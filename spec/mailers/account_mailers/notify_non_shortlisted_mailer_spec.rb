@@ -3,7 +3,7 @@ require "rails_helper"
 describe AccountMailers::NotifyNonShortlistedMailer do
   let!(:user) { create :user }
   let!(:form_answer) do
-    create :form_answer, :submitted, :innovation, user: user
+    create :form_answer, :submitted, user: user
   end
 
   let(:award_title) { form_answer.decorate.award_application_title }

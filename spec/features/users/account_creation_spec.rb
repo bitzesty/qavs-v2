@@ -84,8 +84,6 @@ describe "Account forms" do
 
         click_button("Save and continue")
 
-        expect(page).to have_content("Collaborators and account owner")
-
         user.reload
 
         expect(user.phone_number).to eq(phone_number)

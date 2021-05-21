@@ -15,40 +15,18 @@ step "I go to dashboard" do
   visit '/dashboard'
 end
 
-step "I should see innovation application link" do
-  expect(page).to have_link("New application", href:'/apply_innovation_award')
+step "I should see application link" do
+  expect(page).to have_link("New application", href:'/apply_qavs_award')
 end
 
-step "I should see international trade application link" do
-  expect(page).to have_link("New application", href:'/apply_international_trade_award')
-end
-
-step "I should see sustainable development application link" do
-  expect(page).to have_link("New application", href:'/apply_sustainable_development_award')
-end
-
-step "I create innovation form" do
+step "I create nomination" do
   step "I go to dashboard"
-  click_link "New application", href: '/apply_innovation_award'
-  click_button "Save and start eligibility questionnaire"
-  click_button "Continue" #eligibility step
-end
-
-step "I create international trade form" do
-  step "I go to dashboard"
-  click_link "New application", href: '/apply_international_trade_award'
+  click_link "New application", href: '/apply_qavs_award'
   click_button "Start eligibility questionnaire"
   click_button "Continue" #eligibility step
 end
 
-step "I create sustainable development form" do
-  step "I go to dashboard"
-  click_link "New application", href: '/apply_sustainable_development_award'
-  click_button "Start eligibility questionnaire"
-  click_button "Continue" #eligibility step
-end
-
-step "I should see qae form" do
+step "I should see nomination form" do
   have_selector "form.qae_form"
 end
 

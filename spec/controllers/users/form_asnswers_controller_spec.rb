@@ -5,7 +5,7 @@ describe Users::FormAnswersController do
     let(:user) { create(:user) }
 
     let!(:form_answer) do
-      FactoryBot.create :form_answer, :development,
+      FactoryBot.create :form_answer,
         user: user,
         document: { company_name: "Bitzesty" }
     end

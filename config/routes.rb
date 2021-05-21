@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :assessors
-  devise_for :judges
 
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
@@ -39,10 +38,7 @@ Rails.application.routes.draw do
   get "/privacy"                                        => "content_only#privacy",                                        as: "privacy"
   get "/cookies"                                        => "content_only#cookies",                                        as: "cookies"
 
-  get  "/new_innovation_form"                           => "form#new_innovation_form",                                    as: "new_innovation_form"
-  get  "/new_international_trade_form"                  => "form#new_international_trade_form",                           as: "new_international_trade_form"
-  get  "/new_sustainable_development_form"              => "form#new_sustainable_development_form",                       as: "new_sustainable_development_form"
-  get  "/new_social_mobility_form"                      => "form#new_social_mobility_form",                               as: "new_social_mobility_form"
+  get  "/new_qavs_form"                                 => "form#new_qavs_form",                                          as: "new_qavs_form"
 
   get  "/form/:id"                                      => "form#edit_form",                                              as: "edit_form"
   post "/form/:id"                                      => "form#save",                                                   as: "save_form"
@@ -50,16 +46,9 @@ Rails.application.routes.draw do
   get  "/form/:id/confirmation"                         => "form#submit_confirm",                                         as: "submit_confirm"
   get "/dashboard"                                      => "content_only#dashboard",                                      as: "dashboard"
 
-  get "/apply_innovation_award"                         => "content_only#apply_innovation_award",                         as: "apply_innovation_award"
-  get "/award_info_innovation"                          => "content_only#award_info_innovation",                          as: "award_info_innovation"
 
-  get "/apply_international_trade_award"                => "content_only#apply_international_trade_award",                as: "apply_international_trade_award"
-  get "/award_info_trade"                               => "content_only#award_info_trade",                               as: "award_info_trade"
-
-  get "/apply_sustainable_development_award"            => "content_only#apply_sustainable_development_award",            as: "apply_sustainable_development_award"
-  get "/award_info_development"                         => "content_only#award_info_development",                         as: "award_info_development"
-  get "/apply_social_mobility_award"                    => "content_only#apply_social_mobility_award",                    as: "apply_social_mobility_award"
-  get "/award_info_mobility"                            => "content_only#award_info_mobility",                            as: "award_info_mobility"
+  get "/apply_qavs_award"                               => "content_only#apply_qavs_award",                               as: "apply_qavs_award"
+  get "/award_info_qavs"                                => "content_only#award_info_qavs",                                as: "award_info_qavs"
 
   get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
 
@@ -102,17 +91,10 @@ Rails.application.routes.draw do
         end
       end
 
-      resource :audit_certificate, only: [:show, :create, :destroy]
       resource :list_of_procedures, only: [:create, :destroy]
       resource :support_letter_attachments, only: :create
       resources :supporters, only: [:create, :destroy]
       resources :support_letters, only: [:create, :show, :destroy]
-      resource :press_summary, only: [:show, :update] do
-        get :acceptance
-        get :success
-        get :failure
-        post :update_acceptance
-      end
     end
     resources :form_answer_feedbacks, only: [:show]
   end
@@ -134,7 +116,6 @@ Rails.application.routes.draw do
       end
 
       [
-        :current_queens_awards,
         :awards,
         :subsidiaries
       ].each do |resource_name|
@@ -155,25 +136,14 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :review_audit_certificates, only: [:create]
-
     resources :form_answers do
       resources :form_answer_state_transitions, only: [:create]
       resources :comments
       resources :form_answer_attachments, only: [:create, :show, :destroy]
       resources :support_letters, only: [:show]
-      resources :audit_certificates, only: [:show, :create]
       resources :list_of_procedures, only: [:show]
       resources :feedbacks, only: [:create, :update] do
         member do
-          post :submit
-          post :unlock
-        end
-      end
-
-      resources :press_summaries, only: [:create, :update] do
-        member do
-          post :approve
           post :submit
           post :unlock
         end
@@ -213,10 +183,6 @@ Rails.application.routes.draw do
     resources :dashboard_reports, only: [] do
       collection do
         get :all_applications
-        get :international_trade
-        get :social_mobility
-        get :innovation
-        get :sustainable_development
         get :account_registrations
       end
     end
@@ -241,7 +207,6 @@ Rails.application.routes.draw do
     resources :reports, only: [:show] do
       get :import_csv_into_ms_excel_guide_pdf, on: :collection
     end
-    resources :review_audit_certificates, only: [:create]
     resources :palace_attendees, only: [:new, :create, :update, :destroy]
     resources :palace_invites, only: [] do
       member do
@@ -255,7 +220,6 @@ Rails.application.routes.draw do
       end
 
       member do
-        patch :remove_audit_certificate
         patch :update_financials
         get :review
       end
@@ -264,9 +228,6 @@ Rails.application.routes.draw do
       resources :comments
       resources :form_answer_attachments, only: [:create, :show, :destroy]
       resources :support_letters, only: [:show]
-      resources :audit_certificates, only: [:show, :create] do
-        get :download_initial_pdf, on: :collection
-      end
       resources :list_of_procedures, only: [:show]
       resources :feedbacks, only: [:create, :update] do
         member do
@@ -276,20 +237,9 @@ Rails.application.routes.draw do
 
         get :download_pdf, on: :collection
       end
-      resources :press_summaries, only: [:create, :update] do
-        member do
-          post :approve
-          post :submit
-          post :unlock
-          post :signoff
-        end
-      end
       resources :case_summaries, only: [:index]
       resources :draft_notes, only: [:create, :update]
       resources :review_corp_responsibility, only: [:create]
-      resources :collaborators, only: [:create], module: "form_answers" do
-        get :search, on: :collection
-      end
     end
 
     resource :settings, only: [:show] do
@@ -313,10 +263,6 @@ Rails.application.routes.draw do
     scope format: true, constraints: { format: 'json' } do
       resource :session_checks, only: [:show]
     end
-  end
-
-  namespace :account do
-    resources :collaborators, except: [:show]
   end
 
   namespace :judge do

@@ -2,8 +2,7 @@ require 'rails_helper'
 
 shared_context "admin application feedback pdf download" do
   let!(:form_answer) do
-    create :form_answer, award_type,
-                         :submitted,
+    create :form_answer, :submitted,
                          user: user
   end
 

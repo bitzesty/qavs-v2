@@ -4,11 +4,11 @@ describe Users::SubmissionMailer do
   let!(:user) { create :user }
 
   let(:form_answer) do
-    FactoryBot.create :form_answer, :submitted, :innovation,
-                                                 user: user
+    FactoryBot.create :form_answer,
+                      :submitted,
+                      user: user
   end
 
-  let(:urn) { form_answer.urn }
   let(:subject) { "submission successfully created!" }
 
   before do
@@ -26,7 +26,6 @@ describe Users::SubmissionMailer do
 
     it "renders the body" do
       expect(mail.body.raw_source).to match(user.decorate.full_name)
-      expect(mail.body.raw_source).to match(urn)
     end
   end
 end

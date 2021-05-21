@@ -8,19 +8,15 @@ class FormAnswer
     end
 
     def eligibility
-      method = "#{form_answer.award_type}_eligibility"
-
-      unless form_answer.public_send(method)
-        form_answer.public_send("build_#{method}", account_id: account.id).save!
+      unless form_answer.form_basic_eligibility
+        form_answer.build_form_basic_eligibility(account_id: account.id).save!
       end
 
-      form_answer.public_send(method)
+      form_answer.form_basic_eligibility
     end
 
     def basic_eligibility
       @basic_eligibility ||= begin
-        return nil if form_answer.promotion?
-
         if form_answer.form_basic_eligibility.try(:persisted?)
           form_answer.form_basic_eligibility
         else

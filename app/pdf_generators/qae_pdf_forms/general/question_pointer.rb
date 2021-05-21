@@ -6,7 +6,6 @@ class QaePdfForms::General::QuestionPointer
   include QaePdfForms::CustomQuestions::CheckboxSeria
   include QaePdfForms::CustomQuestions::Textarea
   include FinancialTable
-  include QuestionTextHelper
 
   NOT_CURRENCY_QUESTION_KEYS = %w(employees).freeze
   QUESTIONS_WITH_PDF_TITLES = %w(trading_figures_add).freeze
@@ -39,8 +38,6 @@ class QaePdfForms::General::QuestionPointer
 
   BLOCK_QUESTIONS = [
     QAEFormBuilder::AwardHolderQuestion,
-    QAEFormBuilder::QueenAwardHolderQuestion,
-    QAEFormBuilder::QueenAwardApplicationsQuestion,
     QAEFormBuilder::PositionDetailsQuestion,
     QAEFormBuilder::SubsidiariesAssociatesPlantsQuestion,
     QAEFormBuilder::ByTradeGoodsAndServicesLabelQuestion,
@@ -373,11 +370,9 @@ class QaePdfForms::General::QuestionPointer
         end
       when QAEFormBuilder::ConfirmQuestion
         if q_visible? && humanized_answer.present?
-          question_text = interpolate_deadlines(question_checked_value_title)
-
-          form_pdf.render_standart_answer_block(question_text)
+          form_pdf.render_standart_answer_block(question_checked_value_title)
         else
-          question_option_box interpolate_deadlines(question.pdf_text || question.text)
+          question_option_box(question.pdf_text || question.text)
         end
       when QAEFormBuilder::ByYearsLabelQuestion, QAEFormBuilder::OneOptionByYearsLabelQuestion
         form_pdf.indent 7.mm do
@@ -385,18 +380,6 @@ class QaePdfForms::General::QuestionPointer
         end
       when QAEFormBuilder::ByYearsQuestion, QAEFormBuilder::TurnoverExportsCalculationQuestion, QAEFormBuilder::OneOptionByYearsQuestion
         render_years_table
-      when QAEFormBuilder::QueenAwardHolderQuestion
-        if humanized_answer.present?
-          render_queen_award_holder
-        else
-          render_queen_award_holder_header
-        end
-      when QAEFormBuilder::QueenAwardApplicationsQuestion
-        if humanized_answer.present?
-          render_queen_award_applications
-        else
-          render_queen_award_applications_header
-        end
       when QAEFormBuilder::SubsidiariesAssociatesPlantsQuestion
         if humanized_answer.present?
           render_subsidiaries_plants
@@ -422,46 +405,6 @@ class QaePdfForms::General::QuestionPointer
         form_pdf.render_standart_answer_block(title)
       end
     end
-  end
-
-  def render_queen_award_holder
-    if q_visible?
-      render_queen_award_holder_header
-
-      if list_rows.present?
-        form_pdf.indent 7.mm do
-          list_rows.each do |award|
-            form_pdf.render_text "#{award[1]} - #{PREVIOUS_AWARDS[award[0].to_s]}",
-                                 color: FormPdf::DEFAULT_ANSWER_COLOR
-          end
-        end
-      end
-    end
-  end
-
-  def render_queen_award_applications
-    if q_visible?
-      render_queen_award_applications_header
-
-      if list_rows.present?
-        form_pdf.indent 7.mm do
-          list_rows.each do |award|
-            outcome = question.outcomes.detect { |o| o.value == award[2] }.try(:text)
-
-            form_pdf.render_text "#{award[1]} - #{PREVIOUS_AWARDS[award[0].to_s]} - #{outcome}",
-                                 color: FormPdf::DEFAULT_ANSWER_COLOR
-          end
-        end
-      end
-    end
-  end
-
-  def render_queen_award_applications_header
-    form_pdf.render_text "Year Awarded - Category - Outcome"
-  end
-
-  def render_queen_award_holder_header
-    form_pdf.render_text "Year Awarded - Category"
   end
 
   def render_subsidiaries_plants

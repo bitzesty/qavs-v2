@@ -10,25 +10,13 @@ class Deadline < ApplicationRecord
 
   AVAILABLE_DEADLINES = [
     "award_year_switch",
-    "innovation_submission_start",
-    "trade_submission_start",
-    "development_submission_start",
-    "mobility_submission_start",
     "submission_start",
     "submission_end",
     "buckingham_palace_attendees_details",
     "buckingham_palace_attendees_invite",
     "buckingham_palace_confirm_press_book_notes",
     "buckingham_palace_media_information",
-    "buckingham_palace_reception_attendee_information_due_by",
-    "audit_certificates"
-  ]
-
-  SUBMISSION_START_DEADLINES = [
-    "innovation_submission_start",
-    "trade_submission_start",
-    "development_submission_start",
-    "mobility_submission_start"
+    "buckingham_palace_reception_attendee_information_due_by"
   ]
 
   enumerize :kind, in: AVAILABLE_DEADLINES, predicates: true
@@ -75,10 +63,6 @@ class Deadline < ApplicationRecord
     def buckingham_palace_media_information
       where(kind: "buckingham_palace_media_information").first
     end
-
-    def audit_certificates_deadline
-      where(kind: "audit_certificates").first
-    end
   end
 
   def passed?
@@ -96,9 +80,6 @@ class Deadline < ApplicationRecord
     Rails.cache.delete("current_award_year")
     Rails.cache.delete("#{kind.value}_deadline")
     Rails.cache.delete("#{kind}_deadline_#{settings.award_year.year}")
-
-    if SUBMISSION_START_DEADLINES.include?(kind.to_s)
-      Rails.cache.delete("submission_start_deadlines")
-    end
+    Rails.cache.delete("submission_start_deadlines")
   end
 end

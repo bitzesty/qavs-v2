@@ -5,48 +5,27 @@ describe "FeedbackPdfs::Base" do
     AwardYear.current
   end
 
-  let!(:form_answer_innovation) do
-    FactoryBot.create :form_answer, :submitted, :innovation
-  end
-
-  let!(:form_answer_trade) do
-    FactoryBot.create :form_answer, :submitted, :trade
+  let!(:form_answer) do
+    FactoryBot.create :form_answer, :submitted
   end
 
   before do
     create :feedback, submitted: true,
-                      form_answer: form_answer_trade,
-                      document: set_feedback_content(form_answer_trade)
-
-    create :feedback, submitted: true,
-                      form_answer: form_answer_innovation,
-                      document: set_feedback_content(form_answer_innovation)
+                      form_answer: form_answer,
+                      document: set_feedback_content(form_answer)
   end
 
   describe "#set_feedbacks" do
     it "should be ordered in year and filtered by category" do
-      innovation_feedbacks = FeedbackPdfs::Base.new(
+      feedbacks = FeedbackPdfs::Base.new(
         "all", nil, {
-          category: "innovation",
           award_year: award_year
         }
       ).set_feedbacks
        .map(&:id)
 
-      expect(innovation_feedbacks).to match_array([
-        form_answer_innovation.feedback.id,
-      ])
-
-      trade_feedbacks = FeedbackPdfs::Base.new(
-        "all", nil, {
-          category: "trade",
-          award_year: award_year
-        }
-      ).set_feedbacks
-       .map(&:id)
-
-      expect(trade_feedbacks).to match_array([
-        form_answer_trade.feedback.id,
+      expect(feedbacks).to match_array([
+        form_answer.feedback.id,
       ])
     end
   end

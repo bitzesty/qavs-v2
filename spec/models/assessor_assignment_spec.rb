@@ -163,7 +163,7 @@ describe AssessorAssignment do
   end
 
   context "assessor change" do
-    let(:form) {create(:form_answer, :trade)}
+    let(:form) {create(:form_answer)}
     context "for assigning the primary/secondary assessor per application" do
       it "changes the state of flag on application" do
         primary = form.assessor_assignments.primary
@@ -206,7 +206,7 @@ describe AssessorAssignment do
   end
 
   describe '#as_json' do
-    let(:form) { create(:form_answer, :trade )}
+    let(:form) { create(:form_answer )}
 
     it 'should return error' do
       assessor_assignment = build :assessor_assignment, position: nil, form_answer: form
@@ -221,7 +221,7 @@ describe AssessorAssignment do
   end
 
   describe "#secondary_assessor_can_edit?" do
-    let(:form) { create(:form_answer, :trade) }
+    let(:form) { create(:form_answer) }
     it 'should return true' do
       secondary = form.assessor_assignments.secondary
       expect(secondary.send(:secondary_assessor_can_edit?, build(:admin))).to be_truthy
@@ -229,7 +229,7 @@ describe AssessorAssignment do
   end
 
   describe "#assessor_assignment_to_category" do
-    let(:form) { create(:form_answer, :trade) }
+    let(:form) { create(:form_answer) }
     let(:assessor1) {create(:assessor, :regular_for_all)}
     it 'should return true' do
       allow_any_instance_of(Assessor).to receive(:assignable?) {false}

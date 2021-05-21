@@ -10,7 +10,7 @@ describe Settings do
     }
 
     it "creates all kinds of deadlines" do
-      expect(settings.deadlines.count).to eq(13)
+      expect(settings.deadlines.count).to eq(9)
       expect(settings.deadlines.order(:kind).map(&:kind)).to eq(deadlines)
     end
   end

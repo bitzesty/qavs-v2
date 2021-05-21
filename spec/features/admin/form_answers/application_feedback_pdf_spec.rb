@@ -14,28 +14,8 @@ So that I can print and review application's feedback
     login_admin(admin)
   end
 
-  describe "International Trade Award" do
-    let(:award_type) { :trade }
-    include_context "admin application feedback pdf download"
-  end
-
-  describe "Innovation Award" do
-    let(:award_type) { :innovation }
-    include_context "admin application feedback pdf download"
-  end
-
-  describe "Sustainable Development Award" do
-    let(:award_type) { :development }
-    include_context "admin application feedback pdf download"
-  end
-
-  describe "Promoting Opportunity Award" do
-    let(:award_type) { :mobility }
-    include_context "admin application feedback pdf download"
-  end
-
   describe "Enterprise Promotion Award" do
-    let(:award_type) { :promotion }
+    let(:award_type) { :qavs }
     include_context "admin application feedback pdf download"
   end
 end

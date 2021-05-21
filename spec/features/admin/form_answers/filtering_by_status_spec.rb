@@ -10,10 +10,10 @@ describe "As Admin I want to filter applications", js: true do
 
   before do
     @forms = []
-    @forms << create(:form_answer, :trade, state: "not_submitted", document: { sic_code: "1623" })
-    @forms << create(:form_answer, :trade, state: "application_in_progress")
-    @forms << create(:form_answer, :development, state: "not_eligible")
-    @forms << create(:form_answer, :mobility, state: "application_in_progress")
+    @forms << create(:form_answer, state: "not_submitted", document: { sic_code: "1623" })
+    @forms << create(:form_answer, state: "application_in_progress")
+    @forms << create(:form_answer, state: "not_eligible")
+    @forms << create(:form_answer, state: "application_in_progress")
 
     # 0111 - is default sic_code, came from spec/fixtures/*.json
     # as it is required field

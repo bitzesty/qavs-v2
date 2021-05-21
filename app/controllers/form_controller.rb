@@ -1,26 +1,14 @@
-require "award_years/v2018/qae_forms"
-require "award_years/v2019/qae_forms"
-require 'award_years/v2020/qae_forms'
-
 class FormController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_account_completion, :check_number_of_collaborators, unless: -> { admin_signed_in? || assessor_signed_in? }
+  before_action :check_account_completion, unless: -> { admin_signed_in? || assessor_signed_in? }
   before_action :check_deadlines
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
     :new, :create, :update, :destroy,
     :submit_confirm, :save, :add_attachment
   ]
 
-  before_action :check_trade_deadline, :check_trade_count_limit, only: :new_international_trade_form
-  before_action :check_development_deadline, :check_development_count_limit, only: :new_sustainable_development_form
-  before_action :check_mobility_deadline, only: :new_social_mobility_form
-  before_action :check_innovation_deadline, only: :new_innovation_form
-
   before_action :set_form_answer, except: [
-    :new_innovation_form,
-    :new_international_trade_form,
-    :new_sustainable_development_form,
-    :new_social_mobility_form
+    :new_qavs_form
   ]
 
   before_action :get_collaborators, only: [
@@ -63,20 +51,8 @@ class FormController < ApplicationController
     @form_answer.original_form_answer
   end
 
-  def new_innovation_form
-    build_new_form("innovation")
-  end
-
-  def new_international_trade_form
-    build_new_form("trade")
-  end
-
-  def new_sustainable_development_form
-    build_new_form("development")
-  end
-
-  def new_social_mobility_form
-    build_new_form("mobility")
+  def new_qavs_form
+    build_new_form
   end
 
   def edit_form
@@ -126,7 +102,6 @@ class FormController < ApplicationController
 
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
         @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
-
         if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
@@ -267,11 +242,10 @@ class FormController < ApplicationController
     result
   end
 
-  def build_new_form(award_type)
+  def build_new_form
     form_answer = FormAnswer.create!(
       user: current_user,
       account: current_user.account,
-      award_type: award_type,
       nickname: nickname,
       document: {
         company_name: current_user.company_name
@@ -299,17 +273,6 @@ class FormController < ApplicationController
     unless submission_started?
       flash.alert = "Sorry, submission is still closed"
       redirect_to dashboard_url
-    end
-  end
-
-  %w(innovation trade mobility development).each do |award|
-    define_method "check_#{award}_deadline" do
-      return if admin_in_read_only_mode?
-
-      unless public_send("#{award}_submission_started?")
-        flash.alert = "Sorry, submission is still closed"
-        redirect_to dashboard_url
-      end
     end
   end
 

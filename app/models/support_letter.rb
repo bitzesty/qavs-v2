@@ -1,6 +1,5 @@
 class SupportLetter < ApplicationRecord
   begin :associations
-    belongs_to :supporter
     belongs_to :form_answer
     belongs_to :user
 

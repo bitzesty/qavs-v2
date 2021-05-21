@@ -43,11 +43,7 @@ shared_context "pdf file checks" do
   end
 
   let(:match_name_condition) do
-    if award_type == :promotion
-      form_answer.send("nominee_full_name_from_document").upcase
-    else
-      company_name
-    end
+    company_name
   end
 
   before do
@@ -65,14 +61,6 @@ shared_context "pdf file checks" do
     it "should include steps headers" do
       steps.each do |step|
         title = "#{step.title.upcase}:"
-
-        if award_type == :trade
-          # For Trade form PDF::Inspector::Text
-          # returns  "Step 2 of 6: Description of Goods or Services, Markets and", "Marketing"
-          # instead of  "Step 2 of 6: Description of Goods or Services, Markets and Marketing"
-          # as "Marketing" in pdf is located in new line
-          title = title.gsub(' Marketing', '')
-        end
 
         expect(pdf_content).to include(title)
       end

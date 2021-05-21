@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe AssessorAssignmentService do
-  let(:form_answer) { create(:form_answer, :trade) }
+  let(:form_answer) { create(:form_answer) }
   let(:primary) { form_answer.assessor_assignments.primary }
   let!(:assessor) { create(:assessor, :lead_for_all) }
 
@@ -54,7 +54,7 @@ describe AssessorAssignmentService do
     let(:params) do
       {
         assessor_assignment: {
-          commercial_success_desc: "",
+          corporate_social_responsibility_desc: "",
           verdict_desc: "this is a verdict"
 
         },
@@ -63,7 +63,7 @@ describe AssessorAssignmentService do
     end
 
     it "removes the keys with blank value" do
-      expect(subject.update_params[:commercial_success_desc]).to be_blank
+      expect(subject.update_params[:corporate_social_responsibility_desc]).to be_blank
     end
 
     it "sets the assessed_at" do
@@ -80,18 +80,17 @@ describe AssessorAssignmentService do
       let(:params) do
         {
           assessor_assignment: {
-            commercial_success_desc: "I am description",
-            strategy_desc: "should not be saved",
+            corporate_social_responsibility_desc: "I am description",
             whatever_desc: "asd"
           },
-          updated_section: "commercial_success_desc",
+          updated_section: "corporate_social_responsibility_desc",
           id: primary.id
         }.with_indifferent_access
       end
 
-      it "removes the strategy_desc/whatever_desc from relevant attrs" do
+      it "removes the whatever_desc from relevant attrs" do
         subject.save
-        expect(subject.update_params).to eq("commercial_success_desc" => "I am description")
+        expect(subject.update_params).to eq("corporate_social_responsibility_desc" => "I am description")
       end
     end
 
@@ -99,12 +98,12 @@ describe AssessorAssignmentService do
       let(:params) do
         {
           assessor_assignment: {
-            commercial_success_rate: "negative",
+            corporate_social_responsibility_rate: "negative",
             another_rate: "negative",
             strategy_desc: "asd",
             created_at: "text"
           },
-          updated_section: "commercial_success_rate",
+          updated_section: "corporate_social_responsibility_rate",
           id: primary.id
         }.with_indifferent_access
       end
@@ -112,7 +111,7 @@ describe AssessorAssignmentService do
       it "removes the not relevant _rate and _desc" do
         subject.save
         expect(subject.update_params).to eq(
-          "commercial_success_rate" => "negative", "created_at" => "text")
+          "corporate_social_responsibility_rate" => "negative", "created_at" => "text")
       end
     end
 
@@ -120,8 +119,8 @@ describe AssessorAssignmentService do
       let(:params) do
         {
           assessor_assignment: {
-            commercial_success_desc: "I am description",
-            strategy_desc: "should be saved"
+            corporate_social_responsibility_desc: "I am description",
+            mobility_impact_of_the_programme_desc: "should be saved"
           },
           updated_section: "asd",
           id: primary.id
@@ -131,8 +130,8 @@ describe AssessorAssignmentService do
       it "ignores the updated section attr" do
         subject.save
         expect(subject.update_params).to eq(
-          "commercial_success_desc" => "I am description",
-          "strategy_desc" => "should be saved")
+          "corporate_social_responsibility_desc" => "I am description",
+          "mobility_impact_of_the_programme_desc" => "should be saved")
       end
     end
   end

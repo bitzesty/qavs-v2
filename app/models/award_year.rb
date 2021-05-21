@@ -25,14 +25,8 @@ class AwardYear < ApplicationRecord
     where(year: past_years)
   }
 
-  #
-  # Update me every year!
-  #
   CURRENT_YEAR_AWARDS = [
-    "trade", # International Trade Award
-    "innovation", # Innovation Award
-    "development", # Sustainable Development Award
-    "mobility", # Promoting Opportunity Award
+    "qavs"
   ]
 
   def current?
@@ -91,15 +85,8 @@ class AwardYear < ApplicationRecord
 
   def aggregated_hard_copies_completed?(type)
     CURRENT_YEAR_AWARDS.all? do |award_category|
-      if award_category == "trade" && type == "case_summary"
-        ["3", "6"].all? do |i|
-          copy_record = send("#{type}_#{award_category}_#{i}_hard_copy_pdf")
-          copy_record.present? && copy_record.file.present?
-        end
-      else
-        copy_record = send("#{type}_#{award_category}_hard_copy_pdf")
-        copy_record.present? && copy_record.file.present?
-      end
+      copy_record = send("#{type}_#{award_category}_hard_copy_pdf")
+      copy_record.present? && copy_record.file.present?
     end
   end
 

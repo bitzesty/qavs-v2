@@ -5,7 +5,7 @@ describe FormAnswerStatistics::Picker do
 
   context "for current awarding year" do
     let(:award_year) { AwardYear.current }
-    let(:current_date) { DateTime.new(2019, 10, 31) }
+    let(:current_date) { DateTime.new(2022, 10, 31) }
 
     describe "#applications_table" do
       it "calculates proper stats", :aggregate_failures do
@@ -20,7 +20,7 @@ describe FormAnswerStatistics::Picker do
         end
 
         Timecop.freeze(current_date) do
-          fa1 = create(:form_answer, :trade)
+          fa1 = create(:form_answer)
           fa1.state_machine.perform_transition(:not_eligible, nil, false)
         end
 
@@ -29,6 +29,7 @@ describe FormAnswerStatistics::Picker do
         end
 
         Timecop.freeze(current_date) do
+          puts subject.applications_table
           expect(subject.applications_table[:registered_users][:counters]).to eq([3, 3, 4])
           expect(subject.applications_table[:applications_not_eligible][:counters]).to eq([1, 1, 1])
           expect(subject.applications_table[:applications_submitted][:counters]).to eq([0, 0, 0])
@@ -39,36 +40,36 @@ describe FormAnswerStatistics::Picker do
     describe "#applications_submissions" do
       it "calculates proper stats" do
         Timecop.freeze(current_date) do
-          create(:form_answer, :trade)
-          fa1 = create(:form_answer, :trade)
+          create(:form_answer)
+          fa1 = create(:form_answer)
           fa1.state_machine.perform_transition(:submitted, nil, false)
         end
 
         Timecop.freeze(current_date - 3.days) do
-          fa2 = create(:form_answer, :trade)
+          fa2 = create(:form_answer)
           fa2.state_machine.perform_transition(:submitted, nil, false)
         end
 
         Timecop.freeze(current_date - 8.days) do
-          fa3 = create(:form_answer, :trade)
+          fa3 = create(:form_answer)
           fa3.state_machine.perform_transition(:submitted, nil, false)
         end
 
         Timecop.freeze(current_date) do
-          expect(subject.applications_submissions["trade"]).to eq([1, 2, 3])
+          expect(subject.applications_submissions["qavs"]).to eq([1, 2, 3])
         end
       end
 
       context "multiple submissions" do
         it "counts the submitted records only once" do
           Timecop.freeze(current_date - 4.days) do
-            fa1 = create(:form_answer, :trade)
+            fa1 = create(:form_answer)
             fa1.state_machine.perform_transition(:submitted, nil, false)
             fa1.state_machine.perform_transition(:submitted, nil, false)
           end
 
           Timecop.freeze(current_date) do
-            expect(subject.applications_submissions["trade"]).to eq([0, 1, 1])
+            expect(subject.applications_submissions["qavs"]).to eq([0, 1, 1])
           end
         end
       end
@@ -77,7 +78,7 @@ describe FormAnswerStatistics::Picker do
     describe "#applications_completions" do
       it "calculates proper stats" do
         populate_application_completions
-        expect(subject.applications_completions["trade"]).to eq([1, 1, 0, 1, 1, 0, 4])
+        expect(subject.applications_completions["qavs"]).to eq([1, 1, 0, 1, 1, 0, 4])
       end
     end
   end
@@ -112,39 +113,39 @@ describe FormAnswerStatistics::Picker do
 
     describe "#applications_submissions" do
       it "calculates the proper stats" do
-        create(:form_answer, :trade)
-        fa1 = create(:form_answer, :trade)
+        create(:form_answer)
+        fa1 = create(:form_answer)
         fa1.state_machine.perform_transition(:submitted, nil, false)
 
         date = Date.today.month == 12? Date.today + 12.months : Date.today + 12.months
         Timecop.freeze(date) do
-          fa2 = create(:form_answer, :trade)
+          fa2 = create(:form_answer)
           fa2.state_machine.perform_transition(:submitted, nil, false)
-          fa3 = create(:form_answer, :trade)
+          fa3 = create(:form_answer)
           fa3.state_machine.perform_transition(:submitted, nil, false)
         end
-        expect(subject.applications_submissions["trade"]).to eq(["-", "-", 2])
+        expect(subject.applications_submissions["qavs"]).to eq(["-", "-", 2])
       end
     end
 
     describe "#applications_completions" do
       it "calculates proper stats" do
-        expect(subject.applications_completions["trade"]).to eq([0, 0, 0, 0, 0, 0, 0])
+        expect(subject.applications_completions["qavs"]).to eq([0, 0, 0, 0, 0, 0, 0])
 
         date = Date.today.month == 12? Date.today + 12.months : Date.today + 12.months
         Timecop.freeze(date) do
           populate_application_completions
         end
-        expect(subject.applications_completions["trade"]).to eq([1, 1, 0, 1, 1, 0, 4])
+        expect(subject.applications_completions["qavs"]).to eq([1, 1, 0, 1, 1, 0, 4])
       end
     end
   end
 end
 
 def populate_application_completions
-  create(:form_answer, :trade, state: "application_in_progress").update_column(:fill_progress, 0.0)
-  create(:form_answer, :trade, state: "application_in_progress").update_column(:fill_progress, 0.25)
-  create(:form_answer, :trade, state: "application_in_progress").update_column(:fill_progress, 0.50)
-  create(:form_answer, :trade, state: "application_in_progress").update_column(:fill_progress, 1)
-  create(:form_answer, :trade, state: "not_eligible").update_column(:fill_progress, 0.99)
+  create(:form_answer, state: "application_in_progress").update_column(:fill_progress, 0.0)
+  create(:form_answer, state: "application_in_progress").update_column(:fill_progress, 0.25)
+  create(:form_answer, state: "application_in_progress").update_column(:fill_progress, 0.50)
+  create(:form_answer, state: "application_in_progress").update_column(:fill_progress, 1)
+  create(:form_answer, state: "not_eligible").update_column(:fill_progress, 0.99)
 end

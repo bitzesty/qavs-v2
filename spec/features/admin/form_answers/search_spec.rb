@@ -29,20 +29,5 @@ describe "Form answer search", "
         end
       end
     end
-
-    context "by award type" do
-      let!(:form_answer) { create(:form_answer, :development) }
-      it "search for form answer by award fullname" do
-        within ".search-input" do
-          fill_in "search_query", with: "sustainable"
-          click_button :submit
-        end
-
-        within ".applications-table" do
-          expect(page).to have_selector("td.td-title", count: 1)
-          expect(all("td")[2].text).to eq(FormAnswerDecorator::AWARD_TITLES["Sustainable Development"])
-        end
-      end
-    end
   end
 end

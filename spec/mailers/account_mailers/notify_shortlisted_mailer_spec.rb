@@ -5,7 +5,7 @@ describe AccountMailers::NotifyShortlistedMailer do
   let!(:collaborator) { create :user, account: user.account, role: "regular" }
 
   let(:form_answer) do
-    create :form_answer, :submitted, :innovation, user: user
+    create :form_answer, :submitted, user: user
   end
 
   let!(:deadline) do

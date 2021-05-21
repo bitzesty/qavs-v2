@@ -63,7 +63,7 @@ class Notifiers::EmailNotificationService
 
   def reminder_to_submit(award_year)
     collaborator_data = []
-    scope = award_year.form_answers.business.where(submitted_at: nil)
+    scope = award_year.form_answers.where(submitted_at: nil)
 
     scope.each do |form_answer|
       form_answer.collaborators.each do |collaborator|
@@ -80,14 +80,14 @@ class Notifiers::EmailNotificationService
 
   def shortlisted_notifier(award_year)
     gather_data_and_send_emails!(
-      award_year.form_answers.business.shortlisted,
+      award_year.form_answers.shortlisted,
       AccountMailers::NotifyShortlistedMailer
     )
   end
 
   def not_shortlisted_notifier(award_year)
     gather_data_and_send_emails!(
-      award_year.form_answers.business.not_shortlisted,
+      award_year.form_answers.not_shortlisted,
       AccountMailers::NotifyNonShortlistedMailer
     )
   end
@@ -95,7 +95,7 @@ class Notifiers::EmailNotificationService
   def shortlisted_audit_certificate_reminder(award_year)
     collaborator_data = []
 
-    award_year.form_answers.business.shortlisted.each do |form_answer|
+    award_year.form_answers.shortlisted.each do |form_answer|
       next if form_answer.audit_certificate && form_answer.list_of_procedures
 
       form_answer.collaborators.each do |collaborator|
@@ -108,28 +108,21 @@ class Notifiers::EmailNotificationService
 
   def unsuccessful_notification(award_year)
     gather_data_and_send_emails!(
-      award_year.form_answers.business.unsuccessful_applications,
-      AccountMailers::UnsuccessfulFeedbackMailer
-    )
-  end
-
-  def unsuccessful_ep_notification(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.promotion.unsuccessful_applications,
+      award_year.form_answers.unsuccessful_applications,
       AccountMailers::UnsuccessfulFeedbackMailer
     )
   end
 
   def winners_notification(award_year)
     gather_data_and_send_emails!(
-      award_year.form_answers.business.winners,
+      award_year.form_answers.winners,
       AccountMailers::BusinessAppsWinnersMailer
     )
   end
 
   # to 'Head of Organisation' of the Successful Business categories winners
   def winners_head_of_organisation_notification(award_year)
-    awarded_application_ids = award_year.form_answers.business.winners.pluck(:id)
+    awarded_application_ids = award_year.form_answers.winners.pluck(:id)
 
     awarded_application_ids.each do |form_answer_id|
       Users::WinnersHeadOfOrganisationMailer.notify(form_answer_id).deliver_later!
@@ -139,7 +132,7 @@ class Notifiers::EmailNotificationService
   def buckingham_palace_invite(award_year)
     form_answer_ids = []
 
-    award_year.form_answers.business.winners.each do |form_answer|
+    award_year.form_answers.winners.each do |form_answer|
 
       invite = PalaceInvite.where(
         email: form_answer.decorate.head_email,
@@ -152,10 +145,10 @@ class Notifiers::EmailNotificationService
     end
 
     form_answer_ids.each do |form_answer_id|
-      # 
+      #
       # 1: to Head of Organization
       AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id).deliver_later!
-      # 
+      #
       # 2: to Press Contact
       AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id, true).deliver_later!
     end

@@ -8,11 +8,11 @@ describe "award winners section" do
   end
 
   let(:old_award_year) do
-    AwardYear.create!(year: 2015)
+    AwardYear.create!(year: 2020)
   end
 
   let(:current_award_year) do
-    AwardYear.create!(year: 2016)
+    AwardYear.create!(year: 2021)
   end
 
   let!(:current_year_mock) do
@@ -23,7 +23,6 @@ describe "award winners section" do
   let!(:current_form_answer) do
     create :form_answer,
            :awarded,
-           :trade,
            user: user,
            award_year_id: current_award_year.id
   end
@@ -31,7 +30,6 @@ describe "award winners section" do
   let!(:old_form_answer) do
     create :form_answer,
            :awarded,
-           :innovation,
            user: user,
            award_year_id: old_award_year.id
   end
@@ -43,13 +41,13 @@ describe "award winners section" do
 
   it "see current year's submissions" do
     expect(page).to have_content(
-      "#{current_form_answer.award_type_full_name} #{AwardYear.current.year} Emblem"
+      "Queen's Awards for Enterprise 2021 Emblem"
     )
   end
 
   it "don't see other year's submissions" do
     expect(page).to_not have_content(
-      "#{old_form_answer.award_type_full_name} #{AwardYear.current.year} Emblem"
+      "Queen's Awards for Enterprise 2020 Emblem"
     )
   end
 end

@@ -61,16 +61,6 @@ module FormAnswerHelper
     output.html_safe
   end
 
-  def award_types_collection(year)
-    FormAnswer::AWARD_TYPE_FULL_NAMES.invert.select do |k, v|
-      if year.present? && year.to_i <= 2016
-        true
-      else
-        v != "promotion"
-      end
-    end.to_a
-  end
-
   def each_index_or_empty(collection, attrs, &block)
     if collection.any?
       collection.each_with_index &block

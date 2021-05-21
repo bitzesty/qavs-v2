@@ -11,33 +11,8 @@ describe "Eligibility forms" do
     login_as(user, scope: :user)
   end
 
-  context "trade" do
-    it "process the eligibility form" do
-      visit dashboard_path
-      new_application("International Trade Award")
-      # fill_in("nickname", with: "trade nick")
-      click_button("Start eligibility questionnaire")
-
-      form_choice([
-        "Yes",
-        "Yes",
-        "Yes",
-        /Business/,
-        /Product/,
-        "Yes",
-        "No",
-        "Yes",
-        "No",
-        "Yes"
-      ])
-      expect(page).to have_content("You are eligible to begin your application")
-      first('.previous-answers').click_link("Continue")
-      expect(page).to have_content("You are eligible to begin your application for an International Trade Award.")
-    end
-  end
-
   context "innovation" do
-    it "process the eligibility form" do
+    pending "process the eligibility form" do
       visit dashboard_path
       new_application("Innovation Award")
       # fill_in("nickname", with: "innovation nick")
@@ -52,28 +27,6 @@ describe "Eligibility forms" do
       expect(page).to have_content("You are eligible to begin your application")
       first('.previous-answers').click_link("Continue")
       expect(page).to have_content("You are eligible to begin your application for an Innovation Award.")
-    end
-  end
-
-  context "development" do
-    it "process the eligibility form" do
-      visit dashboard_path
-      new_application("Sustainable Development Award")
-      # fill_in "nickname", with: "development nick"
-      click_button "Start eligibility questionnaire"
-      form_choice([
-        "Yes",
-        "Yes",
-        "Yes",
-        /Business/,
-        /Product/,
-        "Yes",
-        "No",
-        "Yes"
-      ])
-      expect(page).to have_content("You are eligible to begin your application")
-      first('.previous-answers').click_link("Continue")
-      expect(page).to have_content("You are eligible to begin your application for a Sustainable Development Award.")
     end
   end
 end

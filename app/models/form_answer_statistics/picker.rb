@@ -30,7 +30,7 @@ class FormAnswerStatistics::Picker
     in_progress << fa_year_scope.where(state: "application_in_progress").count
     out[:applications_in_progress] = { name: "Applications in progress", counters: in_progress }
 
-    submitted = collect_submission_ranges(fa_year_scope.where.not(award_type: "promotion"))
+    submitted = collect_submission_ranges(fa_year_scope)
     out[:applications_submitted] = {
       name: "Applications submitted",
       counters: submitted
@@ -41,26 +41,21 @@ class FormAnswerStatistics::Picker
   def applications_completions
     out = {}
     out["total"] = [0,0,0,0,0,0,0]
-    klass::POSSIBLE_AWARDS.each do |aw|
-      scope = fa_year_scope.where(award_type: aw).where(state: %w(application_in_progress not_eligible))
-      out[aw] = collect_completion_ranges(scope)
-      unless aw == "promotion"
-        out[aw].each_with_index do |val, index|
-          out["total"][index] += val
-        end
-      end
+    scope = fa_year_scope.where(state: %w(application_in_progress not_eligible))
+    out["awards"] = collect_completion_ranges(scope)
+    out["awards"].each_with_index do |val, index|
+      out["total"][index] += val
     end
+
     out
   end
 
   def applications_submissions
     out = {}
-    klass::POSSIBLE_AWARDS.each do |aw|
-      scope = fa_year_scope.where(award_type: aw)
-      out[aw] = collect_submission_ranges(scope)
-    end
+    scope = fa_year_scope
+    out["awards"] = collect_submission_ranges(scope)
 
-    out["total"] = collect_submission_ranges(fa_year_scope.where.not(award_type: "promotion"))
+    out["total"] = collect_submission_ranges(fa_year_scope)
     out
   end
 

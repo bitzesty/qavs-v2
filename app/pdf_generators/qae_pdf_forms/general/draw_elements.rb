@@ -128,11 +128,7 @@ module QaePdfForms::General::DrawElements
   end
 
   def render_award_information
-    if form_answer.promotion?
-      award_title = "Queen's Award for Enterprise Promotion #{form_answer.award_year.year}"
-    else
-      award_title = form_answer.decorate.award_application_title_print
-    end
+    award_title = form_answer.decorate.award_application_title_print
     text award_title.upcase,
          header_text_properties.merge(style: :bold)
   end
@@ -152,7 +148,7 @@ module QaePdfForms::General::DrawElements
             width: 22.5.mm
 
       intro_text = %(
-        This PDF version of the #{form_answer.award_type_full_name} Award #{form_answer.promotion? ? 'nomination' : 'application'} is for <b>reference only</b>.
+        This PDF version of the #{form_answer.award_type_full_name} Award application is for <b>reference only</b>.
 
         <b>Please do not send in</b> this form to apply for this award. To apply for this award, you must complete the online form.
       )

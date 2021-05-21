@@ -37,12 +37,6 @@ class Account < ApplicationRecord
     form_answers.submitted.where.not(id: excluded_form_answer.id).joins(:award_year).order("award_years.year DESC")
   end
 
-  def has_award_in_this_year?(award_type)
-    form_answers.for_year(AwardYear.current.year.to_s).
-                 for_award_type(award_type).
-                 present?
-  end
-
   def collaborators_checked?
     collaborators_checked_at && collaborators_checked_at > Time.zone.now - 6.months
   end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe AccountMailers::BusinessAppsWinnersMailer do
   let!(:form_answer) do
-    create :form_answer, :awarded, :innovation
+    create :form_answer, :awarded
   end
 
   let!(:settings) { create :settings, :submission_deadlines }

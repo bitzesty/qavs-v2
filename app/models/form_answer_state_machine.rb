@@ -74,18 +74,6 @@ class FormAnswerStateMachine
     end
   end
 
-  def self.trigger_audit_deadlines
-    if Settings.after_current_audit_certificates_deadline?
-      current_year = Settings.current.award_year
-
-      current_year.form_answers.where(state: "assessment_in_progress").find_each do |fa|
-        if !fa.audit_certificate || fa.audit_certificate.attachment.blank?
-          fa.state_machine.perform_transition("disqualified")
-        end
-      end
-    end
-  end
-
   def collection(subject)
     permitted_states_with_deadline_constraint
   end
@@ -102,10 +90,6 @@ class FormAnswerStateMachine
 
         if state == :withdrawn
           Notifiers::WithdrawNotifier.new(object).notify
-        end
-
-        if [:not_awarded, :not_recommended].include?(state)
-          FeedbackCreationService.new(object, subject).perform
         end
       end
     end

@@ -3,10 +3,6 @@ class Reports::RegisteredUsers
 
   MAPPING = [
     {
-      label: "URN",
-      method: :urn
-    },
-    {
       label: "ApplicantName",
       method: :company_or_nominee_name
     },

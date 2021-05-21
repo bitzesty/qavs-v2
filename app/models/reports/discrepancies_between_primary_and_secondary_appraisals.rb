@@ -3,10 +3,6 @@ class Reports::DiscrepanciesBetweenPrimaryAndSecondaryAppraisals
 
   MAPPING = [
     {
-      label: "URN",
-      method: :urn
-    },
-    {
       label: "Primary Assessor Name",
       method: :primary_assessor_name
     },
@@ -39,7 +35,7 @@ class Reports::DiscrepanciesBetweenPrimaryAndSecondaryAppraisals
   def initialize(year, award_type, current_subject=nil)
     @award_type = award_type
 
-    if current_subject.is_a?(Assessor) && 
+    if current_subject.is_a?(Assessor) &&
       !current_subject.lead_roles.include?(@award_type)
 
       raise "Access Denied!"

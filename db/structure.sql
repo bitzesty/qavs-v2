@@ -223,19 +223,15 @@ CREATE TABLE public.assessors (
     confirmation_token character varying,
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
-    trade_role character varying,
-    innovation_role character varying,
-    development_role character varying,
-    promotion_role character varying,
     telephone_number character varying,
     failed_attempts integer DEFAULT 0 NOT NULL,
     unlock_token character varying,
     locked_at timestamp without time zone,
     company character varying,
-    mobility_role character varying,
     deleted boolean DEFAULT false,
     autosave_token character varying,
-    unique_session_id character varying
+    unique_session_id character varying,
+    qavs_role character varying
 );
 
 
@@ -256,44 +252,6 @@ CREATE SEQUENCE public.assessors_id_seq
 --
 
 ALTER SEQUENCE public.assessors_id_seq OWNED BY public.assessors.id;
-
-
---
--- Name: audit_certificates; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.audit_certificates (
-    id integer NOT NULL,
-    form_answer_id integer NOT NULL,
-    attachment character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    changes_description text,
-    reviewable_type character varying,
-    reviewable_id integer,
-    reviewed_at timestamp without time zone,
-    status integer,
-    attachment_scan_results character varying
-);
-
-
---
--- Name: audit_certificates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.audit_certificates_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: audit_certificates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.audit_certificates_id_seq OWNED BY public.audit_certificates.id;
 
 
 --
@@ -365,39 +323,6 @@ CREATE SEQUENCE public.award_years_id_seq
 --
 
 ALTER SEQUENCE public.award_years_id_seq OWNED BY public.award_years.id;
-
-
---
--- Name: case_summary_hard_copy_pdfs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.case_summary_hard_copy_pdfs (
-    id integer NOT NULL,
-    form_answer_id integer,
-    file character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    original_filename character varying
-);
-
-
---
--- Name: case_summary_hard_copy_pdfs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.case_summary_hard_copy_pdfs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: case_summary_hard_copy_pdfs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.case_summary_hard_copy_pdfs_id_seq OWNED BY public.case_summary_hard_copy_pdfs.id;
 
 
 --
@@ -577,39 +502,6 @@ ALTER SEQUENCE public.email_notifications_id_seq OWNED BY public.email_notificat
 
 
 --
--- Name: feedback_hard_copy_pdfs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.feedback_hard_copy_pdfs (
-    id integer NOT NULL,
-    form_answer_id integer,
-    file character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    original_filename character varying
-);
-
-
---
--- Name: feedback_hard_copy_pdfs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.feedback_hard_copy_pdfs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: feedback_hard_copy_pdfs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.feedback_hard_copy_pdfs_id_seq OWNED BY public.feedback_hard_copy_pdfs.id;
-
-
---
 -- Name: feedbacks; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -759,7 +651,6 @@ CREATE TABLE public.form_answers (
     user_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    award_type character varying,
     account_id integer,
     urn character varying,
     submitted boolean DEFAULT false,
@@ -768,7 +659,6 @@ CREATE TABLE public.form_answers (
     company_or_nominee_name character varying,
     nominee_full_name character varying,
     user_full_name character varying,
-    award_type_full_name character varying,
     nickname character varying,
     financial_data public.hstore,
     accepted boolean DEFAULT false,
@@ -811,99 +701,6 @@ CREATE SEQUENCE public.form_answers_id_seq
 --
 
 ALTER SEQUENCE public.form_answers_id_seq OWNED BY public.form_answers.id;
-
-
---
--- Name: judges; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.judges (
-    id bigint NOT NULL,
-    first_name character varying,
-    last_name character varying,
-    deleted boolean DEFAULT false,
-    trade_role character varying,
-    development_role character varying,
-    innovation_role character varying,
-    mobility_role character varying,
-    promotion_role character varying,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip inet,
-    last_sign_in_ip inet,
-    confirmation_token character varying,
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    failed_attempts integer DEFAULT 0 NOT NULL,
-    unlock_token character varying,
-    locked_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    unique_session_id character varying
-);
-
-
---
--- Name: judges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.judges_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: judges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.judges_id_seq OWNED BY public.judges.id;
-
-
---
--- Name: list_of_procedures; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.list_of_procedures (
-    id bigint NOT NULL,
-    form_answer_id bigint,
-    attachment character varying,
-    changes_description text,
-    reviewable_type character varying,
-    reviewable_id bigint,
-    reviewed_at timestamp without time zone,
-    status integer,
-    attachment_scan_results character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: list_of_procedures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.list_of_procedures_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: list_of_procedures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.list_of_procedures_id_seq OWNED BY public.list_of_procedures.id;
 
 
 --
@@ -981,52 +778,6 @@ CREATE SEQUENCE public.palace_invites_id_seq
 --
 
 ALTER SEQUENCE public.palace_invites_id_seq OWNED BY public.palace_invites.id;
-
-
---
--- Name: press_summaries; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.press_summaries (
-    id integer NOT NULL,
-    form_answer_id integer NOT NULL,
-    body text,
-    comment text,
-    approved boolean DEFAULT false,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    name character varying,
-    email character varying,
-    phone_number character varying,
-    correct boolean,
-    token character varying,
-    authorable_type character varying,
-    authorable_id integer,
-    submitted boolean DEFAULT false,
-    applicant_submitted boolean DEFAULT false,
-    admin_sign_off boolean DEFAULT false,
-    title character varying,
-    last_name character varying
-);
-
-
---
--- Name: press_summaries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.press_summaries_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: press_summaries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.press_summaries_id_seq OWNED BY public.press_summaries.id;
 
 
 --
@@ -1250,43 +1001,6 @@ CREATE SEQUENCE public.support_letters_id_seq
 --
 
 ALTER SEQUENCE public.support_letters_id_seq OWNED BY public.support_letters.id;
-
-
---
--- Name: supporters; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.supporters (
-    id integer NOT NULL,
-    form_answer_id integer,
-    email character varying,
-    access_key character varying,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    user_id integer,
-    first_name character varying,
-    last_name character varying,
-    relationship_to_nominee character varying
-);
-
-
---
--- Name: supporters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.supporters_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: supporters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.supporters_id_seq OWNED BY public.supporters.id;
 
 
 --
@@ -2568,10 +2282,6 @@ CREATE TABLE public.users (
     debounce_api_response_code character varying,
     marked_at_bounces_email boolean DEFAULT false,
     debounce_api_latest_check_at timestamp without time zone,
-    notification_when_innovation_award_open boolean DEFAULT false,
-    notification_when_trade_award_open boolean DEFAULT false,
-    notification_when_development_award_open boolean DEFAULT false,
-    notification_when_mobility_award_open boolean DEFAULT false,
     notification_when_submission_deadline_is_coming boolean DEFAULT false,
     agree_sharing_of_details_with_lieutenancies boolean
 );
@@ -2699,13 +2409,6 @@ ALTER TABLE ONLY public.assessors ALTER COLUMN id SET DEFAULT nextval('public.as
 
 
 --
--- Name: audit_certificates id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.audit_certificates ALTER COLUMN id SET DEFAULT nextval('public.audit_certificates_id_seq'::regclass);
-
-
---
 -- Name: audit_logs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2717,13 +2420,6 @@ ALTER TABLE ONLY public.audit_logs ALTER COLUMN id SET DEFAULT nextval('public.a
 --
 
 ALTER TABLE ONLY public.award_years ALTER COLUMN id SET DEFAULT nextval('public.award_years_id_seq'::regclass);
-
-
---
--- Name: case_summary_hard_copy_pdfs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.case_summary_hard_copy_pdfs ALTER COLUMN id SET DEFAULT nextval('public.case_summary_hard_copy_pdfs_id_seq'::regclass);
 
 
 --
@@ -2762,13 +2458,6 @@ ALTER TABLE ONLY public.email_notifications ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
--- Name: feedback_hard_copy_pdfs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.feedback_hard_copy_pdfs ALTER COLUMN id SET DEFAULT nextval('public.feedback_hard_copy_pdfs_id_seq'::regclass);
-
-
---
 -- Name: feedbacks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2804,20 +2493,6 @@ ALTER TABLE ONLY public.form_answers ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
--- Name: judges id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.judges ALTER COLUMN id SET DEFAULT nextval('public.judges_id_seq'::regclass);
-
-
---
--- Name: list_of_procedures id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.list_of_procedures ALTER COLUMN id SET DEFAULT nextval('public.list_of_procedures_id_seq'::regclass);
-
-
---
 -- Name: palace_attendees id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2829,13 +2504,6 @@ ALTER TABLE ONLY public.palace_attendees ALTER COLUMN id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.palace_invites ALTER COLUMN id SET DEFAULT nextval('public.palace_invites_id_seq'::regclass);
-
-
---
--- Name: press_summaries id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.press_summaries ALTER COLUMN id SET DEFAULT nextval('public.press_summaries_id_seq'::regclass);
 
 
 --
@@ -2878,13 +2546,6 @@ ALTER TABLE ONLY public.support_letter_attachments ALTER COLUMN id SET DEFAULT n
 --
 
 ALTER TABLE ONLY public.support_letters ALTER COLUMN id SET DEFAULT nextval('public.support_letters_id_seq'::regclass);
-
-
---
--- Name: supporters id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.supporters ALTER COLUMN id SET DEFAULT nextval('public.supporters_id_seq'::regclass);
 
 
 --
@@ -2957,14 +2618,6 @@ ALTER TABLE ONLY public.assessors
 
 
 --
--- Name: audit_certificates audit_certificates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.audit_certificates
-    ADD CONSTRAINT audit_certificates_pkey PRIMARY KEY (id);
-
-
---
 -- Name: audit_logs audit_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2978,14 +2631,6 @@ ALTER TABLE ONLY public.audit_logs
 
 ALTER TABLE ONLY public.award_years
     ADD CONSTRAINT award_years_pkey PRIMARY KEY (id);
-
-
---
--- Name: case_summary_hard_copy_pdfs case_summary_hard_copy_pdfs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.case_summary_hard_copy_pdfs
-    ADD CONSTRAINT case_summary_hard_copy_pdfs_pkey PRIMARY KEY (id);
 
 
 --
@@ -3029,14 +2674,6 @@ ALTER TABLE ONLY public.email_notifications
 
 
 --
--- Name: feedback_hard_copy_pdfs feedback_hard_copy_pdfs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.feedback_hard_copy_pdfs
-    ADD CONSTRAINT feedback_hard_copy_pdfs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: feedbacks feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3077,22 +2714,6 @@ ALTER TABLE ONLY public.form_answers
 
 
 --
--- Name: judges judges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.judges
-    ADD CONSTRAINT judges_pkey PRIMARY KEY (id);
-
-
---
--- Name: list_of_procedures list_of_procedures_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.list_of_procedures
-    ADD CONSTRAINT list_of_procedures_pkey PRIMARY KEY (id);
-
-
---
 -- Name: palace_attendees palace_attendees_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3106,14 +2727,6 @@ ALTER TABLE ONLY public.palace_attendees
 
 ALTER TABLE ONLY public.palace_invites
     ADD CONSTRAINT palace_invites_pkey PRIMARY KEY (id);
-
-
---
--- Name: press_summaries press_summaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.press_summaries
-    ADD CONSTRAINT press_summaries_pkey PRIMARY KEY (id);
 
 
 --
@@ -3170,14 +2783,6 @@ ALTER TABLE ONLY public.support_letter_attachments
 
 ALTER TABLE ONLY public.support_letters
     ADD CONSTRAINT support_letters_pkey PRIMARY KEY (id);
-
-
---
--- Name: supporters supporters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.supporters
-    ADD CONSTRAINT supporters_pkey PRIMARY KEY (id);
 
 
 --
@@ -3296,24 +2901,10 @@ CREATE UNIQUE INDEX index_assessors_on_unlock_token ON public.assessors USING bt
 
 
 --
--- Name: index_audit_certificates_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_audit_certificates_on_form_answer_id ON public.audit_certificates USING btree (form_answer_id);
-
-
---
 -- Name: index_award_years_on_year; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_award_years_on_year ON public.award_years USING btree (year);
-
-
---
--- Name: index_case_summary_hard_copy_pdfs_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_case_summary_hard_copy_pdfs_on_form_answer_id ON public.case_summary_hard_copy_pdfs USING btree (form_answer_id);
 
 
 --
@@ -3356,13 +2947,6 @@ CREATE INDEX index_eligibilities_on_form_answer_id ON public.eligibilities USING
 --
 
 CREATE INDEX index_email_notifications_on_settings_id ON public.email_notifications USING btree (settings_id);
-
-
---
--- Name: index_feedback_hard_copy_pdfs_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_feedback_hard_copy_pdfs_on_form_answer_id ON public.feedback_hard_copy_pdfs USING btree (form_answer_id);
 
 
 --
@@ -3436,48 +3020,6 @@ CREATE INDEX index_form_answers_on_user_id ON public.form_answers USING btree (u
 
 
 --
--- Name: index_judges_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_judges_on_confirmation_token ON public.judges USING btree (confirmation_token);
-
-
---
--- Name: index_judges_on_email; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_judges_on_email ON public.judges USING btree (email);
-
-
---
--- Name: index_judges_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_judges_on_reset_password_token ON public.judges USING btree (reset_password_token);
-
-
---
--- Name: index_judges_on_unlock_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_judges_on_unlock_token ON public.judges USING btree (unlock_token);
-
-
---
--- Name: index_list_of_procedures_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_list_of_procedures_on_form_answer_id ON public.list_of_procedures USING btree (form_answer_id);
-
-
---
--- Name: index_list_of_procedures_on_reviewable_type_and_reviewable_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_list_of_procedures_on_reviewable_type_and_reviewable_id ON public.list_of_procedures USING btree (reviewable_type, reviewable_id);
-
-
---
 -- Name: index_palace_attendees_on_palace_invite_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3489,13 +3031,6 @@ CREATE INDEX index_palace_attendees_on_palace_invite_id ON public.palace_attende
 --
 
 CREATE INDEX index_palace_invites_on_form_answer_id ON public.palace_invites USING btree (form_answer_id);
-
-
---
--- Name: index_press_summaries_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_press_summaries_on_form_answer_id ON public.press_summaries USING btree (form_answer_id);
 
 
 --
@@ -3552,27 +3087,6 @@ CREATE INDEX index_support_letters_on_supporter_id ON public.support_letters USI
 --
 
 CREATE INDEX index_support_letters_on_user_id ON public.support_letters USING btree (user_id);
-
-
---
--- Name: index_supporters_on_access_key; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_supporters_on_access_key ON public.supporters USING btree (access_key);
-
-
---
--- Name: index_supporters_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_supporters_on_form_answer_id ON public.supporters USING btree (form_answer_id);
-
-
---
--- Name: index_supporters_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_supporters_on_user_id ON public.supporters USING btree (user_id);
 
 
 --
@@ -3647,14 +3161,6 @@ ALTER TABLE ONLY public.support_letter_attachments
 
 
 --
--- Name: supporters fk_rails_20f2c914c7; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.supporters
-    ADD CONSTRAINT fk_rails_20f2c914c7 FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
 -- Name: palace_invites fk_rails_40aaf5af73; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3695,22 +3201,6 @@ ALTER TABLE ONLY public.feedbacks
 
 
 --
--- Name: list_of_procedures fk_rails_89004f7c1e; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.list_of_procedures
-    ADD CONSTRAINT fk_rails_89004f7c1e FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
--- Name: press_summaries fk_rails_9087c6fe61; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.press_summaries
-    ADD CONSTRAINT fk_rails_9087c6fe61 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
 -- Name: aggregated_award_year_pdfs fk_rails_a450856684; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3735,27 +3225,11 @@ ALTER TABLE ONLY public.assessor_assignments
 
 
 --
--- Name: case_summary_hard_copy_pdfs fk_rails_cf4e2cdfc6; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.case_summary_hard_copy_pdfs
-    ADD CONSTRAINT fk_rails_cf4e2cdfc6 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
 -- Name: support_letters fk_rails_fae9e85e5f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.support_letters
     ADD CONSTRAINT fk_rails_fae9e85e5f FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
--- Name: feedback_hard_copy_pdfs fk_rails_fcea737d68; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.feedback_hard_copy_pdfs
-    ADD CONSTRAINT fk_rails_fcea737d68 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --
@@ -3973,6 +3447,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200814122259'),
 ('20200918110854'),
 ('20200918151320'),
-('20201023115307');
+('20201023115307'),
+('20210517075551');
 
 

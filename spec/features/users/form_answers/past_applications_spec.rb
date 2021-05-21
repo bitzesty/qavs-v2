@@ -59,8 +59,7 @@ So that I see
   describe "Displaying of past applications on dashboard" do
     describe "Successful Applications" do
       let!(:past_awarded_form_answer) do
-        create(:form_answer, :innovation,
-                             :awarded,
+        create(:form_answer, :awarded,
                              award_year: previous_award_year,
                              user: user)
       end

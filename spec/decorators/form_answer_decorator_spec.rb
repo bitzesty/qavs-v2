@@ -80,23 +80,14 @@ describe FormAnswerDecorator do
     end
   end
 
-  describe "#press_summary" do
-    it "Returns the person and time of who made the last transition" do
-      Timecop.freeze(DateTime.new(Date.current.year, 2, 6, 8, 30)) do
-        form_answer = create(:press_summary, authorable: user).form_answer.decorate
-        expect(form_answer.press_summary_updated_by).to eq("Updated by John Doe -  6 Feb #{Date.current.year} at 8:30am")
-      end
-    end
-  end
-
   describe "#dashboard_status" do
     it "returns fill progress when application is not submitted" do
-     form_answer = create(:form_answer, :trade, state: "application_in_progress", document: { sic_code:  SICCode.first.code })
-      expect(described_class.new(form_answer).dashboard_status).to eq("Application in progress...9%")
+     form_answer = create(:form_answer, state: "application_in_progress", document: { sic_code:  SICCode.first.code })
+      expect(described_class.new(form_answer).dashboard_status).to eq("Application in progress...2%")
     end
 
     it "warns that assessors are not assigned if assessment is in progress and assessors are not assigned yet for admin section" do
-      form_answer = create(:form_answer, :trade, :submitted, state: "assessment_in_progress")
+      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
       expect(described_class.new(form_answer).dashboard_status("admin")).to eq("Assessors are not assigned")
     end
 
@@ -104,7 +95,7 @@ describe FormAnswerDecorator do
       assessor1 = create(:assessor, :regular_for_all, first_name: "Jon", last_name: "Snow")
       assessor2 = create(:assessor, :regular_for_all, first_name: "Ramsay", last_name: "Snow")
 
-      form_answer = create(:form_answer, :trade, :submitted, state: "assessment_in_progress")
+      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
 
       primary = form_answer.assessor_assignments.primary
       secondary = form_answer.assessor_assignments.secondary
@@ -118,7 +109,7 @@ describe FormAnswerDecorator do
     end
 
     it "warns that assessors are not assigned if assessment is in progress and assessors are not assigned yet for assessor section" do
-      form_answer = create(:form_answer, :trade, :submitted, state: "assessment_in_progress")
+      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
       expect(described_class.new(form_answer).dashboard_status).to eq("Assessment in progress")
     end
 
@@ -126,7 +117,7 @@ describe FormAnswerDecorator do
       assessor1 = create(:assessor, :regular_for_all, first_name: "Jon", last_name: "Snow")
       assessor2 = create(:assessor, :regular_for_all, first_name: "Ramsay", last_name: "Snow")
 
-      form_answer = create(:form_answer, :trade, :submitted, state: "assessment_in_progress")
+      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
 
       primary = form_answer.assessor_assignments.primary
       secondary = form_answer.assessor_assignments.secondary
@@ -140,7 +131,7 @@ describe FormAnswerDecorator do
     end
 
     it "returns application state after assessment is ended" do
-      form_answer = create(:form_answer, :trade, :submitted, state: "not_recommended")
+      form_answer = create(:form_answer, :submitted, state: "not_recommended")
       expect(described_class.new(form_answer).dashboard_status).to eq("Not recommended")
 
       form_answer.update_column(:state, "not_awarded")
@@ -152,36 +143,9 @@ describe FormAnswerDecorator do
   end
 
   describe "#application_background" do
-    it "returns the trade_goods_briefly value if is type trade" do
-      document = {trade_goods_briefly: "International Trade"}
-      form = build(:form_answer, :trade, document: document)
-
-      decorated_app = described_class.new(form)
-
-      expect(decorated_app.application_background).to eq("International Trade")
-    end
-
-    it "returns the trade_goods_briefly value if is type innovation" do
-      document = {innovation_desc_short: "Innovation"}
-      form = build(:form_answer, :innovation, document: document)
-
-      decorated_app = described_class.new(form)
-
-      expect(decorated_app.application_background).to eq("Innovation")
-    end
-
-    it "returns the trade_goods_briefly value if is type development" do
-      document = {development_management_approach_briefly: "Development"}
-      form = build(:form_answer, :development, document: document)
-
-      decorated_app = described_class.new(form)
-
-      expect(decorated_app.application_background).to eq("Development")
-    end
-
-    it "returns the trade_goods_briefly value if is type mobility" do
+    it "returns the trade_goods_briefly value" do
       document = {mobility_desc_short: "Mobility"}
-      form = build(:form_answer, :mobility, document: document)
+      form = build(:form_answer, document: document)
 
       decorated_app = described_class.new(form)
 
@@ -193,84 +157,10 @@ describe FormAnswerDecorator do
     describe "##{field}" do
       it "returns the document field with key #{DOCUMENT_FIELDS[field]}" do
         document = {DOCUMENT_FIELDS[field] => 'An expected value'}
-        form = build(:form_answer, :development, document: document)
+        form = build(:form_answer, document: document)
 
         decorated_app = described_class.new(form)
         expect(decorated_app.send(field)).to eq(document[DOCUMENT_FIELDS[field]])
-      end
-    end
-  end
-
-  describe "show_this_entry_relates_to_question?" do
-    let(:form_answer) { build(:form_answer) }
-
-    context "for innovation and trade" do
-      it "returns true for 2020" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2020))
-
-        form_answer.award_type = "trade"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-
-        form_answer.award_type = "innovation"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-      end
-
-      it "returns true for 2019" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2019))
-
-        form_answer.award_type = "trade"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-
-        form_answer.award_type = "innovation"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-      end
-    end
-
-    context "for development and mobility" do
-      it "returns false for 2020" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2020))
-
-        form_answer.award_type = "development"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(false)
-
-        form_answer.award_type = "mobility"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(false)
-      end
-
-      it "returns true for 2019" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2019))
-
-        form_answer.award_type = "development"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-
-        form_answer.award_type = "development"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(true)
-      end
-    end
-
-    context "for promotion" do
-      it "returns false for 2020" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2020))
-
-        form_answer.award_type = "promotion"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(false)
-      end
-
-      it "returns false for 2019" do
-        allow(form_answer).to receive(:award_year).and_return(double(year: 2019))
-
-        form_answer.award_type = "promotion"
-        decorator = described_class.new form_answer
-        expect(decorator.show_this_entry_relates_to_question?).to eq(false)
       end
     end
   end

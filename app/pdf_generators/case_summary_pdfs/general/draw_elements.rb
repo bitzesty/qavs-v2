@@ -19,19 +19,10 @@ module CaseSummaryPdfs::General::DrawElements
     render_urn(0, 127)
     render_applicant(0, 119.5)
 
-    unless form_answer.promotion?
-      render_organization_type
-      render_sic_code
+    render_organization_type
+    render_sic_code
 
-      if (form_answer.development? || form_answer.mobility?) && form_answer.award_year.year >= 2020
-        # type and sub category Qs are missing for SD2020+, so need to move up
-        render_current_awards(offset: ONE_LINE_OFFSET + sic_code_offset)
-      else
-        render_type(offset: sic_code_offset)
-        render_current_awards(offset: sic_code_offset)
-        render_sub_category(0, y_coord('sub_category') + sic_code_offset.to_i)
-      end
-    end
+    render_current_awards(offset: ONE_LINE_OFFSET + sic_code_offset)
 
     render_award_general_information(130, 127)
     render_award_title(130, 119.5)

@@ -11,7 +11,6 @@ class QAEFormBuilder
       "OneOptionByYearsLabelQuestion",
       "UserInfoQuestion",
       "AwardHolderQuestion",
-      "QueenAwardApplicationsQuestion",
       "SupportersQuestion",
       "SubsidiariesAssociatesPlantsQuestion",
       "ByTradeGoodsAndServicesLabelQuestion"

@@ -34,11 +34,6 @@ awards.each do |award|
       first_name: "#{role}-assessor",
       last_name: "#{award}",
     }
-    role_args = {
-      "#{award}_role" => (role == "none" ? nil : role)
-    }
-
-    assessor_args.merge!(role_args)
 
     a = Assessor.where(assessor_args).first_or_initialize
     a.password = "^#ur9EkLm@1W"
