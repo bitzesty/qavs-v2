@@ -21,19 +21,6 @@ shared_context "form answers table sorting" do
       expect(column_values(header_position)).to eq(asc_company_names)
     end
   end
-
-  context "Reference header" do
-    let(:header_position) { subject.is_a?(Admin) ? 1 : 2 }
-
-    let(:asc_references) do
-      FormAnswer.pluck(:urn).sort
-    end
-
-    it "sorts by reference header" do
-      click_header("Reference")
-      expect(column_values(header_position)).to eq(asc_references)
-    end
-  end
 end
 
 def column_values(column_number)

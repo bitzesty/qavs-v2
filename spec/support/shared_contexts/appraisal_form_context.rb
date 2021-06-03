@@ -1,5 +1,5 @@
 shared_context "successful appraisal form edition" do
-  let!(:form_answer) { create(:form_answer, :innovation) }
+  let!(:form_answer) { create(:form_answer) }
   let(:primary) { "#section-appraisal-form-primary" }
   let(:secondary) { "#section-appraisal-form-secondary" }
   let(:moderated) { "#section-appraisal-form-moderated" }
@@ -49,7 +49,7 @@ end
 shared_context "successful case summary edition" do
   let(:case_summary_header) { "#case-summary-heading-case_summary" }
   let(:case_summary) { "#section-case-summary-case_summary" }
-  let!(:form_answer) { create(:form_answer, :innovation) }
+  let!(:form_answer) { create(:form_answer) }
   let(:text) { "textareatext123123" }
 
   before do
@@ -100,8 +100,8 @@ def assert_description_change(section_id, header_id)
   find("#{header_id} .panel-title a").click
   take_a_nap
 
-  selector = section_id == moderated ? "assessor_assignment_verdict_desc" : "assessor_assignment_level_of_innovation_desc"
-  parent_selector = section_id == moderated ? ".form-overall-verdict" : ".form-level-of-innovation"
+  selector = section_id == moderated ? "assessor_assignment_verdict_desc" : "assessor_assignment_assessor_assignment_mobility_impact_of_the_programme_desc_desc"
+  parent_selector = section_id == moderated ? ".form-overall-verdict" : ".form-assessor-assignment-mobility-impact-of-the-programme"
 
   within section_id do
     within ".#{selector}" do
@@ -135,7 +135,7 @@ def assert_multiple_description_change(section_id, header_id)
 
   within section_id do
     unless section_id == moderated
-      fill_in("assessor_assignment_level_of_innovation_desc", with: text)
+      fill_in("assessor_assignment_mobility_impact_of_the_programme_desc", with: text)
     end
 
     fill_in("assessor_assignment_verdict_desc", with: text2)

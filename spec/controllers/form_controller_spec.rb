@@ -48,7 +48,7 @@ describe FormController do
       end
 
       it "does not allow to create an application if start deadline has not passed" do
-        Settings.current.deadlines.submission_start.update_column(:trigger_at, Time.zone.now + 1.day)
+        Settings.current.deadlines.award_year_switch.update_column(:trigger_at, Time.zone.now + 1.day)
         expect(get :new_qavs_form).to redirect_to(dashboard_url)
       end
     end

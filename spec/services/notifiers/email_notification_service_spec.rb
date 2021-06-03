@@ -68,47 +68,6 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
-  context "buckingham_palace_invite" do
-    let(:kind) { "buckingham_palace_invite" }
-    let!(:form_answer) { create(:form_answer, :awarded) }
-    let!(:account_holder) { form_answer.account.owner }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-
-      expect {
-        described_class.run
-      }.to change {
-        PalaceInvite.count
-      }.by(1)
-
-      last_invite = PalaceInvite.last
-      expect(last_invite.email).to be_eql form_answer.decorate.head_email
-      expect(last_invite.form_answer_id).to be_eql form_answer.id
-
-      expect(current_notification.reload).to be_sent
-    end
-
-    context "for an application with submitted attendees details" do
-      it "does not send an invite" do
-        create(:palace_invite,
-               email: form_answer.decorate.head_email,
-               form_answer: form_answer,
-               submitted: true)
-
-        expect(AccountMailers::BuckinghamPalaceInviteMailer).not_to receive(:invite)
-
-        expect {
-          described_class.run
-        }.not_to change {
-          PalaceInvite.count
-        }
-
-        expect(current_notification.reload).to be_sent
-      end
-    end
-  end
-
   describe "#reminder_to_submit" do
     let(:kind) { "reminder_to_submit" }
     let(:mailer) { double(deliver_later!: true) }

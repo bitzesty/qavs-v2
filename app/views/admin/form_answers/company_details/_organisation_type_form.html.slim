@@ -1,5 +1,3 @@
-- title = "Organisation type"
-
 - if user_can_edit(@form_answer, :organisation_type)
   .form-group class="#{'form-edit' if @form_answer.organisation_type.blank?}"
     = simple_form_for [namespace_name, resource],
@@ -8,7 +6,7 @@
       = hidden_field_tag :section, "organisation_type"
 
       .form-container
-        label.form-label = title
+        label.form-label Organisation type
 
         .form-value
           p
@@ -37,7 +35,7 @@
 - else
   .form-group
     .form-container
-      label.form-label = title
+      label.form-label Organisation type
         p
           - if @form_answer.organisation_type.present?
             = @form_answer.organisation_type.capitalize

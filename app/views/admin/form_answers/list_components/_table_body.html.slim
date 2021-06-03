@@ -9,12 +9,6 @@
         = link_to polymorphic_url([namespace_name, obj], search: params[:search]) do
           em
             ' Not found
-    td
-      = link_to polymorphic_url([namespace_name, obj], search: params[:search])
-        - if obj.urn.present?
-          = obj.urn
-        - else
-          span.urn-not-generated Not generated
     td = obj.dashboard_status(current_admin.class.name)
     td = obj.sic_code
     td = obj.applied_before ? "Yes" : ""

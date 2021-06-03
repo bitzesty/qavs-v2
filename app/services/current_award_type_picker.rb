@@ -24,13 +24,9 @@ class CurrentAwardTypePicker
 
   def visible_categories
     lead_categories = current_subject.categories_as_lead
-    regular_categories = current_subject.applications_scope.pluck(:award_type).uniq
+    regular_categories = ["qavs"]
 
     categories = lead_categories + regular_categories
-
-    if !params[:year].present? || params[:year].to_i > 2016
-      categories -= ["promotion"]
-    end
 
     categories.uniq.each_with_index.map do |category, index|
       AwardCategory.new(slug: category, first_element: index == 0)
@@ -49,7 +45,7 @@ class CurrentAwardTypePicker
     end
 
     def text_label
-      FormAnswer::AWARD_TYPE_FULL_NAMES[slug]
+      "QAVS"
     end
   end
 end

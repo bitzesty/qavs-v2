@@ -3,8 +3,6 @@ table.table.applications-table
     tr
       th.sortable width="250"
         = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
-      th.sortable width="120"
-        = sort_link f, "Reference", @search, :urn, disabled: @search.query?
       th width="250"
         | Status
       th.sortable width="70"
