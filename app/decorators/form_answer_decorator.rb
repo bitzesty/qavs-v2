@@ -397,33 +397,11 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def goods_and_services_key
-    case award_type
-    when "innovation"
-      "innovation_desc_short"
-    when "mobility"
-      "mobility_desc_short"
-    when "development"
-      if award_year.year >= 2020
-        "one_line_description_of_interventions"
-      else
-        "development_management_approach_briefly"
-      end
-    end
+    "mobility_desc_short"
   end
 
   def goods_and_services
-    case award_type
-    when "innovation"
-      innovation_desc_short
-    when "mobility"
-      mobility_desc_short
-    when "development"
-      if award_year.year >= 2020
-        one_line_description_of_interventions
-      else
-        development_management_approach_briefly
-      end
-    end
+    mobility_desc_short
   end
 
   def application_background

@@ -1,119 +1,11 @@
 .form-group-multiple-parent
-  - if @form_answer.promotion?
-    .form-group.form-group-multiple.company-address-personal-form
-      .form-container
-        label.form-label Nominee Address
-
-        .form-value
-          p
-            - if @form_answer.nominee_building.present?
-              = @form_answer.nominee_building
-              br
-            - if @form_answer.nominee_street.present?
-              = @form_answer.nominee_street
-              br
-            - if @form_answer.nominee_city.present?
-              = @form_answer.nominee_city
-              br
-            - if @form_answer.nominee_county.present?
-              = @form_answer.nominee_county
-              br
-            - if @form_answer.nominee_postcode.present?
-              = @form_answer.nominee_postcode
-              br
-            - if @form_answer.nominee_telephone.present?
-              = @form_answer.nominee_telephone
-              br
-            - if @form_answer.nominee_email.present?
-              = @form_answer.nominee_email
-              br
-            - if @form_answer.nominee_region.present?
-              = @form_answer.nominee_region
-
-        - if user_can_edit(@form_answer, :address)
-          = simple_form_for([namespace_name, resource],
-                            remote: true,
-                            authenticity_token: true, html: { "data-type" => "html" }) do |f|
-
-            = hidden_field_tag :section, "address"
-            .input.form-group.form-fields.form-block
-              = f.simple_fields_for(:data) do |f|
-                .row
-                  .col-md-8
-                    = f.input :nominee_personal_address_building,
-                              as: :string,
-                              label: "Building and street",
-                              input_html: { class: "form-control" }
-
-                    = f.input :nominee_personal_address_street,
-                              as: :string,
-                              label: false,
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-6
-                    = f.input :nominee_personal_address_city,
-                              as: :string,
-                              label: "Town or city",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-6
-                    = f.input :nominee_personal_address_county,
-                              as: :string,
-                              label: "County",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-3
-                    = f.input :nominee_personal_address_postcode,
-                              as: :string,
-                              label: "Postcode",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-3
-                    = f.input :nominee_phone,
-                              as: :string,
-                              label: "Telephone number",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-8
-                    = f.input :nominee_email,
-                              as: :string,
-                              label: "Email",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-4
-                    = f.input :nominee_personal_address_region,
-                              as: :select,
-                              label: "Region",
-                              input_html: { class: "form-control" },
-                              collection: regions
-
-              .form-actions.text-right
-                = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-                = f.submit "Save", class: "btn btn-primary pull-right"
-
-            .clear
-
-            = link_to "#", class: "form-edit-link pull-right"
-              span.glyphicon.glyphicon-pencil
-              ' Edit
-        .clear
-
   .form-group.form-group-multiple.company-address-form
     .form-container
       label.form-label
-        = @form_answer.promotion? ? "Organisation Address" : "Address"
+        ' Address
 
       .form-value
         p
-          - if @form_answer.promotion?
-            - if @form_answer.nominee_organisation.present?
-              = @form_answer.nominee_organisation
-              br
-
-            - if @form_answer.nominee_position.present?
-              = @form_answer.nominee_position
-              br
-
           - if @form_answer.document["organization_address_building"].present?
             = @form_answer.document["organization_address_building"]
             br
@@ -130,18 +22,12 @@
             = @form_answer.document["organization_address_postcode"]
             br
 
-          - unless @form_answer.promotion?
-            - if @form_answer.document["org_telephone"].present?
-              = @form_answer.document["org_telephone"]
-              br
-            - if @form_answer.document["organization_address_region"].present?
-              = @form_answer.document["organization_address_region"]
-              br
-
-          - if @form_answer.promotion?
-            - if @form_answer.document["website_url"].present?
-              = @form_answer.document["website_url"]
-              br
+          - if @form_answer.document["org_telephone"].present?
+            = @form_answer.document["org_telephone"]
+            br
+          - if @form_answer.document["organization_address_region"].present?
+            = @form_answer.document["organization_address_region"]
+            br
 
       - if resource.submitted_and_after_the_deadline? && CompanyDetailPolicy.new(pundit_user, resource).can_manage_address?
         = simple_form_for([namespace_name, resource],
@@ -151,19 +37,6 @@
           = hidden_field_tag :section, "address"
           .input.form-group.form-fields.form-block
             = f.simple_fields_for(:data) do |f|
-              - if @form_answer.promotion?
-                .row
-                  .col-md-8
-                    = f.input :organization_address_name,
-                              as: :string,
-                              label: "Organisation Name",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-8
-                    = f.input :nominee_position,
-                              as: :string,
-                              label: "Nominee Position",
-                              input_html: { class: "form-control" }
               .row
                 .col-md-8
                   = f.input :organization_address_building,
@@ -200,22 +73,13 @@
                             label: "Telephone number",
                             input_html: { class: "form-control" }
 
-              - unless @form_answer.promotion?
-                .row
-                  .col-md-4
-                    = f.input :organization_address_region,
-                              as: :select,
-                              label: "Region",
-                              input_html: { class: "form-control" },
-                              collection: regions
-
-              - if @form_answer.promotion?
-                .row
-                  .col-md-8
-                    = f.input :website_url,
-                              as: :string,
-                              label: "Website",
-                              input_html: { class: "form-control" }
+              .row
+                .col-md-4
+                  = f.input :organization_address_region,
+                            as: :select,
+                            label: "Region",
+                            input_html: { class: "form-control" },
+                            collection: regions
 
             .form-actions.text-right
               = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
@@ -227,106 +91,3 @@
             span.glyphicon.glyphicon-pencil
             ' Edit
       .clear
-
-  - if @form_answer.promotion?
-    .form-group.form-group-multiple.company-address-nominator-form
-      .form-container
-        label.form-label Nominator Address
-
-        .form-value
-          p
-            - if @form_answer.nominator_name.present?
-              = @form_answer.nominator_name
-              br
-            - if @form_answer.nominator_building.present?
-              = @form_answer.nominator_building
-              br
-            - if @form_answer.nominator_street.present?
-              = @form_answer.nominator_street
-              br
-            - if @form_answer.nominator_city.present?
-              = @form_answer.nominator_city
-              br
-            - if @form_answer.nominator_county.present?
-              = @form_answer.nominator_county
-              br
-            - if @form_answer.nominator_postcode.present?
-              = @form_answer.nominator_postcode
-              br
-            - if @form_answer.nominator_telephone.present?
-              = @form_answer.nominator_telephone
-              br
-            - if @form_answer.nominator_email.present?
-              = @form_answer.nominator_email
-              br
-
-        - if resource.submitted_and_after_the_deadline? && CompanyDetailPolicy.new(pundit_user, resource).can_manage_address?
-          = simple_form_for([namespace_name, resource],
-                            remote: true,
-                            authenticity_token: true, html: { "data-type" => "html" }) do |f|
-            = hidden_field_tag :section, "address"
-            .input.form-group.form-fields.form-block
-              = f.simple_fields_for(:data) do |f|
-                .row
-                  .col-md-4
-                    = f.input :user_info_first_name,
-                              as: :string,
-                              label: "Nominator Name",
-                              input_html: { class: "form-control" }
-                  .col-md-4
-                    = f.input :user_info_last_name,
-                              as: :string,
-                              label: "Nominator Name",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-8
-                    = f.input :personal_address_building,
-                              as: :string,
-                              label: "Building and street",
-                              input_html: { class: "form-control" }
-
-                    = f.input :personal_address_street,
-                              as: :string,
-                              label: false,
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-6
-                    = f.input :personal_address_city,
-                              as: :string,
-                              label: "Town or city",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-6
-                    = f.input :personal_address_county,
-                              as: :string,
-                              label: "County",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-3
-                    = f.input :personal_address_postcode,
-                              as: :string,
-                              label: "Postcode",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-3
-                    = f.input :personal_phone,
-                              as: :string,
-                              label: "Telephone number",
-                              input_html: { class: "form-control" }
-                .row
-                  .col-md-8
-                    = f.input :personal_email,
-                              as: :string,
-                              label: "Email",
-                              input_html: { class: "form-control" }
-
-              .form-actions.text-right
-                = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-                = f.submit "Save", class: "btn btn-primary pull-right"
-
-            .clear
-
-            = link_to "#", class: "form-edit-link pull-right"
-              span.glyphicon.glyphicon-pencil
-              ' Edit
-        .clear

@@ -78,6 +78,6 @@ class Reports::AdminReport
     sub_type = "#{sub_type}_years" if sub_type.present?
 
     pdf_timestamp = Time.zone.now.strftime("%e_%b_%Y_at_%-l:%M%P")
-    "#{::FormAnswer::AWARD_TYPE_FULL_NAMES[params[:category]]}_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
+    "qavs_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
   end
 end

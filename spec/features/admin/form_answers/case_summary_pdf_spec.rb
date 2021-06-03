@@ -14,23 +14,7 @@ So that I can print and review application's case summaries
     login_admin(admin)
   end
 
-  describe "International Trade Award" do
-    let(:award_type) { :trade }
-    include_context "admin application case summaries pdf download"
-  end
-
-  describe "Innovation Award" do
-    let(:award_type) { :innovation }
-    include_context "admin application case summaries pdf download"
-  end
-
-  # describe "Sustainable Development Award" do
-  #   let(:award_type) { :development }
-  #   include_context "admin application case summaries pdf download"
-  # end
-
-  describe "Enterprise Promotion Award" do
-    let(:award_type) { :promotion }
+  describe "Case summary" do
     include_context "admin application case summaries pdf download"
   end
 end

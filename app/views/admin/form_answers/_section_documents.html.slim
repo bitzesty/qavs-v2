@@ -10,7 +10,6 @@
         span.glyphicon.glyphicon-pencil
         span.btn-title
           ' Edit application
-    = render "admin/form_answers/docs/not_completed_audit_certificate"
     = render "admin/form_answers/docs/download_original_application_pdf_before_deadline"
 
   .sidebar-section
@@ -23,16 +22,6 @@
       ' Post Shortlisting Docs
     .document-list
       = render "admin/form_answers/docs/post_shortlisting_docs", resource: resource
-
-    - if @form_answer.audit_certificate.blank? && Settings.after_shortlisting_stage?
-      br
-      #audit-certificate-form
-        = render "admin/audit_certificate/form", form_answer: @form_answer, audit_certificate: @form_answer.build_audit_certificate
-
-  / TODO Only appears for EP but for now we need to think more on it
-  /.sidebar-section
-    h2.todo-placeholder
-      ' EP ?
 
   .sidebar-section
     h2

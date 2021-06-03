@@ -3,7 +3,6 @@ require 'rails_helper'
 shared_context "admin all feedbacks pdf generation" do
   let!(:form_answer) do
     create :form_answer,
-           award_type,
            :submitted
   end
 
@@ -14,12 +13,12 @@ shared_context "admin all feedbacks pdf generation" do
   end
 
   let(:pdf_filename) do
-    "#{FormAnswer::AWARD_TYPE_FULL_NAMES[award_type]}_award_feedbacks"
+    "qavs_award_feedbacks"
   end
 
   describe "Download PDF" do
     before do
-      visit admin_report_path("feedbacks", category: award_type, format: :pdf)
+      visit admin_report_path("feedbacks", category: "qavs", format: :pdf)
     end
 
     it "should generate pdf" do

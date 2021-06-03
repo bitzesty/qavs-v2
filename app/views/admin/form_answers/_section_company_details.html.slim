@@ -2,7 +2,7 @@
   .panel-heading#company-details-heading role="tab"
     h4.panel-title
       a data-toggle="collapse" data-parent="#panel-application-info" href="#section-company-details" aria-expanded="true" aria-controls="section-company-details"
-        = @form_answer.promotion? ? "Nominee Details" : "Company Details"
+        ' Company Details
         - if resource.company_details_updated_at && resource.company_details_editable
           small
             = "Updated by: #{resource.company_details_editable.decorate.full_name} - #{format_date(resource.company_details_updated_at)}"
@@ -15,7 +15,6 @@
       = render "admin/form_answers/company_details/address_form"
       = render "admin/form_answers/company_details/previous_wins_form"
       = render "admin/form_answers/company_details/sic_form"
-      = render "admin/form_answers/company_details/this_entry_relates_to_form"
       = render "admin/form_answers/company_details/goods_services_form"
       = render "admin/form_answers/company_details/registration_number_form"
       = render "admin/form_answers/company_details/date_trading_form"
