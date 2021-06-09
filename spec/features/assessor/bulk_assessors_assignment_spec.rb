@@ -6,7 +6,7 @@ Warden.test_mode!
 describe "Assessor assigns assessors", %(
   As Assessor
   I want to be able to assign assessors..
-) do
+), skip: true do
 
   let(:subject) { create(:assessor, :lead_for_all) }
   let!(:assessor1) { create(:assessor, :regular_for_trade, first_name: "first-name#{rand(100)}") }

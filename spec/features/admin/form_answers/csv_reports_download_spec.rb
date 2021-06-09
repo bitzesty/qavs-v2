@@ -1,7 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
-describe "Admin downloads CSV reports" do
+describe "Admin downloads CSV reports", skip: true do
   let!(:admin) { create(:admin) }
   before { login_admin(admin) }
 

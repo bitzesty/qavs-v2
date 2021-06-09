@@ -5,7 +5,7 @@ describe "Non JS | Dynamic Lists | Subsidiaries", %q{
 As a User
 I want to be able to add UK subsidiaries, associates or plants
 So that I can fill form completelly even if Javascript is turned off
-} do
+}, skip: true do
 
   include_context "non js form base"
 

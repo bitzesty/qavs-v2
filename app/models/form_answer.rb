@@ -39,7 +39,7 @@ class FormAnswer < ApplicationRecord
     has_one :audit_certificate, dependent: :destroy
     has_one :list_of_procedures, dependent: :destroy
     has_one :feedback, dependent: :destroy
-    has_one :press_summary, dependent: :destroy
+    # has_one :press_summary, dependent: :destroy
     has_one :draft_note, as: :notable, dependent: :destroy
     has_one :palace_invite, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy

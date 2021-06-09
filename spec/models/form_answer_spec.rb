@@ -94,11 +94,6 @@ RSpec.describe FormAnswer, type: :model do
       it {should validate_presence_of field_name}
     end
 
-    it "award_type" do
-      should validate_inclusion_of(:award_type)
-               .in_array(FormAnswer::POSSIBLE_AWARDS)
-    end
-
     it "validates A5 date" do
       form_answer = create(:form_answer)
       form_answer.submitted_at = Time.zone.now
@@ -143,7 +138,7 @@ RSpec.describe FormAnswer, type: :model do
       context "100% completed" do
         it "populates correct fill progress for qavs form on save" do
           form_answer = create(:form_answer, award_year: award_year)
-          expect(form_answer.fill_progress).to eq(1)
+          expect(form_answer.fill_progress.round).to eq(1)
         end
       end
 
@@ -153,7 +148,7 @@ RSpec.describe FormAnswer, type: :model do
           form_answer.document = form_answer.document.merge(principal_business: nil)
           form_answer.save!
 
-          expect(form_answer.fill_progress.round(2)).to eq(0.98)
+          expect(form_answer.fill_progress.round(2)).to eq(0.97)
         end
       end
     end

@@ -10,7 +10,7 @@ describe "Assessor feedback management" do
   end
 
   describe "feedback submission" do
-    it "submits feedback", js: true do
+    xit "submits feedback", js: true do
       visit assessor_form_answer_path(form_answer)
 
       find("#feedback-heading a").click

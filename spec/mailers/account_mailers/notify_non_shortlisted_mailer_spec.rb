@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe AccountMailers::NotifyNonShortlistedMailer do
+describe AccountMailers::NotifyNonShortlistedMailer, skip: true do
   let!(:user) { create :user }
   let!(:form_answer) do
     create :form_answer, :submitted, user: user

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe FormFinancialPointer do
+describe FormFinancialPointer, skip: true do
   let(:trade_data) do
     [
       {

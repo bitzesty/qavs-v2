@@ -29,7 +29,6 @@ describe FormAnswerStatistics::Picker do
         end
 
         Timecop.freeze(current_date) do
-          puts subject.applications_table
           expect(subject.applications_table[:registered_users][:counters]).to eq([3, 3, 4])
           expect(subject.applications_table[:applications_not_eligible][:counters]).to eq([1, 1, 1])
           expect(subject.applications_table[:applications_submitted][:counters]).to eq([0, 0, 0])
@@ -56,7 +55,7 @@ describe FormAnswerStatistics::Picker do
         end
 
         Timecop.freeze(current_date) do
-          expect(subject.applications_submissions["qavs"]).to eq([1, 2, 3])
+          expect(subject.applications_submissions["awards"]).to eq([1, 2, 3])
         end
       end
 
@@ -69,7 +68,7 @@ describe FormAnswerStatistics::Picker do
           end
 
           Timecop.freeze(current_date) do
-            expect(subject.applications_submissions["qavs"]).to eq([0, 1, 1])
+            expect(subject.applications_submissions["awards"]).to eq([0, 1, 1])
           end
         end
       end
@@ -78,7 +77,7 @@ describe FormAnswerStatistics::Picker do
     describe "#applications_completions" do
       it "calculates proper stats" do
         populate_application_completions
-        expect(subject.applications_completions["qavs"]).to eq([1, 1, 0, 1, 1, 0, 4])
+        expect(subject.applications_completions["awards"]).to eq([1, 1, 0, 1, 1, 0, 4])
       end
     end
   end
@@ -124,19 +123,19 @@ describe FormAnswerStatistics::Picker do
           fa3 = create(:form_answer)
           fa3.state_machine.perform_transition(:submitted, nil, false)
         end
-        expect(subject.applications_submissions["qavs"]).to eq(["-", "-", 2])
+        expect(subject.applications_submissions["awards"]).to eq(["-", "-", 2])
       end
     end
 
     describe "#applications_completions" do
       it "calculates proper stats" do
-        expect(subject.applications_completions["qavs"]).to eq([0, 0, 0, 0, 0, 0, 0])
+        expect(subject.applications_completions["awards"]).to eq([0, 0, 0, 0, 0, 0, 0])
 
         date = Date.today.month == 12? Date.today + 12.months : Date.today + 12.months
         Timecop.freeze(date) do
           populate_application_completions
         end
-        expect(subject.applications_completions["qavs"]).to eq([1, 1, 0, 1, 1, 0, 4])
+        expect(subject.applications_completions["awards"]).to eq([1, 1, 0, 1, 1, 0, 4])
       end
     end
   end

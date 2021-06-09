@@ -28,7 +28,7 @@ describe "As Admin I want to filter applications", js: true do
     visit admin_form_answers_path
   end
 
-  it "filters by status" do
+  xit "filters by status" do
     # 4 Applications
     assert_results_number(4)
 
@@ -68,8 +68,8 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(1)
 
     # Add press summary to all applications and check filter
-    assign_dummy_press_summary(@forms)
-    click_status_option("Missing Press Summary")
-    assert_results_number(0)
+    # assign_dummy_press_summary(@forms)
+    # click_status_option("Missing Press Summary")
+    # assert_results_number(0)
   end
 end
