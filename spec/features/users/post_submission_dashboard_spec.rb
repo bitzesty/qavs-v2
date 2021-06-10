@@ -14,8 +14,8 @@ describe  "User sees the post submission dashboard" do
   describe "visits the post submission dashboard", js: true do
     it "sees applications properly" do
       visit dashboard_path
-      expect(page).to have_content"Edit application"
-      expect(page).to have_content("Current Applications")
+      expect(page).to have_content"Edit nomination"
+      expect(page).to have_content("Current Nominations")
 
       settings.destroy
       settings = create(:settings, :expired_submission_deadlines, award_year_id: AwardYear.current.id)

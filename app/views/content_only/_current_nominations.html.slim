@@ -33,7 +33,7 @@
                 / = award.decorate.fill_progress_in_percents
                 / '  completed
           td.pull-right
-            - name = award.award_type == "promotion" ? "nomination" : "application"
+            - name = award.award_type == "qavs" ? "nomination" : "application"
             - award_name = award.award_type_full_name + " Award"
             - nick = award.nickname.present? ? " (#{award.nickname})" : ""
             - action = award.submitted? ? "Edit" : "Continue"

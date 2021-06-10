@@ -32,5 +32,5 @@ end
 
 step "I should see application edit link on dashboard" do
   step "I go to dashboard"
-  expect(page).to have_link("Continue application")
+  expect(page).to have_link("Continue nomination")
 end

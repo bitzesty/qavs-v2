@@ -45,7 +45,7 @@ describe "Account forms" do
         expect(page).to have_content("Contact preferences")
         click_button("Save and continue")
 
-        expect(page).to have_content("To begin your application, select the award(s) you want to apply for.")
+        expect(page).to have_content("Continue to the nomination form")
 
         user.reload
 
