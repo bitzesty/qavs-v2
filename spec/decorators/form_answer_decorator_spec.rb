@@ -21,7 +21,7 @@ describe FormAnswerDecorator do
     nominator_email: "personal_email",
     registration_number: "registration_number",
     website_url: "website_url",
-    head_of_bussines_title: "head_of_bussines_title",
+    head_of_business_title: "head_of_business_title",
     head_of_business_honours: "head_of_business_honours",
     head_job_title: "head_job_title",
     head_email: "head_email",
@@ -83,7 +83,7 @@ describe FormAnswerDecorator do
   describe "#dashboard_status" do
     it "returns fill progress when application is not submitted" do
      form_answer = create(:form_answer, state: "application_in_progress", document: { sic_code:  SICCode.first.code })
-      expect(described_class.new(form_answer).dashboard_status).to eq("Application in progress...3%")
+      expect(described_class.new(form_answer).dashboard_status).to eq("Application in progress...0%")
     end
 
     it "warns that assessors are not assigned if assessment is in progress and assessors are not assigned yet for admin section" do

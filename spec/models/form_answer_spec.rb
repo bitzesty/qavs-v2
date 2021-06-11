@@ -94,21 +94,6 @@ RSpec.describe FormAnswer, type: :model do
       it {should validate_presence_of field_name}
     end
 
-    it "validates A5 date" do
-      form_answer = create(:form_answer)
-      form_answer.submitted_at = Time.zone.now
-
-      form_answer.document = form_answer.document.merge(started_trading_day: "2",
-                                                        started_trading_month: 12,
-                                                        started_trading_year: Date.current.year - 2)
-      expect(form_answer).to be_invalid
-
-      form_answer.document = form_answer.document.merge(started_trading_day: "2",
-                                                        started_trading_month: 12,
-                                                        started_trading_year: Date.current.year - 7)
-      expect(form_answer).to be_valid
-    end
-
     it "sets account on creating" do
       form_answer = create(:form_answer)
       expect(form_answer.account).to eq(form_answer.user.account)
@@ -142,7 +127,7 @@ RSpec.describe FormAnswer, type: :model do
         end
       end
 
-      context "not completed" do
+      pending "not completed" do
         it "populates correct fill progress for qavs form on save" do
           form_answer = create(:form_answer, award_year: award_year)
           form_answer.document = form_answer.document.merge(principal_business: nil)

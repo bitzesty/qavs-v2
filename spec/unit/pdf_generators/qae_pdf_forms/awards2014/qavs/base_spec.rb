@@ -5,8 +5,7 @@ describe "QaePdfForms::Awards2016::Qavs::Base" do
 
   let(:step1_question_answers) {
     {
-      company_name: "Bitzesty",
-      registration_number: '123'
+      company_name: "Bitzesty"
     }
   }
 
