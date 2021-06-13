@@ -2,7 +2,7 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step3
       @qavs_step3 ||= proc do
-        upload :letters_of_support, "" do
+        supporters :letters_of_support, "" do
           ref "C 1"
           context %(
             <p>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
@@ -17,9 +17,9 @@ class AwardYears::V2022::QAEForms
               Letters of support must be uploaded as PDF documents when submitting this form.
             </p>
           )
-          max_attachments 2
-          links
-          description
+          limit 2
+          default 1
+          list_type :manual_upload
         end
       end
     end
