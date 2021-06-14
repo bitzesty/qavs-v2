@@ -463,7 +463,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.5.1)
     minitest (5.14.3)
     money (6.13.1)
       i18n (>= 0.6.4, <= 2)
@@ -474,8 +474,8 @@ GEM
     nilify_blanks (1.3.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
-    nio4r (2.5.4)
-    nokogiri (1.11.1)
+    nio4r (2.5.7)
+    nokogiri (1.11.4)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nokogumbo (2.0.2)
@@ -527,7 +527,7 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (4.0.6)
-    puma (4.3.6)
+    puma (4.3.8)
       nio4r (~> 2.0)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
@@ -838,7 +838,7 @@ DEPENDENCIES
   prawn
   prawn-table
   pry-byebug
-  puma (~> 4.3.6)
+  puma (~> 4.3.8)
   pundit (~> 0.3)
   pusher (= 0.15.2)
   rack-cors (~> 1.0)

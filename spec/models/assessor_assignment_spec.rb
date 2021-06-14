@@ -9,7 +9,7 @@ describe AssessorAssignment do
         [:mobility_embedding_info, :mobility_impact_of_the_programme, :corporate_social_responsibility]
       end
 
-      it "is invalid" do
+      xit "is invalid" do
         attributes.each do |meth|
           obj = build_assignment_with(meth)
           expect(obj).to_not be_valid

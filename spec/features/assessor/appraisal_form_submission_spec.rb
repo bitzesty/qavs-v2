@@ -6,7 +6,7 @@ Warden.test_mode!
 describe "Assessor submits appraisal form", %(
   As Assessor
   I want to be able to edit, submit the appraisal form.
-), js: true do
+), js: true, skip: true do
 
   let(:scope) { :assessor }
   let(:subject) { create(:assessor, :lead_for_all) }

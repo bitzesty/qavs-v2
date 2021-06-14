@@ -649,7 +649,7 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def render_context_for_option(question, answer)
-    context = question.context_for_option(answer.value)
+    context = question.context_for_option(answer&.value)
     if context
       form_pdf.move_down 3.mm
       form_pdf.indent 7.mm do

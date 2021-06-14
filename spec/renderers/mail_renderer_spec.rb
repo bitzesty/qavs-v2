@@ -20,15 +20,6 @@ describe MailRenderer do
     end
   end
 
-  describe "#shortlisted_audit_certificate_reminder" do
-    it "renders e-mail" do
-      rendered = described_class.new.shortlisted_audit_certificate_reminder
-      expect(rendered).to match("Jane Doe")
-      # placeholder for date if deadlines are not set
-      expect(rendered).to match(deadline_str)
-    end
-  end
-
   describe "#shortlisted_notifier" do
     it "renders e-mail" do
       rendered = described_class.new.shortlisted_notifier

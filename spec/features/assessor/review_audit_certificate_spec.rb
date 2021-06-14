@@ -1,7 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
-describe "Assessor reviews the audit certificate" do
+describe "Assessor reviews the audit certificate", skip: true do
   let(:assessor) { create(:assessor, :lead_for_all) }
   let!(:form_answer) { create(:form_answer, :with_audit_certificate) }
 

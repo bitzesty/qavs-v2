@@ -5,7 +5,7 @@ describe "Admin: Download all Case Summary as one pdf", %q{
 As an Admin
 I want to download all Case Summary PDFS as one pdf per category from Dashboard
 So that I can print and review application case summaries
-} do
+}, skip: true do
 
   let!(:admin) { create(:admin) }
 

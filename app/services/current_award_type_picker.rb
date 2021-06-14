@@ -13,7 +13,7 @@ class CurrentAwardTypePicker
   def current_award_type
     lead_categories = current_subject.categories_as_lead
     return nil if lead_categories.blank?
-    regular_categories = current_subject.applications_scope.pluck(:award_type).uniq
+    regular_categories = current_subject.applications_scope.map(&:award_type).uniq
     categories = lead_categories + regular_categories
     if params[:award_type].present?
       params[:award_type] if categories.include?(params[:award_type])

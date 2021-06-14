@@ -3,7 +3,7 @@ require "rails_helper"
 include Warden::Test::Helpers
 Warden.test_mode!
 
-describe "As Lead Assessor I want to sort by assessors", js: true do
+describe "As Lead Assessor I want to sort by assessors", js: true, skip: true do
   let!(:assessor) { create(:assessor, :lead_for_all) }
 
   before do

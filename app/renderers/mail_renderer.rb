@@ -75,17 +75,6 @@ class MailRenderer
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
 
-  def shortlisted_audit_certificate_reminder
-    assigns = {}
-
-    assigns[:recipient] = dummy_user("Jane", "Doe", "Jane's Company")
-    assigns[:form_answer] = form_answer
-    assigns[:deadline] = deadline_str("audit_certificates")
-    assigns[:deadline_time] = deadline_str("audit_certificates", "%H:%M")
-
-    render(assigns, "users/audit_certificate_request_mailer/preview/notify")
-  end
-
   def not_shortlisted_notifier
     assigns = {}
     assigns[:user] = dummy_user("Jon", "Doe", "John's Company")

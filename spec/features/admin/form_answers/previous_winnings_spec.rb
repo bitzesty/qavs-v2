@@ -1,7 +1,7 @@
 require "rails_helper"
 
 include Warden::Test::Helpers
-describe "Admin sets up previous winnings" do
+describe "Admin sets up previous winnings", skip: true do
   let!(:admin) { create(:admin) }
 
   before do

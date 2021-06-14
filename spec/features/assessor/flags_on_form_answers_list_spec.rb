@@ -1,7 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
-describe "assessor sees the proper number of flags and sort by it" do
+describe "assessor sees the proper number of flags and sort by it", skip: true do
   let!(:assessor) { create(:assessor, :lead_for_all) }
   let!(:form_answer) { create(:form_answer, state: 'assessment_in_progress') }
 

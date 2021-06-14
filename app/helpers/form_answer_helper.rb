@@ -80,6 +80,7 @@ module FormAnswerHelper
   end
 
   def assessors_collection_for_bulk
+    return # available_for has been removed
     assessors = Assessor.available_for(category_picker.current_award_type).map { |a| [a.full_name, a.id] }
     [["Not Assigned", "not assigned"]] + assessors
   end
