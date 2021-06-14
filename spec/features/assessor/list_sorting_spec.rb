@@ -1,6 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
+# Skip because removed trait trade from form answer
 describe "Form answer list sorting", js: true, skip: true do
   let!(:subject) { create(:assessor, :lead_for_all) }
 

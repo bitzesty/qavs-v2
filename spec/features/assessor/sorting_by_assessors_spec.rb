@@ -3,6 +3,7 @@ require "rails_helper"
 include Warden::Test::Helpers
 Warden.test_mode!
 
+# Skip because removed trait trade from form answer
 describe "As Lead Assessor I want to sort by assessors", js: true, skip: true do
   let!(:assessor) { create(:assessor, :lead_for_all) }
 

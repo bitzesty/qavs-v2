@@ -1,7 +1,8 @@
 require "rails_helper"
 
 include Warden::Test::Helpers
-describe "Admin sets up previous winnings", skip: true do
+
+describe "Admin sets up previous winnings" do
   let!(:admin) { create(:admin) }
 
   before do
@@ -12,7 +13,8 @@ describe "Admin sets up previous winnings", skip: true do
     visit admin_form_answer_path(form_answer)
   end
 
-  context "addition" do
+  # Skip because removed this html page
+  context "addition", skip: true do
     let!(:form_answer) { create(:form_answer) }
 
     pending "adds previous winning" do
@@ -28,7 +30,8 @@ describe "Admin sets up previous winnings", skip: true do
     end
   end
 
-  context "deletion" do
+  # Skip because removed trait trade from form answer
+  context "deletion", skip: true do
     let!(:form_answer) do
       form = create(:form_answer, :trade)
 

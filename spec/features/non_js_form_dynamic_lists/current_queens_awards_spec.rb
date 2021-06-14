@@ -1,6 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
+# Skip because removed trait innovation from form answer
 describe "Non JS | Dynamic Lists | Current Queen's Awards", %q{
 As a User
 I want to be able to add Current Queen's Awards I hold

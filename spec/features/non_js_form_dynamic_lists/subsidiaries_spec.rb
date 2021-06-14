@@ -1,6 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
+# Skip because removed trade trait from form answer
 describe "Non JS | Dynamic Lists | Subsidiaries", %q{
 As a User
 I want to be able to add UK subsidiaries, associates or plants
