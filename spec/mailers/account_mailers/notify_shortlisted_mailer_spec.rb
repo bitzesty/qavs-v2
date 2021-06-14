@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# Skip because deadline kind "audit_certificates" doesn't currently exists
 describe AccountMailers::NotifyShortlistedMailer, skip: true do
   let!(:user) { create :user }
   let!(:collaborator) { create :user, account: user.account, role: "regular" }
