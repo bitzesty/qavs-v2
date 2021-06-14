@@ -9,6 +9,7 @@ describe "Assessor feedback management" do
     login_as(assessor, scope: :assessor)
   end
 
+  # Skip because Missing a CSS selector
   describe "feedback submission" do
     xit "submits feedback", js: true do
       visit assessor_form_answer_path(form_answer)

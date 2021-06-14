@@ -3,6 +3,7 @@ include Warden::Test::Helpers
 
 Warden.test_mode!
 
+# Skip because removed trait trade from form answer
 describe "Assessor submits appraisal form", %(
   As Assessor
   I want to be able to edit, submit the appraisal form.

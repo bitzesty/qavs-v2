@@ -1,6 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
+# Skip because removed trait innovation from form answer
 describe "Assessor press_summary management", js: true, skip: true do
   let(:assessor) { create(:assessor, :lead_for_all) }
   let!(:form_answer) { create(:form_answer, :innovation, state: "awarded") }

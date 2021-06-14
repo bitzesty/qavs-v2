@@ -1,6 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
+# Skip because removed trait audit_certificate from form answer
 describe "Assessor reviews the audit certificate", skip: true do
   let(:assessor) { create(:assessor, :lead_for_all) }
   let!(:form_answer) { create(:form_answer, :with_audit_certificate) }

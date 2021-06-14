@@ -5,6 +5,7 @@ include FormAnswerFilteringTestHelper
 
 Warden.test_mode!
 
+# Skip because removed trait development from form answer
 describe "As Lead Assessor I want to filter applications by state", js: true, skip: true do
   before do
     @forms = []
