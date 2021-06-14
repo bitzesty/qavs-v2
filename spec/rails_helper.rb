@@ -82,6 +82,10 @@ ActiveRecord::Migration.maintain_test_schema!
 Qae::Application.load_tasks
 
 RSpec.configure do |config|
+  config.filter_run_excluding skip: true
+  config.filter_run focus: true
+  config.run_all_when_everything_filtered = true
+
   config.include FactoryBot::Syntax::Methods
   config.include UserStepDefinitions, type: :feature
   config.include ExpectationHelper, type: :feature

@@ -3,49 +3,15 @@ require "rails_helper"
 describe AssessorAssignment do
   let(:form) {AppraisalForm}
 
-  context "Trade award" do
-    context "with Innovation fields present" do
-      let(:attributes) do
-        [:level_of_innovation, :extent_of_value_added, :impact_of_innovation]
-      end
-
-      it "is invalid" do
-        attributes.each do |meth|
-          obj = build_assignment_with(:trade, meth)
-          expect(obj).to_not be_valid
-          expect(obj.errors.keys).to include(form.desc(meth).to_sym)
-        end
-      end
-    end
-
-    context "only with Trade fields present" do
-      let(:attributes) do
-        [
-            :overseas_earnings_growth,
-            :commercial_success,
-            :strategy,
-            :verdict
-        ]
-      end
-
-      it "is valid" do
-        attributes.each do |meth|
-          obj = build_assignment_with(:trade, meth)
-          expect(obj).to be_valid
-        end
-      end
-    end
-  end
-
-  context "Development award" do
+  context "QAVS award" do
     context "with Enterprise fields present" do
       let(:attributes) do
-        [:nature_of_activities, :impact_achievement, :level_of_support]
+        [:mobility_embedding_info, :mobility_impact_of_the_programme, :corporate_social_responsibility]
       end
 
-      it "is invalid" do
+      xit "is invalid" do
         attributes.each do |meth|
-          obj = build_assignment_with(:development, meth)
+          obj = build_assignment_with(meth)
           expect(obj).to_not be_valid
           expect(obj.errors.keys).to include(form.desc(meth).to_sym)
         end
@@ -58,20 +24,20 @@ describe AssessorAssignment do
       context "with not allowed value" do
         subject do
           build :assessor_assignment,
-                :trade,
-                commercial_success_rate: "invalid"
+                :qavs,
+                corporate_social_responsibility_rate: "invalid"
         end
         it "is invalid" do
           expect(subject).to_not be_valid
-          expect(subject.errors.keys).to include(:commercial_success_rate)
+          expect(subject.errors.keys).to include(:corporate_social_responsibility_rate)
         end
       end
     end
     context "with allowed value" do
       subject do
         build :assessor_assignment,
-              :trade,
-              commercial_success_rate: "negative"
+              :qavs,
+              corporate_social_responsibility_rate: "negative"
       end
       it "is valid" do
         expect(subject).to be_valid
@@ -129,7 +95,7 @@ describe AssessorAssignment do
       end
     end
 
-    context "for previous award year" do
+    pending "for previous award year" do
       let(:previous_award_year) { AwardYear.for_year(AwardYear.current.year - 1).first_or_create }
       let(:lead) {create(:assessor, :lead_for_all)}
 
@@ -163,7 +129,7 @@ describe AssessorAssignment do
   end
 
   context "assessor change" do
-    let(:form) {create(:form_answer, :trade)}
+    let(:form) {create(:form_answer)}
     context "for assigning the primary/secondary assessor per application" do
       it "changes the state of flag on application" do
         primary = form.assessor_assignments.primary
@@ -206,7 +172,7 @@ describe AssessorAssignment do
   end
 
   describe '#as_json' do
-    let(:form) { create(:form_answer, :trade )}
+    let(:form) { create(:form_answer )}
 
     it 'should return error' do
       assessor_assignment = build :assessor_assignment, position: nil, form_answer: form
@@ -221,7 +187,7 @@ describe AssessorAssignment do
   end
 
   describe "#secondary_assessor_can_edit?" do
-    let(:form) { create(:form_answer, :trade) }
+    let(:form) { create(:form_answer) }
     it 'should return true' do
       secondary = form.assessor_assignments.secondary
       expect(secondary.send(:secondary_assessor_can_edit?, build(:admin))).to be_truthy
@@ -229,7 +195,7 @@ describe AssessorAssignment do
   end
 
   describe "#assessor_assignment_to_category" do
-    let(:form) { create(:form_answer, :trade) }
+    let(:form) { create(:form_answer) }
     let(:assessor1) {create(:assessor, :regular_for_all)}
     it 'should return true' do
       allow_any_instance_of(Assessor).to receive(:assignable?) {false}
@@ -242,8 +208,8 @@ describe AssessorAssignment do
 
 end
 
-def build_assignment_with(award_type, meth)
-  obj = build(:assessor_assignment, award_type)
+def build_assignment_with(meth)
+  obj = build(:assessor_assignment)
   obj.public_send("#{form.desc(meth)}=", "123")
   obj
 end

@@ -5,7 +5,6 @@ shared_context "admin feedback pdf file checks" do
 
   let!(:form_answer) do
     create :form_answer,
-           award_type,
            :submitted,
            user: user
   end
@@ -41,10 +40,6 @@ shared_context "admin feedback pdf file checks" do
     PDF::Inspector::Text.analyze(rendered_pdf).strings
   end
 
-  let(:urn) do
-    "QA Ref: #{form_answer.urn}"
-  end
-
   let(:applicant) do
     "Applicant: #{form_answer.decorate.company_nominee_or_application_name}"
   end
@@ -59,7 +54,6 @@ shared_context "admin feedback pdf file checks" do
 
   describe "PDF generation" do
     it "should include main header information" do
-      expect(pdf_content).to include(urn)
       expect(pdf_content).to include(applicant)
       expect(pdf_content).to include(award_general_information)
       expect(pdf_content).to include(award_title)

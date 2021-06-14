@@ -56,7 +56,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def award_type_short_name
-    AWARD_TITLES[object.class::AWARD_TYPE_FULL_NAMES[object.award_type]]
+    "QAVS"
   end
 
   def award_application_title
@@ -247,13 +247,6 @@ class FormAnswerDecorator < ApplicationDecorator
     end
   end
 
-  def press_summary_updated_by
-    ps = object.press_summary
-    if ps.present? && ps.authorable.present?
-      "Updated by #{ps.authorable.decorate.full_name} - #{ps.updated_at.strftime("%e %b %Y at %-l:%M%P")}"
-    end
-  end
-
   def nominee_organisation
     document["organization_address_name"]
   end
@@ -359,20 +352,6 @@ class FormAnswerDecorator < ApplicationDecorator
     document["head_email"]
   end
 
-  def press_contact_details_email
-    object.press_summary.try(:email) || document["press_contact_details_email"]
-  end
-
-  def press_contact_details_full_name
-    p_summary = object.press_summary
-
-    if p_summary.present?
-      "#{p_summary.name} #{p_summary.last_name}"
-    else
-      "#{document['press_contact_details_name']} #{document['press_contact_details_last_name']}"
-    end
-  end
-
   def applying_for
     document["applying_for"]
   end
@@ -418,69 +397,21 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def goods_and_services_key
-    case award_type
-    when "innovation"
-      "innovation_desc_short"
-    when "mobility"
-      "mobility_desc_short"
-    when "development"
-      if award_year.year >= 2020
-        "one_line_description_of_interventions"
-      else
-        "development_management_approach_briefly"
-      end
-    end
+    "mobility_desc_short"
   end
 
   def goods_and_services
-    case award_type
-    when "innovation"
-      innovation_desc_short
-    when "mobility"
-      mobility_desc_short
-    when "development"
-      if award_year.year >= 2020
-        one_line_description_of_interventions
-      else
-        development_management_approach_briefly
-      end
-    end
+    mobility_desc_short
   end
 
   def application_background
-    app_background = case award_type
-                     when "trade"
-                       document["trade_goods_briefly"]
-                     when "innovation"
-                       document["innovation_desc_short"]
-                     when "development"
-                       document["development_management_approach_briefly"]
-                     when "mobility"
-                       document["mobility_desc_short"]
-                     end
+    app_background = document["mobility_desc_short"]
 
     sanitize_html app_background
   end
 
   def organisation_type
     document["organisation_type"]
-  end
-
-  def show_this_entry_relates_to_question?
-    year = award_year.year
-
-    !promotion? &&
-      (!development? || year < 2020) &&
-      (!mobility? || year < 2020)
-  end
-  def this_entry_relates_to
-    source_value = if document["application_relate_to"].present?
-      document["application_relate_to"]
-    elsif document["application_relate_to_header"].present?
-      document["application_relate_to_header"]
-    end
-
-    source_value.map(&:values).flatten if source_value.present?
   end
 
   def primary_assessor_full_name

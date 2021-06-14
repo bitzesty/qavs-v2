@@ -1,8 +1,4 @@
-- if @form_answer.promotion?
-  - page_title = "Enterprise Promotion Award Nomination"
-- else
-  - page_title =  "#{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award Application"
-  - page_title = "Promoting Opportunity Award (through social mobility) Application" if @form_answer.award_type == "mobility"
+- page_title =  "#{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award Application"
 
 header.page-header.group.page-header-over-sidebar
   div
@@ -36,12 +32,7 @@ header.page-header.group.page-header-over-sidebar
             .previous-answers
               - if @form_answer.eligible?
                 .eligibility-passed
-                  - if @form_answer.promotion?
-                    p You are eligible to begin your application for an Enterprise Promotion Award Nomination.
-                  - elsif @form_answer.award_type == "mobility"
-                    p You are eligible to begin your application for a Promoting Opportunity Award (through social mobility).
-                  - else
-                    p You are eligible to begin your application for a #{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award.
+                  p You are eligible to begin your application for a #{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award.
                   p Before you start your application, please check your eligibility answers are correct.
 
                 - if (!step || step.to_s == "wicked_finish")
@@ -52,24 +43,14 @@ header.page-header.group.page-header-over-sidebar
               - else
                 .eligibility-failed
                   p
-                    - if @form_answer.promotion?
-                      ' Your nominee is
-                    - else
-                      ' At the moment you are
+                    ' At the moment you are
                     strong not eligible
                     '  for this award. Please see your answers below for the reason. If you think you made a mistake in the eligibility questionnaire, you can change your answer.
 
                   p
-                    - if @form_answer.promotion?
-                      ' Also, you may consider nominating someone else or your organisation
-                    - else
-                      ' Also, you
-                    ' might be eligible for awards in other categories. Go to the
+                    ' Also, you might be eligible for awards in other categories. Go to the
                     = link_to "applications page", dashboard_path
-                    - if @form_answer.promotion?
-                      '  to nominate/apply.
-                    - else
-                      '  to apply.
+                    '  to apply.
 
         = render "previous_answers"
 

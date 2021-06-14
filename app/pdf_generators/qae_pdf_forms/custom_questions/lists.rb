@@ -1,7 +1,6 @@
 module QaePdfForms::CustomQuestions::Lists
   LIST_TYPES = [
     QAEFormBuilder::AwardHolderQuestion,
-    QAEFormBuilder::QueenAwardApplicationsQuestion,
     QAEFormBuilder::PositionDetailsQuestion,
     QAEFormBuilder::ByTradeGoodsAndServicesLabelQuestion
   ]

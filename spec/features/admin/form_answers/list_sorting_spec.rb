@@ -7,9 +7,7 @@ describe "Form answer list sorting", js: true do
   before do
     3.times do |i|
       create :form_answer,
-             :trade,
-             document: { company_name: "#{i}" },
-             urn: "QAO-#{i}"
+             document: { company_name: "#{i}" }
     end
 
     login_as(subject, scope: :admin)

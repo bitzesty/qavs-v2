@@ -79,18 +79,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :should_enable_js?
 
-  %w(innovation trade mobility development).each do |award|
-    define_method "#{award}_submission_started?" do
-      public_send("#{award}_submission_started_deadline").passed?
-    end
-    helper_method "#{award}_submission_started?"
-
-    define_method "#{award}_submission_started_deadline" do
-      Settings.public_send("current_#{award}_submission_start_deadline")
-    end
-    helper_method "#{award}_submission_started_deadline"
-  end
-
   protected
 
   def settings
@@ -100,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def submission_started?
-    submission_started_deadlines.any?(&:passed?)
+    Settings.current_submission_start_deadline.try(:passed?)
   end
   helper_method :submission_started?
 
@@ -215,15 +203,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # We only allow to use the system if an account has 1 or more collaborator
-  # We also ask users to keep information up to date
-  def check_number_of_collaborators
-    if current_user.account_admin? && (current_account.has_no_collaborators? || !current_account.collaborators_checked?)
-      session[:redirected_to_collaborators_page] = true
-      redirect_to account_collaborators_path
-    end
-  end
-
   def require_to_be_account_admin!
     unless current_user.account_admin?
       redirect_to dashboard_path,
@@ -249,30 +228,4 @@ class ApplicationController < ActionController::Base
       "USER:#{current_user.id}"
     end
   end
-
-  #
-  # Validate applications number per account - BEGIN
-  # used in multiple controllers
-  #
-
-  def check_trade_count_limit
-    check_applications_limit(:trade)
-  end
-
-  def check_development_count_limit
-    check_applications_limit(:development)
-  end
-
-  def check_applications_limit(type_of_award)
-    if current_account.has_award_in_this_year?(type_of_award)
-      redirect_to dashboard_url, flash: {
-        alert: "You can not submit more than one #{FormAnswer::AWARD_TYPE_FULL_NAMES[type_of_award.to_s]} form per year!"
-      }
-    end
-  end
-
-  #
-  # Validate applications number per account - END
-  # used in multiple controllers
-  #
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
-describe "Form answer list sorting", js: true do
+describe "Form answer list sorting", js: true, skip: true do
   let!(:subject) { create(:assessor, :lead_for_all) }
 
   before do

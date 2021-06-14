@@ -5,7 +5,7 @@ describe AssessmentSubmissionService do
 
   subject { described_class.new(assessment, assessor) }
 
-  let(:form_answer) { create(:form_answer, :trade, :submitted) }
+  let(:form_answer) { create(:form_answer, :submitted) }
   let(:document) { { "verdict_desc" => "description NOT to copy", "verdict_rate" => "positive" } }
   let(:assessor) { create(:assessor, :lead_for_all) }
 
@@ -38,7 +38,7 @@ describe AssessmentSubmissionService do
   end
 
   context "case summary submission" do
-    let(:form_answer) { create(:form_answer, :development, :submitted) }
+    let(:form_answer) { create(:form_answer, :submitted) }
     let(:assessment) { form_answer.assessor_assignments.case_summary }
 
     it "performs state transition when case summary is submitted" do
@@ -69,27 +69,6 @@ describe AssessmentSubmissionService do
       }
 
       assessment.save!
-    end
-
-    it "pre-populates feedback" do
-      subject.perform
-
-      feedback = form_answer.feedback
-      expect(feedback).to be
-
-      expected_document = {
-        "overseas_earnings_growth_strength" => "Good",
-        "overseas_earnings_growth_weakness" => "",
-        "commercial_success_weakness" => "Mild",
-        "commercial_success_strength" => "",
-        "strategy_strength" => "Good",
-        "strategy_weakness" => "",
-        "corporate_social_responsibility_weakness" => "Bad",
-        "corporate_social_responsibility_strength" => "",
-        "overall_summary" => "Mild"
-      }
-
-      expect(feedback.document).to eq(expected_document)
     end
   end
 end

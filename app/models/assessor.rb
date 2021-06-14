@@ -19,18 +19,6 @@ class Assessor < ApplicationRecord
   has_many :form_answers,
            through: :assessor_assignments
 
-  before_validation :nil_if_blank
-
-  validates :trade_role,
-            :innovation_role,
-            :development_role,
-            :mobility_role,
-            :promotion_role,
-            inclusion: {
-              in: AVAILABLE_ROLES
-            },
-            allow_nil: true
-
   pg_search_scope :basic_search,
                   against: [
                     :first_name,
@@ -48,14 +36,6 @@ class Assessor < ApplicationRecord
   scope :by_email, -> { order(:email) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
-  FormAnswer::POSSIBLE_AWARDS.each do |award_category|
-    AVAILABLE_ROLES.each do |role|
-      scope "#{award_category}_#{role}", -> {
-        where("#{award_category}_role" => role)
-      }
-    end
-  end
-
   def active_for_authentication?
     super && !deleted?
   end
@@ -64,20 +44,7 @@ class Assessor < ApplicationRecord
     [["Not Assigned", nil], ["Lead Assessor", "lead"], ["Assessor", "regular"]]
   end
 
-  def self.available_for(category)
-    where(role_meth(category) => ["regular", "lead"])
-  end
-
-  def self.leads_for(category)
-    where(role_meth(category) => "lead")
-  end
-
-  def self.role_meth(category)
-    "#{category}_role"
-  end
-
   def applications_scope(award_year = nil)
-    c = assigned_categories_as(%w(lead))
     join = "LEFT OUTER JOIN assessor_assignments ON
     assessor_assignments.form_answer_id = form_answers.id"
 
@@ -89,10 +56,9 @@ class Assessor < ApplicationRecord
 
     out = scope.joins(join)
     out.where("
-      (form_answers.award_type in (?) OR
-      (assessor_assignments.position in (?) AND assessor_assignments.assessor_id = ?))
+      (assessor_assignments.position in (?) AND assessor_assignments.assessor_id = ?)
       AND form_answers.state NOT IN (?)
-    ", c, [0, 1], id, "withdrawn")
+    ", [0, 1], id, "withdrawn")
   end
 
   # we're using extended scope on the resource page
@@ -100,12 +66,9 @@ class Assessor < ApplicationRecord
   # with account's other applications
   # they were not assigned to
   def extended_applications_scope
-    c = assigned_categories_as(%w(lead regular))
-
     out = FormAnswer.where("
-      form_answers.award_type in (?)
-      AND form_answers.state NOT IN (?)
-    ", c, "withdrawn")
+      form_answers.state NOT IN (?)
+    ", "withdrawn")
   end
 
   def full_name
@@ -113,11 +76,11 @@ class Assessor < ApplicationRecord
   end
 
   def lead?(form_answer)
-    get_role(form_answer.read_attribute(:award_type)) == "lead"
+    get_role("qavs") == "lead"
   end
 
   def regular?(form_answer)
-    get_role(form_answer.read_attribute(:award_type)) == "regular"
+    get_role("qavs") == "regular"
   end
 
   def assignable?(form_answer)
@@ -170,6 +133,10 @@ class Assessor < ApplicationRecord
 
   private
 
+  def self.role_meth(category)
+    "#{category}_role"
+  end
+
   def categories
     out = {}
 
@@ -187,12 +154,6 @@ class Assessor < ApplicationRecord
     FormAnswer::POSSIBLE_AWARDS.map do |award|
       award if roles.include?(get_role(award).to_s)
     end.compact
-  end
-
-  def nil_if_blank
-    FormAnswer::POSSIBLE_AWARDS.each do |award|
-      self.public_send("#{award}_role=", nil) if get_role(award).blank?
-    end
   end
 
   def self.leads_for(category)

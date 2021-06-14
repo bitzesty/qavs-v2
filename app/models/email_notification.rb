@@ -4,17 +4,12 @@ class EmailNotification < ApplicationRecord
 
   NOTIFICATION_KINDS = [
                          :award_year_open_notifier,
-                         :trade_submission_started_notification,
-                         :mobility_submission_started_notification,
-                         :development_submission_started_notification,
-                         :innovation_submission_started_notification,
                          :reminder_to_submit,
                          :ep_reminder_support_letters,
                          :winners_notification,
                          :unsuccessful_notification,
                          :unsuccessful_ep_notification,
                          :shortlisted_notifier,
-                         :shortlisted_audit_certificate_reminder,
                          :not_shortlisted_notifier,
                          :winners_head_of_organisation_notification,
                          :buckingham_palace_invite

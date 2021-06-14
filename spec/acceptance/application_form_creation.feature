@@ -5,21 +5,9 @@ Feature: Creating application forms
 
   Scenario: I see application links on dashboard
     When I go to dashboard
-    Then I should see innovation application link
-    And I should see international trade application link
-    And I should see sustainable development application link
+    Then I should see application link
 
-  Scenario: I'm able to create innovation form
-    When I create innovation form
-    Then I should see qae form
-    And I should see application edit link on dashboard
-
-  Scenario: I'm able to create international trade form
-    When I create international trade form
-    Then I should see qae form
-    And I should see application edit link on dashboard
-
-  Scenario: I'm able to create sustainable development form
-    When I create sustainable development form
-    Then I should see qae form
+  Scenario: I'm able to create nomination
+    When I create nomination
+    Then I should see nomination form
     And I should see application edit link on dashboard

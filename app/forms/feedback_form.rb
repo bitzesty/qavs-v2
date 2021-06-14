@@ -8,13 +8,8 @@ class FeedbackForm
 
     keys = filtered_fields(keys).uniq
 
-    development_rates = AppraisalForm::SUPPORTED_YEARS.map do |year|
-      AppraisalForm.const_get("DEVELOPMENT_#{year}").keys.map { |k| "#{k}_rate" }
-    end.flatten.uniq
-
     ["overall_summary"] +
-    keys.map { |k| ["#{k}_strength", "#{k}_weakness"] }.flatten +
-    development_rates
+    keys.map { |k| ["#{k}_strength", "#{k}_weakness"] }.flatten
   end
 
   def self.fields_for_award_type(form_answer)

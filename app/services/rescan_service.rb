@@ -2,7 +2,6 @@ class RescanService
   def self.perform
     rescan_model(SupportLetterAttachment, :attachment)
     rescan_model(FormAnswerAttachment, :file)
-    rescan_model(AuditCertificate, :attachment)
   end
 
   def self.rescan_model(attachment_class, attachment_column)

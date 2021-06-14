@@ -22,9 +22,7 @@
             '  Award
       .content-right.content-offset-24
         / Nominators don't get any options after submision
-        - if award.promotion?
-          p Unfortunately your nomination was unsuccessful.
-        - elsif award.not_submitted?
+        - if award.not_submitted?
           p The application was not submitted on time.
         - else
           h4 Feedback

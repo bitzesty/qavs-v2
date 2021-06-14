@@ -10,8 +10,7 @@
     .content-right.content-offset-24
       p
         ' Your
-        - link_name = award.promotion? ? "nomination" : "application"
-        => link_to link_name, edit_form_url(award.id)
+        => link_to "application", edit_form_url(award.id)
     .clear
 br
 br

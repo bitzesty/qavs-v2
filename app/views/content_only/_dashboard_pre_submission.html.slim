@@ -5,12 +5,7 @@
         - if @user_award_forms.any?
           h2
             ' Current Applications
-          = render "current_applications", award_applications: @user_award_forms_trade
-          = render "current_applications", award_applications: @user_award_forms_innovation
-          = render "current_applications", award_applications: @user_award_forms_development
-          - if display_social_mobility?
-            = render "current_applications", award_applications: @user_award_forms_mobility
-          / = render "current_applications", award_applications: @user_award_forms_promotion
+          = render "current_applications", award_applications: @user_award_forms
 
           br
 
@@ -21,8 +16,6 @@
           p To begin your application, select the award(s) you want to apply for. You can apply for more than one category, as long as you meet the criteria.
 
           = render "shared/application_awards_status"
-
-          / = render "apply_to_promotion_award_block"
 
   - if submission_deadline && submission_deadline.trigger_at
     .related-positioning.related-positioning-no-header

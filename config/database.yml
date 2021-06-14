@@ -4,11 +4,11 @@ default: &default
 
 development:
   <<: *default
-  database: qae_development
+  database: qavs_development
 
 test:
   <<: *default
-  database: qae_test
+  database: qavs_test
 
 production:
   <<: *default

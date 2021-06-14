@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
   end
 
   def password_settings
-    @active_step = 5
+    @active_step = 4
   end
 
   def useful_information
@@ -38,7 +38,7 @@ class AccountsController < ApplicationController
   def update_company_details
     current_user.set_step(3)
     if current_user.update(company_details_params)
-      redirect_to account_collaborators_path
+      complete_registration
     else
       @active_step = 3
       render :company_details

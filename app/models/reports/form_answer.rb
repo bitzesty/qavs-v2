@@ -21,10 +21,6 @@ class Reports::FormAnswer
       @case_summary = pick_assignment("case_summary")
 
       @secondary_assessor = @obj.secondary_assessor
-
-      if @obj.press_summary.present?
-        @press_summary = @obj.press_summary
-      end
     end
   end
 
@@ -45,16 +41,6 @@ class Reports::FormAnswer
     end
   end
 
-  def press_contact_full_name
-    if @press_summary
-      [
-        @press_summary.title,
-        @press_summary.name,
-        @press_summary.last_name
-      ].map(&:presence).compact.join(" ")
-    end
-  end
-
   private
 
   def pick_assignment(name)
@@ -63,18 +49,6 @@ class Reports::FormAnswer
 
   def feedback_complete
     obj.feedback && obj.feedback.submitted? && obj.feedback.locked? ? "Submitted" : "Not Submitted"
-  end
-
-  def press_release_updated
-    obj.press_summary && obj.press_summary.submitted ? "Submitted" : "Not Submitted"
-  end
-
-  def ac_received
-    bool obj.audit_certificate.present?
-  end
-
-  def ac_checked
-    bool obj.audit_certificate.try(:reviewed?)
   end
 
   def case_assigned
@@ -155,14 +129,8 @@ class Reports::FormAnswer
   end
 
   def category
-    @category ||= obj.class::AWARD_TYPE_FULL_NAMES[obj.award_type]
+    "QAVS"
   end
-
-  def business_form?
-    @business_form ||= obj.business?
-  end
-
-  delegate :trade?, :development?, :promotion?, :innovation?, :mobility?, to: :obj
 
   def bool(var)
     var ? "Yes" : "No"
@@ -174,36 +142,6 @@ class Reports::FormAnswer
       "positive" => "G",
       "average" => "A"
     }[var]
-  end
-
-  def press_contact_tel
-    @press_summary.try(:phone_number)
-  end
-
-  def press_contact_email
-    @press_summary.try(:email)
-  end
-
-  def press_contact_notes
-    @press_summary.try(:body)
-  end
-
-  def applicant_submitted_press_note
-    if @press_summary.present?
-      bool @press_summary.try(:applicant_submitted?)
-    end
-  end
-
-  def assessor_agreed_press_note
-    if @press_summary.present?
-      bool @press_summary.try(:submitted?)
-    end
-  end
-
-  def qao_agreed_press_note
-    if @press_summary.present?
-      bool @press_summary.try(:admin_sign_off?)
-    end
   end
 
   def case_summary_status

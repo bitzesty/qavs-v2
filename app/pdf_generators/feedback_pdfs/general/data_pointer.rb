@@ -63,39 +63,6 @@ module FeedbackPdfs::General::DataPointer
       1 => 300,
       2 => 337
     })
-
-    if form_answer.development? && strengths_entries.present?
-      year = form_answer.award_year.year
-
-      pdf_doc.table(strengths_entries,
-                    cell_style: { size: 12 },
-                    column_widths: {
-                      0 => 130,
-                      1 => 637
-                    }) do
-        values = cells.columns(1).rows(0..-1)
-
-        green_rags = values.filter do |cell|
-          FeedbackPdfs::Pointer.const_get("POSITIVE_LABELS_#{year}").include?(cell.content.to_s.strip)
-        end
-        green_rags.background_color = POSITIVE_COLOR
-
-        amber_rags = values.filter do |cell|
-          FeedbackPdfs::Pointer.const_get("AVERAGE_LABELS_#{year}").include?(cell.content.to_s.strip)
-        end
-        amber_rags.background_color = AVERAGE_COLOR
-
-        red_rags = values.filter do |cell|
-          FeedbackPdfs::Pointer.const_get("NEGATIVE_LABELS_#{year}").include?(cell.content.to_s.strip)
-        end
-        red_rags.background_color = NEGATIVE_COLOR
-
-        neutral_rags = values.filter do |cell|
-          FeedbackPdfs::Pointer.const_get("NEUTRAL_LABELS_#{year}").include?(cell.content.to_s.strip)
-        end
-        neutral_rags.background_color = NEUTRAL_COLOR
-      end
-    end
   end
 
   def render_overall_summary!

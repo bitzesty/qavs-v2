@@ -8,7 +8,7 @@ jobs:
         image: postgres:12-alpine
         ports: ['5432:5432']
         env:
-          POSTGRES_DB: qae_test
+          POSTGRES_DB: qavs_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         options: >-
@@ -40,7 +40,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.5.8
       - uses: actions/setup-node@v2-beta
@@ -51,7 +51,7 @@ jobs:
       - name: Build and run tests
         env:
           DISPLAY_SOCIAL_MOBILITY_AWARD: true
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/qae_test"
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/qavs_test"
           BUNDLER_VERSION: 2.1.4
           DOCKER_TLS_CERTDIR: ""
         run: |
@@ -63,83 +63,3 @@ jobs:
           bundle install --jobs 4 --retry 3
           RAILS_ENV=test bundle exec rake db:create db:migrate
           RAILS_ENV=test RAILS_DISABLE_TEST_LOG=true bundle exec rspec --format RspecJunitFormatter --out rspec.xml --format progress
-  deploy_dev:
-    needs: [test]
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 1
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.5.8
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '12'
-      - name: "Deploy dev"
-        env:
-          name: dev
-          url: "https://dev.queens-awards-enterprise.service.gov.uk/"
-          CF_ENDPOINT: "api.london.cloud.service.gov.uk"
-          CF_SPACE: dev
-          CF_APP: qae-dev
-          CF_USER: ${{ secrets.CF_USER }}
-          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-          CF_ORG: ${{ secrets.CF_ORG }}
-          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: |
-          curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-          sudo dpkg -i cf-cli_amd64.deb
-          cf -v
-          cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          cf install-plugin blue-green-deploy -r CF-Community -f
-          ./bin/deploy
-  deploy_staging:
-    needs: [test]
-    if: github.ref == 'refs/heads/staging'
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 1
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.5.8
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '12'
-      - name: "Deploy staging"
-        env:
-          name: staging
-          url: "https://staging.queens-awards-enterprise.service.gov.uk/"
-          CF_ENDPOINT: "api.london.cloud.service.gov.uk"
-          CF_SPACE: staging
-          CF_APP: qae-staging
-          CF_USER: ${{ secrets.CF_USER }}
-          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-          CF_ORG: ${{ secrets.CF_ORG }}
-          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: |
-          curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-          sudo dpkg -i cf-cli_amd64.deb
-          cf -v
-          cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          cf install-plugin blue-green-deploy -r CF-Community -f
-          ./bin/deploy

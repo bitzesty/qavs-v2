@@ -1,9 +1,3 @@
-- winners = FormAnswerDecorator.decorate_collection(@user_award_forms_submitted).select{ |app| app.awarded? }
-- any_promotion_winner = winners.select{ |app| app.mobility? }.any?
-- any_innovation_winner = winners.select{ |app| app.innovation? }.any?
-- any_trade_winner = winners.select{ |app| app.trade? }.any?
-- any_development_winner = winners.select{ |app| app.development? }.any?
-
 div
   header.group.page-header.page-header-wider
     div
@@ -44,48 +38,6 @@ div
                       target: "_blank"
 
         h2 Download The Queen's Awards for Enterprise 2021 Emblems in various formats
-
-        .form-download
-          - if any_promotion_winner
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Promoting Opportunities (PNG, 100KB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_promoting_digital.png"),
-                      target: "_blank"
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Promoting Opportunities (EPS, 5.5MB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_promoting-print-.eps"),
-                      target: "_blank"
-
-          - if any_innovation_winner
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Enterprise Innovation (PNG, 95KB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_innovation_digital.png"),
-                      target: "_blank"
-
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Enterprise Innovation (EPS, 5.6MB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_innovation-print-.eps"),
-                      target: "_blank"
-
-          - if any_trade_winner
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - International Trade (PNG, 96KB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_international trade_digital.png"),
-                      target: "_blank"
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - International Trade (EPS, 5.5MB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_international trade-print-.eps"),
-                      target: "_blank"
-
-          - if any_development_winner
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Sustainable Development (PNG, KB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_Sustainable_digital.png"),
-                      target: "_blank"
-            p
-              = link_to "Queen's Awards for Enterprise 2021 Emblem - Sustainable Development (EPS, 5.6MB)",
-                      static_s3_asset_path(2021, "QA-logo-categories-2021_Sustainable-print-.eps"),
-                      target: "_blank"
 
         .form-download
           p

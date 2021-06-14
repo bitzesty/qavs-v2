@@ -17,8 +17,7 @@ module PartialsVisibilityHelper
   end
 
   def show_feedback_section?
-    !@form_answer.promotion? &&
-      admin_lead_or_primary?
+    admin_lead_or_primary?
   end
 
   def show_press_summary_subsection?

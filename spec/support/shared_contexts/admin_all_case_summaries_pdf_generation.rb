@@ -2,8 +2,7 @@ require 'rails_helper'
 
 shared_context "admin all case summaries pdf generation" do
   let!(:form_answer) do
-    create :form_answer, award_type,
-                         :submitted
+    create :form_answer, :submitted
   end
 
   let!(:assessor_assignment) do
@@ -28,15 +27,12 @@ shared_context "admin all case summaries pdf generation" do
   end
 
   let(:pdf_filename) do
-    "#{FormAnswer::AWARD_TYPE_FULL_NAMES[award_type]}_case_summaries"
+    "qavs_case_summaries"
   end
 
   describe "Download PDF" do
     before do
-      ops = {category: award_type, format: :pdf}
-      # For trade category it would have year depends links ('3 years' and '6 years')
-      ops[:years_mode] = '3' if award_type == :trade
-
+      ops = { category: "qavs", format: :pdf }
       visit admin_report_path("case_summaries", ops)
     end
 

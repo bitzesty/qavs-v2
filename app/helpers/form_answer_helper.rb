@@ -61,16 +61,6 @@ module FormAnswerHelper
     output.html_safe
   end
 
-  def award_types_collection(year)
-    FormAnswer::AWARD_TYPE_FULL_NAMES.invert.select do |k, v|
-      if year.present? && year.to_i <= 2016
-        true
-      else
-        v != "promotion"
-      end
-    end.to_a
-  end
-
   def each_index_or_empty(collection, attrs, &block)
     if collection.any?
       collection.each_with_index &block
@@ -90,6 +80,7 @@ module FormAnswerHelper
   end
 
   def assessors_collection_for_bulk
+    return # available_for has been removed
     assessors = Assessor.available_for(category_picker.current_award_type).map { |a| [a.full_name, a.id] }
     [["Not Assigned", "not assigned"]] + assessors
   end

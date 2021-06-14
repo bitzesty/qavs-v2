@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe FormAnswerStateTransition do
-  let(:form_answer) { create(:form_answer, :trade, :submitted, state: :recommended) }
+  let(:form_answer) { create(:form_answer, :submitted, state: :recommended) }
 
   describe "#collection" do
     before do
@@ -30,7 +30,7 @@ describe FormAnswerStateTransition do
     end
 
     it "excludes 'not awarded' and 'withdrawn' state for lead assessor" do
-      assessor = create(:assessor, :lead_for_trade)
+      assessor = create(:assessor, :lead_for_all)
 
       subject.subject = assessor
 

@@ -13,20 +13,7 @@ describe Reports::AdminReport do
       let(:id) { "registered-users" }
 
       it "generates the CSV" do
-        expect(subject.as_csv).to include("East Midlands")
-      end
-    end
-
-    describe "press book list" do
-      let(:press_summary) { create(:press_summary, submitted: true) }
-
-      before do
-        press_summary.form_answer.update!(state: "awarded")
-      end
-
-      let(:id) { "press-book-list" }
-      it "generates the CSV" do
-        expect(subject.as_csv).to include(press_summary.body)
+        expect(subject.as_csv).to include("0111")
       end
     end
 
@@ -35,7 +22,7 @@ describe Reports::AdminReport do
       before { create_test_forms }
 
       it "generates the CSV" do
-        expect(subject.as_csv).to include(form_answer.urn)
+        expect(subject.as_csv).to include("QAVS")
       end
     end
 
@@ -44,15 +31,12 @@ describe Reports::AdminReport do
       before { create_test_forms }
 
       it "generates the CSV" do
-        expect(subject.as_csv).to include(form_answer.urn)
+        expect(subject.as_csv).to include("QAVS")
       end
     end
   end
 end
 
 def create_test_forms
-  create(:form_answer, :trade, :submitted)
-  create(:form_answer, :innovation, :submitted)
-  create(:form_answer, :promotion, :submitted)
-  create(:form_answer, :mobility, :submitted)
+  create(:form_answer, :submitted)
 end

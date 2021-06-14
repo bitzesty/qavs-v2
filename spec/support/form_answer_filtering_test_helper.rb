@@ -61,24 +61,10 @@ module FormAnswerFilteringTestHelper
     end
   end
 
-  def assign_dummy_audit_certificate(form_answers)
-    Array(form_answers).each do |fa|
-      audit = fa.build_audit_certificate
-      audit.save(validate: false)
-    end
-  end
-
   def assign_dummy_feedback(form_answers, submitted = true)
     Array(form_answers).each do |fa|
       feedback = fa.build_feedback(submitted: submitted)
       feedback.save(validate: false)
-    end
-  end
-
-  def assign_dummy_press_summary(form_answers, approved = true)
-    Array(form_answers).each do |fa|
-      press_summary = fa.build_press_summary(approved: approved)
-      press_summary.save(validate: false)
     end
   end
 end

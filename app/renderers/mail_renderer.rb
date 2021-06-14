@@ -8,7 +8,7 @@ class MailRenderer
       { host: "www.queens-awards-enterprise.service.gov.uk" }
     end
   end
-  
+
   def submission_started_notification
     #
     # NOTE: This one is old.
@@ -27,22 +27,6 @@ class MailRenderer
     assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
 
     render(assigns, "users/award_year_open_notification_mailer/preview/notify")
-  end
-
-  def innovation_submission_started_notification
-    year_open_award_type_specific_notification("innovation")
-  end
-
-  def trade_submission_started_notification
-    year_open_award_type_specific_notification("trade")
-  end
-
-  def development_submission_started_notification
-    year_open_award_type_specific_notification("development")
-  end
-
-  def mobility_submission_started_notification
-    year_open_award_type_specific_notification("mobility")
   end
 
   def unsuccessful_notification
@@ -91,17 +75,6 @@ class MailRenderer
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
 
-  def shortlisted_audit_certificate_reminder
-    assigns = {}
-
-    assigns[:recipient] = dummy_user("Jane", "Doe", "Jane's Company")
-    assigns[:form_answer] = form_answer
-    assigns[:deadline] = deadline_str("audit_certificates")
-    assigns[:deadline_time] = deadline_str("audit_certificates", "%H:%M")
-
-    render(assigns, "users/audit_certificate_request_mailer/preview/notify")
-  end
-
   def not_shortlisted_notifier
     assigns = {}
     assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
@@ -118,8 +91,6 @@ class MailRenderer
 
     assigns[:deadline_time] = deadline_str("audit_certificates", "%H:%M")
     assigns[:deadline_date] = deadline_str("audit_certificates")
-
-    assigns[:award_type_full_name] = "Innovation"
 
     render(assigns, "account_mailers/notify_shortlisted_mailer/preview/notify")
   end
@@ -150,7 +121,6 @@ class MailRenderer
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
     assigns[:urn] = "QAXXXX/#{assigns[:award_year].to_s[2..-1]}I"
-    assigns[:award_category_title] = form.award_type_full_name
     assigns[:head_email] = "john@example.com"
     assigns[:head_of_business_full_name] = "Jon Doe"
 
@@ -205,9 +175,7 @@ class MailRenderer
     @form_answer ||= FormAnswer.new(
       id: 0,
       urn: "QA0128/16I",
-      award_type: "innovation",
       award_year: AwardYear.current,
-      award_type_full_name: "Innovation"
     ).decorate
   end
 
@@ -225,14 +193,5 @@ class MailRenderer
     Settings.current.deadlines.find_by(
       kind: kind
     ).try :trigger_at
-  end
-
-  def year_open_award_type_specific_notification(award_type)
-    assigns = {}
-
-    assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
-    assigns[:award_type] = FormAnswer::AWARD_TYPE_FULL_NAMES[award_type]
-
-    render(assigns, "users/submission_started_notification_mailer/preview/notify")
   end
 end

@@ -1,4 +1,4 @@
-- winners = FormAnswerDecorator.decorate_collection(award_applications).select{ |app| app.awarded? && !app.promotion? }
+- winners = FormAnswerDecorator.decorate_collection(award_applications).select{ |app| app.awarded? }
 - if winners.present?
   .container-split
     .content-left
@@ -37,9 +37,6 @@
             '  Award
       .content-right.content-offset-24
         / Nominators don't get any options after submision
-        - if award.promotion?
-          p Your nomination was successful.
-        - else
           - if award.press_summary.present? && award.press_summary.submitted?
             ul.post-dashboard-actions
               li

@@ -109,16 +109,15 @@ class FormAnswerPolicy < ApplicationPolicy
   def has_access_to_post_shortlisting_docs?
     download_feedback_pdf? ||
     download_case_summary_pdf? ||
-    (admin? || subject.lead_or_assigned?(record)) &&
-    (audit_certificate_available? || list_of_procedures_available?)
+    (admin? || subject.lead_or_assigned?(record))
   end
 
   def can_download_initial_audit_certificate_pdf?
-    admin? && !record.promotion? && record.shortlisted?
+    admin? && record.shortlisted?
   end
 
   def can_see_corp_responsibility?
-    record.business? && record.shortlisted?
+    record.shortlisted?
   end
 
   def can_review_corp_responsibility?
@@ -135,15 +134,5 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def can_add_collaborators_to_application?
     admin?
-  end
-
-  private
-
-  def audit_certificate_available?
-    record.audit_certificate.present? && record.audit_certificate.attachment.present?
-  end
-
-  def list_of_procedures_available?
-    record.list_of_procedures.present? && record.list_of_procedures.attachment.present?
   end
 end

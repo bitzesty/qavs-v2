@@ -2,12 +2,8 @@ FactoryBot.define do
   factory :assessor_assignment do
     association :form_answer
 
-    trait :trade do
-      form_answer { create(:form_answer, :trade) }
-    end
-
-    trait :development do
-      form_answer { create(:form_answer, :development) }
+    trait :qavs do
+      form_answer { create(:form_answer) }
     end
 
     trait :submitted do

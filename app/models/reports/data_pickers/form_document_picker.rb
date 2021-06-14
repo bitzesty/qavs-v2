@@ -1,11 +1,7 @@
 module Reports::DataPickers::FormDocumentPicker
 
   def business_region
-    if business_form?
-      doc "organization_address_region"
-    else
-      doc "nominee_personal_address_region"
-    end
+    doc "organization_address_region"
   end
 
   def business_reg_no
@@ -17,33 +13,23 @@ module Reports::DataPickers::FormDocumentPicker
   end
 
   def head_surname
-    if business_form?
-      doc("head_of_business_last_name")
-    end
+    doc("head_of_business_last_name")
   end
 
   def head_first_name
-    if business_form?
-      doc("head_of_business_first_name")
-    end
+    doc("head_of_business_first_name")
   end
 
   def head_position
-    if business_form?
-      doc("head_job_title")
-    end
+    doc("head_job_title")
   end
 
   def head_full_name
-    if business_form?
-      "#{doc('head_of_bussines_title')} #{doc('head_of_business_first_name')} #{doc('head_of_business_last_name')} #{doc('head_of_business_honours')}"
-    end
+    "#{doc('head_of_bussines_title')} #{doc('head_of_business_first_name')} #{doc('head_of_business_last_name')} #{doc('head_of_business_honours')}"
   end
 
   def personal_honours
-    if business_form?
-      doc "head_of_business_honours"
-    end
+    doc "head_of_business_honours"
   end
 
   def nominee_first_name
@@ -59,88 +45,31 @@ module Reports::DataPickers::FormDocumentPicker
   end
 
   def head_email
-    if business_form?
-      doc "head_email"
-    end
+    doc "head_email"
   end
 
   def head_title
     doc("head_of_bussines_title")
   end
 
-  def innovation_type
-    if innovation? && doc("application_relate_to_header")
-      types = doc("application_relate_to_header").map{ |hash| hash["type"] }
-      types.join(",")
-    else
-      ""
-    end
-  end
-
-  def innovation_description
-    if innovation? && doc("innovation_desc_short")
-      html_text = doc("innovation_desc_short")
-      ActionView::Base.full_sanitizer.sanitize(html_text)
-    else
-      ""
-    end
-  end
-
-  def current_queens_award_holder
-    awards = obj.previous_wins
-    return if !awards || awards.empty?
-
-    categories = PreviousWin::CATEGORIES.invert
-
-    awards.select do |award|
-      # this is to support reports for pre and post 2019 awards
-      award["outcome"] == "won" || award["outcome"].nil?
-    end.map do |award|
-      category = categories[award["category"]]
-      year = award["year"]
-
-      [category, year].compact.join(" ")
-    end.join(", ")
-  end
-
   def principal_postcode
-    if business_form?
-      doc "organization_address_postcode"
-    else
-      doc "nominee_personal_address_postcode"
-    end.to_s.upcase
+    doc("organization_address_postcode").to_s.upcase
   end
 
   def principal_address1
-    if business_form?
-      doc "organization_address_building"
-    else
-      doc "nominee_personal_address_building"
-    end
+    doc "organization_address_building"
   end
 
   def principal_address2
-    if business_form?
-      doc "organization_address_street"
-    else
-      doc "nominee_personal_address_street"
-    end
+    doc "organization_address_street"
   end
 
   def principal_address3
-    if business_form?
-      doc "organization_address_city"
-    else
-      doc "nominee_personal_address_city"
-    end
+    doc "organization_address_city"
   end
 
   def principal_county
-    if business_form?
-      doc "organization_address_county"
-    else
-      doc "nominee_personal_address_county"
-    end
+    doc "organization_address_county"
   end
 
   def immediate_parent_country
@@ -159,16 +88,6 @@ module Reports::DataPickers::FormDocumentPicker
     collect_final_value_from_doc(subcategory_suffix("employees"))
   end
 
-  def export_markets
-    return "" unless trade?
-
-    ##
-    # need to force String as an Integer will raise
-    # undefined method `empty?'
-    markets_geo_spread = doc("markets_geo_spread").to_s
-    ActionController::Base.helpers.strip_tags(markets_geo_spread)
-  end
-
   def final_year_overseas_sales
     collect_final_value_from_doc(subcategory_suffix("overseas_sales"))
   end
@@ -178,107 +97,19 @@ module Reports::DataPickers::FormDocumentPicker
   end
 
   def subcategory_suffix(attr_name)
-    mobility_2017_change = {}
-    development_2020_change = {}
-
-    if obj.award_year.year > 2017
-      mobility_2017_change = {
-        "mobility" => "#{attr_name}_3of3"
-      }
-    end
-
-    if obj.award_year.year >= 2020
-      development_2020_change = {
-        "development" => "#{attr_name}_3of3"
-      }
-    end
-
-    {
-      "trade" => {
-        "trade_commercial_success" => {
-          "3 to 5" => "#{attr_name}_3of3",
-          "6 plus" => "#{attr_name}_6of6"
-        }
-      },
-      "development" => {
-        "development_performance_years" => {
-          "3 to 5" => "#{attr_name}_3of3",
-        }
-      },
-      "mobility" => {
-        "programme_performance_years" => {
-          "2 to 4" => "#{attr_name}_2of2",
-          "5 plus" => "#{attr_name}_5of5"
-        }
-      },
-      "innovation" => {
-        "innovation_performance_years" => {
-          "2 to 4" => "#{attr_name}_2of2",
-          "5 plus" => "#{attr_name}_5of5"
-        }
-      }
-    }.merge(mobility_2017_change)
-      .merge(development_2020_change)[obj.award_type]
+    "#{attr_name}_3of3"
   end
 
   def subcategory_field_name
-    {
-      "trade" => "trade_commercial_success",
-      "development" => "development_performance_years",
-      "mobility" => "development_performance_years",
-      "innovation" => "innovation_performance_years"
-    }[obj.award_type]
+    "development_performance_years"
   end
 
   def sub_category
-    if mobility?
-      # We removed option to choose a period in 2017
-      if obj.award_year.year <= 2017
-        {
-          "2 to 4" => "Outstanding achievement over 2 years",
-          "5 plus" => "Continuous achievement over 5 years"
-        }[doc(subcategory_field_name)]
-      else
-        "Outstanding achievement over 3 years"
-      end
-    elsif development? && obj.award_year.year >= 2020
-      "Outstanding achievement over 3 years"
-    else
-      if trade?
-        {
-          "3 to 5" => "Outstanding growth in the last 3 years",
-          "6 plus" => "Continuous growth in the last 6 years"
-        }
-      elsif innovation?
-        {
-          "2 to 4" => "Outstanding performance improvements in the last 2 years",
-          "5 plus" => "Steady performance improvements in the last 5 years"
-        }
-      elsif development?
-        {
-          "2 to 4" => "Outstanding achievement over 2 years",
-          "5 plus" => "Continuous achievement over 5 years"
-        }
-      else
-        {}
-      end[doc(subcategory_field_name)]
-    end
+    "Outstanding achievement over 3 years"
   end
 
   def product_service
-    service = if innovation?
-      doc("innovation_desc_short")
-    elsif development?
-      obj.award_year.year <= 2019 ? doc("development_management_approach_briefly") : doc("one_line_description_of_interventions")
-    elsif mobility?
-      if obj.award_year.year <= 2020
-        doc("mobility_desc_short")
-      else
-        doc("application_category") == "initiative" ? doc("initiative_desc_short") : doc("organisation_desc_short")
-      end
-    else
-      doc("trade_goods_briefly")
-    end
+    service = doc("application_category") == "initiative" ? doc("initiative_desc_short") : doc("organisation_desc_short")
 
     ActionView::Base.full_sanitizer.sanitize(service)
   end
@@ -297,14 +128,7 @@ module Reports::DataPickers::FormDocumentPicker
     if meth
       target_key = nil
 
-      if !(obj.award_year.year <= 2017) && mobility?
-        target_key = meth
-      elsif obj.award_year.year >= 2020 && development?
-        target_key = meth
-      else
-        range = doc(meth.keys.first)
-        target_key = meth.values.first[range]
-      end
+      target_key = meth
 
       amended_value = financial_data[target_key]
       amended_value.present? ? amended_value : doc(target_key)

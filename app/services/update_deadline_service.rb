@@ -21,9 +21,5 @@ class UpdateDeadlineService
     if deadline.submission_end? && trigger_at.present? && now >= trigger_at
       ::SubmissionDeadlineStatesTransitionWorker.perform_async
     end
-
-    if deadline.audit_certificates? && trigger_at.present? && now >= trigger_at
-      ::DisqualifiedDeadlineStatesTransitionWorker.perform_async
-    end
   end
 end

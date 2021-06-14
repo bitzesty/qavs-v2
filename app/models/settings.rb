@@ -24,24 +24,7 @@ class Settings < ApplicationRecord
     end
 
     def current_submission_start_deadline
-      Rails.cache.fetch("submission_start_deadline", expires_in: 1.minute) do
-        current.deadlines.submission_start
-      end
-    end
-
-    %w(innovation trade mobility development).each do |award|
-      define_method "current_#{award}_submission_start_deadline" do
-        Rails.cache.fetch("#{award}_submission_start_deadline", expires_in: 1.minute) do
-          current.deadlines.public_send("#{award}_submission_start")
-        end
-      end
-    end
-
-
-    def current_submission_start_deadlines
-      Rails.cache.fetch("submission_start_deadlines", expires_in: 1.minute) do
-        current.deadlines.where(kind: Deadline::SUBMISSION_START_DEADLINES)
-      end
+      current_award_year_switch_date
     end
 
     def current_submission_deadline
@@ -56,23 +39,8 @@ class Settings < ApplicationRecord
       end
     end
 
-    def current_audit_certificates_deadline
-      Rails.cache.fetch("current_audit_certificates_deadline", expires_in: 1.minute) do
-        current.deadlines.audit_certificates_deadline
-      end
-    end
-
     def after_current_submission_deadline_start?
-      current_submission_start_deadlines.any?(&:passed?)
-    end
-
-    def all_awards_ready?
-      current_submission_start_deadlines.all?(&:passed?)
-    end
-
-    def after_current_audit_certificates_deadline?
-      deadline = current_audit_certificates_deadline.trigger_at
-      DateTime.now >= deadline if deadline
+      current_submission_start_deadline.try(:passed?)
     end
 
     def after_current_submission_deadline?
@@ -116,12 +84,10 @@ class Settings < ApplicationRecord
 
     def current_award_year_switched?
       award_year_switch_deadline = current_award_year_switch_date.try(:trigger_at)
-      submission_started_deadlines = current_submission_start_deadlines.map(&:trigger_at)
 
       award_year_switch_deadline.present? &&
       award_year_switch_deadline < Time.zone.now && (
-        submission_started_deadlines.any?(&:blank?) ||
-        submission_started_deadlines.all? { |d| d > Time.zone.now }
+        after_current_submission_deadline_start?
       )
     end
 

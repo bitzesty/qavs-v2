@@ -5,7 +5,7 @@ include FormAnswerFilteringTestHelper
 
 Warden.test_mode!
 
-describe "As Lead Assessor I want to filter applications by state", js: true do
+describe "As Lead Assessor I want to filter applications by state", js: true, skip: true do
   before do
     @forms = []
     @forms << create(

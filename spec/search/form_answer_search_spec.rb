@@ -30,7 +30,7 @@ describe FormAnswerSearch do
 
   context "assessment filters" do
     let(:assessor) { create(:assessor, :lead_for_all) }
-    let(:form_answer) { create(:form_answer, :trade, :submitted) }
+    let(:form_answer) { create(:form_answer, :submitted) }
 
     before do
       create(:settings, :expired_submission_deadlines)

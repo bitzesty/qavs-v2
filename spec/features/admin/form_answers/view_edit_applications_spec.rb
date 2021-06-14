@@ -19,7 +19,7 @@ feature "Admin view application", js: true do
   end
 
   scenario "As an admin I can edit the application if superadmin" do
-    Settings.current.deadlines.innovation_submission_start.update(trigger_at: 1.day.ago)
+    Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
 
     application = create_application
     login_admin(create(:admin, superadmin: true))
@@ -37,7 +37,7 @@ feature "Admin view application", js: true do
   end
 
   scenario "As a superadmin I can edit the application even when submission is due date" do
-    Settings.current.deadlines.innovation_submission_start.update(trigger_at: 1.day.ago)
+    Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
     Settings.current_submission_deadline.update(trigger_at: 1.day.ago)
 
     application = create_application
@@ -58,11 +58,9 @@ end
 
 def create_application
   user = create :user, :completed_profile, first_name: "Test User john"
-  form_answer = create :form_answer, :innovation,
-                                     user: user,
+  form_answer = create :form_answer, user: user,
                                      urn: "QA0001/19T",
                                      document: { company_name: "Bitzesty" }
   create :basic_eligibility, form_answer: form_answer, account: user.account
-  create :innovation_eligibility, form_answer: form_answer, account: user.account
   form_answer
 end

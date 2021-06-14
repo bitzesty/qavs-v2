@@ -1,8 +1,7 @@
 class ContentOnlyController < ApplicationController
   before_action :authenticate_user!,
                 :check_account_completion,
-                :check_additional_contact_preferences,
-                :check_number_of_collaborators, unless: -> { admin_signed_in? || assessor_signed_in? },
+                :check_additional_contact_preferences, unless: -> { admin_signed_in? || assessor_signed_in? },
                 except: [
                   :home,
                   :awards_for_organisations,
@@ -19,27 +18,18 @@ class ContentOnlyController < ApplicationController
 
   before_action :get_current_form,
                 only: [
-                  :award_info_innovation,
-                  :award_info_trade,
-                  :award_info_development,
-                  :award_info_mobility
+                  :award_info_qavs
                 ]
 
   before_action :get_collaborators,
                 only: [
-                  :award_info_innovation,
-                  :award_info_trade,
-                  :award_info_development,
-                  :award_info_mobility
+                  :award_info_qavs
                 ]
 
   before_action :restrict_access_if_admin_in_read_only_mode!,
                 only: [:dashboard]
 
   before_action :clean_flash, only: [:sign_up_complete]
-
-  before_action :check_trade_count_limit, only: :apply_international_trade_award
-  before_action :check_development_count_limit, only: :apply_sustainable_development_award
 
   expose(:form_answer) do
     current_user.form_answers.find(params[:id])
@@ -60,14 +50,6 @@ class ContentOnlyController < ApplicationController
   def dashboard
     @user_award_forms = user_award_forms
 
-    forms = @user_award_forms.group_by(&:award_type)
-
-    @user_award_forms_trade = forms["trade"]
-    @user_award_forms_innovation = forms["innovation"]
-    @user_award_forms_development = forms["development"]
-    @user_award_forms_mobility = forms["mobility"]
-    @user_award_forms_promotion = forms["promotion"]
-
     @user_award_forms_submitted = @user_award_forms.submitted
 
     set_unsuccessful_business_applications if Settings.unsuccessful_stage?
@@ -84,7 +66,6 @@ class ContentOnlyController < ApplicationController
   def user_award_forms
     current_account.form_answers
                    .where(award_year: target_award_year)
-                   .order("award_type")
   end
 
   def get_current_form
@@ -113,7 +94,6 @@ class ContentOnlyController < ApplicationController
   helper_method :deadline_for
 
   def set_unsuccessful_business_applications
-    @unsuccessful_business_applications = @user_award_forms.business
-                                                           .unsuccessful_applications
+    @unsuccessful_business_applications = @user_award_forms.unsuccessful_applications
   end
 end

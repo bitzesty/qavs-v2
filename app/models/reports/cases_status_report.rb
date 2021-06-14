@@ -59,14 +59,6 @@ class Reports::CasesStatusReport
       method: :overall_status
     },
     {
-      label: "ACReceived",
-      method: :ac_received
-    },
-    {
-      label: "ACChecked",
-      method: :ac_checked
-    },
-    {
       label: "CaseSummaryStatus",
       method: :case_summary_status
     },
@@ -105,7 +97,6 @@ class Reports::CasesStatusReport
                      .order(:id)
                      .includes(:user,
                                :assessor_assignments,
-                               :audit_certificate,
                                :feedback,
                                :primary_assessor,
                                :secondary_assessor
@@ -130,7 +121,6 @@ class Reports::CasesStatusReport
                      .order(:id)
                      .includes(:user,
                                :assessor_assignments,
-                               :audit_certificate,
                                :feedback,
                                :primary_assessor,
                                :secondary_assessor

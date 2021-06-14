@@ -3,26 +3,15 @@ require "rails_helper"
 describe Reports::FormAnswer do
   describe "#employees" do
     it "returns number of employees" do
-      obj = build(:form_answer, :trade)
-      obj.document["employees_6of6"] = 10
-      obj.document["trade_commercial_success"] = "6 plus"
+      obj = build(:form_answer)
+      obj.document["employees_3of3"] = 10
       expect(described_class.new(obj).employees).to eq(10)
     end
   end
 
   describe '#call_method' do
     it 'should return missing method' do
-      expect(Reports::FormAnswer.new(build(:form_answer, :trade)).call_method(:missing)).to eq 'missing method'
-    end
-  end
-
-  describe "#press_contact_full_name" do
-    it "returns press contact's full name" do
-      form_answer = build(:form_answer, :trade)
-      summary = double(name: "Rob", title: "Earl", last_name: "Stark")
-      allow(form_answer).to receive(:press_summary).and_return(summary)
-
-      expect(described_class.new(form_answer).press_contact_full_name).to eq("Earl Rob Stark")
+      expect(Reports::FormAnswer.new(build(:form_answer)).call_method(:missing)).to eq 'missing method'
     end
   end
 
@@ -71,10 +60,10 @@ describe Reports::FormAnswer do
       allow_any_instance_of(Reports::FormAnswer).to receive(:pick_assignment) {assessor_assignment}
       allow_any_instance_of(AssessorAssignment).to receive(:submitted?) {true}
       allow_any_instance_of(AssessorAssignment).to receive(:locked?) {true}
-      expect(Reports::FormAnswer.new(build(:form_answer, :trade)).send(:case_summary_status)).to eq 'Submitted'
+      expect(Reports::FormAnswer.new(build(:form_answer)).send(:case_summary_status)).to eq 'Submitted'
 
       allow_any_instance_of(AssessorAssignment).to receive(:locked?) {false}
-      expect(Reports::FormAnswer.new(build(:form_answer, :trade)).send(:case_summary_status)).to eq 'Not Submitted'
+      expect(Reports::FormAnswer.new(build(:form_answer)).send(:case_summary_status)).to eq 'Not Submitted'
     end
   end
 

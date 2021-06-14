@@ -1,47 +1,45 @@
-- unless @form_answer.promotion?
+- sic = @form_answer.sic_code_name
 
-  - sic = @form_answer.sic_code_name
+- if user_can_edit(@form_answer, :sic_code)
+  .form-group.sic-code class="#{'form-edit' if @form_answer.sic_code.blank?}"
+    = simple_form_for [namespace_name, @form_answer],
+                      remote: true,
+                      authenticity_token: true do |f|
 
-  - if user_can_edit(@form_answer, :sic_code)
-    .form-group.sic-code class="#{'form-edit' if @form_answer.sic_code.blank?}"
-      = simple_form_for [namespace_name, @form_answer],
-                        remote: true,
-                        authenticity_token: true do |f|
+      = hidden_field_tag :section, "sic_code"
 
-        = hidden_field_tag :section, "sic_code"
-
-        .form-container
-          label.form-label SIC code
-
-          .form-value
-            p
-              - if sic.present?
-                = sic
-              - else
-                em.text-muted No SIC code assigned.
-          .form-fields.form-block
-            = f.input :sic_code,
-                      wrapper_html: { class: "form-group" },
-                      input_html: { class: "form-control select2" },
-                      as: :select,
-                      collection: SICCode.collection,
-                      include_blank: false,
-                      label: false
-          .form-actions.text-right
-            = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-            = f.submit "Save", class: "btn btn-primary form-save-link pull-right"
-
-          = link_to "#", class: "form-edit-link pull-right"
-            span.glyphicon.glyphicon-pencil
-            ' Edit
-          .clear
-  - else
-    .form-group
       .form-container
         label.form-label SIC code
 
-        p
-          - if sic.present?
-            = sic
-          - else
-            em.text-muted No SIC code assigned.
+        .form-value
+          p
+            - if sic.present?
+              = sic
+            - else
+              em.text-muted No SIC code assigned.
+        .form-fields.form-block
+          = f.input :sic_code,
+                    wrapper_html: { class: "form-group" },
+                    input_html: { class: "form-control select2" },
+                    as: :select,
+                    collection: SICCode.collection,
+                    include_blank: false,
+                    label: false
+        .form-actions.text-right
+          = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
+          = f.submit "Save", class: "btn btn-primary form-save-link pull-right"
+
+        = link_to "#", class: "form-edit-link pull-right"
+          span.glyphicon.glyphicon-pencil
+          ' Edit
+        .clear
+- else
+  .form-group
+    .form-container
+      label.form-label SIC code
+
+      p
+        - if sic.present?
+          = sic
+        - else
+          em.text-muted No SIC code assigned.

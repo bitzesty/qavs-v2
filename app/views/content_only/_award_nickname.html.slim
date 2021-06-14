@@ -6,12 +6,7 @@
       p Complete the eligibility questionnaire
       ul
         li
-          ' This is to ensure that your
-          - if award_type == "promotion"
-            ' nominee
-          - else
-            ' organisation
-          ' meets the key eligibility criteria for an award.
+          ' This is to ensure that your  organisation meets the key eligibility criteria for an award.
         li It will take about 10 minutes to complete.
 
     li
@@ -23,28 +18,14 @@
 
     li
       p
-        ' Submit your
-        - if award_type == "promotion"
-          ' nomination
-        - else
-          ' application
+        ' Submit your application
       ul
         li
           ' The deadline for submissions is
           = submission_deadline.decorate.formatted_trigger_time
           ' .
         li
-          ' You can still edit submitted
-          - if award_type == "promotion"
-            ' nominations
-          - else
-            ' applications
-          ' up to this date.
-
-  - if award_type == "innovation"
-    = render "content_only/award_nickname_block"
+          ' You can still edit submitted applications up to this date.
 
   p#get-started.get-started.group
-    - title = award_type == "innovation" ? "Save and start eligibility questionnaire" : "Start eligibility questionnaire"
-    = submit_tag title, class: "button", rel: "external"
-
+    = submit_tag "Start eligibility questionnaire", class: "button", rel: "external"

@@ -31,10 +31,6 @@ FactoryBot.define do
     end
 
     trait :agreed_to_be_contacted do
-      notification_when_innovation_award_open { true }
-      notification_when_trade_award_open { true }
-      notification_when_development_award_open { true }
-      notification_when_mobility_award_open { true }
       notification_when_submission_deadline_is_coming { true }
       subscribed_to_emails { true }
       agree_being_contacted_by_department_of_business { true }
@@ -45,9 +41,6 @@ FactoryBot.define do
 
       after(:create) do |user|
         create(:basic_eligibility, account: user.account)
-        create(:trade_eligibility, account: user.account)
-        create(:development_eligibility, account: user.account)
-        create(:innovation_eligibility, account: user.account)
       end
     end
   end

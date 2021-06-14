@@ -18,15 +18,11 @@ class Reports::AdminReport
     when "entries-report"
       Reports::AllEntries.new(year).build
     when "discrepancies_between_primary_and_secondary_appraisals"
-      Reports::DiscrepanciesBetweenPrimaryAndSecondaryAppraisals.new(year, params[:category]).build
+      Reports::DiscrepanciesBetweenPrimaryAndSecondaryAppraisals.new(year, "qavs").build
     when "reception-buckingham-palace"
       Reports::ReceptionBuckinghamPalaceReport.new(year).build
     when /assessors-progress/
-      if FormAnswer::AWARD_TYPE_FULL_NAMES.keys.include?(params[:category])
-        Reports::AssessorsProgressReport.new(year, params[:category]).build
-      else
-        raise ArgumentError, "Invalid category"
-      end
+      Reports::AssessorsProgressReport.new(year, "qavs").build
     end
   end
 
@@ -75,13 +71,13 @@ class Reports::AdminReport
   private
 
   def category
-    params[:category] if ::FormAnswer::AWARD_TYPE_FULL_NAMES.keys.include?(params[:category])
+    "qavs"
   end
 
   def pdf_filename(sub_type)
     sub_type = "#{sub_type}_years" if sub_type.present?
 
     pdf_timestamp = Time.zone.now.strftime("%e_%b_%Y_at_%-l:%M%P")
-    "#{::FormAnswer::AWARD_TYPE_FULL_NAMES[params[:category]]}_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
+    "qavs_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
   end
 end

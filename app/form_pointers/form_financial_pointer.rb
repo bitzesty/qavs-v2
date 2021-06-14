@@ -128,7 +128,7 @@ class FormFinancialPointer
   end
 
   def overall_growth_values
-    form_answer.trade? ? data_values(:overseas_sales) : data_values(:total_turnover)
+    data_values(:total_turnover)
   end
 
   def overall_growth
@@ -162,10 +162,7 @@ class FormFinancialPointer
   end
 
   def excluded_question_keys
-    case form_answer.object.award_type
-    when "trade"
-      TRADE_AUTOEXCLUDED_QUESTION_KEYS
-    end
+    []
   end
 
   def years_list

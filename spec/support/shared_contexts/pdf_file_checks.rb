@@ -26,28 +26,15 @@ shared_context "pdf file checks" do
   end
 
   let(:award_application_title) do
-    if form_answer.promotion?
-      award_title = "Queen's Award for Enterprise Promotion #{AwardYear.current.year}"
-    else
-      award_title = form_answer.decorate.award_application_title_print
-    end
-    award_title.upcase
+    form_answer.decorate.award_application_title_print.upcase
   end
 
   let(:company_name) do
     form_answer.decorate.company_name
   end
 
-  let(:form_urn) do
-    form_answer.urn
-  end
-
   let(:match_name_condition) do
-    if award_type == :promotion
-      form_answer.send("nominee_full_name_from_document").upcase
-    else
-      company_name
-    end
+    company_name
   end
 
   before do
@@ -59,20 +46,11 @@ shared_context "pdf file checks" do
     it "should include main header information" do
       expect(pdf_content.join(" ")).to match(award_application_title)
       expect(pdf_content).to include(match_name_condition)
-      expect(pdf_content).to include(form_urn)
     end
 
     it "should include steps headers" do
       steps.each do |step|
         title = "#{step.title.upcase}:"
-
-        if award_type == :trade
-          # For Trade form PDF::Inspector::Text
-          # returns  "Step 2 of 6: Description of Goods or Services, Markets and", "Marketing"
-          # instead of  "Step 2 of 6: Description of Goods or Services, Markets and Marketing"
-          # as "Marketing" in pdf is located in new line
-          title = title.gsub(' Marketing', '')
-        end
 
         expect(pdf_content).to include(title)
       end

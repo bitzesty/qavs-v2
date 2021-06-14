@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 describe "Admin fulfills the company details" do
   let!(:admin) { create(:admin) }
-  let!(:form_answer) { create(:form_answer, :trade) }
+  let!(:form_answer) { create(:form_answer) }
 
   before do
     login_admin(admin)
@@ -32,7 +32,7 @@ describe "Admin fulfills the company details" do
 
   it "can see the edit buttons" do
     within ".company-details-forms" do
-      expect(page).to have_selector("input[type='submit']", count: 13)
+      expect(page).to have_selector("input[type='submit']", count: 11)
     end
   end
 end

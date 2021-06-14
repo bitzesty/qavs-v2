@@ -13,10 +13,8 @@ FactoryBot.define do
 
   trait :submission_deadlines do
     after(:create) do |settings|
-      %w(innovation trade mobility development).each do |award|
-        settings.deadlines.where(kind: "#{award}_submission_start").first.update_column(:trigger_at, Time.zone.now - 20.days)
-      end
-
+      start = settings.deadlines.where(kind: "award_year_switch").first
+      start.update_column(:trigger_at, Time.zone.now - 20.days)
       finish = settings.deadlines.where(kind: "submission_end").first
       finish.update_column(:trigger_at, Time.zone.now + 20.days)
 
@@ -26,7 +24,7 @@ FactoryBot.define do
 
   trait :expired_submission_deadlines do
     after(:create) do |settings|
-      start = settings.deadlines.where(kind: "submission_start").first
+      start = settings.deadlines.where(kind: "award_year_switch").first
       start.update_column(:trigger_at, Time.zone.now - 25.days)
       finish = settings.deadlines.where(kind: "submission_end").first
       finish.update_column(:trigger_at, Time.zone.now - 20.days)
