@@ -17,28 +17,6 @@ header.page-header.group.page-header-over-sidebar
 
               = render "content_only/pdf_link"
 
-              h3 Collaborators
-
-              p
-                | We recommend that you&nbsp;
-                = link_to "add collaborators", account_collaborators_path(form_id: @form_answer.id)
-                | &nbsp; to help you fill out the application, but be aware that&nbsp;
-                strong
-                  | they are able to see and edit all of your applications.
-              p
-                | Adding collaborators also means that more people are on our contact list and any correspondence is less likely to be overlooked or not addressed in time.
-
-              - if @collaborators.any?
-                br
-                p
-                  ' You have already added these people as collaborators:
-                ul
-                  - @collaborators.each do |collaborator|
-                    li
-                      - if collaborator.first_name.present?
-                        = collaborator.full_name
-                      - else
-                        ' Anonymous
               h3 Application guidance:
               ul
                 li

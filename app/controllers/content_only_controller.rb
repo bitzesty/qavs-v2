@@ -21,11 +21,6 @@ class ContentOnlyController < ApplicationController
                   :award_info_qavs
                 ]
 
-  before_action :get_collaborators,
-                only: [
-                  :award_info_qavs
-                ]
-
   before_action :restrict_access_if_admin_in_read_only_mode!,
                 only: [:dashboard]
 
@@ -73,10 +68,6 @@ class ContentOnlyController < ApplicationController
     @form = @form_answer.award_form.decorate(
       answers: HashWithIndifferentAccess.new(@form_answer.document)
     )
-  end
-
-  def get_collaborators
-    @collaborators = current_user.account.collaborators_without(current_user)
   end
 
   def clean_flash
