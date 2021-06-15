@@ -4,7 +4,6 @@ FactoryBot.define do
     last_name { "Doe" }
     password { "my98ssdkjv9823kds=2" }
     email
-    role { 'regular' }
     agreed_with_privacy_policy { '1' }
     sequence(:phone_number) { |n| "1111111#{n}"}
     confirmed_at { Time.zone.now }
@@ -21,13 +20,8 @@ FactoryBot.define do
       sequence(:company_phone_number) { |n| "7777777#{n}"}
       prefered_method_of_contact { "phone" }
       qae_info_source { "govuk" }
-      role { "regular" }
       agree_sharing_of_details_with_lieutenancies { true }
       completed_registration { true }
-
-      after(:create) do |user|
-        user.account.update_column(:collaborators_checked_at, Time.zone.now)
-      end
     end
 
     trait :agreed_to_be_contacted do

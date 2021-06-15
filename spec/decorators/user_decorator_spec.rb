@@ -4,7 +4,6 @@ describe UserDecorator do
   let(:user) { User.new(
     first_name: 'Foo',
     last_name: 'Bar',
-    role: 'account_admin',
     company_name: 'Umbrella Corporation'
   )}
 
@@ -84,28 +83,6 @@ describe UserDecorator do
     context 'with a valid company name' do
       it 'returns company_name value' do
         expect(subject.company).to eq(user.company_name)
-      end
-    end
-  end
-
-  describe "#role" do
-    it 'returns user role humanized' do
-      expect(subject.role).to eq(user.role.to_s.humanize)
-    end
-  end
-
-  describe "#role_name" do
-    context 'when user is account_admin' do
-      it 'returns Admin and collaborator' do
-        user.role = 'account_admin'
-        expect(subject.role_name).to eq('Admin and collaborator')
-      end
-    end
-
-    context 'when user has regular role' do
-      it 'returns Admin and collaborator' do
-        user.role = 'regular'
-        expect(subject.role_name).to eq('Collaborator only')
       end
     end
   end

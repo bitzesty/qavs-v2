@@ -4,7 +4,6 @@ Warden.test_mode!
 
 describe "Eligibility forms" do
   let!(:user) { create(:user, :completed_profile) }
-  let!(:collaborator) { create(:user, :completed_profile, role: "regular", account: user.account) }
 
   before do
     create(:settings, :submission_deadlines)

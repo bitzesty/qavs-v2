@@ -4,7 +4,6 @@ describe Notifiers::Submission::SuccessNotifier do
   include ActiveJob::TestHelper
 
   let!(:user) { create :user }
-  let!(:collaborator) { create :user, account: user.account, role: "regular" }
 
   let!(:form_answer) do
     FactoryBot.create :form_answer,
@@ -20,7 +19,7 @@ describe Notifiers::Submission::SuccessNotifier do
       end
 
       it "should schedule delayed mails to all necessary recipients" do
-        expect(enqueued_jobs.size).to be_eql(2)
+        expect(enqueued_jobs.size).to be_eql(1)
       end
     end
 

@@ -21,7 +21,6 @@ class UsersImport::Builder
         map.each do |csv_h, db_h|
           u.send("#{db_h}=", user[csv_h])
         end
-        u.role = "account_admin"
         u = assign_password(u)
         u.agreed_with_privacy_policy = "1"
         u.skip_confirmation!
