@@ -19,8 +19,6 @@ class Reports::AdminReport
       Reports::AllEntries.new(year).build
     when "discrepancies_between_primary_and_secondary_appraisals"
       Reports::DiscrepanciesBetweenPrimaryAndSecondaryAppraisals.new(year, "qavs").build
-    when "reception-buckingham-palace"
-      Reports::ReceptionBuckinghamPalaceReport.new(year).build
     when /assessors-progress/
       Reports::AssessorsProgressReport.new(year, "qavs").build
     end
