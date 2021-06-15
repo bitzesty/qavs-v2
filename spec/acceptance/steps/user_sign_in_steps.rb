@@ -3,11 +3,11 @@ step "a user exists" do
 end
 
 step "an account user exists" do
-  FactoryBot.create(:user, password: "my98ssdkjv9823kds=2", role: 'regular', account: @user.account)
+  FactoryBot.create(:user, password: "my98ssdkjv9823kds=2", account: @user.account)
 end
 
 step "Account admin user exists" do
-  @user = FactoryBot.create(:user, password: "my98ssdkjv9823kds=2", role: 'account_admin')
+  @user = FactoryBot.create(:user, password: "my98ssdkjv9823kds=2")
 end
 
 step "I sign in as user" do

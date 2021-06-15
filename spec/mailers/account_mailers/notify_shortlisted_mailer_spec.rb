@@ -2,7 +2,6 @@ require "rails_helper"
 
 describe AccountMailers::NotifyShortlistedMailer, skip: true do
   let!(:user) { create :user }
-  let!(:collaborator) { create :user, account: user.account, role: "regular" }
 
   let(:form_answer) do
     create :form_answer, :submitted, user: user

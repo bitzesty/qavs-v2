@@ -2,8 +2,6 @@ class User < ApplicationRecord
   include PgSearch::Model
   extend Enumerize
 
-  POSSIBLE_ROLES = %w(account_admin regular)
-
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable, :session_limitable
@@ -12,8 +10,6 @@ class User < ApplicationRecord
   attr_accessor :current_password, :skip_password_validation
 
   validates :agreed_with_privacy_policy, acceptance: { allow_nil: false, accept: '1' }, on: :create
-
-  validates :role, :account, presence: true
 
   # First step validations
   validates :title, presence: true, if: -> { first_step? }
@@ -107,7 +103,6 @@ class User < ApplicationRecord
     local_trade_body
     national_trade_body
     mail_from_qae word_of_mouth other)
-  enumerize :role, in: POSSIBLE_ROLES, predicates: true
 
   begin :searching
     pg_search_scope :basic_search,

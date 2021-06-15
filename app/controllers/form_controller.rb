@@ -11,9 +11,6 @@ class FormController < ApplicationController
     :new_qavs_form
   ]
 
-  before_action :get_collaborators, only: [
-    :submit_confirm
-  ]
   before_action :check_if_deadline_ended!, only: [:update, :save, :add_attachment]
 
   before_action :check_eligibility!, only: [
@@ -194,10 +191,6 @@ class FormController < ApplicationController
                status: :unprocessable_entity
       end
     end
-  end
-
-  def get_collaborators
-    @collaborators = current_user.account.collaborators_without(current_user)
   end
 
   private

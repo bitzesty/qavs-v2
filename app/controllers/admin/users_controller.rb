@@ -84,7 +84,6 @@ class Admin::UsersController < Admin::BaseController
       :job_title,
       :phone_number,
       :email,
-      :role,
       :company_name,
       :company_phone_number,
       :subscribed_to_emails,

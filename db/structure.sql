@@ -33,8 +33,7 @@ CREATE TABLE public.accounts (
     id integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    owner_id integer,
-    collaborators_checked_at timestamp without time zone
+    owner_id integer
 );
 
 
@@ -2262,7 +2261,6 @@ CREATE TABLE public.users (
     qae_info_source character varying,
     qae_info_source_other character varying,
     account_id integer,
-    role character varying,
     completed_registration boolean DEFAULT false,
     confirmation_token character varying,
     confirmed_at timestamp without time zone,
@@ -3448,6 +3446,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200918110854'),
 ('20200918151320'),
 ('20201023115307'),
-('20210517075551');
+('20210517075551'),
+('20210615093659');
 
 
