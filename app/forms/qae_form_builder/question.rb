@@ -12,8 +12,7 @@ class QAEFormBuilder
       "UserInfoQuestion",
       "AwardHolderQuestion",
       "SupportersQuestion",
-      "SubsidiariesAssociatesPlantsQuestion",
-      "ByTradeGoodsAndServicesLabelQuestion"
+      "SubsidiariesAssociatesPlantsQuestion"
     ]
 
     attr_reader :question, :answers
@@ -109,7 +108,6 @@ class QAEFormBuilder
         "options_question",
         "options_business_name_changed_question",
         "regions_question",
-        "trade_commercial_success_question",
         "checkbox_seria_question",
         "confirm_question"
       ]
@@ -262,8 +260,7 @@ class QAEFormBuilder
     end
 
     def can_have_conditional_hints?
-      delegate_obj.is_a?(QAEFormBuilder::OptionsQuestion) ||
-      delegate_obj.is_a?(QAEFormBuilder::TradeCommercialSuccessQuestion)
+      delegate_obj.is_a?(QAEFormBuilder::OptionsQuestion)
     end
 
     def can_have_parent_conditional_hints?
@@ -312,27 +309,7 @@ class QAEFormBuilder
     end
 
     def generate_hint(option_name, dependencies)
-      if delegate_obj.form.title == "Sustainable Development Award Application" && delegate_obj.ref.to_s == "A 8"
-        # Hardcoded condition by client request:
-        #
-        # "Please change Sustainable Development note in question A8 'If Yes, please answer the questions A8.1 and B7'
-        # to 'If Yes, please answer both parts of question A8.1 and B7' from the print out."
-        #
-        "If #{option_name}, please answer both parts of question A8.1 and B7"
-
-      elsif delegate_obj.form.title == "International Trade Award Application" &&
-            delegate_obj.ref.to_s == "A 1" &&
-            option_name.to_s == "Organisation"
-        # Hardcoded condition by client request:
-        #
-        # On International Trade, Question A1 please can you remove note 'if organisation,
-        # please answer the questions C4' from the print out.
-        #
-        # Nothing
-      else
-        # Normal behavior
-        "If #{option_name}, please answer the questions #{dependencies.to_sentence}"
-      end
+      "If #{option_name}, please answer the questions #{dependencies.to_sentence}"
     end
   end
 

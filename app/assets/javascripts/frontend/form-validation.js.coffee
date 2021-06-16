@@ -85,25 +85,16 @@ window.FormValidation =
     # if it's a conditional question, but condition was not satisfied
     conditional = true
 
-    if question.find(".js-by-trade-goods-and-services-amount").size() > 0
-      # If it's the trade B1 question which has multiple siblings that have js-conditional-question
-      if question.find(".js-conditional-question.show-question .js-by-trade-goods-and-services-amount .js-conditional-question.show-question").size() == 0
+    question.find(".js-conditional-question").each ->
+      if !$(this).hasClass("show-question")
         conditional = false
-    else
-      question.find(".js-conditional-question").each ->
-        if !$(this).hasClass("show-question")
-          conditional = false
 
     if !conditional
       return
 
     # This handles questions with multiple fields,
     # like name and address
-    if question.find(".js-by-trade-goods-and-services-amount").size() > 0
-      # If it's the trade B1 question which has multiple siblings that have js-conditional-question
-      subquestions = question.find(".js-by-trade-goods-and-services-amount .js-conditional-question.show-question .question-group")
-    else
-      subquestions = question.find(".question-group .question-group")
+    subquestions = question.find(".question-group .question-group")
 
     if subquestions.length
       for subquestion in subquestions
@@ -436,21 +427,6 @@ window.FormValidation =
       @appendMessage(question, "You need to request or upload at least 2 letters of support")
       @addErrorClass(question)
 
-  validateGoodsServicesPercentage: (question) ->
-    totalOverseasTradeInputs = question.find(".js-by-trade-goods-and-services-amount .show-question input[type='text']")
-    totalOverseasTradePercentage = 0
-    missingOverseasTradeValue = false
-    totalOverseasTradeInputs.each ->
-      if $(this).val().toString().trim().length
-        totalOverseasTradePercentage += parseFloat($(this).val())
-      else
-        missingOverseasTradeValue = true
-    if !missingOverseasTradeValue
-      if totalOverseasTradePercentage != 100
-        @logThis(question, "validateGoodsServicesPercentage", "% of your total overseas trade should add up to 100")
-        @appendMessage(question, "% of your total overseas trade should add up to 100")
-        @addErrorClass(question)
-
   validateSelectionLimit: (question) ->
     selection_limit = question.data("selection-limit")
     current_selection_count = question.find("input[type=checkbox]:checked").length
@@ -544,10 +520,6 @@ window.FormValidation =
        question.hasClass("question-support-uploads")
       # console.log "validateSupportLetters"
       @validateSupportLetters(question)
-
-    if question.find(".js-by-trade-goods-and-services-amount").length
-      # console.log "validateGoodsServicesPercentage"
-      @validateGoodsServicesPercentage(question)
 
     if question.hasClass("question-limited-selections")
       @validateSelectionLimit(question)
