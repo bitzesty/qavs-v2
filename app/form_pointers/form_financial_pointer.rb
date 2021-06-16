@@ -24,11 +24,6 @@ class FormFinancialPointer
   TRADE_AUTOEXCLUDED_QUESTION_KEYS = [
   ]
 
-  UK_SALES_EXCLUDED_FORM_TYPES = [
-    :trade,
-    :promotion
-  ]
-
   def initialize(form_answer, options={})
     @form_answer = form_answer
     @options = options
@@ -54,10 +49,8 @@ class FormFinancialPointer
         ).data
       end
 
-      unless UK_SALES_EXCLUDED_FORM_TYPES.include?(form_answer.object.award_type.to_sym)
-        uk_sales_data = UkSalesCalculator.new(fetched).data
-        fetched += [UkSalesCalculator.new(fetched).data] if uk_sales_data.present?
-      end
+      uk_sales_data = UkSalesCalculator.new(fetched).data
+      fetched += [UkSalesCalculator.new(fetched).data] if uk_sales_data.present?
 
       fetched
     end

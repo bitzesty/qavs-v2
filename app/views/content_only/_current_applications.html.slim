@@ -11,7 +11,6 @@
           td
             h4
               - app_name = award.decorate.application_name
-              = app_name == "Promoting Opportunity" ? "Social Mobility" : app_name
               br
               small
                 = award.award_type_full_name
@@ -33,7 +32,7 @@
                 / = award.decorate.fill_progress_in_percents
                 / '  completed
           td.pull-right
-            - name = award.award_type == "promotion" ? "nomination" : "application"
+            - name = "nomination"
             - award_name = award.award_type_full_name + " Award"
             - nick = award.nickname.present? ? " (#{award.nickname})" : ""
             - action = award.submitted? ? "Edit" : "Continue"

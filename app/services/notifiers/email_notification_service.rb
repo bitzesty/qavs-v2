@@ -41,20 +41,6 @@ class Notifiers::EmailNotificationService
     year_open_award_type_specific_notification(award_type)
   end
 
-  def ep_reminder_support_letters(award_year)
-    collaborator_data = []
-
-    award_year.form_answers.promotion.includes(:support_letters).each do |form_answer|
-      next unless form_answer.support_letters.count < 2
-
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    send_emails_to_collaborators!(collaborator_data, AccountMailers::PromotionLettersOfSupportReminderMailer)
-  end
-
   def reminder_to_submit(award_year)
     collaborator_data = []
     scope = award_year.form_answers.where(submitted_at: nil)
