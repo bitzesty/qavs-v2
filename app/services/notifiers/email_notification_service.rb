@@ -24,12 +24,6 @@ class Notifiers::EmailNotificationService
     end
   end
 
-  %w(innovation trade mobility development).each do |award|
-    define_method "#{award}_submission_started_notification" do |award_year|
-      submission_started_notification(award_year, award)
-    end
-  end
-
   def award_year_open_notifier(award_year)
     user_ids = User.confirmed
                    .not_bounced_emails
@@ -45,20 +39,6 @@ class Notifiers::EmailNotificationService
 
   def submission_started_notification(award_year, award_type)
     year_open_award_type_specific_notification(award_type)
-  end
-
-  def ep_reminder_support_letters(award_year)
-    collaborator_data = []
-
-    award_year.form_answers.promotion.includes(:support_letters).each do |form_answer|
-      next unless form_answer.support_letters.count < 2
-
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    send_emails_to_collaborators!(collaborator_data, AccountMailers::PromotionLettersOfSupportReminderMailer)
   end
 
   def reminder_to_submit(award_year)

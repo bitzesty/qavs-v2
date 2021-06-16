@@ -124,10 +124,6 @@ class AccountsController < ApplicationController
       :agree_being_contacted_by_department_of_business,
       :qae_info_source_other,
       :qae_info_source,
-      :notification_when_innovation_award_open,
-      :notification_when_trade_award_open,
-      :notification_when_development_award_open,
-      :notification_when_mobility_award_open,
       :notification_when_submission_deadline_is_coming,
       :agree_sharing_of_details_with_lieutenancies
     )

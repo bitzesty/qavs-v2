@@ -5,7 +5,6 @@ class EmailNotification < ApplicationRecord
   NOTIFICATION_KINDS = [
                          :award_year_open_notifier,
                          :reminder_to_submit,
-                         :ep_reminder_support_letters,
                          :winners_notification,
                          :unsuccessful_notification,
                          :unsuccessful_ep_notification,
@@ -37,7 +36,7 @@ class EmailNotification < ApplicationRecord
   end
 
   def self.not_awarded
-    where(kind: ["unsuccessful_notification", "unsuccessful_ep_notification"])
+    where(kind: "unsuccessful_notification")
   end
 
   private

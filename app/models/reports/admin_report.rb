@@ -32,15 +32,7 @@ class Reports::AdminReport
       CaseSummaryPdfs::Base
     end
 
-    sub_type = ""
-    if category == "trade" &&
-       id == "case_summaries" &&
-       year.year != 2016
-       # For 2016 we use one report for both trade years modes ('3 to 5' and '6 plus')
-      sub_type = "_#{params[:years_mode]}"
-    end
-
-    attachment = year.send("#{id.singularize}_#{category}#{sub_type}_hard_copy_pdf")
+    attachment = year.send("#{id.singularize}_#{category}_hard_copy_pdf")
 
     if year.send("aggregated_#{id.singularize}_hard_copy_state").to_s == "completed" &&
        attachment.present? &&
@@ -55,13 +47,12 @@ class Reports::AdminReport
     else
       # Render dynamically
       ops = {category: category, award_year: year}
-      ops[:years_mode] = params[:years_mode] if category == "trade"
 
       data = pdf_klass.new("all", nil, ops)
 
       OpenStruct.new(
         data: data.render,
-        filename: pdf_filename(sub_type)
+        filename: pdf_filename
       )
     end
   end
@@ -72,10 +63,8 @@ class Reports::AdminReport
     "qavs"
   end
 
-  def pdf_filename(sub_type)
-    sub_type = "#{sub_type}_years" if sub_type.present?
-
+  def pdf_filename
     pdf_timestamp = Time.zone.now.strftime("%e_%b_%Y_at_%-l:%M%P")
-    "qavs_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
+    "qavs_award_#{id}_#{pdf_timestamp}.pdf"
   end
 end

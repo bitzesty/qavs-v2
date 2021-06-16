@@ -27,13 +27,7 @@ class HardCopyGenerators::AggregatedBase < HardCopyGenerators::Base
   end
 
   def file_prefix
-    subtype_line = ""
-
-    if award_category == "trade" && type_of_report == "case_summary"
-      subtype_line = "_#{sub_type}_years"
-    end
-
-    "aggregated_hard_copy_#{award_category}_#{type_of_report}#{subtype_line}_#{award_year.year}"
+    "aggregated_hard_copy_#{award_category}_#{type_of_report}_#{award_year.year}"
   end
 
   def tempfile_name

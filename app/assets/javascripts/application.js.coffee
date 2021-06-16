@@ -707,65 +707,6 @@ jQuery ->
       else
         $("#number-of-eligible-initiatives-info").addClass("visuallyhidden")
 
-  # Show trade org fulfilled info when checked yes
-  trade_org_q = ".question-organisation-fulfill-above-exceptions"
-  if $(trade_org_q).size() > 0
-    $("#{trade_org_q} input[type='radio']").bind "propertychange change click keyup input paste", ->
-      radio_val = $("#{trade_org_q} input[type='radio']:checked").val()
-      if radio_val == "yes"
-        $("#trade-org-fulfilled-info").removeClass("visuallyhidden")
-      else
-        $("#trade-org-fulfilled-info").addClass("visuallyhidden")
-
-  trade_eligibility_not_eligible_message = (year_where_can_be_eligible) ->
-    year_where_can_be_awarded = year_where_can_be_eligible + 1
-
-    "<p>Unfortunately you cannot apply for International Trade award this year.</p>
-     <p>If your international trade continues to result in outstanding year on year growth, you can apply again in " +
-     year_where_can_be_eligible +
-     " for an award to be given in " +
-     year_where_can_be_awarded +
-     " (on outstanding short term growth over 3 years basis).</p>"
-
-  # Show trade awarded info if it isn't 2010 (lowest year)
-  if $(".trade-awarded-input").size() > 0
-    $(document).on "change", ".trade-awarded-input", (e) ->
-      lowest_year = "9999"
-      last_year = "2000"
-      taInfo = $("#trade-awarded-info")
-      lyInfo = $("#trade-awarded-last-year-info")
-
-      $(".trade-awarded-input option").each ->
-        this_year = $(this).attr("value")
-        if this_year != ""
-          if parseInt(lowest_year) > parseInt(this_year)
-            lowest_year = this_year
-          if parseInt(last_year) < parseInt(this_year)
-            last_year = this_year
-
-      last_year_int = parseInt(last_year)
-      value_int = parseInt($(this).val())
-      not_eligible_years = [last_year_int]
-      not_eligible_block = lyInfo.find(".application-notice")
-
-      if ($.inArray(value_int, not_eligible_years) >= 0)
-        not_eligible_block.html(trade_eligibility_not_eligible_message(value_int + 1))
-
-        lyInfo.removeClass("visuallyhidden")
-        taInfo.addClass("visuallyhidden")
-      else if $(this).val().length > 1 && value_int > (last_year - 4) && value_int < last_year_int
-        taInfo.removeClass("visuallyhidden")
-        lyInfo.addClass("visuallyhidden")
-      else
-        taInfo.addClass("visuallyhidden")
-        lyInfo.addClass("visuallyhidden")
-
-      if $(this).val().length > 0 && value_int < last_year_int
-        $(".eligibility_qae_for_trade_award_year").removeClass("field-with-errors")
-                                                  .find("span.error").remove();
-
-  $(".trade-awarded-input").trigger "change"
-
   # Show the eligibility failure contact message
   if $("#basic-eligibility-failure-submit").size() > 0
     $(document).on "click", "#basic-eligibility-failure-submit", (e) ->
@@ -882,25 +823,6 @@ jQuery ->
   # Disable copying in input fields
   $('.js-disable-copy').bind "cut copy contextmenu", (e) ->
     e.preventDefault()
-
-  # Change the entry period text dependion on entry period chosen
-  # 2 or 5 years for Innovation and Sustainable development
-  # 3 or 6 years for International Trade
-  replaceEntryPeriodText = () ->
-    new_text = ""
-    switch $(".js-entry-period input:checked").val()
-      when "2 to 4"
-        new_text = 2
-      when "5 plus"
-        new_text = 5
-      when "3 to 5"
-        new_text = 3
-      when "6 plus"
-        new_text = 6
-    $(".js-entry-period-subtext").each () ->
-      $(this).text(new_text)
-  if $(".js-entry-period input:checked").size() > 0
-    replaceEntryPeriodText()
 
   $(".js-entry-period input").change () ->
     replaceEntryPeriodText()

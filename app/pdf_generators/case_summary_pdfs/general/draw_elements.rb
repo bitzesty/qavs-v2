@@ -52,20 +52,7 @@ module CaseSummaryPdfs::General::DrawElements
       2
     end
 
-    if form_answer.award_type == "mobility" &&
-       form_answer.award_year.year < 2020 &&
-       application_type_answer.size > 0
-      case application_type_answer.size
-      when 1
-        [79, 71, 75]
-      when 2
-        [74, 67, 81]
-      when 3
-        [69, 62, 85]
-      end
-    else
-      [89, 81, 65]
-    end[mode_number]
+    [89, 81, 65][mode_number]
   end
 
   def render_sic_code
