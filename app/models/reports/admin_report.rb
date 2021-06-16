@@ -52,7 +52,7 @@ class Reports::AdminReport
 
       OpenStruct.new(
         data: data.render,
-        filename: pdf_filename(sub_type)
+        filename: pdf_filename
       )
     end
   end
@@ -63,10 +63,8 @@ class Reports::AdminReport
     "qavs"
   end
 
-  def pdf_filename(sub_type)
-    sub_type = "#{sub_type}_years" if sub_type.present?
-
+  def pdf_filename
     pdf_timestamp = Time.zone.now.strftime("%e_%b_%Y_at_%-l:%M%P")
-    "qavs_award#{sub_type}_#{id}_#{pdf_timestamp}.pdf"
+    "qavs_award_#{id}_#{pdf_timestamp}.pdf"
   end
 end
