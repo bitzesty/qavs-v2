@@ -5,7 +5,6 @@ class ContentOnlyController < ApplicationController
                 except: [
                   :home,
                   :awards_for_organisations,
-                  :enterprise_promotion_awards,
                   :how_to_apply,
                   :timeline,
                   :additional_information_and_contact,

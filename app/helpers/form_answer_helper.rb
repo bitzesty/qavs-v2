@@ -3,15 +3,6 @@
 require "countries"
 
 module FormAnswerHelper
-  # This is a temporary method to disable Promoting Opportunity Award for users
-  def display_social_mobility?
-    ENV["DISPLAY_SOCIAL_MOBILITY_AWARD"] == "true"
-  end
-
-  def hide_promotion?
-    !params[:year] || params[:year].to_i >= 2017
-  end
-
   def application_flags(fa, subject = nil)
     comments_count = if subject
       if current_subject.is_a?(Admin)

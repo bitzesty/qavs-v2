@@ -11,7 +11,6 @@
           td
             h4
               - app_name = award.decorate.application_name
-              = app_name == "Promoting Opportunity" ? "Social Mobility" : app_name
               br
               small
                 = award.award_type_full_name
@@ -33,19 +32,18 @@
                 / = award.decorate.fill_progress_in_percents
                 / '  completed
           td.pull-right
-            - name = award.award_type == "qavs" ? "nomination" : "application"
             - award_name = award.award_type_full_name + " Award"
             - nick = award.nickname.present? ? " (#{award.nickname})" : ""
             - action = award.submitted? ? "Edit" : "Continue"
-            - aria_label = "#{action} #{award_name} #{name}"
+            - aria_label = "#{action} #{award_name} nomination"
 
             - if award.nickname.present?
-              - aria_label = "#{action} #{award_name} (#{award.nickname}) #{name}"
+              - aria_label = "#{action} #{award_name} (#{award.nickname}) nomination"
             - else
               - row = ordinal(index + 1)
-              - aria_label = "#{row} row - #{action} #{award_name} #{name}"
+              - aria_label = "#{row} row - #{action} #{award_name} nomination"
 
             - if award.submitted?
-              = link_to "Edit #{name}", edit_form_path(award.id), "aria-label" => aria_label
+              = link_to "Edit nomination", edit_form_path(award.id), "aria-label" => aria_label
             - else
-              = link_to "Continue #{name}", edit_form_path(award.id), "aria-label" => aria_label
+              = link_to "Continue nomination", edit_form_path(award.id), "aria-label" => aria_label

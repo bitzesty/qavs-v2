@@ -26,11 +26,7 @@ class PalaceInvite < ApplicationRecord
   end
 
   def attendees_limit
-    if form_answer.promotion?
-      1 # nominator
-    else
-      2
-    end
+    2
   end
 
   private
