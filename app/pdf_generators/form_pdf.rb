@@ -14,7 +14,6 @@ class FormPdf < Prawn::Document
     financial_year_date
     nominee_date_of_birth
     innovation_was_launched_in_the_market
-    development_was_launched_since
   )
   JUST_NOTES = [
     "QAEFormBuilder::HeaderQuestion"
