@@ -42,17 +42,6 @@ describe MailRenderer do
     end
   end
 
-  describe "#ep_reminder_support_letters" do
-    it "renders e-mail" do
-      link = "http://www.queens-awards-enterprise.service.gov.uk/form/0"
-      rendered = described_class.new.ep_reminder_support_letters
-      expect(rendered).to match("Jon Doe")
-      expect(rendered).to match("Jane Doe")
-      expect(rendered).to match(link)
-      expect(rendered).to match(deadline_str)
-    end
-  end
-
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_notification
