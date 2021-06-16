@@ -98,7 +98,7 @@ module FinancialTable
   end
 
   def financial_date_selector_value
-    if one_option_question_or_development?
+    if one_option_question?
       "3"
     else
       filled_answers[financial_date_selector.key.to_s]
@@ -128,7 +128,7 @@ module FinancialTable
 
   def financial_years_number
     if financial_date_selector_value.present?
-      if one_option_question_or_development?
+      if one_option_question?
         "3"
       else
         financial_date_selector.ops_values[financial_date_selector_value]
@@ -139,10 +139,6 @@ module FinancialTable
       # If not selected yet, render last option as default
       financial_date_selector.ops_values.values.last
     end
-  end
-
-  def one_option_question_or_development?
-    one_option_question? || form_answer.development?
   end
 
   def one_option_question?
