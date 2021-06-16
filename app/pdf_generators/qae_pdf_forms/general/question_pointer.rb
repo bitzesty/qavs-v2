@@ -40,7 +40,6 @@ class QaePdfForms::General::QuestionPointer
     QAEFormBuilder::AwardHolderQuestion,
     QAEFormBuilder::PositionDetailsQuestion,
     QAEFormBuilder::SubsidiariesAssociatesPlantsQuestion,
-    QAEFormBuilder::ByTradeGoodsAndServicesLabelQuestion,
     QAEFormBuilder::UploadQuestion,
     QAEFormBuilder::ByYearsLabelQuestion,
     QAEFormBuilder::ByYearsQuestion,

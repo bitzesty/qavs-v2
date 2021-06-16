@@ -24,12 +24,6 @@ class Notifiers::EmailNotificationService
     end
   end
 
-  %w(innovation trade mobility development).each do |award|
-    define_method "#{award}_submission_started_notification" do |award_year|
-      submission_started_notification(award_year, award)
-    end
-  end
-
   def award_year_open_notifier(award_year)
     user_ids = User.confirmed
                    .not_bounced_emails

@@ -37,19 +37,13 @@ class HardCopyGenerators::AggregatedCaseSummaryGenerator < HardCopyGenerators::A
   class << self
     def run(award_year)
       AwardYear::CURRENT_YEAR_AWARDS.each do |award_category|
-        if award_category == "trade"
-          new(award_category, award_year, "case_summary", 3).run
-          new(award_category, award_year, "case_summary", 6).run
-        else
-          new(award_category, award_year, "case_summary").run
-        end
+        new(award_category, award_year, "case_summary").run
       end
     end
   end
 
   def set_pdf!
     ops = {category: award_category, award_year: award_year}
-    ops[:years_mode] = sub_type if award_category == "trade"
 
     @pdf = CaseSummaryPdfs::Base.new(
       "all", nil, ops

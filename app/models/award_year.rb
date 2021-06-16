@@ -45,19 +45,6 @@ class AwardYear < ApplicationRecord
     end
   end
 
-  #
-  # For trade category Case summary would have 2 hard copies
-  # for '3 to 5' and '6 plus' years
-  #
-  ["3", "6"].map do |i|
-    define_method("case_summary_trade_#{i}_hard_copy_pdf") do
-      send("aggregated_case_summary_hard_copies").find_by(
-        award_category: 'trade',
-        sub_type: i
-      )
-    end
-  end
-
   def form_data_generation_can_be_started?
     Settings.after_current_submission_deadline? &&
     form_data_hard_copies_state.nil?
