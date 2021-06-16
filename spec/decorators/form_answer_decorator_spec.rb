@@ -31,10 +31,6 @@ describe FormAnswerDecorator do
     parent_ultimate_control: "parent_ultimate_control",
     ultimate_control_company: "ultimate_control_company",
     ultimate_control_company_country: "ultimate_control_company_country",
-    innovation_desc_short: "innovation_desc_short",
-    development_desc_short: "development_desc_short",
-    development_management_approach_briefly: "development_management_approach_briefly",
-    mobility_desc_short: "mobility_desc_short",
     organisation_type: "organisation_type"
   }
 

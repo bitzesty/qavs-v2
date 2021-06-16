@@ -12,7 +12,7 @@ describe  "User sees the pre submission dashboard" do
   describe "when visits the dashboard after some awards are opened" do
     it "should see message confirming that" do
       visit dashboard_path
-      expect(page).to have_link("New application", href: "/apply_qavs_award")
+      expect(page).to have_link("New nomination", href: "/apply_qavs_award")
     end
   end
 end
