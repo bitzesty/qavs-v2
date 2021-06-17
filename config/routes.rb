@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     verify_authy_installation: "/verify-installation"
   }
 
+  devise_for :lieutenants
+
   authenticate :admin do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -195,7 +197,7 @@ Rails.application.routes.draw do
       end
     end
     resources :assessors
-    resources :judges
+    resources :lieutenants
 
     resources :admins do
       collection do
@@ -265,10 +267,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :judge do
-    root to: "case_summaries#index"
-    resources :case_summaries, only: :index do
-      get :download, on: :collection
-    end
+  namespace :lieutenant do
+    root to: "dashboard#show"
   end
 end
