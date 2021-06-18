@@ -1,8 +1,12 @@
-class Admin::LieutenantsController < Admin::UsersController
+class Lieutenant::LieutenantsController < Lieutenant::BaseController
+  respond_to :html
+  before_action :find_resource, except: [:index, :new, :create]
+
   def index
+    authorize :lieutenant, :index?
+
     params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
     params[:search].permit!
-    authorize :lieutenant, :index?
 
     @search = LieutenantSearch.new(Lieutenant.all).
                              search(params[:search])
@@ -16,11 +20,16 @@ class Admin::LieutenantsController < Admin::UsersController
 
   def create
     @resource = Lieutenant.new(resource_params)
+    @resource.role = "regular"
+
     authorize @resource, :create?
 
-    @resource.save
-    location = @resource.persisted? ? admin_lieutenants_path : nil
-    respond_with :admin, @resource, location: location
+    if @resource.save
+      redirect_to lieutenant_lieutenants_url,
+                  notice: "Lieutenant successfully created"
+    else
+      render :new
+    end
   end
 
   def update
@@ -32,14 +41,25 @@ class Admin::LieutenantsController < Admin::UsersController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_lieutenants_path
+    respond_with :lieutenant, @resource, location: lieutenant_lieutenants_path
   end
+
+
+  def new
+    @resource = Lieutenant.new
+    authorize @resource, :create?
+  end
+
+  def edit
+    authorize @resource, :update?
+  end
+
 
   def destroy
     authorize @resource, :destroy?
     @resource.soft_delete!
 
-    respond_with :admin, @resource, location: admin_lieutenants_path
+    respond_with :lieutenant, @resource, location: lieutenant_lieutenants_path
   end
 
   private
@@ -54,7 +74,6 @@ class Admin::LieutenantsController < Admin::UsersController
              :password,
              :password_confirmation,
              :first_name,
-             :last_name,
-             :role)
+             :last_name)
   end
 end
