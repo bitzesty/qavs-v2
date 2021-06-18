@@ -269,5 +269,7 @@ Rails.application.routes.draw do
 
   namespace :lieutenant do
     root to: "dashboard#show"
+
+    resources :lieutenants, except: [:show]
   end
 end
