@@ -55,8 +55,9 @@ html.no-js
                 ul.nav.navbar-nav role="navigation"
                   li class=('active' if controller_name == 'form_answers')
                     = link_to "Nominations", "#"
-                  li class=('active' if controller_name == 'reports')
-                    = link_to "Reports", "#"
+                  - if policy(:lieutenant).index?
+                    li class=('active' if controller_name == 'lieutenants')
+                      = link_to "Lieutenants", lieutenant_lieutenants_path
 
                 ul.nav.navbar-nav.navbar-right role="navigation"
                   li.dropdown

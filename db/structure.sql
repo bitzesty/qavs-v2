@@ -730,6 +730,7 @@ CREATE TABLE public.lieutenants (
     role character varying,
     lieutenants character varying,
     unique_session_id character varying,
+    deleted boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::BaseController
+  respond_to :html
   before_action :find_resource, except: [:index, :new, :create]
 
   def index

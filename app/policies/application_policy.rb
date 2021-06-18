@@ -44,6 +44,10 @@ class ApplicationPolicy
     subject.is_a?(Lieutenant)
   end
 
+  def advanced_lieutenant?
+    lieutenant? && subject.role.advanced?
+  end
+
   def assessor?
     subject.is_a?(Assessor)
   end
