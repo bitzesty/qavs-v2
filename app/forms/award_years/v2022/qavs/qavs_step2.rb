@@ -17,6 +17,7 @@ class AwardYears::V2022::QAEForms
 
         textarea :group_activities, "Please summarise the activities of the group" do
           ref "B 1"
+          classes "sub-question"
           required
           words_max 50
           rows 2
@@ -24,6 +25,7 @@ class AwardYears::V2022::QAEForms
 
         textarea :beneficiaries, "Who are the beneficiaries (the people it helps) and where do they live?" do
           ref "B 2"
+          classes "sub-question"
           required
           words_max 30
           rows 2
@@ -31,20 +33,23 @@ class AwardYears::V2022::QAEForms
 
         textarea :benefits, "What are the benefits of the group's work?" do
           ref "B 3"
+          classes "sub-question"
           required
           words_max 100
           rows 2
         end
 
         textarea :volunteers, "This Award is specifically for groups that rely on significant and committed work by volunteers. Please explain what the volunteers do and what makes this particular group of volunteers so impressive?" do
-          required
           ref "B 4"
+          classes "sub-question"
+          required
           words_max 200
           rows 5
         end
 
         checkbox_seria :how_did_you_hear_about_award, "How did you hear about the Award this year?" do
           ref "B 5"
+          classes "sub-question"
           required
           context %(
             <p>Select all that apply.</p>
