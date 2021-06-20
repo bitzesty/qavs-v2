@@ -45,7 +45,7 @@ class AwardYears::V2022::QAEForms
           )
         end
 
-        text :nominee_leader, "Name of the group leader or main contact in the group" do
+        text :nominee_leader_name, "Name of the group leader or main contact in the group" do
           classes "sub-question"
           required
           style "small"
