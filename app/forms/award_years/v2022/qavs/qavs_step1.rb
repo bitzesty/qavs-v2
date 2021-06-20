@@ -17,7 +17,7 @@ class AwardYears::V2022::QAEForms
           style "large"
         end
 
-        address :nominee_address, "Contact details for the group" do
+        address :nominee_address, "" do
           classes "sub-question"
           required
         end
@@ -57,7 +57,7 @@ class AwardYears::V2022::QAEForms
           style "large"
         end
 
-        address :nominee_leader_address, "Contact address of the group leader or main contact" do
+        address :nominee_leader_address, "" do
           classes "sub-question"
           required
         end
