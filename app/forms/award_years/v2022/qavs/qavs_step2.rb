@@ -42,6 +42,27 @@ class AwardYears::V2022::QAEForms
           words_max 200
           rows 5
         end
+
+        checkbox_seria :how_did_you_hear_about_award, "How did you hear about the Award this year?" do
+          ref "B 5"
+          required
+          context %(
+            <p>Select all that apply.</p>
+          )
+          check_options [
+            ["national_newspaper", "National newspaper"],
+            ["local_newspaper", "Local newsaper"],
+            ["tv_radio", "TV/radio"],
+            ["internet", "Internet"],
+            ["word_of_mouth", "Word of mouth"],
+            ["previous_winner", "Previous winner/entrant"],
+            ["charity", "Voluntary organisation/charity"],
+            ["event", "Local event"],
+            ["library", "Local library"],
+            ["council", "Local Council"], 
+            ["other", "Other"]
+          ]
+        end
       end
     end
   end
