@@ -5,7 +5,6 @@ class ContentOnlyController < ApplicationController
                 except: [
                   :home,
                   :awards_for_organisations,
-                  :enterprise_promotion_awards,
                   :how_to_apply,
                   :timeline,
                   :additional_information_and_contact,
@@ -17,11 +16,6 @@ class ContentOnlyController < ApplicationController
                 ]
 
   before_action :get_current_form,
-                only: [
-                  :award_info_qavs
-                ]
-
-  before_action :get_collaborators,
                 only: [
                   :award_info_qavs
                 ]
@@ -73,10 +67,6 @@ class ContentOnlyController < ApplicationController
     @form = @form_answer.award_form.decorate(
       answers: HashWithIndifferentAccess.new(@form_answer.document)
     )
-  end
-
-  def get_collaborators
-    @collaborators = current_user.account.collaborators_without(current_user)
   end
 
   def clean_flash

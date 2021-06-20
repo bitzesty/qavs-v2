@@ -57,10 +57,6 @@ class Admin::AssessorsController < Admin::UsersController
              :first_name,
              :last_name,
              :telephone_number,
-             :trade_role,
-             :innovation_role,
-             :development_role,
-             :mobility_role,
-             :promotion_role)
+             :qavs_role)
   end
 end

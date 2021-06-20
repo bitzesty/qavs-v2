@@ -1,11 +1,9 @@
 class Reports::DataPickers::AssessorProgressPicker
 
-  attr_accessor :award_year_id,
-                :award_category
+  attr_accessor :award_year_id
 
-  def initialize(year, award_category)
+  def initialize(year, _award_category)
     self.award_year_id = year.id
-    self.award_category = award_category
   end
 
   def results
@@ -46,7 +44,6 @@ class Reports::DataPickers::AssessorProgressPicker
                WHERE assessor_assignments.assessor_id = assessors.id
                      AND assessor_assignments.position = 0
                      AND assessor_assignments.award_year_id = #{award_year_id}
-                     AND form_answers.award_type = '#{award_category}'
              ) As primary_assigned,
              (
                SELECT
@@ -58,7 +55,6 @@ class Reports::DataPickers::AssessorProgressPicker
                      AND assessor_assignments.position = 0
                      AND assessor_assignments.award_year_id = #{award_year_id}
                      AND assessor_assignments.submitted_at IS NOT NULL
-                     AND form_answers.award_type = '#{award_category}'
              ) As primary_assessed,
              (
                SELECT
@@ -70,7 +66,6 @@ class Reports::DataPickers::AssessorProgressPicker
                      AND assessor_assignments.position = 4
                      AND assessor_assignments.award_year_id = #{award_year_id}
                      AND assessor_assignments.submitted_at IS NOT NULL
-                     AND form_answers.award_type = '#{award_category}'
              ) As primary_case_summary,
              (
                SELECT
@@ -82,7 +77,6 @@ class Reports::DataPickers::AssessorProgressPicker
                      AND feedbacks.authorable_type = 'Assessor'
                      AND feedbacks.award_year_id = #{award_year_id}
                      AND feedbacks.submitted = '1'
-                     AND form_answers.award_type = '#{award_category}'
              ) As primary_feedback,
              (
                SELECT
@@ -93,7 +87,6 @@ class Reports::DataPickers::AssessorProgressPicker
                WHERE assessor_assignments.assessor_id = assessors.id
                      AND assessor_assignments.position = 1
                      AND assessor_assignments.award_year_id = #{award_year_id}
-                     AND form_answers.award_type = '#{award_category}'
              ) As secondary_assigned,
              (
                SELECT
@@ -105,11 +98,10 @@ class Reports::DataPickers::AssessorProgressPicker
                      AND assessor_assignments.position = 1
                      AND assessor_assignments.award_year_id = #{award_year_id}
                      AND assessor_assignments.submitted_at IS NOT NULL
-                     AND form_answers.award_type = '#{award_category}'
              ) As secondary_assessed
       FROM assessors
       WHERE assessors.confirmed_at IS NOT NULL
-            AND assessors.#{award_category}_role IN ('lead', 'regular')
+            AND assessors.qavs_role IN ('lead', 'regular')
       ORDER BY assessors.id ASC
     eos
   end

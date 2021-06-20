@@ -29,21 +29,6 @@ class UserDecorator < ApplicationDecorator
     company_name.presence || '<span class="text-muted">N/A</span>'.html_safe
   end
 
-  def role
-    object.role.to_s.humanize
-  end
-
-  def role_name
-    case object.role.to_s.humanize
-    when "Account admin"
-      "Admin and collaborator"
-    when "Regular"
-      "Collaborator only"
-    else
-      object.role.to_s.humanize
-    end
-  end
-
   def debounce_api_check_last_run
     object.debounce_api_latest_check_at
   end

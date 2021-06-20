@@ -1,4 +1,4 @@
-- content_for?(:title) ? yield(:title) : "Queen's Awards for Enterprise"
+- content_for?(:title) ? yield(:title) : "Queen's Award for Voluntary Service"
 
 - content_for :head do
   = stylesheet_link_tag "application.css"
@@ -44,7 +44,7 @@
       .content
         nav#proposition-menu
           a#proposition-name href="/"
-            ' Queen's Awards for Enterprise
+            ' Queen's Award for Voluntary Service
 
           - if current_user && !current_admin && !current_assessor
             span.if-no-js-hide

@@ -45,11 +45,7 @@ So that I see
   end
 
   let!(:user) do
-    create :user, :completed_profile, role: "account_admin"
-  end
-
-  let!(:collaborator) do
-    create :user, :completed_profile, role: "regular", account: user.account
+    create :user, :completed_profile
   end
 
   before do

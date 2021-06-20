@@ -380,14 +380,6 @@ class FormAnswerDecorator < ApplicationDecorator
    sanitize_html document["innovation_desc_short"]
   end
 
-  def development_desc_short
-    sanitize_html document["development_desc_short"]
-  end
-
-  def development_management_approach_briefly
-    sanitize_html document["development_management_approach_briefly"]
-  end
-
   def mobility_desc_short
     sanitize_html document["mobility_desc_short"]
   end

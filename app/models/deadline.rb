@@ -42,12 +42,6 @@ class Deadline < ApplicationRecord
       where(kind: "submission_start").first
     end
 
-    %w(innovation trade mobility development).each do |award|
-      define_method "#{award}_submission_start" do
-        where(kind: "#{award}_submission_start").first
-      end
-    end
-
     def end_of_embargo
       where(kind: "buckingham_palace_attendees_details").first
     end

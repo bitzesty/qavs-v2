@@ -25,9 +25,7 @@
     .content-right.content-offset-24
       = render "content_only/past_applications/download_pdf_link", award: award
 
-      - if award.promotion?
-        p Unfortunately your nomination was unsuccessful.
-      - elsif award.not_submitted?
+      - if award.not_submitted?
         p The application was not submitted on time.
       - else
         h4 Feedback

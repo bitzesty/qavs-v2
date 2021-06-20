@@ -2,9 +2,8 @@ require 'rails_helper'
 
 describe FormController do
   let!(:award_year) { AwardYear.current }
-  let(:user) { create :user, :completed_profile, role: "account_admin" }
+  let(:user) { create :user, :completed_profile }
   let(:account) { user.account }
-  let!(:collaborator) { create :user, :completed_profile, role: "regular", account: account }
   let(:form_answer) do
     create :form_answer,
            user: user,

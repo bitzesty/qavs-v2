@@ -16,12 +16,12 @@ step "I go to dashboard" do
 end
 
 step "I should see application link" do
-  expect(page).to have_link("New application", href:'/apply_qavs_award')
+  expect(page).to have_link("New nomination", href:'/apply_qavs_award')
 end
 
 step "I create nomination" do
   step "I go to dashboard"
-  click_link "New application", href: '/apply_qavs_award'
+  click_link "New nomination", href: '/apply_qavs_award'
   click_button "Start eligibility questionnaire"
   click_button "Continue" #eligibility step
 end

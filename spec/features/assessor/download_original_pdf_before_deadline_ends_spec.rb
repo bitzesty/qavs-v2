@@ -5,7 +5,7 @@ describe "Assessor: Download original pdf of application at the deadline", %q{
 As an Assessor (Lead / Primary)
 I want to download original PDF of application at the deadline
 So that I can see original application data was at the deadline moment
-}, skip: true do
+} do
 
   let(:target_url) do
     assessor_form_answer_path(form_answer)
@@ -26,7 +26,8 @@ So that I can see original application data was at the deadline moment
     it_behaves_like "download original pdf before deadline ends"
   end
 
-  describe "Primary Assessor" do
+  # Skip because removed trait regular_for_trade from form answer
+  describe "Primary Assessor", skip: true do
     let!(:primary_assessor) { create(:assessor, :regular_for_trade) }
     let!(:primary) { form_answer.assessor_assignments.primary }
 

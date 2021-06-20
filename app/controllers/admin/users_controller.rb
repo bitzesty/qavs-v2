@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::BaseController
+  respond_to :html
   before_action :find_resource, except: [:index, :new, :create]
 
   def index
@@ -84,17 +85,12 @@ class Admin::UsersController < Admin::BaseController
       :job_title,
       :phone_number,
       :email,
-      :role,
       :company_name,
       :company_phone_number,
       :subscribed_to_emails,
       :agree_being_contacted_by_department_of_business,
       :qae_info_source,
       :qae_info_source_other,
-      :notification_when_innovation_award_open,
-      :notification_when_trade_award_open,
-      :notification_when_development_award_open,
-      :notification_when_mobility_award_open,
       :notification_when_submission_deadline_is_coming,
       :current_password,
       :password,

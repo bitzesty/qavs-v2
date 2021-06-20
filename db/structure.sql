@@ -33,8 +33,7 @@ CREATE TABLE public.accounts (
     id integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    owner_id integer,
-    collaborators_checked_at timestamp without time zone
+    owner_id integer
 );
 
 
@@ -701,6 +700,59 @@ CREATE SEQUENCE public.form_answers_id_seq
 --
 
 ALTER SEQUENCE public.form_answers_id_seq OWNED BY public.form_answers.id;
+
+
+--
+-- Name: lieutenants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lieutenants (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
+    first_name character varying,
+    last_name character varying,
+    role character varying,
+    lieutenants character varying,
+    unique_session_id character varying,
+    deleted boolean DEFAULT false,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: lieutenants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lieutenants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lieutenants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lieutenants_id_seq OWNED BY public.lieutenants.id;
 
 
 --
@@ -2262,7 +2314,6 @@ CREATE TABLE public.users (
     qae_info_source character varying,
     qae_info_source_other character varying,
     account_id integer,
-    role character varying,
     completed_registration boolean DEFAULT false,
     confirmation_token character varying,
     confirmed_at timestamp without time zone,
@@ -2493,6 +2544,13 @@ ALTER TABLE ONLY public.form_answers ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: lieutenants id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lieutenants ALTER COLUMN id SET DEFAULT nextval('public.lieutenants_id_seq'::regclass);
+
+
+--
 -- Name: palace_attendees id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2711,6 +2769,14 @@ ALTER TABLE ONLY public.form_answer_transitions
 
 ALTER TABLE ONLY public.form_answers
     ADD CONSTRAINT form_answers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lieutenants lieutenants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lieutenants
+    ADD CONSTRAINT lieutenants_pkey PRIMARY KEY (id);
 
 
 --
@@ -3017,6 +3083,34 @@ CREATE INDEX index_form_answers_on_award_year_id ON public.form_answers USING bt
 --
 
 CREATE INDEX index_form_answers_on_user_id ON public.form_answers USING btree (user_id);
+
+
+--
+-- Name: index_lieutenants_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lieutenants_on_confirmation_token ON public.lieutenants USING btree (confirmation_token);
+
+
+--
+-- Name: index_lieutenants_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lieutenants_on_email ON public.lieutenants USING btree (email);
+
+
+--
+-- Name: index_lieutenants_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lieutenants_on_reset_password_token ON public.lieutenants USING btree (reset_password_token);
+
+
+--
+-- Name: index_lieutenants_on_unlock_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lieutenants_on_unlock_token ON public.lieutenants USING btree (unlock_token);
 
 
 --
@@ -3448,6 +3542,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200918110854'),
 ('20200918151320'),
 ('20201023115307'),
-('20210517075551');
+('20210517075551'),
+('20210615093659'),
+('20210616135647');
 
 

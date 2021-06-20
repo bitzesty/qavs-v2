@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# Skip because removed trait trade from form answer
 describe FormFinancialPointer, skip: true do
   let(:trade_data) do
     [

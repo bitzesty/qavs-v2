@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe AccountMailers::NotifyNonShortlistedMailer, skip: true do
+describe AccountMailers::NotifyNonShortlistedMailer do
   let!(:user) { create :user }
   let!(:form_answer) do
     create :form_answer, :submitted, user: user
@@ -30,7 +30,8 @@ describe AccountMailers::NotifyNonShortlistedMailer, skip: true do
     end
   end
 
-  describe "#ep_notify" do
+  #  Skip because removed trait promotion
+  describe "#ep_notify", skip: true do
     let(:form_answer) { create :form_answer, :promotion, :submitted, user: user }
     let(:subject) do
       "Queen's Awards for Enterprise Promotion: Thank you for your nomination"
