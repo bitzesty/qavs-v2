@@ -3,40 +3,69 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step4
       @qavs_step4 ||= proc do
-        header :head_of_business_header, "Head of your organisation" do
-          ref "D 1"
+        header :nominator_details_header, "Details of person making the nomination" do
         end
 
-        text :head_of_business_title, "Title" do
-          required
+        text :nominator_title, "Title" do
           classes "sub-question"
+          required
           style "tiny"
         end
 
-        head_of_business :head_of_business, "" do
-          sub_fields([
-            { first_name: "First name" },
-            { last_name: "Last name" },
-            { honours: "Personal Honours" }
-          ])
-        end
-
-        text :head_job_title, "Job title / role in the organisation" do
+        text :nominator_name, "Name" do
           classes "sub-question"
           required
-          form_hint %(
-            e.g. CEO, Managing Director, Founder
-          )
         end
 
-        text :head_email, "Email address" do
+        address :nominator_address, "" do
+          classes "sub-question"
+          required
+        end
+
+        text :nominator_telephone, "Telephone" do
+          classes "sub-question"
+          style "small"
+        end
+
+        text :nominator_mobile, "Mobile" do
+          classes "sub-question"
+          style "small"
+        end
+
+        text :nominator_email, "Email address" do
           classes "sub-question"
           style "large"
           required
         end
 
+        confirm :not_volunteer, "" do
+          required
+          text -> do
+            %(
+              I am neither a volunteer nor a paid member of the group.
+            )
+          end
+        end
+
+        confirm :understood_privacy_notice, "" do
+          required
+          text -> do
+            %(
+              I have read and understood the contents of the Privacy Notice
+            )
+          end
+        end
+
+        confirm :group_leader_aware, "" do
+          required
+          text -> do
+            %(
+              The group leader and writers of support letters are aware that their details have been included with this nomination.
+            )
+          end
+        end
+
         confirm :entry_confirmation, "Confirmation of nomination" do
-          ref "D 4"
           required
           text -> do
             %(
