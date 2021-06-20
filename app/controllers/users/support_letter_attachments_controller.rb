@@ -30,7 +30,7 @@ class Users::SupportLetterAttachmentsController < Users::BaseController
 
     def support_letter_attachment_params
       {
-        attachment: params[:form][:supporter_letters_list].first[1][:letter_of_support]
+        attachment: params[:form][:supporter_letters_list].to_unsafe_h.first[1][:letter_of_support]
       }
     end
 
