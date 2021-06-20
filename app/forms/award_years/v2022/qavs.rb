@@ -7,8 +7,8 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs
       @qavs ||= QAEFormBuilder.build "Queen's Award for Voluntary Service Nomination" do
-        step "Contact Details",
-             "Contact Details",
+        step "Nominee",
+             "Nominee",
              &AwardYears::V2022::QAEForms.qavs_step1
 
         step "Your Recommendation",
@@ -17,7 +17,7 @@ class AwardYears::V2022::QAEForms
 
         step "Letters of Support",
              "Letters of Support",
-             { id: :add_website_address_documents_step },
+             { id: :letters_of_support_step },
              &AwardYears::V2022::QAEForms.qavs_step3
 
         step "Authorise & Submit",
