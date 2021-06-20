@@ -20,6 +20,13 @@ class AwardYears::V2022::QAEForms
         address :nominator_address, "" do
           classes "sub-question"
           required
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
         end
 
         text :nominator_telephone, "Telephone" do

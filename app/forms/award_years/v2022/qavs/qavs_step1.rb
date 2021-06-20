@@ -20,6 +20,13 @@ class AwardYears::V2022::QAEForms
         address :nominee_address, "" do
           classes "sub-question"
           required
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
         end
 
         text :nominee_phone, "Telephone number" do
@@ -60,6 +67,13 @@ class AwardYears::V2022::QAEForms
         address :nominee_leader_address, "" do
           classes "sub-question"
           required
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
         end
 
         text :nominee_leader_email, "Email" do
