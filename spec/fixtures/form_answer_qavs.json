@@ -93,6 +93,24 @@
   "volunteers": "AN Other",
   "how_did_you_hear_about_award": [{"type":"other"}, {"type": "word_of_mouth"}],
 
+  "manually_upload": "yes",
+  "supporter_letters_list": [
+    {
+      "support_letter_id":"1",
+      "first_name":"First",
+      "last_name":"Supporter",
+      "relationship_to_nominee":"Supporter",
+      "letter_of_support":"1"
+    },
+    {
+      "support_letter_id":"2",
+      "first_name":"Second",
+      "last_name":"Supporter",
+      "relationship_to_nominee":"Supporter",
+      "letter_of_support":"2"
+    }
+  ],
+
   "nominator_title": "Mr",
   "nominator_name": "Nominator",
   "nominator_address_building": "94",

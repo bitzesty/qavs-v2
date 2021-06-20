@@ -101,12 +101,12 @@ RSpec.describe FormAnswer, type: :model do
 
     describe "#company_or_nominee_from_document" do
       subject { build(:form_answer, document: doc) }
-      let(:c_name) { "company name" }
+      let(:c_name) { "nominee name" }
 
       context "form" do
-        let(:doc) { { "company_name" => c_name } }
+        let(:doc) { { "nominee_name" => c_name } }
 
-        it "gets the company name" do
+        it "gets the nominee name" do
           expect(subject.company_or_nominee_from_document).to eq(c_name)
         end
       end

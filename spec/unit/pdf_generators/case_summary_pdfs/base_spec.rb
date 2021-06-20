@@ -4,9 +4,11 @@ describe "CaseSummaryPdfs::Base" do
   let!(:award_year) do
     AwardYear.current
   end
+  let!(:support_letter_attachment) { FactoryBot.create :support_letter_attachment }
+  let!(:support_letter) { FactoryBot.create :support_letter, support_letter_attachment: support_letter_attachment }
 
   let!(:form_answer_current_year) do
-    FactoryBot.create :form_answer, :recommended, award_year: award_year
+    FactoryBot.create :form_answer, :recommended, award_year: award_year, support_letters: [support_letter]
   end
 
   before do
