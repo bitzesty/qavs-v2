@@ -1,6 +1,6 @@
 module QaePdfForms::CustomQuestions::SupporterLists
   def render_supporters
-    entries = if question.list_type == :manuall_upload
+    entries = if question.list_type == :manual_upload
       form_answer.support_letters.manual
     else
       form_answer.supporters

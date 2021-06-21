@@ -5,11 +5,9 @@ describe "QaePdfForms::Awards2016::Qavs::Base" do
 
   let(:step1_question_answers) {
     {
-      company_name: "Bitzesty",
-      registration_number: '123'
+      nominee_name: "Bitzesty"
     }
   }
-
 
   let(:form_answer) do
     fa = FactoryBot.build(:form_answer, :submitted, user: user)

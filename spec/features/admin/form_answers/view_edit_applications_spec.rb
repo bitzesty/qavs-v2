@@ -14,7 +14,7 @@ feature "Admin view application", js: true do
     application_window = window_opened_by { click_link("View application") }
     within_window application_window do
       expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[company_name]", disabled: true).value).to eq("Bitzesty")
+      expect(find_field("form[nominee_name]", disabled: true).value).to eq("Bitzesty")
     end
   end
 
@@ -32,7 +32,7 @@ feature "Admin view application", js: true do
     application_window = window_opened_by { click_link("Edit application") }
     within_window application_window do
       expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[company_name]").value).to eq("Bitzesty")
+      expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
     end
   end
 
@@ -51,7 +51,7 @@ feature "Admin view application", js: true do
     application_window = window_opened_by { click_link("Edit application") }
     within_window application_window do
       expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[company_name]").value).to eq("Bitzesty")
+      expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
     end
   end
 end
@@ -60,7 +60,7 @@ def create_application
   user = create :user, :completed_profile, first_name: "Test User john"
   form_answer = create :form_answer, user: user,
                                      urn: "QA0001/19T",
-                                     document: { company_name: "Bitzesty" }
+                                     document: { nominee_name: "Bitzesty" }
   create :basic_eligibility, form_answer: form_answer, account: user.account
   form_answer
 end

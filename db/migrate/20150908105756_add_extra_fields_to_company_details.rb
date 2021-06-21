@@ -3,7 +3,7 @@ class AddExtraFieldsToCompanyDetails < ActiveRecord::Migration[4.2]
     add_column :company_details, :registration_number,              :string
     add_column :company_details, :date_started_trading,             :string
     add_column :company_details, :website_url,                      :string
-    add_column :company_details, :head_of_bussines_title,           :string
+    add_column :company_details, :head_of_business_title,           :string
     add_column :company_details, :head_of_business_full_name,       :string
     add_column :company_details, :head_of_business_honours,         :string
     add_column :company_details, :head_job_title,                   :string

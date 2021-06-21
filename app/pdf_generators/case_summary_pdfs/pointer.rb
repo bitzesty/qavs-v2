@@ -32,7 +32,7 @@ class CaseSummaryPdfs::Pointer < ReportPdfFormAnswerPointerBase
   def generate!
     # fetch case_summary or primary (if lead missing)
     @data = form_answer.lead_or_primary_assessor_assignments.first.document
-    fetch_financial_data if form_answer.submitted?
+    # fetch_financial_data if form_answer.submitted?
 
     main_header
     render_data!

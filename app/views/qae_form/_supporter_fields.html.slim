@@ -9,8 +9,8 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       - url = "#"
     = link_to "Remove", url, class: "remove-supporter remove-link js-remove-link #{'read_only' if admin_in_read_only_mode?}"
 
-  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][#{question.list_type == :manuall_upload ? "support_letter_id" : "supporter_id"}]" value=(question.list_type == :manuall_upload ? supporter["support_letter_id"] : supporter["supporter_id"]) *possible_read_only_ops
-  .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][#{question.list_type == :manuall_upload ? "support_letter_id" : "supporter_id"}]"
+  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][#{question.list_type == :manual_upload ? "support_letter_id" : "supporter_id"}]" value=(question.list_type == :manual_upload ? supporter["support_letter_id"] : supporter["supporter_id"]) *possible_read_only_ops
+  .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][#{question.list_type == :manual_upload ? "support_letter_id" : "supporter_id"}]"
   span.row
     span.span-6
       label
@@ -39,7 +39,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
         span.visible-read-only = supporter["relationship_to_nominee"]
   span.clear
   span.row
-    - if question.list_type == :manuall_upload
+    - if question.list_type == :manual_upload
       span.span-12
         label
           ' Letter of Support
@@ -61,13 +61,13 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
   span.clear
   span.row
     span.span-12
-      a.button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=(question.list_type == :manuall_upload ? users_form_answer_support_letters_url(@form_answer) : users_form_answer_supporters_url(@form_answer))
-        - if question.list_type == :manuall_upload
+      a.button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=(question.list_type == :manual_upload ? users_form_answer_support_letters_url(@form_answer) : users_form_answer_supporters_url(@form_answer))
+        - if question.list_type == :manual_upload
           | Submit letter of support
         - else
           | Send support request
   span.clear
-  - if persisted && (s = @form_answer.supporters.find_by_id(supporter["supporter_id"])) && s.support_letter.present? && question.list_type != :manuall_upload
+  - if persisted && (s = @form_answer.supporters.find_by_id(supporter["supporter_id"])) && s.support_letter.present? && question.list_type != :manual_upload
     .visible-read-only
       .application-notice.help-notice
         p Letter of support received
@@ -76,7 +76,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
     .visible-read-only
       .application-notice.help-notice
         p
-          - if question.list_type == :manuall_upload
+          - if question.list_type == :manual_upload
             ' Letter of support uploaded
           - else
             ' Support request sent

@@ -210,7 +210,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def company_or_nominee_from_document
-    comp_attr = 'company_name'
+    comp_attr = 'nominee_name'
     name = document[comp_attr]
     name = nominee_full_name_from_document if name.blank?
     name = name.try(:strip)

@@ -29,12 +29,12 @@ shared_context "pdf file checks" do
     form_answer.decorate.award_application_title_print.upcase
   end
 
-  let(:company_name) do
+  let(:nominee_name) do
     form_answer.decorate.company_name
   end
 
   let(:match_name_condition) do
-    company_name
+    nominee_name
   end
 
   before do

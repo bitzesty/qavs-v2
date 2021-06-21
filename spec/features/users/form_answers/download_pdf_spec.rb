@@ -19,7 +19,7 @@ So that I can review my progress or share the pdf with others
     let!(:form_answer) do
       FactoryBot.create :form_answer,
         user: user,
-        document: { company_name: "Bitzesty" }
+        document: { nominee_name: "Bitzesty" }
     end
 
     let(:pdf_filename) do

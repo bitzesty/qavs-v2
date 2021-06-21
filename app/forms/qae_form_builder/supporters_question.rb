@@ -15,7 +15,7 @@ class QAEFormBuilder
       end
 
       if count < MIN_LIMIT
-        result["supporters"] = "You need to provide at least 2 letters of support"
+        result["supporters"] = "You must provide #{MIN_LIMIT} letters of support"
       end
 
       result
