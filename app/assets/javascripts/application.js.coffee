@@ -886,7 +886,6 @@ jQuery ->
     e.preventDefault()
     $(this).closest("span").toggleClass("open")
 
-  OptionsWithPreselectedConditionsQuestion.init()
   ongoingDateDuration()
   SupportLetters.init()
   AuditCertificatesUpload.init()
