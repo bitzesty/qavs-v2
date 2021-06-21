@@ -67,7 +67,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
         - else
           | Send support request
   span.clear
-  - if persisted && (s = @form_answer.supporters.find_by_id(supporter["supporter_id"])) && s.support_letter.present? && question.list_type != :manual_upload
+  - if persisted && question.list_type != :manual_upload
     .visible-read-only
       .application-notice.help-notice
         p Letter of support received
