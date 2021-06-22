@@ -2,22 +2,6 @@ require "rails_helper"
 include Warden::Test::Helpers
 
 feature "Admin view application", js: true do
-  scenario "As an admin I can only see the application in read only mode" do
-    application = create_application
-    login_admin(create(:admin))
-
-    visit admin_form_answer_path(application)
-
-    expect(page).to have_content("View application")
-    expect(page).to_not have_content("Edit application")
-
-    application_window = window_opened_by { click_link("View application") }
-    within_window application_window do
-      expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[nominee_name]", disabled: true).value).to eq("Bitzesty")
-    end
-  end
-
   scenario "As an admin I can edit the application if superadmin" do
     Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
 
