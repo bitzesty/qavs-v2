@@ -1,6 +1,5 @@
 class FormController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_account_completion, unless: -> { admin_signed_in? || assessor_signed_in? }
   before_action :check_deadlines
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
     :new, :create, :update, :destroy,

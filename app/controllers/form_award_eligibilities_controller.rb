@@ -1,7 +1,7 @@
 class FormAwardEligibilitiesController < ApplicationController
   include Wicked::Wizard
 
-  before_action :authenticate_user!, :check_account_completion
+  before_action :authenticate_user!
   before_action :set_form_answer
   before_action :set_steps_and_eligibilities, :setup_wizard
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
