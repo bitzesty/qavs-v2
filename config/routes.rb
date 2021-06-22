@@ -58,19 +58,10 @@ Rails.application.routes.draw do
 
   resource :account, only: :show do
     collection do
-      get :correspondent_details
-      get :company_details
-      get :contact_settings
       get :password_settings
-      get :additional_contact_preferences
       get :useful_information
 
-      patch :update_correspondent_details
-      patch :update_company_details
-      patch :update_contact_settings
-      patch :complete_registration
       patch :update_password_settings
-      patch :update_additional_contact_preferences
     end
   end
 
