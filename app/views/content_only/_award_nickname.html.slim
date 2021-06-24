@@ -28,4 +28,7 @@
           ' You can still edit submitted applications up to this date.
 
   p#get-started.get-started.group
-    = submit_tag "Start eligibility questionnaire", class: "button", rel: "external"
+    - if session[:admin_in_nomination_mode]
+      = submit_tag "Mark as eligible and create nomination", class: "button", rel: "external"
+    - else
+      = submit_tag "Start eligibility questionnaire", class: "button", rel: "external"

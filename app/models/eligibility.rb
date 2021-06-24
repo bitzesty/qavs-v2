@@ -121,11 +121,6 @@ class Eligibility < ApplicationRecord
     questions_storage.keys
   end
 
-  # legacy
-  def skipped?
-    false
-  end
-
   def any_error_yet?
     answers.any?{ |answer| !answer_valid?(answer[0], answer[1]) }
   end

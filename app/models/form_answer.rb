@@ -176,7 +176,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def eligible?
-    eligibility && eligibility.eligible? && ((form_basic_eligibility && form_basic_eligibility.eligible?))
+    eligibility && eligibility.eligible?
   end
 
   def eligibility

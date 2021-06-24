@@ -10,33 +10,6 @@
         .panel-body
           = render "fields_user_details", f: f
 
-    .panel.panel-default
-      .panel-heading role="tab" id="organisation-details-header"
-        h4.panel-title
-          a.collapsed data-toggle="collapse" data-parent="#user-form-panel" href="#organisation-details" aria-expanded="false" aria-controls="organisation-details"
-            ' Organisation Details
-      #organisation-details.section-organisation-details.panel-collapse.collapse role="tabpanel" aria-labelledby="organisation-details-header"
-        .panel-body
-          = render "fields_organisation_details", f: f
-
-    .panel.panel-default
-      .panel-heading role="tab" id="contact-preferences-header"
-        h4.panel-title
-          a.collapsed data-toggle="collapse" data-parent="#user-form-panel" href="#contact-preferences" aria-expanded="false" aria-controls="contact-preferences"
-            ' Contact Preferences
-      #contact-preferences.section-contact-preferences.panel-collapse.collapse role="tabpanel" aria-labelledby="contact-preferences-header"
-        .panel-body
-          = render "fields_contact_preferences", f: f
-
-    .panel.panel-default
-      .panel-heading role="tab" id="section-password-header"
-        h4.panel-title
-          a.collapsed data-toggle="collapse" data-parent="#user-form-panel" href="#section-password" aria-expanded="false" aria-controls="section-password"
-            ' Password
-      #section-password.section-password.panel-collapse.collapse role="tabpanel" aria-labelledby="section-password-header"
-        .panel-body
-          = render "fields_password", f: f
-
     br
     .clearfix
       .pull-right
@@ -59,6 +32,15 @@
                     unlock_admin_user_path(resource),
                     class: "btn btn-primary btn-md",
                     method: :patch
+
+          ' &nbsp;
+
+        - if resource.persisted?
+          = link_to "Log in an create nomination",
+                     log_in_admin_user_path(resource),
+                     class: "btn btn-primary btn-md",
+                     target: "_blank",
+                     method: :patch
 
           ' &nbsp;
 

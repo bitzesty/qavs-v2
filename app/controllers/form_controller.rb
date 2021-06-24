@@ -98,7 +98,7 @@ class FormController < ApplicationController
 
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
         @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
-        if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
+        if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save(validate: false))
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
             FormAnswerUserSubmissionService.new(@form_answer).perform
@@ -243,6 +243,15 @@ class FormController < ApplicationController
         company_name: current_user.company_name
       }
     )
+
+    # Mark as eligible
+    if session[:admin_in_nomination_mode]
+      eligibility = form_answer.build_form_basic_eligibility
+      eligibility.account = current_account
+      eligibility.save_as_eligible!
+
+      form_answer.state_machine.after_eligibility_step_progress
+    end
 
     redirect_to edit_form_url(form_answer)
   end
