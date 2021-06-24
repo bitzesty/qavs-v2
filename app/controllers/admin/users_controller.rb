@@ -71,6 +71,16 @@ class Admin::UsersController < Admin::BaseController
                  location: edit_admin_user_path(@resource)
   end
 
+  def log_in
+    authorize @resource
+    @resource.update_column(:confirmed_at, Time.zone.now)
+    sign_in(@resource, scope: :user, skip_session_limitable: true)
+    session[:admin_in_read_only_mode] = false
+    session[:admin_in_nomination_mode] = true
+
+    redirect_to dashboard_path
+  end
+
   private
 
   def find_resource
