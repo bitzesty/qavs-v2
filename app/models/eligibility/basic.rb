@@ -53,8 +53,14 @@ class Eligibility::Basic < Eligibility
     end
   end
 
-  def skipped?
-    false
+  def save_as_eligible!
+    self.organization_kind = 'charity'
+    self.based_in_uk = true
+    self.do_you_file_company_tax_returns = true
+    self.self_contained_enterprise = true
+    self.has_management_and_two_employees = true
+
+    save
   end
 
   private

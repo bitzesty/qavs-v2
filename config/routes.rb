@@ -184,6 +184,7 @@ Rails.application.routes.draw do
       member do
         patch :resend_confirmation_email
         patch :unlock
+        patch :log_in
         post :scan_via_debounce_api
       end
     end

@@ -35,6 +35,15 @@
 
           ' &nbsp;
 
+        - if resource.persisted?
+          = link_to "Log in an create nomination",
+                     log_in_admin_user_path(resource),
+                     class: "btn btn-primary btn-md",
+                     target: "_blank",
+                     method: :patch
+
+          ' &nbsp;
+
 
         = f.button :submit, "Save",
                   class: "btn btn-primary btn-md"

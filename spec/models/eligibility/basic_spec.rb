@@ -54,6 +54,16 @@ RSpec.describe Eligibility::Basic, type: :model do
     end
   end
 
+  describe "#save_as_eligible" do
+    let(:eligibility) { Eligibility::Basic.new(account: account) }
+
+    it "saves and marks eligibilty as eligible" do
+      eligibility.save_as_eligible!
+      eligibility.reload
+      expect(eligibility).to be_eligible
+    end
+  end
+
   describe '#questions' do
     let(:eligibility) { Eligibility::Basic.new(account: account) }
 
@@ -72,13 +82,6 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'does not return industry for charity' do
       eligibility.organization_kind = 'charity'
       expect(eligibility.questions).not_to include(:industry)
-    end
-  end
-
-  describe '#skipped?' do
-    it 'should return false' do
-      eligibility = Eligibility::Basic.new(account: account)
-      expect(eligibility.skipped?).to be_falsey
     end
   end
 end
