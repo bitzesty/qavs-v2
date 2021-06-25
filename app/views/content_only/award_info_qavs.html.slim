@@ -1,7 +1,7 @@
 header.page-header.group.page-header-over-sidebar
   div
     h1
-      ' Promoting Opportunity Award (through social mobility) Application
+      ' Queen's Award for Voluntary Service Nomination
 
 .application-info-page
   .steps-progress-container.min-height-800
@@ -13,46 +13,26 @@ header.page-header.group.page-header-over-sidebar
               .page-header
                 h2 Useful Application Info Before You Begin
 
-              p You are eligible to begin your application for a Promoting Opportunity Award (through social mobility).
-
-              = render "content_only/pdf_link"
-
-              h3 Application guidance:
-              ul
-                li
-                  ' The deadline for submissions is
+                p
+                  ' The deadline for nominations is
                   = submission_deadline.decorate.formatted_trigger_time
                   ' .
-                li Your information is only shared with those involved in the assessment process.
-                li Try to take full advantage of the word limits. However, the quality of your answer is more important than its length.
-                li All questions are mandatory unless specified otherwise, but if the question is not applicable to your organisation, you can state so.
-                li The majority of previous applicants reported taking around 20 hours to complete the form. However, others took up to 50 hours, so please take time to prepare your responses to ensure submission before the deadline.
-                li You can skip questions and return to them later.
-                li Question numbers aren't always consecutive, as we show and hide different questions depending on your answers.
-                li Your answers are saved automatically as you go.
 
-              h3 Need help?
-
-              p
-                | If you need digital assistance with filling in the form or have any questions, please feel free to get in touch with us:
-
-              p
-                | By calling&nbsp;
-                strong
-                  | 020 7215 6880
-                br
-                | Or emailing&nbsp;
-                = link_to "queensawards@beis.gov.uk", "mailto: queensawards@beis.gov.uk"
+              = render "content_only/pdf_link"
+              = render "content_only/guidance_notes"
 
               h3 What you will need:
-              h4 Section A: Company Info
-              p Basic information about your organisation and its structure.
+              h4 Section A: Nominee
+              p Basic information about the group you are nominating and main contact details for the group.
 
-              h4 Section B: Your Social Mobility Programme
-              p Detailed knowledge of your social mobility programme.
+              h4 Section B: Your Recommendation
+              p Detailed information about the contribution the group has made in its area of activity.
 
-              h4 Section C: Commercial Performance
-              p Detailed financial information.
+              h4 Section C: Letters of Support
+              p Two letters from external supporters familiar with the group's work endorsing the group's contribution.
+
+              h4 Section D: Authorise and Submit
+              p Contact details for the person making the nomination and confirmation that the group leader and supports are aware of the nomination.
 
               p#get-started.get-started.group
                 = link_to result_form_award_eligibility_url(form_id: @form_answer.id), class: "button", rel: "external"
@@ -61,5 +41,9 @@ header.page-header.group.page-header-over-sidebar
                   / ' Continue application
                   / - else
                   / ' Start application
+
+              .meta-data.group
+                p.modified-date
+                  ' Last updated: 10 June 2021
 
     = render "steps_progress_bar", cant_access_future: true

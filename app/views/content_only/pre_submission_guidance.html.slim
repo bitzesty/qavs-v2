@@ -1,0 +1,17 @@
+header.page-header.page-header-large.group
+  div
+    h1
+      span Help
+      ' Guidance Notes
+
+.article-container
+  article.group role="article"
+    .inner
+    #text-only
+
+    p
+      ' The deadline for nominations is
+      = submission_deadline.decorate.formatted_trigger_time
+      ' .
+
+    = render 'content_only/guidance_notes'

@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   post "/form/:id/attachments"                          => "form#add_attachment",                                         as: "attachments"
   get  "/form/:id/confirmation"                         => "form#submit_confirm",                                         as: "submit_confirm"
   get "/dashboard"                                      => "content_only#dashboard",                                      as: "dashboard"
-  get "/guidance_notes"                                 => "content_only#guidance_notes",                                 as: "guidance_notes"
+  get "/guidance_notes"                                 => "content_only#pre_submission_guidance",                        as: "guidance_notes"
 
   get "/apply_qavs_award"                               => "content_only#apply_qavs_award",                               as: "apply_qavs_award"
   get "/award_info_qavs"                                => "content_only#award_info_qavs",                                as: "award_info_qavs"
