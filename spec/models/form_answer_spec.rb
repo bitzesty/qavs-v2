@@ -123,17 +123,17 @@ RSpec.describe FormAnswer, type: :model do
       context "100% completed" do
         it "populates correct fill progress for qavs form on save" do
           form_answer = create(:form_answer, award_year: award_year)
-          expect(form_answer.fill_progress.round).to eq(1)
+          expect(form_answer.fill_progress).to eq(1.0)
         end
       end
 
-      pending "not completed" do
+      context "not completed" do
         it "populates correct fill progress for qavs form on save" do
           form_answer = create(:form_answer, award_year: award_year)
-          form_answer.document = form_answer.document.merge(principal_business: nil)
+          form_answer.document = form_answer.document.merge(nominee_name: nil)
           form_answer.save!
 
-          expect(form_answer.fill_progress.round(2)).to eq(0.97)
+          expect(form_answer.fill_progress.round(2)).to eq(0.95)
         end
       end
     end
