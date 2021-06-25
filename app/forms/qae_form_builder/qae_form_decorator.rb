@@ -20,9 +20,8 @@ class QAEFormBuilder
 
     private
 
-    def count_questions meth
-      steps.map{|step| step.send meth}.reduce(:+)
+    def count_questions(meth)
+      steps.map { |step| step.send(meth) }.reduce(:+)
     end
-
   end
 end
