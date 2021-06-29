@@ -75,4 +75,13 @@ describe "As Admin I want to filter applications", js: true do
     # click_status_option("Missing Press Summary")
     # assert_results_number(0)
   end
+
+  it "filters by activity" do
+    assert_results_number(4)
+    assign_activity(@forms.first, "mental_health")
+
+    # Untick sport activity filter 
+    click_status_option("Sport")
+    assert_results_number(1)
+  end
 end
