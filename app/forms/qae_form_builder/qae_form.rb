@@ -27,5 +27,13 @@ class QAEFormBuilder
       @steps << step
       step
     end
+
+    def current_steps(nomination, user)
+      can_see_lieutenant_form = FormAnswerPolicy.new(user, nomination).lieutenant_assessment?
+
+      @steps.select do |s|
+        (s.opts[:id] != :lieutenants_assessment || can_see_lieutenant_form)
+      end
+    end
   end
 end

@@ -2,6 +2,7 @@ require "award_years/v2022/qavs/qavs_step1"
 require "award_years/v2022/qavs/qavs_step2"
 require "award_years/v2022/qavs/qavs_step3"
 require "award_years/v2022/qavs/qavs_step4"
+require "award_years/v2022/qavs/qavs_step5"
 
 class AwardYears::V2022::QAEForms
   class << self
@@ -23,6 +24,11 @@ class AwardYears::V2022::QAEForms
         step "Authorise & Submit",
              "Authorise & Submit",
              &AwardYears::V2022::QAEForms.qavs_step4
+
+        step "Lieutenant's assessment",
+             "Lieutenant's assessment",
+             { id: :lieutenants_assessment },
+             &AwardYears::V2022::QAEForms.qavs_step5
       end
     end
   end
