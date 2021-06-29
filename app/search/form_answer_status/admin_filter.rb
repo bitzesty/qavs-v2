@@ -115,6 +115,21 @@ class FormAnswerStatus::AdminFilter
     }
   }
 
+  ACTIVITY_OPTIONS = {
+    sport: {
+      label: "Sport",
+      nominee_activity: [
+        :sport
+      ]
+    },
+    mental_health: {
+      label: "Mental Health",
+      nominee_activity: [
+        :mental_health
+      ]
+    }
+  }
+
   def self.options
     OPTIONS
   end
@@ -122,4 +137,8 @@ class FormAnswerStatus::AdminFilter
   def self.sub_options
     SUB_OPTIONS
   end
+
+  def self.activity_options
+    ACTIVITY_OPTIONS
+  end  
 end
