@@ -61,8 +61,8 @@
         li.apply
           button.btn.btn-block.btn-default type="submit"
             ' Apply
-
-  .col-lg-4.col-md-4.col-sm-7.applications-filter.sub-status-filter
+  
+  .col-lg-4.col-md-5.col-sm-7.applications-filter.status-filter
     = f.simple_fields_for [:filters, @search.filters] do |m|
       = m.input :nominee_activity,
                 collection: activity_options,
@@ -80,7 +80,7 @@
         li.checkbox role="presentation"
           label data-value='select_all'
             input type="checkbox"
-            span.label-contentsall
+            span.label-contents
               em Select all
         - activity_options.each do |k, option|
           li.checkbox role="presentation"

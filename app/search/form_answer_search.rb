@@ -4,7 +4,8 @@ class FormAnswerSearch < Search
   DEFAULT_SEARCH = {
     sort: 'company_or_nominee_name',
     search_filter: {
-      status: FormAnswerStatus::AdminFilter.all
+      status: FormAnswerStatus::AdminFilter.all,
+      nominee_activity: FormAnswerStatus::AdminFilter.all
     }
   }
 
