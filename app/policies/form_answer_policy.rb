@@ -29,6 +29,10 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? || assessor?
   end
 
+  def lieutenant_assessment?
+    lieutenant? || admin?
+  end
+
   def edit?
     deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
     admin? && (!deadline.present? || DateTime.now <= deadline)

@@ -135,6 +135,11 @@ class ApplicationController < ActionController::Base
     current_user || dummy_user
   end
 
+  def current_form_user
+    current_user || current_lieutenant || current_admin
+  end
+  helper_method :current_form_user
+
   #
   # Disabling browser caching in order
   # to protect sensitive data

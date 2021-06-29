@@ -16,6 +16,6 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
 
     .steps-progress-content
       = render 'qae_form/form_header', form: @form, current_step: params[:step]
-      = render partial: 'qae_form/step', collection: @form.steps, locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
+      = render partial: 'qae_form/step', collection: @form.current_steps(@form_answer, current_form_user), locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
 
       = render "qae_form/step_error"
