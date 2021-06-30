@@ -8,12 +8,10 @@ services:
       - PORT=3000
       - SECRET_KEY_BASE=PLACEHOLDERSECRETBASEKEY
       - RAILS_SERVE_STATIC_FILES=enabled
+      - DATABASE_URL
       - LANG=en_US.UTF-8
       - RAILS_ENV=production
       - RACK_ENV=production
-    labels:
-      - convox.port.443.protocol=https
-      - convox.deployment.minimum=50
     ports:
       - 80:3000/tcp
       - 443:3000/tcp
