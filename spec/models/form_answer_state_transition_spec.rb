@@ -28,22 +28,5 @@ describe FormAnswerStateTransition do
 
       expect(subject.collection).to eq(expected)
     end
-
-    it "excludes 'not awarded' and 'withdrawn' state for lead assessor" do
-      assessor = create(:assessor, :lead_for_all)
-
-      subject.subject = assessor
-
-      expected = [
-        :assessment_in_progress,
-        :recommended,
-        :reserved,
-        :not_recommended,
-        :disqualified,
-        :awarded
-      ]
-
-      expect(subject.collection).to eq(expected)
-    end
   end
 end

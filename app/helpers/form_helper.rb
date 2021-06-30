@@ -15,7 +15,13 @@ module FormHelper
   end
 
   def current_form_is_not_editable?
-    admin_in_read_only_mode? || current_form_submission_ended?
+    admin_in_read_only_mode? ||
+      (current_form_submission_ended? &&
+       !lieutenant_nomination?)
+  end
+
+  def lieutenant_nomination?
+    current_subject.is_a?(Lieutenant)
   end
 
   def next_step(form, step)
