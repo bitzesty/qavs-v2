@@ -1,16 +1,21 @@
-ARG RUBY_VERSION=2.5.0
+ARG RUBY_VERSION=2.7.3
 
-FROM convox/rails
+FROM ruby:2.7.3
 
 ENV HOME=/app
 WORKDIR /app
 
-ENV SSL_CERT_DIR=/etc/ssl/certs
-ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+# ENV SSL_CERT_DIR=/etc/ssl/certs
+# ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 ENV DATABASE_URL postgresql://localhost/dummy_url
 ENV AWS_ACCESS_KEY_ID dummy
 ENV AWS_SECRET_ACCESS_KEY dummy
+
+# Install NodeJS
+RUN apt-get update
+RUN apt-get install -y nodejs
+
 
 ENV CURL_CONNECT_TIMEOUT=0 CURL_TIMEOUT=0 GEM_PATH="$HOME/vendor/bundle/ruby/${RUBY_VERSION}:$GEM_PATH" LANG=${LANG:-en_US.UTF-8} PATH="$HOME/bin:$HOME/vendor/bundle/bin:$HOME/vendor/bundle/ruby/${RUBY_VERSION}/bin:$PATH" RACK_ENV=${RACK_ENV:-production} RAILS_ENV=${RAILS_ENV:-production} RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-enabled} SECRET_KEY_BASE=${SECRET_KEY_BASE:-PLACEHOLDERSECRETBASEKEY}
 
@@ -18,4 +23,6 @@ ENV CURL_CONNECT_TIMEOUT=0 CURL_TIMEOUT=0 GEM_PATH="$HOME/vendor/bundle/ruby/${R
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 COPY . /app
-RUN bundle install --without development test --jobs 4 && RAILS_ENV=production bundle exec rake assets:precompile
+RUN bundle config set --local path 'vendor/bundle'
+RUN bundle config set --local without 'development test'
+RUN bundle install --jobs 4 && RAILS_ENV=production bundle exec rake assets:precompile
