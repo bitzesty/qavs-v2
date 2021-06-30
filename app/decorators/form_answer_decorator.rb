@@ -146,6 +146,10 @@ class FormAnswerDecorator < ApplicationDecorator
     object.state.humanize
   end
 
+  def nominee_name
+    object.document["nominee_name"]
+  end
+
   def progress_text
     out = progress_text_short
     out += "...#{fill_progress_in_percents}" if object.application_in_progress?

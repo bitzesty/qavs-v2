@@ -10,6 +10,7 @@ class AwardYears::V2022::QAEForms
         textarea :lieutenant_verdict, "Verdict" do
           sub_ref "E 1.1"
           classes "sub-question"
+          required
         end
 
         submit "Submit application" do

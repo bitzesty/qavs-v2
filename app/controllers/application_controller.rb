@@ -134,6 +134,7 @@ class ApplicationController < ActionController::Base
   def current_subject
     current_user || dummy_user
   end
+  helper_method :current_subject
 
   def current_form_user
     current_user || current_lieutenant || current_admin
