@@ -1,5 +1,5 @@
 - if category_picker.show_award_tabs_for_assessor?
-  .nav-subnav
+  .nav-subnav role="navigation"
     ul
       - category_picker.visible_categories.each do |category|
         li class="cat-#{category.text_label.parameterize} #{'active' if category.active?(params)}" role="presentation"
