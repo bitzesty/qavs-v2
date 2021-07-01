@@ -7,4 +7,4 @@ ul.download-list
     / p.download-item__description
       ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
     - year = "#{(@award_year.year - 1).to_s[2..-1]}-#{@award_year.year.to_s[2..-1]}"
-    = link_to "Download", admin_report_path("assessors-progress-qavs-#{year}", category: "qavs", format: :csv, year: @award_year.year), class: "download-link"
+    = link_to "Download", admin_report_path("assessors-progress-qavs-#{year}", category: "qavs", format: :csv, year: @award_year.year), class: "download-link", aria: { label: "Download QAVS" }
