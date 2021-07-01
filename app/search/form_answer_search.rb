@@ -4,7 +4,8 @@ class FormAnswerSearch < Search
   DEFAULT_SEARCH = {
     sort: 'company_or_nominee_name',
     search_filter: {
-      status: FormAnswerStatus::AdminFilter.all
+      status: FormAnswerStatus::AdminFilter.all,
+      nominee_activity: FormAnswerStatus::AdminFilter.all
     }
   }
 
@@ -63,6 +64,10 @@ class FormAnswerSearch < Search
 
   def filter_by_status(scoped_results, value)
     scoped_results.where(state: filter_klass.internal_states(value))
+  end
+
+  def filter_by_nominee_activity(scoped_results, value)
+    scoped_results.where(nominee_activity: filter_klass.internal_states(value))
   end
 
   def filter_by_sub_status(scoped_results, value)

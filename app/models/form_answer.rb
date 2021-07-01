@@ -217,10 +217,6 @@ class FormAnswer < ApplicationRecord
     name.presence
   end
 
-  def nominee_full_name_from_document
-    "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
-  end
-
   def fill_progress_in_percents
     ((fill_progress || 0) * 100).round.to_s + "%"
   end
@@ -331,18 +327,6 @@ class FormAnswer < ApplicationRecord
 
   private
 
-  def nominator_full_name_from_document
-    "#{document['user_info_first_name']} #{document['user_info_last_name']}".strip
-  end
-
-  def nominator_email_from_document
-    document["personal_email"]
-  end
-
-  def set_account
-    self.account = user.account
-  end
-
   def set_award_year
     self.award_year = AwardYear.current
   end
@@ -371,8 +355,29 @@ class FormAnswer < ApplicationRecord
     end
 
     self.nominee_full_name = nominee_full_name_from_document
+    self.nominee_activity = nominee_activity_from_document
     self.nominator_full_name = nominator_full_name_from_document
     self.nominator_email = nominator_email_from_document
+  end
+
+  def nominee_full_name_from_document
+    "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
+  end
+
+  def nominee_activity_from_document
+    document["nominee_activity"]
+  end
+
+  def nominator_full_name_from_document
+    document["nominator_name"]
+  end
+
+  def nominator_email_from_document
+    document["nominator_email"]
+  end
+
+  def set_account
+    self.account = user.account
   end
 
   def set_user_info

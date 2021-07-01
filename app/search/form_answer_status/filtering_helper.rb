@@ -21,11 +21,17 @@ module FormAnswerStatus::FilteringHelper
     end
   end
 
+  def activity_collection
+    activity_options.map do |k,v|
+      [v[:label], k]
+    end
+  end
+
   def supported_filter_attrs
     options.keys.map(&:to_s)
   end
 
   def all
-    collection.map { |s| s.last.to_s } + sub_collection.map { |s| s.last.to_s }
+    collection.map { |s| s.last.to_s } + sub_collection.map { |s| s.last.to_s } + activity_collection.map { |s| s.last.to_s }
   end
 end

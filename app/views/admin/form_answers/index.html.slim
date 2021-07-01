@@ -1,5 +1,5 @@
 h1.admin-page-heading
-  | Applications
+  | Nominations
 = simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
   .row
     .col-md-4.col-sm-5.col-xs-12
@@ -10,7 +10,8 @@ h1.admin-page-heading
 
   = render "shared/form_answers/top_statuses_filters", f: f,
                                                        options: FormAnswerStatus::AdminFilter.options,
-                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options
+                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options,
+                                                       activity_options: FormAnswerStatus::AdminFilter.activity_options
 
   - if @search.query?
     .well.search-text

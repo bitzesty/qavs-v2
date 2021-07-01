@@ -15,8 +15,17 @@ class AwardYears::V2022::QAEForms
           style "large"
         end
 
+        dropdown :nominee_activity, "Please select the group's main area of activity" do
+          sub_ref "A 1.2"
+          classes "sub-question"
+          required
+          option "", "Please select"
+          option "sport", "Sport"
+          option "mental health", "Mental Health"
+        end
+
         address :nominee_address, "Address of group" do
-          sub_ref "A1.2"
+          sub_ref "A 1.3"
           classes "sub-question"
           required
           sub_fields([
@@ -29,19 +38,19 @@ class AwardYears::V2022::QAEForms
         end
 
         text :nominee_phone, "Telephone number" do
-          sub_ref "A 1.3"
+          sub_ref "A 1.4"
           classes "sub-question"
           style "small"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.4"
+          sub_ref "A 1.5"
           classes "sub-question"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           classes "sub-question"
           form_hint "Social media accounts if known"
           words_max 100

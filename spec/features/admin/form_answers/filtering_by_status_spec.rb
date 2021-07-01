@@ -10,7 +10,7 @@ describe "As Admin I want to filter applications", js: true do
 
   before do
     @forms = []
-    @forms << create(:form_answer, state: "not_submitted", document: { sic_code: "1623" })
+    @forms << create(:form_answer, state: "not_submitted")
     @forms << create(:form_answer, state: "application_in_progress")
     @forms << create(:form_answer, state: "not_eligible")
     @forms << create(:form_answer, state: "application_in_progress")
@@ -21,6 +21,9 @@ describe "As Admin I want to filter applications", js: true do
     #
     @forms.last(3).map do |form|
       form.document["sic_code"] = nil
+    end
+
+    @forms.each.map do |form|
       form.save!(validate: false)
     end
 
@@ -28,7 +31,7 @@ describe "As Admin I want to filter applications", js: true do
     visit admin_form_answers_path
   end
 
-  xit "filters by status" do
+  it "filters by status" do
     # 4 Applications
     assert_results_number(4)
 
@@ -71,5 +74,14 @@ describe "As Admin I want to filter applications", js: true do
     # assign_dummy_press_summary(@forms)
     # click_status_option("Missing Press Summary")
     # assert_results_number(0)
+  end
+
+  it "filters by activity" do
+    assert_results_number(4)
+    assign_activity(@forms.first, "mental_health")
+
+    # Untick sport activity filter 
+    click_status_option("Sport")
+    assert_results_number(1)
   end
 end
