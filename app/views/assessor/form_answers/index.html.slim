@@ -11,7 +11,8 @@ h1.admin-page-heading
 
   = render "shared/form_answers/top_statuses_filters", f: f,
                                                       options: FormAnswerStatus::AssessorFilter.options,
-                                                      sub_options: FormAnswerStatus::AssessorFilter.sub_options(current_assessor)
+                                                      sub_options: FormAnswerStatus::AssessorFilter.sub_options(current_assessor),
+                                                       activity_options: FormAnswerStatus::AssessorFilter.activity_options
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
   - #sort needs to be here because the sorting is done in the other form below, so in order not to break sorting, we need to duplicate it here

@@ -95,7 +95,11 @@ class FormAnswerStatus::LieutenantFilter
     OPTIONS
   end
 
-  def self.sub_options(user)
+  def self.sub_options
     SUB_OPTIONS
+  end
+
+  def self.activity_options
+    FormAnswerStatus::AdminFilter::ACTIVITY_OPTIONS
   end
 end

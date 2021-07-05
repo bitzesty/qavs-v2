@@ -102,4 +102,8 @@ class FormAnswerStatus::AssessorFilter
       SUB_OPTIONS.except(:recommendation_disperancy)
     end
   end
+
+  def self.activity_options
+    FormAnswerStatus::AdminFilter::ACTIVITY_OPTIONS
+  end
 end
