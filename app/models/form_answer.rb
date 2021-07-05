@@ -392,7 +392,6 @@ class FormAnswer < ApplicationRecord
       validator = FormAnswerValidator.new(self)
 
       unless validator.valid?
-
         if Rails.env.test?
           # Better output in Test env
           # so that devs can easily detect the reasons of issues!

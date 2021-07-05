@@ -21,7 +21,13 @@ class QAEFormBuilder
     private
 
     def count_questions(meth)
-      steps.map { |step| step.send(meth) }.reduce(:+)
+      steps.map do |step|
+        if step.opts[:id] != :lieutenants_assessment
+          step.send(meth)
+        else
+          0
+        end
+      end.reduce(:+)
     end
   end
 end
