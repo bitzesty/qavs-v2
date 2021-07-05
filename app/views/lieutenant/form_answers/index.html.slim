@@ -1,6 +1,6 @@
 h1.admin-page-heading
   | Nominations
-= simple_form_for @search, url: assessor_form_answers_path, method: :get, as: :search do |f|
+= simple_form_for @search, url: lieutenant_form_answers_path, method: :get, as: :search do |f|
   .row
     .col-md-4.col-sm-5.col-xs-12
       .form-group.search-input
@@ -11,7 +11,8 @@ h1.admin-page-heading
 
   = render "shared/form_answers/top_statuses_filters", f: f,
                                                       options: FormAnswerStatus::LieutenantFilter.options,
-                                                      sub_options: FormAnswerStatus::LieutenantFilter.sub_options(current_assessor)
+                                                      sub_options: FormAnswerStatus::LieutenantFilter.sub_options,
+                                                       activity_options: FormAnswerStatus::LieutenantFilter.activity_options
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
   - #sort needs to be here because the sorting is done in the other form below, so in order not to break sorting, we need to duplicate it here
@@ -21,10 +22,10 @@ h1.admin-page-heading
     p
       = "Search results for '#{@search.query}'"
       small
-        = link_to "(Clear search)", assessor_form_answers_path, class: "btn btn-link"
+        = link_to "(Clear search)", lieutenant_form_answers_path, class: "btn btn-link"
 
 
-= simple_form_for @search, url: assessor_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
+= simple_form_for @search, url: lieutenant_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
   = hidden_field_tag :award_type, "qavs"
   = text_field_tag :year, @award_year.year, class: "visuallyhidden"
 
@@ -36,7 +37,7 @@ h1.admin-page-heading
               input_html: { multiple: true, class: 'visuallyhidden'}
 
     = h.input :sub_status,
-              collection: FormAnswerStatus::LieutenantFilter.sub_options(current_assessor),
+              collection: FormAnswerStatus::LieutenantFilter.sub_options,
               label: false,
               input_html: { multiple: true, class: 'visuallyhidden'}
 
