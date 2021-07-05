@@ -124,6 +124,7 @@
   "understood_privacy_notice": "on",
   "group_leader_aware": "on",
   "entry_confirmation": "on",
+
   // Lieutenant form
-  "lieutenant_verdict": "ok"
+  "l_citation_summary": ""
 }
