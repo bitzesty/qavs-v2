@@ -4,7 +4,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   helper_method :resource
 
-  before_action :find_resource, only: [:show, :edit, :update]
+  before_action :find_resource, only: [:show, :edit, :update, :save]
 
   layout :resolve_layout
 
@@ -78,7 +78,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
         @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
         if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
           if submitted_was_changed
-            @form_answer.state_machine.submit(current_user)
+            @form_answer.state_machine.l_submit(current_lieutenant)
             FormAnswerUserSubmissionService.new(@form_answer).perform
 
             if @form_answer.submission_ended?
@@ -93,18 +93,15 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
         end
 
         if redirected
-          url = current_user.is_a?(Lieutenant) ? lieutenant_form_answer_url(@form_answer) : dashboard_url
-          redirect_to url
+          redirect_to lieutenant_form_answer_url(@form_answer)
           return
         else
           if submitted && saved
-            puts 'here?'
-            redirect_to submit_confirm_url(@form_answer)
+            redirect_to lieutenant_form_answer_submit_confirm_url(@form_answer)
           else
-            puts 'or here?'
             if saved
               params[:next_step] ||= @form.steps[1].title.parameterize
-              redirect_to edit_form_url(@form_answer, step: params[:next_step])
+              redirect_to edit_lieutenant_form_answer_path(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               # avoid redirecting to supporters page
