@@ -18,8 +18,7 @@ class FormAwardEligibilitiesController < ApplicationController
     #      and there's no step
 
     if !params[:id] &&
-      (@basic_eligibility && (@basic_eligibility.eligible? || @basic_eligibility.answers.none?)) &&
-      (@award_eligibility.eligible? || @award_eligibility.answers.none?)
+      (@basic_eligibility && (@basic_eligibility.eligible? || @basic_eligibility.answers.none?))
 
       step = nil
 
@@ -28,15 +27,6 @@ class FormAwardEligibilitiesController < ApplicationController
          @basic_eligibility.questions.size != @basic_eligibility.answers.size)
 
         step = @basic_eligibility.questions.first
-      elsif @award_eligibility.answers.none?
-        step = @award_eligibility.questions.first
-      end
-
-      if step.blank? && params[:force_validate_now].present?
-        @award_eligibility.force_validate_now = true
-        @award_eligibility.valid?
-
-        step = @award_eligibility.errors.keys.first
       end
 
       if step
@@ -52,8 +42,6 @@ class FormAwardEligibilitiesController < ApplicationController
     @eligibility.current_step = step
     @form = @form_answer.award_form.decorate(answers: HashWithIndifferentAccess.new(@form_answer.document))
     if @eligibility.update(eligibility_params)
-      @award_eligibility.force_validate_now = true
-
       if @eligibility.any_error_yet?
         @form_answer.state_machine.perform_simple_transition("not_eligible")
       else
@@ -64,9 +52,7 @@ class FormAwardEligibilitiesController < ApplicationController
         @eligibility.pass!
       end
 
-      check_passed_award_eligibility_after_changing_answer!
-
-      if params[:skipped] == "false" || !@award_eligibility.valid?
+      if params[:skipped] == "false"
         set_steps_and_eligibilities
         setup_wizard
 
@@ -103,40 +89,21 @@ class FormAwardEligibilitiesController < ApplicationController
 
   def set_steps_and_eligibilities
     builder = FormAnswer::AwardEligibilityBuilder.new(@form_answer)
-    @award_eligibility = builder.eligibility
     @basic_eligibility =  builder.basic_eligibility
 
-    if @basic_eligibility && @basic_eligibility.questions.map(&:to_s).include?(params[:id])
-      @eligibility = @basic_eligibility
-
-      basic_steps = []
-      found = false
-      @basic_eligibility.questions.each do |question|
-        if found || question == params[:id].to_sym
-          basic_steps << question
-          found = true
-        end
+    @eligibility = @basic_eligibility
+    basic_steps = []
+    found = false
+    @basic_eligibility.questions.each do |question|
+      if found || (params[:id] && question == params[:id].to_sym)
+        basic_steps << question
+        found = true
       end
-
-      self.steps = basic_steps + @award_eligibility.questions
-    else
-      @eligibility = @award_eligibility
-      self.steps = @award_eligibility.questions
     end
-  end
 
-  def check_passed_award_eligibility_after_changing_answer!
-    if @basic_eligibility.passed? && @award_eligibility.passed?
-      # We need to check validations it in case if user changed answer
-      # after passing of validation
-      #
-      @award_eligibility.force_validate_now = true
+    basic_steps = @basic_eligibility.questions unless basic_steps.any?
 
-      # Mark eligibility as not passed in case if answer was changed
-      # and now eligibility is not valid!
-      #
-      @award_eligibility.update_column(:passed, false) if !@award_eligibility.valid?
-    end
+    self.steps = basic_steps
   end
 
   def eligibility_params

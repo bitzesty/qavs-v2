@@ -36,18 +36,11 @@ class FormAnswer < ApplicationRecord
     belongs_to :company_details_editable, polymorphic: true
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
-    has_one :audit_certificate, dependent: :destroy
-    has_one :list_of_procedures, dependent: :destroy
     has_one :feedback, dependent: :destroy
     # has_one :press_summary, dependent: :destroy
     has_one :draft_note, as: :notable, dependent: :destroy
     has_one :palace_invite, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy
-
-    # PDF Hard Copies
-    #
-    has_one :case_summary_hard_copy_pdf, dependent: :destroy
-    has_one :feedback_hard_copy_pdf, dependent: :destroy
 
     belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
     belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id
@@ -55,7 +48,6 @@ class FormAnswer < ApplicationRecord
     has_many :support_letter_attachments, dependent: :destroy
 
     has_many :audit_logs, as: :auditable
-    has_many :supporters, dependent: :destroy, autosave: true
     has_many :support_letters, dependent: :destroy
     has_many :comments, as: :commentable, dependent: :destroy
     has_many :form_answer_transitions, autosave: false

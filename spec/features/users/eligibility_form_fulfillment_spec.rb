@@ -11,21 +11,15 @@ describe "Eligibility forms" do
   end
 
   context "innovation" do
-    pending "process the eligibility form" do
+    it "process the eligibility form" do
       visit dashboard_path
-      new_application("Innovation Award")
-      # fill_in("nickname", with: "innovation nick")
-      click_button("Save and start eligibility questionnaire")
-      form_choice(["Yes", "Yes", "Yes", /Business/, /Product/, "Yes", "No", "Yes"])
+      click_link("New nomination")
 
-      fill_in("How many innovative products, services or business models do you have?", with: 2)
-      click_button "Continue"
-      form_choice("Yes")
-      form_choice("Yes")
-      form_choice("Yes")
+      click_button("Start eligibility questionnaire")
+      form_choice(["Yes", "Yes", "Yes", /Business/, /Product/, "Yes", "No"])
       expect(page).to have_content("You are eligible to begin your application")
       first('.previous-answers').click_link("Continue")
-      expect(page).to have_content("You are eligible to begin your application for an Innovation Award.")
+      expect(page).to have_content("Useful Application Info Before You Begin")
     end
   end
 end
