@@ -3,7 +3,7 @@ default: &defaults
   push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
 
   # Your app's name as reported on AppSignal.com. Required
-  name: "<%= ENV['GAE_INSTANCE'] || QAVS V2 %>"
+  name: "<%= ENV['GAE_INSTANCE'] || 'QAVS V2' %>"
 
   revision: "<%= ENV['GAE_VERSION'] %>"
 
