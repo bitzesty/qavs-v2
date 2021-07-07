@@ -40,6 +40,6 @@ module FormHelper
   end
 
   def hide_step?(step, nomination, subject)
-    step.opts[:id] == :lieutenants_assessmen && !policy(@form_answer).lieutenant_assessment? # && let's add a date condition
+    step.opts[:id] == :lieutenants_assessment && !policy(@form_answer).lieutenant_assessment? # && let's add a date condition
   end
 end
