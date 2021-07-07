@@ -1,0 +1,34 @@
+.well.section-applicant-users
+  h2
+    ' Lieutenancy
+  ul.list-unstyled.list-actions
+    li.form-group
+      .form-value class=("ellipsis edit-value" if policy(resource).assign_lieutenancy?)
+        - if resource.ceremonial_county
+          = resource.ceremonial_county.try(:name)
+        - else
+          span.p-empty Not assigned
+
+
+      - if policy(resource).assign_lieutenancy?
+        = form_for [namespace_name, resource],
+                   remote: true,
+                   html: { "data-type" => "json"},
+                   authenticity_token: true do |form|
+
+          .form-fields
+            = hidden_field_tag :section, value: "lieutenancy"
+            = form.select :ceremonial_county_id,
+                          CeremonialCounty.all.pluck(:name, :id),
+                          { include_blank: true }
+
+          = link_to "#", class: "form-edit-link"
+            span.glyphicon.glyphicon-pencil
+            ' Edit
+          .clear
+          .form-actions.text-right
+            span.if-no-js-hide
+              = link_to "Cancel", "#", class: "btn btn-default form-cancel-link"
+            = form.submit "Save", class: "btn btn-primary form-save-button"
+          .errors-holder
+      .clear

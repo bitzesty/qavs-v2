@@ -1,5 +1,7 @@
 h1.admin-page-heading
   | Nominations
+
+
 = simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
   .row
     .col-md-4.col-sm-5.col-xs-12
@@ -19,9 +21,33 @@ h1.admin-page-heading
         = "Search results for '#{@search.query}'"
         small
           = link_to "(Clear search)", admin_form_answers_path, class: "btn btn-link"
-  - else
-    br
 
+= render("admin/form_answers/bulk_assignment")
+
+= simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
+  .row
+    .col-md-4.col-sm-5.col-xs-12
+      .form-group.search-input
+        = text_field_tag :year, @award_year.year, class: "visuallyhidden"
+        = f.input :query, label: false, input_html: { class: "visuallyhidden", placeholder: "Search...", type: "search" }
+        = submit_tag :submit, class: 'search-submit'
+
+  - # status filters need to be here because the filtering is done in the other form above, so in order not to break filtering, we need to duplicate it here
+  = f.simple_fields_for [:filters, @search.filters] do |h|
+
+    = h.input :status,
+              collection: FormAnswerStatus::AssessorFilter.options,
+              label: false,
+              input_html: { multiple: true, class: 'visuallyhidden'}
+    = h.input :sub_status,
+              collection: FormAnswerStatus::AdminFilter.sub_options,
+              label: false,
+              input_html: { multiple: true, class: 'visuallyhidden'}
+
+    = h.input :nominee_activity,
+              collection: FormAnswerStatus::AdminFilter.activity_options,
+              label: false,
+              input_html: { multiple: true, class: 'visuallyhidden' }
   .row
     .col-xs-12
       = render("admin/form_answers/list_components/table", f: f)

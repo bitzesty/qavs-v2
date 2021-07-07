@@ -711,7 +711,8 @@ CREATE TABLE public.form_answers (
     case_summary_hard_copy_generated boolean DEFAULT false,
     feedback_hard_copy_generated boolean DEFAULT false,
     discrepancies_between_primary_and_secondary_appraisals json,
-    nominee_activity character varying
+    nominee_activity character varying,
+    ceremonial_county_id integer
 );
 
 
@@ -3127,6 +3128,13 @@ CREATE INDEX index_form_answers_on_award_year_id ON public.form_answers USING bt
 
 
 --
+-- Name: index_form_answers_on_award_year_id_and_ceremonial_county_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_form_answers_on_award_year_id_and_ceremonial_county_id ON public.form_answers USING btree (award_year_id, ceremonial_county_id);
+
+
+--
 -- Name: index_form_answers_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3602,6 +3610,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210616135647'),
 ('20210629130552'),
 ('20210707081708'),
-('20210707115136');
+('20210707115136'),
+('20210707122554');
 
 

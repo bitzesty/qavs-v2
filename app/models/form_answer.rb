@@ -34,6 +34,7 @@ class FormAnswer < ApplicationRecord
     belongs_to :account
     belongs_to :award_year
     belongs_to :company_details_editable, polymorphic: true
+    belongs_to :ceremonial_county, optional: true
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
     has_one :feedback, dependent: :destroy
