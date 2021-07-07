@@ -5,14 +5,8 @@ class QAEFormBuilder
     def errors
       result = super
 
-      supporters = question.answers["supporters"] || {}
       letters = question.answers["supporter_letters_list"] || {}
-
-      count = calculate_without_blanks(supporters)
-
-      if question.answers["manually_upload"] == "yes"
-        count += calculate_without_blanks(letters)
-      end
+      count = calculate_without_blanks(letters)
 
       if count < MIN_LIMIT
         result["supporters"] = "You must provide #{MIN_LIMIT} letters of support"
@@ -25,7 +19,7 @@ class QAEFormBuilder
 
     def calculate_without_blanks(supporters)
       supporters.count do |sup|
-        sup["support_letter_id"].present? || sup["supporter_id"].present?
+        sup["support_letter_id"].present?
       end
     end
   end

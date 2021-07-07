@@ -263,5 +263,13 @@ Rails.application.routes.draw do
     root to: "dashboard#show"
 
     resources :lieutenants, except: [:show]
+    resources :form_answers, only: [:index, :show, :edit] do
+      member do
+        post :save
+      end
+
+
+      resources :form_answer_state_transitions, only: [:create]
+    end
   end
 end

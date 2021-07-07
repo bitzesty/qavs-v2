@@ -1,4 +1,4 @@
-class FormAnswerStatus::AssessorFilter
+class FormAnswerStatus::LieutenantFilter
   extend FormAnswerStatus::FilteringHelper
 
   OPTIONS = {
@@ -95,12 +95,8 @@ class FormAnswerStatus::AssessorFilter
     OPTIONS
   end
 
-  def self.sub_options(user)
-    if user.lead_for_any_category?
-      SUB_OPTIONS
-    else
-      SUB_OPTIONS.except(:recommendation_disperancy)
-    end
+  def self.sub_options
+    SUB_OPTIONS
   end
 
   def self.activity_options

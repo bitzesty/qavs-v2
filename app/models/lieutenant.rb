@@ -29,4 +29,17 @@ class Lieutenant < ApplicationRecord
   def soft_delete!
     update_column(:deleted, true)
   end
+
+  def assigned_nominations
+    nominations_scope
+  end
+
+  # Dummy method, will be changed later
+  def nominations_scope(award_year = nil)
+    if award_year
+      award_year.form_answers
+    else
+      FormAnswer.all
+    end
+  end
 end

@@ -1,6 +1,6 @@
 class FormAnswerPolicy < ApplicationPolicy
   def index?
-    admin? || assessor?
+    admin? || assessor? || lieutenant?
   end
 
   # if subject is a lead or admin
@@ -20,18 +20,24 @@ class FormAnswerPolicy < ApplicationPolicy
   def review?
     record.award_year.current? &&
     (
-      admin? ||
-      subject.lead_or_assigned?(record)
+
+      !lieutenant? &&
+      (admin? ||
+       subject.lead_or_assigned?(record))
     )
   end
 
   def show?
-    admin? || assessor?
+    admin? || assessor? || lieutenant?
+  end
+
+  def lieutenant_assessment?
+    lieutenant? || admin?
   end
 
   def edit?
     deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    admin? && (!deadline.present? || DateTime.now <= deadline)
+    (lieutenant? || admin?) && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def update?
@@ -56,15 +62,15 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def can_update_by_admin_lead_and_primary_assessors?
-    admin? || subject.lead?(record) || subject.primary?(record)
+    !lieutenant? && (admin? || subject.lead?(record) || subject.primary?(record))
   end
 
   def update_financials?
-    admin? || subject.lead?(record) || subject.primary?(record)
+    !lieutenant && (admin? || subject.lead?(record) || subject.primary?(record))
   end
 
   def assign_assessor?
-    admin? || subject.lead?(record)
+    !lieutenant? && (admin? || subject.lead?(record))
   end
 
   def toggle_admin_flag?
@@ -72,7 +78,7 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def toggle_assessor_flag?
-    admin? || subject.lead_or_assigned?(record)
+    admin? || (!lieutenant? && subject.lead_or_assigned?(record))
   end
 
   def download_feedback_pdf?
@@ -83,27 +89,12 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? && record.in_positive_state? && record.lead_or_primary_assessor_assignments.any?
   end
 
-  def download_audit_certificate_pdf?
-    (admin? || subject.lead_or_assigned?(record)) &&
-    record.audit_certificate.present? &&
-    record.audit_certificate.attachment.present? &&
-    (Rails.env.development? || record.audit_certificate.clean?)
-  end
-
   def download_list_of_procedures_pdf?
+    !lieutenant? &&
     (admin? || subject.lead_or_assigned?(record)) &&
     record.list_of_procedures.present? &&
     record.list_of_procedures.attachment.present? &&
     (Rails.env.development? || record.list_of_procedures.clean?)
-  end
-
-  def create_audit_certificate_pdf?
-    admin? || subject.lead_or_assigned?(record)
-    (record.audit_certificate.nil? || record.audit_certificate.attachment.nil?)
-  end
-
-  def remove_audit_certificate?
-    admin? && record.audit_certificate.present?
   end
 
   def has_access_to_post_shortlisting_docs?

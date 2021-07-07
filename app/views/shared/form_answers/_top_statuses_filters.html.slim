@@ -61,7 +61,7 @@
         li.apply
           button.btn.btn-block.btn-default type="submit"
             ' Apply
-  
+
   .col-lg-4.col-md-5.col-sm-7.applications-filter.activity-filter
     = f.simple_fields_for [:filters, @search.filters] do |m|
       = m.input :nominee_activity,

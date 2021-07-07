@@ -123,5 +123,8 @@
   "not_volunteer": "on",
   "understood_privacy_notice": "on",
   "group_leader_aware": "on",
-  "entry_confirmation": "on"
+  "entry_confirmation": "on",
+
+  // Lieutenant form
+  "l_citation_summary": ""
 }

@@ -54,8 +54,9 @@ html.no-js
 
               .navbar-collapse.collapse#nav-main-collapse
                 ul.nav.navbar-nav role="navigation"
-                  li class=('active' if controller_name == 'form_answers')
-                    = link_to "Nominations", "#"
+                  - if policy(:form_answer).index?
+                    li class=('active' if controller_name == 'form_answers')
+                      = link_to "Nominations", lieutenant_form_answers_path
                   - if policy(:lieutenant).index?
                     li class=('active' if controller_name == 'lieutenants')
                       = link_to "Lieutenants", lieutenant_lieutenants_path

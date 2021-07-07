@@ -1,0 +1,40 @@
+tbody
+  - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
+    tr
+      td.td-title
+        = link_to polymorphic_url([namespace_name, obj], search: params.permit[:search]) do
+          - unless obj.nominee_name.nil?
+            span.ellipsis
+              = obj.nominee_name
+          - else
+            em
+              ' Not found
+
+      td
+        - if obj.urn.present?
+          = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
+        - else
+          span.urn-not-generated Not yet generated
+
+      td = obj.dashboard_status
+      td = obj.sic_code
+      td = obj.applied_before ? "Yes" : ""
+
+      td.td-primary-name
+        = obj.primary_assessor_full_name
+
+      td.td-secondary-name
+        = obj.secondary_assessor_full_name
+
+      td
+        - app_comments = application_comments(obj.comments_count)
+        - if app_comments.present?
+          = link_to polymorphic_url([:assessor, obj], search: params.permit[:search]) do
+            = app_comments
+        = application_flags(obj)
+        = application_flags(obj, current_subject)
+      td
+        = obj.last_updated_at
+        br
+        span.muted
+          = obj.last_updated_by

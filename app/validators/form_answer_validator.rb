@@ -13,8 +13,11 @@ class FormAnswerValidator
 
   def valid?
     form_answer.steps_with_errors = []
-
     award_form.steps.each do |step|
+
+      # skip lieutenants step validation
+      next if step.opts[:id] == :lieutenants_assessment
+
       # if form was submitted before
       # we should validate current step
       # else if form was submitted just now

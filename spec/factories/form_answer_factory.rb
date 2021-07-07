@@ -58,5 +58,33 @@ FactoryBot.define do
       state { "submitted" }
       submitted_at { Time.current }
     end
+
+    trait :with_support_letters do
+      after(:create) do |form|
+        ids = []
+        2.times { ids << create(:support_letter_attachment, form_answer: form, user: form.user).id }
+
+        doc = form.document
+        doc["supporter_letters_list"] = [
+          {
+            "support_letter_id" => ids.first.to_s,
+            "first_name" => "First",
+            "last_name" => "Supporter",
+            "relationship_to_nominee" => "Supporter",
+            "letter_of_support" =>  ids.first.to_s
+          },
+          {
+            "support_letter_id" => ids.last.to_s,
+            "first_name" => "Second",
+            "last_name" => "Supporter",
+            "relationship_to_nominee" => "Supporter",
+            "letter_of_support" =>  ids.last.to_s
+          }
+        ]
+        form.document = doc
+        form.save!
+      end
+
+    end
   end
 end

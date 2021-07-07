@@ -15,6 +15,10 @@ class QAEFormBuilder
       end
     end
 
+    def next_for(nomination, user)
+      form.current_steps(nomination, user)[index + 1]
+    end
+
     def previous
       @previous ||= begin
         form.steps[index-1] if index-1 >=0
