@@ -1,0 +1,27 @@
+- if show_bulk_lieutenants_assignment?
+  .if-no-js-hide
+    .btn.btn-success.bulk-assign-lieutenants-link Bulk Assign Lieutenants
+
+    .bulk-assign-lieutenants-form
+      .well
+        h3 Bulk Assign Lieutenants
+
+        p Please make sure that the correct applications are selected in the list before assigning lieutenants.
+        br
+
+        = form_for [namespace_name, LieutenantAssignmentCollection.new] do |f|
+          = flash[:error]
+          fieldset.question-group
+            .input.select.form-group.primary-lieutenant-group
+              = f.label :ceremonial_county_id, "Assign ceremonial county to these applications", class: "control-label"
+              = f.select :ceremonial_county_id,
+                         CeremonialCounty.all.pluck(:name, :id),
+                         { include_blank: true },
+                         class: "form-control"
+
+            = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
+
+            .pull-right
+              = link_to "Cancel", "#", class: "btn btn-default if-no-js-hide bulk-assign-lieutenants-cancel-link"
+              = f.submit "Assign", class: "btn btn-primary"
+            .clear

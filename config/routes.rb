@@ -257,6 +257,8 @@ Rails.application.routes.draw do
     scope format: true, constraints: { format: 'json' } do
       resource :session_checks, only: [:show]
     end
+
+    resources :lieutenant_assignment_collections, only: [:create]
   end
 
   namespace :lieutenant do

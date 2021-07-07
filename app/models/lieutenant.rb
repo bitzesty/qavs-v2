@@ -37,12 +37,15 @@ class Lieutenant < ApplicationRecord
     nominations_scope
   end
 
-  # Dummy method, will be changed later
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   def nominations_scope(award_year = nil)
     if award_year
       award_year.form_answers
     else
       FormAnswer.all
-    end
+    end.where(ceremonial_county_id: ceremonial_county_id)
   end
 end
