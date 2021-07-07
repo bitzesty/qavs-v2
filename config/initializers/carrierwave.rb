@@ -12,7 +12,7 @@ CarrierWave.configure do |config|
 
     config.gcloud_credentials = {
       gcloud_project: ENV['GCLOUD_PROJECT'],
-      gcloud_keyfile: JSON.parse(ENV['GCLOUD_KEYFILE'])
+      gcloud_keyfile: JSON.parse(ENV['GCLOUD_KEYFILE'] || "null")
     }
   else
     config.storage = :file
