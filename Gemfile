@@ -82,9 +82,8 @@ gem 'prawn-table'
 gem 'nokogiri'
 
 # Uploads
-gem 'carrierwave', '~> 1.3'
-gem 'fog', "1.42.1"
-gem "fog-aws"
+gem 'carrierwave', '~> 1.3.2'
+gem 'carrierwave-google-storage', github: "metaware/carrierwave-google-storage", ref: "d8092cb70096ae599ffb99ab99ee13c9fc4deafd"
 gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
