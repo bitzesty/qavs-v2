@@ -8,7 +8,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
     params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
     params[:search].permit!
 
-    @search = LieutenantSearch.new(Lieutenant.all).
+    @search = LieutenantSearch.new(Lieutenant.from_county(current_lieutenant.ceremonial_county)).
                              search(params[:search])
     @resources = @search.results.page(params[:page])
   end
@@ -21,6 +21,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
   def create
     @resource = Lieutenant.new(resource_params)
     @resource.role = "regular"
+    @resource.ceremonial_county = current_lieutenant.ceremonial_county
 
     authorize @resource, :create?
 
@@ -65,7 +66,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
   private
 
   def find_resource
-    @resource = Lieutenant.find(params[:id])
+    @resource = current_lieutenant.ceremonial_county.lieutenants.find(params[:id])
   end
 
   def resource_params

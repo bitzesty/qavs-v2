@@ -7,6 +7,8 @@ FactoryBot.define do
     confirmed_at { Time.zone.now }
     role { "regular" }
 
+    association :ceremonial_county
+
     trait :advanced do
       role { "advanced" }
     end

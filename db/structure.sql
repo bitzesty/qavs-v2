@@ -325,6 +325,37 @@ ALTER SEQUENCE public.award_years_id_seq OWNED BY public.award_years.id;
 
 
 --
+-- Name: ceremonial_counties; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ceremonial_counties (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: ceremonial_counties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.ceremonial_counties_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ceremonial_counties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.ceremonial_counties_id_seq OWNED BY public.ceremonial_counties.id;
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -733,7 +764,8 @@ CREATE TABLE public.lieutenants (
     unique_session_id character varying,
     deleted boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    ceremonial_county_id integer
 );
 
 
@@ -2475,6 +2507,13 @@ ALTER TABLE ONLY public.award_years ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: ceremonial_counties id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ceremonial_counties ALTER COLUMN id SET DEFAULT nextval('public.ceremonial_counties_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2690,6 +2729,14 @@ ALTER TABLE ONLY public.audit_logs
 
 ALTER TABLE ONLY public.award_years
     ADD CONSTRAINT award_years_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ceremonial_counties ceremonial_counties_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ceremonial_counties
+    ADD CONSTRAINT ceremonial_counties_pkey PRIMARY KEY (id);
 
 
 --
@@ -3084,6 +3131,13 @@ CREATE INDEX index_form_answers_on_award_year_id ON public.form_answers USING bt
 --
 
 CREATE INDEX index_form_answers_on_user_id ON public.form_answers USING btree (user_id);
+
+
+--
+-- Name: index_lieutenants_on_ceremonial_county_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lieutenants_on_ceremonial_county_id ON public.lieutenants USING btree (ceremonial_county_id);
 
 
 --
@@ -3546,6 +3600,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210517075551'),
 ('20210615093659'),
 ('20210616135647'),
-('20210629130552');
+('20210629130552'),
+('20210707081708'),
+('20210707115136');
 
 
