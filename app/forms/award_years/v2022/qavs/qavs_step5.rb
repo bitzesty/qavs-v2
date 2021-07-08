@@ -12,6 +12,7 @@ class AwardYears::V2022::QAEForms
           classes "sub-question"
           form_hint "Please check that the name given by the nominator is correct."
           required
+          default_value :nominee_name
           style "large"
         end
 
@@ -147,17 +148,17 @@ class AwardYears::V2022::QAEForms
           ref "E 4"
         end
 
-        text :local_assessment_form_volunteers_number, "Number of volunteers" do
+        number :local_assessment_form_volunteers_number, "Number of volunteers" do
           sub_ref "E 4.1"
           classes "sub-question"
-          style "small"
+          style "tiny"
           required
         end
 
-        text :local_assessment_form_paid_staff_number, "Number of full time paid staff" do
+        number :local_assessment_form_paid_staff_number, "Number of full time paid staff" do
           sub_ref "E 4.2"
           classes "sub-question"
-          style "small"
+          style "tiny"
           required
         end
 
@@ -381,8 +382,6 @@ class AwardYears::V2022::QAEForms
           words_max 600
           rows 3
         end
-
-
 
         submit "Submit application" do
           notice %(
