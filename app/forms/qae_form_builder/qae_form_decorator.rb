@@ -22,7 +22,7 @@ class QAEFormBuilder
 
     def count_questions(meth)
       steps.map do |step|
-        if step.opts[:id] != :lieutenants_assessment
+        if step.opts[:id] != :local_assessment
           step.send(meth)
         else
           0
