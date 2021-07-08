@@ -23,6 +23,6 @@ describe "Lieutenant: Nomination process", js: true do
     click_link("A. Nominee")
     expect(find_field("form[nominee_name]").value).to eq("Bit Zesty")
 
-    expect(page).to have_content("E. Lieutenant's assessment")
+    expect(page).to have_content("E. Local Assessment Form")
   end
 end
