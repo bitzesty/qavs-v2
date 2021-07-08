@@ -16,7 +16,7 @@ class FormAnswerValidator
     award_form.steps.each do |step|
 
       # skip lieutenants step validation
-      next if step.opts[:id] == :lieutenants_assessment
+      next if step.opts[:id] == :local_assessment
 
       # if form was submitted before
       # we should validate current step

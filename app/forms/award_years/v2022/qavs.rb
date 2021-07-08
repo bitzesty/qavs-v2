@@ -25,9 +25,9 @@ class AwardYears::V2022::QAEForms
              "Authorise & Submit",
              &AwardYears::V2022::QAEForms.qavs_step4
 
-        step "Lieutenant's assessment",
-             "Lieutenant's assessment",
-             { id: :lieutenants_assessment },
+        step "Local Assessment Form",
+             "Local Assessment Form",
+             { id: :local_assessment },
              &AwardYears::V2022::QAEForms.qavs_step5
       end
     end
