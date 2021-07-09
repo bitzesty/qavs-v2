@@ -22,17 +22,17 @@ class FormAnswerStatistics::Picker
     n_eligible << count_with_year(not_eligible(DateTime.now - 1.day).count)
     n_eligible << count_with_year(not_eligible(DateTime.now - 7.days).count)
     n_eligible << fa_year_scope.where(state: "not_eligible").count
-    out[:applications_not_eligible] = { name: "Applications not eligible", counters: n_eligible }
+    out[:applications_not_eligible] = { name: "Nominations not eligible", counters: n_eligible }
 
     in_progress = []
     in_progress << count_with_year(application_in_progress(Time.now - 1.days).count)
     in_progress << count_with_year(application_in_progress(Time.now - 7.days).count)
     in_progress << fa_year_scope.where(state: "application_in_progress").count
-    out[:applications_in_progress] = { name: "Applications in progress", counters: in_progress }
+    out[:applications_in_progress] = { name: "Nominations in progress", counters: in_progress }
 
     submitted = collect_submission_ranges(fa_year_scope)
     out[:applications_submitted] = {
-      name: "Applications submitted",
+      name: "Nominations submitted",
       counters: submitted
     }
     out
