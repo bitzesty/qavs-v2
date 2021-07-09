@@ -59,7 +59,7 @@ html.no-js
 
                   - if policy(:form_answer).index?
                     li class=('active' if controller_name == 'form_answers')
-                      = link_to "Applications", admin_form_answers_path
+                      = link_to "Nominations", admin_form_answers_path
 
                   - if policy(:user).index?
                     li class=('active' if %w[users admins assessors].include?(controller_name))

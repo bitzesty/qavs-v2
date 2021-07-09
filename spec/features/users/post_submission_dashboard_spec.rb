@@ -40,7 +40,7 @@ describe  "User sees the post submission dashboard" do
       )
 
       visit dashboard_path
-      expect(page).to have_content("Congratulations on winning a Queen's Award for Enterprise")
+      expect(page).to have_content("Congratulations on winning a Queen's Award for Voluntary Service")
 
       form_answer.update_column(:state, "not_awarded")
       visit dashboard_path
@@ -51,7 +51,7 @@ describe  "User sees the post submission dashboard" do
       )
 
       visit dashboard_path
-      expect(page).to have_content("Your following application was unsuccessful.")
+      expect(page).to have_content("Your following nomination was unsuccessful.")
     end
   end
 end

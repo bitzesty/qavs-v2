@@ -18,14 +18,14 @@
 
     li
       p
-        ' Submit your application
+        ' Submit your nomination
       ul
         li
           ' The deadline for submissions is
           = submission_deadline.decorate.formatted_trigger_time
           ' .
         li
-          ' You can still edit submitted applications up to this date.
+          ' You can still edit submitted nominations up to this date.
 
   p#get-started.get-started.group
     - if session[:admin_in_nomination_mode]

@@ -13,7 +13,7 @@
         = f.input "#{feedback_field}_strength", as: :text, input_html: { class: 'form-control js-char-count', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{form_answer.id}-#{f.object.id}-#{feedback_field}-strength" }, label: false
       .clear
 
-      label.form-label Information to strengthen the application
+      label.form-label Information to strengthen the nomination
       .form-value.no-js-update
         - if feedback.public_send("#{feedback_field}_weakness").present?
           p = qae_simple_format(feedback.public_send("#{feedback_field}_weakness"))

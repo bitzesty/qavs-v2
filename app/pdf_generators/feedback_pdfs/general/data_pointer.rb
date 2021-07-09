@@ -21,7 +21,7 @@ module FeedbackPdfs::General::DataPointer
       [
         "",
         "Key strengths",
-        "Information to strengthen the application"
+        "Information to strengthen the nomination"
       ]
     ]
   end
