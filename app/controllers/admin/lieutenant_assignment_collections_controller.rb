@@ -1,6 +1,5 @@
 class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
   def create
-    puts create_params
     @lieutenant_assignment_collection = LieutenantAssignmentCollection.new(create_params)
     authorize @lieutenant_assignment_collection, :create?
 
@@ -18,8 +17,9 @@ class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
   private
 
   def create_params
-    params.require(:lieutenant_assignment_collection)
-      .permit :form_answer_ids,
-              :ceremonial_county_id
+    params
+      .require(:lieutenant_assignment_collection)
+      .permit(:form_answer_ids,
+              :ceremonial_county_id)
   end
 end

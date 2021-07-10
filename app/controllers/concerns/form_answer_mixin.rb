@@ -97,8 +97,7 @@ module FormAnswerMixin
     params[:section] == "sic_code"
   end
 
-
-  def its_sic_code_update?
+  def lieutenancy_update?
     params[:section] == "lieutenancy"
   end
 

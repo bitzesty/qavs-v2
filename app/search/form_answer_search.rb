@@ -55,15 +55,16 @@ class FormAnswerSearch < Search
   end
 
   def filter_by_status(scoped_results, value)
-    scoped_results#.where(state: filter_klass.internal_states(value))
+    scoped_results.where(state: filter_klass.internal_states(value))
   end
 
   def filter_by_nominee_activity(scoped_results, value)
-    scoped_results#.where(nominee_activity: filter_klass.internal_states(value))
+    scoped_results.where(nominee_activity: filter_klass.internal_states(value))
   end
 
   def filter_by_sub_status(scoped_results, value)
-    return out = scoped_results
+    out = scoped_results
+
     value.each do |v|
       case v
       when "missing_sic_code"
