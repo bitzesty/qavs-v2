@@ -27,7 +27,7 @@ h1.admin-page-heading
 = simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
   .row
     .col-md-4.col-sm-5.col-xs-12
-      .form-group.search-input
+      .form-group
         = text_field_tag :year, @award_year.year, class: "visuallyhidden"
         = f.input :query, label: false, input_html: { class: "visuallyhidden", placeholder: "Search...", type: "search" }
         = submit_tag :submit, class: 'search-submit'
