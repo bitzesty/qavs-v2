@@ -58,6 +58,31 @@ class Notifiers::EmailNotificationService
     )
   end
 
+  def reminder_to_submit(award_year)
+    collaborator_data = []
+    scope = award_year.form_answers.where(submitted_at: nil)
+
+    scope.each do |form_answer|
+      form_answer.collaborators.each do |collaborator|
+        if collaborator.notification_when_submission_deadline_is_coming?
+          collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
+        end
+      end
+    end
+
+    send_emails_to_collaborators!(
+      collaborator_data, AccountMailers::ReminderToSubmitMailer
+    )
+  end
+
+  def local_assessment_reminder(award_year)
+    lieutenant_ids = Lieutenant.all.pluck(:id)
+
+    lieutenant_ids.each do |lieutenant_id|
+      LieutenantMailers::LocalAssessmentReminderMailer.notify(lieutenant_id)
+    end
+  end
+
   def shortlisted_notifier(award_year)
     gather_data_and_send_emails!(
       award_year.form_answers.shortlisted,

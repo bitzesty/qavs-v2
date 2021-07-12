@@ -5,3 +5,5 @@
         ' Deadlines
   #section-final-stage-deadlines.section-appraisal-form.section-final-stage-deadlines.panel-collapse.collapse.in role="tabpanel" aria-labelledby="final-stage-deadlines-heading"
     .panel-body
+      ul
+        li = render 'deadline_form', kind: 'local_assessment_submission_end'

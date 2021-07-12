@@ -135,6 +135,7 @@ en:
     development_submission_start: Sustainable Development submission period starts on
     mobility_submission_start: Promoting Opportunity submission period starts on
     submission_end: Submission period closes on
+    local_assessment_submission_end: Local assessment period ends on
     buckingham_palace_attendees_details: HM The Queen's Birthday (end of embargo)
     buckingham_palace_media_information: QAO provides information to the media of the winners on
     buckingham_palace_confirm_press_book_notes: Press Book Entry confirmation due by
@@ -150,6 +151,7 @@ en:
     development_submission_start: "This date is when the applications for the Sustainable Development award of the current award year become available."
     mobility_submission_start: "This date is when the applications for the Promoting Opportunity award of the current award year become available."
     submission_end: "Applicants will no longer be able to edit or submit their nominations after this date. This date will be pulled into the Reminder to submit the nominations email."
+    local_assessment_submission_end: This date is displayed for the lieutenants to remind them about the local assessment deadline.
     buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
     buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
     buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
@@ -159,10 +161,7 @@ en:
 
   email_notification_help_messages:
     award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
-    innovation_submission_started_notification: "This email will be sent to all users who have ticked that they want to receive opening notification for Innovation award in account's 'Contact Preferences' section."
-    trade_submission_started_notification: "This email will be sent to all users who have ticked that they want to receive opening notification for International Trade award in account's 'Contact Preferences' section."
-    development_submission_started_notification: "This email will be sent to all users who have ticked that they want to receive opening notification for Sustainable Development award in account's 'Contact Preferences' section."
-    mobility_submission_started_notification: "This email will be sent to all users who have ticked that they want to receive opening notification for Promoting Opportunity award in account's 'Contact Preferences' section."
+    local_assessment_reminder: "This email be sent out to Lieutenants to remind them to submit their local assessment forms"
     shortlisted_notifier: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
     winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
     unsuccessful_notification: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
@@ -170,13 +169,9 @@ en:
 
   email_notification_headers:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
-    innovation_submission_started_notification: "Notify users that the applications for Queen’s Awards for Innovation are now open"
-    trade_submission_started_notification: "Notify users that the applications for Queen’s Awards for International Trade are now open"
-    development_submission_started_notification: "Notify users that the applications for Queen’s Awards for Sustainable Development are now open"
-    mobility_submission_started_notification: "Notify users that the applications for Queen’s Awards for Promoting Opportunity are now open"
     submission_started_notification: "Notify users that nominations for the new Award year are open"
     reminder_to_submit: Reminder to submit the nominations (to all those who have started but not yet submitted nominations).
-    ep_reminder_support_letters: "ENTERPRISE PROMOTION : Reminder to follow up supporter letters (to all those who have started EP applications, but have fewer than 2 support letters submitted)."
+    local_assessment_reminder: "Reminder to submit the local assessment form"
     winners_notification: "WINNERS : Email notifying all winning business applicants of their success & requesting their confirmation of their Press Book entry."
     winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning applicants who haven't submitted yet)."
     winners_head_of_organisation_notification: "WINNERS : Success email to the 'Head of Organisation' of the Business categories Winner."
