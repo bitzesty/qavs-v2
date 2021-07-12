@@ -75,6 +75,15 @@ class MailRenderer
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
 
+  def local_assessment_reminder
+    assigns = {}
+
+    assigns[:lieutenant] = dummy_lieutenant
+    assigns[:deadline] = deadline_str("local_assessment_submission_end", "%A %d %B %Y")
+
+    render(assigns, "lieutenants_mailers/local_assessment_reminder_mailer/preview/notify")
+  end
+
   def not_shortlisted_notifier
     assigns = {}
     assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
@@ -169,6 +178,10 @@ class MailRenderer
 
   def dummy_user(first_name, last_name, company_name)
     User.new(first_name: first_name, last_name: last_name, company_name: company_name).decorate
+  end
+
+  def dummy_lieutenant(first_name = "Jay", last_name = "Doe")
+    Lieutenant.new(first_name: first_name, last_name: last_name).decorate
   end
 
   def form_answer

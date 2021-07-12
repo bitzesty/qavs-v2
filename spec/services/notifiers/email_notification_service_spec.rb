@@ -107,6 +107,23 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
+  describe "#local_assessment_reminder" do
+    let(:kind) { "local_assessment_reminder" }
+    let(:mailer) { double(deliver_later!: true) }
+
+    let!(:lieutenant) { create(:lieutenant) }
+
+    it "triggers current notification" do
+      expect(LieutenantMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
+                                                                    lieutenant.id
+                                                                  ) { mailer }
+
+      described_class.run
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
   context "unsuccessful_notification" do
     let(:kind) { "unsuccessful_notification" }
 
