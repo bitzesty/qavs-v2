@@ -383,13 +383,13 @@ class AwardYears::V2022::QAEForms
           rows 3
         end
 
-        submit "Submit application" do
+        submit "Submit assessment" do
           notice %(
             <p>
-              If you have answered all the questions, you can submit your application now. You will be able to edit it any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
+              If you have answered all the questions, you can submit your assessment now. You will be able to edit it any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
             </p>
             <p>
-              If you are not ready to submit yet, you can save your application and come back later.
+              If you are not ready to submit yet, you can save your assessment and come back later.
             </p>
           )
         end

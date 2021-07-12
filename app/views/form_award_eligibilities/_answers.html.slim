@@ -29,8 +29,8 @@
         tr.previous-answer-invalid
           td colspan=3
             span
-              ' This excludes you from entering the
+              ' This excludes the group from being nominated for the
               - if eligibility.is_a?(Eligibility::Basic)
-                ' Queen's Awards for Enterprise
+                ' Queen's Award for Voluntary Service
               - else
                 = eligibility.class.award_name

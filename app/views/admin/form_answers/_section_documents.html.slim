@@ -4,17 +4,17 @@
       = link_to [:review, namespace_name, @form_answer], class: "btn btn-default btn-block", target: "_blank"
         span.icon-view
         span.btn-title
-          ' View application
+          ' View nomination
     - if policy(resource).edit?
       = link_to [:edit, namespace_name, @form_answer], class: "btn btn-default btn-block", target: "_blank"
         span.glyphicon.glyphicon-pencil
         span.btn-title
-          ' Edit application
+          ' Edit nomination
     = render "admin/form_answers/docs/download_original_application_pdf_before_deadline"
 
   .sidebar-section
     h2
-      ' Application & Supporting Docs
+      ' Nomination & Supporting Docs
     = render "admin/form_answers/docs/application_and_supporting_docs"
 
   .sidebar-section
