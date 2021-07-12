@@ -8,7 +8,7 @@ describe FormPaginator do
 
   before do
     [form_answer_1, form_answer_2, form_answer_3].each_with_index do |fa, i|
-      fa.document = { nominee_name: i.to_s, nominee_activity: "sport" }
+      fa.document = { nominee_name: i.to_s, nominee_activity: "SPO" }
       fa.company_or_nominee_name = i.to_s
       fa.save!
     end
