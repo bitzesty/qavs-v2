@@ -28,16 +28,16 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def show?
-    admin? || assessor? || (lieutenant? && lieuenancy_assigned?)
+    admin? || assessor? || (lieutenant? && lieutenancy_assigned?)
   end
 
   def lieutenant_assessment?
-    (lieutenant? && lieuenancy_assigned?) || admin?
+    (lieutenant? && lieutenancy_assigned?) || admin?
   end
 
   def edit?
     deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    ((lieutenant? && lieuenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
+    ((lieutenant? && lieutenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def update?
@@ -131,7 +131,7 @@ class FormAnswerPolicy < ApplicationPolicy
     admin?
   end
 
-  def lieuenancy_assigned?
+  def lieutenancy_assigned?
     record.ceremonial_county == subject.ceremonial_county
   end
 end
