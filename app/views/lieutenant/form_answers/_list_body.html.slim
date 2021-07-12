@@ -17,14 +17,9 @@ tbody
           span.urn-not-generated Not yet generated
 
       td = obj.dashboard_status
-      td = obj.sic_code
-      td = obj.applied_before ? "Yes" : ""
 
       td.td-primary-name
         = obj.primary_assessor_full_name
-
-      td.td-secondary-name
-        = obj.secondary_assessor_full_name
 
       td
         - app_comments = application_comments(obj.comments_count)

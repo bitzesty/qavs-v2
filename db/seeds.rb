@@ -42,3 +42,10 @@ awards.each do |award|
   end
 end
 p "========Other assessors created========"
+
+
+unless CeremonialCounty.exists?
+  %w(Berkshire Cumbria Warwickshire).each do |name|
+    CeremonialCounty.create!(name: name)
+  end
+end

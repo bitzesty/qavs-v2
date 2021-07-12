@@ -70,6 +70,19 @@
 
   .row
     .col-md-2.col-sm-3
+      = f.label :ceremonial_county, "Ceremonial county"
+    .col-md-2.col-sm-3
+      = f.association :ceremonial_county,
+                      wrapper_html: { class: "form-group" },
+                      input_html: { class: "form-control"},
+                      include_blank: false,
+                      colleciton: CeremonialCounty.all,
+                      label_method: :name,
+                      label: false
+  br
+
+  .row
+    .col-md-2.col-sm-3
       = f.label :role, "Role"
     .col-md-2.col-sm-3
       = f.input :role,

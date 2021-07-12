@@ -43,7 +43,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
       params[:year].to_s == "all_years" ? nil : @award_year
     )
 
-    @search = FormAnswerSearch.new(scope, current_assessor).search(params[:search])
+    @search = FormAnswerSearch.new(scope, current_lieutenant).search(params[:search])
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
 
     @form_answers = @search.results

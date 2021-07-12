@@ -55,6 +55,7 @@ class Admin::LieutenantsController < Admin::UsersController
              :password_confirmation,
              :first_name,
              :last_name,
-             :role)
+             :role,
+             :ceremonial_county_id)
   end
 end

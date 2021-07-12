@@ -9,10 +9,13 @@ class Lieutenant < ApplicationRecord
          :confirmable, :lockable, :zxcvbnable, :timeoutable,
          :session_limitable
 
+  belongs_to :ceremonial_county
 
   validates :first_name, :last_name, presence: true
 
   enumerize :role, in: %w(regular advanced)
+
+  scope :from_county, -> (county) { where(ceremonial_county_id: county.id) }
 
   pg_search_scope :basic_search,
                   against: [
@@ -34,12 +37,15 @@ class Lieutenant < ApplicationRecord
     nominations_scope
   end
 
-  # Dummy method, will be changed later
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   def nominations_scope(award_year = nil)
     if award_year
       award_year.form_answers
     else
       FormAnswer.all
-    end
+    end.where(ceremonial_county_id: ceremonial_county_id)
   end
 end

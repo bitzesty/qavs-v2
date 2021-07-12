@@ -97,9 +97,15 @@ module FormAnswerMixin
     params[:section] == "sic_code"
   end
 
+  def lieutenancy_update?
+    params[:section] == "lieutenancy"
+  end
+
   def check_rigths_by_updating_options
     if its_previous_wins_update? || its_sic_code_update?
       authorize resource, :can_update_by_admin_lead_and_primary_assessors?
+    elsif lieutenancy_update?
+      authorize resource, :assign_lieutenancy?
     else
       authorize resource, :update?
     end

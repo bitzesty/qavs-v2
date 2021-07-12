@@ -47,15 +47,11 @@ h1.admin-page-heading
         thead
           tr
             th.sortable width="250"
-              = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
+              = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
             th.sortable width="120"
               = sort_link f, "Reference", @search, :urn, disabled: @search.query?
             th width="250"
               | Status
-            th.sortable width="70"
-              = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
-            th.sortable width="130"
-              = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
             = render("assessor/form_answers/assessor_header", f: f)
             th.sortable width="110"
               = sort_link f, "Flag", @search, :flag, disabled: @search.query?

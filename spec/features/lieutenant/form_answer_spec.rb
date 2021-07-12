@@ -13,9 +13,10 @@ describe "Lieutenant: Nomination process", js: true do
 
   it "allows lieutenant to continue nomination after it was submitted" do
     Settings.current_submission_deadline.update(trigger_at: 1.day.ago)
-    fa = create(:form_answer, :submitted, :with_support_letters)
+    fa = create(:form_answer, :submitted, :with_support_letters, ceremonial_county_id: lieutenant.ceremonial_county_id)
 
     visit lieutenant_form_answers_path
+
     click_link "Bit Zesty"
     click_link "Continue nomination"
 

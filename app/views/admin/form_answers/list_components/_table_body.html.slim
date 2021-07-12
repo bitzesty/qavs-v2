@@ -1,8 +1,9 @@
 - @form_answers.each do |form_answer|
   - obj = form_answer.decorate
   tr
+    td = check_box_tag :check, obj.id, false, class: "form-answer-check"
     td.td-title
-      - unless obj.company_or_nominee_name.nil?
+      - if obj.company_or_nominee_name.present?
         = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" } do
           = obj.company_or_nominee_name
       - else
@@ -10,8 +11,6 @@
           em
             ' Not yet specified
     td = obj.dashboard_status(current_admin.class.name)
-    td = obj.sic_code
-    td = obj.applied_before ? "Yes" : ""
     td
       - app_comments = application_comments(obj.comments_count)
       - if app_comments.present?
