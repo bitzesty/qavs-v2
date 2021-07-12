@@ -78,10 +78,10 @@ describe "As Admin I want to filter applications", js: true do
 
   it "filters by activity" do
     assert_results_number(4)
-    assign_activity(@forms.first, "mental_health")
+    assign_activity(@forms.first, "ART")
 
     # Untick sport activity filter 
-    click_status_option("Sport")
+    click_status_option("Sports")
     assert_results_number(1)
   end
 end

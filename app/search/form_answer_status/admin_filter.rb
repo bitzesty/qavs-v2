@@ -116,16 +116,76 @@ class FormAnswerStatus::AdminFilter
   }
 
   ACTIVITY_OPTIONS = {
-    sport: {
-      label: "Sport",
+    ART: {
+      label: "Arts",
       nominee_activity: [
-        :sport
+        :ART
       ]
     },
-    mental_health: {
-      label: "Mental Health",
+    EDU: {
+      label: "Education",
       nominee_activity: [
-        :mental_health
+        :EDU
+      ]
+    },
+    EME: {
+      label: "Emergency response",
+      nominee_activity: [
+        :EME
+      ]
+    },
+    ENV: {
+      label: "Environment & regeneration",
+      nominee_activity: [
+        :ENV
+      ]
+    },
+    HEA: {
+      label: "Health",
+      nominee_activity: [
+        :HEA
+      ]
+    },
+    HER: {
+      label: "Heritage",
+      nominee_activity: [
+        :HER
+      ]
+    },
+    OTH: {
+      label: "Other",
+      nominee_activity: [
+        :OTH
+      ]
+    },
+    PLY: {
+      label: "Playscheme/youth",
+      nominee_activity: [
+        :PLY
+      ]
+    },
+    SUP: {
+      label: "Self help/support group",
+      nominee_activity: [
+        :SUP
+      ]
+    },
+    SOC: {
+      label: "Social centre/community",
+      nominee_activity: [
+        :SOC
+      ]
+    },
+    SPS: {
+      label: "Social preventative scheme",
+      nominee_activity: [
+        :SPS
+      ]
+    },
+    SPO: {
+      label: "Sports",
+      nominee_activity: [
+        :SPO
       ]
     }
   }

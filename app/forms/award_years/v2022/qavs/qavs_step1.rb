@@ -20,8 +20,18 @@ class AwardYears::V2022::QAEForms
           classes "sub-question"
           required
           option "", "Please select"
-          option "sport", "Sport"
-          option "mental health", "Mental Health"
+          option "ART", "Arts"
+          option "EDU", "Education"
+          option "EME", "Emergency response"
+          option "ENV", "Environment & regeneration"
+          option "HEA", "Health"
+          option "HER", "Heritage"
+          option "OTH", "Other"
+          option "PLY", "Playscheme/youth"
+          option "SUP", "Self help/support group"
+          option "SOC", "Social centre/community"
+          option "SPS", "Social preventative scheme"
+          option "SPO", "Sports"
         end
 
         address :nominee_address, "Address of group" do
