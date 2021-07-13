@@ -30,7 +30,7 @@ h1.admin-page-heading
       .form-group
         = text_field_tag :year, @award_year.year, class: "visuallyhidden"
         = f.input :query, label: false, input_html: { class: "visuallyhidden", placeholder: "Search...", type: "search" }
-        = submit_tag :submit, class: 'search-submit'
+        = submit_tag :submit, class: 'search-submit visuallyhidden'
 
   - # status filters need to be here because the filtering is done in the other form above, so in order not to break filtering, we need to duplicate it here
   = f.simple_fields_for [:filters, @search.filters] do |h|

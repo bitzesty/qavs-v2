@@ -14,7 +14,9 @@ module FormAnswerMixin
         render json: {
           form_answer: {
             sic_codes: resource.decorate.all_average_growths,
-            legend: resource.decorate.average_growth_legend
+            legend: resource.decorate.average_growth_legend,
+            ceremonial_county_name: resource.ceremonial_county.try(:name),
+            ceremonial_county_id: resource.ceremonial_county.try(:id)
           }
         }
       end
