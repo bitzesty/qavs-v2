@@ -5,10 +5,17 @@ article.group role="article"
       p
         = render "content_only/info_messages/new_users_message"
 
-        ' The entry period for the
-        = AwardYear.current.year
-        '  Awards season has now closed.
+        ' Please note, the
+        =<> AwardYear.current.year-1
+        ' award nominations closed on the 
+        =< submission_deadline.decorate.formatted_trigger_time
+        ' .
         br
         ' Award winners will be announced on
         =< application_deadline_for_year(AwardYear.current, :buckingham_palace_attendees_details, "with_year")
         ' .
+        br
+        ' The
+        =<> AwardYear.current.year
+        ' award nomination form is currently being updated. Watch out for an email from us - we will notify you as soon as the form becomes available.
+
