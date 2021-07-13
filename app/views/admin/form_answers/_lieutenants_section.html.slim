@@ -1,6 +1,7 @@
 .well.section-applicant-lieutenants
   h2
     ' Lieutenancy
+
   ul.list-unstyled.list-actions
     li.form-group
       .form-value class=("ellipsis edit-value" if policy(resource).assign_lieutenancy?)
@@ -29,6 +30,6 @@
           .form-actions.text-right
             span.if-no-js-hide
               = link_to "Cancel", "#", class: "btn btn-default form-cancel-link"
-            = form.submit "Save", class: "btn btn-primary form-save-button"
+            = form.submit "Save", class: "btn btn-primary form-save-link"
           .errors-holder
       .clear

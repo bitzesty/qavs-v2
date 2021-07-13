@@ -318,11 +318,11 @@ changeRagStatus = ->
     $(this).closest(".panel-body").find(".feedback-holder").removeClass("error")
 
 editFormAnswerAutoUpdate = ->
-  $(".sic-code .form-save-link").on "click", (e) ->
+  $(".sic-code .form-save-link, .section-applicant-lieutenants .form-save-link").on "click", (e) ->
     e.preventDefault()
     e.stopPropagation()
     that = $("#form_answer_sic_code")
-    form = $(".edit_form_answer")
+    form = $(e.currentTarget).closest(".edit_form_answer")
     $.ajax
       action: form.attr("action")
       data: form.serialize()
@@ -339,6 +339,12 @@ editFormAnswerAutoUpdate = ->
           $(row).text(sicCodes[counter.toString()])
           counter += 1
         $(".avg-growth-legend").text(result["form_answer"]["legend"])
+
+        if result["form_answer"]["ceremonial_county_name"]
+          $(".section-applicant-lieutenants .form-value").text(result["form_answer"]["ceremonial_county_name"])
+          $("#form_answer_ceremonial_county_id").val(result["form_answer"]["ceremonial_county_id"])
+          $(".section-applicant-lieutenants .form-edit").removeClass("form-edit")
+
 bindRags =(klass) ->
   $(document).on "click", "#{klass} .btn-rag .dropdown-menu a", (e) ->
     e.preventDefault()
