@@ -17,16 +17,16 @@ class Eligibility::Basic < Eligibility
             label: "Are the majority of them volunteers?",
             accept: :not_no
 
-  property :organization_kind,
-            values: %w[business charity],
-            label: "What kind of organisation is it?",
-            accept: :not_nil
+  property :national_organisation,
+            boolean: true,
+            label: "Was it set up as a national organisation (e.g. for all England/Wales/Scotland/N. Ireland)?",
+            accept: :false
 
-  property :industry,
-            values: %w[product_business service_business either_business],
-            label: "Is your business mainly a:",
-            accept: :not_nil,
-            if: proc { !organization_kind_value || !organization_kind.charity? }
+  # property :industry,
+  #           values: %w[product_business service_business either_business],
+  #           label: "Is your business mainly a:",
+  #           accept: :not_nil,
+  #           if: proc { !organization_kind_value || !organization_kind.charity? }
 
   property :self_contained_enterprise,
             boolean: true,
@@ -42,7 +42,7 @@ class Eligibility::Basic < Eligibility
     current_step_index = questions.index(current_step) || questions.size - 1
     previous_questions = questions[0..current_step_index]
 
-    answers.any? && answers.all? do |question, answer|
+    answers.present? && answers.all? do |question, answer|
       if previous_questions.include?(question.to_sym)
         answer_valid?(question, answer)
       else
@@ -52,7 +52,7 @@ class Eligibility::Basic < Eligibility
   end
 
   def save_as_eligible!
-    self.organization_kind = 'charity'
+    self.national_organisation = false
     self.based_in_uk = true
     self.are_majority_volunteers = true
     self.self_contained_enterprise = true

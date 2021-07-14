@@ -28,14 +28,14 @@ RSpec.describe Eligibility::Basic, type: :model do
 
     it 'is eligible in the middle of the survey' do
       eligibility.current_step = :based_in_uk
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
 
       expect(eligibility).to be_eligible
     end
 
     it 'is eligible when all questions are answered correctly' do
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
       eligibility.are_majority_volunteers = true
       eligibility.self_contained_enterprise = true
@@ -45,7 +45,7 @@ RSpec.describe Eligibility::Basic, type: :model do
     end
 
     it 'is not eligible when not all answers are correct' do
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
       eligibility.self_contained_enterprise = true
       eligibility.has_at_least_three_people = false
@@ -72,16 +72,10 @@ RSpec.describe Eligibility::Basic, type: :model do
         :based_in_uk,
         :has_at_least_three_people,
         :are_majority_volunteers,
-        :organization_kind,
-        :industry,
+        :national_organisation,
         :self_contained_enterprise,
         :current_holder
       ])
-    end
-
-    it 'does not return industry for charity' do
-      eligibility.organization_kind = 'charity'
-      expect(eligibility.questions).not_to include(:industry)
     end
   end
 end

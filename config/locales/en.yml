@@ -20,9 +20,6 @@ en:
         assessors: Assessors
         all_users: All applicants
     eligibility/basic:
-      organization_kind:
-        business: "Business (e.g. companies, partnerships, social enterprises)"
-        charity: "Not-for-profit (e.g. charities, foundations, associations)"
       kind:
         application: Apply for an organisation award
         nomination: Nominate an individual
