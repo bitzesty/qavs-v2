@@ -16,7 +16,6 @@ FactoryBot.define do
         are_majority_volunteers: true,
         has_at_least_three_people: true,
         national_organisation: false,
-        industry: "product_business",
         self_contained_enterprise: true,
         current_holder: "no"
       }}

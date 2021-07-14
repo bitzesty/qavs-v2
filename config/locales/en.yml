@@ -23,10 +23,6 @@ en:
       kind:
         application: Apply for an organisation award
         nomination: Nominate an individual
-      industry:
-        product_business: Product business
-        service_business: Service business
-        either_business: Mixed business
       current_holder:
         i_dont_know: "I don't know"
     eligibility/innovation:

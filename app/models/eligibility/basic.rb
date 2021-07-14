@@ -22,12 +22,6 @@ class Eligibility::Basic < Eligibility
             label: "Was it set up as a national organisation (e.g. for all England/Wales/Scotland/N. Ireland)?",
             accept: :false
 
-  # property :industry,
-  #           values: %w[product_business service_business either_business],
-  #           label: "Is your business mainly a:",
-  #           accept: :not_nil,
-  #           if: proc { !organization_kind_value || !organization_kind.charity? }
-
   property :self_contained_enterprise,
             boolean: true,
             label: "Is your organisation a self-contained operational unit?",
