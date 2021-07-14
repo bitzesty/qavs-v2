@@ -28,16 +28,16 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def show?
-    admin? || assessor? || lieutenant?
+    admin? || assessor? || (lieutenant? && lieutenancy_assigned?)
   end
 
   def lieutenant_assessment?
-    lieutenant? || admin?
+    (lieutenant? && lieutenancy_assigned?) || admin?
   end
 
   def edit?
     deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    (lieutenant? || admin?) && (!deadline.present? || DateTime.now <= deadline)
+    ((lieutenant? && lieutenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def update?
@@ -71,6 +71,10 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def assign_assessor?
     !lieutenant? && (admin? || subject.lead?(record))
+  end
+
+  def assign_lieutenancy?
+    admin?
   end
 
   def toggle_admin_flag?
@@ -125,5 +129,9 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def can_add_collaborators_to_application?
     admin?
+  end
+
+  def lieutenancy_assigned?
+    record.ceremonial_county == subject.ceremonial_county
   end
 end

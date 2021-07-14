@@ -33,6 +33,12 @@ class Settings < ApplicationRecord
       end
     end
 
+    def current_local_assessment_submission_deadline
+      Rails.cache.fetch("local_assessment_submission_end", expires_in: 1.minute) do
+        current.deadlines.local_assessment_submission_end.first
+      end
+    end
+
     def winner_notification_date
       Rails.cache.fetch("winners_notification", expires_in: 1.minute) do
         current.winners_email_notification.try(:trigger_at).presence

@@ -34,6 +34,7 @@ class FormAnswer < ApplicationRecord
     belongs_to :account
     belongs_to :award_year
     belongs_to :company_details_editable, polymorphic: true
+    belongs_to :ceremonial_county, optional: true
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
     has_one :feedback, dependent: :destroy
@@ -160,7 +161,7 @@ class FormAnswer < ApplicationRecord
           AwardYears::V2022::QAEForms # default value
         end
       else
-        raise ArgumentError, "Can not find award form for the application"
+        raise ArgumentError, "Can not find award form for the nomination"
       end
 
       form_class.qavs

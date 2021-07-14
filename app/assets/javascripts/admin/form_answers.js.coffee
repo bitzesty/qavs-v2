@@ -66,6 +66,7 @@ ready = ->
   $(".section-applicant-users .edit_assessor_assignment select").select2()
   $("#new_assessor_assignment_collection select").select2()
   $(".bulk-assign-assessors-form select").select2()
+  $(".bulk-assign-lieutenants-form select").select2()
 
   $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
     form = $(this)
@@ -253,12 +254,20 @@ ready = ->
       area.removeClass("if-js-hide")
     else
       area.addClass("if-js-hide")
+
   $(document).on "submit", "#new_assessor_assignment_collection", (e) ->
     form = $(this)
     ids = ""
     $(".form-answer-check:checked").each ->
       ids += ($(@).val() + ",")
     $("#assessor_assignment_collection_form_answer_ids").val(ids)
+
+  $(document).on "submit", "#new_lieutenant_assignment_collection", (e) ->
+    form = $(this)
+    ids = ""
+    $(".form-answer-check:checked").each ->
+      ids += ($(@).val() + ",")
+    $("#lieutenant_assignment_collection_form_answer_ids").val(ids)
 
   $("#check_all").on "change", ->
     select_all_value = $(this).prop("checked")
@@ -267,20 +276,30 @@ ready = ->
   # Show/hide the bulk assign assessors form
   $(".form-answer-check, #check_all").on "change", ->
     show_button = false
+
     $(".form-answer-check").each ->
       if $(this).prop("checked")
         show_button = true
+
     if show_button
       $(".bulk-assign-assessors-link").addClass("show-button")
+      $(".bulk-assign-lieutenants-link").addClass("show-button")
     else
       $(".bulk-assign-assessors-link").removeClass("show-button")
-  $(".bulk-assign-assessors-link").on "click", (e) ->
-    e.preventDefault()
-    $(".bulk-assign-assessors-form").closest(".container").addClass("show-bulk-assign")
+      $(".bulk-assign-lieutenants-link").removeClass("show-button")
+    $(".bulk-assign-assessors-link").on "click", (e) ->
+      e.preventDefault()
+      $(".bulk-assign-assessors-form").closest(".container").addClass("show-bulk-assign")
+    $(".bulk-assign-lieutenants-link").on "click", (e) ->
+      e.preventDefault()
+      $(".bulk-assign-lieutenants-form").closest(".container").addClass("show-bulk-assign")
 
   $(".bulk-assign-assessors-cancel-link").on "click", (e) ->
     e.preventDefault()
     $(".bulk-assign-assessors-form").closest(".container").removeClass("show-bulk-assign")
+  $(".bulk-assign-lieutenants-cancel-link").on "click", (e) ->
+    e.preventDefault()
+    $(".bulk-assign-lieutenants-form").closest(".container").removeClass("show-bulk-assign")
 
 changeRagStatus = ->
   $(document).on "click", ".btn-rag .dropdown-menu a", (e) ->
@@ -299,11 +318,11 @@ changeRagStatus = ->
     $(this).closest(".panel-body").find(".feedback-holder").removeClass("error")
 
 editFormAnswerAutoUpdate = ->
-  $(".sic-code .form-save-link").on "click", (e) ->
+  $(".sic-code .form-save-link, .section-applicant-lieutenants .form-save-link").on "click", (e) ->
     e.preventDefault()
     e.stopPropagation()
     that = $("#form_answer_sic_code")
-    form = $(".edit_form_answer")
+    form = $(e.currentTarget).closest(".edit_form_answer")
     $.ajax
       action: form.attr("action")
       data: form.serialize()
@@ -320,6 +339,12 @@ editFormAnswerAutoUpdate = ->
           $(row).text(sicCodes[counter.toString()])
           counter += 1
         $(".avg-growth-legend").text(result["form_answer"]["legend"])
+
+        if result["form_answer"]["ceremonial_county_name"]
+          $(".section-applicant-lieutenants .form-value").text(result["form_answer"]["ceremonial_county_name"])
+          $("#form_answer_ceremonial_county_id").val(result["form_answer"]["ceremonial_county_id"])
+          $(".section-applicant-lieutenants .form-edit").removeClass("form-edit")
+
 bindRags =(klass) ->
   $(document).on "click", "#{klass} .btn-rag .dropdown-menu a", (e) ->
     e.preventDefault()

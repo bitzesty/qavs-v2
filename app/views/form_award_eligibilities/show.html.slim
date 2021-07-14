@@ -31,8 +31,8 @@ header.page-header.group.page-header-over-sidebar
             .previous-answers
               - if @form_answer.eligible?
                 .eligibility-passed
-                  p You are eligible to begin your application for a #{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award.
-                  p Before you start your application, please check your eligibility answers are correct.
+                  p You are eligible to begin your nomination for a #{@form_answer.award_type_full_name.split.map(&:capitalize)*' '} Award.
+                  p Before you start your nomination, please check your eligibility answers are correct.
 
                 - if (!step || step.to_s == "wicked_finish")
                   br
@@ -48,7 +48,7 @@ header.page-header.group.page-header-over-sidebar
 
                   p
                     ' Also, you might be eligible for awards in other categories. Go to the
-                    = link_to "applications page", dashboard_path
+                    = link_to "nominations page", dashboard_path
                     '  to apply.
 
         = render "previous_answers"

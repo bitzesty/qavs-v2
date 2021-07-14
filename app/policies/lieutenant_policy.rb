@@ -8,10 +8,16 @@ class LieutenantPolicy < AdminPolicy
   end
 
   def update?
-    admin? || advanced_lieutenant?
+    admin? || (advanced_lieutenant? && same_county?)
   end
 
   def destroy?
-    admin? || (advanced_lieutenant? && subject != record && record.role.regular?)
+    admin? || (advanced_lieutenant? && subject != record && record.role.regular? && same_county?)
+  end
+
+  private
+
+  def same_county?
+    record.ceremonial_county == subject.ceremonial_county
   end
 end

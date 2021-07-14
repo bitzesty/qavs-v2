@@ -8,7 +8,7 @@ describe "Form answer list sorting", js: true do
     3.times do |i|
       create :form_answer,
              document: { nominee_name: "#{i}",
-                         nominee_activity: "sport" }
+                         nominee_activity: "SPO" }
     end
 
     login_as(subject, scope: :admin)

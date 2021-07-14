@@ -7,10 +7,7 @@ class AwardYears::V2022::QAEForms
           context %(
             <h3>About this section</h3>
             <p>
-            In this section, please explain how your nominated group has made a significant contribution in its area of activity. 
-            We are looking for groups that have given excellent service to their beneficiaries and communities; 
-            have delivered their service in innovative ways, and have shown other examples of selfless voluntary service that distinguish their work. 
-            <strong>Please answer each question, noting the word limits, explaining what achievements make the nominated group stand out from others.</strong>
+            In this section, please explain how your nominated group has made a significant contribution in its area of activity. We are looking for groups that have given excellent service to their beneficiaries and communities; have delivered their service in innovative ways, and have shown other examples of selfless voluntary service that distinguish their work. <strong>Please answer each question, noting the word limits, explaining what achievements make the nominated group stand out from others.</strong>
             </p>
           )
         end

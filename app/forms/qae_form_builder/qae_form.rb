@@ -32,7 +32,7 @@ class QAEFormBuilder
       can_see_lieutenant_form = FormAnswerPolicy.new(user, nomination).lieutenant_assessment?
 
       @steps.select do |s|
-        (s.opts[:id] != :lieutenants_assessment || can_see_lieutenant_form)
+        (s.opts[:id] != :local_assessment || can_see_lieutenant_form)
       end
     end
   end

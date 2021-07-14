@@ -12,6 +12,7 @@ class Deadline < ApplicationRecord
     "award_year_switch",
     "submission_start",
     "submission_end",
+    "local_assessment_submission_end",
     "buckingham_palace_attendees_details",
     "buckingham_palace_attendees_invite",
     "buckingham_palace_confirm_press_book_notes",

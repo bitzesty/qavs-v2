@@ -2,7 +2,8 @@ require "rails_helper"
 
 shared_context "form answers table sorting" do
   context "Company/Nominee" do
-    let(:header_position) { subject.is_a?(Admin) ? 0 : 1 }
+    let(:header_position) { 1 }
+
     let(:asc_company_names) do
       FormAnswer.pluck(:company_or_nominee_name).sort
     end

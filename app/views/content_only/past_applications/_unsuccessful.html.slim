@@ -6,9 +6,9 @@
     p
       ' Your following
       - if past_unsuccessful_applications.length == 1
-        ' application was
+        ' nomination was
       - else
-        ' applications were
+        ' nominations were
       ' unsuccessful.
   .clear
 
@@ -26,14 +26,14 @@
       = render "content_only/past_applications/download_pdf_link", award: award
 
       - if award.not_submitted?
-        p The application was not submitted on time.
+        p The nomination was not submitted on time.
       - else
         h4 Feedback
         - if award.feedback.try(:submitted?)
           p
             ' Please
             = link_to "download and read the feedback document", users_form_answer_feedback_path(award, format: :pdf)
-            '  so you can better understand our decision. We hope it will help you to improve your future applications.
+            '  so you can better understand our decision. We hope it will help you to improve your future nominations.
         - else
           p You will be notified when your feedback is ready.
     .clear

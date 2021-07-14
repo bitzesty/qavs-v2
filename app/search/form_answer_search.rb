@@ -12,9 +12,6 @@ class FormAnswerSearch < Search
   def initialize(scope, subject)
     @subject = subject
     super(scope)
-
-    @scope = @scope.select(advanced_select)
-               .joins("LEFT OUTER JOIN form_answers AS other_applications ON other_applications.account_id = form_answers.account_id AND other_applications.id != form_answers.id AND other_applications.state in #{post_submission_states_for_sql}")
   end
 
   # admin comments with flags + global flag per application
@@ -23,16 +20,11 @@ class FormAnswerSearch < Search
     section = Comment.sections[section]
 
     q = "form_answers.*,
-      (COUNT(other_applications) > 0) AS applied_before,
       (COUNT(flagged_comments.id)) AS flags_count"
     scoped_results.select(q)
       .joins("LEFT OUTER JOIN comments  AS flagged_comments on (flagged_comments.commentable_id=form_answers.id) AND ((flagged_comments.section = '#{section}' AND flagged_comments.commentable_type = 'FormAnswer' AND flagged_comments.flagged = true) OR flagged_comments.section IS NULL)")
       .group("form_answers.id")
       .order("flags_count #{sort_order(desc)}")
-  end
-
-  def sort_by_applied_before(scoped_results, desc = false)
-    scoped_results.order("applied_before #{sort_order(desc)}")
   end
 
   def sort_by_sic_code(scoped_results, desc = false)
@@ -72,6 +64,7 @@ class FormAnswerSearch < Search
 
   def filter_by_sub_status(scoped_results, value)
     out = scoped_results
+
     value.each do |v|
       case v
       when "missing_sic_code"
@@ -82,22 +75,10 @@ class FormAnswerSearch < Search
         out = primary_assessment_submitted(out)
       when "secondary_assessment_submitted"
         out = secondary_assessment_submitted(out)
-      when "missing_audit_certificate"
-        out = out.joins(
-          "LEFT OUTER JOIN audit_certificates ON audit_certificates.form_answer_id=form_answers.id"
-        ).where("audit_certificates.id IS NULL")
-      when "audit_certificate_not_reviewed"
-        out = out.joins(
-          "JOIN audit_certificates auditcerts ON auditcerts.form_answer_id=form_answers.id"
-        ).where("auditcerts.reviewed_at IS NULL")
       when "missing_feedback"
         out = out.joins(
           "LEFT OUTER JOIN feedbacks on feedbacks.form_answer_id=form_answers.id"
         ).where("feedbacks.submitted = false OR feedbacks.id IS NULL")
-      when "missing_press_summary"
-        out = out.joins(
-          "LEFT OUTER JOIN press_summaries on press_summaries.form_answer_id = form_answers.id"
-        ).where("press_summaries.id IS NULL OR press_summaries.approved = false")
       when "missing_rsvp_details"
         out = out.joins(
           "LEFT OUTER JOIN palace_invites on palace_invites.form_answer_id = form_answers.id"
@@ -132,10 +113,6 @@ class FormAnswerSearch < Search
     quoted_states = FormAnswerStateMachine::POST_SUBMISSION_STATES.map { |s| "'#{s}'"}
 
     "(#{quoted_states.join(', ')})"
-  end
-
-  def advanced_select
-    "form_answers.*, (COUNT(other_applications) > 0) AS applied_before"
   end
 
   def filter_klass

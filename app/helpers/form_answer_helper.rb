@@ -75,4 +75,8 @@ module FormAnswerHelper
     assessors = Assessor.available_for(category_picker.current_award_type).map { |a| [a.full_name, a.id] }
     [["Not Assigned", "not assigned"]] + assessors
   end
+
+  def show_bulk_lieutenants_assignment?
+    policy(:lieutenant_assignment_collection).create? && Settings.after_current_submission_deadline?
+  end
 end
