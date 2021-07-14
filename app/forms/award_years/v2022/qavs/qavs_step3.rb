@@ -7,8 +7,7 @@ class AwardYears::V2022::QAEForms
           context %(
             <p>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
             <p>
-              Supporters must not be volunteers or paid workers in the group. Each letter should be no more than 500 words. 
-              The letters should be about the whole group, rather than just one volunteer and should help to show <u>how</u> its work is outstanding. 
+              Supporters must not be volunteers or paid workers in the group. Each letter should be no more than 500 words. The letters should be about the whole group, rather than just one volunteer and should help to show <u>how</u> its work is outstanding. 
             </p>
             <p>Please list below the names of the supporters and their relationship (if any) to the group.</p>
           )

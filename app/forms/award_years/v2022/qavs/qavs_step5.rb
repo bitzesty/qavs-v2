@@ -31,9 +31,7 @@ class AwardYears::V2022::QAEForms
           classes "sub-question"
           context %(
             <p>
-              Please discuss and provide a
-              <strong> short summary of the group's work in one sentence that could be used for their certificate </strong>
-              if they eventually receive a QAVS. The format should be similar to the examples below:
+              Please discuss and provide a <strong>short summary of the group's work in one sentence that could be used for their certificate</strong> if they eventually receive a QAVS. The format should be similar to the examples below:
             </p>
             <p><em>"Providing advice and practical help to women at risk of domestic abuse."</em></p>
             <p><em>"Transforming derelict land into a vibrant community park."</em></p>
@@ -72,10 +70,7 @@ class AwardYears::V2022::QAEForms
           classes "sub-question"
           context %(
             <p>
-              <strong>Please include direct benefits, but also any indirect benefits, </strong>
-              such as preserving heritage or environment, promoting community cohesion among volunteers themselves or contributing to crime reduction.
-              <strong> Please ask the group for evidence to support this </strong>
-              (for example, number of people helped, visitor numbers) and provide details below.
+              <strong>Please include direct benefits, but also any indirect benefits, </strong>such as preserving heritage or environment, promoting community cohesion among volunteers themselves or contributing to crime reduction. <strong>Please ask the group for evidence to support this</strong> (for example, number of people helped, visitor numbers) and provide details below.
             </p>
           )
         end
@@ -363,15 +358,22 @@ class AwardYears::V2022::QAEForms
           ref "E 8"
           context %(
             <p>
-              The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. 
-              If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. 
-              The main guidance for Lieutenancies circulated each September provides more advice about drafting the citation, but you might want to bear in the points below when recommending a group to the national assessors:
+              The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. The main guidance for Lieutenancies circulated each September provides more advice about drafting the citation, but you might want to bear in the points below when recommending a group to the national assessors:
             </p>
             <ul>
               <li>The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.</li>
               <li>Instead, the citation should try to capture what is exceptional about this particular group. For instance, the impact it has made on local people (particularly if the local context is challenging); the ways in which its work or approach is distinctive or different from other groups doing similar things; anything outstanding about the way the group is run; any exemplary qualities in the volunteers themselves.</li>
               <li>The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either as this is an important opportunity to 'bring the group to life' for the national assessors.</li>
             </ul>
+          )
+          pdf_context %(
+            The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. The main guidance for Lieutenancies circulated each September provides more advice about drafting the citation, but you might want to bear in the points below when recommending a group to the national assessors:
+            
+            \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
+            
+            \u2022 Instead, the citation should try to capture what is exceptional about this particular group. For instance, the impact it has made on local people (particularly if the local context is challenging); the ways in which its work or approach is distinctive or different from other groups doing similar things; anything outstanding about the way the group is run; any exemplary qualities in the volunteers themselves.
+            
+            \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either as this is an important opportunity to 'bring the group to life' for the national assessors.
           )
         end
 
