@@ -7,8 +7,6 @@ step "I create new user" do
   click_link "+ Add applicant"
 
   fill_in 'Email', with: 'user@example.com'
-  fill_in 'Password', with: "my98ssdkjv9823kds=2"
-  fill_in 'Password confirmation', with: "my98ssdkjv9823kds=2"
 
   click_button "Save"
 end
@@ -29,11 +27,11 @@ step "I should see user in the list" do
 end
 
 step "a not confirmed user exists" do
-  @not_confirmed_user = FactoryBot.create(:user, confirmed_at: nil, password: "my98ssdkjv9823kds=2")
+  @not_confirmed_user = FactoryBot.create(:user, confirmed_at: nil)
 end
 
 step "a locked user exists" do
-  @locked_user = FactoryBot.create(:user, password: "my98ssdkjv9823kds=2")
+  @locked_user = FactoryBot.create(:user)
   @locked_user.lock_access!
 end
 

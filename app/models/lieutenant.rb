@@ -1,6 +1,7 @@
 class Lieutenant < ApplicationRecord
   extend Enumerize
   include PgSearch::Model
+  include PasswordGeneratable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
