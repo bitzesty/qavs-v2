@@ -7,17 +7,16 @@ class Eligibility::Basic < Eligibility
             label: "Is the group based in the UK, the Channel Islands or the Isle of Man?",
             accept: :true
 
+  property :has_at_least_three_people,
+            boolean: true,
+            label: "Is the group comprised of at least three people?",
+            accept: :true
+
   property :do_you_file_company_tax_returns,
             values: %w[true false na],
             label: "Do you file your Company Tax Returns with HM Revenue and Customs (HMRC)?",
             hint: "All companies and partnerships have to select Yes or No. However, if you are a charity or are based in the Channel Islands or the Isle of Man and do not pay tax to the HMRC, please select N/A.",
             accept: :not_no
-
-  property :has_management_and_two_employees,
-            boolean: true,
-            label: "Did your organisation have two or more full-time UK employees for the last two years?",
-            accept: :true,
-            hint: "Part-time staff should be counted in full-time equivalents (FTE). "
 
   property :organization_kind,
             values: %w[business charity],
@@ -58,7 +57,7 @@ class Eligibility::Basic < Eligibility
     self.based_in_uk = true
     self.do_you_file_company_tax_returns = true
     self.self_contained_enterprise = true
-    self.has_management_and_two_employees = true
+    self.has_at_least_three_people = true
 
     save
   end

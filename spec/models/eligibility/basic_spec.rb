@@ -39,7 +39,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.based_in_uk = true
       eligibility.do_you_file_company_tax_returns = true
       eligibility.self_contained_enterprise = true
-      eligibility.has_management_and_two_employees = true
+      eligibility.has_at_least_three_people = true
 
       expect(eligibility).to be_eligible
     end
@@ -48,7 +48,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.organization_kind = 'charity'
       eligibility.based_in_uk = true
       eligibility.self_contained_enterprise = true
-      eligibility.has_management_and_two_employees = false
+      eligibility.has_at_least_three_people = false
 
       expect(eligibility).not_to be_eligible
     end
@@ -70,8 +70,8 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'returns all questions for new eligibility' do
       expect(eligibility.questions).to eq([
         :based_in_uk,
+        :has_at_least_three_people,
         :do_you_file_company_tax_returns,
-        :has_management_and_two_employees,
         :organization_kind,
         :industry,
         :self_contained_enterprise,
