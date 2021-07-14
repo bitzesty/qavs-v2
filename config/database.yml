@@ -10,6 +10,9 @@ test:
   <<: *default
   database: qavs_test
 
+cloud_build:
+  url: <%= ENV['DATABASE_URL'] %>
+
 staging:
   username: <%= ENV["DB_USER"] %>  # e.g. "my-database-user"
   password: <%= ENV["DB_PASS"] %> # e.g. "my-database-password"
