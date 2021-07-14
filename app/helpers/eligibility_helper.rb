@@ -3,22 +3,22 @@ module EligibilityHelper
     !step || step.to_s == "wicked_finish"
   end
 
-  def eligibility_tax_returns_question_ops
+  def eligibility_volunteer_majority_question_ops
     [
-      ['Yes', 'true'], 
-      ['No', 'false'], 
-      ['N/A', 'na']
+      ['Yes', 'true'],
+      ['No (permitted in exceptional circumstances)', 'false'],
+      ["Don't know", 'na']
     ]
   end
 
-  def eligibility_tax_returns_formatted_answer(answer)
+  def eligibility_volunteer_majority_formatted_answer(answer)
     case answer
     when 'true'
       'Yes'
     when 'false'
-      'No'
+      'No (permitted in exceptional circumstances)'
     when 'na'
-      'N/A'
+      "Don't know"
     end
   end
 end

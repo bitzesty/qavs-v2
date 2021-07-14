@@ -12,10 +12,9 @@ class Eligibility::Basic < Eligibility
             label: "Is the group comprised of at least three people?",
             accept: :true
 
-  property :do_you_file_company_tax_returns,
+  property :are_majority_volunteers,
             values: %w[true false na],
-            label: "Do you file your Company Tax Returns with HM Revenue and Customs (HMRC)?",
-            hint: "All companies and partnerships have to select Yes or No. However, if you are a charity or are based in the Channel Islands or the Isle of Man and do not pay tax to the HMRC, please select N/A.",
+            label: "Are the majority of them volunteers?",
             accept: :not_no
 
   property :organization_kind,
@@ -55,7 +54,7 @@ class Eligibility::Basic < Eligibility
   def save_as_eligible!
     self.organization_kind = 'charity'
     self.based_in_uk = true
-    self.do_you_file_company_tax_returns = true
+    self.are_majority_volunteers = true
     self.self_contained_enterprise = true
     self.has_at_least_three_people = true
 

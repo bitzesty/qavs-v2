@@ -13,7 +13,7 @@ FactoryBot.define do
       answers { {
         kind: "application",
         based_in_uk: true,
-        do_you_file_company_tax_returns: true,
+        are_majority_volunteers: true,
         has_at_least_three_people: true,
         organization_kind: "business",
         industry: "product_business",

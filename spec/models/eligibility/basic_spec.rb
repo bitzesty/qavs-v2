@@ -37,7 +37,7 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'is eligible when all questions are answered correctly' do
       eligibility.organization_kind = 'charity'
       eligibility.based_in_uk = true
-      eligibility.do_you_file_company_tax_returns = true
+      eligibility.are_majority_volunteers = true
       eligibility.self_contained_enterprise = true
       eligibility.has_at_least_three_people = true
 
@@ -71,7 +71,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       expect(eligibility.questions).to eq([
         :based_in_uk,
         :has_at_least_three_people,
-        :do_you_file_company_tax_returns,
+        :are_majority_volunteers,
         :organization_kind,
         :industry,
         :self_contained_enterprise,
