@@ -4,7 +4,7 @@ class Eligibility::Basic < Eligibility
 
   property :based_in_uk,
             boolean: true,
-            label: "Is your organisation based in the UK (including the Channel Islands and the Isle of Man)?",
+            label: "Is the group based in the UK, the Channel Islands or the Isle of Man?",
             accept: :true
 
   property :do_you_file_company_tax_returns,
