@@ -16,7 +16,7 @@ describe "Eligibility forms" do
       click_link("New nomination")
 
       click_button("Start eligibility questionnaire")
-      form_choice(["Yes", "Yes", "Yes", "No", "Yes", "No"])
+      form_choice(["Yes", "Yes", "Yes", "No", "No", "No"])
       expect(page).to have_content("You are eligible to begin your nomination")
       first('.previous-answers').click_link("Continue")
       expect(page).to have_content("Useful Nomination Info Before You Begin")

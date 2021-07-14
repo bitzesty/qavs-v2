@@ -38,7 +38,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.national_organisation = false
       eligibility.based_in_uk = true
       eligibility.are_majority_volunteers = true
-      eligibility.self_contained_enterprise = true
+      eligibility.benefits_animals_only = false
       eligibility.has_at_least_three_people = true
 
       expect(eligibility).to be_eligible
@@ -47,7 +47,7 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'is not eligible when not all answers are correct' do
       eligibility.national_organisation = false
       eligibility.based_in_uk = true
-      eligibility.self_contained_enterprise = true
+      eligibility.benefits_animals_only = false
       eligibility.has_at_least_three_people = false
 
       expect(eligibility).not_to be_eligible
@@ -73,7 +73,7 @@ RSpec.describe Eligibility::Basic, type: :model do
         :has_at_least_three_people,
         :are_majority_volunteers,
         :national_organisation,
-        :self_contained_enterprise,
+        :benefits_animals_only,
         :current_holder
       ])
     end

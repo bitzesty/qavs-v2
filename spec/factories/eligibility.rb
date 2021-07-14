@@ -16,11 +16,10 @@ FactoryBot.define do
         are_majority_volunteers: true,
         has_at_least_three_people: true,
         national_organisation: false,
-        self_contained_enterprise: true,
+        benefits_animals_only: false,
         current_holder: "no"
       }}
     end
-
 
     factory :basic_eligibility, class: "Eligibility::Basic", traits: [:basic]
   end
