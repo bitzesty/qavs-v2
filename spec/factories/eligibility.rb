@@ -17,6 +17,7 @@ FactoryBot.define do
         has_at_least_three_people: true,
         national_organisation: false,
         benefits_animals_only: false,
+        years_operating: "3",
         current_holder: "no"
       }}
     end

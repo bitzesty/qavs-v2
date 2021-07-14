@@ -27,6 +27,11 @@ class Eligibility::Basic < Eligibility
             label: "Does it only benefit animals rather than people?",
             accept: :false
 
+  property :years_operating,
+            positive_integer: true,
+            label: "How long has the group been operating? (must be at least 3 years)",
+            accept: :more_than_two
+
   property :current_holder,
            values: %w[yes no i_dont_know],
            label: "Are you a current Queen's Award holder in any category?",
@@ -51,6 +56,7 @@ class Eligibility::Basic < Eligibility
     self.are_majority_volunteers = true
     self.benefits_animals_only = false
     self.has_at_least_three_people = true
+    self.years_operating = 3
 
     save
   end

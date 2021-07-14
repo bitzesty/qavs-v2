@@ -40,6 +40,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.are_majority_volunteers = true
       eligibility.benefits_animals_only = false
       eligibility.has_at_least_three_people = true
+      eligibility.years_operating = 3
 
       expect(eligibility).to be_eligible
     end
@@ -74,6 +75,7 @@ RSpec.describe Eligibility::Basic, type: :model do
         :are_majority_volunteers,
         :national_organisation,
         :benefits_animals_only,
+        :years_operating,
         :current_holder
       ])
     end
