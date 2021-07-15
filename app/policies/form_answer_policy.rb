@@ -40,6 +40,10 @@ class FormAnswerPolicy < ApplicationPolicy
     ((lieutenant? && lieutenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
   end
 
+  def submit?
+    nominator? || lieutenant? && lieutenancy_assigned? && advanced_lieutenant?
+  end
+
   def update?
     admin? || subject.lead?(record)
   end
