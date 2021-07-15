@@ -12,9 +12,6 @@
             h3
               = award.decorate.company_or_nominee_name || award.id
               br
-              small
-                = award.award_type_full_name
-                '  Award
           td
             p
               - if award.submitted?
