@@ -16,7 +16,7 @@ feature "Admin creates nomination", js: true do
 
     within_window application_window do
       # User interface
-      click_link("New nomination")
+      click_link("Start a new nomination")
       click_button("Mark as eligible and create nomination")
 
       expect(page).to have_content("A. Nominee")

@@ -9,13 +9,14 @@ describe  "User sees the post submission dashboard" do
   before do
     form_answer.state_machine.submit(user)
     login_as user
+    @current_year = AwardYear.current.year
   end
 
   describe "visits the post submission dashboard", js: true do
     it "sees applications properly" do
       visit dashboard_path
       expect(page).to have_content"Edit nomination"
-      expect(page).to have_content("Current Nominations")
+      expect(page).to have_content("#{@current_year} award nominations (current)")
 
       settings.destroy
       settings = create(:settings, :expired_submission_deadlines, award_year_id: AwardYear.current.id)
