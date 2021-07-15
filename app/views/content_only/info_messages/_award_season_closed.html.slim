@@ -1,11 +1,22 @@
 article.group role="article"
-  header.page-header.group
-    div
-      h2
-        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May.
-  .inner
-    .application-notice.info-notice
-      p.text-normal
-        ' Please note, the #{ AwardYear.current.year } award nominations has closed on #{ submission_deadline.decorate.formatted_trigger_time }.
-      p.text-normal
-        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May. We will email you when it opens.
+  - if !@user_award_forms.any?
+    header.page-header.group
+      div
+        h2
+          ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May.
+    .inner
+      .application-notice.info-notice
+        p.text-normal
+          ' Please note, the #{ AwardYear.current.year } award nominations has closed on #{ submission_deadline.decorate.formatted_trigger_time }.
+        p.text-normal
+          ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May. We will email you when it opens.
+  - else
+    br
+    .inner
+      .application-notice.info-notice
+        p.text-normal
+          ' The entry period for the #{ AwardYear.current.year } awards has now closed.
+        p.text-normal
+          ' Award winners will be announced on
+          =< application_deadline_for_year(AwardYear.current, :buckingham_palace_attendees_details, "with_year")
+          ' .
