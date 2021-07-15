@@ -21,8 +21,6 @@ describe "Lieutenant: Lieutenant management" do
 
     fill_in "Email", with: "llkk@example.com"
 
-    fill_in "Password", with: "my98ssdkjv9823kdS=2"
-    fill_in "Retype password", with: "my98ssdkjv9823kdS=2"
     click_button "Create lieutenant"
 
     expect(page).to have_content "LL KK"
