@@ -51,11 +51,11 @@
             ul#proposition-links class="#{show_navigation_links? == false ? "right-align" : ""}"
               - if show_navigation_links?
                 li
-                  = link_to "Nominations", dashboard_path
+                  = link_to "Nominations", dashboard_path, class: current_class?(dashboard_path)
                 li
-                  = link_to "Useful information", useful_information_account_path
+                  = link_to "Useful information", useful_information_account_path, class: current_class?(useful_information_account_path)
                 li
-                  = link_to "Account details", password_settings_account_path
+                  = link_to "Account details", password_settings_account_path, class: current_class?(password_settings_account_path)
               li
                 = link_to "Sign out", destroy_user_session_path, method: :delete
 
