@@ -9,7 +9,8 @@
   header.page-header.group
     div
       h1
-        ' Nominations
+        => AwardYear.current.year
+        ' award nominations (current)
 
 - if Settings.after_current_submission_deadline?
   .dashboard-post-submission
