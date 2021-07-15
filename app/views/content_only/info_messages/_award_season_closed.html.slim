@@ -1,6 +1,9 @@
 article.group role="article"
+  header.page-header.group
+    div
+      h2
+        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May.
   .inner
-    br
     .application-notice.info-notice
       p.text-normal
       ' Please note, the #{ AwardYear.current.year } award nominations has closed on #{ submission_deadline.decorate.formatted_trigger_time }.
