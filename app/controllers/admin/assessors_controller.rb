@@ -16,6 +16,8 @@ class Admin::AssessorsController < Admin::UsersController
 
   def create
     @resource = Assessor.new(resource_params)
+    @resource.generate_password!
+
     authorize @resource, :create?
 
     @resource.save

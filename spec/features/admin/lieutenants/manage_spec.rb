@@ -18,9 +18,6 @@ describe "Admin: Lieutenant management" do
 
     fill_in "Email", with: "llkk@example.com"
 
-    fill_in "Password", with: "my98ssdkjv9823kds=2"
-    fill_in "Retype password", with: "my98ssdkjv9823kds=2"
-
     select "Regular", from: "Role"
 
     click_button "Create lieutenant"

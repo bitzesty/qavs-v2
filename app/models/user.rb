@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include PgSearch::Model
+  include PasswordGeneratable
   extend Enumerize
 
   devise :database_authenticatable, :registerable,

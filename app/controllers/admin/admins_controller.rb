@@ -16,6 +16,8 @@ class Admin::AdminsController < Admin::UsersController
 
   def create
     @resource = Admin.new(resource_params)
+    @resource.generate_password!
+
     authorize @resource, :create?
 
     @resource.save

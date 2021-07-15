@@ -16,6 +16,8 @@ class Admin::LieutenantsController < Admin::UsersController
 
   def create
     @resource = Lieutenant.new(resource_params)
+    @resource.generate_password!
+
     authorize @resource, :create?
 
     @resource.save
