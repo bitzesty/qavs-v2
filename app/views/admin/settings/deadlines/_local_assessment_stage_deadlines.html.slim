@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading#local-assessment-stage-deadlines-heading role="tab"
+    h4.panel-title
+      a data-toggle="collapse" data-parent="#panel-local-assessment-stage" href="#section-local-assessment-stage-deadlines" aria-expanded="true" aria-controls="section-local-assessment-stage-deadlines"
+        ' Deadlines
+  #section-local-assessment-stage-deadlines.section-appraisal-form.section-local-assessment-stage-deadlines.panel-collapse.collapse.in role="tabpanel" aria-labelledby="local-assessment-stage-deadlines-heading"
+    .panel-body
+      ul
+        li = render 'deadline_form', kind: 'local_assessment_submission_end'
