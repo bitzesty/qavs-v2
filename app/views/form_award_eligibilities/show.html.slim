@@ -37,19 +37,12 @@ h1.govuk-heading-xl Queen's Award for Voluntary Service Nomination
               - else
                 .eligibility-failed
                   p.govuk-body-l
-                    - if @form_answer.promotion?
-                      ' Your nominee is
-                    - else
-                      ' At the moment you are
+                    ' At the moment you are
                     strong not eligible
                     '  for this award. Please see your answers below for the reason. If you think you made a mistake in the eligibility questionnaire, you can change your answer.
 
                   p.govuk-body-l
-                    - if @form_answer.promotion?
-                      ' Also, you may consider nominating someone else or your organisation
-                    - else
-                      ' Also, you
-                    ' might be eligible for awards in other categories. Go to the
+                    ' Also, you might be eligible for awards in other categories. Go to the
                     = link_to "nominations page", dashboard_path
                     | to nominate.
         = render "previous_answers"
