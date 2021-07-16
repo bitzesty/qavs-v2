@@ -6,6 +6,7 @@
           h4
             ' You can nominate more than one group
           = render "current_nominations", award_applications: @user_award_forms
+          br
         - else
             .application-notice.help-notice
               .alert.alert-warning
@@ -15,12 +16,3 @@
 
         - if submission_started? && !submission_ended?
           = render "shared/application_awards_status"
-
-  - if submission_deadline && submission_deadline.trigger_at
-    .related-positioning.related-positioning-no-header
-      .related-container
-        .related#related
-          .highlighted-event
-            p
-              ' Submission deadline
-              em = submission_deadline.decorate.formatted_trigger_time
