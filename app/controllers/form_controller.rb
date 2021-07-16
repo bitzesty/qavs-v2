@@ -1,5 +1,6 @@
 class FormController < ApplicationController
   include FormAnswerSubmissionMixin
+  include Pundit
 
   before_action :authenticate_user!
   before_action :check_deadlines

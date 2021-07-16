@@ -66,6 +66,8 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     redirected = params[:next_action] == "redirect"
     submitted = params[:submit] == "true" && !redirected
 
+    authorize resource, :submit? if submitted
+
     respond_to do |format|
       format.html do
         redirected = params[:next_action] == "redirect"
@@ -97,7 +99,8 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
           return
         else
           if submitted && saved
-            redirect_to lieutenant_form_answer_submit_confirm_url(@form_answer)
+            flash[:notice] = "Local assessment was successfully submitted."
+            redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
               params[:next_step] ||= @form.steps[1].title.parameterize
