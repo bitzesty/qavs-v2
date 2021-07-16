@@ -1,0 +1,7 @@
+h1.govuk-heading-xl Sustainable Development Award Application
+
+.article-related-positioning-container
+  .article-container
+    article.group role="article"
+      = form_tag new_sustainable_development_form_path, method: :get do
+        = render "award_nickname", award_type: "development"

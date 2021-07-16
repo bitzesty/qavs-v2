@@ -5,17 +5,13 @@
 #= require vendor/file_upload/jquery.fileupload
 #= require vendor/file_upload/jquery.fileupload-process
 #= require vendor/file_upload/jquery.fileupload-validate
-#= require select2.full.min
 #= require ckeditor/init
 #= require ./ckeditor/config.js
 #= require Countable
 #= require moment.min
 #= require core
-#= require vendor/polyfills/bind
-#= require govuk/selection-buttons
 #= require libs/suchi/isOld.js
 #= require libs/pusher.min.js
-#= require govuk_toolkit
 #= require mobile
 #= require browser-check
 #= require vendor/zxcvbn
@@ -43,15 +39,10 @@ ordinal = (n) ->
     return n + "th"
 
 jQuery ->
-  GOVUK.details.init();
-
-  $("html").removeClass("no-js").addClass("js")
+  $("html").removeClass("no-js")
 
   offlineCheck = new Offline
   offlineCheck.start()
-
-  # initialize Select dropdowns, if needed
-  window.Select2Dropdowns.init()
 
   # This is a very primitive way of testing.
   # Should be refactored once forms stabilize.
@@ -94,8 +85,8 @@ jQuery ->
     hidden_link.toggleClass("show-hint")
 
   $(".supporters-list input").change ->
-    $(this).closest("label").find(".errors-container").empty()
-    $(this).closest(".question-has-errors").removeClass("question-has-errors")
+    $(this).closest("label").find(".govuk-error-message").empty()
+    $(this).closest(".govuk-form-group--error").removeClass("govuk-form-group--error")
 
   # Conditional questions that appear depending on answers
   $(".js-conditional-question, .js-conditional-drop-question").addClass("conditional-question")
@@ -103,13 +94,15 @@ jQuery ->
   simpleConditionalQuestion = (input, clicked) ->
     answer = input.closest(".js-conditional-answer").attr("data-answer")
     question = $(".conditional-question[data-question='#{answer}']")
-    answerVal = input.val()
-
-    if input.attr('type') == 'checkbox'
-      answerVal = input.is(':checked').toString()
+    isCheckbox = input.attr('type') == 'checkbox'
+    checkboxVal = input.val()
+    answerVal = if isCheckbox then input.is(':checked').toString() else input.val()
+    boolean_values = ["0", "1", "true", "false"]
+    values = input.closest(".govuk-form-group").find("input[type='checkbox']").filter(":checked").map(() -> $(@).val()).toArray()
 
     question.each () ->
-      if $(this).attr('data-value') == answerVal || ($(this).attr('data-value') == "true" && (answerVal != 'false' && answerVal != false)) || ($(this).attr('data-type') == "in_clause_collection" && $(this).attr('data-value') <= answerVal)
+      nonBooleanCheckboxMeetsCriteria = isCheckbox && $(this).attr('data-value') in values
+      if $(this).attr('data-value') == answerVal || nonBooleanCheckboxMeetsCriteria || ($(this).attr('data-value') == "true" && (answerVal != 'false' && answerVal != false)) || ($(this).attr('data-type') == "in_clause_collection" && $(this).attr('data-value') <= answerVal)
         if clicked || (!clicked && input.attr('type') == 'radio' && input.is(':checked')) || (!clicked && input.attr('type') != 'radio')
           $(this).addClass("show-question")
       else
@@ -118,7 +111,9 @@ jQuery ->
   $(".js-conditional-answer input, .js-conditional-answer select").each () ->
     simpleConditionalQuestion($(this), false)
   $(".js-conditional-answer input, .js-conditional-answer select").change () ->
-    simpleConditionalQuestion($(this), true)
+    setTimeout((() =>
+      simpleConditionalQuestion($(this), true)
+    ), 50)
   # Numerical conditional that checks that trend doesn't ever drop
   dropConditionalQuestion = (input) ->
     drop_question_ids = input.closest(".js-conditional-drop-answer").attr('data-drop-question')
@@ -535,7 +530,7 @@ jQuery ->
     $el = $(el)
 
     wrapper = $el.closest('div.js-upload-wrapper')
-    button = wrapper.find(".button-add")
+    button = wrapper.find(".js-button-add")
     list = wrapper.find('.js-uploaded-list')
 
     max = wrapper.data('max-attachments')
@@ -564,8 +559,8 @@ jQuery ->
       new_el.append(div)
       list.append(new_el)
       list.removeClass("visuallyhidden")
-      wrapper.removeClass("question-has-errors")
-      wrapper.find(".errors-container").empty()
+      wrapper.removeClass("govuk-form-group--error")
+      wrapper.find(".govuk-error-message").empty()
 
     success_or_error = (e, data) ->
       errors = data.result.errors
@@ -577,8 +572,8 @@ jQuery ->
 
     failed = (error_message) ->
       if error_message
-        wrapper.addClass("question-has-errors")
-        wrapper.find(".errors-container").html("<li>" + error_message + "</li>")
+        wrapper.addClass("govuk-form-group--error")
+        wrapper.find(".govuk-error-message").html(error_message)
 
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
@@ -589,8 +584,8 @@ jQuery ->
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
       list.addClass("visuallyhidden")
-      wrapper.removeClass("question-has-errors")
-      wrapper.find(".errors-container").empty()
+      wrapper.removeClass("govuk-form-group--error")
+      wrapper.find(".govuk-error-message").empty()
 
       # Show new upload
       new_el = $("<li>")
@@ -674,7 +669,7 @@ jQuery ->
       li = $(this).closest 'li'
       list = li.closest(".js-uploaded-list")
       wrapper = list.closest(".js-upload-wrapper")
-      button = wrapper.find(".button-add")
+      button = wrapper.find(".js-button-add")
       max = wrapper.data('max-attachments')
 
       li.remove()
@@ -760,7 +755,7 @@ jQuery ->
           question.find(".list-add").find("li:last-child .remove-link").attr("aria-label", "Remove " + ordinal(idx) + " " + entity)
           clear_example = question.find(".list-add").attr("data-need-to-clear-example")
           if (typeof(clear_example) != typeof(undefined) && clear_example != false)
-            question.find(".list-add li.js-list-item:last .errors-container").empty()
+            question.find(".list-add li.js-list-item:last .govuk-error-message").empty()
             clearFormElements(question.find(".list-add li.js-list-item:last"))
 
           # If .js-add-example has file field (like in SupportLetters)
@@ -780,11 +775,11 @@ jQuery ->
           triggerAutosave()
 
   # Removing these added fields
-  $(document).on "click", ".question-group .list-add .js-remove-link", (e) ->
+  $(document).on "click", ".govuk-form-group .list-add .js-remove-link", (e) ->
     e.preventDefault()
     if !$(this).hasClass("read-only")
       parent_ul = $(this).closest("ul")
-      $(this).closest(".question-group")
+      $(this).closest(".govuk-form-group")
              .find(".js-button-add")
              .removeClass("visuallyhidden")
 
@@ -904,7 +899,7 @@ jQuery ->
   if $('.js-ckeditor').length > 0
 
     $('.js-ckeditor').each (index) ->
-      group = $(this).closest(".question-group")
+      group = $(this).closest(".govuk-form-group")
 
       spacer = $("<div class='js-ckeditor-spacer'></div>")
       spacer.insertAfter($(this).parent().find(".hint"))
@@ -924,7 +919,7 @@ jQuery ->
         target_id = event.editor.name
 
         spinner = group.find(".js-ckeditor-spinner-block")
-        spinner.addClass('hidden')
+        spinner.addClass('govuk-!-display-none')
 
     for i of CKEDITOR.instances
       instance = CKEDITOR.instances[i]

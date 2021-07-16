@@ -254,7 +254,6 @@ ready = ->
       area.removeClass("if-js-hide")
     else
       area.addClass("if-js-hide")
-
   $(document).on "submit", "#new_assessor_assignment_collection", (e) ->
     form = $(this)
     ids = ""
@@ -276,27 +275,19 @@ ready = ->
   # Show/hide the bulk assign assessors form
   $(".form-answer-check, #check_all").on "change", ->
     show_button = false
-
     $(".form-answer-check").each ->
       if $(this).prop("checked")
         show_button = true
-
     if show_button
       $(".bulk-assign-assessors-link").addClass("show-button")
       $(".bulk-assign-lieutenants-link").addClass("show-button")
     else
       $(".bulk-assign-assessors-link").removeClass("show-button")
       $(".bulk-assign-lieutenants-link").removeClass("show-button")
-    $(".bulk-assign-assessors-link").on "click", (e) ->
-      e.preventDefault()
-      $(".bulk-assign-assessors-form").closest(".container").addClass("show-bulk-assign")
-    $(".bulk-assign-lieutenants-link").on "click", (e) ->
-      e.preventDefault()
-      $(".bulk-assign-lieutenants-form").closest(".container").addClass("show-bulk-assign")
-
-  $(".bulk-assign-assessors-cancel-link").on "click", (e) ->
+  $(".bulk-assign-lieutenants-link").on "click", (e) ->
     e.preventDefault()
-    $(".bulk-assign-assessors-form").closest(".container").removeClass("show-bulk-assign")
+    $(".bulk-assign-lieutenants-form").closest(".container").addClass("show-bulk-assign")
+
   $(".bulk-assign-lieutenants-cancel-link").on "click", (e) ->
     e.preventDefault()
     $(".bulk-assign-lieutenants-form").closest(".container").removeClass("show-bulk-assign")
@@ -344,7 +335,6 @@ editFormAnswerAutoUpdate = ->
           $(".section-applicant-lieutenants .form-value").text(result["form_answer"]["ceremonial_county_name"])
           $("#form_answer_ceremonial_county_id").val(result["form_answer"]["ceremonial_county_id"])
           $(".section-applicant-lieutenants .form-edit").removeClass("form-edit")
-
 bindRags =(klass) ->
   $(document).on "click", "#{klass} .btn-rag .dropdown-menu a", (e) ->
     e.preventDefault()

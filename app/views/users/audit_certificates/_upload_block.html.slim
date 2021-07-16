@@ -1,0 +1,15 @@
+.js-upload-wrapper data-max-attachments=1 data-form-name="audit-cert-form" data-name="audit-cert-name" data-filename="Uploaded Verification of Commercial Figures"
+  ul.js-uploaded-list.no-bullets class=("hidden" unless cert_exists)
+    li.li-audit-upload
+      div
+        = render "users/audit_certificates/file", cert_exists: cert_exists,
+                                                  award: award
+
+  / JS Upload Form
+  .if-no-js-hide
+    = render "users/audit_certificates/form", form_answer: award, audit_certificate: award.audit_certificate, cert_exists: cert_exists
+
+  / Non JS Upload Form
+  - unless cert_exists
+    .if-js-hide
+      = render "users/audit_certificates/non_js_form"

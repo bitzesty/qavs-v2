@@ -5,14 +5,14 @@ class AwardYears::V2022::QAEForms
         supporters :supporter_letters_list, "" do
           ref "C 1"
           context %(
-            <p>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
-            <p>
+            <p class='govuk-hint'>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
+            <p class='govuk-hint'>
               Supporters must not be volunteers or paid workers in the group. Each letter should be no more than 500 words. The letters should be about the whole group, rather than just one volunteer and should help to show <u>how</u> its work is outstanding. 
             </p>
-            <p>Please list below the names of the supporters and their relationship (if any) to the group.</p>
+            <p class='govuk-hint'>Please list below the names of the supporters and their relationship (if any) to the group.</p>
           )
           hint "What are the allowed file formats?", %(
-            <p>
+            <p class='govuk-hint'>
               Letters of support must be uploaded as PDF documents when submitting this form.
             </p>
           )

@@ -29,6 +29,7 @@ gem 'govuk_template', '0.12.0'
 gem 'uglifier', '>= 2.7.2'
 gem 'js_cookie_rails', '2.1.4'
 gem 'ckeditor', github: 'galetahub/ckeditor', ref: "752bca97f78e5c5df3fbd876e51a06918da804e2"
+gem 'webpacker', '6.0.0.beta.7'
 
 # Autolinking in admin mass user mailer
 gem 'rails_autolink'

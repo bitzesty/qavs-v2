@@ -5,18 +5,18 @@ window.FormValidation =
 
   clearAllErrors: ->
     @validates = true
-    $(".question-has-errors").removeClass("question-has-errors")
-    $(".errors-container").empty()
+    $(".govuk-form-group--error").removeClass("govuk-form-group--error")
+    $(".govuk-error-message").empty()
     $(".steps-progress-bar .js-step-link").removeClass("step-errors")
 
   clearErrors: (container) ->
     if container.closest(".question-financial").size() > 0
-      if container.closest("label").find(".errors-container li").size() > 0
-        container.closest("label").find(".errors-container").empty()
+      container.closest("label").find(".govuk-error-message").empty()
+    else if container.closest('.question-matrix').length > 0
+      container.closest("td").find(".govuk-error-message").empty()
     else
-      if container.closest(".question-block").find(".errors-container li").size() > 0
-        container.closest(".question-block").find(".errors-container").empty()
-    container.closest(".question-has-errors").removeClass("question-has-errors")
+      container.closest(".question-block").find(".govuk-error-message").empty()
+    container.closest(".govuk-form-group--error").removeClass("govuk-form-group--error")
 
   addErrorMessage: (question, message) ->
     @appendMessage(question, message)
@@ -25,11 +25,11 @@ window.FormValidation =
     @validates = false
 
   appendMessage: (container, message) ->
-    container.find(".errors-container").first().append("<li>#{message}</li>")
+    container.find(".govuk-error-message").first().append(message)
     @validates = false
 
   addErrorClass: (container) ->
-    container.addClass("question-has-errors")
+    container.addClass("govuk-form-group--error")
     page = container.closest(".step-article")
     if !page.hasClass("step-errors")
       # highlight the error sections in sidebar and in error message
@@ -69,11 +69,11 @@ window.FormValidation =
     if question.find("input").hasClass("not-required")
       return true
     else
-      if @isTextishQuestion(question)
-        return question.find("input[type='text'], input[type='number'], input[type='password'], input[type='email'], input[type='url'], textarea").val().toString().trim().length
-
       if @isSelectQuestion(question)
         return question.find("select").val()
+
+      if @isTextishQuestion(question)
+        return question.find("input[type='text'], input[type='number'], input[type='password'], input[type='email'], input[type='url'], textarea").val().toString().trim().length
 
       if @isOptionsQuestion(question)
         return question.find("input[type='radio']").filter(":checked").length
@@ -92,9 +92,7 @@ window.FormValidation =
     if !conditional
       return
 
-    # This handles questions with multiple fields,
-    # like name and address
-    subquestions = question.find(".question-group .question-group")
+    subquestions = question.find(".govuk-form-group .govuk-form-group")
 
     if subquestions.length
       for subquestion in subquestions
@@ -277,7 +275,7 @@ window.FormValidation =
             @addErrorClass(question)
 
   validateCurrentAwards: (question) ->
-    $(".errors-container", question).empty()
+    $(".govuk-error-message", question).empty()
 
     for subquestion in question.find(".list-add li")
       errorText = ""
@@ -303,6 +301,7 @@ window.FormValidation =
 
     for subquestion in question.find("input")
       subq = $(subquestion)
+      qParent = subq.closest(".js-fy-entries")
       errContainer = subq.closest(".span-financial")
 
       shownQuestion = true
@@ -341,7 +340,7 @@ window.FormValidation =
     for subquestionBlock in question.find(".js-fy-entry-container.show-question .date-input")
       subq = $(subquestionBlock)
       qParent = subq.closest(".js-fy-entries")
-      errorsContainer = qParent.find(".errors-container").html()
+      errorsContainer = qParent.find(".govuk-error-message").html()
 
       day = subq.find("input.js-fy-day").val()
       month = subq.find("input.js-fy-month").val()
@@ -361,9 +360,9 @@ window.FormValidation =
           @appendMessage(qParent, "Not a valid date")
           @addErrorClass(question)
         # temporary condition
-        else if parseInt(year) > 2020 || parseInt(year) < 2012
-          @logThis(question, "validateDateByYears", "the year must be from 2012 to 2020")
-          @appendMessage(qParent, "the year must be from 2012 to 2020")
+        else if parseInt(year) > 2021 || parseInt(year) < 2012
+          @logThis(question, "validateDateByYears", "the year must be from 2012 to 2021")
+          @appendMessage(qParent, "the year must be from 2012 to 2021")
           @addErrorClass(question)
 
 
@@ -415,7 +414,7 @@ window.FormValidation =
     if drop
       errorMessage = "Sorry, you are not eligible. \
       You must have constant growth in overseas sales for the entire entry period to be eligible \
-      for a Queen's Award for Enterprise: International Trade."
+      for a Queen's Award for Voluntary Service."
       @logThis(question, "validateDropBlockCondition", errorMessage)
       @addErrorMessage(question, errorMessage)
       return
@@ -456,10 +455,10 @@ window.FormValidation =
 
     $(document).on "change", ".question-block input, .question-block select, .question-block textarea", ->
       self.clearErrors $(this)
-      self.validateIndividualQuestion($(@).closest(".question-block"))
+      self.validateIndividualQuestion($(@).closest(".question-block"), $(@))
 
-  validateIndividualQuestion: (question) ->
-    if question.hasClass("question-required") and not question.hasClass("question-date-by-years") and not question.hasClass("question-money-by-years")
+  validateIndividualQuestion: (question, triggeringElement) ->
+    if question.hasClass("question-required") and not question.hasClass("question-date-by-years") and not question.hasClass("question-money-by-years") and not question.hasClass("question-matrix")
       # console.log "validateRequiredQuestion"
       @validateRequiredQuestion(question)
 
@@ -529,12 +528,8 @@ window.FormValidation =
 
     for question in $(".question-block")
       question = $(question)
-      # console.log "----"
-      # console.log question.find("h2").text()
 
       @validateIndividualQuestion(question)
-
-      #console.log @validates
 
     return @validates
 
@@ -545,8 +540,8 @@ window.FormValidation =
 
     stepContainer = $(".article-container[data-step='" + currentStep + "']")
 
-    stepContainer.find(".question-has-errors").removeClass("question-has-errors")
-    stepContainer.find(".errors-container").empty()
+    stepContainer.find(".govuk-form-group--error").removeClass("govuk-form-group--error")
+    stepContainer.find(".govuk-error-message").empty()
     $(".steps-progress-bar .js-step-link[data-step='" + currentStep + "']").removeClass("step-errors")
 
     for question in stepContainer.find(".question-block")
