@@ -32,19 +32,20 @@ header.page-header.group.page-header-over-sidebar
               h2
                 span class="steps step-d-1"
                   span.visuallyhidden
-                    ' D 1
+                    ' C 1
                   span.todo
-                    ' D 1
+                    ' C 1
                 ' Support Requests
 
           ul.list-add.supporters-list
-            - @form_answer.supporters.each do |supporter|
+            - @form_answer.support_letters.each do |supporter|
               = render "supporter", supporter: supporter
 
           = link_to "+ Add another supporter", new_form_form_answer_supporter_path(@form_answer), class: "button button-add"
           br
           br
 
+          = @step.questions.map(&:key)
           - letters_intro_question =  @step.questions.detect { |q| q.key == :supporter_letters_list }
 
           .question-block
@@ -52,14 +53,14 @@ header.page-header.group.page-header-over-sidebar
               h2
                 span class="steps step-d-2"
                   span.visuallyhidden
-                    ' D 2
+                    ' C 2
                   span.todo
-                    ' D 2
+                    ' C 2
                 ' Upload your letters of support
 
-          == letters_intro_question.context
+          == letters_intro_question&.context
 
-          - for help in letters_intro_question.hint
+          - for help in (letters_intro_question&.hint || [])
             div.hidden-hint
               span.hidden-link
                 = help.title.html_safe

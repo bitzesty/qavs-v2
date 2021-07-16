@@ -21,7 +21,7 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
             p.govuk-body
               ' You need to request or upload at least 2 letters of support.
             p.govuk-body
-              = link_to "Add more letters of support", form_form_answer_supporters_path(@form_answer), class: 'govuk-link'
+              = link_to "Add more letters of support", form_form_answer_support_letters_path(@form_answer), class: 'govuk-link'
 
       = render partial: 'qae_form/step', collection: @form.steps, locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
 
