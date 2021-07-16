@@ -75,6 +75,14 @@ class MailRenderer
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
 
+  def local_assessment_notification
+    assigns = {}
+
+    assigns[:lieutenant] = dummy_lieutenant
+
+    render(assigns, "lieutenants_mailers/local_assessment_notification_mailer/preview/notify")
+  end
+
   def local_assessment_reminder
     assigns = {}
 
