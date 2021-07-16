@@ -2,39 +2,37 @@
 - if unsuccessful.present? && Settings.unsuccessful_stage?
   .container-split
     .content-left
-      h2.govuk-heading-l Unsuccessful
+      h2 Unsuccessful
     .content-right.content-offset-36
-      p.govuk-body
+      p
         ' Your following
         - if unsuccessful.length == 1
-          ' application was
+          ' nomination was
         - else
-          ' applications were
+          ' nominations were
         ' unsuccessful.
     .clear
   - unsuccessful.each do |award|
     .container-split.award-list
       .content-left
-        h3.govuk-heading-m
+        h3
           = award.application_name
           small
             = award.award_type_full_name
             '  Award
       .content-right.content-offset-24
         / Nominators don't get any options after submision
-        - if award.promotion?
-          p.govuk-body Unfortunately your nomination was unsuccessful.
-        - elsif award.not_submitted?
-          p.govuk-body The application was not submitted on time.
+        - if award.not_submitted?
+          p The nomination was not submitted on time.
         - else
-          h4.govuk-heading-s Feedback
+          h4 Feedback
           - if award.feedback.try(:submitted?)
-            p.govuk-body
+            p
               ' Please
-              = link_to "download and read the feedback document", users_form_answer_feedback_path(award, format: :pdf), class: 'govuk-link'
-              '  so you can better understand our decision. We hope it will help you to improve your future applications.
+              = link_to "download and read the feedback document", users_form_answer_feedback_path(award, format: :pdf)
+              '  so you can better understand our decision. We hope it will help you to improve your future nominations.
           - else
-            p.govuk-body You will be notified when your feedback is ready.
+            p You will be notified when your feedback is ready.
       .clear
   br
   br

@@ -2,16 +2,15 @@
 - applications.each do |award|
   .container-split.award-list
     .content-left
-      h3.govuk-heading-m
+      h3
         = award.application_name
         small
           = award.award_type_full_name
           '  Award
     .content-right.content-offset-24
-      p.govuk-body
+      p
         ' Your
-        - link_name = award.promotion? ? "nomination" : "application"
-        => link_to link_name, edit_form_url(award.id), class: 'govuk-link'
+        => link_to "nomination", edit_form_url(award.id)
     .clear
 br
 br
