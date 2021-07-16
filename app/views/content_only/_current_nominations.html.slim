@@ -10,7 +10,7 @@
         tr
           td
             h3
-              = award.decorate.company_or_nominee_name || award.id
+              = award.decorate.company_or_nominee_name || "Nomination ID: " + award.id.to_s
               br
           td
             p
