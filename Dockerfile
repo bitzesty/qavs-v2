@@ -29,6 +29,4 @@ RUN RAILS_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle ex
 
 ADD docker-entrypoint.sh /home/app/docker-entrypoint.sh
 
-EXPOSE 3000
-
 ENTRYPOINT /home/app/docker-entrypoint.sh
