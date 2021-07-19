@@ -1,5 +1,5 @@
 class CustomEmailWorker
-  include Sidekiq::Worker
+  include Cloudtasker::Worker
 
   def perform(request)
     puts "processing email #{request}"

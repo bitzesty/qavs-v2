@@ -1,5 +1,5 @@
 class ApplicantEmailDebounceApiCheckWorker
-  include Sidekiq::Worker
+  include Cloudtasker::Worker
 
   def perform(user_id)
     user = User.find(user_id)

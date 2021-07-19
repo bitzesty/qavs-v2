@@ -88,10 +88,7 @@ gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
 # Background jobs
-gem "sidekiq", "~> 5.2"
-gem "sidekiq-cron", "~> 1.1"
-gem 'sinatra', '~> 2.0', require: nil
-gem "rack-protection"
+gem 'cloudtasker'
 
 # CORS configuration
 gem 'rack-cors', '~> 1.0'
@@ -187,5 +184,4 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.3'
   gem 'timecop'
   gem 'webmock', '3.13.0'
-  gem 'rspec-sidekiq'
 end

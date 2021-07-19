@@ -1,5 +1,5 @@
 class DisqualifiedDeadlineStatesTransitionWorker
-  include Sidekiq::Worker
+  include Cloudtasker::Worker
 
   def perform
     FormAnswerStateMachine.trigger_audit_deadlines

@@ -20,7 +20,7 @@ web: &web
 worker:
   <<: *web
   ports: []
-  command: bundle exec sidekiq -C config/sidekiq.yml
+  command: bundle exec cloudtasker
 redis:
   image: convox/redis
   ports:

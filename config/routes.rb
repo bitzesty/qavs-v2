@@ -1,6 +1,3 @@
-require 'sidekiq/web'
-require 'sidekiq/cron/web'
-
 Rails.application.routes.draw do
   resource :healthcheck, only: :show
 
@@ -22,10 +19,6 @@ Rails.application.routes.draw do
   }
 
   devise_for :lieutenants
-
-  authenticate :admin do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 
   devise_for :assessors
 

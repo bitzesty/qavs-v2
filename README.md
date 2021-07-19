@@ -20,10 +20,10 @@
 ```
 ./bin/setup
 bundle exec rails s
-bundle exec sidekiq -C config/sidekiq.yml
+cloudtasker
 ```
 
-If you're running this on your local dev setup, start redis first before starting sidekiq
+If you're running this on your local dev setup, start redis first before starting cloudtasker
 
 ### Install Poxa
 
