@@ -27,6 +27,9 @@ RUN bundle install --jobs 4 --retry 3
 
 RUN RAILS_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
 
-ADD docker-entrypoint.sh /home/app/docker-entrypoint.sh
+ADD docker-entrypoint.sh /app/docker-entrypoint.sh
 
-ENTRYPOINT /home/app/docker-entrypoint.sh
+ENTRYPOINT /app/docker-entrypoint.sh
+
+bundle exec puma -C config/puma.rb
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
