@@ -16,6 +16,20 @@ GIT
       orm_adapter (~> 0.5.0)
 
 GIT
+  remote: https://github.com/keypup-io/cloudtasker.git
+  revision: 151c44d7bcc664645e31999ae46ae8902a8a7fca
+  ref: 151c44d7bcc664645e31999ae46ae8902a8a7fca
+  specs:
+    cloudtasker (0.12.rc11)
+      activesupport
+      connection_pool
+      fugit
+      google-cloud-tasks (~> 1.0)
+      jwt
+      redis
+      retriable
+
+GIT
   remote: https://github.com/metaware/carrierwave-google-storage.git
   revision: d8092cb70096ae599ffb99ab99ee13c9fc4deafd
   ref: d8092cb70096ae599ffb99ab99ee13c9fc4deafd
@@ -133,14 +147,6 @@ GEM
       rake (< 13.0)
     climate_control (0.2.0)
     cliver (0.3.2)
-    cloudtasker (0.11.0)
-      activesupport
-      connection_pool
-      fugit
-      google-cloud-tasks (~> 1.0)
-      jwt
-      redis
-      retriable
     cocaine (0.6.0)
       terrapin (= 0.6.0)
     codeclimate-test-reporter (1.0.9)
@@ -160,7 +166,7 @@ GEM
     coffee-script-source (1.12.2)
     colorize (0.8.1)
     concurrent-ruby (1.1.9)
-    connection_pool (2.2.2)
+    connection_pool (2.2.5)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
       money (~> 6.9)
@@ -457,8 +463,6 @@ GEM
       rack (>= 2.0.0)
     rack-mini-profiler (1.0.0)
       rack (>= 1.2.0)
-    rack-protection (2.0.7)
-      rack
     rack-ssl-enforcer (0.2.9)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -559,9 +563,6 @@ GEM
       rspec-expectations (~> 3.9)
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
-    rspec-sidekiq (3.0.3)
-      rspec-core (~> 3.0, >= 3.0.0)
-      sidekiq (>= 2.4.0)
     rspec-support (3.9.3)
     rspec_junit_formatter (0.2.3)
       builder (< 4)
@@ -597,11 +598,6 @@ GEM
       rails (>= 4)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
-    sidekiq (5.2.7)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
     signet (0.12.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -701,7 +697,7 @@ DEPENDENCIES
   carrierwave (~> 1.3.2)
   carrierwave-google-storage!
   ckeditor!
-  cloudtasker
+  cloudtasker!
   codeclimate_circle_ci_coverage
   coffee-rails (= 5.0)
   country_select (~> 3.1)
@@ -762,7 +758,6 @@ DEPENDENCIES
   responders (~> 3.0)
   rest-client
   rspec-rails (~> 4.0.1)
-  rspec-sidekiq
   rspec_junit_formatter (= 0.2.3)
   rubocop (~> 0.52)
   sanitize

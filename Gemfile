@@ -88,7 +88,7 @@ gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
 # Background jobs
-gem 'cloudtasker'
+gem 'cloudtasker', github: 'keypup-io/cloudtasker', ref: '151c44d7bcc664645e31999ae46ae8902a8a7fca'
 
 # CORS configuration
 gem 'rack-cors', '~> 1.0'
