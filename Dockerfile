@@ -31,5 +31,4 @@ ADD docker-entrypoint.sh /app/docker-entrypoint.sh
 
 ENTRYPOINT /app/docker-entrypoint.sh
 
-bundle exec puma -C config/puma.rb
-CMD ["/bin/sh", "-c", "bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
