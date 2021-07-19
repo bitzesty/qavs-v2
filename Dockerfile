@@ -31,4 +31,6 @@ ADD docker-entrypoint.sh /app/docker-entrypoint.sh
 
 ENTRYPOINT /app/docker-entrypoint.sh
 
+EXPOSE 3000
+
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
