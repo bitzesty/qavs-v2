@@ -1,7 +1,7 @@
 class Users::CollaboratorAccessController < Users::BaseController
 
   # stop rails CSRF protection for pusher authentication
-  protect_from_forgery except: :auth
+  skip_before_action :verify_authenticity_token, only: :auth
 
   expose(:user_id) do
     "#{current_user.id}-time-#{params[:timestamp]}"
