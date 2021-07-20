@@ -39,6 +39,10 @@ class Deadline < ApplicationRecord
       where(kind: "submission_end")
     end
 
+    def local_assessment_submission_end
+      where(kind: "local_assessment_submission_end")
+    end
+
     def submission_start
       where(kind: "submission_start").first
     end

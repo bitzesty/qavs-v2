@@ -3,29 +3,16 @@
     article.group role="article"
       .inner
         - if @user_award_forms.any?
-          h2
-            ' Current Nominations
+          h4
+            ' You can nominate more than one group
           = render "current_nominations", award_applications: @user_award_forms
-
           br
+        - else
+            .application-notice.help-notice
+              .alert.alert-warning
+                p.text-bold
+                  ' You haven't submitted any nominations.
+                br
 
         - if submission_started? && !submission_ended?
-          h2 Nominating a group for The Queen's Award for Voluntary Service
-
-          h2 Continue to the nomination form
-          / deadline notice
-          p 
-            ' It is very important that you read the 
-            => link_to "guidance notes", guidance_notes_path
-            | before submitting your nominations.
-
           = render "shared/application_awards_status"
-
-  - if submission_deadline && submission_deadline.trigger_at
-    .related-positioning.related-positioning-no-header
-      .related-container
-        .related#related
-          .highlighted-event
-            p
-              ' Submission deadline
-              em = submission_deadline.decorate.formatted_trigger_time

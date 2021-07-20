@@ -36,13 +36,14 @@
     - unless QAE.hide_pdf_links?
       li.divider
       li.step-past.step-download
-        = link_to users_form_answer_path(@form_answer, format: :pdf)
+        - pdf_url = current_user ? users_form_answer_path(@form_answer, format: :pdf) : lieutenant_form_answer_path(@form_answer, format: :pdf)
+        = link_to pdf_url
           = render "content_only/download_icon"
           ' Download your nomination
 
     li.divider
     li.sidebar-helpline
-      ' Need help? Ring us on
+      ' Need help? Call us on
       br
       ' 0207 271 6206
       span.helpline-space
