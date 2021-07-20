@@ -15,6 +15,6 @@ production:
   username: <%= ENV["DB_USER"] %>  # e.g. "my-database-user"
   password: <%= ENV["DB_PASS"] %> # e.g. "my-database-password"
   database: <%= ENV.fetch("DB_NAME") { "qavs" } %>
-  host: "<%= ENV.fetch("DB_HOST") { "127.0.0.1" }%>" # '172.17.0.1' if deployed to GAE Flex
+  host: <%= ENV.fetch("DB_HOST") { "10.65.80.3" }%> # '172.17.0.1' if deployed to GAE Flex
   port: <%= ENV.fetch("DB_PORT") { 5432 }%>
   pool: <%= ENV['DB_POOL'] || ENV['MAX_THREADS'] || 5 %>
