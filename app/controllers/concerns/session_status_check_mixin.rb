@@ -6,7 +6,7 @@ module SessionStatusCheckMixin
   JUDGE_NAMESPACE = "judges".freeze
 
   included do
-    protect_from_forgery with: :exception, prepend: true
+    protect_from_forgery with: :exception
 
     prepend_before_action :skip_timeout, only: [:show]
   end
