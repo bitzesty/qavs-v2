@@ -226,6 +226,18 @@ class FormAnswer < ApplicationRecord
               .try(:trigger_at)
   end
 
+  def local_assessment_end_date
+    award_year.settings
+              .deadlines
+              .local_assessment_submission_end
+              .last
+              .try(:trigger_at)
+  end
+
+  def local_assessment_ended?
+    local_assessment_end_date.present? && (Time.zone.now > local_assessment_end_date)
+  end
+
   def submission_ended?
     submission_end_date.present? && (Time.zone.now > submission_end_date)
   end

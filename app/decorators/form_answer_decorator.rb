@@ -11,8 +11,8 @@ class FormAnswerDecorator < ApplicationDecorator
   NOT_ASSIGNED = "Not Assigned"
   ASSESSORS_NOT_ASSIGNED = "Assessors are not assigned"
 
-  def pdf_generator(pdf_blank_mode=false)
-    "QaePdfForms::Awards2016::#{object.award_type.capitalize}::Base".constantize.new(object, pdf_blank_mode)
+  def pdf_generator(current_subject, pdf_blank_mode=false)
+    "QaePdfForms::Awards2016::#{object.award_type.capitalize}::Base".constantize.new(object, pdf_blank_mode: pdf_blank_mode, current_subject: current_subject)
   end
 
   def feedbacks_pdf_generator

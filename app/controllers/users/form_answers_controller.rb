@@ -1,12 +1,10 @@
 class Users::FormAnswersController < Users::BaseController
+  include FormAnswersPdf
+
   expose(:form_answer) do
     current_user.account
                 .form_answers
                 .find(params[:id])
-  end
-
-  expose(:pdf_blank_mode) do
-    params[:pdf_blank_mode].present?
   end
 
   before_action do
@@ -19,7 +17,7 @@ class Users::FormAnswersController < Users::BaseController
     if can_render_pdf_on_fly?
       respond_to do |format|
         format.pdf do
-          pdf = form_answer.decorate.pdf_generator(pdf_blank_mode)
+          pdf = form_answer.decorate.pdf_generator(current_subject, pdf_blank_mode)
           send_data pdf.render,
                     filename: form_answer.decorate.pdf_filename,
                     type: "application/pdf",
@@ -45,41 +43,7 @@ class Users::FormAnswersController < Users::BaseController
     end
   end
 
-  def can_render_pdf_on_fly?
-    #
-    # Render PDF on fly only if:
-    #
-    # 1) 'Download blank PDF'
-    #
-    # 2) Submission IS NOT ended for current application award year
-    #
-    # 3) Submission IS ended for current application award year,
-    #    but application is not submitted and
-    #    application's award year equal current award year (because
-    #    PDF formatting changes from year to year and we can' generate
-    #    PDF on fly for previous award years)
-    #
-
-    pdf_blank_mode ||
-    !form_answer.submission_ended? ||
-    (
-      form_answer.submission_ended? &&
-      !form_answer.submitted? &&
-      form_answer.award_year_id == AwardYear.current.id
-    )
-  end
-
-  def render_hard_copy_pdf
-    if form_answer.pdf_version.present?
-      redirect_to form_answer.pdf_version.url
-    else
-      if !admin_in_read_only_mode?
-        redirect_to dashboard_path,
-                    notice: "PDF version for your application is not available!"
-      else
-        flash[:notice] = "PDF version for your application is not available!"
-        redirect_back(fallback_location: root_path)
-      end
-    end
+  def resource
+    form_answer
   end
 end
