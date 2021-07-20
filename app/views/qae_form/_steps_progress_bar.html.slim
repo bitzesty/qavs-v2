@@ -36,7 +36,8 @@
     - unless QAE.hide_pdf_links?
       li.divider
       li.step-past.step-download
-        = link_to users_form_answer_path(@form_answer, format: :pdf)
+        - pdf_url = current_user ? users_form_answer_path(@form_answer, format: :pdf) : lieutenant_form_answer_path(@form_answer, format: :pdf)
+        = link_to pdf_url
           = render "content_only/download_icon"
           ' Download your nomination
 

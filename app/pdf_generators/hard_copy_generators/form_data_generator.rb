@@ -14,7 +14,7 @@ class HardCopyGenerators::FormDataGenerator < HardCopyGenerators::Base
     end
 
     @pdf = form_record.decorate
-                      .pdf_generator
+                      .pdf_generator(form_answer.user)
   end
 
   def file_prefix

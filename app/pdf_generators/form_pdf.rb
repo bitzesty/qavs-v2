@@ -31,16 +31,17 @@ class FormPdf < Prawn::Document
               :financial_pointer,
               :pdf_blank_mode
 
-  def initialize(form_answer, pdf_blank_mode=false)
+  def initialize(form_answer, options = {})
     super()
 
+    options[:pdf_blank_mode] ||= false
     @form_answer = form_answer
     @user = form_answer.user
-    @pdf_blank_mode = pdf_blank_mode
+    @pdf_blank_mode = options[:pdf_blank_mode]
     @answers = fetch_answers(pdf_blank_mode)
     set_fonts!
     @award_form = form_answer.award_form.decorate(answers: answers)
-    @steps = award_form.steps
+    @steps = award_form.current_steps(form_answer, options[:current_subject])
     @all_questions = steps.map(&:questions).flatten
     @form_answer_attachments = form_answer.form_answer_attachments.select do |a|
       a.clean?
