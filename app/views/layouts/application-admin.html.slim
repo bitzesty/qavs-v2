@@ -29,6 +29,8 @@ html.no-js
 
     = yield(:head) if content_for?(:head)
 
+    script src="https://unpkg.com/micromodal/dist/micromodal.min.js"
+
     - if Rails.env.test?
      = javascript_tag("$.fx.off = true;")
 
