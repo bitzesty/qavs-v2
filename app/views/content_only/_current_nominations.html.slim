@@ -9,12 +9,9 @@
       - award_applications.each_with_index do |award, index|
         tr
           td
-            h4
-              - app_name = award.decorate.application_name
+            h3
+              = award.decorate.company_or_nominee_name || "Nomination ID: " + award.id.to_s
               br
-              small
-                = award.award_type_full_name
-                '  Award
           td
             p
               - if award.submitted?

@@ -1,0 +1,22 @@
+.container-split
+  
+- past_applications.each do |award|
+  - award = award.decorate
+
+  .container-split.award-list
+    .content-left
+      h3
+        = award.company_or_nominee_name
+        small
+          - if award.awarded?
+            ' Successful
+          - else
+            ' Unsuccessful
+    .content-right.content-offset-24
+      = render "content_only/past_applications/download_pdf_link", award: award
+
+      - if award.not_submitted?
+        p The nomination was not submitted on time.
+    .clear
+br
+br

@@ -8,8 +8,8 @@ article.group role="article"
         = render "content_only/info_messages/new_users_message"
 
         - if Settings.after_current_submission_deadline_start?
-          ' Please note, we are still in the process of updating the nomination form for the year #{award_year.year}
-          br
+          p.text-normal
+            ' Please note, we are still in the process of updating the nomination form for the year #{award_year.year}
         - else
           ' The entry period for the #{award_year.year - 1} Awards season has now closed.
           br

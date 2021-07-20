@@ -13,7 +13,7 @@ describe "Eligibility forms" do
   context "innovation" do
     it "process the eligibility form" do
       visit dashboard_path
-      click_link("New nomination")
+      click_link("Start a new nomination")
 
       click_button("Start eligibility questionnaire")
       form_choice(["Yes", "Yes", "Yes", "No", "No"])

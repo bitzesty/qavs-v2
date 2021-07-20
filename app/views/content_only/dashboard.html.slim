@@ -2,14 +2,21 @@
 
 - if Settings.after_current_submission_deadline?
   = render "content_only/info_messages/award_season_closed"
-- elsif Settings.current_award_year_switched?
-  = render "content_only/info_messages/award_season_opens_soon"
+
+/ hidden for demo purposes
+/ - elsif Settings.current_award_year_switched?
+/   = render "content_only/info_messages/award_season_opens_soon"
+
+
+/ - if submission_deadline && submission_deadline.trigger_at
+/   = render "dashboard_deadline_banner"
 
 - if Settings.after_current_submission_deadline_start? || past_applications.present?
   header.page-header.group
     div
       h1
-        ' Nominations
+        => AwardYear.current.year
+        ' award nominations (current)
 
 - if Settings.after_current_submission_deadline?
   .dashboard-post-submission

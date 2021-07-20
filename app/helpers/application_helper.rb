@@ -141,4 +141,8 @@ module ApplicationHelper
       str
     ).text.strip
   end
+
+  def current_class?(path)
+    request.path == path ? "active" : ""
+  end
 end
