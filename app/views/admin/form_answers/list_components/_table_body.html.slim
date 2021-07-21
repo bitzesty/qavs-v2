@@ -11,7 +11,11 @@
           em
             ' Not yet specified
     td = obj.dashboard_status(current_admin.class.name)
-    td = obj.ceremonial_county.name
+    td
+      -if obj.ceremonial_county.present?
+        = obj.ceremonial_county.name
+      -else
+        'Not stated
     td
       - app_comments = application_comments(obj.comments_count)
       - if app_comments.present?
