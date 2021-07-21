@@ -119,6 +119,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :submission_deadline
 
+  def local_assessment_submission_deadline
+    Settings.current_local_assessment_submission_deadline
+  end
+  helper_method :local_assessment_submission_deadline
+
   def log_action(action_type)
     AuditLog.create!(subject: current_subject, action_type: action_type)
   end
