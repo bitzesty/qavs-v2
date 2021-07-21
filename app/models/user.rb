@@ -44,7 +44,6 @@ class User < ApplicationRecord
     belongs_to :account
     has_many :form_answer_attachments, as: :attachable
     has_many :support_letter_attachments, dependent: :destroy
-    has_many :supporters, dependent: :destroy
   end
 
   begin :scopes
