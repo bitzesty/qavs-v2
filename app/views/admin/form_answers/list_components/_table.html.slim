@@ -5,7 +5,7 @@ table.table.applications-table
         span.if-no-js-hide
           = check_box_tag :check_all
       th.sortable width="450"
-        = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
+        = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
       th width="250"
         | Status
       th width="200"
