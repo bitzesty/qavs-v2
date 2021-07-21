@@ -3,7 +3,8 @@ footer
     ul.group
       - if step.previous
         li.previous.previous-alternate.js-step-link data-step="step-#{step.previous.title.parameterize}"
-          = link_to edit_form_url(step: step.previous.title.parameterize), rel: "prev", title: "Navigate to previous part", "aria-label" => "Back to #{step.previous.title}" do
+          - back_url = current_user ? edit_form_url(step: step.previous.title.parameterize) : edit_lieutenant_form_answer_url(@form_answer, step: step.previous.title.parameterize)
+          = link_to back_url, rel: "prev", title: "Navigate to previous part", "aria-label" => "Back to #{step.previous.title}" do
             span.pagination-label
               | Back
             /span class="pagination-part-title"
