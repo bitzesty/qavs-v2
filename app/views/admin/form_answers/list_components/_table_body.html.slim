@@ -16,6 +16,7 @@
         = obj.ceremonial_county.name
       -else
         'Not stated
+    td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td
       - app_comments = application_comments(obj.comments_count)
       - if app_comments.present?
