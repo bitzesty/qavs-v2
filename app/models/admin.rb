@@ -7,8 +7,7 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   devise :authy_authenticatable, :database_authenticatable,
-         :recoverable, :trackable, :validatable, :confirmable,
-         :zxcvbnable, :lockable, :timeoutable
+         :recoverable, :trackable, :validatable, :confirmable
 
   validates :first_name, :last_name, presence: true
 
