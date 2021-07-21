@@ -717,6 +717,15 @@ jQuery ->
       $("#form_eligibility_show").addClass("visuallyhidden")
       $("#form_eligibility_questions").removeClass("visuallyhidden")
 
+  $(".question-block .js-button-add").each ->
+    question = $(this).closest(".question-block")
+    add_limit_attr = question.find(".list-add").attr("data-add-limit")
+    li_size = question.find(".list-add > li:visible").size()
+
+    if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
+      if li_size + 1 >= add_limit_attr
+        question.find(".js-button-add").addClass("govuk-!-display-none")
+
   # Clicking `+ Add` on certain questions add fields
   $(document).on "click", ".question-block .js-button-add", (e) ->
     e.preventDefault()
@@ -741,7 +750,7 @@ jQuery ->
             can_add = false
 
           if li_size + 1 >= add_limit_attr
-            question.find(".js-button-add").addClass("visuallyhidden")
+            question.find(".js-button-add").addClass("govuk-!-display-none")
 
         if can_add
           add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\d+)\]/g, "$1#{li_size}]")
@@ -749,6 +758,7 @@ jQuery ->
 
           question.find(".list-add").append("<li class='js-add-example js-list-item'>#{add_eg}</li>")
           question.find(".list-add").find("li:last-child input").prop("disabled", false)
+          question.find(".list-add").find("li:last-child .js-save-collection").prop("disabled", false)
 
           idx = question.find(".list-add").find("> li").length
 

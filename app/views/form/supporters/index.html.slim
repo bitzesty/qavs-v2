@@ -1,12 +1,12 @@
 - provide(:page_wrapper_class, "page-award-form")
 
 - content_for :breadcrumbs do
-  li = link_to "Nominations", dashboard_path
-  li = @form.title
+  li.govuk-breadcrumbs__list-item = link_to "Nominations", dashboard_path, class: 'govuk-breadcrumbs__link'
+  li.govuk-breadcrumbs__list-item = @form.title
 
 header.page-header.group.page-header-over-sidebar
   div
-    h1
+    h1.govuk-heading-xl
       = @form.title
 
 .steps-progress-container
@@ -15,7 +15,7 @@ header.page-header.group.page-header-over-sidebar
 
     .article-container.article-container-wider.step-article.step-current
       article.group role="article"
-        .inner
+        div
           - supporters_intro_question = @step.questions.detect { |q| q.key =  :support_letters_intro }
 
           == supporters_intro_question.context
@@ -29,7 +29,7 @@ header.page-header.group.page-header-over-sidebar
 
           .question-block
             label
-              h2
+              h2.govuk-heading-l
                 span class="steps step-d-1"
                   span.visuallyhidden
                     ' C 1
@@ -41,7 +41,7 @@ header.page-header.group.page-header-over-sidebar
             - @form_answer.support_letters.each do |supporter|
               = render "supporter", supporter: supporter
 
-          = link_to "+ Add another supporter", new_form_form_answer_supporter_path(@form_answer), class: "button button-add"
+          = link_to "+ Add another supporter", new_form_form_answer_supporter_path(@form_answer), class: "govuk-button govuk-button--secondary button-add"
           br
           br
 
@@ -50,7 +50,7 @@ header.page-header.group.page-header-over-sidebar
 
           .question-block
             label
-              h2
+              h2.govuk-heading-l
                 span class="steps step-d-2"
                   span.visuallyhidden
                     ' C 2
@@ -71,7 +71,7 @@ header.page-header.group.page-header-over-sidebar
             - @form_answer.support_letters.each do |support_letter|
               = render "form/support_letters/support_letter", support_letter: support_letter
 
-          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "button button-add"
+          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "govuk-button govuk-button--secondary button-add"
 
     = render "qae_form/steps_progress_bar", current_step: "letters-of-support"
 

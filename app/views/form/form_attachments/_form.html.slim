@@ -3,9 +3,9 @@ li
     = simple_form_for form_answer_attachment,
                       url: form_form_answer_form_attachments_url(@form_answer),
                       html: { class: 'qae-form' } do |f|
-      .row
-        .span-6
-          = f.input :file, as: :file, input_html: { class: "form-control" }
+      .govuk-grid-row
+        .govuk-grid-column-one-half
+          = f.input :file, as: :file
       .clear
       = f.label :description
       .char-count.char-max-shift
@@ -13,7 +13,7 @@ li
           | Word limit:
           span.total-count 100
         = f.input :description, as: :text, rows: 2, label: false
-      .row
-        .span-12
-          = f.submit "Save attachment", class: "button button-alt"
+      .govuk-grid-row
+        .govuk-grid-column-full
+          = f.submit "Save attachment", class: "govuk-button button-alt"
       .clear

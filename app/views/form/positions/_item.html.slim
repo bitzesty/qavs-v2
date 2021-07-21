@@ -2,36 +2,36 @@ li non-js-attribute=attrs["name"]
   div
     = button_to "Remove", form_form_answer_positions_url(@form_answer, position: attrs),
                           method: :delete,
-                          class: "remove-link non-js-remove-link",
+                          class: "remove-link non-js-remove-link govuk-button govuk-button--warning",
                           form_class: "non-js-button-to"
 
     = link_to "Edit",
               edit_form_form_answer_positions_url(@form_answer.id, position: attrs),
-              class: "remove-link non-js-edit-link"
+              class: "remove-link non-js-edit-link govuk-button govuk-button--secondary"
 
   = simple_form_for :position, url: "#", html: { class: 'qae-form' } do |f|
 
-    label
+    label.govuk-label
       strong Position/role
-    p
+    p.govuk-body
       - if attrs["name"].present?
         = attrs["name"]
       - else
         ' -
     br
 
-    label
+    label.govuk-label
       strong Start Date
-    p
+    p.govuk-body
       - if attrs["start_month"].present? and attrs["start_year"].present?
         = "#{attrs['start_month']}/#{attrs['start_year']}"
       - else
         ' -
     br
 
-    label
+    label.govuk-label
       strong End Date
-    p
+    p.govuk-body
       - if attrs["ongoing"].to_s == "1"
         ' Ongoing
       - else
@@ -41,9 +41,9 @@ li non-js-attribute=attrs["name"]
           ' -
     br
 
-    label
+    label.govuk-label
       strong Details
-    p
+    p.govuk-body
       - if attrs["details"].present?
         = attrs["details"]
       - else

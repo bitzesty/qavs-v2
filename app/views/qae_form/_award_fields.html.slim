@@ -4,8 +4,8 @@
 
 li.js-add-example class=(award.blank? ? "if-no-js-hide" : '') non-js-attribute=award["title"]
   - errors = @form_answer.validator_errors
-  - if errors && errors[question.key] && errors[question.key][index]
-    span.govuk-error-message
+  span.govuk-error-message
+    - if errors && errors[question.key] && errors[question.key][index]
       = errors[question.key][index]
 
   - unless admin_in_read_only_mode?

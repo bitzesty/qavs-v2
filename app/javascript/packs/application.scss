@@ -78,3 +78,10 @@ body.js-enabled {
   height: 1px;
   overflow: hidden;
 }
+
+.autocomplete__hint,
+.autocomplete__input,
+.autocomplete__option {
+  @extend .govuk-body;
+  margin: 0 !important;
+}
