@@ -12,16 +12,17 @@ Rails.application.routes.draw do
 
   devise_for :admins, controllers: {
     confirmations: "devise/confirmations",
-    devise_authy: "admin/devise_authy"
+    devise_authy: "admin/devise_authy",
+    sessions: "sessions"
   }, path_names: {
     verify_authy: "/verify-token",
     enable_authy: "/enable-two-factor",
     verify_authy_installation: "/verify-installation"
   }
 
-  devise_for :lieutenants
+  devise_for :lieutenants, controllers: { sessions: 'sessions' }
 
-  devise_for :assessors
+  devise_for :assessors, controllers: { sessions: 'sessions' }
 
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
