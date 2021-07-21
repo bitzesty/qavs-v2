@@ -287,19 +287,6 @@ ready = ->
     else
       $(".bulk-assign-assessors-link").removeClass("show-button")
       $(".bulk-assign-lieutenants-link").removeClass("show-button")
-    # $(".bulk-assign-assessors-link").on "click", (e) ->
-    #   e.preventDefault()
-    #   $(".bulk-assign-assessors-form").closest(".container").addClass("show-bulk-assign")
-    # $(".bulk-assign-lieutenants-link").on "click", (e) ->
-    #   e.preventDefault()
-    #   $(".bulk-assign-lieutenants-form").closest(".container").addClass("show-bulk-assign")
-
-  $(".bulk-assign-assessors-cancel-link").on "click", (e) ->
-    e.preventDefault()
-    $(".bulk-assign-assessors-form").closest(".container").removeClass("show-bulk-assign")
-  $(".bulk-assign-lieutenants-cancel-link").on "click", (e) ->
-    e.preventDefault()
-    $(".bulk-assign-lieutenants-form").closest(".container").removeClass("show-bulk-assign")
 
 changeRagStatus = ->
   $(document).on "click", ".btn-rag .dropdown-menu a", (e) ->

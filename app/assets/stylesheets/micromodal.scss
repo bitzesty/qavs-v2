@@ -1,5 +1,5 @@
 .mm-modal {
-  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+  
 }
 
 .mm-modal__overlay {
@@ -18,7 +18,7 @@
 .mm-modal__container {
   background-color: #fff;
   padding: 30px;
-  max-width: 500px;
+  max-width: 650px;
   max-height: 100vh;
   border-radius: 4px;
   overflow-y: auto;
@@ -35,7 +35,7 @@
   margin-top: 0;
   margin-bottom: 0;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 2rem;
   line-height: 1.25;
   box-sizing: border-box;
 }
@@ -45,24 +45,27 @@
   border: 0;
 }
 
-.mm-modal__header .mm-modal__close:before { content: "\2715"; }
+.mm-modal__header .mm-modal__close:before { 
+  content: "\2715";
+  font-weight: bold; }
 
 .mm-modal__content {
   margin-top: 2rem;
   margin-bottom: 2rem;
   line-height: 1.5;
-  color: rgba(0,0,0,.8);
+  color: black
 }
 
 .mm-modal__btn {
-  font-size: .875rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  background-color: #e6e6e6;
-  color: rgba(0,0,0,.8);
-  border-radius: .25rem;
+  font-size: 1em;
+  padding-left: 0.6em; 
+  padding-right: 0.6em;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  background-color: #00823b;
+  box-shadow: 0 2px 0 #003618;
+  color: #fff;
+  border-radius: 0;
   border-style: none;
   border-width: 0;
   cursor: pointer;
@@ -92,12 +95,31 @@
   color: #fff;
 }
 
-@keyframes mmfadeIn {
+.mm-modal-select {
+  -webkit-appearance: menulist !important;
+  background-image: none !important;
+  width: 50%;
+  border-color: black;
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  :focus {
+    border-color: black !important;
+    border-width: 3px !important;
+    box-shadow: 0 8px 8px #ffdd00 !important;
+  }
+}
+
+.mm-modal-cancel-link {
+  text-decoration: underline;
+  margin-right: 10px;
+}
+
+@keyframes mm-modal-fadeIn {
   from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes mmfadeOut {
+@keyframes mm-modal-fadeOut {
   from { opacity: 1; }
     to { opacity: 0; }
 }
@@ -107,7 +129,7 @@ from { transform: translateY(15%); }
   to { transform: translateY(0); }
 }
 
-@keyframes mOut {
+@keyframes mm-modal-Out {
   from { transform: translateY(0); }
   to { transform: translateY(-10%); }
 }
