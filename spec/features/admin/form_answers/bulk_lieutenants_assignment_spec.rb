@@ -25,22 +25,17 @@ describe "Admin assigns lieutenants", %(
     it "assigns the lieutenant" do
       first("#check_all").set(true)
 
-      find(".btn", text: "Bulk Assign Lieutenants").click
+      find("button", text: "Bulk assign to Lord Lieutenancy office").click
+      find(:css, "#modal-bulk-assign-lieutenants").should be_visible
 
-      open_county_select
+      select ceremonial_county_2.name, from: "Select Lord Lieutenancy office"
 
-      all(".select2-results__options li")[2].click
-
-      within ".bulk-assign-lieutenants-form" do
-        click_button "Assign"
+      within "#modal-bulk-assign-lieutenants" do
+        click_button "Bulk assign groups to Lord Lieutenancy office"
       end
 
       expect(form_answer_1.reload.ceremonial_county.name).to eq("B")
       expect(form_answer_2.reload.ceremonial_county.name).to eq("B")
     end
   end
-end
-
-def open_county_select
-  page.execute_script("$('#lieutenant_assignment_collection_ceremonial_county_id').select2('open');")
 end

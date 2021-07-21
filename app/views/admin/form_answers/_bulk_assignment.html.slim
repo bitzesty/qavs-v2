@@ -18,7 +18,7 @@
                 = f.select :ceremonial_county_id,
                           CeremonialCounty.all.pluck(:name, :id),
                           { include_blank: true },
-                          class: "form-control mm-modal-select"
+                          class: "form-control mm-modal__select"
 
               = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 
