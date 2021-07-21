@@ -36,20 +36,26 @@ class AwardYears::V2022::QAEForms
           ])
         end
 
-        text :nominee_phone, "Telephone number" do
+        ceremonial_county :nominee_ceremonial_county, "Lieutenancy county (if known)" do
           sub_ref "A 1.4"
+          classes "sub-question"
+          counties
+        end
+
+        text :nominee_phone, "Telephone number" do
+          sub_ref "A 1.5"
           classes "sub-question"
           style "small"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           classes "sub-question"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           classes "sub-question"
           form_hint "Social media accounts if known"
           words_max 100
