@@ -363,7 +363,6 @@ class FormAnswer < ApplicationRecord
     self.nominee_activity = nominee_activity_from_document
     self.nominator_full_name = nominator_full_name_from_document
     self.nominator_email = nominator_email_from_document
-    self.ceremonial_county_id = ceremonial_county_from_document
   end
 
   def nominee_full_name_from_document
