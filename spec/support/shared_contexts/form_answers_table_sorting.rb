@@ -15,10 +15,10 @@ shared_context "form answers table sorting" do
     end
 
     it "sorts by Company/Nominee header" do
-      click_header("Company")
+      click_header("Group name")
       expect(column_values(header_position)).to eq(asc_company_names.reverse)
 
-      click_header("Company")
+      click_header("Group name")
       expect(column_values(header_position)).to eq(asc_company_names)
     end
   end
