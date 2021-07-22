@@ -4,15 +4,15 @@ class Lieutenant < ApplicationRecord
   include PasswordGeneratable
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :zxcvbnable, :timeoutable,
-         :session_limitable
+         :session_limitable, :trackable
 
   belongs_to :ceremonial_county
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :role, :ceremonial_county, presence: true
 
   enumerize :role, in: %w(regular advanced)
 
