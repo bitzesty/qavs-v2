@@ -14,7 +14,7 @@
       - if obj.urn.present?
         = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
       - else
-        span.urn-not-generated Not yet generated
+        span.urn-not-generated Not generated
     td = obj.dashboard_status(current_admin.class.name)
     td
       - if obj.ceremonial_county.present?
