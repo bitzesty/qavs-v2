@@ -5,13 +5,17 @@ table.table.applications-table
         span.if-no-js-hide
           = check_box_tag :check_all
       th.sortable width="450"
-        = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
+        = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
       th width="250"
         | Status
+      th width="200"
+        | Lord Lieutenancy office
+      th width="200"
+        | Type of group
       th.sortable width="110"
         = sort_link f, "Flag", @search, :flag, disabled: @search.query?
       th.sortable width="130"
         = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
-      th View Nomination
+      th View
   tbody
     = render("admin/form_answers/list_components/table_body")

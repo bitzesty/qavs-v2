@@ -18,3 +18,5 @@ jQuery ->
     $("tbody", wrapper).load href, ->
       link.removeClass("hidden")
       $(".updating-data", wrapper).addClass("hidden")
+
+  MicroModal.init();

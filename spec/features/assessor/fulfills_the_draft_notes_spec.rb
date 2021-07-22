@@ -17,7 +17,7 @@ describe "Assessor fulfills the draft notes.", js: true do
     find("#draft-notes-heading .panel-title a").click
     within "#section-draft-notes" do
       find("#draft_note_content").set(text)
-      click_link "Save"
+      click_on "Save"
       wait_for_ajax
     end
     visit assessor_form_answer_path form_answer
