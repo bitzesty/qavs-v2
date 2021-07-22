@@ -20,16 +20,9 @@ en:
         assessors: Assessors
         all_users: All applicants
     eligibility/basic:
-      organization_kind:
-        business: "Business (e.g. companies, partnerships, social enterprises)"
-        charity: "Not-for-profit (e.g. charities, foundations, associations)"
       kind:
         application: Apply for an organisation award
         nomination: Nominate an individual
-      industry:
-        product_business: Product business
-        service_business: Service business
-        either_business: Mixed business
       current_holder:
         i_dont_know: "I don't know"
     eligibility/innovation:
@@ -161,6 +154,7 @@ en:
 
   email_notification_help_messages:
     award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
+    local_assessment_notification: "This email be sent out to Lieutenants to notify them about available local assessments in their ceremonial county"
     local_assessment_reminder: "This email be sent out to Lieutenants to remind them to submit their local assessment forms"
     shortlisted_notifier: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
     winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
@@ -171,6 +165,7 @@ en:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
     submission_started_notification: "Notify users that nominations for the new Award year are open"
     reminder_to_submit: Reminder to submit the nominations (to all those who have started but not yet submitted nominations).
+    local_assessment_notification: "Notification to start the local assessment"
     local_assessment_reminder: "Reminder to submit the local assessment form"
     winners_notification: "WINNERS : Email notifying all winning business applicants of their success & requesting their confirmation of their Press Book entry."
     winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning applicants who haven't submitted yet)."

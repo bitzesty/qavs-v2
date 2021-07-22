@@ -100,6 +100,8 @@ class FormAnswerStatus::LieutenantFilter
   end
 
   def self.activity_options
-    FormAnswerStatus::AdminFilter::ACTIVITY_OPTIONS
+    option = Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
+      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
+    } ]
   end
 end

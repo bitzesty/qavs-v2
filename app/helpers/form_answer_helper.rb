@@ -3,6 +3,13 @@
 require "countries"
 
 module FormAnswerHelper
+  def format_submit_notice(notice)
+    notice.gsub!("[SUBMISSION_ENDS_TIME]", submission_deadline.decorate.formatted_trigger_time)
+    notice.gsub!("[LIEUTENANT_SUBMISSION_ENDS_TIME]", local_assessment_submission_deadline.decorate.formatted_trigger_time)
+
+    notice
+  end
+
   def application_flags(fa, subject = nil)
     comments_count = if subject
       if current_subject.is_a?(Admin)

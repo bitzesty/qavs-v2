@@ -16,11 +16,5 @@
 /* link:      Download PDF
 /* action:    Download PDF of your application
 
-ul.applications-list
-  li
-    h3.govuk-heading-m
-      ' QAVS
-    small
-      ' You can apply for multiple Promoting Opportunity Awards
-    .pull-right
-      = link_to "New nomination", apply_qavs_award_path, "aria-label" => "New nomination"
+.pull-left
+  = link_to "Start a new nomination", apply_qavs_award_path, "aria-label" => "New nomination", class: "govuk-button"

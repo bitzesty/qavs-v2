@@ -13,12 +13,9 @@
 
   = yield :head
 
-
-
 - content_for :header_class do
   - unless landing_page?
     ' with-proposition
-
 
 - content_for :proposition_header do
   - unless landing_page?
@@ -94,10 +91,10 @@
 
           - unless landing_page?
             p.footer-helpline.govuk-body
-              ' Need help? Ring us on
-              strong 020 7215 6880
+              ' Need help? Call us on
+              strong 0207 271 6206
               ' . Alternatively, email us at
-              = link_to "queensawards@beis.gov.uk", "mailto:queensawards@beis.gov.uk", class: 'govuk-link'
+              = link_to "queensaward@dcms.gov.uk", "mailto:queensaward@dcms.gov.uk", class: 'govuk-link'
 
 - content_for :footer_support_links do
   h2.govuk-visually-hidden Support links

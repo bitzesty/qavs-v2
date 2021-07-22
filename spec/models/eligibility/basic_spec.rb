@@ -28,27 +28,28 @@ RSpec.describe Eligibility::Basic, type: :model do
 
     it 'is eligible in the middle of the survey' do
       eligibility.current_step = :based_in_uk
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
 
       expect(eligibility).to be_eligible
     end
 
     it 'is eligible when all questions are answered correctly' do
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
-      eligibility.do_you_file_company_tax_returns = true
-      eligibility.self_contained_enterprise = true
-      eligibility.has_management_and_two_employees = true
+      eligibility.are_majority_volunteers = true
+      eligibility.benefits_animals_only = false
+      eligibility.has_at_least_three_people = true
+      eligibility.years_operating = 3
 
       expect(eligibility).to be_eligible
     end
 
     it 'is not eligible when not all answers are correct' do
-      eligibility.organization_kind = 'charity'
+      eligibility.national_organisation = false
       eligibility.based_in_uk = true
-      eligibility.self_contained_enterprise = true
-      eligibility.has_management_and_two_employees = false
+      eligibility.benefits_animals_only = false
+      eligibility.has_at_least_three_people = false
 
       expect(eligibility).not_to be_eligible
     end
@@ -70,18 +71,13 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'returns all questions for new eligibility' do
       expect(eligibility.questions).to eq([
         :based_in_uk,
-        :do_you_file_company_tax_returns,
-        :has_management_and_two_employees,
-        :organization_kind,
-        :industry,
-        :self_contained_enterprise,
+        :has_at_least_three_people,
+        :are_majority_volunteers,
+        :national_organisation,
+        :benefits_animals_only,
+        :years_operating,
         :current_holder
       ])
-    end
-
-    it 'does not return industry for charity' do
-      eligibility.organization_kind = 'charity'
-      expect(eligibility.questions).not_to include(:industry)
     end
   end
 end

@@ -9,12 +9,8 @@
       - award_applications.each_with_index do |award, index|
         tr
           td
-            h4.govuk-heading-s
-              = award.decorate.application_name
-              br
-              small
-                = award.award_type_full_name
-                '  Award
+            h3.govuk-heading-m
+              = award.decorate.company_or_nominee_name || "Nomination ID: " + award.id.to_s
           td
             p.govuk-body
               - if award.submitted?

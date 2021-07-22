@@ -13,15 +13,14 @@ FactoryBot.define do
       answers { {
         kind: "application",
         based_in_uk: true,
-        do_you_file_company_tax_returns: true,
-        has_management_and_two_employees: true,
-        organization_kind: "business",
-        industry: "product_business",
-        self_contained_enterprise: true,
+        are_majority_volunteers: true,
+        has_at_least_three_people: true,
+        national_organisation: false,
+        benefits_animals_only: false,
+        years_operating: "3",
         current_holder: "no"
       }}
     end
-
 
     factory :basic_eligibility, class: "Eligibility::Basic", traits: [:basic]
   end

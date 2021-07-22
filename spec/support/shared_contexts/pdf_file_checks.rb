@@ -11,10 +11,10 @@ shared_context "pdf file checks" do
   }
 
   let(:award_form) { form_answer.award_form }
-  let(:steps) { award_form.decorate.steps }
+  let(:steps) { award_form.decorate.current_steps(form_answer, user) }
 
   let(:pdf_generator) do
-    form_answer.decorate.pdf_generator
+    form_answer.decorate.pdf_generator(user)
   end
 
   let(:step1) { award_form.steps.first }

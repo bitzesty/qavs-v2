@@ -107,6 +107,25 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
+  describe "#local_assessment_notification" do
+    let(:kind) { "local_assessment_notification" }
+    let(:mailer) { double(deliver_later!: true) }
+
+    let!(:lieutenant) { create(:lieutenant) }
+    let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
+
+    it "triggers current notification" do
+      expect(LieutenantMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
+                                                                    lieutenant.id
+                                                                  ) { mailer }
+
+      described_class.run
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
+
   describe "#local_assessment_reminder" do
     let(:kind) { "local_assessment_reminder" }
     let(:mailer) { double(deliver_later!: true) }

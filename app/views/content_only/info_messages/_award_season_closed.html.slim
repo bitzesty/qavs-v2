@@ -1,12 +1,25 @@
 article.group role="article"
-  .govuk-inset-text
-    p.govuk-body
-      = render "content_only/info_messages/new_users_message"
-
-      ' The entry period for the
-      = AwardYear.current.year
-      '  Awards season has now closed.
-    p.govuk-body
-      ' Award winners will be announced on
-      =< application_deadline_for_year(AwardYear.current, :buckingham_palace_attendees_details, "with_year")
-      ' .
+  - if !@user_award_forms.any?
+    h2.govuk-heading-l
+      ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May.
+    .govuk-warning-text
+      span.govuk-warning-text__icon aria-hidden="true"
+        | !
+      strong.govuk-warning-text__text
+        span.govuk-warning-text__assistive
+          | Warning
+        ' Please note, the #{ AwardYear.current.year } award nominations has closed on #{ submission_deadline.decorate.formatted_trigger_time }.
+        br
+        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May. We will email you when it opens.
+  - else
+    .govuk-warning-text
+      span.govuk-warning-text__icon aria-hidden="true"
+        | !
+      strong.govuk-warning-text__text
+        span.govuk-warning-text__assistive
+          | Warning
+      	' The entry period for the #{ AwardYear.current.year } awards has now closed.
+	br
+        ' Award winners will be announced on
+        =< application_deadline_for_year(AwardYear.current, :buckingham_palace_attendees_details, "with_year")
+        ' .

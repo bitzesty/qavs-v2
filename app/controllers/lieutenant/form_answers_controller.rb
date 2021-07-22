@@ -1,6 +1,7 @@
 class Lieutenant::FormAnswersController < Lieutenant::BaseController
   include FormAnswerMixin
   include FormAnswerSubmissionMixin
+  include FormAnswersPdf
 
   helper_method :resource
 
@@ -28,6 +29,28 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   expose(:original_form_answer) do
     resource.original_form_answer
+  end
+
+  def show
+    authorize resource, :show?
+
+    respond_to do |format|
+      format.html do
+        @form_paginator = FormPaginator.new(resource, current_lieutenant, params)
+      end
+
+      format.pdf do
+        if can_render_pdf_on_fly?
+          pdf = resource.decorate.pdf_generator(current_lieutenant, pdf_blank_mode)
+          send_data pdf.render,
+                    filename: resource.decorate.pdf_filename,
+                    type: "application/pdf",
+                    disposition: 'attachment'
+        else
+          render_hard_copy_pdf
+        end
+      end
+    end
   end
 
   def index
@@ -66,6 +89,8 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     redirected = params[:next_action] == "redirect"
     submitted = params[:submit] == "true" && !redirected
 
+    authorize resource, :submit? if submitted
+
     respond_to do |format|
       format.html do
         redirected = params[:next_action] == "redirect"
@@ -97,7 +122,8 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
           return
         else
           if submitted && saved
-            redirect_to lieutenant_form_answer_submit_confirm_url(@form_answer)
+            flash[:notice] = "Local assessment was successfully submitted."
+            redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
               params[:next_step] ||= @form.steps[1].title.parameterize

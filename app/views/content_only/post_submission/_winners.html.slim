@@ -31,10 +31,7 @@
     .container-split.award-list
       .content-left
         h3.govuk-heading-m
-          = award.application_name
-          small
-            = award.award_type_full_name
-            '  Award
+          = award.company_or_nominee_name
       .content-right.content-offset-24
         / Nominators don't get any options after submision
           - if award.press_summary.present? && award.press_summary.submitted?

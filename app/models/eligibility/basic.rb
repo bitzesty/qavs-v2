@@ -4,36 +4,33 @@ class Eligibility::Basic < Eligibility
 
   property :based_in_uk,
             boolean: true,
-            label: "Is your organisation based in the UK (including the Channel Islands and the Isle of Man)?",
+            label: "Is the group based in the UK, the Channel Islands or the Isle of Man?",
             accept: :true
 
-  property :do_you_file_company_tax_returns,
+  property :has_at_least_three_people,
+            boolean: true,
+            label: "Is the group comprised of at least three people?",
+            accept: :true
+
+  property :are_majority_volunteers,
             values: %w[true false na],
-            label: "Do you file your Company Tax Returns with HM Revenue and Customs (HMRC)?",
-            hint: "All companies and partnerships have to select Yes or No. However, if you are a charity or are based in the Channel Islands or the Isle of Man and do not pay tax to the HMRC, please select N/A.",
+            label: "Are the majority of them volunteers?",
             accept: :not_no
 
-  property :has_management_and_two_employees,
+  property :national_organisation,
             boolean: true,
-            label: "Did your organisation have two or more full-time UK employees for the last two years?",
-            accept: :true,
-            hint: "Part-time staff should be counted in full-time equivalents (FTE). "
+            label: "Was it set up as a national organisation (e.g. for all England/Wales/Scotland/N. Ireland)?",
+            accept: :false
 
-  property :organization_kind,
-            values: %w[business charity],
-            label: "What kind of organisation is it?",
-            accept: :not_nil
-
-  property :industry,
-            values: %w[product_business service_business either_business],
-            label: "Is your business mainly a:",
-            accept: :not_nil,
-            if: proc { !organization_kind_value || !organization_kind.charity? }
-
-  property :self_contained_enterprise,
+  property :benefits_animals_only,
             boolean: true,
-            label: "Is your organisation a self-contained operational unit?",
-            accept: :true
+            label: "Does it only benefit animals rather than people?",
+            accept: :false
+
+  property :years_operating,
+            positive_integer: true,
+            label: "How long has the group been operating? (must be at least 3 years)",
+            accept: :more_than_two
 
   property :current_holder,
            values: %w[yes no i_dont_know],
@@ -44,7 +41,7 @@ class Eligibility::Basic < Eligibility
     current_step_index = questions.index(current_step) || questions.size - 1
     previous_questions = questions[0..current_step_index]
 
-    answers.any? && answers.all? do |question, answer|
+    answers.present? && answers.all? do |question, answer|
       if previous_questions.include?(question.to_sym)
         answer_valid?(question, answer)
       else
@@ -54,11 +51,12 @@ class Eligibility::Basic < Eligibility
   end
 
   def save_as_eligible!
-    self.organization_kind = 'charity'
+    self.national_organisation = false
     self.based_in_uk = true
-    self.do_you_file_company_tax_returns = true
-    self.self_contained_enterprise = true
-    self.has_management_and_two_employees = true
+    self.are_majority_volunteers = true
+    self.benefits_animals_only = false
+    self.has_at_least_three_people = true
+    self.years_operating = 3
 
     save
   end

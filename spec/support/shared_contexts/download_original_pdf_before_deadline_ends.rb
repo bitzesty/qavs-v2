@@ -5,6 +5,8 @@ shared_context "download original pdf before deadline ends" do
     create(:form_answer, :submitted)
   end
 
+  let!(:user) { create(:user) }
+
   describe "Download" do
     describe "PDF content" do
       let(:registration_number_at_the_deadline) { "1111111111" }
@@ -32,7 +34,7 @@ shared_context "download original pdf before deadline ends" do
 
       it "should include main header information" do
         original_form_answer = form_answer.original_form_answer
-        pdf_generator = original_form_answer.decorate.pdf_generator
+        pdf_generator = original_form_answer.decorate.pdf_generator(user)
         pdf_content = PDF::Inspector::Text.analyze(pdf_generator.render).strings
 
         expect(pdf_content).to include(Settings.submission_deadline_title)

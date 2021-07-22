@@ -18,18 +18,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "A 1.2"
           required
           option "", "Please select"
-          option "ART", "Arts"
-          option "EDU", "Education"
-          option "EME", "Emergency response"
-          option "ENV", "Environment & regeneration"
-          option "HEA", "Health"
-          option "HER", "Heritage"
-          option "OTH", "Other"
-          option "PLY", "Playscheme/youth"
-          option "SUP", "Self help/support group"
-          option "SOC", "Social centre/community"
-          option "SPS", "Social preventative scheme"
-          option "SPO", "Sports"
+          nominee_activities
         end
 
         address :nominee_address, "Address of group" do
@@ -44,18 +33,23 @@ class AwardYears::V2022::QAEForms
           ])
         end
 
-        text :nominee_phone, "Telephone number" do
+        ceremonial_county :nominee_ceremonial_county, "Lieutenancy county (if known)" do
           sub_ref "A 1.4"
+          counties
+        end
+
+        text :nominee_phone, "Telephone number" do
+          sub_ref "A 1.5"
           style "small"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           form_hint "Social media accounts if known"
           words_max 100
           rows 2
