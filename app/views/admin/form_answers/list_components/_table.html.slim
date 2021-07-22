@@ -6,11 +6,13 @@ table.table.applications-table
           = check_box_tag :check_all
       th.sortable width="450"
         = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
-      th.sortable width="130"
+      th.sortable width="140"
         = sort_link f, "Reference", @search, :urn, disabled: @search.query?
       th width="250"
         | Status
-      th width="200"
+      th width="100"
+        | Postcode
+      th width="250"
         | Lord Lieutenancy office
       th width="200"
         | Type of group

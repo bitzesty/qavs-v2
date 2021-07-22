@@ -16,6 +16,7 @@
       - else
         span.urn-not-generated Not generated
     td = obj.dashboard_status(current_admin.class.name)
+    td = obj.document["nominee_address_postcode"]
     td
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
