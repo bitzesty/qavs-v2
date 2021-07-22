@@ -582,12 +582,12 @@
   margin-bottom: 20px;
 }
 
-.bulk-assign-assessors-link, .bulk-assign-lieutenants-link {
+.bulk-assignment-container {
   position: relative;
   left: -9999px;
   margin-top: 10px;
 
-  &.show-button {
+  &.show-container {
     left: 0;
   }
 
@@ -598,6 +598,10 @@
   }
 }
 
+.nominations-checked-total {
+  display: inline;
+  margin-right: 20px;
+}
 
 .bulk-assign-assessors-form, .bulk-assign-lieutenants-form {
   max-width: 755px;
