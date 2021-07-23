@@ -3,11 +3,16 @@ class SessionsController < Devise::SessionsController
 
   def create
     actions = _process_action_callbacks.map {|c| c.filter if c.kind == :before }
-    Rails.logger.debug actions
     actions.each do |action|
       Rails.logger.debug action
     end
-    super
+    Rails.logger.debug auth_options
+    self.resource = warden.authenticate!(auth_options)
+    Rails.logger.debug self.resource
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   private
