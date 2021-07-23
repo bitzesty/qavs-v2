@@ -25,7 +25,7 @@ describe "Admin assigns lieutenants", %(
     it "assigns the lieutenant" do
       first("#check_all").set(true)
 
-      find("button", text: "Bulk assign to Lord Lieutenancy office").click
+      click_button("Bulk assign to Lord Lieutenancy office", match: :first)
       find(:css, "#modal-bulk-assign-lieutenants").should be_visible
 
       select ceremonial_county_2.name, from: "Select Lord Lieutenancy office"
