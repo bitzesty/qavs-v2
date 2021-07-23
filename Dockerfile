@@ -20,9 +20,10 @@ ENV CURL_CONNECT_TIMEOUT=0 CURL_TIMEOUT=0 GEM_PATH="$HOME/vendor/bundle/ruby/${R
 # Cache bundler
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-COPY . /app
 RUN bundle config set --local path 'vendor/bundle'
 RUN bundle config set --local without 'development test'
 RUN bundle install --jobs 4 --retry 3
+
+COPY . /app
 
 RUN RAILS_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
