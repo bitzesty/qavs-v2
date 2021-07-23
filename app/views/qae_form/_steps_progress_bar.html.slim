@@ -1,16 +1,17 @@
 .steps-progress-bar
   ol
-    li.js-step-condition.step-past
-      span
-        = link_to form_award_eligibility_url(form_id: @form_answer.id) do
-          span.step-number
-            ' Eligibility
+    - if current_user
+      li.js-step-condition.step-past
+        span
+          = link_to form_award_eligibility_url(form_id: @form_answer.id) do
+            span.step-number
+              ' Eligibility
 
-    li.js-step-condition.step-past
-      span
-        = link_to [:award_info, @form_answer.award_type, form_id: @form_answer.id] do
-          span.step-number
-            ' Useful Nomination Info
+      li.js-step-condition.step-past
+        span
+          = link_to [:award_info, @form_answer.award_type, form_id: @form_answer.id] do
+            span.step-number
+              ' Useful Nomination Info
 
     - step_letters = ["A", "B", "C", "D", "E", "F"]
     li.js-step-condition
@@ -36,10 +37,14 @@
     - unless QAE.hide_pdf_links?
       li.divider
       li.step-past.step-download
-        - pdf_url = current_user ? users_form_answer_path(@form_answer, format: :pdf) : lieutenant_form_answer_path(@form_answer, format: :pdf)
-        = link_to pdf_url
-          = render "content_only/download_icon"
-          ' Download your nomination
+        - if current_user
+          = link_to users_form_answer_path(@form_answer, format: :pdf)
+            = render "content_only/download_icon"
+            ' Download your nomination (PDF)
+        - else
+          = link_to lieutenant_form_answer_path(@form_answer, format: :pdf)
+            = render "content_only/download_icon"
+            ' Download nomination and local assessment form (PDF)
 
     li.divider
     li.sidebar-helpline
