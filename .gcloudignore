@@ -1,0 +1,14 @@
+.env
+vendor/bundle/*
+# Other files
+*.DS_Store
+/coverage/*
+
+# Ignore git
+.git
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp/*
+.byebug_history
