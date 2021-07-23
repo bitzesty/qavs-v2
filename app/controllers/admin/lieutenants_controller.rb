@@ -16,7 +16,7 @@ class Admin::LieutenantsController < Admin::UsersController
 
   def create
     @resource = Lieutenant.new(resource_params)
-    @resource.generate_password!
+    @resource.skip_password_validation = true
 
     authorize @resource, :create?
 

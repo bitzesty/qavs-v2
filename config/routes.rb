@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   }
 
   devise_for :admins, controllers: {
-    confirmations: "devise/confirmations",
+    confirmations: "admins/confirmations",
     devise_authy: "admin/devise_authy"
   }, path_names: {
     verify_authy: "/verify-token",
@@ -22,13 +22,17 @@ Rails.application.routes.draw do
     verify_authy_installation: "/verify-installation"
   }
 
-  devise_for :lieutenants
+  devise_for :lieutenants, controllers: {
+    confirmations: "lieutenants/confirmations"
+  }
 
   authenticate :admin do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :assessors
+  devise_for :assessors, controllers: {
+    confirmations: "assessors/confirmations"
+  }
 
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")

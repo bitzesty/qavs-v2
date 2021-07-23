@@ -1,6 +1,6 @@
 class Admin < ApplicationRecord
   include PgSearch::Model
-  include PasswordGeneratable
+  include PasswordSkippable
   include AutosaveTokenGeneration
 
   # Include default devise modules. Others available are:

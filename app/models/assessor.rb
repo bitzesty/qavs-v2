@@ -1,7 +1,7 @@
 class Assessor < ApplicationRecord
   include PgSearch::Model
   include AutosaveTokenGeneration
-  include PasswordGeneratable
+  include PasswordSkippable
 
   AVAILABLE_ROLES = ["lead", "regular"]
   # lead - created & assigned to Admin to specific categories

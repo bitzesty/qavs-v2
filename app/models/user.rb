@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   include PgSearch::Model
-  include PasswordGeneratable
+  include PasswordSkippable
   extend Enumerize
 
   devise :database_authenticatable, :registerable,
@@ -191,8 +191,4 @@ class User < ApplicationRecord
     form_answers.each { |f| f.update(user_full_name: full_name) } if full_name_changed
   end
 
-  def password_required?
-    return false if skip_password_validation
-    super
-  end
 end
