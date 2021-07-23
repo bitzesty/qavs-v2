@@ -6,7 +6,10 @@ class SessionsController < Devise::SessionsController
     actions.each do |action|
       Rails.logger.debug action
     end
+    Rails.logger.debug "!!!!!!!!!!!!!!!!"
     Rails.logger.debug auth_options
+    Rails.logger.debug['HTTP_COOKIE']
+    Rails.logger.debug['warden']
     self.resource = warden.authenticate!(auth_options)
     Rails.logger.debug self.resource
     set_flash_message!(:notice, :signed_in)
