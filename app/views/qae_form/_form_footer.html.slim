@@ -25,7 +25,7 @@ footer
           span.if-js-hide
             = button_tag "Save and come back later", class: "govuk-button save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_url }
           span.if-no-js-hide
-            = link_to "Save and come back later", dashboard_link, class: " govuk-button govuk-button--secondary js-save-and-come-back"
+            = link_to "Save and come back later", dashboard_url, class: " govuk-button govuk-button--secondary js-save-and-come-back"
 
       - if step.next_for(@form_answer, current_form_user)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
