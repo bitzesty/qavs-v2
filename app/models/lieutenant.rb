@@ -1,7 +1,6 @@
 class Lieutenant < ApplicationRecord
   extend Enumerize
   include PgSearch::Model
-  include PasswordSkippable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -9,6 +8,8 @@ class Lieutenant < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :zxcvbnable, :timeoutable,
          :session_limitable, :trackable
+
+  include PasswordSkippable
 
   belongs_to :ceremonial_county
 

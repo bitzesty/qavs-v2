@@ -1,7 +1,6 @@
 class Assessor < ApplicationRecord
   include PgSearch::Model
   include AutosaveTokenGeneration
-  include PasswordSkippable
 
   AVAILABLE_ROLES = ["lead", "regular"]
   # lead - created & assigned to Admin to specific categories
@@ -12,6 +11,8 @@ class Assessor < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable, :session_limitable
+
+  include PasswordSkippable
 
   validates :first_name, :last_name, presence: true
   has_many :form_answer_attachments, as: :attachable
