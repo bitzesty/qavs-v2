@@ -90,7 +90,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     
-    b.use :label, wrap_with: { tag: :legend, class: 'govuk-fieldset__legend govuk-fieldset__legend--l' }, tag: :h2, class: 'govuk-fieldset__heading govuk-heading-l'
+    b.use :label, wrap_with: { tag: :legend, class: 'govuk-fieldset__legend' }, tag: :h2, class: 'govuk-label govuk-label--l'
     
     b.use :full_error, wrap_with: { class: 'govuk-error-message' }
     b.use :hint, wrap_with: { class: 'govuk-hint' }

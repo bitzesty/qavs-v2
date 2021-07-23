@@ -1,5 +1,5 @@
 .question-body
   p.question-context
     = @eligibility.class.hint(question)
-  = f.input :years_operating, as: :text, label: @eligibility.class.label(step).html_safe, input_html: { class: 'tiny' }
+  = f.input :years_operating, as: :numeric, label: @eligibility.class.label(step).html_safe, input_html: { class: 'tiny' }, label_html: { class: 'govuk-label govuk-label--l' }
   span.clear
