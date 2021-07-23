@@ -1,5 +1,6 @@
 class FormAnswerStatus::AdminFilter
   extend FormAnswerStatus::FilteringHelper
+  include NomineeActivityHelper
 
   SUB_OPTIONS = {
     missing_sic_code: {
@@ -115,81 +116,6 @@ class FormAnswerStatus::AdminFilter
     }
   }
 
-  ACTIVITY_OPTIONS = {
-    ART: {
-      label: "Arts",
-      nominee_activity: [
-        :ART
-      ]
-    },
-    EDU: {
-      label: "Education",
-      nominee_activity: [
-        :EDU
-      ]
-    },
-    EME: {
-      label: "Emergency response",
-      nominee_activity: [
-        :EME
-      ]
-    },
-    ENV: {
-      label: "Environment & regeneration",
-      nominee_activity: [
-        :ENV
-      ]
-    },
-    HEA: {
-      label: "Health",
-      nominee_activity: [
-        :HEA
-      ]
-    },
-    HER: {
-      label: "Heritage",
-      nominee_activity: [
-        :HER
-      ]
-    },
-    OTH: {
-      label: "Other",
-      nominee_activity: [
-        :OTH
-      ]
-    },
-    PLY: {
-      label: "Playscheme/youth",
-      nominee_activity: [
-        :PLY
-      ]
-    },
-    SUP: {
-      label: "Self help/support group",
-      nominee_activity: [
-        :SUP
-      ]
-    },
-    SOC: {
-      label: "Social centre/community",
-      nominee_activity: [
-        :SOC
-      ]
-    },
-    SPS: {
-      label: "Social preventative scheme",
-      nominee_activity: [
-        :SPS
-      ]
-    },
-    SPO: {
-      label: "Sports",
-      nominee_activity: [
-        :SPO
-      ]
-    }
-  }
-
   def self.options
     OPTIONS
   end
@@ -199,6 +125,8 @@ class FormAnswerStatus::AdminFilter
   end
 
   def self.activity_options
-    ACTIVITY_OPTIONS
-  end  
+    option = Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
+      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
+    } ]
+  end
 end

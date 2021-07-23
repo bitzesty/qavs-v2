@@ -381,6 +381,10 @@ class FormAnswer < ApplicationRecord
     document["nominator_email"]
   end
 
+  def ceremonial_county_from_document
+    document["ceremonial_county_id"]
+  end
+
   def set_account
     self.account = user.account
   end
