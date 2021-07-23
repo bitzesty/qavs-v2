@@ -1,8 +1,6 @@
-header.page-header.group
-  div
-    - steps_first_char = 65 # aka 'A'
-    - form.steps.each_with_index do |step, index|
-      h2.step-header.js-step-condition data-step="step-#{step.title.parameterize}" class=('step-current' if (!current_step && step.index == 0) || current_step == step.title.parameterize)
-        = (steps_first_char + index).chr
-        ' .
-        = step.title
+- steps_first_char = 65 # aka 'A'
+- form.steps.each_with_index do |step, index|
+  h2.govuk-heading-l.step-header.js-step-condition data-step="step-#{step.title.parameterize}" class=('step-current' if (!current_step && step.index == 0) || current_step == step.title.parameterize)
+    = (steps_first_char + index).chr
+    ' .
+    = step.title

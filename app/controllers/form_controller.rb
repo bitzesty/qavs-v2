@@ -61,7 +61,7 @@ class FormController < ApplicationController
     # @form_answer = original_form_answer if admin_in_read_only_mode?
     if @form_answer.eligible?
       if params[:step] == "letters-of-support"
-        redirect_to form_form_answer_support_letters_path(@form_answer)
+        redirect_to form_form_answer_supporters_path(@form_answer)
         return
       elsif params[:step] == "add-website-address-documents" && params[:form_refresh].blank?
         redirect_to form_form_answer_form_attachments_url(@form_answer)

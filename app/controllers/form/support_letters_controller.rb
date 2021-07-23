@@ -19,7 +19,7 @@ class Form::SupportLettersController < Form::BaseController
       add_support_letter_to_document!
       @form_answer.save
 
-      redirect_to form_form_answer_support_letters_path(@form_answer)
+      redirect_to form_form_answer_supporters_path(@form_answer)
     else
       render :new
     end
@@ -35,7 +35,7 @@ class Form::SupportLettersController < Form::BaseController
       @form_answer.save
     end
 
-    redirect_to form_form_answer_support_letters_path(@form_answer)
+    redirect_to form_form_answer_supporters_path(@form_answer)
   end
 
   private

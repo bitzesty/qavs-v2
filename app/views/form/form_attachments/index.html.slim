@@ -31,11 +31,12 @@ header.page-header.group.page-header-over-sidebar
           == question.context
 
           - for help in question.hint
-            div.hidden-hint
-              span.hidden-link
-                = help.title.html_safe
-              span.hidden-content
-                == help.text
+            details.govuk-details data-module="govuk-details"
+              summary.govuk-details__summary
+                span.govuk-details__summary-text
+                  = help.title.html_safe
+                .govuk-details__text
+                  == help.text
 
           ul.list-add
             - existing_materials.each do |position, attrs|
