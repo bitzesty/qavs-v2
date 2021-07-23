@@ -21,6 +21,14 @@ class LieutenantAssignmentCollection
     form_answers.update_all(ceremonial_county_id: ceremonial_county_id)
   end
 
+  def notice_message
+    if ids.length > 1
+      "Groups have"
+    else
+      "Group has"
+    end.concat " been assigned to the Lord Lieutenancy office."
+  end
+
   private
 
   def form_answers
