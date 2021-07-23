@@ -27,4 +27,4 @@ RUN bundle install --jobs 4 --retry 3
 
 COPY . /app
 
-RUN RAILS_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
+RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
