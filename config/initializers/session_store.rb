@@ -9,5 +9,6 @@ else
   Rails.application.config.session_store :cookie_store, key: "_qavs_session_#{Rails.env}",
                                                         domain: ENV["COOKIE_DOMAIN"],
                                                         secure: true,
-                                                        httponly: true
+                                                        httponly: true,
+                                                        tld_length: ENV["COOKIE_TLD_LENGTH"]
 end
