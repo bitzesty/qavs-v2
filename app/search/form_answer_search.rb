@@ -134,8 +134,4 @@ class FormAnswerSearch < Search
       "JOIN assessor_assignments secondary_assignments ON secondary_assignments.form_answer_id=form_answers.id"
     ).where("secondary_assignments.position = ? AND secondary_assignments.submitted_at IS NOT NULL", AssessorAssignment.positions[:secondary])
   end
-
-  def sort_order(desc = false)
-    desc ? 'desc' : 'asc'
-  end
 end

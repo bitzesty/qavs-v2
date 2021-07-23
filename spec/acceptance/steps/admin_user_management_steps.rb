@@ -4,7 +4,7 @@ end
 
 step "I create new user" do
   step "I go to user management page"
-  click_link "+ Add applicant"
+  click_link "Add nominator"
 
   fill_in 'Email', with: 'user@example.com'
 

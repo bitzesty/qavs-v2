@@ -8,9 +8,16 @@
           th.sortable
             = sort_link f, 'Email', @search, :email
           th.sortable
+            = sort_link f, 'Lord Lieutenancy office', @search, :ceremonial_county_name
+          th.sortable
+            = sort_link f, 'Type', @search, :role
+          th.sortable
             = sort_link f, 'Signed in on', @search, :last_sign_in_at
           th.sortable
             = sort_link f, "Confirmed on", @search, :confirmed_at
+          th.sortable
+            = sort_link f, "Locked on", @search, :locked_at
+          th
       tbody
         - if resources.none?
           tr
@@ -25,11 +32,18 @@
                 = link_to lieutenant.full_name, edit_admin_lieutenant_path(lieutenant), class: 'link-edit-user'
               td = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis"}
               td
+                = lieutenant.ceremonial_county.name
+              td
+                = lieutenant.role_text
+              td
                 small.text-muted
-                  span.visible-lg
-                    = lieutenant.formatted_last_sign_in_at_long
-                  span.hidden-lg
-                    = lieutenant.formatted_last_sign_in_at_short
+                  - if lieutenant.last_sign_in_at.present?
+                    span.visible-lg
+                      = lieutenant.formatted_last_sign_in_at_long
+                    span.hidden-lg
+                      = lieutenant.formatted_last_sign_in_at_short
+                  - else
+                    | Never signed in
               td
                 - if lieutenant.confirmed_at.present?
                   small.text-muted
@@ -37,3 +51,12 @@
                 - else
                   small.text-danger
                     ' Not confirmed
+              td
+                - if lieutenant.locked_at.present?
+                  small.text-muted
+                    = l lieutenant.locked_at, format: :date_at_time
+                - else
+                  small.text-muted
+                    ' Not locked
+              td
+                = link_to "Edit user", edit_admin_lieutenant_path(lieutenant)

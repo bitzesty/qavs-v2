@@ -90,6 +90,10 @@ class Search
 
   private
 
+  def sort_order(desc = false)
+    desc ? 'desc' : 'asc'
+  end
+
   def included_in_model_columns?(column)
     scope.model.column_names.include?(column.to_s)
   end

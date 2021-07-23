@@ -104,6 +104,10 @@
     font-style: italic;
   }
 
+  .assigned {
+    color: $button-colour;
+  }
+
   .icon-unflagged {
     display: none;
   }
@@ -582,12 +586,12 @@
   margin-bottom: 20px;
 }
 
-.bulk-assign-assessors-link {
+.bulk-assignment-container {
   position: relative;
   left: -9999px;
   margin-top: 10px;
 
-  &.show-button {
+  &.show-container {
     left: 0;
   }
 
@@ -598,7 +602,12 @@
   }
 }
 
-.bulk-assign-assessors-form {
+.nominations-checked-total {
+  display: inline;
+  margin-right: 20px;
+}
+
+.bulk-assign-assessors-form, .bulk-assign-lieutenants-form {
   max-width: 755px;
   margin-top: 25px;
   margin-bottom: 10px;
@@ -684,10 +693,7 @@
       display: block;
     }
   }
-  .btn-cancel { float: left; margin-right: 0 }
 }
-
-.sidebar-section.no-margin-bottom { margin-bottom: 0; }
 
 .uploaded-file .btn-attachment {
   display: none;

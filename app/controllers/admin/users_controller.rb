@@ -23,7 +23,7 @@ class Admin::UsersController < Admin::BaseController
 
   def create
     @resource = User.new(resource_params)
-    @resource.generate_password!
+    @resource.skip_password_validation = true
     @resource.agreed_with_privacy_policy = "1"
     authorize @resource, :create?
 

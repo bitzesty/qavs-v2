@@ -87,6 +87,17 @@ en:
       govuk_date: "%-e %B %Y"
 
   admin:
+    users:
+      role_headers:
+        users: "Nominators"
+        lieutenants: "Lord Lieutenancy office users"
+        assessors: "National assessors"
+        admins: "Admins"
+      new_button:
+        users: "Add nominator"
+        lieutenants: "Add Lord Lieutenancy office user"
+        assessors: "Add National assessor"
+        admins: "Add Admin"
     form_answers:
       financial_summary:
         years_row:
