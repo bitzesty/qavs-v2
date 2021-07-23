@@ -1,8 +1,0 @@
-.question-body
-  p.govuk-hint
-    = @eligibility.class.hint(step)
-  - collection = @eligibility.class.innovative_product.options
-  - collection.reject! { |opts| opts.last == 'skip' } if controller_name == 'form_award_eligibilities'
-  = f.input :innovative_product, as: :radio_buttons, label: false, label_html: { class: 'visuallyhidden' }, wrapper_html: { class: 'govuk-radios', id: "eligibility_#{question}", "aria-labelledby" => "eligibility_#{question}_label" }, collection: collection
-
-span.clear

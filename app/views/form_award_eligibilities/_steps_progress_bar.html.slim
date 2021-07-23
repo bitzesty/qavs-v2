@@ -13,7 +13,7 @@
       span.govuk-body
         ' Form
       ul.govuk-list
-        - @form.steps.each_with_index do |step, index|
+        - @form.current_steps(@form_answer, current_form_user).each_with_index do |step, index|
           li
             span.govuk-body
               span.step-number = "#{step_letters[index]}. "

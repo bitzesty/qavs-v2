@@ -1,5 +1,3 @@
-- input_steps = ['number_of_eligible_initiatives', 'number_of_innovative_products']
-
 h1.govuk-heading-xl Queen's Award for Voluntary Service Nomination
 
 .steps-progress-container.min-height-800
@@ -11,15 +9,8 @@ h1.govuk-heading-xl Queen's Award for Voluntary Service Nomination
             = simple_form_for @eligibility, as: :eligibility, url: wizard_path(step, form_id: @form_answer.id, skipped: params[:skipped]), method: :put do |f|
               .govuk-form-group.current-question.qae-form#current-question
                 fieldset.govuk-fieldset class="question-#{step.to_s.gsub!(/_/, '-')}"
-                  - if @eligibility.is_a?(Eligibility::Basic) || !input_steps.include?(step.to_s)
-                    legend.govuk-fieldset__legend.govuk-fieldset__legend--l.eligibilty-label for="eligibility_#{step.to_s}" id="eligibility_#{step.to_s}_label" class="govuk-!-margin-bottom-5"
-                      h2.govuk-fieldset__heading
-                        = @eligibility.class.label(step).html_safe
-                  - if @eligibility.is_a?(Eligibility::Basic)
-                    = render "form_award_eligibilities/basic_questions/#{step.to_s}", f: f, question: step.to_s
-                  - else
-                    = render("form_award_eligibilities/questions/#{step.to_s}", f: f, question: step.to_s) rescue render("form_award_eligibilities/questions/question", f: f, question: step.to_s)
-
+                  = render "form_award_eligibilities/basic_questions/#{step.to_s}", f: f, question: step.to_s
+                  
                 .next-question
                   = f.submit "Continue", class: "govuk-button"
           - else

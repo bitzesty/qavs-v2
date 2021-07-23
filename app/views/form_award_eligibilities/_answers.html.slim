@@ -28,8 +28,4 @@
         - @already_has_invalid_questions = true
         .govuk-summary-list__row
           dt.govuk-summary-list__key
-            ' This excludes you from entering the
-            - if eligibility.is_a?(Eligibility::Basic)
-              ' Queen's Awards for Enterprise
-            - else
-              = eligibility.class.award_name
+            ' This excludes you from entering the Queen's Award for Voluntary Service

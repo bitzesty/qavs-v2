@@ -1,5 +1,5 @@
 .question-body
   p.govuk-hint
     = @eligibility.class.hint(question)
-  = f.input :has_at_least_three_people, as: :radio_buttons, wrapper_html: { role: "radiogroup", "aria-labelledby" => "eligibility_#{question}_label", id: "eligibility_#{question}" }, label_html: { class: 'visuallyhidden' }
+  = f.input :has_at_least_three_people, as: :radio_buttons, label: @eligibility.class.label(step).html_safe
   span.clear

@@ -1,6 +1,3 @@
 - unless QAE.hide_pdf_links?
   = link_to users_form_answer_path(@form_answer, format: :pdf), class: 'govuk-link'
-    - if @form_answer.award_type == "promotion"
-      ' Download your nomination
-    - else
-      ' Download your application
+    ' Download your nomination

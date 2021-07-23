@@ -25,9 +25,9 @@ footer
           span.if-js-hide
             = button_tag "Save and come back later", class: "govuk-button save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_url }
           span.if-no-js-hide
-            = link_to "Save and come back later", dashboard_url, class: " govuk-button govuk-button--secondary js-save-and-come-back"
+            = link_to "Save and come back later", dashboard_link, class: " govuk-button govuk-button--secondary js-save-and-come-back"
 
-      - if step.next
+      - if step.next_for(@form_answer, current_form_user)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
           - opts = possible_read_only_ops
           - opts[:class] ||= ""
@@ -36,7 +36,7 @@ footer
             ' Save and continue
 
       - else
-        - if step.submit && current_form_is_editable?
+        - if step.submit && current_form_is_editable? && policy(@form_answer).submit?
           li.submit.qae-form
             button type="submit" name="submit" value="true" class="govuk-button #{step.submit.style.presence}"
               = step.submit.text
