@@ -1,14 +1,15 @@
 class User < ApplicationRecord
   include PgSearch::Model
-  include PasswordGeneratable
   extend Enumerize
 
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable, :session_limitable
 
+  include PasswordSkippable
+
   attr_accessor :agreed_with_privacy_policy
-  attr_accessor :current_password, :skip_password_validation
+  attr_accessor :current_password
 
   validates :agreed_with_privacy_policy, acceptance: { allow_nil: false, accept: '1' }, on: :create
 
@@ -18,7 +19,6 @@ class User < ApplicationRecord
   validates :last_name, presence: true, if: -> { first_step? }
   validates :job_title, presence: true, if: -> { first_step? }
   validates :phone_number, presence: true, if: -> { first_step? }
-  validates :password, confirmation: true
 
   validates :phone_number, length: {
     minimum: 7,
@@ -191,8 +191,4 @@ class User < ApplicationRecord
     form_answers.each { |f| f.update(user_full_name: full_name) } if full_name_changed
   end
 
-  def password_required?
-    return false if skip_password_validation
-    super
-  end
 end

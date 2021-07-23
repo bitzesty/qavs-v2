@@ -16,7 +16,7 @@ class Admin::AssessorsController < Admin::UsersController
 
   def create
     @resource = Assessor.new(resource_params)
-    @resource.generate_password!
+    @resource.skip_password_validation = true
 
     authorize @resource, :create?
 
