@@ -7,8 +7,6 @@ WORKDIR /app
 
 # ENV SSL_CERT_DIR=/etc/ssl/certs
 # ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-ENV AWS_ACCESS_KEY_ID dummy
-ENV AWS_SECRET_ACCESS_KEY dummy
 
 # Install NodeJS
 RUN apt-get update
