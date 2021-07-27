@@ -282,11 +282,15 @@ ready = ->
         show_button = true
 
     if show_button
-      $(".bulk-assign-assessors-link").addClass("show-button")
-      $(".bulk-assign-lieutenants-link").addClass("show-button")
+      $(".bulk-assignment-container").addClass("show-container")
+
+      selected_count = $('input[type=checkbox].form-answer-check:checked').length
+      if selected_count > 1
+        $('.nominations-checked-total').text(`selected_count` +' groups selected')
+      else
+        $('.nominations-checked-total').text(`selected_count` +' group selected')
     else
-      $(".bulk-assign-assessors-link").removeClass("show-button")
-      $(".bulk-assign-lieutenants-link").removeClass("show-button")
+      $(".bulk-assignment-container").removeClass("show-container")
 
 changeRagStatus = ->
   $(document).on "click", ".btn-rag .dropdown-menu a", (e) ->

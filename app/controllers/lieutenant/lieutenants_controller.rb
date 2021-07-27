@@ -22,7 +22,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
     @resource = Lieutenant.new(resource_params)
     @resource.role = "regular"
     @resource.ceremonial_county = current_lieutenant.ceremonial_county
-    @resource.generate_password!
+    @resource.skip_password_validation = true
 
     authorize @resource, :create?
 

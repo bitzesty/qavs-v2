@@ -2,7 +2,7 @@
   ul role="navigation"
     - %w[users lieutenants assessors admins].each do |role|
       - if policy(role.singularize.to_sym).index?
-        - role_name = role == "users" ? "Applicants" : role.titleize
+        - role_name = t("admin.users.role_headers.#{role}")
         li class="role-#{role_name} #{'active' if controller_name == role}" role="presentation"
           = link_to role_name, public_send("admin_#{role}_path")
   .clear
