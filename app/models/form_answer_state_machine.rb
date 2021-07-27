@@ -8,6 +8,10 @@ class FormAnswerStateMachine
     :withdrawn,
     :not_eligible,
     :not_submitted,
+    :admin_eligible,
+    :local_assessment_in_progress,
+    :local_assessment_recommended,
+    :local_assessment_not_recommended,
     :assessment_in_progress,
     :disqualified,
     :recommended,
@@ -26,6 +30,9 @@ class FormAnswerStateMachine
   POST_SUBMISSION_STATES = [
     :submitted,
     :withdrawn,
+    :local_assessment_in_progress,
+    :local_assessment_recommended,
+    :local_assessment_not_recommended,
     :assessment_in_progress,
     :disqualified,
     :recommended,
@@ -46,6 +53,10 @@ class FormAnswerStateMachine
   state :withdrawn
   state :not_eligible
   state :not_submitted
+  state :admin_eligible
+  state :local_assessment_in_progress
+  state :local_assessment_recommended
+  state :local_assessment_not_recommended
   state :assessment_in_progress
   state :disqualified
   state :recommended
@@ -107,6 +118,7 @@ class FormAnswerStateMachine
     object.update(submitted_at: Time.current)
   end
 
+
   def assign_lead_verdict(verdict, subject)
     new_state = {
       "negative" => :not_recommended,
@@ -149,6 +161,11 @@ class FormAnswerStateMachine
   def permitted_states_with_deadline_constraint
     if Settings.after_current_submission_deadline?
       all_states = [
+        :admin_not_eligible,
+        :admin_eligible,
+        :local_assessment_in_progress,
+        :local_assessment_recommended,
+        :local_assessment_not_recommended,
         :assessment_in_progress,
         :recommended,
         :reserved,
@@ -160,7 +177,7 @@ class FormAnswerStateMachine
       ]
 
       case object.state.to_sym
-      when :not_eligible
+      when :not_eligible, :admin_not_eligible
         []
       when :application_in_progress, :eligibility_in_progress
         [:not_submitted]
@@ -168,6 +185,10 @@ class FormAnswerStateMachine
         [:assessment_in_progress]
       when :not_submitted
         []
+      when :admin_eligible
+        [:local_assessment_in_progress]
+      when :local_assessment_in_progress
+        [:local_assessment_recommended, :local_assessment_not_recommended]
       else
         all_states
       end

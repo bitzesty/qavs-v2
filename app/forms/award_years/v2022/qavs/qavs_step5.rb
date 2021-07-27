@@ -384,6 +384,14 @@ class AwardYears::V2022::QAEForms
           rows 3
         end
 
+        options :local_assessment_verdict, "Local assessment outcome" do
+          sub_ref "E 3.10"
+          classes "sub-question"
+          option "recommended", "Recommended"
+          option "not_recommended", "Not recommended"
+          required
+        end
+
         submit "Submit assessment" do
           notice %(
             <p>
