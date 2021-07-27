@@ -157,9 +157,10 @@ group :development do
   gem 'rb-readline'
 end
 
+gem 'dotenv-rails'
+
 group :development, :test do
   # Enviroment variables
-  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 4.0.1'
   gem "pry-byebug"
   gem 'rails-controller-testing'
