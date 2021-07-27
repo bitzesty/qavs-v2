@@ -3,6 +3,7 @@ include Warden::Test::Helpers
 
 describe "Admin: Lieutenant management" do
   let(:admin) { create(:admin) }
+  let!(:ceremonial_county) { create(:ceremonial_county, name: "Bounty County") }
 
   before do
     login_admin(admin)
@@ -11,16 +12,17 @@ describe "Admin: Lieutenant management" do
   it "can create a lieutenant" do
     visit admin_lieutenants_path
 
-    click_link "+ Add lieutenant"
+    click_link "Add Lord Lieutenancy office user"
 
     fill_in "First name", with: "LL"
     fill_in "Last name", with: "KK"
 
     fill_in "Email", with: "llkk@example.com"
 
-    select "Regular", from: "Role"
+    select "Bounty County", from: "Lord Lieutenancy office"
+    choose "Regular"
 
-    click_button "Create lieutenant"
+    click_button "Add user"
 
     expect(page).to have_content "LL KK"
   end
@@ -37,7 +39,7 @@ describe "Admin: Lieutenant management" do
 
       fill_in "First name", with: "Rob"
 
-      click_button "Update lieutenant"
+      click_button "Update user"
 
       expect(page).to have_content "Rob Bobbers"
     end

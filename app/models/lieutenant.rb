@@ -1,18 +1,19 @@
 class Lieutenant < ApplicationRecord
   extend Enumerize
   include PgSearch::Model
-  include PasswordGeneratable
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :zxcvbnable, :timeoutable,
-         :session_limitable
+         :session_limitable, :trackable
+
+  include PasswordSkippable
 
   belongs_to :ceremonial_county
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :role, :ceremonial_county, presence: true
 
   enumerize :role, in: %w(regular advanced)
 
@@ -48,5 +49,10 @@ class Lieutenant < ApplicationRecord
     else
       FormAnswer.all
     end.where(ceremonial_county_id: ceremonial_county_id)
+  end
+
+  def password_required?
+    return false if skip_password_validation
+    super
   end
 end

@@ -11,8 +11,8 @@
           = submit_tag :submit, class: 'search-submit'
 
       .col-md-3.col-sm-4.col-xs-12.pull-right.text-right
-        = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user btn btn-secondary btn-md' do
-          = "+ Add #{controller_name == "users" ? "applicant" : controller_name.singularize}"
+        = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user btn btn-success btn-md' do
+          = t("admin.users.new_button.#{controller_name}")
     .clear
 
     - if @search.query?

@@ -16,13 +16,16 @@ class Admin::LieutenantsController < Admin::UsersController
 
   def create
     @resource = Lieutenant.new(resource_params)
-    @resource.generate_password!
+    @resource.skip_password_validation = true
 
     authorize @resource, :create?
 
     @resource.save
     location = @resource.persisted? ? admin_lieutenants_path : nil
-    respond_with :admin, @resource, location: location
+    respond_with :admin,
+                 @resource,
+                 location: location,
+                 notice: "User has been successfully added."
   end
 
   def update
@@ -34,7 +37,10 @@ class Admin::LieutenantsController < Admin::UsersController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_lieutenants_path
+    respond_with :admin,
+                 @resource,
+                 location: admin_lieutenants_path,
+                 notice: "User has been successfully updated."
   end
 
   def destroy

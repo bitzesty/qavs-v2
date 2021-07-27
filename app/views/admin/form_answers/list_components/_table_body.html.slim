@@ -10,13 +10,21 @@
         = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted nomination, nominee name not yet specified" } do
           em
             ' Not yet specified
-    td = obj.dashboard_status(current_admin.class.name)
     td
-      -if obj.ceremonial_county.present?
+      - if obj.urn.present?
+        = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
+      - else
+        span.urn-not-generated Not generated
+    td = obj.dashboard_status(current_admin.class.name)
+    td = obj.document["nominee_address_postcode"]
+    td
+      - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
-      -elsif obj.document["nominee_ceremonial_county"].present?
+        br
+        span.assigned Assigned
+      - elsif obj.document["nominee_ceremonial_county"].present?
         = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
-      -else
+      - else
        'Not stated
     td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td
