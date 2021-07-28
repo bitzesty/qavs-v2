@@ -6,16 +6,11 @@ form.qae-form.award-form data-autosave-url=save_lieutenant_form_answer_url(@form
 
   = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title.parameterize)
 
-  header.page-header.group.page-header-over-sidebar
-    div
-      h1
-        = @form.title
+  h1.govuk-heading-xl
+    = @form.title
 
   .steps-progress-container.min-height-800
     = render "qae_form/steps_progress_bar", current_step: params[:step]
 
     .steps-progress-content
-      = render 'qae_form/form_header', form: @form, current_step: params[:step]
       = render partial: 'qae_form/step', collection: @form.current_steps(@form_answer, current_form_user), locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
-
-      = render "qae_form/step_error"
