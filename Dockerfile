@@ -23,5 +23,5 @@ RUN bundle config set --local without 'development test'
 RUN bundle install --jobs 4 --retry 3
 
 COPY . /app
-
+RUN yarn install
 RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile

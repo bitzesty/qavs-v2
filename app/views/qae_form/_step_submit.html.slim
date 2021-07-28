@@ -3,7 +3,7 @@
     p
       = render "qae_form/pdf_link"
 
-  - if submit.notice
+  - if submit.notice && (!current_lieutenant || current_lieutenant.role.advanced?)
     br
     .application-notice.info-notice
       == format_submit_notice(submit.notice)

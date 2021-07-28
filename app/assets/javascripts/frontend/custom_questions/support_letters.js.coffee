@@ -11,7 +11,7 @@ window.SupportLetters =
 
   fileupload_init: (el) ->
     $el = $(el)
-    parent = $el.closest("label")
+    parent = $el.closest(".govuk-form-group")
 
     upload_done = (e, data) ->
       SupportLetters.clean_up_system_tags(parent)
@@ -20,19 +20,19 @@ window.SupportLetters =
         filename = data.result['original_filename']
       else
         filename = "File uploaded"
-      file_title = $("<span class='support-letter-attachment-filename'>" + filename + "</span>")
+      file_title = $("<p class='govuk-body support-letter-attachment-filename'>" + filename + "</p>")
       hidden_input = $("<input class='js-support-letter-attachment-id' type='hidden' name='#{$el.attr("name")}' value='#{data.result['id']}' />")
 
-      parent.find(".errors-container").html("")
-      parent.find(".errors-container").closest("label").removeClass("question-has-errors")
+      parent.find(".govuk-error-message").html("")
+      parent.find(".govuk-error-message").closest(".govuk-form-group").removeClass("govuk-form-group--error")
       parent.append(file_title)
       parent.append(hidden_input)
       SupportLetters.autosave()
 
     failed = (error_message) ->
       SupportLetters.clean_up_system_tags(parent)
-      parent.find(".errors-container").html("<li>" + error_message + "</li>")
-      parent.closest("label").addClass("question-has-errors")
+      parent.find(".govuk-error-message").html(error_message)
+      parent.closest(".govuk-form-group").addClass("govuk-form-group--error")
 
     success_or_error = (e, data) ->
       errors = data.result.errors
@@ -57,30 +57,32 @@ window.SupportLetters =
     parent.find(".support-letter-attachment-filename").remove()
 
   enable_item_fields_and_controls: (parent) ->
-    parent.find(".js-save-collection").removeClass("visuallyhidden")
+    parent.find(".js-save-collection").removeClass("govuk-!-display-none")
     parent.find(".visible-read-only").hide()
-    parent.find(".remove-link").removeClass("visuallyhidden")
+    parent.find(".remove-link").removeClass("govuk-!-display-none")
     fields = parent.find("input")
     fields.removeClass("read-only")
-    parent.find(".errors-container").html("")
+    parent.find(".govuk-error-message").html("")
     form_name_prefix = parent.find(".js-system-tag").data("new-hidden-input-name")
     letter_id_hidden_input = $("<input class='js-support-entry-id'>").prop('type', 'hidden').
                                                                        prop('name', form_name_prefix)
     parent.append(letter_id_hidden_input)
 
   disable_item_fields_and_controls: (parent) ->
-    parent.find(".js-save-collection").addClass("visuallyhidden")
+    parent.find(".js-save-collection").addClass("govuk-!-display-none")
     parent.find(".visible-read-only").show()
-    parent.find(".remove-link").addClass("visuallyhidden")
     fields = parent.find("input")
     fields.addClass("read-only")
 
   save_collection_init: () ->
-    $(document).on 'click', '.js-save-collection', ->
+    $(document).on 'click', '.js-save-collection', (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      
       button = $(this)
       parent = $(this).closest("li")
 
-      if !button.hasClass("visuallyhidden")
+      if !button.hasClass("govuk-!-display-none")
         save_url = button.data 'save-collection-url'
 
         first_name = parent.find(".js-support-letter-first-name").val()
@@ -111,29 +113,29 @@ window.SupportLetters =
             dataType: 'json'
             success: (response) ->
               parent.find(".js-support-entry-id").prop('value', response)
-              parent.find(".errors-container").html("")
-              parent.find(".errors-container").closest("label").addClass("question-has-errors")
+              parent.find(".govuk-error-message").html("")
+              parent.removeClass("govuk-form-group--error")
               parent.addClass("read-only")
               parent.addClass("js-support-letter-received")
-              parent.find("input[type='text']").each ->
-                show_el = $(this).closest("label").find(".visible-read-only")
+              parent.closest('li').find("input[type='text']").each ->
+                show_el = $(this).closest(".govuk-form-group").find(".visible-read-only")
                 show_el.text($(this).val())
               SupportLetters.disable_item_fields_and_controls(parent)
               SupportLetters.autosave()
 
               return
             error: (response) ->
-              parent.find(".errors-container").html("")
-              parent.find(".errors-container").closest("label").removeClass("question-has-errors")
+              parent.find(".govuk-error-message").html("")
+              parent.removeClass("govuk-form-group--error")
               error_message = response.responseText
               $.each $.parseJSON(response.responseText), (question_key, error_message) ->
                 key_selector = ".js-support-letter-" + question_key.replace(/_/g, "-")
                 field_error_container = parent.find(key_selector).
-                                              closest("label").
-                                              find(".errors-container")
-                field_error_container.html("<li>" + error_message[0] + "</li>")
-                field_error_container.closest("label").addClass("question-has-errors")
-              button.removeClass("visuallyhidden")
+                                              closest(".govuk-form-group").
+                                              find(".govuk-error-message")
+                field_error_container.html(error_message[0])
+                field_error_container.closest(".govuk-form-group").addClass("govuk-form-group--error")
+              button.removeClass("govuk-visually-hidden")
 
               return
 

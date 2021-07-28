@@ -21,7 +21,7 @@ class Users::SupportLetterAttachmentsController < Users::BaseController
              status: :created,
              content_type: "text/plain"
     else
-      render json: { errors: humanized_errors }.to_json,
+      render json: { errors: support_letter_attachment.errors.full_messages }.to_json,
              status: :unprocessable_entity
     end
   end

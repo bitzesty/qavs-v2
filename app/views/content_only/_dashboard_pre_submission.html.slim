@@ -1,18 +1,21 @@
 .article-related-positioning-container
   .article-container
     article.group role="article"
-      .inner
+      div
         - if @user_award_forms.any?
-          h4
-            ' You can nominate more than one group
+          h3.govuk-heading-m
+            ' Current Nominations
           = render "current_nominations", award_applications: @user_award_forms
+
           br
         - else
-            .application-notice.help-notice
-              .alert.alert-warning
-                p.text-bold
-                  ' You haven't submitted any nominations.
-                br
+            .govuk-warning-text
+              span.govuk-warning-text__icon aria-hidden="true"
+                | !
+              strong.govuk-warning-text__text
+                span.govuk-warning-text__assistive
+                  | Warning
+                ' You haven't submitted any nominations.
 
         - if submission_started? && !submission_ended?
           = render "shared/application_awards_status"

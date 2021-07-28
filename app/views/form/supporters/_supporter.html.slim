@@ -1,34 +1,34 @@
 li.view-only
-  = button_to "Remove", form_form_answer_supporter_path(@form_answer, supporter), class: "remove-link js-remove-link #{'read_only' if admin_in_read_only_mode?}", method: :delete
+  = button_to "Remove", form_form_answer_supporter_path(@form_answer, supporter), class: "remove-link js-remove-link #{'read_only' if admin_in_read_only_mode?} govuk-button govuk-button--warning", method: :delete
 
-  span.row
-    span.span-6
-      label
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      label.govuk-label
         ' First Name
-        span.view-value
-          = supporter.first_name
-  span.clear
-  span.row
-    span.span-6
-      label
+      p.govuk-body
+        = supporter.first_name
+  
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      label.govuk-label
         ' Last Name
-        span.view-value
-          = supporter.last_name
-  span.clear
-  span.row
-    span.span-6
-      label
+      p.govuk-body
+        = supporter.last_name
+  
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      label.govuk-label
         ' Relationship to Nominee
-        span.view-value
-          = supporter.relationship_to_nominee
-  span.clear
-  span.row
-    span.span-6
-      label
+      p.govuk-body
+        = supporter.relationship_to_nominee
+  
+  .govuk-grid-row
+    .govuk-grid-column-one-half
+      label.govuk-label
         ' Email address
-        span.view-value
-          = supporter.email
-  span.clear
+      p.govuk-body
+        = supporter.email
+  
   .application-notice.help-notice
     p
       ' Support request sent

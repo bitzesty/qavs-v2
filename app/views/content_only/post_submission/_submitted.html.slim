@@ -2,10 +2,10 @@
 - applications.each do |award|
   .container-split.award-list
     .content-left
-      h3
+      h3.govuk-heading-m
         = award.company_or_nominee_name
     .content-right.content-offset-24
-      p
+      p.govuk-body
         => link_to "View nomination", edit_form_url(award.id)
     .clear
 br

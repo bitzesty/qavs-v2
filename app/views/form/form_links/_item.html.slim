@@ -4,10 +4,7 @@ li
                              target: "_blank"
     = button_to "Remove", form_form_answer_form_links_url(@form_answer, link: attrs["link"]),
                           method: :delete,
-                          class: "non-js-remove-link", form_class: "non-js-button-to"
+                          class: "non-js-remove-link govuk-button govuk-button--warning", form_class: "non-js-button-to"
   div
-    .row
-      .span-12
-        p
-          = attrs["description"]
-    .clear
+    p
+       = attrs["description"]
