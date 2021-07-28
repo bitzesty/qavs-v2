@@ -8,7 +8,7 @@ Cloudtasker.configure do |config|
   #
   # Default with Rails: Rails.application.credentials.secret_key_base
   #
-  config.secret = Rails.application.credentials.secret_key_base
+  config.secret = Rails.application.credentials.secret_key_base || 'testing'
 
   #
   # Specify the details of your Google Cloud Task location.
