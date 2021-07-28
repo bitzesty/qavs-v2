@@ -5,9 +5,9 @@ module ApplicationHelper
 
     if opts[:index]
       if opts[:index_name]
-        index_step_text = "<span class='step-number'>#{opts[:index_name]}</span> #{name}".html_safe
+        index_step_text = "<span class='govuk-body step-number'>#{opts[:index_name]}</span> #{name}".html_safe
       else
-        index_step_text = "<span class='step-number'>#{opts[:index]}.</span> #{name}".html_safe
+        index_step_text = "<span class='govuk-body step-number'>#{opts[:index]}.</span> #{name}".html_safe
       end
     else
       index_step_text = name
@@ -30,11 +30,11 @@ module ApplicationHelper
 
     content_tag :li, opts do
       if step_status == "current" or (step_status != "past" && opts[:cant_access_future])
-        content_tag :span do
+        content_tag :span, class: 'govuk-body' do
           index_step_text
         end
       else
-        link_to url do
+        link_to url, class: 'govuk-body' do
           index_step_text
         end
       end
@@ -69,7 +69,7 @@ module ApplicationHelper
   end
 
   def show_navigation_links?
-    current_user.completed_registration?
+    current_user
   end
 
   def application_deadline(kind)

@@ -17,6 +17,7 @@ describe "Eligibility forms" do
 
       click_button("Start eligibility questionnaire")
       form_choice(["Yes", "Yes", "Yes", "No", "No"])
+      expect(page).to have_content('How long has the group been operating? (must be at least 3 years)')
       fill_in("How long has the group been operating? (must be at least 3 years)", with: 3)
       click_button "Continue"
       form_choice("No")
@@ -31,7 +32,7 @@ def form_choice(labels)
   label_ids = Array(labels)
 
   label_ids.each do |label_id|
-    l = all(".question-body .selectable").detect do |label|
+    l = all(".question-body .govuk-radios__item").detect do |label|
       if label_id.is_a?(String)
         label.text == label_id
       elsif label_id.is_a?(Regexp)

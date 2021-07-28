@@ -1,8 +1,8 @@
 - provide(:page_wrapper_class, "page-award-form")
 
 - content_for :breadcrumbs do
-  li = link_to "Nominations", dashboard_path
-  li = @form.title
+  li.govuk-breadcrumbs__list-item = link_to "Nominations", dashboard_path, class: 'govuk-breadcrumbs__link'
+  li.govuk-breadcrumbs__list-item = @form.title
 
 header.page-header.group.page-header-over-sidebar
   div
@@ -15,12 +15,12 @@ header.page-header.group.page-header-over-sidebar
 
     .article-container.article-container-wider.step-article.step-current
       article.group role="article"
-        .inner
+        div
           - question = step.questions.detect { |q| q.key =  :innovation_materials }
 
           .question-block
             label
-              h2
+              h2.govuk-heading-l
                 span class="steps step-d-1"
                   span.visuallyhidden
                     = question.ref
@@ -31,11 +31,12 @@ header.page-header.group.page-header-over-sidebar
           == question.context
 
           - for help in question.hint
-            div.hidden-hint
-              span.hidden-link
-                = help.title.html_safe
-              span.hidden-content
-                == help.text
+            details.govuk-details data-module="govuk-details"
+              summary.govuk-details__summary
+                span.govuk-details__summary-text
+                  = help.title.html_safe
+                .govuk-details__text
+                  == help.text
 
           ul.list-add
             - existing_materials.each do |position, attrs|
@@ -47,9 +48,9 @@ header.page-header.group.page-header-over-sidebar
 
           - if existing_materials.count < 4
             = link_to "+ Upload", new_form_form_answer_form_attachment_path(@form_answer),
-                                  class: "button button-add"
+                                  class: "govuk-button govuk-button--secondary button button-add"
             = link_to "+ Add website address", new_form_form_answer_form_links_path(@form_answer),
-                                               class: "button button-add"
+                                               class: "govuk-button govuk-button--secondary button-add"
 
     = render "qae_form/steps_progress_bar", current_step: "add-website-address-documents"
 

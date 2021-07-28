@@ -5,20 +5,20 @@ li
   = simple_form_for item, url: form_form_answer_awards_url(@form_answer.id, index: detect_index_of_element(attrs), holder: params[:holder]),
                           html: { class: 'qae-form', method: (action_name == "edit" ? :put : :post) } do |f|
 
-    span.row
-      span.span-6
+    .govuk-grid-row
+      .govuk-grid-column-one-half
         = f.input :title,
             input_html: { class: "form-control medium" },
             label: "Award/personal honour title"
 
       - if item.holder?
-        span.span-3
+        .govuk-grid-column-one-quarter
           = f.input :year,
               input_html: { class: "form-control medium" },
               label: "Year"
     span.clear
-    span.row
-      span.span-12
+    .govuk-grid-row
+      .govuk-grid-column-full
         = f.label :details
         .char-count.char-max-shift
           .char-text-limit
@@ -28,7 +28,7 @@ li
           = f.input :details, as: :text,
                               rows: 2,
                               label: false
-    span.row
-      span.span-12
-        = f.submit "Save", class: "button button-alt"
+    .govuk-grid-row
+      .govuk-grid-column-full
+        = f.submit "Save", class: "govuk-button button-alt"
     span.clear

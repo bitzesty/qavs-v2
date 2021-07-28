@@ -9,20 +9,17 @@ class AwardYears::V2022::QAEForms
 
         text :nominator_title, "Title" do
           sub_ref "D 1.1"
-          classes "sub-question"
           required
           style "tiny"
         end
 
         text :nominator_name, "Name" do
           sub_ref "D 1.2"
-          classes "sub-question"
           required
         end
 
         address :nominator_address, "Address" do
           sub_ref "D 1.3"
-          classes "sub-question"
           required
           sub_fields([
             { building: "Building" },
@@ -35,19 +32,16 @@ class AwardYears::V2022::QAEForms
 
         text :nominator_telephone, "Telephone" do
           sub_ref "D 1.4"
-          classes "sub-question"
           style "small"
         end
 
         text :nominator_mobile, "Mobile" do
           sub_ref "D 1.5"
-          classes "sub-question"
           style "small"
         end
 
         text :nominator_email, "Email address" do
           sub_ref "D 1.6"
-          classes "sub-question"
           style "large"
           required
         end
@@ -94,10 +88,10 @@ class AwardYears::V2022::QAEForms
 
         submit "Submit nomination" do
           notice %(
-            <p>
+            <p class='govuk-hint'>
               If you have answered all the questions, you can submit your nomination now. You will be able to edit it any time before [SUBMISSION_ENDS_TIME].
             </p>
-            <p>
+            <p class='govuk-hint'>
               If you are not ready to submit yet, you can save your nomination and come back later.
             </p>
           )
