@@ -1,9 +1,10 @@
-- if item.send(mount_name)
+- if item&.send(mount_name)
   - scan_results = item.send("#{mount_name}_scan_results")
   - if item.clean?
     = link_to item.try(:original_filename),
               item.send(mount_name).url,
-              target: "_blank"
+              target: "_blank",
+              class: 'govuk-link'
   - elsif scan_results == "scanning"
     = item.try(:original_filename)
     |  (scanning on viruses)

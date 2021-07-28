@@ -4,11 +4,5 @@ li
                       url: form_form_answer_organisational_charts_url(@form_answer.id),
                       html: { class: 'qae-form' } do |f|
       = f.input :form_answer_id, as: :hidden, input_html: { value: @form_answer.id }
-      .row
-        .span-6
-          = f.input :file, as: :file, input_html: { class: "form-control" }
-      .clear
-      .row
-        .span-12
-          = f.submit "Save", class: "button button-alt"
-      .clear
+      = f.input :file, as: :file, input_html: { class: "medium" }
+      = f.submit "Save", class: "govuk-button button-alt"

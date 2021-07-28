@@ -1,25 +1,35 @@
-.inner.page-pre-eligibility  
-  h2 The Process
+.page-pre-eligibility
+  h2.govuk-heading-l The Process
 
-  ol 
-    li Complete the eligibility questionnaire
-    ul 
-      li This is to ensure that the volunteering group meets the basic eligibility criteria for the award and that you are able to make the nomination.
-      li It will take about 10 minutes to complete.
+  ol.govuk-list.govuk-list--number
+    li
+      p.govuk-body Complete the eligibility questionnaire
+      ul.govuk-list.govuk-list--bullet
+        li
+          ' This is to ensure that the volunteering group meets the key eligibility criteria for an award.
+        li It will take about 10 minutes to complete.
 
-    li Complete the form
-    ul
-      li The form can be completed over a number of days.
-      li You can save and return to the form at any point.
-      li You will be given more detailed instructions after the eligibility questionnaire.
+    li
+      p.govuk-body Complete the form
+      ul.govuk-list.govuk-list--bullet
+        li The form can be completed over a number of days.
+        li You can save and return to the form at any point.
+        li You will be given more detailed instructions after the eligibility questionnaire.
 
-    li Submit your nomination 
-    ul 
-      li The deadline for submissions is #{submission_deadline.decorate.formatted_trigger_time}.
-      li You can still edit submitted nominations up to this date.
+    li
+      p.govuk-body
+        ' Submit your nomination
+      ul.govuk-list.govuk-list--bullet
+        li
+          ' The deadline for submissions is
+          = submission_deadline.decorate.formatted_trigger_time
+          ' .
+        li
+          ' You can still edit submitted nominations up to this date.
 
   p#get-started.get-started.group
     - if session[:admin_in_nomination_mode]
-      = submit_tag "Mark as eligible and create nomination", class: "button", rel: "external"
+      = submit_tag "Mark as eligible and create nomination", class: "govuk-button", rel: "external"
     - else
-      = submit_tag "Start eligibility questionnaire", class: "button", rel: "external"
+      = submit_tag "Start eligibility questionnaire", class: "govuk-button", rel: "external"
+

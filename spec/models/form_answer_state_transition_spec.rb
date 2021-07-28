@@ -16,6 +16,11 @@ describe FormAnswerStateTransition do
       subject.subject = admin
 
       expected = [
+        :admin_not_eligible,
+        :admin_eligible,
+        :local_assessment_in_progress,
+        :local_assessment_recommended,
+        :local_assessment_not_recommended,
         :assessment_in_progress,
         :recommended,
         :reserved,

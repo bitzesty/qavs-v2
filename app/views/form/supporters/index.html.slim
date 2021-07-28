@@ -1,13 +1,11 @@
 - provide(:page_wrapper_class, "page-award-form")
 
 - content_for :breadcrumbs do
-  li = link_to "Nominations", dashboard_path
-  li = @form.title
+  li.govuk-breadcrumbs__list-item = link_to "Nominations", dashboard_path, class: 'govuk-breadcrumbs__link'
+  li.govuk-breadcrumbs__list-item = @form.title
 
-header.page-header.group.page-header-over-sidebar
-  div
-    h1
-      = @form.title
+h1.govuk-heading-xl
+  = @form.title
 
 .steps-progress-container
   .steps-progress-content
@@ -15,62 +13,34 @@ header.page-header.group.page-header-over-sidebar
 
     .article-container.article-container-wider.step-article.step-current
       article.group role="article"
-        .inner
-          - supporters_intro_question = @step.questions.detect { |q| q.key =  :support_letters_intro }
-
-          == supporters_intro_question.context
-
-          - for help in supporters_intro_question.hint
-            div.hidden-hint
-              span.hidden-link
-                = help.title.html_safe
-              span.hidden-content
-                == help.text
-
-          .question-block
-            label
-              h2
-                span class="steps step-d-1"
-                  span.visuallyhidden
-                    ' D 1
-                  span.todo
-                    ' D 1
-                ' Support Requests
-
-          ul.list-add.supporters-list
-            - @form_answer.supporters.each do |supporter|
-              = render "supporter", supporter: supporter
-
-          = link_to "+ Add another supporter", new_form_form_answer_supporter_path(@form_answer), class: "button button-add"
-          br
-          br
-
+        div
           - letters_intro_question =  @step.questions.detect { |q| q.key == :supporter_letters_list }
 
           .question-block
-            label
-              h2
-                span class="steps step-d-2"
-                  span.visuallyhidden
-                    ' D 2
-                  span.todo
-                    ' D 2
+            label.govuk-label
+              span class="steps step-d-1"
+                span.visuallyhidden
+                  ' C 1
+                span.todo
+                  ' C 1
+              span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
                 ' Upload your letters of support
 
-          == letters_intro_question.context
+          == letters_intro_question&.context
 
-          - for help in letters_intro_question.hint
-            div.hidden-hint
-              span.hidden-link
-                = help.title.html_safe
-              span.hidden-content
+          - for help in (letters_intro_question&.hint || [])
+            details.govuk-details data-module="govuk-details"
+              summary.govuk-details__summary
+                span.govuk-details__summary-text
+                  = help.title.html_safe
+              .govuk-details__text
                 == help.text
 
           ul.list-add.supporters-list
             - @form_answer.support_letters.each do |support_letter|
               = render "form/support_letters/support_letter", support_letter: support_letter
 
-          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "button button-add"
+          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "govuk-button govuk-button--secondary button-add"
 
     = render "qae_form/steps_progress_bar", current_step: "letters-of-support"
 

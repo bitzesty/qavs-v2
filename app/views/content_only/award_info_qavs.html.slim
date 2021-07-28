@@ -1,7 +1,5 @@
-header.page-header.group.page-header-over-sidebar
-  div
-    h1
-      ' Queen's Award for Voluntary Service Nomination
+h1.govuk-heading-xl
+  ' Queen's Award for Voluntary Service Nomination
 
 .application-info-page
   .steps-progress-container.min-height-800
@@ -9,40 +7,39 @@ header.page-header.group.page-header-over-sidebar
       .article-related-positioning-container
         .article-container
           article.group role="article"
-            .inner
+            div
               .page-header
-                h2 Useful Nomination Info Before You Begin
+                h2.govuk-heading-l Useful Nomination Info Before You Begin
 
-                p
+                p.govuk-body
                   ' The deadline for nominations is
                   = submission_deadline.decorate.formatted_trigger_time
                   ' .
 
               = render "content_only/pdf_link"
 
-              h3 What you will need:
-              h4 Section A: Nominee
-              p Basic information about the group you are nominating, including the main contact details for the group.
+              h3.govuk-heading-m What you will need:
+              h4.govuk-heading-s Section A: Nominee
+              p.govuk-body Basic information about the group you are nominating, including the main contact details for the group.
 
-              h4 Section B: Your Recommendation
-              p Detailed information about the contribution the group has made in its area of activity.
+              h4.govuk-heading-s Section B: Your Recommendation
+              p.govuk-body Detailed information about the contribution the group has made in its area of activity.
 
-              h4 Section C: Letters of Support
-              p Two letters from external supporters familiar with the group's work endorsing the group's contribution.
+              h4.govuk-heading-s Section C: Letters of Support
+              p.govuk-body Two letters from external supporters familiar with the group's work endorsing the group's contribution.
 
-              h4 Section D: Authorise and Submit
-              p Contact details for the person making the nomination and confirmation that the group leader and supporters are aware of the nomination.
+              h4.govuk-heading-s Section D: Authorise and Submit
+              p.govuk-body Contact details for the person making the nomination and confirmation that the group leader and supporters are aware of the nomination.
 
               p#get-started.get-started.group
-                = link_to result_form_award_eligibility_url(form_id: @form_answer.id), class: "button", rel: "external"
+                = link_to result_form_award_eligibility_url(form_id: @form_answer.id), class: "govuk-button", rel: "external"
                   ' Continue
                   / TODO if application is started
                   / ' Continue application
                   / - else
                   / ' Start application
 
-              .meta-data.group
-                p.modified-date
-                  ' Last updated: 10 June 2021
+              p.modified-date.govuk-hint
+                ' Last updated: 10 June 2021
 
     = render "steps_progress_bar", cant_access_future: true
