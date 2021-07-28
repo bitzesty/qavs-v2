@@ -1,30 +1,30 @@
 .dashboard
-  h1.dashboard__heading
+  h1.govuk-heading-xl
     | Users
   = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
-    = render 'admin/users/navigation'
+    = render 'admin/users/navigation' do
+      .govuk-tabs__panel
+        .govuk-grid-row
+          .govuk-grid-column-one-third
+            .form-group.search-input
+              = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
+              = submit_tag :submit, class: 'search-submit'
 
-    .row
-      .col-md-4.col-sm-5.col-xs-12
-        .form-group.search-input
-          = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-          = submit_tag :submit, class: 'search-submit'
-
-      .col-md-3.col-sm-4.col-xs-12.pull-right.text-right
-        = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user btn btn-success btn-md' do
-          = t("admin.users.new_button.#{controller_name}")
-    .clear
-
-    - if @search.query?
-      .well.search-text
-        p
-          = "Search results for '#{@search.query}'"
-          small
-            = link_to "(Clear search)", [:admin, controller_name], class: "btn btn-link"
-
-    = render 'list', resources: @resources, f: f
-
-    .row
-      .col-xs-12.text-right
-        = paginate @resources
+          .govuk-grid-column-two-thirds.text-right
+            = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button' do
+              = t("admin.users.new_button.#{controller_name}")
         .clear
+
+        - if @search.query?
+          .well.search-text
+            p.govuk-body
+              = "Search results for '#{@search.query}'"
+              small
+                = link_to "(Clear search)", [:admin, controller_name], class: "btn btn-link"
+
+        = render 'list', resources: @resources, f: f
+
+        .row
+          .col-xs-12.text-right
+            = paginate @resources
+            .clear

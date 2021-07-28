@@ -15,6 +15,52 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("govuk-frontend/govuk/all").initAll()
+const frontend = require("govuk-frontend/govuk/all")
 require.context('govuk-frontend/govuk/assets/images', true)
 import './application.scss';
+
+import $ from 'jquery';
+import MicroModal from 'micromodal';
+
+import Accordion from '../components/accordion';
+
+const accordions = document.querySelectorAll('[data-module="govuk-accordion"]');
+
+Array.prototype.forEach.call(accordions, function(module) {
+  const accordion = new Accordion(module);
+  accordion.init();
+})
+
+// frontend.initAll()
+
+MicroModal.init();
+
+if ($('.bulk-assignment-container').length > 0) {
+  $("#check_all").on("change", function() {
+    var select_all_value = $(this).prop("checked");
+    $(this).closest("table").find(".form-answer-check").prop("checked", select_all_value)
+  });
+
+  $(".form-answer-check, #check_all").on("change", function() {
+    var show_button = false;
+
+    $(".form-answer-check").each(function() {
+      if ($(this).prop("checked")) {
+        show_button = true
+      }
+    })
+
+    if (show_button) {
+      $(".bulk-assignment-container").addClass("show-container")
+
+      var selected_count = $('input[type=checkbox].form-answer-check:checked').length
+      if (selected_count > 1) {
+        $('.nominations-checked-total').text(selected_count +' groups selected')
+      } else {
+        $('.nominations-checked-total').text(selected_count +' group selected')
+      }
+    } else {
+      $(".bulk-assignment-container").removeClass("show-container")
+    }
+  })
+}

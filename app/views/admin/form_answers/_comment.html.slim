@@ -8,12 +8,12 @@
         = form_for [namespace_name, @form_answer, comment],
                    html: { method: :delete, class: "destroy-comment"} do |f|
 
-            = f.submit 'Yes', class: "btn btn-danger link-delete-comment-confirm"
+            = f.submit 'Yes', class: "govuk-button btn-danger link-delete-comment-confirm"
             ' &nbsp;
-            = link_to "No", "#", class: "btn btn-default link-delete-comment-close"
+            = link_to "No", "#", class: "govuk-button btn-default link-delete-comment-close"
 
   .comment-header
-    h3
+    h3.govuk-heading-m
       = comment_author(comment)
 
       span.pull-right.if-no-js-hide
@@ -27,7 +27,7 @@
           = form_for [namespace_name, @form_answer, comment],
                      html: { method: :delete, class: "destroy-comment"} do |f|
 
-            = f.submit 'Delete', class: "btn btn-danger link-delete-comment-confirm"
+            = f.submit 'Delete', class: "govuk-button btn-danger link-delete-comment-confirm"
 
   .comment-content
     = qae_simple_format comment.body

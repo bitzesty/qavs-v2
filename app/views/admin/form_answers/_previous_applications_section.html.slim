@@ -1,5 +1,6 @@
 .well
-  h2 Company's other applications
+  h2.govuk-heading-l 
+    | Company's other applications
   ul.list-unstyled.other-applications-list
     - other_applications = @form_answer.account.other_submitted_applications(@form_answer)
     - if other_applications.any?

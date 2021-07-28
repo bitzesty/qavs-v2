@@ -9,5 +9,5 @@
       li
         = link_to "View/print a nomination's feedback", download_pdf_admin_form_answer_feedbacks_path(resource.object, format: :pdf), target: admin_conditional_pdf_link_target(resource.object, "feedback")
 - else
-  p.p-empty
+  p.govuk-body.p-empty
     ' No documents have been attached.

@@ -14,7 +14,7 @@ describe "Assessor feedback management" do
     xit "submits feedback", js: true do
       visit assessor_form_answer_path(form_answer)
 
-      find("#feedback-heading a").click
+      find("#feedback-heading").click
       expect(page).to have_css("#section-feedback .mobility_impact_of_the_programme", visible: true)
       within "#section-feedback .level_of_innovation" do
         expect(page).to have_link("Edit", class: "form-edit-link")
@@ -42,7 +42,7 @@ describe "Assessor feedback management" do
 
     it "unlocks submitted feedback", js: true do
       visit assessor_form_answer_path(form_answer)
-      find("#feedback-heading a").click
+      find("#feedback-heading").click
 
       expect(page).to have_selector(".feedback-holder", text: "Feedback Submitted")
       expect {

@@ -1,22 +1,23 @@
-table.dashboard-table
-  caption Submitted nominations
-  thead
-    tr
-      th.bold.border-right width="250" Award
-      th.bold width="125" Last 24h
-      th.bold width="125" Last 7 days
-      th.bold width="125" Total
-  tbody
+table.dashboard-table.govuk-table class="govuk-!-font-size-14"
+  caption.govuk-table__caption.govuk-table__caption--m
+   | nominations
+  thead.govuk-table__head
+    tr.govuk-table__row
+      th.bold.border-right.govuk-table__header width="250" Award
+      th.bold.govuk-table__header.govuk-table__header--numeric width="125" Last 24h
+      th.bold.govuk-table__header.govuk-table__header--numeric width="125" Last 7 days
+      th.bold.govuk-table__header.govuk-table__header--numeric width="125" Total
+  tbody.govuk-table__body
     - submissions = @statistics.applications_submissions
-    tr
-      th.bold Award
+    tr.govuk-table__row
+      th.bold.govuk-table__header Award
       - ar_size = submissions["awards"].size
       - submissions["awards"].each_with_index do |count, index|
         - if index + 1 == ar_size
-          td.bold =count
+          td.bold.govuk-table__header.govuk-table__header--numeric =count
         - else
-          td= count
-    tr
-      th.bold Total
+          td.govuk-table__header.govuk-table__header--numeric = count
+    tr.govuk-table__row
+      th.bold.govuk-table__header Total
       - submissions["total"].each do |count|
-        td.bold = count
+        td.bold.govuk-table__header.govuk-table__header--numeric = count

@@ -1,6 +1,6 @@
 .well.section-applicant-details
   - if @form_answer.urn.present?
-    h1
+    h1.govuk-heading-xl
       = @form_answer.urn
-  h2 = @form_answer.company_name
-  p = @form_answer.award_type_full_name
+  h2.govuk-heading-l = @form_answer.company_name
+  p.govuk-body = @form_answer.award_type_full_name

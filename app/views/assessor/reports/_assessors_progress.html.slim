@@ -1,5 +1,5 @@
 .well
-  h2
+  h2.govuk-heading-l
     ' Assessor's Progress Reports
   ul.list-unstyled.list-actions
     - FormAnswer::AWARD_TYPE_FULL_NAMES.select { |key, value| current_assessor.lead_roles.include?(key) }.each do |key, value|

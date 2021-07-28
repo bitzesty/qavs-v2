@@ -4,10 +4,6 @@
  *= require select2.min
  */
 
-// Bootstrap
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
 // Password strength bar
 $error-colour: #df3034;
 $yellow: #ffbf47;
@@ -16,6 +12,7 @@ $button-colour: #00823b;
 
 @import "admin/variables";
 @import "admin/toggle";
+@import "admin/dropdown";
 @import "admin/layout";
 @import "admin/base";
 @import "admin/forms";

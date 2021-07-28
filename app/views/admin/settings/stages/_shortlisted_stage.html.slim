@@ -1,9 +1,8 @@
-.panel.panel-default.panel-parent
-  .panel-heading role="tab" id="shortlisted-stage-header"
-    h4.panel-title
-      a.collapsed data-toggle="collapse" data-parent="#admin-settings" href="#shortlisted-stage" aria-expanded="false" aria-controls="shortlisted-stage"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Shortlisted Stage
-  #shortlisted-stage.panel-collapse.collapse.in role="tabpanel" aria-labelledby="shortlisted-stage-header"
-    .panel-body
-      .panel-group#panel-shortlisted-stage-parent role="tablist" aria-multiselectable="true"
-        = render "admin/settings/deadlines/shortlisted_stage_email_notifications"
+  .govuk-accordion__section-content
+    .govuk-accordion data-module="govuk-accordion" class="govuk-!-margin-left-7"
+      = render "admin/settings/deadlines/shortlisted_stage_email_notifications"

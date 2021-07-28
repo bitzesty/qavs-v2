@@ -1,39 +1,37 @@
-.row
-  .col-xs-12
-    table.table.assessor-table
-      thead
-        tr
-          th.sortable
-            = sort_link f, 'Name', @search, :full_name
-          th.sortable
-            = sort_link f, 'Email', @search, :email
-          th.sortable
-            = sort_link f, 'Signed in on', @search, :last_sign_in_at
-          th.sortable
-            = sort_link f, "Confirmed on", @search, :confirmed_at
-      tbody
-        - if AssessorDecorator.decorate_collection(resources).none?
-          tr
-            td.text-center colspan=100
-              br
-              p.p-empty No assessors found.
-              br
-        - else
-          - AssessorDecorator.decorate_collection(resources).each do |assessor|
-            tr
-              td.td-title
-                = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: 'link-edit-user'
-              td = mail_to assessor.email, assessor.email, {class: "ellipsis"}
-              td
-                small.text-muted
-                  span.visible-lg
-                    = assessor.formatted_last_sign_in_at_long
-                  span.hidden-lg
-                    = assessor.formatted_last_sign_in_at_short
-              td
-                - if assessor.confirmed_at.present?
-                  small.text-muted
-                    = l assessor.confirmed_at, format: :date_at_time
-                - else
-                  small.text-danger
-                    ' Not confirmed
+table.govuk-table
+  thead.govuk-table__head
+    tr.govuk-table__row
+      th.sortable.govuk-table__header scope='col'
+        = sort_link f, 'Name', @search, :full_name
+      th.sortable.govuk-table__header scope='col'
+        = sort_link f, 'Email', @search, :email
+      th.sortable.govuk-table__header scope='col'
+        = sort_link f, 'Signed in on', @search, :last_sign_in_at
+      th.sortable.govuk-table__header scope='col'
+        = sort_link f, "Confirmed on", @search, :confirmed_at
+  tbody.govuk-table__body
+    - if AssessorDecorator.decorate_collection(resources).none?
+      tr.govuk-table__row
+        td.text-center colspan=100
+          br
+          p.p-empty No assessors found.
+          br
+    - else
+      - AssessorDecorator.decorate_collection(resources).each do |assessor|
+        tr.govuk-table__row
+          th.govuk-table__header scope="row"
+            = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: 'link-edit-user'
+          td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis"}
+          td.govuk-table__cell
+            small.text-muted
+              span.visible-lg
+                = assessor.formatted_last_sign_in_at_long
+              span.hidden-lg
+                = assessor.formatted_last_sign_in_at_short
+          td.govuk-table__cell
+            - if assessor.confirmed_at.present?
+              small.text-muted
+                = l assessor.confirmed_at, format: :date_at_time
+            - else
+              small.text-danger
+                ' Not confirmed

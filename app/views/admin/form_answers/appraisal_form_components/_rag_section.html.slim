@@ -2,8 +2,8 @@
 
 - editable = f.object.editable_for?(current_subject)
 
-.form-group.rag-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
-  .form-container
+.govuk-form-group.rag-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
+  div
     = f.input section.rate,
               as: :select,
               label: false,
@@ -28,7 +28,7 @@
                   span.rag-text= opt[0]
 
     .form-value
-      p
+      p.govuk-body
         - if f.object.public_send(section.desc).present?
           = qae_simple_format f.object.public_send(section.desc)
         - else
@@ -36,16 +36,16 @@
       .clear
 
     = f.input section.desc,
-              wrapper_html: { class: 'form-group' },
+              wrapper_html: { class: 'govuk-form-group' },
               input_html: { class: 'form-control js-char-count', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
               as: :text,
               label: false
 
     - if editable
-      = link_to "#", class: "form-edit-link pull-right"
+      = link_to "#", class: "govuk-link form-edit-link pull-right"
         span.glyphicon.glyphicon-pencil
         ' Edit
       .form-actions.text-right
-        = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-        = link_to "Save", "#", class: "btn btn-primary form-save-link pull-right if-no-js-hide", "data-updated-section" => section.desc
+        = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+        = link_to "Save", "#", class: "govuk-button  btn-primary form-save-link pull-right if-no-js-hide", "data-updated-section" => section.desc
       .clear

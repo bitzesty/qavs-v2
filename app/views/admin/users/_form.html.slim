@@ -1,28 +1,27 @@
 = simple_form_for [:admin, resource], html: { class: "qae-form" } do |f|
-  .panel-group#user-form-panel-parent role="tablist" aria-multiselectable="true"
-    .panel.panel-default
-      .panel-heading#user-details-heading role="tab"
-        h4.panel-title
-          a data-toggle="collapse" data-parent="#user-form-panel" href="#user-details" aria-expanded="true" aria-controls="user-details"
+  .govuk-accordion data-module="govuk-accordion"
+    .govuk-accordion__section
+      .govuk-accordion__section-header
+        h2.govuk-accordion__section-heading
+          span.govuk-accordion__section-button#user-details-heading
             = controller_name == "users" ? "Applicant" : controller_name.singularize.titleize
             '  Details
-      #user-details.section-user-details.panel-collapse.collapse.in role="tabpanel" aria-labelledby="user-details-heading"
-        .panel-body
-          = render "fields_user_details", f: f
+      .govuk-accordion__section-content aria-labelledby="user-details-heading"
+        = render "fields_user_details", f: f
 
     br
     .clearfix
       .pull-right
         = link_to "Cancel",
                   admin_users_path,
-                  class: "btn btn-default btn-md"
+                  class: "govuk-button govuk-button--secondary btn-default btn-md"
 
         ' &nbsp;
 
         - if resource.persisted? && resource.confirmed_at.blank?
           = link_to "Resend confirmation email",
                     resend_confirmation_email_admin_user_path(resource),
-                    class: "btn btn-primary btn-md",
+                    class: "govuk-button",
                     method: :patch
 
           ' &nbsp;
@@ -30,15 +29,15 @@
         - if resource.access_locked?
           = link_to "Unlock",
                     unlock_admin_user_path(resource),
-                    class: "btn btn-primary btn-md",
+                    class: "govuk-button",
                     method: :patch
 
           ' &nbsp;
 
         - if resource.persisted?
-          = link_to "Log in an create nomination",
+          = link_to "Log in and create nomination",
                      log_in_admin_user_path(resource),
-                     class: "btn btn-primary btn-md",
+                     class: "govuk-button",
                      target: "_blank",
                      method: :patch
 
@@ -46,5 +45,5 @@
 
 
         = f.button :submit, "Save",
-                  class: "btn btn-primary btn-md"
+                  class: "govuk-button"
     .clear

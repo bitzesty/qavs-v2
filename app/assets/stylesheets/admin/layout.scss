@@ -2,23 +2,6 @@
 $footer-height: 60px;
 $footer-height-sm: 30px;
 
-html,
-body,
-body > .ember-view {
-  height: 100%;
-  margin: 0 !important;
-  padding: 0;
-}
-
-body {
-  position: relative;
-  background: $grey-lightest;
-  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 #site-wrapper {
   min-height: 100%;
   _height: 100%;

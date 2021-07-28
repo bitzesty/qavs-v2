@@ -1,9 +1,7 @@
-.panel.panel-default
-  .panel-heading#registration-stage-deadlines-heading role="tab"
-    h4.panel-title
-      a data-toggle="collapse" data-parent="#panel-registration-stage" href="#section-registration-stage-deadlines" aria-expanded="true" aria-controls="section-registration-stage-deadlines"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Deadlines
-  #section-registration-stage-deadlines.section-appraisal-form.section-registration-stage-deadlines.panel-collapse.collapse.in role="tabpanel" aria-labelledby="registration-stage-deadlines-heading"
-    .panel-body
-      ul
-        li = render 'deadline_form', kind: 'award_year_switch'
+  .govuk-accordion__section-content
+    = render 'deadline_form', kind: 'award_year_switch'

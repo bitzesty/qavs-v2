@@ -1,4 +1,4 @@
-h1.admin-page-heading
+h1.govuk-heading-xl
   | Nominations
 
 
@@ -17,7 +17,7 @@ h1.admin-page-heading
 
   - if @search.query?
     .well.search-text
-      p
+      p.govuk-body
         = "Search results for '#{@search.query}'"
         small
           = link_to "(Clear search)", admin_form_answers_path, class: "btn btn-link"
@@ -38,16 +38,16 @@ h1.admin-page-heading
     = h.input :status,
               collection: FormAnswerStatus::AssessorFilter.options,
               label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
+              input_html: { multiple: true, class: 'multiselect'}
     = h.input :sub_status,
               collection: FormAnswerStatus::AdminFilter.sub_options,
               label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
+              input_html: { multiple: true, class: 'multiselect'}
 
     = h.input :nominee_activity,
               collection: FormAnswerStatus::AdminFilter.activity_options,
               label: false,
-              input_html: { multiple: true, class: 'visuallyhidden' }
+              input_html: { multiple: true, class: 'multiselect' }
   .row
     .col-xs-12
       = render("admin/form_answers/list_components/table", f: f)
