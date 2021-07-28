@@ -12,13 +12,6 @@ en:
         national_trade_body: From a national trade body
         word_of_mouth: Word of mouth
         other: Other
-    custom_email_form:
-      scope:
-        myself: Myself
-        qae_opt_in_group: QAE opt-in group
-        bis_opt_in: BIS opt-in
-        assessors: Assessors
-        all_users: All applicants
     eligibility/basic:
       kind:
         application: Apply for an organisation award
