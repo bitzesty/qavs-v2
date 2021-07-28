@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   devise_for :assessors, controllers: {
     confirmations: "assessors/confirmations"
   }
-  
+
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
   get "/how_to_apply"                                   => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
@@ -248,7 +248,6 @@ Rails.application.routes.draw do
       patch :unlock, on: :member
     end
 
-    resource :custom_email, only: [:show, :create]
     resource :users_feedback, only: [:show]
     resources :audit_logs, only: :index
 
