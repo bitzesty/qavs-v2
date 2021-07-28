@@ -32,6 +32,7 @@ require "capybara/rspec"
 require "shoulda/matchers"
 require "webmock/rspec"
 require 'selenium-webdriver'
+require 'cloudtasker/testing'
 
 Dotenv.overload('.env.test')
 
@@ -111,6 +112,8 @@ RSpec.configure do |config|
     stub_sendgrid_bounced_emails_check_request("test@irrelevant.com")
     stub_sendgrid_bounced_emails_check_request("test@example.com")
     # SENDGRID RELATED STUBS - END
+
+    Cloudtasker::Testing.inline!
 
     AwardYear.current
   end
