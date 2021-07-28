@@ -1,4 +1,4 @@
-input name="form[position_details][array]" value="true" type="hidden" *possible_read_only_ops
+input name="form[position_details][array]" value="true" type="hidden" *possible_read_only_ops(question.step.opts[:id])
 ul.list-add.positions data-default=1
 
   - question.entities.each_with_index do |position, index|
@@ -7,5 +7,5 @@ ul.list-add.positions data-default=1
   - if question.entities.none?
     = render 'qae_form/position_fields', position: {}, index: 0, question: question
 
-button.govuk-button.govuk-button--secondary.button-add.js-button-add href="#" aria-label="Add another role" data-entity="role" *possible_read_only_ops
+button.govuk-button.govuk-button--secondary.button-add.js-button-add href="#" aria-label="Add another role" data-entity="role" *possible_read_only_ops(question.step.opts[:id])
   | + Add another role

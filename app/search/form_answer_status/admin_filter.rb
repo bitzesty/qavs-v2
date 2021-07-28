@@ -64,6 +64,26 @@ class FormAnswerStatus::AdminFilter
       label: "Application submitted",
       states: [:submitted]
     },
+    admin_not_eligible: {
+      label: "Not eligible",
+      states: [:admin_not_eligible]
+    },
+    admin_eligible: {
+      label: "Eligible",
+      states: [:admin_eligible]
+    },
+    local_assessment_in_progress: {
+      label: "Local assessment in progress",
+      states: [:application_in_progress]
+    },
+    local_assessment_recommended: {
+      label: "Local assessment: recommended",
+      states: [:application_in_progress]
+    },
+    local_assessment_not_recommended: {
+      label: "Local assessment: not recommended",
+      states: [:application_in_progress]
+    },
     assessment_in_progress: {
       label: "Assessment in progress",
       states: [:assessment_in_progress]

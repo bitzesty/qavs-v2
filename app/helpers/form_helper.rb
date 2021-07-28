@@ -1,8 +1,11 @@
 module FormHelper
-  def possible_read_only_ops
+  def possible_read_only_ops(section = :default)
     ops = {}
 
-    if current_form_is_not_editable?
+    if lieutenant_nomination? && section != :local_assessment
+      ops[:disabled] = "disabled"
+      ops[:class] = "read-only"
+    elsif current_form_is_not_editable? && section != :local_assessment
       ops[:disabled] = "disabled"
       ops[:class] = "read-only"
     end
@@ -15,9 +18,7 @@ module FormHelper
   end
 
   def current_form_is_not_editable?
-    admin_in_read_only_mode? ||
-      (current_form_submission_ended? &&
-       !lieutenant_nomination?)
+    admin_in_read_only_mode? || current_form_submission_ended?
   end
 
   def lieutenant_nomination?
