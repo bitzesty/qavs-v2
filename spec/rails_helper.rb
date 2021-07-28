@@ -82,6 +82,8 @@ ActiveRecord::Migration.check_pending!
 ActiveRecord::Migration.maintain_test_schema!
 Qae::Application.load_tasks
 
+Cloudtasker::Testing.inline!
+
 RSpec.configure do |config|
   config.filter_run_excluding skip: true
   config.filter_run focus: true
@@ -112,8 +114,6 @@ RSpec.configure do |config|
     stub_sendgrid_bounced_emails_check_request("test@irrelevant.com")
     stub_sendgrid_bounced_emails_check_request("test@example.com")
     # SENDGRID RELATED STUBS - END
-
-    Cloudtasker::Testing.inline!
 
     AwardYear.current
   end
