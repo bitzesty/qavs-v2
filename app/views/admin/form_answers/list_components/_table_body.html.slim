@@ -20,12 +20,10 @@
     td
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
-        br
-        span.assigned Assigned
       - elsif obj.document["nominee_ceremonial_county"].present?
         = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
       - else
-       'Not stated
+       'Not assigned
     td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td
       - app_comments = application_comments(obj.comments_count)
