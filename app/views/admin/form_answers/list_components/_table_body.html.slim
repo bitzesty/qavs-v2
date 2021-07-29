@@ -17,13 +17,16 @@
         span.urn-not-generated Not generated
     td = obj.dashboard_status(current_admin.class.name)
     td = obj.document["nominee_address_postcode"]
+    td 
+      - if obj.document["nominee_ceremonial_county"].present?
+        = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
+      - else
+        | Not stated
     td
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
-      - elsif obj.document["nominee_ceremonial_county"].present?
-        = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
       - else
-       'Not assigned
+       | Not assigned
     td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td
       - app_comments = application_comments(obj.comments_count)
