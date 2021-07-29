@@ -89,10 +89,7 @@ gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
 # Background jobs
-gem "sidekiq", "~> 5.2"
-gem "sidekiq-cron", "~> 1.1"
-gem 'sinatra', '~> 2.0', require: nil
-gem "rack-protection"
+gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf'
 
 # CORS configuration
 gem 'rack-cors', '~> 1.0'
@@ -161,9 +158,10 @@ group :development do
   gem 'rb-readline'
 end
 
+gem 'dotenv-rails'
+
 group :development, :test do
   # Enviroment variables
-  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 4.0.1'
   gem "pry-byebug"
   gem 'rails-controller-testing'
@@ -188,5 +186,4 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.3'
   gem 'timecop'
   gem 'webmock', '3.13.0'
-  gem 'rspec-sidekiq'
 end

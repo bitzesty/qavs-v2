@@ -7,10 +7,6 @@ web: &web
     - ASSET_HOST=temp
     - MAILER_HOST=temp
     - SECRET_KEY_BASE=xxxxxxxxx
-    - AWS_ACCESS_KEY_ID
-    - AWS_SECRET_ACCESS_KEY
-    - AWS_REGION
-    - AWS_S3_BUCKET_NAME
   ports:
     - 80:3000
     - 443:3000
@@ -20,7 +16,7 @@ web: &web
 worker:
   <<: *web
   ports: []
-  command: bundle exec sidekiq -C config/sidekiq.yml
+  command: bundle exec cloudtasker
 redis:
   image: convox/redis
   ports:

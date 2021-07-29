@@ -1,7 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
-  config.secret_key = ENV['DEVISE_SECRET_KEY'] || "2e540986ced007b7f4f525f404de81dd1203f0d029d989b56428b0b5b4b5e19bca5905d9b89420b005fa116879eb518b3322e3474ed5cdfc3d8657ce7aa4c4e2"
+  config.secret_key = ENV["SECRET_KEY_BASE"] || "2e540986ced007b7f4f525f404de81dd1203f0d029d989b56428b0b5b4b5e19bca5905d9b89420b005fa116879eb518b3322e3474ed5cdfc3d8657ce7aa4c4e2"
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
@@ -59,7 +59,7 @@ Devise.setup do |config|
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
-  config.stretches = Rails.env.test? ? 1 : 10
+  config.stretches = Rails.env.test? ? 1 : 12
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = ENV['DEVISE_PEPPER']
