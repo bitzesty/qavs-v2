@@ -24,14 +24,6 @@
        | Not assigned
     td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td
-      - app_comments = application_comments(obj.comments_count)
-      - if app_comments.present?
-        = link_to polymorphic_url([namespace_name, obj], search: params[:search]), class: "icon-comment-wrapper"
-          = app_comments
-
-      = application_flags(obj, current_subject)
-      = application_flags(obj)
-    td
       = obj.last_updated_at
       br
       span.muted
