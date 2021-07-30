@@ -72,6 +72,27 @@ module FormAnswerFilteringTestHelper
         end
       end
     end
+    within ".applications-filter.assigned-lieutenancy-filter" do
+      find(".dropdown-toggle").click
+
+      expect(page).to have_selector('.assigned-lieutenancy-filter .dropdown.open', visible: true)
+      expect(page).to have_selector('.assigned-lieutenancy-filter li.apply button', visible: true)
+
+      within ".assigned-lieutenancy-filter .dropdown-menu" do
+        button = find("li.apply button")
+        all("li").each do |li|
+          next if li.all(".label-contents").count == 0
+
+          content = li.first(".label-contents")
+          if content.text.to_s == val
+            li.first("label input").click
+            button.click
+
+            return
+          end
+        end
+      end
+    end
     fail "NotFoundOption"
   end
 
@@ -93,6 +114,13 @@ module FormAnswerFilteringTestHelper
   def assign_activity(form_answers, activity)
     Array(form_answers).each do |fa|
       fa.document["nominee_activity"] = activity
+      fa.save!(validate: false)
+    end
+  end
+
+  def assign_ceremonial_county(form_answers, county)
+    Array(form_answers).each do |fa|
+      fa.ceremonial_county_id = county.id
       fa.save!(validate: false)
     end
   end

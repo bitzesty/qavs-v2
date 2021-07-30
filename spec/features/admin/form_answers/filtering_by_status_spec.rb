@@ -7,6 +7,7 @@ Warden.test_mode!
 
 describe "As Admin I want to filter applications", js: true do
   let!(:admin) { create(:admin) }
+  let!(:county) { create(:ceremonial_county)}
 
   before do
     @forms = []
@@ -74,6 +75,14 @@ describe "As Admin I want to filter applications", js: true do
     # assign_dummy_press_summary(@forms)
     # click_status_option("Missing Press Summary")
     # assert_results_number(0)
+  end
+
+  it "filters by ceremonial county" do
+    assert_results_number(4)
+    assign_ceremonial_county(@forms.first, county)
+
+    click_status_option("Not assigned")
+    assert_results_number(1)
   end
 
   it "filters by activity" do
