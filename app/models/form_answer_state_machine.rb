@@ -189,6 +189,10 @@ class FormAnswerStateMachine
         [:local_assessment_in_progress]
       when :local_assessment_in_progress
         [:local_assessment_recommended, :local_assessment_not_recommended]
+      when :local_assessment_recommended
+        [:local_assessment_not_recommended]
+      when :local_assessment_not_recommended
+        [:local_assessment_recommended]
       else
         all_states
       end

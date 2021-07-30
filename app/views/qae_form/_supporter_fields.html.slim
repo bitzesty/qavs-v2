@@ -1,6 +1,6 @@
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
 li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
-  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][#{question.list_type == :manual_upload ? "support_letter_id" : "supporter_id"}]" value=(question.list_type == :manual_upload ? supporter["support_letter_id"] : supporter["supporter_id"]) *possible_read_only_ops
+  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][#{question.list_type == :manual_upload ? "support_letter_id" : "supporter_id"}]" value=(question.list_type == :manual_upload ? supporter["support_letter_id"] : supporter["supporter_id"]) *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][#{question.list_type == :manual_upload ? "support_letter_id" : "supporter_id"}]"
   
   .govuk-form-group
@@ -8,7 +8,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       ' First Name
     span.govuk-error-message
     
-    input.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops
+    input.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops(question.step.opts[:id])
     p.govuk-body.visible-read-only = supporter["first_name"]
   
   
@@ -17,7 +17,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       ' Surname
     span.govuk-error-message
     
-    input.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops
+    input.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops(question.step.opts[:id])
     p.govuk-body.visible-read-only = supporter["last_name"]
   
   
@@ -26,7 +26,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       ' Relationship to Nominee
     span.govuk-error-message
     
-    input.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops
+    input.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops(question.step.opts[:id])
     p.govuk-body.visible-read-only = supporter["relationship_to_nominee"]
   .govuk-form-group
     - if question.list_type == :manual_upload
@@ -34,7 +34,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
         ' Letter of Support
       span.govuk-error-message
       
-      input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops
+      input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops(question.step.opts[:id])
       - if supporter['letter_of_support'].present?
         = render "support_letters/attachment", question: question,
                                                 index: index,
@@ -44,7 +44,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
         ' Email address
       span.govuk-error-message
       
-      input.js-support-letter-email.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][email]" id="form[#{question.key}][#{index}][email]" type="text" value=supporter['email'] *possible_read_only_ops
+      input.js-support-letter-email.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][email]" id="form[#{question.key}][#{index}][email]" type="text" value=supporter['email'] *possible_read_only_ops(question.step.opts[:id])
       p.govuk-body.visible-read-only = supporter['email']
   
   p

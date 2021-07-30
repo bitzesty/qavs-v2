@@ -2,14 +2,14 @@
   label.govuk-label
     ' Title
   span.govuk-error-message
-  input.govuk-input.govuk-input--width-2.js-trigger-autosave type="text" name=question.input_name(suffix: 'title') value=question.input_value(suffix: 'primary') autocomplete="off" *possible_read_only_ops
+  input.govuk-input.govuk-input--width-2.js-trigger-autosave type="text" name=question.input_name(suffix: 'title') value=question.input_value(suffix: 'primary') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
 .govuk-form-group
   label.govuk-label
     ' First name
   span.govuk-error-message
-  input.govuk-input.govuk-input--width-5.js-trigger-autosave type="text" name=question.input_name(suffix: 'first_name') value=question.input_value(suffix: 'first_name') autocomplete="off" *possible_read_only_ops
+  input.govuk-input.govuk-input--width-5.js-trigger-autosave type="text" name=question.input_name(suffix: 'first_name') value=question.input_value(suffix: 'first_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
 .govuk-form-group
   label.govuk-label
     ' Last name
   span.govuk-error-message
-  input.govuk-input.govuk-input--width-5.js-trigger-autosave type="text" name=question.input_name(suffix: 'last_name') value=question.input_value(suffix: 'last_name') autocomplete="off" *possible_read_only_ops
+  input.govuk-input.govuk-input--width-5.js-trigger-autosave type="text" name=question.input_name(suffix: 'last_name') value=question.input_value(suffix: 'last_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])

@@ -3,10 +3,10 @@
     .govuk-form-group
       label.govuk-label
         ' Name used previously
-      input.govuk-input.govuk-input--width-10.js-toggle-autosave type="text" name=question.input_name(suffix: 'name') value=question.input_value(suffix: 'name') autocomplete="off" *possible_read_only_ops
+      input.govuk-input.govuk-input--width-10.js-toggle-autosave type="text" name=question.input_name(suffix: 'name') value=question.input_value(suffix: 'name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
   .govuk-grid-column-one-half
     .govuk-form-group
       label.govuk-label
         ' Reference number used previously
-      input.govuk-input.govuk-input--width-6.js-toggle-autosave type="text" name=question.input_name(suffix: 'refnum') value=question.input_value(suffix: 'refnum') autocomplete="off" *possible_read_only_ops
+      input.govuk-input.govuk-input--width-6.js-toggle-autosave type="text" name=question.input_name(suffix: 'refnum') value=question.input_value(suffix: 'refnum') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
 span.clear

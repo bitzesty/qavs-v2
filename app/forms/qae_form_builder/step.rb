@@ -206,6 +206,10 @@ class QAEFormBuilder
       @questions = []
     end
 
+    def local_assessment?
+      opts[:id] == :local_assessment
+    end
+
     def decorate options = {}
       StepDecorator.new self, options
     end
