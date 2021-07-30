@@ -129,4 +129,10 @@ class FormAnswerStatus::AdminFilter
       [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
     } ]
   end
+
+  def self.county_options
+    Hash[CeremonialCounty.all.collect { |county|
+      [county.id, { label: county.name }]
+    } ]
+  end
 end

@@ -5,7 +5,8 @@ class FormAnswerSearch < Search
     sort: 'company_or_nominee_name',
     search_filter: {
       status: FormAnswerStatus::AdminFilter.all,
-      nominee_activity: FormAnswerStatus::AdminFilter.all
+      nominee_activity: FormAnswerStatus::AdminFilter.all,
+      ceremonial_county: FormAnswerStatus::AdminFilter.all
     }
   }
 
@@ -60,6 +61,10 @@ class FormAnswerSearch < Search
 
   def filter_by_nominee_activity(scoped_results, value)
     scoped_results.where(nominee_activity: filter_klass.internal_states(value))
+  end
+
+  def filter_by_ceremonial_county(scoped_results, value)
+    scoped_results.where(ceremonial_county: value)
   end
 
   def filter_by_sub_status(scoped_results, value)

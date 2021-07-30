@@ -64,6 +64,37 @@
 
   .col-lg-4.col-md-5.col-sm-7.applications-filter.activity-filter
     = f.simple_fields_for [:filters, @search.filters] do |m|
+      = m.input :ceremonial_county,
+                collection: county_options,
+                label: false,
+                input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
+    label.applications-filter__label
+      ' Lord Lieutenancy assigned
+    .dropdown.if-no-js-hide
+      a.dropdown-toggle.btn.btn-block.btn-default href="#" role="button" aria-expanded="false"
+        span.text-filter
+          ' Lord Lieutenancy assigned
+        span.caret-container
+          span.caret
+      ul.dropdown-menu role="menu"
+        li.checkbox role="presentation"
+          label data-value='select_all'
+            input type="checkbox"
+            span.label-contents
+              em Select all
+        - county_options.each do |k, option|
+          li.checkbox role="presentation"
+            label data-value=k
+              input type="checkbox"
+              span.label-contents
+                = option[:label]
+        li.divider
+        li.apply
+          button.btn.btn-block.btn-default type="submit"
+            ' Apply
+
+  .col-lg-4.col-md-5.col-sm-7.applications-filter.activity-filter
+    = f.simple_fields_for [:filters, @search.filters] do |m|
       = m.input :nominee_activity,
                 collection: activity_options,
                 label: false,
@@ -73,7 +104,7 @@
     .dropdown.if-no-js-hide
       a.dropdown-toggle.btn.btn-block.btn-default href="#" role="button" aria-expanded="false"
         span.text-filter
-          ' Activity
+          ' Type of group
         span.caret-container
           span.caret
       ul.dropdown-menu role="menu"
