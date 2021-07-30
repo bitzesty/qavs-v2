@@ -16,15 +16,15 @@ class FormAnswerStatus::LieutenantFilter
     },
     local_assessment_in_progress: {
       label: "Local assessment in progress",
-      states: [:application_in_progress]
+      states: [:local_assessment_in_progress]
     },
     local_assessment_recommended: {
       label: "Local assessment: recommended",
-      states: [:application_in_progress]
+      states: [:local_assessment_recommended]
     },
     local_assessment_not_recommended: {
       label: "Local assessment: not recommended",
-      states: [:application_in_progress]
+      states: [:local_assessment_not_recommended]
     },
     assessment_in_progress: {
       label: "Assessment in progress",
