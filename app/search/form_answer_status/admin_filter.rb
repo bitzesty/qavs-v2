@@ -65,11 +65,11 @@ class FormAnswerStatus::AdminFilter
       states: [:submitted]
     },
     admin_not_eligible: {
-      label: "Not eligible",
+      label: "Admin: Not eligible",
       states: [:admin_not_eligible]
     },
     admin_eligible: {
-      label: "Eligible",
+      label: "Admin: Eligible",
       states: [:admin_eligible]
     },
     local_assessment_in_progress: {
