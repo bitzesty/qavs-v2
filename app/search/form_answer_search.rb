@@ -5,8 +5,8 @@ class FormAnswerSearch < Search
     sort: 'company_or_nominee_name',
     search_filter: {
       status: FormAnswerStatus::AdminFilter.all,
-      nominee_activity: FormAnswerStatus::AdminFilter.all,
-      ceremonial_county: FormAnswerStatus::AdminFilter.all
+      nominee_activity: FormAnswerStatus::AdminFilter.activity_values,
+      ceremonial_county: FormAnswerStatus::AdminFilter.county_values
     }
   }
 
@@ -64,7 +64,14 @@ class FormAnswerSearch < Search
   end
 
   def filter_by_ceremonial_county(scoped_results, value)
-    scoped_results.where(ceremonial_county: value)
+    value = value.map do |v|
+      if v == "not_assigned"
+        nil
+      elsif v
+        v
+      end
+    end
+    scoped_results.where(ceremonial_county_id: value)
   end
 
   def filter_by_sub_status(scoped_results, value)

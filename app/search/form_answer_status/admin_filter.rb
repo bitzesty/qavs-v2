@@ -125,14 +125,16 @@ class FormAnswerStatus::AdminFilter
   end
 
   def self.activity_options
-    option = Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
+    Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
       [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
     } ]
   end
 
   def self.county_options
-    Hash[CeremonialCounty.all.collect { |county|
+    options = Hash[CeremonialCounty.all.collect { |county|
       [county.id, { label: county.name }]
     } ]
+    options[:not_assigned] = { label: "Not assigned" }
+    options
   end
 end
