@@ -93,6 +93,28 @@ module FormAnswerFilteringTestHelper
         end
       end
     end
+
+    within ".applications-filter.nominated-lieutenancy-filter" do
+      find(".dropdown-toggle").click
+
+      expect(page).to have_selector('.nominated-lieutenancy-filter .dropdown.open', visible: true)
+      expect(page).to have_selector('.nominated-lieutenancy-filter li.apply button', visible: true)
+
+      within ".nominated-lieutenancy-filter .dropdown-menu" do
+        button = find("li.apply button")
+        all("li").each do |li|
+          next if li.all(".label-contents").count == 0
+
+          content = li.first(".label-contents")
+          if content.text.to_s == val
+            li.first("label input").click
+            button.click
+
+            return
+          end
+        end
+      end
+    end
     fail "NotFoundOption"
   end
 

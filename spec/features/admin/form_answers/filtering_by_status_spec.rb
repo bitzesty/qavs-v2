@@ -7,7 +7,9 @@ Warden.test_mode!
 
 describe "As Admin I want to filter applications", js: true do
   let!(:admin) { create(:admin) }
-  let!(:county) { create(:ceremonial_county)}
+  let!(:ceremonial_county_1) { create(:ceremonial_county, name: "A") }
+  let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
+
 
   before do
     @forms = []
@@ -22,6 +24,7 @@ describe "As Admin I want to filter applications", js: true do
     #
     @forms.last(3).map do |form|
       form.document["sic_code"] = nil
+      form.document["nominee_ceremonial_county"] = ceremonial_county_1.id
     end
 
     @forms.each.map do |form|
@@ -77,12 +80,19 @@ describe "As Admin I want to filter applications", js: true do
     # assert_results_number(0)
   end
 
-  it "filters by ceremonial county" do
+  it "filters by assigned ceremonial county" do
     assert_results_number(4)
-    assign_ceremonial_county(@forms.first, county)
+    assign_ceremonial_county(@forms.first, ceremonial_county_1)
 
     click_status_option("Not assigned")
     assert_results_number(1)
+  end
+
+  it "filters by nomination ceremonial county" do
+    assert_results_number(4)
+
+    click_status_option("Not stated")
+    assert_results_number(3)
   end
 
   it "filters by activity" do

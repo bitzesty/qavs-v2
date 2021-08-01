@@ -31,14 +31,12 @@ module FormAnswerStatus::FilteringHelper
     activity_options.keys.map(&:to_s)
   end
 
-  def county_values
-    county_options.keys.map(&:to_s)
+  def assigned_county_values
+    assigned_county_options.keys.map(&:to_s)
   end
 
-  def county_collection
-    county_options.map do |k, v|
-      [v[:label], k]
-    end
+  def nomination_county_values
+    nomination_county_options.keys.map(&:to_s)
   end
 
   def supported_filter_attrs

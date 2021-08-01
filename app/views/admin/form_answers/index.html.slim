@@ -14,7 +14,8 @@ h1.admin-page-heading
                                                        options: FormAnswerStatus::AdminFilter.options,
                                                        sub_options: FormAnswerStatus::AdminFilter.sub_options,
                                                        activity_options: FormAnswerStatus::AdminFilter.activity_options,
-                                                       county_options: FormAnswerStatus::AdminFilter.county_options
+                                                       assigned_county_options: FormAnswerStatus::AdminFilter.assigned_county_options,
+                                                       nomination_county_options: FormAnswerStatus::AdminFilter.nomination_county_options
 
   - if @search.query?
     .well.search-text
@@ -49,8 +50,12 @@ h1.admin-page-heading
               collection: FormAnswerStatus::AdminFilter.activity_options,
               label: false,
               input_html: { multiple: true, class: 'visuallyhidden' }
-    = h.input :ceremonial_county,
-              collection: FormAnswerStatus::AdminFilter.county_options,
+    = h.input :assigned_ceremonial_county,
+              collection: FormAnswerStatus::AdminFilter.assigned_county_options,
+              label: false,
+              input_html: { multiple: true, class: 'visuallyhidden' }
+    = h.input :nominated_ceremonial_county,
+              collection: FormAnswerStatus::AdminFilter.nomination_county_options,
               label: false,
               input_html: { multiple: true, class: 'visuallyhidden' }
 

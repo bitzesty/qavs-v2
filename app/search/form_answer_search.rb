@@ -6,7 +6,8 @@ class FormAnswerSearch < Search
     search_filter: {
       status: FormAnswerStatus::AdminFilter.all,
       nominee_activity: FormAnswerStatus::AdminFilter.activity_values,
-      ceremonial_county: FormAnswerStatus::AdminFilter.county_values
+      assigned_ceremonial_county: FormAnswerStatus::AdminFilter.assigned_county_values,
+      nominated_ceremonial_county: FormAnswerStatus::AdminFilter.nomination_county_values
     }
   }
 
@@ -63,17 +64,21 @@ class FormAnswerSearch < Search
     scoped_results.where(nominee_activity: filter_klass.internal_states(value))
   end
 
-  def filter_by_ceremonial_county(scoped_results, value)
+  def filter_by_assigned_ceremonial_county(scoped_results, value)
     value = value.map do |v|
-      if v == "not_assigned"
-        nil
-      elsif v
-        v
-      end
+      v == "not_assigned" ? nil : v
     end
     scoped_results.where(ceremonial_county_id: value)
   end
 
+  def filter_by_nominated_ceremonial_county(scoped_results, value)
+    if value.include?("not_stated")
+      scoped_results.where("(form_answers.document -> 'nominee_ceremonial_county') IS NULL").or(scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value))
+    else
+      scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value)
+    end
+  end
+  
   def filter_by_sub_status(scoped_results, value)
     out = scoped_results
 
