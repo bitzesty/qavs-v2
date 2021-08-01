@@ -72,10 +72,11 @@ class FormAnswerSearch < Search
   end
 
   def filter_by_nominated_ceremonial_county(scoped_results, value)
+    county_filter_query = scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value)
     if value.include?("not_stated")
-      scoped_results.where("(form_answers.document -> 'nominee_ceremonial_county') IS NULL").or(scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value))
+      scoped_results.where("(form_answers.document -> 'nominee_ceremonial_county') IS NULL").or(county_filter_query)
     else
-      scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value)
+      county_filter_query
     end
   end
   
