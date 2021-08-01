@@ -1,0 +1,7 @@
+- if show_bulk_lieutenants_assignment?
+  = render "bulk_assignment"
+  .if-no-js-hide
+    .nominations-checked-total
+      | Select groups from the list below to bulk assign to Lord Lieutenancy office or national assessor sub-groups.
+    .bulk-assignment-container
+      button.mm-modal__btn.bulk-assign-lieutenants-link data-micromodal-trigger="modal-bulk-assign-lieutenants" Bulk assign to Lord Lieutenancy office

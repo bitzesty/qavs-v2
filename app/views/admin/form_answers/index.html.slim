@@ -26,7 +26,7 @@ h1.admin-page-heading
         small
           = link_to "(Clear search)", admin_form_answers_path, class: "btn btn-link"
 
-= render("admin/form_answers/bulk_assignment")
+= render "admin/form_answers/upper_bulk_assignment"
 
 = simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
   .row
@@ -64,9 +64,10 @@ h1.admin-page-heading
   .row
     .col-xs-12
       = render("admin/form_answers/list_components/table", f: f)
+  = render "admin/form_answers/lower_bulk_assignment"
   .row
     .col-xs-12.text-right
       = paginate @form_answers
       .clear
 
-= render("admin/form_answers/bulk_assignment")
+

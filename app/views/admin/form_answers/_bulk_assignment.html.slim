@@ -1,34 +1,28 @@
-- if show_bulk_lieutenants_assignment?
-  .mm-modal#modal-bulk-assign-lieutenants aria-hidden="true"
-    .mm-modal__overlay tabindex="-1" data-micromodal-close=''
-      .mm-modal__container role="dialog" aria-modal="true" aria-labelledby="modal-bulk-assign-lieutenants-title"
-        header.mm-modal__header
-          h1.mm-modal__title id="modal-bulk-assign-lieutenants-title"
-            | Bulk assign groups to Lord Lieutenancy office
-          button.mm-modal__close aria-label="Close modal" data-micromodal-close=''
-        .mm-modal__content id="modal-bulk-assign-lieutenants-content"
-          | Please select the Lord Lieutenancy office that you would like to assign selected groups to.
-        .clear
+.mm-modal#modal-bulk-assign-lieutenants aria-hidden="true"
+  .mm-modal__overlay tabindex="-1" data-micromodal-close=''
+    .mm-modal__container role="dialog" aria-modal="true" aria-labelledby="modal-bulk-assign-lieutenants-title"
+      header.mm-modal__header
+        h1.mm-modal__title id="modal-bulk-assign-lieutenants-title"
+          | Bulk assign groups to Lord Lieutenancy office
+        button.mm-modal__close aria-label="Close modal" data-micromodal-close=''
+      .mm-modal__content id="modal-bulk-assign-lieutenants-content"
+        | Please select the Lord Lieutenancy office that you would like to assign selected groups to.
+      .clear
 
-          = form_for [namespace_name, LieutenantAssignmentCollection.new] do |f|
-            = flash[:error]
-            fieldset.question-group
-              .input.select.form-group.primary-lieutenant-group
-                = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "control-label"
-                = f.select :ceremonial_county_id,
-                          CeremonialCounty.all.pluck(:name, :id),
-                          { include_blank: true },
-                          class: "form-control mm-modal__select"
+        = form_for [namespace_name, LieutenantAssignmentCollection.new] do |f|
+          = flash[:error]
+          fieldset.question-group
+            .input.select.form-group.primary-lieutenant-group
+              = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "control-label"
+              = f.select :ceremonial_county_id,
+                        CeremonialCounty.all.pluck(:name, :id),
+                        { include_blank: true },
+                        class: "form-control mm-modal__select"
 
-              = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
+            = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 
-              .pull-right
-                a.mm-modal-cancel-link data-micromodal-close='' href='#'
-                  | Cancel
-                = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "mm-modal__btn"
-              .clear
-
-  .if-no-js-hide
-    .bulk-assignment-container
-      .nominations-checked-total
-      button.mm-modal__btn.bulk-assign-lieutenants-link data-micromodal-trigger="modal-bulk-assign-lieutenants" Bulk assign to Lord Lieutenancy office
+            .pull-right
+              a.mm-modal-cancel-link data-micromodal-close='' href='#'
+                | Cancel
+              = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "mm-modal__btn"
+            .clear

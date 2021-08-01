@@ -290,6 +290,7 @@ ready = ->
       else
         $('.nominations-checked-total').text(`selected_count` +' group selected')
     else
+      $('.nominations-checked-total').text("Select groups from the list below to bulk assign to Lord Lieutenancy office or national assessor sub-groups.")
       $(".bulk-assignment-container").removeClass("show-container")
 
 changeRagStatus = ->
