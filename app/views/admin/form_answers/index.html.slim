@@ -12,10 +12,12 @@ h1.admin-page-heading
 
   = render "shared/form_answers/top_statuses_filters", f: f,
                                                        options: FormAnswerStatus::AdminFilter.options,
-                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options,
-                                                       activity_options: FormAnswerStatus::AdminFilter.activity_options,
-                                                       assigned_county_options: FormAnswerStatus::AdminFilter.assigned_county_options,
-                                                       nomination_county_options: FormAnswerStatus::AdminFilter.nomination_county_options
+                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options
+                                                       
+  = render "shared/form_answers/nomination_answer_filters", f: f,
+                                                            activity_options: FormAnswerStatus::AdminFilter.activity_options,
+                                                            assigned_county_options: FormAnswerStatus::AdminFilter.assigned_county_options,
+                                                            nomination_county_options: FormAnswerStatus::AdminFilter.nomination_county_options
 
   - if @search.query?
     .well.search-text
