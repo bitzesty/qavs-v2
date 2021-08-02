@@ -1,5 +1,0 @@
----
-:concurrency: <%= ENV['DB_POOL'] || ENV['MAX_THREADS'] || 5 %>
-:queues:
-  - default
-  - mailers
