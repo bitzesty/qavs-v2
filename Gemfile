@@ -123,6 +123,7 @@ gem 'puma', '~> 4.3.8'
 
 # Performance & Error reporting
 gem 'appsignal'
+gem 'web-console'
 
 # Log formatting
 gem 'lograge'
