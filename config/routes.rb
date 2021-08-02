@@ -162,6 +162,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboard#index"
+    get 'console', to: "admins#console"
+
     resources :dashboard, only: [:index] do
       collection do
         get :totals_by_month
@@ -194,7 +196,6 @@ Rails.application.routes.draw do
         # NOTE: debug abilities for Admin
         get :login_as_assessor
         get :login_as_user
-        get :console
       end
     end
     resources :reports, only: [:show] do
