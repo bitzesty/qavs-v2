@@ -42,6 +42,13 @@ describe MailRenderer do
     end
   end
 
+  describe "#group_leader_notification" do
+    it "renders e-mail" do
+      rendered = described_class.new.group_leader_notification
+      expect(rendered).to match("Jane Campton")
+    end
+  end
+
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_notification
