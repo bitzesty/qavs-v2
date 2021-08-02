@@ -51,13 +51,13 @@ module FormAnswerFilteringTestHelper
       end
     end
 
-    within ".applications-filter.activity-filter" do
+    within ".applications-filter.nominated-lieutenancy-filter" do
       find(".dropdown-toggle").click
 
-      expect(page).to have_selector('.activity-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.activity-filter li.apply button', visible: true)
+      expect(page).to have_selector('.nominated-lieutenancy-filter .dropdown.open', visible: true)
+      expect(page).to have_selector('.nominated-lieutenancy-filter li.apply button', visible: true)
 
-      within ".activity-filter .dropdown-menu" do
+      within ".nominated-lieutenancy-filter .dropdown-menu" do
         button = find("li.apply button")
         all("li").each do |li|
           next if li.all(".label-contents").count == 0
@@ -72,6 +72,7 @@ module FormAnswerFilteringTestHelper
         end
       end
     end
+
     within ".applications-filter.assigned-lieutenancy-filter" do
       find(".dropdown-toggle").click
 
@@ -94,13 +95,14 @@ module FormAnswerFilteringTestHelper
       end
     end
 
-    within ".applications-filter.nominated-lieutenancy-filter" do
+    within ".applications-filter.activity-filter" do
+      puts page.find(".dropdown-toggle").visible?
       find(".dropdown-toggle").click
 
-      expect(page).to have_selector('.nominated-lieutenancy-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.nominated-lieutenancy-filter li.apply button', visible: true)
+      expect(page).to have_selector('.activity-filter .dropdown.open', visible: true)
+      expect(page).to have_selector('.activity-filter li.apply button', visible: true)
 
-      within ".nominated-lieutenancy-filter .dropdown-menu" do
+      within ".activity-filter .dropdown-menu" do
         button = find("li.apply button")
         all("li").each do |li|
           next if li.all(".label-contents").count == 0
