@@ -1,4 +1,5 @@
 # config/initializers/cloudtasker.rb
+require 'cloudtasker/cron'
 
 Cloudtasker.configure do |config|
   #
