@@ -31,7 +31,7 @@ describe "Admin fulfills the company details" do
   end
 
   it "can see the edit buttons" do
-    within ".company-details-forms" do
+    within "#company-details-section" do
       expect(page).to have_selector("input[type='submit']", count: 11)
     end
   end

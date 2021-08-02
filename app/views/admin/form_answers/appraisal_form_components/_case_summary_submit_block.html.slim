@@ -6,7 +6,7 @@
     .feedback-holder
 
     .pull-right
-      = submit_tag submit_case_summary_title(assessment), class: "btn btn-primary btn-confirm-submit"
+      = submit_tag submit_case_summary_title(assessment), class: "govuk-button btn-primary btn-confirm-submit"
     .clear
 
 - elsif assessment.submitted?
@@ -21,7 +21,7 @@
         ' Case Summary Submitted
 
         .pull-right
-          = submit_tag "Unlock", class: "btn btn-primary"
+          = submit_tag "Unlock", class: "govuk-button btn-primary"
         .clear
 
   - else

@@ -1,7 +1,7 @@
 - if user_can_edit(@form_answer, :parent_company)
-  .form-group-multiple-parent
+  .govuk-form-group.form-group-multiple-parent
     = render "admin/form_answers/company_details/parent_company/form"
 - else
-  .form-group
-    .form-container
+  .govuk-form-group
+    div
       = render "admin/form_answers/company_details/parent_company/show"

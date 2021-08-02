@@ -4,7 +4,7 @@
                   html: { "data-type" => "html" } do |f|
 
   = hidden_field_tag :section, "previous_wins"
-  .form-container
+  div
     = render "admin/form_answers/company_details/previous_wins/show"
 
     .input.form-group.form-fields.form-block
@@ -34,11 +34,11 @@
 
       = link_to "+ Add another winnings", "#", class: "btn btn-default if-no-js-hide add-previous-winning"
       .form-actions.text-right
-        = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-        = f.submit "Save", class: "btn btn-primary pull-right"
+        = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary  btn-default form-cancel-link if-no-js-hide"
+        = f.submit "Save", class: "govuk-button  btn-primary pull-right"
 
 
-    = link_to "#", class: "form-edit-link pull-right"
+    = link_to "#", class: "govuk-link form-edit-link pull-right"
       span.glyphicon.glyphicon-pencil
       ' Edit
     .clear

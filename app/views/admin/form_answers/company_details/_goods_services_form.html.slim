@@ -1,8 +1,8 @@
-.form-group
-  .form-container
+.govuk-form-group
+  div
     label.form-label Description of goods/services
     .form-value
-      p = @form_answer.goods_and_services
+      p.govuk-body = @form_answer.goods_and_services
 
     - if user_can_edit(@form_answer, :goods_services)
       = simple_form_for [namespace_name, resource], remote: true, authenticity_token: true, html: { "data-type" => "html" } do |f|
@@ -12,10 +12,10 @@
             = f.input :mobility_desc_short, as: :text, label: false, input_html: { class: "form-control js-char-count", rows: 3, "data-word-max" => 15 }
 
           .form-actions.text-right
-            = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-            = f.submit "Save", class: "btn btn-primary pull-right"
+            = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+            = f.submit "Save", class: "govuk-button btn-primary pull-right"
         .clear
-        = link_to "#", class: "form-edit-link pull-right"
+        = link_to "#", class: "govuk-link form-edit-link pull-right"
           span.glyphicon.glyphicon-pencil
           ' Edit
         .clear

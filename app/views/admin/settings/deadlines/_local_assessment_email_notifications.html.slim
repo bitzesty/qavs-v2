@@ -1,9 +1,8 @@
-.panel.panel-default
-  .panel-heading#local-assessment-stage-email-notifications-heading role="tab"
-    h4.panel-title
-      a data-toggle="collapse" data-parent="#panel-local-assessment-stage" href="#section-local-assessment-stage-email-notifications" aria-expanded="true" aria-controls="section-local-assessment-stage-email-notifications"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Email notification
-  #section-local-assessment-stage-email-notifications.section-appraisal-form.section-local-assessment-stage-email-notifications.panel-collapse.collapse.in role="tabpanel" aria-labelledby="local-assessment-stage-email-notifications-heading"
-    .panel-body
-      = render 'email_notification', kind: 'local_assessment_notification'
-      = render 'email_notification', kind: 'local_assessment_reminder'
+  .govuk-accordion__section-content
+    = render 'email_notification', kind: 'local_assessment_notification'
+    = render 'email_notification', kind: 'local_assessment_reminder'

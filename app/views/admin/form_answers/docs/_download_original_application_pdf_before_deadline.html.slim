@@ -1,7 +1,7 @@
 - if policy(@form_answer).can_download_original_pdf_of_application_before_deadline?
 
   = link_to @form_answer.pdf_version.url,
-            class: "btn btn-default btn-block",
+            class: "govuk-button btn-default btn-block",
             target: "_blank"
     span.glyphicon.glyphicon-file
     span.btn-title

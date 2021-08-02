@@ -284,6 +284,7 @@
       .download-item__title {
         color: black;
         font-size: 1.11111em;
+        margin-bottom: 0 !important;
 
         @media (min-width: 992px) {
           margin-right: 200px;

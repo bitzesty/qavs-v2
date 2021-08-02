@@ -1,9 +1,9 @@
 .form-value.no-js-update
-  p data-for="press_summary_name"
+  p.govuk-body data-for="press_summary_name"
     = press_summary.name
-  p data-for="press_summary_phone_number"
+  p.govuk-body data-for="press_summary_phone_number"
     = press_summary.phone_number
-  p data-for="press_summary_email"
+  p.govuk-body data-for="press_summary_email"
     = press_summary.email
 
 - if policy(press_summary).can_update_contact_details?

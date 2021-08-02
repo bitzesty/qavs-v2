@@ -5,14 +5,12 @@
   h3 Schedule new email
   = simple_form_for notification, url: admin_settings_email_notifications_path(year: params[:year]), remote: true, authenticity_token: true do |f|
     = f.input :kind, as: :hidden
-    .control-date
-      .form-group
-        label.control-label Send at
-        = f.input :trigger_at,
-                  as: :separated_date_time,
-                  input_html: { id: "" }
+    = f.input :trigger_at,
+              as: :separated_date_time,
+              input_html: { id: "" },
+              label: "Send at"
 
-    .control-action
-      = link_to "Cancel", "#", class: "btn btn-default btn-cancel if-no-js-hide"
-      = f.submit "Save", class: "btn btn-primary btn-submit"
+    .govuk-button-group
+      = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
+      = f.submit "Save", class: "govuk-button"
     .clear

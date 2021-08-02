@@ -3,11 +3,11 @@ class SeparatedDateTimeInput < SimpleForm::Inputs::StringInput
     out = ''.html_safe
 
     out << @builder.text_field("formatted_#{attribute_name}_date",
-                               input_html_options.merge(class: "form-control datepicker",
-                                                        placeholder: "dd/mm/yyyy"))
+                               input_html_options.merge(class: "govuk-input medium datepicker",
+                                                        placeholder: "dd/mm/yyyy", 'aria-label' => 'Date'))
     out << @builder.text_field("formatted_#{attribute_name}_time",
-                               input_html_options.merge(class: "form-control timepicker",
-                                                        placeholder: "hh:mm"))
+                               input_html_options.merge(class: "govuk-input medium timepicker",
+                                                        placeholder: "hh:mm", 'aria-label' => 'Time'))
 
     out
   end

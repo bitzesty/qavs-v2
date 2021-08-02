@@ -32,7 +32,7 @@ describe "Assessment flow", %(
   #    login_as(lead, scope: :assessor)
   #    visit assessor_form_answer_path(form_answer)
 
-  #    find("#appraisal-form-moderated-heading .panel-title a").click
+  #    find("#appraisal-form-moderated-heading").click
   #    within "#section-appraisal-form-moderated" do
   #      all(".btn-rag").each do |rag|
   #        rag.click
@@ -55,7 +55,7 @@ describe "Assessment flow", %(
   #    visit assessor_form_answer_path(form_answer)
 
   #    page.document.synchronize do
-  #      element = first("#case-summary-heading-primary_case_summary .panel-title a")
+  #      element = first("#case-summary-heading-primary_case_summary")
   #      element.click if element
   #    end
 
@@ -73,12 +73,12 @@ describe "Assessment flow", %(
   #    submit_primary_case_summary
 
   #    visit assessor_form_answer_path(form_answer)
-  #    find("#case-summary-heading-primary_case_summary .panel-title a").click
+  #    find("#case-summary-heading-primary_case_summary").click
 
   #    expect(page).to_not have_selector("input[value='Confirm case summary']")
   #    login_as(lead, scope: :assessor)
   #    visit assessor_form_answer_path(form_answer)
-  #    find("#case-summary-heading-primary_case_summary .panel-title a").click
+  #    find("#case-summary-heading-primary_case_summary").click
 
   #    page.document.synchronize do
   #      if first("#section-case-summary")

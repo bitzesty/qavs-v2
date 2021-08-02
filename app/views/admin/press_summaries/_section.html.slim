@@ -11,7 +11,7 @@
        br
        | This gets downloaded into a csv and most word processing tools add non-standard characters, leaving the information illegible.
     .form-value.no-js-update
-      p = press_summary.body.presence || content_tag(:i, "No Press Book Notes has been added yet")
+      p.govuk-body = press_summary.body.presence || content_tag(:i, "No Press Book Notes has been added yet")
     .input.form-group
       = f.input :body,
                 as: :text,
@@ -32,7 +32,7 @@
   = simple_form_for press_summary, url: url, remote: true, authenticity_token: true do |f|
     = f.input :contact_details_update, as: :hidden, input_html: {value: true}
 
-    .form-group
+    .govuk-form-group
       label.form-label Contact details for press enquiries
       
       - if form_answer.award_year.year >= 2020
@@ -42,10 +42,10 @@
 
     - if press_summary.body.present?
       - if press_summary.correct
-        .form-group
+        .govuk-form-group
           label.form-label
             ' Comments by Applicant
-          p
+          p.govuk-body
             - if press_summary.comment.present?
               = press_summary.comment
             - else
@@ -55,7 +55,7 @@
       .alert.alert-success
         ' Applicant has confirmed the Press Book Notes
     - else
-      p.p-empty
+      p.govuk-body.p-empty
         | Applicant hasn't confirmed the Press Book Notes
 
 - if press_summary.submitted?
@@ -66,7 +66,7 @@
   - else
     br
     br
-    p.p-empty Press Notes submitted
+    p.govuk-body.p-empty Press Notes submitted
 - else
   - if press_summary.persisted? && policy(press_summary).submit?
     br
@@ -75,12 +75,12 @@
   - else
     br
     br
-    p.p-empty Press Notes not submitted
+    p.govuk-body.p-empty Press Notes not submitted
 
 - if press_summary.admin_sign_off?
   br
   br
-  p.p-empty Admin has signed off the Press Book Notes
+  p.govuk-body.p-empty Admin has signed off the Press Book Notes
 - else
   - if press_summary.persisted? && policy(press_summary).admin_signoff?
     br

@@ -1,13 +1,11 @@
-.panel.panel-default
-  .panel-heading#shortlisted-stage-deadlines-heading role="tab"
-    h4.panel-title
-      a data-toggle="collapse" data-parent="#panel-shortlisted-stage" href="#section-shortlisted-stage-deadlines" aria-expanded="true" aria-controls="section-shortlisted-stage-deadlines"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Deadlines
-  #section-shortlisted-stage-deadlines.section-appraisal-form.section-shortlisted-stage-deadlines.panel-collapse.collapse.in role="tabpanel" aria-labelledby="shortlisted-stage-deadlines-heading"
-    .panel-body
-      ul
-        li = render 'deadline_form', kind: 'buckingham_palace_attendees_details'
-        li = render 'deadline_form', kind: 'buckingham_palace_media_information'
-        li = render 'deadline_form', kind: 'buckingham_palace_confirm_press_book_notes'
-        li = render 'deadline_form', kind: 'buckingham_palace_reception_attendee_information_due_by'
-        li = render 'deadline_form', kind: 'buckingham_palace_attendees_invite'
+  .govuk-accordion__section-content
+    = render 'deadline_form', kind: 'buckingham_palace_attendees_details'
+    = render 'deadline_form', kind: 'buckingham_palace_media_information'
+    = render 'deadline_form', kind: 'buckingham_palace_confirm_press_book_notes'
+    = render 'deadline_form', kind: 'buckingham_palace_reception_attendee_information_due_by'
+    = render 'deadline_form', kind: 'buckingham_palace_attendees_invite'

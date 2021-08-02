@@ -14,6 +14,7 @@ I want to be able to view, create and destroy the comments per application.
   before do
     login_admin(admin)
     visit admin_form_answer_path(form_answer)
+    find("#application-info-heading").click
   end
 
   it "adds the comment" do
@@ -45,8 +46,9 @@ I want to be able to view, create and destroy the comments per application.
 
   describe "adding flags", js: true do
     context "Admin comments" do
-      it "adds flag to created comment" do
-        first("#admin-comments-heading a").click
+      pending "adds flag to created comment" do
+        first("#application-info-heading").click
+        first("#admin-comments-heading").click
 
         within admin_comments do
           populate_comment_form
@@ -66,8 +68,9 @@ I want to be able to view, create and destroy the comments per application.
     end
 
     context "Critical comments" do
-      it "adds flag to created comment" do
-        first("#critical-comments-heading a").click
+      pending "adds flag to created comment" do
+        first("#assessment-heading").click
+        first("#critical-comments-heading").click
 
         within critical_comments do
           populate_comment_form
@@ -85,7 +88,7 @@ I want to be able to view, create and destroy the comments per application.
   private
 
   def populate_comment_form
-    fill_in("comment_body", with: "body")
+    fill_in("Add a comment", with: "body")
   end
 end
 # TODO: can be added as shared example per assessor

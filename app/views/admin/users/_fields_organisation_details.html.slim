@@ -1,17 +1,17 @@
 fieldset.question-group
-  h3 = f.label :company_name, label: "Name of the organisation"
+  h3.govuk-heading-m  = f.label :company_name, label: "Name of the organisation"
   .row
     .col-md-4.col-sm-5
       = f.input :company_name,
-                wrapper_html: { class: "form-group" },
+                wrapper_html: { class: "govuk-form-group" },
                 input_html: { class: "form-control" },
                 label_html: { class: "visuallyhidden" }
 
 fieldset.question-group
-  h3 = f.label :company_phone_number, label: "Main telephone number"
+  h3.govuk-heading-m = f.label :company_phone_number, label: "Main telephone number"
   .row
     .col-md-4.col-sm-5
       = f.input :company_phone_number,
-                wrapper_html: { class: "form-group" },
+                wrapper_html: { class: "govuk-form-group" },
                 input_html: { class: "form-control" },
                 label_html: { class: "visuallyhidden" }

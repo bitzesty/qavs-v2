@@ -1,5 +1,4 @@
-.page-header
-  h1
-    = "New #{controller_name == "users" ? "applicant" : controller_name.singularize}"
+h1.govuk-heading-xl
+  = "New #{controller_name == "users" ? "applicant" : controller_name.singularize}"
 
 = render 'form', resource: @resource

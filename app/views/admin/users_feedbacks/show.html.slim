@@ -1,45 +1,39 @@
 .dashboard
-  h1.dashboard__heading
+  h1.govuk-heading-xl
     | Feedback
-  .row
-    .col-xs-12
-      .table-overflow-container
-        table.table.feedback-table
-          colgroup
-            col width="100"
-            col width="100"
-            col width="400"
-          thead
-            tr
-              th.sortable
-                ' Date
-              th.sortable
-                ' Rating
-              th.sortable
-                ' Feedback
-          tbody
-            - if @feedbacks.none?
-              tr
-                td.text-center colspan=100
-                  br
-                  p.p-empty No feedback received.
-                  br
-            - else
-              - @feedbacks.each do |feedback|
-                tr
-                  td
-                    = feedback.created_at.strftime("%d/%m/%Y %-l:%M%P")
-                  td
-                    span.feedback-stars alt=feedback.rating.text title=feedback.rating.text
-                      - feedback.rating.value.times do
-                        span.glyphicon.glyphicon-star
-                      - (5 - feedback.rating.value).times do
-                        span.glyphicon.glyphicon-star-empty
-                  td
-                    .feedback-description
-                      = feedback.comment
+  table.govuk-table
+    colgroup
+      col width="100"
+      col width="100"
+      col width="400"
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th.sortable.govuk-table__header scope="col"
+          ' Date
+        th.sortable.govuk-table__header scope="col"
+          ' Rating
+        th.sortable.govuk-table__header scope="col"
+          ' Feedback
+    tbody.govuk-table__body
+      - if @feedbacks.none?
+        tr.govuk-table__row
+          td.text-center.govuk-table__cell colspan=100
+            br
+            p.p-empty No feedback received.
+            br
+      - else
+        - @feedbacks.each do |feedback|
+          tr.govuk-table__row
+            td.govuk-table__cell
+              = feedback.created_at.strftime("%d/%m/%Y %-l:%M%P")
+            td.govuk-table__cell
+              span.feedback-stars alt=feedback.rating.text title=feedback.rating.text
+                - feedback.rating.value.times do
+                  span.glyphicon.glyphicon-star
+                - (5 - feedback.rating.value).times do
+                  span.glyphicon.glyphicon-star-empty
+            td.govuk-table__cell
+              .feedback-description
+                = feedback.comment
 
-  .row
-    .col-xs-12.text-right
-      = paginate @feedbacks
-      .clear
+  = paginate @feedbacks

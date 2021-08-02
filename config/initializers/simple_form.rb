@@ -9,7 +9,7 @@ SimpleForm.setup do |config|
                   class: 'govuk-form-group',
                   label_class: 'govuk-label',
                   hint_class: "field-with-hint",
-                  error_class: "field-with-errors" do |b|
+                  error_class: "govuk-form-group--error" do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.

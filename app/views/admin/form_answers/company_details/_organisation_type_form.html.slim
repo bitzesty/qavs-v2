@@ -1,15 +1,15 @@
 - if user_can_edit(@form_answer, :organisation_type)
-  .form-group class="#{'form-edit' if @form_answer.organisation_type.blank?}"
+  .govuk-form-group class="#{'form-edit' if @form_answer.organisation_type.blank?}"
     = simple_form_for [namespace_name, resource],
                       remote: true,
                       authenticity_token: true, html: { "data-type" => "html" } do |f|
       = hidden_field_tag :section, "organisation_type"
 
-      .form-container
+      div
         label.form-label Organisation type
 
         .form-value
-          p
+          p.govuk-body
             - if @form_answer.organisation_type.present?
               = @form_answer.organisation_type.capitalize
             - else
@@ -24,18 +24,18 @@
                           input_html: { class: "form-control" },
                           include_blank: false
           .form-actions.text-right
-            = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-            = f.submit "Save", class: "btn btn-primary pull-right"
+            = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+            = f.submit "Save", class: "govuk-button btn-primary pull-right"
         .clear
 
-        = link_to "#", class: "form-edit-link pull-right"
+        = link_to "#", class: "govuk-link form-edit-link pull-right"
           span.glyphicon.glyphicon-pencil
           ' Edit
         .clear
 - else
-  .form-group
-    .form-container
+  .govuk-form-group
+    div
       label.form-label Organisation type
-        p
+        p.govuk-body
           - if @form_answer.organisation_type.present?
             = @form_answer.organisation_type.capitalize

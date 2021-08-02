@@ -3,18 +3,16 @@
     .award-year-label
       ' Award year
     .award-year-dropdown
-      .dropdown
-        a.dropdown-toggle.btn.btn-block.btn-default href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+      .govuk-dropdown
+        button.govuk-dropdown__toggle href="#" data-toggle="dropdown" aria-expanded="false"
           - current_year = params[:year] ? params[:year].to_i : AwardYear.current.year
           - current_year_text = "#{current_year - 1} - #{current_year}"
 
           = params[:year].to_s == "all_years" ? "All Years" : current_year_text
-          span.caret-container
-            span.caret
-        ul.dropdown-menu.dropdown-menu-right
-          li class="#{'active' if params[:year].to_s == 'all_years'}"
-            = link_to "All Years", url_for(params.permit(:controller, :action).merge(year: :all_years))
+        ul.govuk-dropdown__menu.govuk-dropdown__menu--right
+          li
+            = link_to "All Years", url_for(params.permit(:controller, :action).merge(year: :all_years)), class: "#{'active' if params[:year].to_s == 'all_years'}"
 
           - AwardYear.admin_switch.each do |year, label|
-            li class="#{'active' if label == current_year_text}"
-              = link_to label, url_for(params.permit(:controller, :action).merge(year: year))
+            li
+              = link_to label, url_for(params.permit(:controller, :action).merge(year: year)), class: "#{'active' if label == current_year_text}"

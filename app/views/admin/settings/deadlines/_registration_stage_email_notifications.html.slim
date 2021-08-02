@@ -1,15 +1,14 @@
-.panel.panel-default
-  .panel-heading#registration-stage-email-notifications-heading role="tab"
-    h4.panel-title
-      a data-toggle="collapse" data-parent="#panel-final-stage" href="#section-registration-stage-email-notifications" aria-expanded="true" aria-controls="section-registration-stage-email-notifications"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Email notification
-  #section-registration-stage-email-notifications.section-appraisal-form.section-registration-stage-email-notifications.panel-collapse.collapse.in role="tabpanel" aria-labelledby="registration-stage-email-notifications-heading"
-    .panel-body
-      .panel-section id="submission_started_email_notification"
-        p Notify users that nominations for the new Award year are open
+  .govuk-accordion__section-content
+    .panel-section id="submission_started_email_notification"
+      p.govuk-body Notify users that nominations for the new Award year are open
 
-        p
-          = link_to "View email example", "#", class: "link-email-example if-no-js-hide"
+      p.govuk-body
+        = link_to "View email example", "#", class: "link-email-example if-no-js-hide govuk-link"
 
-        .email-example.well
-          = MailRenderer.new.submission_started_notification
+      .email-example.well
+        = MailRenderer.new.submission_started_notification
