@@ -86,7 +86,7 @@ Cloudtasker.configure do |config|
   #
   config.redis = { url: ENV['REDIS_URL'] }
 
-  if Rails.env.production?
+  if Rails.env.production? && ENV['REDIS_URL']
     default_schedule = {
       "email_notification_service" => {
         "cron" => "0 * * * *",
