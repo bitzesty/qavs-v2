@@ -39,16 +39,16 @@ describe "As Admin I want to filter applications", js: true do
     # 4 Applications
     assert_results_number(4)
 
-    click_status_option("Application in progress")
+    click_filter_option("Application in progress", "status")
     assert_results_number(2)
 
-    click_status_option("Application in progress")
+    click_filter_option("Application in progress", "status")
     assert_results_number(4)
 
-    click_status_option("Applications not submitted")
+    click_filter_option("Applications not submitted", "status")
     assert_results_number(3)
 
-    click_status_option("Not eligible")
+    click_filter_option("Not eligible", "status")
     assert_results_number(2)
   end
 
@@ -56,27 +56,27 @@ describe "As Admin I want to filter applications", js: true do
     # 4 Applications
     assert_results_number(4)
 
-    click_status_option("Missing SIC code")
+    click_filter_option("Missing SIC code", "sub-status")
     assert_results_number(3)
 
     # Add assesors to all applications and check filter
     assign_dummy_assessors(@forms, create(:assessor, :lead_for_all))
-    click_status_option("Assessors not assigned")
+    click_filter_option("Assessors not assigned", "sub-status")
     assert_results_number(0)
 
     # Uncheck filter
-    click_status_option("Assessors not assigned")
+    click_filter_option("Assessors not assigned", "sub-status")
     assert_results_number(3)
 
     # Add feedback to the first 3 applications and check filter
     first_three_forms = @forms.slice(0..2)
     assign_dummy_feedback(first_three_forms)
-    click_status_option("Missing Feedback")
+    click_filter_option("Missing Feedback", "sub-status")
     assert_results_number(1)
 
     # Add press summary to all applications and check filter
     # assign_dummy_press_summary(@forms)
-    # click_status_option("Missing Press Summary")
+    # click_filter_option("Missing Press Summary")
     # assert_results_number(0)
   end
 
@@ -84,14 +84,14 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(4)
     assign_ceremonial_county(@forms.first, ceremonial_county_1)
 
-    click_status_option("Not assigned")
+    click_filter_option("Not assigned", "assigned-lieutenancy")
     assert_results_number(1)
   end
 
   it "filters by nomination ceremonial county" do
     assert_results_number(4)
 
-    click_status_option("Not stated")
+    click_filter_option("Not stated", "nominated-lieutenancy")
     assert_results_number(3)
   end
 
@@ -100,7 +100,7 @@ describe "As Admin I want to filter applications", js: true do
     assign_activity(@forms.first, "ART")
 
     # Untick sport activity filter 
-    click_status_option("Sports")
+    click_filter_option("Sports", "activity")
     assert_results_number(1)
   end
 end

@@ -5,104 +5,14 @@ module FormAnswerFilteringTestHelper
     end
   end
 
-  def click_status_option(val)
-    within ".applications-filter.status-filter" do
+  def click_filter_option(val, filter)
+    within ".applications-filter.#{filter}-filter" do
       find(".dropdown-toggle").click
 
-      expect(page).to have_selector('.status-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.status-filter li.apply button', visible: true)
+      expect(page).to have_selector(".#{filter}-filter .dropdown.open", visible: true)
+      expect(page).to have_selector(".#{filter}-filter li.apply button", visible: true)
 
-      within ".status-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
-          end
-        end
-      end
-    end
-
-    within ".applications-filter.sub-status-filter" do
-      expect(page).to have_selector(".dropdown-toggle")
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.sub-status-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.sub-status-filter li.apply button', visible: true)
-
-      within ".sub-status-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
-          end
-        end
-      end
-    end
-
-    within ".applications-filter.nominated-lieutenancy-filter" do
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.nominated-lieutenancy-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.nominated-lieutenancy-filter li.apply button', visible: true)
-
-      within ".nominated-lieutenancy-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
-          end
-        end
-      end
-    end
-
-    within ".applications-filter.assigned-lieutenancy-filter" do
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.assigned-lieutenancy-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.assigned-lieutenancy-filter li.apply button', visible: true)
-
-      within ".assigned-lieutenancy-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
-          end
-        end
-      end
-    end
-
-    within ".applications-filter.activity-filter" do
-      puts page.find(".dropdown-toggle").visible?
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.activity-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.activity-filter li.apply button', visible: true)
-
-      within ".activity-filter .dropdown-menu" do
+      within ".#{filter}-filter .dropdown-menu" do
         button = find("li.apply button")
         all("li").each do |li|
           next if li.all(".label-contents").count == 0
