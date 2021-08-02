@@ -27,8 +27,8 @@ module Qae
       end
     end
 
+    config.web_console.development_only = false
     if ENV['WEB_CONSOLE']
-      config.web_console.development_only = false
       config.web_console.permissions = ENV['WEB_CONSOLE']
     end
 
