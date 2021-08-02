@@ -1,5 +1,5 @@
 class Admin::AdminsController < Admin::UsersController
-  before_action :find_resource, except: [:index, :new, :create, :login_as_assessor, :login_as_user]
+  before_action :find_resource, except: [:index, :new, :create, :login_as_assessor, :login_as_user, :console]
   def index
     params[:search] ||= AdminSearch::DEFAULT_SEARCH
     params[:search].permit!
@@ -59,6 +59,10 @@ class Admin::AdminsController < Admin::UsersController
     sign_in(user, scope: :user, skip_session_limitable: true)
 
     redirect_to dashboard_url
+  end
+
+  def console
+    authorize Admin, :index?
   end
   # NOTE: debug abilities for Admin - END
 
