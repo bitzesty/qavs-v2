@@ -15,7 +15,7 @@ describe "As Admin I want to change the applications states.", js: true do
   it "changes the state from application_to_progress to submitted" do
     within ".section-applicant-status" do
       expect(page).to have_selector(".state-toggle", text: "Assessment in progress")
-      click_button "Assessment in progress"
+      find('.state-toggle').click
       within ".dropdown-menu" do
         click_link "Recommended"
       end
