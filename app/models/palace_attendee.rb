@@ -1,6 +1,6 @@
 class PalaceAttendee < ApplicationRecord
   extend Enumerize
-  
+
   belongs_to :palace_invite
 
   validates :palace_invite,
@@ -10,10 +10,10 @@ class PalaceAttendee < ApplicationRecord
             :address_1,
             :postcode,
             :relationship,
-            :disabled_access,
             :preferred_date,
             :alternative_date,
             presence: true
+  validates_inclusion_of :disabled_access, in: [true, false]
 
   enumerize :preferred_date, in: %w(
     any
