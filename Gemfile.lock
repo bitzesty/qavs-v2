@@ -121,6 +121,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.16)
+    bindex (0.8.1)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootscale (0.7.0)
@@ -670,6 +671,11 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
+    web-console (4.1.0)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
     webmock (3.13.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -708,6 +714,7 @@ DEPENDENCIES
   cloudtasker!
   codeclimate_circle_ci_coverage
   coffee-rails (= 5.0)
+  connection_pool
   country_select (~> 3.1)
   curb (= 0.9.10)
   database_cleaner-active_record
@@ -783,6 +790,7 @@ DEPENDENCIES
   vigilion (~> 1.0.4)
   vigilion-rails
   virtus
+  web-console
   webmock (= 3.13.0)
   webpacker (= 6.0.0.beta.7)
   websocket-extensions (~> 0.1.5)

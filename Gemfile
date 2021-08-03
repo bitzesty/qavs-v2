@@ -97,6 +97,7 @@ gem 'rack-cors', '~> 1.0'
 # Redis
 gem 'redis-rails'
 gem 'redis-store', "~> 1.4"
+gem 'connection_pool'
 
 # We use it for communicating with api.debounce.io
 gem 'rest-client'
@@ -123,6 +124,7 @@ gem 'puma', '~> 4.3.8'
 
 # Performance & Error reporting
 gem 'appsignal'
+gem 'web-console'
 
 # Log formatting
 gem 'lograge'

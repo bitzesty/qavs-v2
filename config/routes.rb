@@ -162,6 +162,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboard#index"
+    get 'console', to: "admins#console"
+
     resources :dashboard, only: [:index] do
       collection do
         get :totals_by_month
