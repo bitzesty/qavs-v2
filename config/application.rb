@@ -29,8 +29,7 @@ module Qae
 
     config.web_console.development_only = false
     if ENV['WEB_CONSOLE']
-      host_ip = `/sbin/ip route|awk '/default/ { print $3 }'`.strip
-      config.web_console.permissions = host_ip
+      config.web_console.permissions = ENV['WEB_CONSOLE']
     end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
