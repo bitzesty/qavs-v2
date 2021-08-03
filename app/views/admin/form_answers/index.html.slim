@@ -12,9 +12,9 @@ h1.govuk-heading-xl
     = render "layouts/vertical_admin_award_year"
 
   = render "shared/form_answers/top_statuses_filters", f: f,
-                                                       options: FormAnswerStatus::AdminFilter.options,
-                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options,
-                                                       activity_options: FormAnswerStatus::AdminFilter.activity_options
+                                                       options: FormAnswerStatus::AdminFilter.collection,
+                                                       sub_options: FormAnswerStatus::AdminFilter.sub_collection,
+                                                       activity_options: FormAnswerStatus::AdminFilter.activity_collection
 
   = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
 
