@@ -16,6 +16,8 @@ h1.govuk-heading-xl
                                                        sub_options: FormAnswerStatus::AdminFilter.sub_options,
                                                        activity_options: FormAnswerStatus::AdminFilter.activity_options
 
+  = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
+
   = render("admin/form_answers/bulk_assignment_button")
   - if @search.query?
     .well.search-text

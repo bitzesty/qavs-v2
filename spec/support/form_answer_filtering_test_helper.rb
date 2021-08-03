@@ -1,73 +1,31 @@
 module FormAnswerFilteringTestHelper
   def assert_results_number(n)
-    within ".applications-table" do
-      expect(page).to have_selector(".td-title", count: n)
+    within ".applications-table tbody" do
+      expect(page).to have_selector("th", count: n)
     end
   end
 
   def click_status_option(val)
-    within ".applications-filter.status-filter" do
-      find(".dropdown-toggle").click
+    button = find('#apply-nomination-filters')
 
-      expect(page).to have_selector('.status-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.status-filter li.apply button', visible: true)
+    ['status', 'sub-status', 'activity'].each do |field|
+      within ".#{field}-filter" do
+        find(".#{field}-filter .dropdown-checkboxes__selection").click
 
-      within ".status-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
+        expect(page).to have_selector(".#{field}-filter .dropdown-checkboxes--open", visible: true)
 
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
+        within ".dropdown-checkboxes__list" do
+          button = find("li.apply button")
+          all(".dropdown-checkboxes__option").each do |option|
+            # next if li.all(".label-contents").count == 0
 
-            return
-          end
-        end
-      end
-    end
+            # content = li.first(".label-contents")
+            if option.text.to_s == val
+              option.click
+              button.click
 
-    within ".applications-filter.sub-status-filter" do
-      expect(page).to have_selector(".dropdown-toggle")
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.sub-status-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.sub-status-filter li.apply button', visible: true)
-
-      within ".sub-status-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
-          end
-        end
-      end
-    end
-
-    within ".applications-filter.activity-filter" do
-      find(".dropdown-toggle").click
-
-      expect(page).to have_selector('.activity-filter .dropdown.open', visible: true)
-      expect(page).to have_selector('.activity-filter li.apply button', visible: true)
-
-      within ".activity-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
-
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
-
-            return
+              return
+            end
           end
         end
       end
