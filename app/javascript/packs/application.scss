@@ -45,6 +45,11 @@ p {
 @import "node_modules/govuk-frontend/govuk/utilities/all";
 @import "node_modules/govuk-frontend/govuk/overrides/all";
 
+@import "../vendor/accessible-autocomplete.min";
+@import "../vendor/checkbox-multiselect";
+
+@import "../styles/dropdown";
+@import "../styles/selects";
 
 .html-admin {
   .govuk-width-container {

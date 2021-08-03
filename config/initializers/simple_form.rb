@@ -49,7 +49,7 @@ SimpleForm.setup do |config|
     b.use :input, class: 'govuk-input'
   end
 
-  config.wrappers :select do |b|
+  config.wrappers :select, class: 'govuk-form-group' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
