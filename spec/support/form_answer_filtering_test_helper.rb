@@ -10,9 +10,9 @@ module FormAnswerFilteringTestHelper
 
     ['status', 'sub-status', 'activity'].each do |field|
       within ".#{field}-filter" do
-        find(".#{field}-filter .dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__selection").click
 
-        expect(page).to have_selector(".#{field}-filter .dropdown-checkboxes--open", visible: true)
+        expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
 
         within ".dropdown-checkboxes__list" do
           all(".dropdown-checkboxes__option").each do |option|

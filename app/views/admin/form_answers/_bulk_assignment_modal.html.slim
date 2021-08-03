@@ -12,13 +12,12 @@
 
           = form_for [namespace_name, LieutenantAssignmentCollection.new] do |f|
             = flash[:error]
-            fieldset.question-group
-              .input.select.form-group.primary-lieutenant-group
-                = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "control-label"
-                = f.select :ceremonial_county_id,
-                          CeremonialCounty.all.pluck(:name, :id),
-                          { include_blank: true },
-                          class: "form-control mm-modal__select"
+            .govuk-form-group.primary-lieutenant-group
+              = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "govuk-label"
+              = f.select :ceremonial_county_id,
+                        CeremonialCounty.all.pluck(:name, :id),
+                        { include_blank: true },
+                        class: "govuk-select"
 
               = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 
