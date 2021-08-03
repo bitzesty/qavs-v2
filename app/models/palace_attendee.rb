@@ -1,4 +1,6 @@
 class PalaceAttendee < ApplicationRecord
+  extend Enumerize
+  
   belongs_to :palace_invite
 
   validates :palace_invite,
