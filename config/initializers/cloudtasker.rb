@@ -84,9 +84,9 @@ Cloudtasker.configure do |config|
   #
   # Default: redis-rb connects to redis://127.0.0.1:6379/0
   #
-  config.redis = { url: ENV['REDIS_URL'] }
-
   if Rails.env.production? && ENV['REDIS_URL']
+    config.redis = { url: ENV['REDIS_URL'] }
+
     default_schedule = {
       "email_notification_service" => {
         "cron" => "0 * * * *",
@@ -130,7 +130,7 @@ Cloudtasker.configure do |config|
       }
     }
 
-    Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
+  #  Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
 
   end
 
