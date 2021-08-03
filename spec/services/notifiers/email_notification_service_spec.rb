@@ -107,6 +107,44 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
+  describe "#group_leader_notification" do
+    let!(:not_submitted) { create(:form_answer) }
+    let!(:submitted) { create(:form_answer, :submitted) }
+    let!(:dup_submitted) { create(:form_answer) }
+
+    let(:kind) { "group_leader_notification" }
+    let(:mailer) { double(deliver_later!: true) }
+
+
+    before do
+      doc = not_submitted.document
+      doc["nominee_leader_name"] = "Rob Becket"
+      doc["nominee_leader_email"] = "rob@example.com"
+      not_submitted.document = doc
+      not_submitted.save!
+
+      doc = submitted.document
+      doc["nominee_leader_name"] = "Alice Becket"
+      doc["nominee_leader_email"] = "alice@example.com"
+      submitted.document = doc
+      submitted.save!
+
+      doc = dup_submitted.document
+      doc["nominee_leader_name"] = "Alice Becket"
+      doc["nominee_leader_email"] = "alice@example.com"
+      dup_submitted.document = doc
+      dup_submitted.save!
+    end
+
+    it "sends one notification to the submitted group leader" do
+      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with("alice@example.com", "Alice Becket").once { mailer }
+
+      described_class.run
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
   describe "#local_assessment_notification" do
     let(:kind) { "local_assessment_notification" }
     let(:mailer) { double(deliver_later!: true) }
