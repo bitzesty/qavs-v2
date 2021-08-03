@@ -29,10 +29,10 @@ h1.govuk-heading-xl
   .row
     .col-xs-12
       = render("admin/form_answers/list_components/table", f: f)
+      = render("admin/form_answers/bulk_assignment_button")
   .row
     .col-xs-12.text-right
       = paginate @form_answers
       .clear
 
-= render("admin/form_answers/bulk_assignment_button")
 = render("admin/form_answers/bulk_assignment_modal")

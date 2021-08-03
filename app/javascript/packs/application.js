@@ -35,7 +35,17 @@ Array.prototype.forEach.call(accordions, function(module) {
 
 // frontend.initAll()
 
-MicroModal.init();
+$('.bulk-assign-lieutenants-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  MicroModal.show('modal-bulk-assign-lieutenants');
+})
+
+$(document).on('click', '[data-micromodal-close]', function(e) {
+  e.preventDefault();
+  e.stopPropagation()
+})
 
 if ($('.bulk-assignment-container').length > 0) {
   $("#check_all").on("change", function() {

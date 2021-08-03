@@ -21,8 +21,8 @@ describe "Form answer search", "
       it "searchs for form answer with first name" do
         within ".search-input" do
           fill_in "search_query", with: first_name
-          click_button :submit
         end
+        click_button :submit
 
         within ".applications-table" do
           expect(page).to have_selector("td.td-title", count: 1)

@@ -1,7 +1,7 @@
 module FormAnswerFilteringTestHelper
   def assert_results_number(n)
     within ".applications-table tbody" do
-      expect(page).to have_selector("th", count: n)
+      expect(page).to have_selector("tr", count: n)
     end
   end
 
