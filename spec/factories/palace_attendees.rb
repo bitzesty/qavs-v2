@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :palace_attendee do
-    relationship { "MyString" }
     title { "MyString" }
     first_name { "MyString" }
     last_name { "MyString" }
