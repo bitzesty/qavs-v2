@@ -1,8 +1,6 @@
 module FormAnswerFilteringTestHelper
   def assert_results_number(n)
-    within ".applications-table tbody" do
-      expect(page).to have_selector("tr", count: n)
-    end
+    expect(page).to have_selector(".applications-table tbody tr", count: n)
   end
 
   def click_status_option(val)
@@ -10,7 +8,8 @@ module FormAnswerFilteringTestHelper
 
     ['status', 'sub-status', 'activity'].each do |field|
       within ".#{field}-filter" do
-        find(".dropdown-checkboxes__selection").click
+        filter_dropdown = find(".dropdown-checkboxes__selection")
+        filter_dropdown.click
 
         expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
 
@@ -21,6 +20,7 @@ module FormAnswerFilteringTestHelper
             # content = li.first(".label-contents")
             if option.text.to_s == val
               option.click
+              filter_dropdown.click
               button.click
 
               return
