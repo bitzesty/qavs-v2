@@ -2,7 +2,7 @@
   h2.govuk-tabs__title
     Contents
   ul.govuk-tabs__list
-    - %w[users lieutenants assessors admins].each do |role|
+    - %w[users lieutenants assessors group_leaders admins].each do |role|
       - if policy(role.singularize.to_sym).index?
         - role_name = t("admin.users.role_headers.#{role}")
         li.govuk-tabs__list-item class="role-#{role_name} #{'govuk-tabs__list-item--selected' if controller_name == role}" role="presentation"

@@ -44,6 +44,10 @@ class ApplicationPolicy
     subject.is_a?(Lieutenant)
   end
 
+  def group_leader?
+    subject.is_a?(GroupLeader)
+  end
+
   def advanced_lieutenant?
     lieutenant? && subject.role.advanced?
   end

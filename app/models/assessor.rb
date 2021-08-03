@@ -1,6 +1,7 @@
 class Assessor < ApplicationRecord
   include PgSearch::Model
   include AutosaveTokenGeneration
+  include SoftDelete
 
   AVAILABLE_ROLES = ["lead", "regular"]
   # lead - created & assigned to Admin to specific categories
@@ -119,10 +120,6 @@ class Assessor < ApplicationRecord
 
   def secondary?(form_answer)
     form_answer.assessor_assignments.secondary.assessor_id == id
-  end
-
-  def soft_delete!
-    update_column(:deleted, true)
   end
 
   def timeout_in
