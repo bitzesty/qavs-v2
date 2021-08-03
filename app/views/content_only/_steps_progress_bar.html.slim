@@ -6,7 +6,7 @@
 
     li.js-step-condition.step-current
       span.govuk-body
-        = link_to [:award_info, @form_answer.award_type, form_id: @form_answer.id] do
+        = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id] do
           span.step-number
             ' Useful Nomination Info
 
