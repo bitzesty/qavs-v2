@@ -7,7 +7,6 @@ module FormAnswerFilteringTestHelper
 
   def click_status_option(val)
     button = find('#apply-nomination-filters')
-    found = false
 
     ['status', 'sub-status', 'activity'].each do |field|
       within ".#{field}-filter" do
@@ -22,7 +21,7 @@ module FormAnswerFilteringTestHelper
             # content = li.first(".label-contents")
             if option.text.to_s == val
               option.click
-              found = true
+              button.click
 
               return
             end
@@ -31,11 +30,7 @@ module FormAnswerFilteringTestHelper
       end
     end
     
-    if found
-      button.click
-    else
-      fail "NotFoundOption"
-    end
+    fail "NotFoundOption"
   end
 
   def assign_dummy_assessors(form_answers, assessor)
