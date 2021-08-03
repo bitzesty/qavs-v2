@@ -317,6 +317,7 @@ GEM
     hashdiff (1.0.1)
     hashery (2.1.2)
     hashie (3.6.0)
+    hiredis (0.6.3)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httpclient (2.8.3)
@@ -733,6 +734,7 @@ DEPENDENCIES
   govuk_frontend_toolkit (~> 3.1.0)
   govuk_template (= 0.12.0)
   hashie (~> 3.5)
+  hiredis
   jbuilder (~> 2.10.1)
   jquery-rails (= 4.3.5)
   jquery-ui-rails (= 6.0.1)

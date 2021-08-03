@@ -95,6 +95,7 @@ gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04
 gem 'rack-cors', '~> 1.0'
 
 # Redis
+gem 'hiredis'
 gem 'redis-rails'
 gem 'redis-store', "~> 1.4"
 gem 'connection_pool'
