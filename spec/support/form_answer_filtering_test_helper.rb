@@ -15,7 +15,6 @@ module FormAnswerFilteringTestHelper
         expect(page).to have_selector(".#{field}-filter .dropdown-checkboxes--open", visible: true)
 
         within ".dropdown-checkboxes__list" do
-          button = find("li.apply button")
           all(".dropdown-checkboxes__option").each do |option|
             # next if li.all(".label-contents").count == 0
 
