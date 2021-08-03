@@ -12,23 +12,17 @@
 
           = form_for [namespace_name, LieutenantAssignmentCollection.new] do |f|
             = flash[:error]
-            fieldset.question-group
-              .input.select.form-group.primary-lieutenant-group
-                = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "control-label"
-                = f.select :ceremonial_county_id,
-                          CeremonialCounty.all.pluck(:name, :id),
-                          { include_blank: true },
-                          class: "form-control mm-modal__select"
+            .govuk-form-group.primary-lieutenant-group
+              = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "govuk-label"
+              = f.select :ceremonial_county_id,
+                        CeremonialCounty.all.pluck(:name, :id),
+                        { include_blank: true },
+                        class: "govuk-select"
 
               = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 
-              .pull-right
-                a.mm-modal-cancel-link data-micromodal-close='' href='#'
+              .govuk-button-group
+                = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "govuk-button"
+                button.govuk-button.govuk-button--secondary data-micromodal-close='' href='#'
                   | Cancel
-                = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "mm-modal__btn"
               .clear
-
-  .if-no-js-hide
-    .bulk-assignment-container
-      .nominations-checked-total
-      button.govuk-button.mm-modal__btn.bulk-assign-lieutenants-link data-micromodal-trigger="modal-bulk-assign-lieutenants" Bulk assign to Lord Lieutenancy office

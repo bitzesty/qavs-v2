@@ -4,5 +4,7 @@
       span.govuk-accordion__section-button
         ' Email notification
   .govuk-accordion__section-content
+
+    = render 'email_notification', kind: 'group_leader_notification'
     = render 'email_notification', kind: 'local_assessment_notification'
     = render 'email_notification', kind: 'local_assessment_reminder'

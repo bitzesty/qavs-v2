@@ -9,8 +9,8 @@
 
     .state-input
       - if policy(state).view_dropdown? && state.collection.present?
-        .btn-group
-          button.govuk-button.btn-link.dropdown-toggle.state-toggle.if-no-js-hide type="button" data-toggle="dropdown" aria-expanded="false"
+        .dropdown
+          button.govuk-link.dropdown-toggle.state-toggle.if-no-js-hide type="button" data-toggle="dropdown" aria-expanded="false"
             = @form_answer.state_short_text
           = render("admin/form_answers/states_list", collection: state.collection, policy: policy(state).view_dropdown?)
 

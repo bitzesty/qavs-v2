@@ -1,0 +1,9 @@
+class AccountMailers::GroupLeaderMailer < AccountMailers::BaseMailer
+  def notify(email, name)
+    @form_answer = form_answer
+    @group_leader_name = name
+
+    subject = "A notification about nomination"
+    send_mail_if_not_bounces ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: email, subject: subject_with_env_prefix(subject)
+  end
+end

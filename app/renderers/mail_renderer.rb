@@ -75,6 +75,15 @@ class MailRenderer
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
 
+  def group_leader_notification
+    assigns = {}
+
+    assigns[:group_leader_name] = "Jane Campton"
+    assigns[:form_answer] = form_answer
+
+    render(assigns, "account_mailers/group_leader_mailer/preview/notify")
+  end
+
   def local_assessment_notification
     assigns = {}
 
