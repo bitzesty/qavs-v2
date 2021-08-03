@@ -42,7 +42,7 @@ $('.bulk-assign-lieutenants-link').on('click', function(e) {
   MicroModal.show('modal-bulk-assign-lieutenants');
 })
 
-$(document).on('click', '[data-micromodal-close]', function(e) {
+$(document).on('click', 'button[data-micromodal-close]', function(e) {
   e.preventDefault();
   e.stopPropagation()
 })
