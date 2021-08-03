@@ -7,11 +7,11 @@
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
 
-        li.js-add-example
+        .js-add-example
           = hidden_field_tag "palace_invite[palace_attendees_attributes][#{i}][_remove]", "", class: 'remove'
           a.remove-link.js-remove-link href="#" Remove
           - i += 1
-
+  
           .h3.govuk-heading-m
             | The first attendee
 
@@ -41,4 +41,5 @@
 
           = render "attendee_details", ff: ff
 
-  = render 'actions', f: f
+  = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
+  = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
