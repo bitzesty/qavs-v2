@@ -16,7 +16,7 @@ Cloudtasker.configure do |config|
   #
   # This not required in development using the Cloudtasker local server.
   #
-  config.gcp_location_id = 'eu-west2' # defaults to 'us-east1'
+  config.gcp_location_id = 'europe-west2' # defaults to 'us-east1'
   config.gcp_project_id = 'new-qavs'
 
   #
