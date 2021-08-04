@@ -1,15 +1,17 @@
 class FormAnswerSearch < Search
   attr_reader :subject
 
-  DEFAULT_SEARCH = {
-    sort: 'company_or_nominee_name',
-    search_filter: {
-      status: FormAnswerStatus::AdminFilter.all,
-      nominee_activity: FormAnswerStatus::AdminFilter.activity_values,
-      assigned_ceremonial_county: FormAnswerStatus::AdminFilter.assigned_county_values,
-      nominated_ceremonial_county: FormAnswerStatus::AdminFilter.nomination_county_values
+  def self.default_search
+    {
+      sort: 'company_or_nominee_name',
+      search_filter: {
+        status: FormAnswerStatus::AdminFilter.all,
+        nominee_activity: FormAnswerStatus::AdminFilter.activity_values,
+        assigned_ceremonial_county: FormAnswerStatus::AdminFilter.assigned_county_values,
+        nominated_ceremonial_county: FormAnswerStatus::AdminFilter.nomination_county_values
+      }
     }
-  }
+  end
 
   def initialize(scope, subject)
     @subject = subject
@@ -79,7 +81,7 @@ class FormAnswerSearch < Search
       county_filter_query
     end
   end
-  
+
   def filter_by_sub_status(scoped_results, value)
     out = scoped_results
 
