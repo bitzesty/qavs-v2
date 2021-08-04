@@ -16,18 +16,14 @@ describe RescanService do
     it "rescans unresolved files" do
       attachment.file_scan_results = "scanning"
       attachment.save!
-
-      expect_any_instance_of(FormAnswerAttachment).to receive(:scan_file!)
-
       described_class.rescan_model(FormAnswerAttachment, :file)
+      expect(attachment.reload.file_scan_results).to eq('clean')
     end
 
     it "does not rescan clean files" do
       attachment.file_scan_results = "clean"
       attachment.save!
-
-      expect_any_instance_of(FormAnswerAttachment).not_to receive(:scan_file!)
-
+      expect(attachment).not_to receive(:scan_file!)
       described_class.rescan_model(FormAnswerAttachment, :file)
     end
   end
