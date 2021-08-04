@@ -621,7 +621,11 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def prepared_checkbox_value(title)
-    Sanitize.fragment(title, elements: ["strong"]).strip
+    Sanitize.fragment(title, elements: ["strong"], :parser_options => {
+      max_errors: -1,
+      max_tree_depth: -1
+    }
+    ).strip
   end
 
   def to_month(value)
