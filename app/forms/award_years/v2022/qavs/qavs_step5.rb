@@ -338,7 +338,7 @@ class AwardYears::V2022::QAEForms
 
         options :local_assessment_verdict, "Local assessment outcome" do
           sub_ref "E 9"
-          classes "sub-question"
+          classes "govuk-notification-banner govuk-notification-banner__content"
           option "recommended", "Recommended"
           option "not_recommended", "Not recommended"
           required
