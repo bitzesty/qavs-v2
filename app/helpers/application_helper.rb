@@ -145,4 +145,10 @@ module ApplicationHelper
   def current_class?(path)
     request.path == path ? "active" : ""
   end
+
+  def award_years_collection
+    [['All years', 'all_years']] + AwardYear.admin_switch.map do |year, label|
+      [label, year]
+    end
+  end
 end

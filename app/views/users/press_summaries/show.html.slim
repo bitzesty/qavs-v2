@@ -1,12 +1,12 @@
 div
   header.group.page-header.page-header-wider
     div
-      h1 Press Book Entry
+      h1.govuk-heading-xl Press Book Entry
 
   .article-container.article-container-wider
     article.group role="article"
       .inner
-        p Please check that this is factually accurate (please note employee numbers cannot be changed)
+        p.govuk-body Please check that this is factually accurate (please note employee numbers cannot be changed)
 
         br
 
@@ -26,7 +26,7 @@ div
 
         = simple_form_for @press_summary, url: users_form_answer_press_summary_path(form_answer, token: params[:token]), html: { class: "qae-form" } do |f|
           fieldset.question-block.sub-question.js-press-comment-correct
-            h2 = f.label :correct, label: "Do you have any comments on the Press Book Notes or organisation details?"
+            h2.govuk-heading-l = f.label :correct, label: "Do you have any comments on the Press Book Notes or organisation details?"
             ul.errors-container
             .clear
             .question-group
@@ -36,7 +36,7 @@ div
           br
 
           fieldset.question-block.regular-question.js-press-comment-feeback
-            h2
+            h2.govuk-heading-l
               = f.label :comment, label: "How are the Press Book Notes and/or organisation details factually incorrect"
             .question-group
               = f.input :comment, as: :text, input_html: { class: "js-char-count", rows: "5", data: { word_max: "300" } }, label: false
@@ -46,7 +46,7 @@ div
 
           fieldset.question-block.sub-question
             label
-              h2 Contact details for press enquiries
+              h2.govuk-heading-l Contact details for press enquiries
 
             .question-group
               = f.input :title, input_html: { class: "tiny" }
@@ -66,10 +66,10 @@ div
                   = link_to dashboard_path
                     span.pagination-label Back
                 li.submit
-                  = f.submit "Save", class: "button save-press-summary-button",
+                  = f.submit "Save", class: "govuk-button save-press-summary-button",
                                      name: "save"
                   span.press-summary-action-devider
                     ' OR
-                  = f.submit "Submit", class: "button",
+                  = f.submit "Submit", class: "govuk-button",
                                        rel: "next",
                                        name: "submit"

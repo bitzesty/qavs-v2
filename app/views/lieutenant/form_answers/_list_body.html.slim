@@ -1,7 +1,7 @@
-tbody
+tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
-    tr
-      td.td-title
+    tr.govuk-table__row
+      th.govuk-table__header scope="row"
         = link_to polymorphic_url([namespace_name, obj], search: params.permit[:search]) do
           - unless obj.nominee_name.nil?
             span.ellipsis
@@ -10,25 +10,18 @@ tbody
             em
               ' Not found
 
-      td
+      td.govuk-table__cell
         - if obj.urn.present?
           = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
         - else
           span.urn-not-generated Not yet generated
 
-      td = obj.dashboard_status
+      td.govuk-table__cell = obj.dashboard_status
 
-      td.td-primary-name
+      td.td-primary-name.govuk-table__cell
         = obj.primary_assessor_full_name
 
-      td
-        - app_comments = application_comments(obj.comments_count)
-        - if app_comments.present?
-          = link_to polymorphic_url([:assessor, obj], search: params.permit[:search]) do
-            = app_comments
-        = application_flags(obj)
-        = application_flags(obj, current_subject)
-      td
+      td.govuk-table__cell
         = obj.last_updated_at
         br
         span.muted

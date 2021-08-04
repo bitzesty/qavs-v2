@@ -7,7 +7,7 @@
   border: 2px solid govuk-colour('black');
   border-radius: 0;
   transition: none !important;
-  padding: 0.4em 1em;
+  padding: 0.5625em 1em;
   height: auto;
   box-shadow: none !important;
   min-height: 2.25em !important;
@@ -77,6 +77,10 @@
 
 .dropdown-checkboxes__search-wrapper {
   padding: 0 0.5em 1em;
+
+  input {
+    @extend .govuk-input;
+  }
 }
 
 .dropdown-checkboxes__list {
@@ -147,6 +151,16 @@
   border-color: govuk-colour('blue') !important;
 }
 
+.autocomplete__option,
+.dropdown-checkboxes__option,
+.dropdown-checkboxes__selection {
+  @extend .govuk-body; 
+  margin: 0 !important;
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.1rem !important;
+  min-height: 2.1055em !important;
+}
+
 .autocomplete__option--focused {
   background-color: govuk-colour('blue');
 }
@@ -155,7 +169,7 @@
   content: "";
   display: block;
   position: absolute;
-  right: 2em;
+  right: 1em;
   top: .85em;
   width: 14px;
   height: 1em;
@@ -164,6 +178,8 @@
   background-size:contain;
   background-repeat:no-repeat;
   background-position:50%;
+  pointer-events: none
+  ;
 }
 
 .autocomplete__hint {

@@ -1,20 +1,13 @@
-= link_to "‹ Back to nominations list", admin_form_answers_path(params.permit!.except(:controller, :action)), class: "btn btn-link btn-lg"
-.apps-navigation
-  - if !@form_paginator.first?
-    = link_to "‹ Previous nomination", admin_form_answer_path(@form_paginator.prev_entry, search: params[:search]), class: "btn btn-link btn-lg link-prev"
-  - if !@form_paginator.last?
-    = link_to "Next nomination ›", admin_form_answer_path(@form_paginator.next_entry, search: params[:search]), class: "btn btn-link btn-lg link-next"
+- content_for :before_main_content do
+  = link_to "Back to nominations list", admin_form_answers_path(params.permit!.except(:controller, :action)), class: "govuk-back-link"
 
-.govuk-grid-row
-  .govuk-grid-column-one-quarter
-    aside.show-sidebar aria-label="Application summary"
-      = render("applicant_details")
-      = render("eligibility_status")
-      = render("applicant_status")
-      = render("section_documents")
-      = render("lieutenants_section")
-      = render("admin/form_answers/assessors_section")
-      = render("admin/form_answers/previous_applications_section")
+h1.govuk-heading-xl
+  = resource.nominee_name
 
-  .govuk-grid-column-three-quarters
+.govuk-grid-row class="govuk-!-margin-top-9"
+  .govuk-grid-column-one-third
+    = render("applicant_status")
+    = render('nomination_details')
+
+  .govuk-grid-column-two-thirds
     = render partial: "submitted_view"

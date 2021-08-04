@@ -7,13 +7,7 @@ h1.govuk-heading-xl
       = f.input :year, input_html: { value: params[:year] || @award_year.year }
     .govuk-grid-column-one-third
       .form-group.search-input
-        = f.label 'Search', class: 'govuk-label'
-        = f.input :query, label: false, input_html: { type: "search" }
-  .govuk-grid-row
-    = render "layouts/vertical_admin_award_year"
-    = render "shared/form_answers/top_statuses_filters", f: f,
-                                                       options: FormAnswerStatus::AdminFilter.collection('status'),
-                                                       sub_options: FormAnswerStatus::AdminFilter.collection('sub')
+        = f.input :query, label: 'Search', input_html: { type: "search" }
 
   .govuk-grid-row
     = render "shared/form_answers/nomination_answer_filters", f: f,
@@ -24,20 +18,10 @@ h1.govuk-heading-xl
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
   = render("admin/form_answers/bulk_assignment_button_top")
-  - if @search.query?
-    .well.search-text
-      p.govuk-body
-        = "Search results for '#{@search.query}'"
-        small
-          = link_to "(Clear search)", admin_form_answers_path, class: "btn btn-link"
 
-  .row
-    .col-xs-12
-      = render("admin/form_answers/list_components/table", f: f)
-      = render("admin/form_answers/bulk_assignment_button_bottom")
-  .row
-    .col-xs-12.text-right
-      = paginate @form_answers
-      .clear
+  = render("admin/form_answers/list_components/table", f: f)
+  = render("admin/form_answers/bulk_assignment_button_bottom")
+
+  = paginate @form_answers
 
 = render("admin/form_answers/bulk_assignment_modal")

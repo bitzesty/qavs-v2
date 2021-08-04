@@ -1,31 +1,42 @@
-strong = feedback_field_value[:label]
-.form-group class=feedback_field
-  label.form-label
-    | Key strength
-  .form-value.no-js-update
-    - if feedback.public_send("#{feedback_field}_strength").present?
-      p = qae_simple_format(feedback.public_send("#{feedback_field}_strength"))
-    - else
-      p = content_tag(:i, "No feedback has been added yet")
-  .input.form-group
-    = f.input "#{feedback_field}_strength", as: :text, input_html: { class: 'form-control js-char-count', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{form_answer.id}-#{f.object.id}-#{feedback_field}-strength" }, label: false
-  .clear
-
-  label.form-label Information to strengthen the nomination
-  .form-value.no-js-update
-    - if feedback.public_send("#{feedback_field}_weakness").present?
-      p = qae_simple_format(feedback.public_send("#{feedback_field}_weakness"))
-    - else
-      p = content_tag(:i, "No feedback has been added yet")
-  .input.form-group
-    = f.input "#{feedback_field}_weakness", as: :text, input_html: { class: 'form-control js-char-count', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{form_answer.id}-#{f.object.id}-#{feedback_field}-weakness" }, label: false
-  .clear
-
-  - if policy(feedback).update?
-    = link_to "#", class: "form-edit-link pull-right" do
-      span.glyphicon.glyphicon-pencil
-      ' Edit
-    .form-actions.text-right
-      = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-      = link_to "Save", "#", class: "btn btn-primary form-save-link pull-right"
-.clear
+h3.govuk-heading-m class="govuk-!-margin-top-7" = feedback_field_value[:label]
+.govuk-form-group class=feedback_field
+  .toggable-form
+    .toggable-form__read
+      .govuk-body
+        strong
+          | Key strength
+        br
+        .toggable-form__content
+          - if feedback.public_send("#{feedback_field}_strength").present?
+            = qae_simple_format(feedback.public_send("#{feedback_field}_strength"))
+          - else
+            | No feedback has been added yet
+      .govuk-body
+        strong
+          | Information to strengthen the nomination
+        br
+        .toggable-form__content
+          - if feedback.public_send("#{feedback_field}_weakness").present?
+            = qae_simple_format(feedback.public_send("#{feedback_field}_weakness"))
+          - else
+            | No feedback has been added yet
+      - if policy(feedback).update?
+        p.govuk-body
+          = link_to "#", class: "govuk-link toggable-form__trigger", role: 'button'
+            | Edit
+            span.govuk-visually-hidden
+              = feedback_field_value[:label]
+    .toggable-form__edit
+      = f.input "#{feedback_field}_strength", as: :text, input_html: { class: 'form-control js-char-count', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{form_answer.id}-#{f.object.id}-#{feedback_field}-strength" }, label: 'Key strength'
+      = f.input "#{feedback_field}_weakness", as: :text, input_html: { class: 'form-control js-char-count', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{form_answer.id}-#{f.object.id}-#{feedback_field}-weakness" }, label: 'Information to strengthen the nomination'
+      .govuk-button-group
+        = link_to "#", class: "govuk-button govuk-button--secondary toggable-form__cancel"
+          | Cancel
+          span.govuk-visually-hidden
+            | changes to
+            = feedback_field_value[:label]
+        = link_to "#", class: "govuk-button btn-primary toggable-form__save"
+          | Save
+          span.govuk-visually-hidden
+            | changes to
+            = feedback_field_value[:label]

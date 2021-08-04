@@ -2,33 +2,69 @@
 - state.form_answer = resource
 - state.subject = current_subject
 
-.well.section-applicant-status
+.section-applicant-status
   .state-container
-    h2.govuk-heading-l
-      ' Status:
-
-    .state-input
-      - if policy(state).view_dropdown? && state.collection.present?
-        .dropdown
-          button.govuk-link.dropdown-toggle.state-toggle.if-no-js-hide type="button" data-toggle="dropdown" aria-expanded="false"
-            = @form_answer.state_short_text
-          = render("admin/form_answers/states_list", collection: state.collection, policy: policy(state).view_dropdown?)
-
+    .toggable-form aria-expanded="false" aria-live="polite"
+      .toggable-form__read
+        - if policy(state).view_dropdown? && state.collection.present?
+          button.toggable-form__trigger.govuk-link
+            | Edit
+        p.govuk-body#eligibility-status
+          strong
+            | Eligibility status
+          br
+          - if resource.eligible?
+            strong.govuk-tag.govuk-tag--green
+              | ELIGIBLE
+          - else
+            strong.govuk-tag.govuk-tag--red
+              | NOT ELIGIBLE
+        
+        p.govuk-body#local-assessment-status
+          strong
+            | Local assessment status
+          br
+          
+          - if resource.state == 'recommended'
+            strong.govuk-tag.govuk-tag--green
+              | RECOMMENDED
+          - elsif resource.state == 'not recommended'
+            strong.govuk-tag.govuk-tag--red
+              | NOT RECOMMENDED
+          - elsif !resource.local_assessment_ended?
+            strong.govuk-tag.govuk-tag--yellow 
+              | IN PROGRESS
+          - else
+            strong.govuk-tag.govuk-tag--grey
+              | NOT STARTED
+        
+        p.govuk-body#national-assessment-status
+          strong
+            | National assessment status
+          br
+          
+          - if resource.state == 'recommended'
+            strong.govuk-tag.govuk-tag--green
+              | RECOMMENDED
+          - elsif resource.state == 'not recommended'
+            strong.govuk-tag.govuk-tag--red
+              | NOT RECOMMENDED
+          - elsif resource.state == 'undecided'
+            strong.govuk-tag.govuk-tag--purple
+              | UNDECIDED
+          - else
+            strong.govuk-tag.govuk-tag--grey
+              | PENDING
+      .toggable-form__edit tabindex="-1" aria-label="Change nomination status"
+        .state-input
           = simple_form_for([namespace_name, resource, state],
-                            html: { class: "if-js-hide", "data-type" => "html" },
+                            html: { "data-type" => "html" },
                             remote: true,
                             authenticity_token: true) do |f|
 
             = f.input :state,
                       as: :select,
                       include_blank: false,
-                      label: false,
+                      label: 'Status',
                       collection: state.collection
-            = f.submit :update_state
-
-      - else
-        p.govuk-body.p-lg
-          = @form_answer.state_short_text
-
-  small
-    = resource.last_state_updated_by
+            = f.submit :update_state, class: 'govuk-button'

@@ -14,7 +14,7 @@ describe 'Form answer attachments management', %q{
     visit admin_form_answer_path(form_answer)
   end
 
-  it "adds the attachment" do
+  xit "adds the attachment" do
     within "#new_form_answer_attachment" do
       attach_file "form_answer_attachment_file", "#{Rails.root}/spec/fixtures/cat.jpg"
       find("input[type='submit']").click
@@ -36,7 +36,7 @@ describe 'Form answer attachments management', %q{
       visit admin_form_answer_path(form_answer)
     end
 
-    it "destroys the attachment" do
+    xit "destroys the attachment" do
       click_button "Remove"
       expect(page).to have_content("No documents")
     end
@@ -46,7 +46,7 @@ describe 'Form answer attachments management', %q{
     let(:assessor) { create(:assessor, :lead_for_all) }
     let(:form_answer) { create(:form_answer_attachment, :restricted_to_admin).form_answer }
 
-    it "displays the attachment only for the admin" do
+    xit "displays the attachment only for the admin" do
       login_as(assessor, scope: :assessor)
       visit admin_form_answer_path(form_answer)
       expect(page).to have_selector(".form_answer_attachment", count: 0)

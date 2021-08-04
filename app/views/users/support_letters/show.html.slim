@@ -1,7 +1,7 @@
 .page-support-letter
   header.page-header.group
     div
-      h1
+      h1.govuk-heading-xl
         ' Support letter for:
         = form_answer.nominee_full_name
 
@@ -16,11 +16,11 @@
                         confirm: "Are you sure?",
                         class: "remove-link"
             span
-              h3 Full name
+              h3.govuk-heading-m Full name
               p = @support_letter.full_name
 
               h3 Relationship to nominee
               p = @support_letter.relationship_to_nominee
 
-              h3 Support letter
+              h3.govuk-heading-m Support letter
               p = @support_letter.body

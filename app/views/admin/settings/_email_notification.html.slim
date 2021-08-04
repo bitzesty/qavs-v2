@@ -11,7 +11,7 @@
           = help_message
 
   p.govuk-body
-    = link_to "", "#", class: "link-email-example if-no-js-hide govuk-link"
+    = link_to "", "#", class: "link-email-example if-no-js-hide govuk-link", role: 'button'
   details.govuk-details data-module="govuk-details"
     summary.govuk-details__summary
       span.govuk-details__summary-text
@@ -19,7 +19,7 @@
     .govuk-details__text
       = MailRenderer.new.public_send(kind)
 
-  = link_to "+ Schedule new email", "#", class: "govuk-button btn-add-schedule if-no-js-hide"
+  = link_to "Schedule to send the email", "#", class: "govuk-button btn-add-schedule if-no-js-hide"
 
   .notification-form
     = render "schedule_new", notification: @settings.email_notifications.build(kind: kind)

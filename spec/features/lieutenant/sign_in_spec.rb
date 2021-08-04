@@ -13,6 +13,6 @@ describe "Lieutenant sign in" do
 
     click_button "Sign in"
 
-    expect(page).to have_content("Lieutenant dashboard")
+    expect(page).to have_content("Sign out")
   end
 end
