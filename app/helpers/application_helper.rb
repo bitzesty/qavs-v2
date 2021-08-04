@@ -138,7 +138,7 @@ module ApplicationHelper
 
   def remove_html_tags(str)
     Nokogiri::HTML.parse(
-      str, max_tree_depth: -1
+      str
     ).text.strip
   end
 

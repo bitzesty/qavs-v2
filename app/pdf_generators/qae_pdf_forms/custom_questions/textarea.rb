@@ -50,7 +50,7 @@ module QaePdfForms::CustomQuestions::Textarea
 
   def wysywyg_entries
     Nokogiri::HTML.parse(
-      humanized_answer, max_attributes: -1
+      humanized_answer
     ).children[1]
      .children[0]
      .children
@@ -333,7 +333,7 @@ module QaePdfForms::CustomQuestions::Textarea
   end
 
   def sanitize_content(content)
-    content = Nokogiri::HTML(content, max_attributes: -1)
+    content = Nokogiri::HTML(content)
     content.xpath('//@style')
            .remove
 

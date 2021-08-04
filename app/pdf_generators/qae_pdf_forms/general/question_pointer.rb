@@ -617,7 +617,7 @@ class QaePdfForms::General::QuestionPointer
 
   def question_checked_value_title
     question_text = question.pdf_text || question.text
-    Nokogiri::HTML.parse(question_text, max_attributes: -1).text.strip if humanized_answer == "on"
+    Nokogiri::HTML.parse(question_text).text.strip if humanized_answer == "on"
   end
 
   def prepared_checkbox_value(title)
