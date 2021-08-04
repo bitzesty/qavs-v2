@@ -16,7 +16,7 @@ describe "Assessor press_summary management", js: true, skip: true do
     end
 
     it "submits press_summary" do
-      find("#press-summary-heading a").click
+      find("#press-summary-heading").click
 
       within "#section-press-summary .press-summary-body-block" do
         find("a.form-edit-link").click
@@ -39,7 +39,7 @@ describe "Assessor press_summary management", js: true, skip: true do
     end
 
     it "submit press_summary" do
-      find("#press-summary-heading a").click
+      find("#press-summary-heading").click
       click_button "Submit Press Book Notes"
 
       expect(page).to have_no_selector(".btn-block", text: "Submit Press Book Notes")

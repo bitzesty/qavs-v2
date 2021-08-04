@@ -1,14 +1,14 @@
-table.dashboard-table
-  caption Summary
-  thead
-    tr
-      th.bold.border-right width="250" Parameter
-      th.bold width="125" Last 24h
-      th.bold width="125" Last 7 days
-      th.bold width="125" Total
-  tbody
+table.dashboard-table.govuk-table class="govuk-!-font-size-14"
+  caption.govuk-table__caption.govuk-table__caption--m Summary
+  thead.govuk-table__head
+    tr.govuk-table__row
+      th.govuk-table__header.bold.border-right scope='col' width="250" Parameter
+      th.govuk-table__header.govuk-table__header--numeric.bold scope='col' width="125" Last 24h
+      th.govuk-table__header.govuk-table__header--numeric.bold scope='col' width="125" Last 7 days
+      th.govuk-table__header.govuk-table__header--numeric.bold scope='col' width="125" Total
+  tbody.govuk-table__body
     - applications = @statistics.applications_table.each do |_, app|
-      tr
-        th.bold = app[:name]
+      tr.govuk-table__row
+        th.bold.govuk-table__header = app[:name]
         - app[:counters].each_with_index do |count, i|
-          td class=(i == 2 ? "bold" : "") = count
+          td.govuk-table__cell.govuk-table__cell--numeric class=(i == 2 ? "bold" : "") = count

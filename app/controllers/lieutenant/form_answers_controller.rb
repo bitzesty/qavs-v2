@@ -77,6 +77,9 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   def edit
     authorize resource, :edit?
+
+    resource.state_machine.perform_transition(:local_assessment_in_progress, current_lieutenant)
+
     @form = resource.award_form.decorate(answers: HashWithIndifferentAccess.new(resource.document))
   end
 
@@ -95,33 +98,16 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
       format.html do
         redirected = params[:next_action] == "redirect"
 
-        if submitted
-          @form_answer.submitted_at = Time.current
-        end
-
-        submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
-        @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
-        if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
-          if submitted_was_changed
-            @form_answer.state_machine.l_submit(current_lieutenant)
-            FormAnswerUserSubmissionService.new(@form_answer).perform
-
-            if @form_answer.submission_ended?
-              #
-              # If submission period ended and Admin makes manual submission
-              # then we need to generate Hard Copy PDF file
-              # as it required for all submitted applications after submission deadline.
-              #
-              HardCopyPdfGenerators::FormDataWorker.perform_async(@form_answer.id, true)
-            end
-          end
-        end
+        params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
+        # HardCopyPdfGenerators::FormDataWorker.perform_async(@form_answer.id, true)
 
         if redirected
           redirect_to lieutenant_form_answer_url(@form_answer)
           return
         else
           if submitted && saved
+            LocalAssessmentSubmissionService.new(@form_answer, current_lieutenant).submit!
+
             flash[:notice] = "Local assessment was successfully submitted."
             redirect_to lieutenant_form_answer_url(@form_answer)
           else

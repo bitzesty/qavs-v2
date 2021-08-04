@@ -27,6 +27,11 @@ module Qae
       end
     end
 
+    config.web_console.development_only = false
+    if ENV['WEB_CONSOLE']
+      config.web_console.permissions = ENV['WEB_CONSOLE']
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = "London"
@@ -47,7 +52,7 @@ module Qae
 
     config.cache_store = :memory_store
     config.active_record.schema_format = :sql
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :cloudtasker
     config.action_view.automatically_disable_submit_tag = false
   end
 end

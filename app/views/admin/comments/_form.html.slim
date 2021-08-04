@@ -1,15 +1,13 @@
-.form-container.comment-new
-  label
-    ' Add a comment
-  = f.hidden_field :section
-  = f.text_area :body, class: 'form-control', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.section}-new-comment"
-  .comment-actions
-    = f.check_box :flagged
-    = link_to "#flag-comment", class: "link-flag-comment js-link-flag-comment"
-      span.unflagged-visible
-        ' Mark as flagged
-      span.flagged-visible
-        ' Flagged
-    .pull-right
-      = f.submit 'Comment', class: 'btn btn-default'
-  .clear
+.comment-new
+  .govuk-form-group
+    label.govuk-label for="admin-comment-text"
+      ' Add a comment
+    = f.hidden_field :section
+    = f.text_area :body, class: 'govuk-textarea', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.section}-new-comment", id: 'admin-comment-text'
+  .govuk-form-group
+    .govuk-checkboxes.govuk-checkboxes--small data-module="govuk-checkboxes"
+      .govuk-checkboxes__item
+        = f.check_box :flagged, class: 'govuk-checkboxes__input', id: 'admin-comment-flag'
+        label.govuk-label.govuk-checkboxes__label for="admin-comment-flag"
+          ' Mark as flagged
+  = f.submit 'Comment', class: 'govuk-button'

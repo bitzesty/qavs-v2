@@ -63,10 +63,10 @@ ready = ->
       stateToggle = $(".section-applicant-status .dropdown-toggle")
       stateToggle.replaceWith("<p class='p-lg'>"+stateToggle.text()+"</p>")
 
-  $(".section-applicant-users .edit_assessor_assignment select").select2()
-  $("#new_assessor_assignment_collection select").select2()
-  $(".bulk-assign-assessors-form select").select2()
-  $(".bulk-assign-lieutenants-form select").select2()
+  # $(".section-applicant-users .edit_assessor_assignment select").select2()
+  # $("#new_assessor_assignment_collection select").select2()
+  # $(".bulk-assign-assessors-form select").select2()
+  # $(".bulk-assign-lieutenants-form select").select2()
 
   $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
     form = $(this)
@@ -210,7 +210,7 @@ ready = ->
   $(document).on "click", ".form-save-link", (e) ->
     link = $(this)
     e.preventDefault()
-    formGroup = link.closest(".form-group")
+    formGroup = link.closest(".govuk-form-group")
     form = formGroup.closest("form")
     area = formGroup.find("textarea:visible")
 
@@ -268,30 +268,6 @@ ready = ->
     $(".form-answer-check:checked").each ->
       ids += ($(@).val() + ",")
     $("#lieutenant_assignment_collection_form_answer_ids").val(ids)
-
-  $("#check_all").on "change", ->
-    select_all_value = $(this).prop("checked")
-    $(this).closest("table").find(".form-answer-check").prop("checked", select_all_value)
-
-  # Show/hide the bulk assign assessors form
-  $(".form-answer-check, #check_all").on "change", ->
-    show_button = false
-
-    $(".form-answer-check").each ->
-      if $(this).prop("checked")
-        show_button = true
-
-    if show_button
-      $(".bulk-assignment-container").addClass("show-container")
-
-      selected_count = $('input[type=checkbox].form-answer-check:checked').length
-      if selected_count > 1
-        $('.nominations-checked-total').text(`selected_count` +' groups selected')
-      else
-        $('.nominations-checked-total').text(`selected_count` +' group selected')
-    else
-      $('.nominations-checked-total').text("Select groups from the list below to bulk assign to Lord Lieutenancy office or national assessor sub-groups.")
-      $(".bulk-assignment-container").removeClass("show-container")
 
 changeRagStatus = ->
   $(document).on "click", ".btn-rag .dropdown-menu a", (e) ->

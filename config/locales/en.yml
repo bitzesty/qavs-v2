@@ -12,13 +12,6 @@ en:
         national_trade_body: From a national trade body
         word_of_mouth: Word of mouth
         other: Other
-    custom_email_form:
-      scope:
-        myself: Myself
-        qae_opt_in_group: QAE opt-in group
-        bis_opt_in: BIS opt-in
-        assessors: Assessors
-        all_users: All applicants
     eligibility/basic:
       kind:
         application: Apply for an organisation award
@@ -49,6 +42,20 @@ en:
     eligibility/promotion:
       nominee_is_qae_ep_award_holder:
         i_dont_know: "I don't know"
+    palace_attendee:
+      preferred_date:
+        any: Any
+        buck_1: 15th May - Buckingham palace
+        buck_2: 31st May - Buckingham palace
+        buck_3: 5th June - Buckingham palace
+        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+      alternative_date:
+        any: Any
+        buck_1: 15th May - Buckingham palace
+        buck_2: 31st May - Buckingham palace
+        buck_3: 5th June - Buckingham palace
+        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        none: There is no suitable secondary date
 
   activerecord:
     errors:
@@ -165,8 +172,9 @@ en:
 
   email_notification_help_messages:
     award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
-    local_assessment_notification: "This email be sent out to Lieutenants to notify them about available local assessments in their ceremonial county"
-    local_assessment_reminder: "This email be sent out to Lieutenants to remind them to submit their local assessment forms"
+    group_leader_notification: "This email will be sent to group leaders notifying them about the nomination"
+    local_assessment_notification: "This email will be sent out to Lieutenants to notify them about available local assessments in their ceremonial county"
+    local_assessment_reminder: "This email will be sent out to Lieutenants to remind them to submit their local assessment forms"
     shortlisted_notifier: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
     winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
     unsuccessful_notification: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
@@ -176,6 +184,7 @@ en:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
     submission_started_notification: "Notify users that nominations for the new Award year are open"
     reminder_to_submit: Reminder to submit the nominations (to all those who have started but not yet submitted nominations).
+    group_leader_notification: "Notification sent to group leaders about the nomination"
     local_assessment_notification: "Notification to start the local assessment"
     local_assessment_reminder: "Reminder to submit the local assessment form"
     winners_notification: "WINNERS : Email notifying all winning business applicants of their success & requesting their confirmation of their Press Book entry."
@@ -263,6 +272,10 @@ en:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
       submitted: Submitted
+      admin_eligible: Eligible
+      local_assessment_in_progress: "Local assessment in progress"
+      local_assessment_recommended: "Local assessment: recommended"
+      local_assessment_not_recommended: "Local assessment: not recommended"
       withdrawn: Withdrawn/Ineligible
       not_eligible: Not eligible
       not_submitted: Not submitted
@@ -277,6 +290,10 @@ en:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
       submitted: Submitted
+      admin_eligible: Eligible
+      local_assessment_in_progress: "Local assessment: in progress"
+      local_assessment_recommended: "Local assessment: recommended"
+      local_assessment_not_recommended: "Local assessment: not recommended"
       withdrawn: Withdrawn/Ineligible
       not_eligible: Not eligible
       not_submitted: Not submitted

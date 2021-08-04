@@ -1,10 +1,10 @@
-.form-group.form-group-multiple class="#{'form-edit' if @form_answer.parent_company.blank?}"
+.govuk-form-group.form-group-multiple class="#{'form-edit' if @form_answer.parent_company.blank?}"
   = simple_form_for [namespace_name, resource],
                     remote: true,
                     authenticity_token: true, html: { "data-type" => "html" } do |f|
     = hidden_field_tag :section, "parent_company"
 
-    .form-container
+    div
       = render "admin/form_answers/company_details/parent_company/show"
       .form-fields.form-block
         = f.simple_fields_for(:data) do |f|
@@ -29,11 +29,11 @@
                       collection: country_collection
 
         .form-actions.text-right
-          = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-          = f.submit "Save", class: "btn btn-primary pull-right"
+          = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary  btn-default form-cancel-link if-no-js-hide"
+          = f.submit "Save", class: "govuk-button  btn-primary pull-right"
       .clear
 
-      = link_to "#", class: "form-edit-link pull-right"
+      = link_to "#", class: "govuk-link form-edit-link pull-right"
         span.glyphicon.glyphicon-pencil
         ' Edit
       .clear

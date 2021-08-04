@@ -1,3 +1,4 @@
+require 'uglifier'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -23,7 +24,8 @@ Rails.application.configure do
   config.public_file_server.enabled = true # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(compress: { unused: false })
+
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -36,6 +38,7 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = ENV['ASSET_HOST']
+  config.static_cache_control = 'public, max-age=1000'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -77,7 +80,7 @@ Rails.application.configure do
   config.action_mailer.notify_settings = {
     api_key: ENV['GOV_UK_NOTIFY_API_KEY']
   }
-  
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -88,8 +91,6 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.lograge.enabled = true
-  config.lograge.ignore_actions = ['HealthchecksController#show']
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
@@ -99,6 +100,9 @@ Rails.application.configure do
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  else
+    config.lograge.enabled = true
+    config.lograge.ignore_actions = ['HealthchecksController#show']
   end
 
   # Do not dump schema after migrations.

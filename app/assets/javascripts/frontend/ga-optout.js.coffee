@@ -5,7 +5,7 @@ jQuery ->
     $(".govuk-cookie-banner").removeAttr("hidden")
     $(".govuk-cookie-banner").attr("role", "alert")
 
-    $(".govuk-cookie-banner .button.cookies-action").on "click", (e) ->
+    $(".govuk-cookie-banner .cookies-action").on "click", (e) ->
       e.preventDefault()
 
       Cookies.set("gaconsent", $(@).val(), { expires: 3650 })

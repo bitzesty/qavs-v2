@@ -576,7 +576,6 @@ table .ellipsis {
 
   li {
     margin-bottom: 10px;
-    @extend .clearfix;
 
     &:last-child {
       margin-bottom: 0;

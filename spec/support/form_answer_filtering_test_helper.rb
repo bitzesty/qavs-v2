@@ -1,32 +1,35 @@
 module FormAnswerFilteringTestHelper
   def assert_results_number(n)
-    within ".applications-table" do
-      expect(page).to have_selector(".td-title", count: n)
-    end
+    expect(page).to have_selector(".applications-table tbody tr", count: n)
   end
 
-  def click_filter_option(val, filter)
-    within ".applications-filter.#{filter}-filter" do
-      find(".dropdown-toggle").click
+  def click_status_option(val)
+    button = find('#apply-nomination-filters')
 
-      expect(page).to have_selector(".#{filter}-filter .dropdown.open", visible: true)
-      expect(page).to have_selector(".#{filter}-filter li.apply button", visible: true)
+    ['status', 'sub-status', 'activity'].each do |field|
+      within ".#{field}-filter" do
+        filter_dropdown = find(".dropdown-checkboxes__selection")
+        filter_dropdown.click
 
-      within ".#{filter}-filter .dropdown-menu" do
-        button = find("li.apply button")
-        all("li").each do |li|
-          next if li.all(".label-contents").count == 0
+        expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
 
-          content = li.first(".label-contents")
-          if content.text.to_s == val
-            li.first("label input").click
-            button.click
+        within ".dropdown-checkboxes__list" do
+          all(".dropdown-checkboxes__option").each do |option|
+            # next if li.all(".label-contents").count == 0
 
-            return
+            # content = li.first(".label-contents")
+            if option.text.to_s == val
+              option.click
+              filter_dropdown.click
+              button.click
+
+              return
+            end
           end
         end
       end
     end
+    
     fail "NotFoundOption"
   end
 

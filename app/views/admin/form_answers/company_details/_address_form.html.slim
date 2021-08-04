@@ -1,11 +1,11 @@
 .form-group-multiple-parent
-  .form-group.form-group-multiple.company-address-form
-    .form-container
+  .govuk-form-group.form-group-multiple.company-address-form
+    div
       label.form-label
         ' Address
 
       .form-value
-        p
+        p.govuk-body
           - if @form_answer.document["organization_address_building"].present?
             = @form_answer.document["organization_address_building"]
             br
@@ -82,12 +82,12 @@
                             collection: regions
 
             .form-actions.text-right
-              = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-              = f.submit "Save", class: "btn btn-primary pull-right"
+              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+              = f.submit "Save", class: "govuk-button btn-primary pull-right"
 
           .clear
 
-          = link_to "#", class: "form-edit-link pull-right"
+          = link_to "#", class: "govuk-link form-edit-link pull-right"
             span.glyphicon.glyphicon-pencil
             ' Edit
       .clear

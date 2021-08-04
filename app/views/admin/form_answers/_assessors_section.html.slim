@@ -2,17 +2,17 @@
 / probably can be handled by AJAX to keep the data consistent
 / and for example remove the assigned assessors from the selects
 .well.section-applicant-users
-  h2
+  h2.govuk-heading-l
     ' Assessors
   ul.list-unstyled.list-actions
-    li.form-group
+    li.govuk-form-group
       label
         span.assessor-label Lead:
       .form-value.lead-assessor
         = resource.lead_assessors
       .clear
 
-    li.form-group.primary-assessor-assignment
+    li.govuk-form-group.primary-assessor-assignment
       label
         ' Primary:
       .form-value class=("ellipsis edit-value" if policy(resource).assign_assessor?)
@@ -44,7 +44,7 @@
           .errors-holder
       .clear
 
-    li.form-group.secondary-assessor-assignment
+    li.govuk-form-group.secondary-assessor-assignment
       label
         span.assessor-label Secondary:
       .form-value class=("ellipsis edit-value" if policy(resource).assign_assessor?)
@@ -68,7 +68,7 @@
           .clear
           .form-actions.text-right
             span.if-no-js-hide
-              = link_to "Cancel", "#", class: "btn btn-default form-cancel-link"
-            = form.submit "Save", class: "btn btn-primary form-save-button"
+              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link"
+            = form.submit "Save", class: "govuk-button btn-primary form-save-button"
           .errors-holder
       .clear

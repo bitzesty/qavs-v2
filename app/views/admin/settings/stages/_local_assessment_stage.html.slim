@@ -1,10 +1,9 @@
-.panel.panel-default.panel-parent
-  .panel-heading role="tab" id="local-assessment-stage-header"
-    h4.panel-title
-      a.collapsed data-toggle="collapse" data-parent="#admin-settings" href="#local-assessment-stage" aria-expanded="false" aria-controls="local-assessment-stage"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h2.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Local Assessment Stage
-  #local-assessment-stage.panel-collapse.collapse.in role="tabpanel" aria-labelledby="local-assessment-stage-header"
-    .panel-body
-      .panel-group#panel-local-assessment-stage-parent role="tablist" aria-multiselectable="true"
-        = render "admin/settings/deadlines/local_assessment_stage_deadlines"
-        = render "admin/settings/deadlines/local_assessment_email_notifications"
+  .govuk-accordion__section-content
+    .govuk-accordion data-module="govuk-accordion" class="govuk-!-margin-left-7"
+      = render "admin/settings/deadlines/local_assessment_stage_deadlines"
+      = render "admin/settings/deadlines/local_assessment_email_notifications"

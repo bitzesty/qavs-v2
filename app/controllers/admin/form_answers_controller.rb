@@ -30,6 +30,7 @@ class Admin::FormAnswersController < Admin::BaseController
     params[:search] ||= FormAnswerSearch.default_search
     params[:search].permit!
     authorize :form_answer, :index?
+
     @search = FormAnswerSearch.new(target_scope, current_admin).search(params[:search])
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
     @form_answers = @search.results

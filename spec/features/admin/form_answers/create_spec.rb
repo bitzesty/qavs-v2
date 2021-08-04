@@ -11,7 +11,7 @@ feature "Admin creates nomination", js: true do
     visit edit_admin_user_path(user)
 
     application_window = window_opened_by do
-      click_link("Log in an create nomination")
+      click_link("Log in and create nomination")
     end
 
     within_window application_window do

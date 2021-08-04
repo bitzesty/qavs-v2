@@ -20,12 +20,8 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        header :local_assessment_citation_summary_header, "Citation summary" do
-          ref "E 2"
-        end
-
         textarea :l_citation_summary, "Citation summary" do
-          sub_ref "E 2.1"
+          sub_ref "E 2"
           context %(
             <p class='govuk-hint'>
               Please discuss and provide a <strong>short summary of the group's work in one sentence that could be used for their certificate</strong> if they eventually receive a QAVS. The format should be similar to the examples below:
@@ -176,7 +172,7 @@ class AwardYears::V2022::QAEForms
           )
           required
         end
-        
+
         textarea :nomination_local_assessment_form_evidence_of_ownership, "What evidence is there that the other volunteers can feed in their thoughts and ideas to the leadership through a regular forum or reference group? Does it feel like their own project, or are they just following instructions from paid staff?" do
           sub_ref "E 4.9"
           required
@@ -217,7 +213,7 @@ class AwardYears::V2022::QAEForms
           )
           required
         end
-        
+
         textarea :nomination_local_assessment_form_adequate_insurance, "Does the group have adequate insurance to cover volunteers and members of the public with whom they interact?" do
           sub_ref "E 5.5"
           context %(
@@ -314,6 +310,14 @@ class AwardYears::V2022::QAEForms
 
         header :local_assessment_lord_lieutenant_citation_header, "Lord Lieutenant Citation" do
           ref "E 8"
+
+        end
+
+        textarea :nomination_local_assessment_form_citation_full, "Lord Lieutenant Citation" do
+          sub_ref "E 8"
+          required
+          words_max 600
+
           context %(
             <p class='govuk-hint'>
               The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. The main guidance for Lieutenancies circulated each September provides more advice about drafting the citation, but you might want to bear in the points below when recommending a group to the national assessors:
@@ -326,20 +330,23 @@ class AwardYears::V2022::QAEForms
           )
           pdf_context %(
             The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. The main guidance for Lieutenancies circulated each September provides more advice about drafting the citation, but you might want to bear in the points below when recommending a group to the national assessors:
-            
+
             \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
-            
+
             \u2022 Instead, the citation should try to capture what is exceptional about this particular group. For instance, the impact it has made on local people (particularly if the local context is challenging); the ways in which its work or approach is distinctive or different from other groups doing similar things; anything outstanding about the way the group is run; any exemplary qualities in the volunteers themselves.
-            
+
             \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either as this is an important opportunity to 'bring the group to life' for the national assessors.
           )
+
+          rows 3
         end
 
-        textarea :nomination_local_assessment_form_citation_full, "Citation" do
-          sub_ref "E 8.1"
+        options :local_assessment_verdict, "Local assessment outcome" do
+          sub_ref "E 9"
+          classes "sub-question"
+          option "recommended", "Recommended"
+          option "not_recommended", "Not recommended"
           required
-          words_max 600
-          rows 3
         end
 
         submit "Submit assessment" do

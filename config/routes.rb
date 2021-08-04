@@ -1,6 +1,3 @@
-require 'sidekiq/web'
-require 'sidekiq/cron/web'
-
 Rails.application.routes.draw do
   resource :healthcheck, only: :show
 
@@ -25,10 +22,6 @@ Rails.application.routes.draw do
   devise_for :lieutenants, controllers: {
     confirmations: "lieutenants/confirmations"
   }
-
-  authenticate :admin do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 
   devise_for :assessors, controllers: {
     confirmations: "assessors/confirmations"
@@ -169,6 +162,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboard#index"
+    get 'console', to: "admins#console"
+
     resources :dashboard, only: [:index] do
       collection do
         get :totals_by_month
@@ -255,7 +250,6 @@ Rails.application.routes.draw do
       patch :unlock, on: :member
     end
 
-    resource :custom_email, only: [:show, :create]
     resource :users_feedback, only: [:show]
     resources :audit_logs, only: :index
 

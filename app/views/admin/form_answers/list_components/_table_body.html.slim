@@ -1,8 +1,8 @@
 - @form_answers.each do |form_answer|
   - obj = form_answer.decorate
-  tr
-    td = check_box_tag :check, obj.id, false, class: "form-answer-check"
-    td.td-title
+  tr.govuk-table__row
+    td.govuk-table__cell = check_box_tag :check, obj.id, false, class: "form-answer-check"
+    td.td-title.govuk-table__cell
       - if obj.company_or_nominee_name.present?
         = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" } do
           = obj.company_or_nominee_name
@@ -10,22 +10,30 @@
         = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted nomination, nominee name not yet specified" } do
           em
             ' Not yet specified
-    td = obj.dashboard_status(current_admin.class.name)
-    td = obj.document["nominee_address_postcode"]
-    td 
-      - if obj.document["nominee_ceremonial_county"].present?
-        = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
+    td.govuk-table__cell
+      - if obj.urn.present?
+        = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
       - else
-        | Not stated
-    td
+        span.urn-not-generated Not generated
+    td.govuk-table__cell = obj.dashboard_status(current_admin.class.name)
+    td.govuk-table__cell = obj.document["nominee_address_postcode"]
+    td.govuk-table__cell
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
       - else
-       | Not assigned
-    td = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
-    td
+       'Not stated
+    td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+    td.govuk-table__cell
+      - app_comments = application_comments(obj.comments_count)
+      - if app_comments.present?
+        = link_to polymorphic_url([namespace_name, obj], search: params[:search]), class: "icon-comment-wrapper"
+          = app_comments
+
+      = application_flags(obj, current_subject)
+      = application_flags(obj)
+    td.govuk-table__cell
       = obj.last_updated_at
       br
       span.muted
         = obj.last_updated_by
-    td = link_to "View", review_admin_form_answer_path(obj), target: "_blank"
+    td.govuk-table__cell = link_to "View", review_admin_form_answer_path(obj), target: "_blank"

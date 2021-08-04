@@ -15,12 +15,12 @@ footer
 
           - if step.index == 0
             - aria_label = "Back to Useful Application Information page"
-          
+
           = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id], rel: "prev", title: aria_label, "aria-label" => aria_label, class: "govuk-button govuk-button--secondary" do
             span.pagination-label
               | Back
 
-      - if current_form_is_editable?
+      - if current_form_is_editable? || (current_lieutenant && step.local_assessment?)
         - dashboard_link = current_subject.is_a?(Lieutenant) ? lieutenant_form_answer_url(@form_answer) : dashboard_url
         li.save-quit-link
           span.if-js-hide
@@ -30,14 +30,14 @@ footer
 
       - if step.next_for(@form_answer, current_form_user)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
-          - opts = possible_read_only_ops
+          - opts = possible_read_only_ops(step.opts[:id])
           - opts[:class] ||= ""
           - opts[:class] << " govuk-button"
           = button_tag opts.merge(rel: "next", title: "Navigate to next part") do
             ' Save and continue
 
       - else
-        - if step.submit && current_form_is_editable? && policy(@form_answer).submit?
+        - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?)) && policy(@form_answer).submit?
           li.submit.qae-form
             button type="submit" name="submit" value="true" class="govuk-button #{step.submit.style.presence}"
               = step.submit.text

@@ -138,8 +138,10 @@ class FormAnswerSearch < Search
   def filter_klass
     if subject.is_a?(Admin)
       FormAnswerStatus::AdminFilter
-    else
+    elsif subject.is_a?(Assessor)
       FormAnswerStatus::AssessorFilter
+    else
+      FormAnswerStatus::LieutenantFilter
     end
   end
 

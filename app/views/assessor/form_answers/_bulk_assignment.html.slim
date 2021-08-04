@@ -4,7 +4,7 @@
 
     .bulk-assign-assessors-form
       .well
-        h3 Bulk Assign Assessors
+        h3.govuk.heading-m Bulk Assign Assessors
 
         p Please make sure that the correct nominations are selected in the list before assigning assessors.
         br
@@ -28,6 +28,6 @@
             = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 
             .pull-right
-              = link_to "Cancel", "#", class: "btn btn-default if-no-js-hide bulk-assign-assessors-cancel-link"
-              = f.submit "Assign", class: "btn btn-primary"
+              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default if-no-js-hide bulk-assign-assessors-cancel-link"
+              = f.submit "Assign", class: "govuk-button btn-primary"
             .clear

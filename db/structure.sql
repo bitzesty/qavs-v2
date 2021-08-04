@@ -809,7 +809,11 @@ CREATE TABLE public.palace_attendees (
     additional_info text,
     palace_invite_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    relationship character varying,
+    disabled_access boolean,
+    preferred_date character varying,
+    alternative_date character varying
 );
 
 
@@ -3611,6 +3615,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210629130552'),
 ('20210707081708'),
 ('20210707115136'),
-('20210707122554');
+('20210707122554'),
+('20210803084421');
 
 

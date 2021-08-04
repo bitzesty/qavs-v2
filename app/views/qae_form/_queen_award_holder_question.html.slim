@@ -4,7 +4,7 @@
 = render "shared/non_js_dynamic_list_redirect_warning", add_message: "Add award"
 
 div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label"
-  input name="form[queen_award_holder_details][array]" value="true" type="hidden" *possible_read_only_ops
+  input name="form[queen_award_holder_details][array]" value="true" type="hidden" *possible_read_only_ops(question.step.opts[:id])
   ul.list-add data-add-limit="10" data-need-to-clear-example=true data-default=1 id="non_js_#{question.key}-list-question"
 
     - question.entities.each_with_index do |award, index|
@@ -35,7 +35,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
         label
           span.visuallyhidden Category
           span.if-no-js-hide
-            select.inline.js-trigger-autosave name="form[queen_award_holder_details][#{index}][category]" data-dependable-values=dependable_values data-parent-option-dependable-key=question.key data-dependable-option-siffix="category" class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops
+            select.inline.js-trigger-autosave name="form[queen_award_holder_details][#{index}][category]" data-dependable-values=dependable_values data-parent-option-dependable-key=question.key data-dependable-option-siffix="category" class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops(question.step.opts[:id])
               option value=""
                 ' Category
               - question.categories.each do |category|
@@ -48,7 +48,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
         label
           span.visuallyhidden Year Awarded
           span.if-no-js-hide
-            select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][#{index}][year]" data-dependable-option-siffix="year" data-parent-option-dependable-key=question.key class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops
+            select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][#{index}][year]" data-dependable-option-siffix="year" data-parent-option-dependable-key=question.key class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops(question.step.opts[:id])
               option value=""
                 ' Year Awarded
               - question.years.each do |year|
@@ -67,7 +67,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
 
         label
           span.visuallyhidden Category
-          select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][0][category]" data-dependable-values=dependable_values data-parent-option-dependable-key=question.key data-dependable-option-siffix="category" class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops
+          select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][0][category]" data-dependable-values=dependable_values data-parent-option-dependable-key=question.key data-dependable-option-siffix="category" class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops(question.step.opts[:id])
             option value=""
               ' Category
             - question.categories.each do |category|
@@ -76,7 +76,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
 
         label
           span.visuallyhidden Year Awarded
-          select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][0][year]" data-dependable-option-siffix="year" data-parent-option-dependable-key=question.key class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops
+          select.govuk-select.inline.js-trigger-autosave name="form[queen_award_holder_details][0][year]" data-dependable-option-siffix="year" data-parent-option-dependable-key=question.key class=("js-options-with-dependent-child-select" if children_depends_on.present?) *possible_read_only_ops(question.step.opts[:id])
             option value=""
               ' Year Awarded
             - question.years.each do |year|
@@ -85,7 +85,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
 
         span.clear
 
-a.govuk-button.govuk-button--secondary.button-add.js-button-add.if-no-js-hide href="#" aria-label="Add another award" data-entity="award" *possible_read_only_ops
+a.govuk-button.govuk-button--secondary.button-add.js-button-add.if-no-js-hide href="#" aria-label="Add another award" data-entity="award" *possible_read_only_ops(question.step.opts[:id])
   | + Add another award
 
 = link_to "+ Add award", new_form_form_answer_current_queens_awards_url(@form_answer.id),

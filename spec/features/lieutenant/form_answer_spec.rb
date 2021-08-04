@@ -22,7 +22,9 @@ describe "Lieutenant: Nomination process", js: true do
 
     expect(page).to have_current_path edit_lieutenant_form_answer_path(fa)
     click_link("A. Nominee")
-    expect(find_field("form[nominee_name]").value).to eq("Bit Zesty")
+    expect(find_field("form[nominee_name]", disabled: true).value).to eq("Bit Zesty")
+    click_link("E. Local Assessment Form")
+    expect(find_field("form[nomination_local_assessment_form_nominee_name]", disabled: false).value).to eq("Bit Zesty")
 
     expect(page).to have_content("E. Local Assessment Form")
   end

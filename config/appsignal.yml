@@ -3,9 +3,9 @@ default: &defaults
   push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
 
   # Your app's name as reported on AppSignal.com. Required
-  name: "<%= ENV['GAE_INSTANCE'] || 'QAVS V2' %>"
+  name: "<%= ENV['APPSIGNAL_NAME'] || 'QAVS V2' %>"
 
-  revision: "<%= ENV['GAE_VERSION'] %>"
+  revision: "<%= ENV['K_REVISION'] %>"
 
   # Add default instrumentation of net/http. Default: true
   # instrument_net_http: true

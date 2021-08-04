@@ -1,10 +1,10 @@
 - editable = f.object.editable_for?(current_subject)
 
-.form-group.application-background-section class="#{'form-edit' if f.object.application_background_section_desc.blank? && editable}"
-  .form-container
+.govuk-form-group.application-background-section class="#{'form-edit' if f.object.application_background_section_desc.blank? && editable}"
+  div
     label.form-label Nomination background
     .form-value
-      p
+      p.govuk-body
         - if f.object.application_background_section_desc.present?
           = qae_simple_format f.object.application_background_section_desc
         - else
@@ -23,5 +23,5 @@
       = link_to "#", class: "form-edit-link pull-right"
         span.glyphicon.glyphicon-pencil
         ' Edit
-      = link_to "Save", "#", class: "btn btn-primary form-save-link pull-right if-no-js-hide"
+      = link_to "Save", "#", class: "govuk-button btn-primary form-save-link pull-right if-no-js-hide"
       .clear

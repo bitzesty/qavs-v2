@@ -4,7 +4,7 @@ li.js-add-example
     = link_to "Remove", "#", class: "remove-link js-remove-link"
   label.govuk-label
     ' Position/Role
-    input.govuk-input.govuk-input--width-10.js-trigger-autosave name="form[position_details][#{index}][name]" value=position['name'] type="text" *possible_read_only_ops
+    input.govuk-input.govuk-input--width-10.js-trigger-autosave name="form[position_details][#{index}][name]" value=position['name'] type="text" *possible_read_only_ops(question.step.opts[:id])
   .validate-date-start-end
     span.govuk-error-message
     .govuk-grid-row
@@ -17,12 +17,12 @@ li.js-add-example
             .govuk-form-group
               label.govuk-label.govuk-date-input__label.date-input-field
                 ' Month
-              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-2.js-date-input-month type="text" name="form[position_details][#{index}][start_month]" value=position['start_month'] maxlength=2 autocomplete="off" *possible_read_only_ops
+              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-2.js-date-input-month type="text" name="form[position_details][#{index}][start_month]" value=position['start_month'] maxlength=2 autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
           .govuk-date-input__item
             .govuk-form-group
               label.govuk-label.govuk-date-input__label.date-input-field
                 ' Year
-              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-4.js-date-input-year type="text" name="form[position_details][#{index}][start_year]" value=position['start_year'] maxlength=4 autocomplete="off" *possible_read_only_ops
+              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-4.js-date-input-year type="text" name="form[position_details][#{index}][start_year]" value=position['start_year'] maxlength=4 autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
     span.clear
     .govuk-grid-row.nominee-end-date-row
       .govuk-grid-column-one-quarter
@@ -34,17 +34,17 @@ li.js-add-example
             .govuk-form-group
               label.govuk-label.govuk-date-input__label.date-input-field
                 ' Month
-              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-2.js-date-input-month type="text" name="form[position_details][#{index}][end_month]" value=position['end_month'] maxlength=2 autocomplete="off" *(possible_read_only_ops.merge(ongoing_opts))
+              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-2.js-date-input-month type="text" name="form[position_details][#{index}][end_month]" value=position['end_month'] maxlength=2 autocomplete="off" *(possible_read_only_ops(question.step.opts[:id]).merge(ongoing_opts))
           .govuk-date-input__item
             .govuk-form-group
               label.govuk-label.govuk-date-input__label
                 ' Year
-              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-4.js-date-input-year type="text" name="form[position_details][#{index}][end_year]" value=position['end_year'] maxlength=4 autocomplete="off" *(possible_read_only_ops.merge(ongoing_opts))
+              input.js-trigger-autosave.govuk-input-govuk-date-input__input.govuk-input--widh-4.js-date-input-year type="text" name="form[position_details][#{index}][end_year]" value=position['end_year'] maxlength=4 autocomplete="off" *(possible_read_only_ops(question.step.opts[:id]).merge(ongoing_opts))
       .govuk-grid-column-one-quarter
         .govuk-checkboxes
           .govuk-checkboxes__item
-            input.js-trigger-autosave type="hidden" name="form[position_details][#{index}][ongoing]" value='0' *(possible_read_only_ops.merge(ongoing_opts))
-            input.js-trigger-autosave.govuk-checkboxes__input type="checkbox" id="form_position_details_#{index}_ongoing" name="form[position_details][#{index}][ongoing]" checked=('checked' if position['ongoing'] == '1') value='1' *possible_read_only_ops
+            input.js-trigger-autosave type="hidden" name="form[position_details][#{index}][ongoing]" value='0' *(possible_read_only_ops(question.step.opts[:id]).merge(ongoing_opts))
+            input.js-trigger-autosave.govuk-checkboxes__input type="checkbox" id="form_position_details_#{index}_ongoing" name="form[position_details][#{index}][ongoing]" checked=('checked' if position['ongoing'] == '1') value='1' *possible_read_only_ops(question.step.opts[:id])
             label.govuk-label.govuk-checkboxes__label for="form_position_details_#{index}_ongoing"
               ' Ongoing
     span.clear
@@ -52,5 +52,5 @@ li.js-add-example
     label.govuk-label for="form[position_details][#{index}][details]"
       span.label-char-count-reposition
         ' Details
-    textarea.govuk-textarea.position-textarea.js-char-count.js-trigger-autosave rows="2" name="form[position_details][#{index}][details]" id="form[position_details][#{index}][details]" data-word-max=question.details_words_max *possible_read_only_ops
+    textarea.govuk-textarea.position-textarea.js-char-count.js-trigger-autosave rows="2" name="form[position_details][#{index}][details]" id="form[position_details][#{index}][details]" data-word-max=question.details_words_max *possible_read_only_ops(question.step.opts[:id])
       = position['details']
