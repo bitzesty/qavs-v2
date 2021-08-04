@@ -47,7 +47,7 @@ Cloudtasker.configure do |config|
   # > E.g. in development, using `config.mode = :production` and ngrok
   # config.processor_host = 'https://111111.ngrok.io'
   #
-  config.processor_host = Rails.env.production? ? QAE.env : 'http://localhost:3000'
+  config.processor_host = Rails.env.production? ? ENV["GCP_HOST"] : 'http://localhost:3000'
 
   #
   # Specify the mode of operation:

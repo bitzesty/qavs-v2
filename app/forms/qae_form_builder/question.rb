@@ -243,7 +243,10 @@ class QAEFormBuilder
     end
 
     def prepared_text(content)
-      Sanitize.fragment(content, elements: ["strong"]).strip
+      Sanitize.fragment(content, elements: ["strong"], :parser_options => {
+        max_errors: -1,
+        max_tree_depth: -1
+      }).strip
     end
 
     # Detects children conditions, grouped by option

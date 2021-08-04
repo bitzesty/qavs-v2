@@ -616,11 +616,16 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def question_checked_value_title
-    Nokogiri::HTML.parse(question.pdf_text || question.text).text.strip if humanized_answer == "on"
+    question_text = question.pdf_text || question.text
+    Nokogiri::HTML.parse(question_text).text.strip if humanized_answer == "on"
   end
 
   def prepared_checkbox_value(title)
-    Sanitize.fragment(title, elements: ["strong"]).strip
+    Sanitize.fragment(title, elements: ["strong"], :parser_options => {
+      max_errors: -1,
+      max_tree_depth: -1
+    }
+    ).strip
   end
 
   def to_month(value)
