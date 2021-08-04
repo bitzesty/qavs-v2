@@ -567,6 +567,8 @@ GEM
     rspec-expectations (3.9.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
+    rspec-github (2.3.1)
+      rspec-core (~> 3.0)
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
@@ -788,6 +790,7 @@ DEPENDENCIES
   redis-store (~> 1.4)
   responders (~> 3.0)
   rest-client
+  rspec-github
   rspec-rails (~> 4.0.1)
   rspec_junit_formatter (= 0.2.3)
   rubocop (~> 0.52)
