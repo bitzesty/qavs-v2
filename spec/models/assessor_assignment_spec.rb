@@ -95,11 +95,11 @@ describe AssessorAssignment do
       end
     end
 
-    pending "for previous award year" do
+    context "for previous award year" do
       let(:previous_award_year) { AwardYear.for_year(AwardYear.current.year - 1).first_or_create }
       let(:lead) {create(:assessor, :lead_for_all)}
 
-      it "moderated form is not visible" do
+      pending "moderated form is not visible" do
         form_answer.award_year = previous_award_year
         form_answer.save!
 

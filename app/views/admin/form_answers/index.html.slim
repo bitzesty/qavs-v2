@@ -1,59 +1,38 @@
-h1.admin-page-heading
+h1.govuk-heading-xl
   | Nominations
 
 
 = simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
-  .row
-    .col-md-4.col-sm-5.col-xs-12
+  .govuk-grid-row
+    .govuk-grid-column-one-quarter.if-js-hide
+      = f.input :year, input_html: { value: params[:year] || @award_year.year }
+    .govuk-grid-column-one-third
       .form-group.search-input
-        = text_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
-        = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-        = submit_tag :submit, class: 'search-submit'
+        = f.input :query, label: 'Search', input_html: { type: "search" }
+    = render "layouts/vertical_admin_award_year"
 
   = render "shared/form_answers/top_statuses_filters", f: f,
-                                                       options: FormAnswerStatus::AdminFilter.options,
-                                                       sub_options: FormAnswerStatus::AdminFilter.sub_options,
-                                                       activity_options: FormAnswerStatus::AdminFilter.activity_options
+                                                       options: FormAnswerStatus::AdminFilter.collection,
+                                                       sub_options: FormAnswerStatus::AdminFilter.sub_collection,
+                                                       activity_options: FormAnswerStatus::AdminFilter.activity_collection
 
+  = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
+
+  = render("admin/form_answers/bulk_assignment_button")
   - if @search.query?
     .well.search-text
-      p
+      p.govuk-body
         = "Search results for '#{@search.query}'"
         small
           = link_to "(Clear search)", admin_form_answers_path, class: "btn btn-link"
 
-= render("admin/form_answers/bulk_assignment")
-
-= simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
-  .row
-    .col-md-4.col-sm-5.col-xs-12
-      .form-group
-        = text_field_tag :year, @award_year.year, class: "visuallyhidden"
-        = f.input :query, label: false, input_html: { class: "visuallyhidden", placeholder: "Search...", type: "search" }
-        = submit_tag :submit, class: 'search-submit visuallyhidden'
-
-  - # status filters need to be here because the filtering is done in the other form above, so in order not to break filtering, we need to duplicate it here
-  = f.simple_fields_for [:filters, @search.filters] do |h|
-
-    = h.input :status,
-              collection: FormAnswerStatus::AssessorFilter.options,
-              label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
-    = h.input :sub_status,
-              collection: FormAnswerStatus::AdminFilter.sub_options,
-              label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
-
-    = h.input :nominee_activity,
-              collection: FormAnswerStatus::AdminFilter.activity_options,
-              label: false,
-              input_html: { multiple: true, class: 'visuallyhidden' }
   .row
     .col-xs-12
       = render("admin/form_answers/list_components/table", f: f)
+      = render("admin/form_answers/bulk_assignment_button")
   .row
     .col-xs-12.text-right
       = paginate @form_answers
       .clear
 
-= render("admin/form_answers/bulk_assignment")
+= render("admin/form_answers/bulk_assignment_modal")

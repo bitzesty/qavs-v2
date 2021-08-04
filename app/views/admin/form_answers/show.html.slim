@@ -1,15 +1,12 @@
-.row
-  .col-xs-12
-    .page-header.page-header-nav
-      = link_to "‹ Back to nominations list", admin_form_answers_path(params.permit!.except(:controller, :action)), class: "btn btn-link btn-lg"
-      .apps-navigation
-        - if !@form_paginator.first?
-          = link_to "‹ Previous nomination", admin_form_answer_path(@form_paginator.prev_entry, search: params[:search]), class: "btn btn-link btn-lg link-prev"
-        - if !@form_paginator.last?
-          = link_to "Next nomination ›", admin_form_answer_path(@form_paginator.next_entry, search: params[:search]), class: "btn btn-link btn-lg link-next"
-        .clear
-.row.inline-form-view
-  .show-sidebar-container
+= link_to "‹ Back to nominations list", admin_form_answers_path(params.permit!.except(:controller, :action)), class: "btn btn-link btn-lg"
+.apps-navigation
+  - if !@form_paginator.first?
+    = link_to "‹ Previous nomination", admin_form_answer_path(@form_paginator.prev_entry, search: params[:search]), class: "btn btn-link btn-lg link-prev"
+  - if !@form_paginator.last?
+    = link_to "Next nomination ›", admin_form_answer_path(@form_paginator.next_entry, search: params[:search]), class: "btn btn-link btn-lg link-next"
+
+.govuk-grid-row
+  .govuk-grid-column-one-quarter
     aside.show-sidebar aria-label="Application summary"
       = render("applicant_details")
       = render("applicant_status")
@@ -18,5 +15,5 @@
       = render("admin/form_answers/assessors_section")
       = render("admin/form_answers/previous_applications_section")
 
-  .show-main-content.submitted-view
+  .govuk-grid-column-three-quarters
     = render partial: "submitted_view"

@@ -13,21 +13,21 @@
     = render "admin/form_answers/docs/download_original_application_pdf_before_deadline"
 
   .sidebar-section
-    h2
+    h2.govuk-heading-l
       ' Nomination & Supporting Docs
     = render "admin/form_answers/docs/application_and_supporting_docs"
 
   .sidebar-section
-    h2
+    h2.govuk-heading-l
       ' Post Shortlisting Docs
     .document-list
       = render "admin/form_answers/docs/post_shortlisting_docs", resource: resource
 
   .sidebar-section
-    h2
+    h2.govuk-heading-l
       ' Other Docs
     .document-list
-      p.p-empty class="#{'visuallyhidden' if @form_answer.form_answer_attachments.any?}"
+      p.govuk-body.p-empty class="#{'visuallyhidden' if @form_answer.form_answer_attachments.any?}"
         ' No documents have been attached.
       ul.list-unstyled.list-actions
         - if @form_answer.form_answer_attachments.uploaded_not_by_user.any?

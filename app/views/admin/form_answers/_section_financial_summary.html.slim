@@ -1,8 +1,8 @@
 - if !financial_pointer.period_length.zero? && @form_answer.submitted?
-  .panel.panel-default
-    .panel-heading#financial-summary-heading role="tab"
-      h4.panel-title
-        a data-toggle="collapse" data-parent="#submitted-application" href="#financial-summary" aria-expanded="true" aria-controls="financial-summary"
+  .govuk-accordion__section
+    .govuk-accordion__section-header
+      h3.govuk-accordion__section-heading
+        span.govuk-accordion__section-button
           ' Financial Summary
           - if @form_answer.financial_summary_updated_by
             small
@@ -11,6 +11,5 @@
               ' -
               = l @form_answer.financial_summary_updated_at.to_datetime, format: :date_at_time
 
-    #financial-summary.section-financial-summary.panel-collapse.collapse role="tabpanel" aria-labelledby="financial-summary-heading"
-      .panel-body
-        = render 'admin/form_answers/financial_summary/list', financial_pointer: financial_pointer
+    .govuk-accordion__section-content
+      = render 'admin/form_answers/financial_summary/list', financial_pointer: financial_pointer

@@ -22,8 +22,8 @@ describe "Users search", "
           click_button :submit
         end
 
-        within ".admin-table" do
-          expect(page).to have_selector("td.td-title", count: 1)
+        within ".govuk-table" do
+          expect(page).to have_selector("tbody tr", count: 1)
         end
       end
     end

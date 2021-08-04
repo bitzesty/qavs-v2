@@ -1,44 +1,38 @@
 - user_record = f.object
 
-.col-md-12.admin-user-debounce-api-check-block
-  strong.heading-message
+.govuk-inset-text.admin-user-debounce-api-check-block
+  h4.govuk-heading-s
     | Email deliverability (Valid/Bounces):
-  br
 
   - if user_record.debounce_api_latest_check_at.present?
 
     - if user_record.marked_at_bounces_email?
-      = image_tag "icon-important-sm-red.png", alt: ""
-      span.check-result-title
+      p.govuk-body
+        = image_tag "icon-important-sm-red.png", alt: ""
         | Bounces
-      br
       
-      span.next-run-info 
+      p.govuk-body
         = "Error code: #{user_record.debounce_api_response_code} (#{user_record.bounces_email_reason})"
-        br
         = user_record.decorate.debounce_api_check_cycle_details
 
     - else
-      = image_tag "icon-grade-positive.png", alt: ""
-      span.check-result-title
+      p.govuk-body
+        = image_tag "icon-grade-positive.png", alt: ""
         | Valid!
-      br
 
-      span.next-run-info 
+      p.govuk-body
         = user_record.decorate.debounce_api_check_cycle_details
 
   - else
-    = image_tag "icon-info.png", alt: ""
-    span.check-result-title
+    p.govuk-body
+      = image_tag "icon-info.png", alt: ""
       | Not scanned yet!
-    br
 
-    span.next-run-info 
+    p.govuk-body
       | Next check will be today / tomorrow!
 
-  .clearfix
 
   - link_title = user_record.debounce_api_latest_check_at.present? ? 'Re-scan' : 'Scan now'
-  = link_to link_title, scan_via_debounce_api_admin_user_url(user_record), method: :post, class: "btn btn-default btn-md"
+  = link_to link_title, scan_via_debounce_api_admin_user_url(user_record), method: :post, class: "govuk-button govuk-button--secondary"
 
 

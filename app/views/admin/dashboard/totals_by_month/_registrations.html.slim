@@ -1,27 +1,27 @@
 .dashboard-table__wrapper.dashboard-report
-  table.dashboard-table.dashboard-table--small width="1000"
-    caption
+  table.govuk-table.dashboard-table class="govuk-!-font-size-14"
+    caption.govuk-table__caption.govuk-table__caption--m
       | New account registrations
       a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_month")
         | Load data
-      button.btn.btn-primary.btn--loading.updating-data.hidden
+      button.btn.btn-primary.btn--loading.updating-data.hidden.govuk-button
         | Updating data
 
-    thead
-      tr
-        th.bold.border-right width="150"
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th.bold.border-right.govuk-table__header width="150"
           | Year
-        th.bold.border-right width="140"
+        th.bold.border-right.govuk-table__header width="140"
           | By end of April
-        th.bold.border-right width="140"
+        th.bold.border-right.govuk-table__header width="140"
           | By end of May
-        th.bold.border-right width="140"
+        th.bold.border-right.govuk-table__header width="140"
           | By end of June
-        th.bold.border-right width="140"
+        th.bold.border-right.govuk-table__header width="140"
           | By end of July
-        th.bold.border-right width="140"
+        th.bold.border-right .govuk-table__headerwidth="140"
           | By end of August
-        th.bold width="140"
+        th.bold.govuk-table__header width="140"
           | Totals on deadline
-    tbody
+    tbody.govuk-table__body
       = render "admin/dashboard/totals_by_month/users_table_body"

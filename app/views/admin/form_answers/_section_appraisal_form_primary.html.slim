@@ -1,22 +1,20 @@
-.panel.panel-default
-  .panel-heading#appraisal-form-primary-heading role="tab"
-    h4.panel-title
-      a data-toggle="collapse" data-parent="#panel-assessment" href="#section-appraisal-form-primary" aria-expanded="true" aria-controls="section-appraisal-form-primary"
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h3.govuk-accordion__section-heading
+      span.govuk-accordion__section-button
         ' Appraisal Form (Primary)
         - if primary_assessment.last_editor_info.present?
           small
             = primary_assessment.last_editor_info
-  #section-appraisal-form-primary.section-appraisal-form.section-appraisal-form-primary.panel-collapse.collapse role="tabpanel" aria-labelledby="appraisal-form-primary-heading"
-    .panel-body
+  .govuk-accordion__section-content
+    = simple_form_for([namespace_name, primary_assessment],
+                      remote: true,
+                      authenticity_token: true,
+                      html: { "data-type" => "json"}) do |f|
 
-      = simple_form_for([namespace_name, primary_assessment],
-                        remote: true,
-                        authenticity_token: true,
-                        html: { "data-type" => "json"}) do |f|
-
-        = hidden_field_tag :updated_section
-        = render_section(resource, f)
-        = f.submit "Save changes", class: "if-js-hide btn btn-primary"
-      .clear
-      br
-      = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: primary_assessment)
+      = hidden_field_tag :updated_section
+      = render_section(resource, f)
+      = f.submit "Save changes", class: "if-js-hide govuk-button"
+    .clear
+    br
+    = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: primary_assessment)

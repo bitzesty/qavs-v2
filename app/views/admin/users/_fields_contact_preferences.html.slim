@@ -1,5 +1,5 @@
 fieldset.question-group
-  h3
+  h3.govuk-heading-m
     label General settings:
 
   = f.input :notification_when_submission_deadline_is_coming, label: "I would like to receive email reminders of submission deadlines - these are sent at regular intervals closer to the deadline.", wrapper_class: "selectable"
@@ -11,18 +11,18 @@ fieldset.question-group
   = f.input :agree_sharing_of_details_with_lieutenancies, label: "I am happy for my and my organisation's name, contact details and application status to be shared with Lieutenancies so that they can contact us to assist as appropriate.", wrapper_class: "selectable"
 
 fieldset.question-group
-  h3 = f.label :qae_info_source, label: "How did the #{controller_name == "users" ? "applicant" : controller_name.singularize} hear about The Queen's Awards?"
+  h3.govuk-heading-m = f.label :qae_info_source, label: "How did the #{controller_name == "users" ? "applicant" : controller_name.singularize} hear about The Queen's Awards?"
   .row
     .col-md-4.col-sm-5
       = f.input :qae_info_source,
                 as: :select,
-                wrapper_html: { class: "form-group" },
+                wrapper_html: { class: "govuk-form-group" },
                 input_html: { class: "form-control" },
                 label_html: { class: "visuallyhidden" }
 
       span.clear
       #qae_info_source_other.visuallyhidden
         = f.input :qae_info_source_other,
-                  wrapper_html: { class: "form-group" },
+                  wrapper_html: { class: "govuk-form-group" },
                   input_html: { class: "form-control" },
                   label: "Please specify"

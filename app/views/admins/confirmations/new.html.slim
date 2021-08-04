@@ -1,25 +1,15 @@
 - provide(:page_wrapper_class, "page-devise")
 
-.article-related-positioning-container
-  header.page-header.group
-    div
-      h1
-        | Resend confirmation instructions
+h1.govuk-heading-xl
+  | Resend confirmation instructions
 
-  .article-container.group
-    article.group role="article"
-      .inner
-        = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-          /= f.error_notification
-          = f.full_error :confirmation_token
+= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+  /= f.error_notification
+  = f.full_error :confirmation_token
 
-          .form-inputs
-            .question
-              h2 Email
-              .question-body
-                = f.input :email, required: true, label: false, autofocus: true, input_html: {class: "large"}
+  = f.input :email, required: true, label: 'Email', autofocus: true, input_html: {class: "large"}
 
-          .form-actions
-            = f.button :submit, "Resend confirmation instructions", class: "button large"
+  .form-actions
+    = f.button :submit, "Resend confirmation instructions", class: "govuk-button button large"
 
-        = render "admins/shared/links"
+= render "admins/shared/links"

@@ -1,15 +1,15 @@
 - if user_can_edit(@form_answer, :date_trading)
-  .form-group
+  .govuk-form-group
     = simple_form_for [namespace_name, resource],
                       remote: true,
                       authenticity_token: true, html: { "data-type" => "html" } do |f|
       = hidden_field_tag :section, "date_trading"
 
-      .form-container
+      div
         label.form-label Date started trading
 
         .form-value
-          p
+          p.govuk-body
             - if resource.date_started_trading.present?
               = resource.date_started_trading
             - else
@@ -26,20 +26,20 @@
             input.string.optional.form-control id="date_started_trading_1i" type='text' name="form_answer[data_attributes][started_trading_year]" value="#{@form_answer.document["started_trading_year"]}"
           .clear
           .form-actions.text-right
-            = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-            = f.submit "Save", class: "btn btn-primary pull-right"
+            = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+            = f.submit "Save", class: "govuk-button btn-primary pull-right"
         .clear
 
-        = link_to "#", class: "form-edit-link pull-right"
+        = link_to "#", class: "govuk-link form-edit-link pull-right"
           span.glyphicon.glyphicon-pencil
           ' Edit
         .clear
 - else
-  .form-group
-    .form-container
+  .govuk-form-group
+    div
       label.form-label Date started trading
 
-      p
+      p.govuk-body
         - if resource.date_started_trading.present?
           = resource.date_started_trading
         - else

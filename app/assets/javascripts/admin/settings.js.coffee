@@ -79,9 +79,9 @@ class DeadlineForm
 
 jQuery ->
   if (settingsWrapper = ($ "#admin-settings-parent")).length
-    ($ ".deadline-form").addClass("hidden")
-    ($ ".notification-edit-form, .notification-form").addClass("hidden")
-    ($ ".email-example").addClass("hidden")
+    ($ ".deadline-form").addClass("govuk-!-display-none")
+    ($ ".notification-edit-form, .notification-form").addClass("govuk-!-display-none")
+    ($ ".email-example").addClass("govuk-!-display-none")
 
     ($ "form.edit_deadline").each ->
       new DeadlineForm($(@))
@@ -91,46 +91,46 @@ jQuery ->
 
       wrapper = ($ e.currentTarget).closest('.deadline')
 
-      ($ ".form-value", wrapper).addClass("hidden")
-      ($ ".deadline-form", wrapper).removeClass("hidden")
-      ($ e.currentTarget).addClass("hidden")
+      ($ ".form-value", wrapper).addClass("govuk-!-display-none")
+      ($ ".deadline-form", wrapper).removeClass("govuk-!-display-none")
+      ($ e.currentTarget).addClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".edit-notification", (e) ->
       e.preventDefault()
 
       wrapper = ($ e.currentTarget).closest('li')
 
-      ($ ".form-value", wrapper).addClass("hidden")
-      ($ ".notification-edit-form", wrapper).removeClass("hidden")
-      ($ ".actions", wrapper).addClass("hidden")
+      ($ ".form-value", wrapper).addClass("govuk-!-display-none")
+      ($ ".notification-edit-form", wrapper).removeClass("govuk-!-display-none")
+      ($ ".actions", wrapper).addClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".btn-add-schedule", (e) ->
       e.preventDefault()
       wrapper = ($ e.currentTarget).closest('.panel-section')
-      ($ ".notification-form", wrapper).toggleClass("hidden")
+      ($ ".notification-form", wrapper).toggleClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".link-email-example", (e) ->
       e.preventDefault()
       wrapper = ($ e.currentTarget).closest('.panel-section')
-      ($ ".email-example", wrapper).toggleClass("hidden")
+      ($ ".email-example", wrapper).toggleClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".btn-cancel", (e) ->
       e.preventDefault()
 
-      form_well = ($ e.currentTarget).closest('.well')
+      form_well = ($ e.currentTarget).closest('.govuk-inset-text')
 
       if form_well.hasClass("deadline-form")
         wrapper = ($ e.currentTarget).closest('.deadline')
-        ($ ".form-value", wrapper).removeClass("hidden")
-        ($ ".deadline-form", wrapper).addClass("hidden")
-        ($ ".edit-deadline", wrapper).removeClass("hidden")
+        ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
+        ($ ".deadline-form", wrapper).addClass("govuk-!-display-none")
+        ($ ".edit-deadline", wrapper).removeClass("govuk-!-display-none")
 
       else if form_well.hasClass("notification-edit-form")
         wrapper = ($ e.currentTarget).closest('li')
-        ($ ".form-value", wrapper).removeClass("hidden")
-        ($ ".notification-edit-form", wrapper).addClass("hidden")
-        ($ ".actions", wrapper).removeClass("hidden")
+        ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
+        ($ ".notification-edit-form", wrapper).addClass("govuk-!-display-none")
+        ($ ".actions", wrapper).removeClass("govuk-!-display-none")
 
       else if form_well.hasClass("notification-new-form")
         wrapper = ($ e.currentTarget).closest('.panel-section')
-        ($ ".notification-form", wrapper).addClass("hidden")
+        ($ ".notification-form", wrapper).addClass("govuk-!-display-none")

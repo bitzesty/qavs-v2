@@ -1,15 +1,15 @@
 - press_summary.send(:set_press_contact_details_data_from_form) if press_summary.new_record?
 
 .form-value.no-js-update
-  p data-for="press_summary_title"
+  p.govuk-body data-for="press_summary_title"
     = press_summary.title
-  p data-for="press_summary_name"
+  p.govuk-body data-for="press_summary_name"
     = press_summary.name
-  p data-for="press_summary_last_name"
+  p.govuk-body data-for="press_summary_last_name"
     = press_summary.last_name
-  p data-for="press_summary_phone_number"
+  p.govuk-body data-for="press_summary_phone_number"
     = press_summary.phone_number
-  p data-for="press_summary_email"
+  p.govuk-body data-for="press_summary_email"
     = press_summary.email
 
 - if policy(press_summary).can_update_contact_details?
