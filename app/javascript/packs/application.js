@@ -64,7 +64,7 @@ if ($('.bulk-assignment-container').length > 0) {
 
     if (show_button) {
       $(".bulk-assignment-container").addClass("show-container")
-      $(".bulk-assignment-help").addClass("hide")
+      $(".bulk-assignment-help").addClass("govuk-!-display-none")
       var selected_count = $('input[type=checkbox].form-answer-check:checked').length
       if (selected_count > 1) {
         $('.nominations-checked-total').text(selected_count +' groups selected')
@@ -73,7 +73,7 @@ if ($('.bulk-assignment-container').length > 0) {
       }
     } else {
       $(".bulk-assignment-container").removeClass("show-container")
-      $(".bulk-assignment-help").removeClass("hide")
+      $(".bulk-assignment-help").removeClass("govuk-!-display-none")
     }
   })
 }
@@ -84,8 +84,6 @@ if (dropdowns.length > 0) {
     var dropdown = $(this)[0];
     var multiselect = new CheckboxMultiselect(dropdown, {
       singleSelectionShowDirectly: true,
-      // includeBlank: true,
-      // placeholder: 'Select all',
       search: {
         enabled: false
       }

@@ -3,7 +3,7 @@
     .mm-modal__overlay tabindex="-1" data-micromodal-close=''
       .mm-modal__container role="dialog" aria-modal="true" aria-labelledby="modal-bulk-assign-lieutenants-title"
         header.mm-modal__header
-          h3.govuk-heading-l.mm-modal__title id="modal-bulk-assign-lieutenants-title"
+          h3.govuk-heading-m.mm-modal__title id="modal-bulk-assign-lieutenants-title"
             | Bulk assign groups to Lord Lieutenancy office
           button.govuk-button.mm-modal__close aria-label="Close modal" data-micromodal-close=''
         .govuk-body.mm-modal__content id="modal-bulk-assign-lieutenants-content"
@@ -17,7 +17,7 @@
               = f.select :ceremonial_county_id,
                         CeremonialCounty.all.pluck(:name, :id),
                         { include_blank: true },
-                        class: "govuk-select govuk-grid-column-one-half"
+                        class: "govuk-select"
 
             = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 

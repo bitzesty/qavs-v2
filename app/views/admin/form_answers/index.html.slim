@@ -7,8 +7,8 @@ h1.govuk-heading-xl
       = f.input :year, input_html: { value: params[:year] || @award_year.year }
     .govuk-grid-column-one-third
       .form-group.search-input
-        = f.label 'Search', class: 'govuk-visually-hidden'
-        = f.input :query, label: 'Search', input_html: { type: "search" }
+        = f.label 'Search', class: 'govuk-label'
+        = f.input :query, label: false, input_html: { type: "search" }
   .govuk-grid-row
     = render "layouts/vertical_admin_award_year"
     = render "shared/form_answers/top_statuses_filters", f: f,
@@ -20,7 +20,7 @@ h1.govuk-heading-xl
                                                             activity_options: FormAnswerStatus::AdminFilter.collection('activity'),
                                                             assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county'),
                                                             nomination_county_options: FormAnswerStatus::AdminFilter.collection('nomination county')
-  = f.submit 'Apply filters', class: 'govuk-button govuk-button--secondary', id: 'apply-nomination-filters'
+  = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
   = render("admin/form_answers/bulk_assignment_button_top")
