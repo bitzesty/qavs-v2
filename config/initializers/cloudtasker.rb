@@ -16,7 +16,7 @@ Cloudtasker.configure do |config|
   #
   # This not required in development using the Cloudtasker local server.
   #
-  config.gcp_location_id = 'eu-west2' # defaults to 'us-east1'
+  config.gcp_location_id = 'europe-west2' # defaults to 'us-east1'
   config.gcp_project_id = 'new-qavs'
 
   #
@@ -47,7 +47,7 @@ Cloudtasker.configure do |config|
   # > E.g. in development, using `config.mode = :production` and ngrok
   # config.processor_host = 'https://111111.ngrok.io'
   #
-  config.processor_host = Rails.env.production? ? QAE.env : 'http://localhost:3000'
+  config.processor_host = Rails.env.production? ? ENV["GCP_HOST"] : 'http://localhost:3000'
 
   #
   # Specify the mode of operation:
@@ -84,9 +84,9 @@ Cloudtasker.configure do |config|
   #
   # Default: redis-rb connects to redis://127.0.0.1:6379/0
   #
-  config.redis = { url: ENV['REDIS_URL'] }
-
   if Rails.env.production? && ENV['REDIS_URL']
+    config.redis = { url: ENV['REDIS_URL'] }
+
     default_schedule = {
       "email_notification_service" => {
         "cron" => "0 * * * *",
@@ -130,7 +130,7 @@ Cloudtasker.configure do |config|
       }
     }
 
-    Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
+  #  Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
 
   end
 

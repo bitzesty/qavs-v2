@@ -21,11 +21,11 @@ describe "Form answer search", "
       it "searchs for form answer with first name" do
         within ".search-input" do
           fill_in "search_query", with: first_name
-          click_button :submit
         end
+        click_button "Apply filters"
 
-        within ".applications-table" do
-          expect(page).to have_selector("td.td-title", count: 1)
+        within ".applications-table tbody" do
+          expect(page).to have_selector("tr", count: 1)
         end
       end
     end

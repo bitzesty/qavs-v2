@@ -5,6 +5,7 @@ class EmailNotification < ApplicationRecord
   NOTIFICATION_KINDS = [
                          :award_year_open_notifier,
                          :reminder_to_submit,
+                         :group_leader_notification,
                          :local_assessment_notification,
                          :local_assessment_reminder,
                          :winners_notification,

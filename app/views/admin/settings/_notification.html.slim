@@ -17,10 +17,10 @@ li id="notification-#{notification.id}"
         = button_to "Delete", admin_settings_email_notification_path(notification), { onclick: "return confirm('Are you sure?')", method: :delete, remote: true }
     .notification-edit-form.well
       = simple_form_for notification, url: admin_settings_email_notification_path(notification, year: params[:year]), remote: true, authenticity_token: true do |f|
-      = f.input :trigger_at,
-                as: :separated_date_time,
-                input_html: { id: '' },
-                label: "Edit schedule"
+        = f.input :trigger_at,
+                  as: :separated_date_time,
+                  input_html: { id: '' },
+                  label: "Edit schedule"
         .control-action
           = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
           = f.submit "Save", class: "govuk-button"

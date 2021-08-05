@@ -83,8 +83,8 @@ gem 'prawn-table'
 gem 'nokogiri'
 
 # Uploads
-gem 'carrierwave', '~> 1.3.2'
-gem 'carrierwave-google-storage', github: "metaware/carrierwave-google-storage", ref: "d8092cb70096ae599ffb99ab99ee13c9fc4deafd"
+gem 'carrierwave', '~> 2.2.2'
+gem 'carrierwave-google-storage', github: "rondy/carrierwave-google-storage", ref: "8f0ea2060f393a00e238e466c8009b585d24e148"
 gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
@@ -95,6 +95,7 @@ gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04
 gem 'rack-cors', '~> 1.0'
 
 # Redis
+gem 'hiredis'
 gem 'redis-rails'
 gem 'redis-store', "~> 1.4"
 gem 'connection_pool'
@@ -165,6 +166,7 @@ gem 'dotenv-rails'
 group :development, :test do
   # Enviroment variables
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'rspec-github', require: false
   gem "pry-byebug"
   gem 'rails-controller-testing'
   gem "selenium-webdriver"

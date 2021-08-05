@@ -1,12 +1,12 @@
 .well
   .sidebar-section
     - if policy(resource).review?
-      = link_to [:review, namespace_name, @form_answer], class: "btn btn-default btn-block", target: "_blank"
+      = link_to [:review, namespace_name.to_sym, @form_answer], class: "btn btn-default btn-block", target: "_blank"
         span.icon-view
         span.btn-title
           ' View nomination
     - if policy(resource).edit?
-      = link_to [:edit, namespace_name, @form_answer], class: "btn btn-default btn-block", target: "_blank"
+      = link_to [:edit, namespace_name.to_sym, @form_answer], class: "btn btn-default btn-block", target: "_blank"
         span.glyphicon.glyphicon-pencil
         span.btn-title
           ' Edit nomination

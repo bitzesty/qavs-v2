@@ -23,6 +23,8 @@ import $ from 'jquery';
 import MicroModal from 'micromodal';
 
 import Accordion from '../components/accordion';
+import AccessibleAutocomplete from '../vendor/accessible-autocomplete.min';
+import CheckboxMultiselect from '../vendor/checkbox-multiselect';
 
 const accordions = document.querySelectorAll('[data-module="govuk-accordion"]');
 
@@ -33,7 +35,17 @@ Array.prototype.forEach.call(accordions, function(module) {
 
 // frontend.initAll()
 
-MicroModal.init();
+$('.bulk-assign-lieutenants-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  MicroModal.show('modal-bulk-assign-lieutenants');
+})
+
+$(document).on('click', 'button[data-micromodal-close]', function(e) {
+  e.preventDefault();
+  e.stopPropagation()
+})
 
 if ($('.bulk-assignment-container').length > 0) {
   $("#check_all").on("change", function() {
@@ -62,5 +74,20 @@ if ($('.bulk-assignment-container').length > 0) {
     } else {
       $(".bulk-assignment-container").removeClass("show-container")
     }
+  })
+}
+
+var dropdowns = $('select[multiple]');
+if (dropdowns.length > 0) {
+  dropdowns.each(function() {
+    var dropdown = $(this)[0];
+    var multiselect = new CheckboxMultiselect(dropdown, {
+      singleSelectionShowDirectly: true,
+      search: {
+        enabled: true
+      }
+    })
+
+    multiselect.enable()
   })
 }

@@ -75,13 +75,29 @@ class Notifiers::EmailNotificationService
     )
   end
 
+  def group_leader_notification(award_year)
+    submitted_nominations = award_year.form_answers.submitted
+    group_leaders = {}
+
+    submitted_nominations.each do |nomination|
+      name = nomination.document["nominee_leader_name"]
+      email = nomination.document["nominee_leader_email"]
+      # making sure we only send 1 email per email
+      group_leaders[email] = name
+    end
+
+    group_leaders.each do |email, name|
+      AccountMailers::GroupLeaderMailer.notify(email, name).deliver_later!
+    end
+  end
+
   def local_assessment_notification(award_year)
     ceremonial_counties = award_year.form_answers.submitted.pluck(:ceremonial_county_id).uniq
 
     lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties).pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id)
+      LieutenantMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
     end
   end
 
@@ -89,7 +105,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentReminderMailer.notify(lieutenant_id)
+      LieutenantMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
     end
   end
 

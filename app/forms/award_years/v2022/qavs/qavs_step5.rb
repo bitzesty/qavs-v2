@@ -308,11 +308,6 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        header :local_assessment_lord_lieutenant_citation_header, "Lord Lieutenant Citation" do
-          ref "E 8"
-
-        end
-
         textarea :nomination_local_assessment_form_citation_full, "Lord Lieutenant Citation" do
           sub_ref "E 8"
           required
@@ -343,7 +338,7 @@ class AwardYears::V2022::QAEForms
 
         options :local_assessment_verdict, "Local assessment outcome" do
           sub_ref "E 9"
-          classes "sub-question"
+          classes "govuk-notification-banner govuk-notification-banner__content"
           option "recommended", "Recommended"
           option "not_recommended", "Not recommended"
           required
