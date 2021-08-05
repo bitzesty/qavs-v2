@@ -6,18 +6,16 @@ table.govuk-table.applications-table
           = check_box_tag :check_all
       th.sortable.govuk-table__header scope="col" width="450"
         = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
-      th.sortable.govuk-table__header scope="col" width="140"
-        = sort_link f, "Reference", @search, :urn, disabled: @search.query?
       th.govuk-table__header scope="col" width="250"
         | Status
       th.govuk-table__header scope="col" width="100"
         | Postcode
       th.govuk-table__header scope="col" width="250"
-        | Lord Lieutenancy office
+        | Lord Lieutenancy as per form
+      th.govuk-table__header scope="col" width="250"
+        | Lord Lieutenancy assigned
       th.govuk-table__header scope="col" width="200"
         | Type of group
-      th.sortable.govuk-table__header scope="col" width="110"
-        = sort_link f, "Flag", @search, :flag, disabled: @search.query?
       th.sortable.govuk-table__header scope="col" width="130"
         = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
       th.govuk-table__header scope="col" View

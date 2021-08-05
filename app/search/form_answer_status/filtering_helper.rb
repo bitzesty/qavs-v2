@@ -9,34 +9,36 @@ module FormAnswerStatus::FilteringHelper
     end.compact
   end
 
-  def collection
+  def collection(filter)
+    case filter
+    when 'status'
+      collection_mapping(options)
+    when 'sub'
+      collection_mapping(sub_options)
+    when 'activity'
+      collection_mapping(activity_options)
+    when 'nomination county'
+      collection_mapping(county_options('nomination'))
+    when 'assigned county'
+      collection_mapping(county_options('assigned'))
+    end
+  end
+
+  def collection_mapping(options)
     options.map do |k, v|
       [v[:label], k]
     end
   end
 
-  def sub_collection
-    sub_options.map do |k, v|
-      [v[:label], k]
+  def values(options)
+    case options
+    when 'activity'
+      activity_options.keys.map(&:to_s)
+    when 'assigned county'
+      county_options('assigned').keys.map(&:to_s)
+    when 'nominated county'
+      county_options('nomination').keys.map(&:to_s)
     end
-  end
-
-  def activity_collection
-    activity_options.map do |k,v|
-      [v[:label], k]
-    end
-  end
-
-  def activity_values
-    activity_options.keys.map(&:to_s)
-  end
-
-  def assigned_county_values
-    assigned_county_options.keys.map(&:to_s)
-  end
-
-  def nomination_county_values
-    nomination_county_options.keys.map(&:to_s)
   end
 
   def supported_filter_attrs
@@ -44,6 +46,6 @@ module FormAnswerStatus::FilteringHelper
   end
 
   def all
-    collection.map { |s| s.last.to_s } + sub_collection.map { |s| s.last.to_s } + activity_collection.map { |s| s.last.to_s }
+    collection('status').map { |s| s.last.to_s } + collection('sub').map { |s| s.last.to_s }
   end
 end

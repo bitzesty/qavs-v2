@@ -1,93 +1,18 @@
-.row 
-  .col-lg-3.col-md-5.col-sm-4.applications-filter.nominated-lieutenancy-filter
-    = f.simple_fields_for [:filters, @search.filters] do |m|
-      = m.input :nominated_ceremonial_county,
-                collection: nomination_county_options,
-                label: false,
-                input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
-    label.applications-filter__label
-      ' Lord Lieutenancy as per form
-    .dropdown.if-no-js-hide
-      a.dropdown-toggle.btn.btn-block.btn-default href="#" role="button" aria-expanded="false"
-        span.text-filter
-          ' Lord Lieutenancy as per form
-        span.caret-container
-          span.caret
-      ul.dropdown-menu role="menu"
-        li.checkbox role="presentation"
-          label data-value='select_all'
-            input type="checkbox"
-            span.label-contents
-              em Select all
-        - nomination_county_options.each do |k, option|
-          li.checkbox role="presentation"
-            label data-value=k
-              input type="checkbox"
-              span.label-contents
-                = option[:label]
-        li.divider
-        li.apply
-          button.btn.btn-block.btn-default type="submit"
-            ' Apply
+= f.simple_fields_for [:filters, @search.filters] do |g|
+  .govuk-grid-column-one-quarter.applications-filter.nominated-lieutenancy-filter
+    = g.input :nominated_ceremonial_county,
+              collection: nomination_county_options,
+              label: 'Lord Lieutenancy as per form',
+              input_html: { multiple: true, class: 'js-admin-filter-option'}
 
-  .col-lg-3.col-md-5.col-sm-4.applications-filter.assigned-lieutenancy-filter
-    = f.simple_fields_for [:filters, @search.filters] do |m|
-      = m.input :assigned_ceremonial_county,
-                collection: assigned_county_options,
-                label: false,
-                input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
-    label.applications-filter__label
-      ' Lord Lieutenancy assigned
-    .dropdown.if-no-js-hide
-      a.dropdown-toggle.btn.btn-block.btn-default href="#" role="button" aria-expanded="false"
-        span.text-filter
-          ' Lord Lieutenancy assigned
-        span.caret-container
-          span.caret
-      ul.dropdown-menu role="menu"
-        li.checkbox role="presentation"
-          label data-value='select_all'
-            input type="checkbox"
-            span.label-contents
-              em Select all
-        - assigned_county_options.each do |k, option|
-          li.checkbox role="presentation"
-            label data-value=k
-              input type="checkbox"
-              span.label-contents
-                = option[:label]
-        li.divider
-        li.apply
-          button.btn.btn-block.btn-default type="submit"
-            ' Apply
+  .govuk-grid-column-one-quarter.applications-filter.assigned-lieutenancy-filter
+    = g.input :assigned_ceremonial_county,
+              collection: assigned_county_options,
+              label: 'Lord Lieutenancy assigned',
+              input_html: { multiple: true, class: 'js-admin-filter-option'}
 
-  .col-lg-3.col-md-5.col-sm-4.applications-filter.activity-filter
-    = f.simple_fields_for [:filters, @search.filters] do |m|
-      = m.input :nominee_activity,
-                collection: activity_options,
-                label: false,
-                input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
-    label.applications-filter__label
-      ' Type of group
-    .dropdown.if-no-js-hide
-      a.dropdown-toggle.btn.btn-block.btn-default href="#" role="button" aria-expanded="false"
-        span.text-filter
-          ' Type of group
-        span.caret-container
-          span.caret
-      ul.dropdown-menu role="menu"
-        li.checkbox role="presentation"
-          label data-value='select_all'
-            input type="checkbox"
-            span.label-contents
-              em Select all
-        - activity_options.each do |k, option|
-          li.checkbox role="presentation"
-            label data-value=k
-              input type="checkbox"
-              span.label-contents
-                = option[:label]
-        li.divider
-        li.apply
-          button.btn.btn-block.btn-default type="submit"
-            ' Apply
+  .govuk-grid-column-one-quarter.applications-filter.activity-filter
+    = g.input :nominee_activity,
+              collection: activity_options,
+              label: 'Type of group',
+              input_html: { multiple: true, class: 'js-admin-filter-option'}

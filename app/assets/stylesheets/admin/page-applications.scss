@@ -586,19 +586,27 @@
 }
 
 .bulk-assignment-container {
-  position: relative;
-  left: -9999px;
-  margin-top: 10px;
-  display: inline;
+  display: none;
 
   &.show-container {
-    left: 0;
+    display: flex;
+    align-items: center;
   }
 
   .show-bulk-assign & {
     .js & {
       display: none;
     }
+  }
+
+  .bulk-assign-lieutenants-link {
+    margin-bottom: 20px;
+  }
+}
+
+.bulk-assignment-help {
+  &.hide {
+    display: none;
   }
 }
 

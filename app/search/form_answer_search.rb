@@ -6,9 +6,9 @@ class FormAnswerSearch < Search
       sort: 'company_or_nominee_name',
       search_filter: {
         status: FormAnswerStatus::AdminFilter.all,
-        nominee_activity: FormAnswerStatus::AdminFilter.activity_values,
-        assigned_ceremonial_county: FormAnswerStatus::AdminFilter.assigned_county_values,
-        nominated_ceremonial_county: FormAnswerStatus::AdminFilter.nomination_county_values
+        nominee_activity: FormAnswerStatus::AdminFilter.values('activity'),
+        assigned_ceremonial_county: FormAnswerStatus::AdminFilter.values('assigned county'),
+        nominated_ceremonial_county: FormAnswerStatus::AdminFilter.values('nominated county')
       }
     }
   end

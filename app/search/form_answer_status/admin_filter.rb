@@ -150,19 +150,15 @@ class FormAnswerStatus::AdminFilter
     } ]
   end
 
-  def self.assigned_county_options
-    options = Hash[CeremonialCounty.all.collect { |county|
-      [county.id, { label: county.name }]
-    } ]
-    options[:not_assigned] = { label: "Not assigned" }
-    options
-  end
-
-  def self.nomination_county_options
-    options = Hash[CeremonialCounty.all.collect { |county|
-      [county.id, { label: county.name }]
-    } ]
-    options[:not_stated] = { label: "Not stated" }
+  def self.county_options(type)
+    if type == 'assigned'
+      options = Hash[not_assigned: { label: "Not assigned" }]
+    elsif type == 'nomination'
+      options = Hash[not_stated: { label: "Not stated" }]
+    end
+    CeremonialCounty.all.collect { |county|
+      options[county.id] = { label: county.name }
+    }
     options
   end
 end
