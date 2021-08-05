@@ -1,6 +1,7 @@
 class Lieutenant < ApplicationRecord
   extend Enumerize
   include PgSearch::Model
+  include SoftDelete
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -31,9 +32,6 @@ class Lieutenant < ApplicationRecord
                     }
                   }
 
-  def soft_delete!
-    update_column(:deleted, true)
-  end
 
   def assigned_nominations
     nominations_scope

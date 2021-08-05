@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     confirmations: "assessors/confirmations"
   }
 
+  devise_for :group_leaders, controllers: {
+    confirmations: "group_leaders/confirmations"
+  }
+
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
   get "/how_to_apply"                                   => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
@@ -190,6 +194,7 @@ Rails.application.routes.draw do
     end
     resources :assessors
     resources :lieutenants
+    resources :group_leaders, except: [:new, :create, :show]
 
     resources :admins do
       collection do
@@ -272,5 +277,9 @@ Rails.application.routes.draw do
 
       resources :form_answer_state_transitions, only: [:create]
     end
+  end
+
+  namespace :group_leader do
+    root to: "dashboard#show"
   end
 end

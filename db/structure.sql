@@ -736,6 +736,55 @@ ALTER SEQUENCE public.form_answers_id_seq OWNED BY public.form_answers.id;
 
 
 --
+-- Name: group_leaders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.group_leaders (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    deleted boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: group_leaders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.group_leaders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: group_leaders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.group_leaders_id_seq OWNED BY public.group_leaders.id;
+
+
+--
 -- Name: lieutenants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2589,6 +2638,13 @@ ALTER TABLE ONLY public.form_answers ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: group_leaders id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders ALTER COLUMN id SET DEFAULT nextval('public.group_leaders_id_seq'::regclass);
+
+
+--
 -- Name: lieutenants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2822,6 +2878,14 @@ ALTER TABLE ONLY public.form_answer_transitions
 
 ALTER TABLE ONLY public.form_answers
     ADD CONSTRAINT form_answers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: group_leaders group_leaders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders
+    ADD CONSTRAINT group_leaders_pkey PRIMARY KEY (id);
 
 
 --
@@ -3143,6 +3207,34 @@ CREATE INDEX index_form_answers_on_award_year_id_and_ceremonial_county_id ON pub
 --
 
 CREATE INDEX index_form_answers_on_user_id ON public.form_answers USING btree (user_id);
+
+
+--
+-- Name: index_group_leaders_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_group_leaders_on_confirmation_token ON public.group_leaders USING btree (confirmation_token);
+
+
+--
+-- Name: index_group_leaders_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_group_leaders_on_email ON public.group_leaders USING btree (email);
+
+
+--
+-- Name: index_group_leaders_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_group_leaders_on_reset_password_token ON public.group_leaders USING btree (reset_password_token);
+
+
+--
+-- Name: index_group_leaders_on_unlock_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_group_leaders_on_unlock_token ON public.group_leaders USING btree (unlock_token);
 
 
 --
@@ -3616,6 +3708,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210707081708'),
 ('20210707115136'),
 ('20210707122554'),
-('20210803084421');
+('20210803084421'),
+('20210803120605');
 
 

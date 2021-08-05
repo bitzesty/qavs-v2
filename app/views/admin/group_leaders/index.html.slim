@@ -1,0 +1,28 @@
+.dashboard
+  h1.govuk-heading-xl
+    | Users
+  = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
+    = render 'admin/users/navigation' do
+      .govuk-tabs__panel
+        .govuk-grid-row
+          .govuk-grid-column-one-third
+            .form-group.search-input
+              = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
+              = submit_tag :submit, class: 'search-submit'
+
+          .govuk-grid-column-two-thirds.text-right
+        .clear
+
+        - if @search.query?
+          .well.search-text
+            p.govuk-body
+              = "Search results for '#{@search.query}'"
+              small
+                = link_to "(Clear search)", [:admin, controller_name], class: "btn btn-link"
+
+        = render 'list', resources: @resources, f: f
+
+        .row
+          .col-xs-12.text-right
+            = paginate @resources
+            .clear

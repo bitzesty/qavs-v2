@@ -1,6 +1,7 @@
 class Admin < ApplicationRecord
   include PgSearch::Model
   include AutosaveTokenGeneration
+  include SoftDelete
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -46,10 +47,6 @@ class Admin < ApplicationRecord
 
   def active_for_authentication?
     super && !deleted?
-  end
-
-  def soft_delete!
-    update_column(:deleted, true)
   end
 
   def timeout_in

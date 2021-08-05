@@ -99,6 +99,7 @@ en:
         users: "Nominators"
         lieutenants: "Lord Lieutenancy office users"
         assessors: "National assessors"
+        group_leaders: "Group leaders"
         admins: "Admins"
       new_button:
         users: "Add nominator"

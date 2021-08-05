@@ -1,5 +1,5 @@
 class LieutenantDashboardPolicy < ApplicationPolicy
   def show?
-    true
+    lieutenant?
   end
 end

@@ -1,0 +1,52 @@
+table.govuk-table
+  thead.govuk-table__head
+    tr.govuk-tabke__row
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, 'Name', @search, :full_name
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, 'Email', @search, :email
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, 'Signed in on', @search, :last_sign_in_at
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, "Confirmed on", @search, :confirmed_at
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, "Locked on", @search, :locked_at
+      th
+  tbody.govuk-table__body
+    - if resources.none?
+      tr.govuk-table__row
+        td.text-center colspan=100
+          br
+          p.govuk-body.p-empty No group leaders found.
+          br
+    - else
+      - GroupLeaderDecorator.decorate_collection(resources).each do |group_leader|
+        tr.govuk-table__row
+          th.govuk-table__header scope="row"
+            = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: 'link-edit-user'
+          td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis"}
+          td.govuk-table__cell
+            small.text-muted
+              - if group_leader.last_sign_in_at.present?
+                span.visible-lg
+                  = group_leader.formatted_last_sign_in_at_long
+                span.hidden-lg
+                  = group_leader.formatted_last_sign_in_at_short
+              - else
+                | Never signed in
+          td.govuk-table__cell
+            - if group_leader.confirmed_at.present?
+              small.text-muted
+                = l group_leader.confirmed_at, format: :date_at_time
+            - else
+              small.text-danger
+                ' Not confirmed
+          td.govuk-table__cell
+            - if group_leader.locked_at.present?
+              small.text-muted
+                = l group_leader.locked_at, format: :date_at_time
+            - else
+              small.text-muted
+                ' Not locked
+          td.govuk-table__cell
+            = link_to "Edit user", edit_admin_group_leader_path(group_leader)

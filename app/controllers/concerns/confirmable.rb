@@ -11,6 +11,8 @@ module Confirmable
         edit_user_password_path(reset_password_token: token)
       when Lieutenant
         edit_lieutenant_password_path(reset_password_token: token)
+      when GroupLeader
+        edit_group_leader_password_path(reset_password_token: token)
       when Assessor
         edit_assessor_password_path(reset_password_token: token)
       when Admin
