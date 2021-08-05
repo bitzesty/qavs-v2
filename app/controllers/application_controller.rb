@@ -151,6 +151,7 @@ class ApplicationController < ActionController::Base
   # to protect sensitive data
   #
   def disable_browser_caching!
+    return true if request.path.include?("/assets/")
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
