@@ -43,8 +43,6 @@ class Admin::GroupLeadersController < Admin::UsersController
              :password,
              :password_confirmation,
              :first_name,
-             :last_name,
-             :role,
-             :ceremonial_county_id)
+             :last_name)
   end
 end
