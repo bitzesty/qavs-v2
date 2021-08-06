@@ -6,7 +6,7 @@ module FormAnswerFilteringTestHelper
   def click_status_option(val)
     button = find('#apply-nomination-filters')
 
-    ['status', 'sub-status', 'activity'].each do |field|
+    ['status', 'sub-status', 'nominated-lieutenancy', 'assigned-lieutenancy', 'activity'].each do |field|
       within ".#{field}-filter" do
         filter_dropdown = find(".dropdown-checkboxes__selection")
         filter_dropdown.click
@@ -51,6 +51,13 @@ module FormAnswerFilteringTestHelper
   def assign_activity(form_answers, activity)
     Array(form_answers).each do |fa|
       fa.document["nominee_activity"] = activity
+      fa.save!(validate: false)
+    end
+  end
+
+  def assign_ceremonial_county(form_answers, county)
+    Array(form_answers).each do |fa|
+      fa.ceremonial_county_id = county.id
       fa.save!(validate: false)
     end
   end

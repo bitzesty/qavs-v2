@@ -2,6 +2,7 @@
   .govuk-grid-column-one-third.applications-filter.status-filter
     = g.input :status,
               collection: options,
+              include_blank: true,
               label: 'Status',
               input_html: { multiple: true, class: 'js-admin-filter-option'}
 
@@ -11,8 +12,3 @@
               label: 'Post Submission Status',
               input_html: { multiple: true, class: 'js-admin-filter-option'}
 
-  .govuk-grid-column-one-third.applications-filter.activity-filter
-    = g.input :nominee_activity,
-              collection: activity_options,
-              label: 'Type of group',
-              input_html: { multiple: true, class: 'js-admin-filter-option'}

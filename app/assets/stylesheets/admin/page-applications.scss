@@ -9,7 +9,6 @@
 
   .applications-filter__label {
     display: block;
-    text-transform: uppercase;
     padding-right: 10px;
     padding-top: 7px;
 
@@ -587,18 +586,21 @@
 }
 
 .bulk-assignment-container {
-  position: relative;
-  left: -9999px;
-  margin-top: 10px;
+  display: none;
 
   &.show-container {
-    left: 0;
+    display: flex;
+    align-items: center;
   }
 
   .show-bulk-assign & {
     .js & {
       display: none;
     }
+  }
+
+  .bulk-assign-lieutenants-link {
+    margin-bottom: 20px;
   }
 }
 

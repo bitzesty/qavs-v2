@@ -27,7 +27,7 @@ class Admin::FormAnswersController < Admin::BaseController
   end
 
   def index
-    params[:search] ||= FormAnswerSearch::DEFAULT_SEARCH
+    params[:search] ||= FormAnswerSearch.default_search
     params[:search].permit!
     authorize :form_answer, :index?
 
