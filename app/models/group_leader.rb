@@ -24,7 +24,7 @@ class GroupLeader < ApplicationRecord
                   }
 
   has_many :form_answers
-
+  
   scope :by_email, -> { order(:email) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 

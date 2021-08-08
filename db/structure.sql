@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -353,6 +355,40 @@ CREATE SEQUENCE public.ceremonial_counties_id_seq
 --
 
 ALTER SEQUENCE public.ceremonial_counties_id_seq OWNED BY public.ceremonial_counties.id;
+
+
+--
+-- Name: citations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.citations (
+    id bigint NOT NULL,
+    group_name character varying,
+    body text,
+    completed_at timestamp without time zone,
+    group_leader_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: citations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.citations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: citations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.citations_id_seq OWNED BY public.citations.id;
 
 
 --
@@ -847,22 +883,22 @@ CREATE TABLE public.palace_attendees (
     title character varying,
     first_name character varying,
     last_name character varying,
-    job_name character varying,
     post_nominals character varying,
     address_1 character varying,
     address_2 character varying,
     address_3 character varying,
     address_4 character varying,
     postcode character varying,
-    phone_number character varying,
-    additional_info text,
     palace_invite_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     relationship character varying,
     disabled_access boolean,
     preferred_date character varying,
-    alternative_date character varying
+    alternative_date character varying,
+    job_name character varying,
+    phone_number character varying,
+    additional_info character varying
 );
 
 
@@ -2568,6 +2604,13 @@ ALTER TABLE ONLY public.ceremonial_counties ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: citations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.citations ALTER COLUMN id SET DEFAULT nextval('public.citations_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2798,6 +2841,14 @@ ALTER TABLE ONLY public.award_years
 
 ALTER TABLE ONLY public.ceremonial_counties
     ADD CONSTRAINT ceremonial_counties_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: citations citations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.citations
+    ADD CONSTRAINT citations_pkey PRIMARY KEY (id);
 
 
 --
@@ -3088,6 +3139,13 @@ CREATE UNIQUE INDEX index_assessors_on_unlock_token ON public.assessors USING bt
 --
 
 CREATE UNIQUE INDEX index_award_years_on_year ON public.award_years USING btree (year);
+
+
+--
+-- Name: index_citations_on_group_leader_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_citations_on_group_leader_id ON public.citations USING btree (group_leader_id);
 
 
 --
@@ -3478,6 +3536,14 @@ ALTER TABLE ONLY public.assessor_assignments
 
 
 --
+-- Name: citations fk_rails_bf3e41ded4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.citations
+    ADD CONSTRAINT fk_rails_bf3e41ded4 FOREIGN KEY (group_leader_id) REFERENCES public.group_leaders(id);
+
+
+--
 -- Name: support_letters fk_rails_fae9e85e5f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3708,7 +3774,15 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210707081708'),
 ('20210707115136'),
 ('20210707122554'),
+('20210802223731'),
+('20210802225239'),
 ('20210803084421'),
-('20210803120605');
+('20210803120605'),
+('20210805191655'),
+('20210806201610'),
+('20210808170204'),
+('20210808174640'),
+('20210808191028'),
+('20210808194051');
 
 
