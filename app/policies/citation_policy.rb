@@ -1,5 +1,5 @@
-class GroupLeaderPolicy < ApplicationPolicy
-  def update
+class CitationPolicy < ApplicationPolicy
+  def update?
     group_leader?
   end
 end

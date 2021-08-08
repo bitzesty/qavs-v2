@@ -1,7 +1,12 @@
-class GroupLeader::CitationsController < ApplicationController
+class GroupLeader::CitationsController < GroupLeader::BaseController
   before_action :load_citation
 
+  def edit
+    authorize :citation, :edit?
+  end
+
   def update
+    authorize @citation, :update?
     @citation.completed_at = Time.now
     if @citation.update citation_params
       redirect_to group_leader_root_path,
