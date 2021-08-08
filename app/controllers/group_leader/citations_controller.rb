@@ -4,7 +4,8 @@ class GroupLeader::CitationsController < ApplicationController
   def update
     @citation.completed_at = Time.now
     if @citation.update citation_params
-      redirect_to group_leader_root_path
+      redirect_to group_leader_root_path,
+      notice: "Citation successfully updated!"
     else
       render :edit
     end
