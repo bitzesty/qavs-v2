@@ -281,5 +281,7 @@ Rails.application.routes.draw do
 
   namespace :group_leader do
     root to: "dashboard#show"
+    
+    resources :citations, only: [:edit, :update]
   end
 end
