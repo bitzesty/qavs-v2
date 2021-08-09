@@ -48,13 +48,13 @@ en:
         buck_1: 15th May - Buckingham Palace
         buck_2: 31st May - Buckingham Palace
         buck_3: 5th June - Buckingham Palace
-        holy: 4th July - Palace of Holyroodhouse (only for those residing in Scotland)
+        holy: 4th July - Palace of Holyroodhouse
       alternative_date:
         any: Any date at Buckingham Palace
         buck_1: 15th May - Buckingham Palace
         buck_2: 31st May - Buckingham Palace
         buck_3: 5th June - Buckingham Palace
-        holy: 4th July - Palace of Holyroodhouse (only for those residing in Scotland)
+        holy: 4th July - Palace of Holyroodhouse
         none: There is no suitable secondary date
 
   activerecord:
