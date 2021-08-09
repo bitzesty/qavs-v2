@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe GroupLeader, type: :model do
-  subject {build(:group_leader)}
+RSpec.describe Citation, type: :model do
+  subject {build(:citation)}
 
   describe "associations" do
     it { should belong_to(:form_answer) }
