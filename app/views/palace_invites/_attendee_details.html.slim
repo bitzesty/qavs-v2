@@ -1,5 +1,5 @@
 .question-group
-  = ff.label "The attendee’s relationship to the successful group?", class: "govuk-label--s"
+  = ff.label :relationship, label: "The attendee’s relationship to the successful group?", class: "govuk-label--s"
   = ff.input :relationship,
               input_html: { class: "medium" },
               label: false
@@ -8,7 +8,7 @@
   = ff.label :title, class: "govuk-label--s"
   = ff.input :title,
               as: :radio_buttons,
-              collection: ["Miss", "Ms", "Mr", "Mrs"],
+              collection: ["Miss", "Ms", "Mr", "Mrs", "Dr"],
               wrapper_html: { class: "govuk-radios--inline" },
               label: false
 
