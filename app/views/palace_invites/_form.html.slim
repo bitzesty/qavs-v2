@@ -11,7 +11,7 @@
           legend.govuk-fieldset__legend
             h3.govuk-heading-m
               | The
-              =<> (i).ordinalize
+              =<> TextOrdinalize.new(i).text_ordinalize
               | attendee
           = render "attendee_details", ff: ff
 
