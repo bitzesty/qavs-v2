@@ -3,24 +3,17 @@
   - @invite_form.build_palace_attendee if @invite_form.palace_attendees.none?
 
   fieldset.question-block.question-group.govuk-form-group
-    ul.list-add.govuk-list data-need-to-clear-example=true data-add-limit="2" data-default=1
+    ul.govuk-list data-need-to-clear-example=true data-add-limit="2" data-default=1
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
-
-        .js-add-example
-          = hidden_field_tag "palace_invite[palace_attendees_attributes][#{i}][_remove]", "", class: 'remove'
-          a.remove-link.js-remove-link href="#" Remove
+        .js-add-example.govuk-form-group
           - i += 1
-
           legend.govuk-fieldset__legend
             h3.govuk-heading-m
-              | The first attendee
+              | The
+              =<> (i).ordinalize
+              | attendee
           = render "attendee_details", ff: ff
 
-          legend.govuk-fieldset__legend
-            h3.govuk-heading-m
-              | The second attendee
-          = render "attendee_details", ff: ff
-
-  = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
-  = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
+    = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
+    = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
