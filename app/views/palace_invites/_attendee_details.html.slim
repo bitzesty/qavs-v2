@@ -1,11 +1,17 @@
 .question-group
+  = ff.label "The attendee’s relationship to the successful group?", class: "govuk-label--s"
+  = ff.input :relationship,
+              input_html: { class: "medium" },
+              label: false
+
+.question-group
   = ff.label :title, class: "govuk-label--s"
   = ff.input :title,
               as: :radio_buttons,
               collection: ["Miss", "Ms", "Mr", "Mrs"],
               wrapper_html: { class: "govuk-radios--inline" },
               label: false
-              
+
 .question-group
   = ff.label "First names", class: "govuk-label--s"
   = ff.input :first_name,
@@ -24,16 +30,16 @@
   = ff.hint "Please note, this does not apply to qualifications such as Masters or Doctorates."
   = ff.input :post_nominals,
               input_html: { class: "tiny" },
-              label: false 
+              label: false
 
 .question-group
   = ff.label "Address", class: "govuk-label--s"
   = ff.input :address_1,
               input_html: { class: "large" },
-              label: "Building and street"   
+              label: "Building and street"
   = ff.input :address_2,
               input_html: { class: "large" },
-              label: false 
+              label: false
   = ff.input :address_3,
               input_html: { class: "medium" },
               label: "Town or city"

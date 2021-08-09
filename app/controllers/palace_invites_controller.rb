@@ -29,18 +29,19 @@ class PalaceInvitesController < ApplicationController
     if params[:palace_invite].present?
       params.require(:palace_invite).permit(
         palace_attendees_attributes: [
+          :relationship,
           :title,
           :first_name,
           :last_name,
-          :job_name,
           :post_nominals,
           :address_1,
           :address_2,
           :address_3,
           :address_4,
           :postcode,
-          :phone_number,
-          :additional_info,
+          :disabled_access,
+          :preferred_date,
+          :alternative_date,
           :id,
           :_remove
         ]
