@@ -44,13 +44,13 @@ en:
         i_dont_know: "I don't know"
     palace_attendee:
       preferred_date:
-        any: Any
+        any: Any date at Buckingham Palace
         buck_1: 15th May - Buckingham Palace
         buck_2: 31st May - Buckingham Palace
         buck_3: 5th June - Buckingham Palace
         holy: 4th July - Palace of Holyroodhouse (only for those residing in Scotland)
       alternative_date:
-        any: Any
+        any: Any date at Buckingham Palace
         buck_1: 15th May - Buckingham Palace
         buck_2: 31st May - Buckingham Palace
         buck_3: 5th June - Buckingham Palace
