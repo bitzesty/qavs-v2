@@ -2,8 +2,8 @@
 
   - @invite_form.build_palace_attendee if @invite_form.palace_attendees.none?
 
-  fieldset.question-block.question-group
-    ul.list-add data-need-to-clear-example=true data-add-limit="2" data-default=1
+  fieldset.question-block.question-group.govuk-form-group
+    ul.list-add.govuk-list data-need-to-clear-example=true data-add-limit="2" data-default=1
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
 
@@ -12,19 +12,14 @@
           a.remove-link.js-remove-link href="#" Remove
           - i += 1
 
-          .h3.govuk-heading-m
-            | The first attendee
-
-          p.govuk-body.text-normal
-            | Usually this would be you, the group leader, but if you cannot attend, someone else from your group can attend instead of you.
-          p.govuk-body.text-normal
-            | Your name and address must be the same as per form of identification that you will bring to the event.
-
+          legend.govuk-fieldset__legend
+            h3.govuk-heading-m
+              | The first attendee
           = render "attendee_details", ff: ff
 
-          h3.govuk-heading-m
-            | The second attendee
-
+          legend.govuk-fieldset__legend
+            h3.govuk-heading-m
+              | The second attendee
           = render "attendee_details", ff: ff
 
   = f.submit "Submit", class: "govuk-button save-palace-attendees-button"

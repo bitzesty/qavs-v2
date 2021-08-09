@@ -1,71 +1,63 @@
-.question-group
-  = ff.label :relationship, label: "The attendee’s relationship to the successful group?", class: "govuk-label--s"
-  = ff.input :relationship,
-              input_html: { class: "medium" },
-              label: false
 
-.question-group
-  = ff.label :title, class: "govuk-label--s"
-  = ff.input :title,
-              as: :radio_buttons,
-              collection: ["Miss", "Ms", "Mr", "Mrs", "Dr"],
-              wrapper_html: { class: "govuk-radios--inline" },
-              label: false
+= ff.input :relationship,
+            input_html: { class: "medium" },
+            label: "The attendee’s relationship to the successful group?",
+            label_html: { class: "govuk-label--s" }
 
-.question-group
-  = ff.label "First names", class: "govuk-label--s"
-  = ff.input :first_name,
-              input_html: { class: "medium" },
-              label: false
+= ff.input :title,
+            as: :radio_buttons,
+            collection: ["Miss", "Ms", "Mr", "Mrs", "Dr"],
+            wrapper_html: { class: "govuk-radios--inline" },
+            label_html: { class: "govuk-label--s" }
 
-.question-group
-  = ff.label "Surname", class: "govuk-label--s"
-  = ff.input :last_name,
-              input_html: { class: "medium" },
-              label: false
+= ff.input :first_name,
+            input_html: { class: "medium" },
+            label: "First names",
+            label_html: { class: "govuk-label--s" }
 
-.question-group
-  = ff.label "Official decorations", class: "govuk-label--s"
-  = ff.hint "Include any letters after the name that you would like to appear in the name badge. For example, LVO, MBE, or AFC."
-  = ff.hint "Please note, this does not apply to qualifications such as Masters or Doctorates."
-  = ff.input :post_nominals,
-              input_html: { class: "tiny" },
-              label: false
+= ff.input :last_name,
+            input_html: { class: "medium" },
+            label: "Surname",
+            label_html: { class: "govuk-label--s" }
 
-.question-group
-  = ff.label "Address", class: "govuk-label--s"
-  = ff.input :address_1,
-              input_html: { class: "large" },
-              label: "Building and street"
-  = ff.input :address_2,
-              input_html: { class: "large" },
-              label: false
-  = ff.input :address_3,
-              input_html: { class: "medium" },
-              label: "Town or city"
-  = ff.input :address_4,
-              input_html: { class: "medium" },
-              label: "County"
 
-.question-group
-  = ff.input :postcode,
-              input_html: { class: "small" }
+= ff.label :post_nominals, label: "Official decorations", class: "govuk-label--s"
+= ff.hint "Include any letters after the name that you would like to appear in the name badge. For example, LVO, MBE, or AFC."
+= ff.hint "Please note, this does not apply to qualifications such as Masters or Doctorates."
+= ff.input :post_nominals,
+            input_html: { class: "tiny" },
+            label: false
 
-.question-group
-  = ff.label "Is disabled access required?", class: "govuk-label--s"
-  = ff.input :disabled_access,
-              as: :radio_buttons,
-              wrapper_html: { class: "govuk-radios--inline" },
-              label: false
+h4.govuk-heading-s
+  | Address
+= ff.input :address_1,
+            input_html: { class: "large" },
+            label: "Address line 1"
+= ff.input :address_2,
+            input_html: { class: "large" },
+            label: "Address line 2"
+= ff.input :address_3,
+            input_html: { class: "medium" },
+            label: "Address line 3"
+= ff.input :address_4,
+            input_html: { class: "medium" },
+            label: "Town or city"
+= ff.input :postcode,
+            input_html: { class: "small" }
 
-.question-group
+= ff.input :disabled_access,
+            as: :radio_buttons,
+            wrapper_html: { class: "govuk-radios--inline" },
+            label: "Is disabled access required?",
+            label_html: { class: "govuk-label--s" }
+
+.govuk-form-group
   = ff.label "Preferred date and location to attend the Royal Garden Party", class: "govuk-label--s"
   = ff.hint "Please note, if you reside in Scotland, you have an option to attend the Buckingham Palace or the Palace of Holyrood House."
   = ff.input :preferred_date,
               as: :radio_buttons,
               label: false
-
-.question-group
+.govuk-form-group
   = ff.label "Secondary date and location to attend the Royal Garden Party", class: "govuk-label--s"
   = ff.hint "Please note, if you reside in Scotland, you have an option to attend the Buckingham Palace or the Palace of Holyrood House."
   = ff.input :alternative_date,
