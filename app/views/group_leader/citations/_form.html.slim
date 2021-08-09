@@ -1,11 +1,11 @@
 = simple_form_for [:group_leader, @citation] do |f|
   .govuk-form-group
-    = f.label "Group name", class: "govuk-label govuk-label--s"
-    = f.input :group_name, label: false, wrapper_class: { class: "govuk-!-width-one-half" }
+    = f.label :group_name, class: "govuk-label govuk-label--s"
+    = f.input :group_name, label: false, wrapper_class: { class: "govuk-!-width-one-half", id: "group_name" }
 
   .govuk-form-group
     .govuk-body
-      = f.label 'Citation', class: 'govuk-label govuk-label--s'
+      = f.label :body, class: 'govuk-label govuk-label--s', label: 'Citation'
       = f.hint 'The length of your citation will depend on the length of your group name.', class: 'govuk-hint'
       ul.govuk-list.govuk-list--bullet
         li
