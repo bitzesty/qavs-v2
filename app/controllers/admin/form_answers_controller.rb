@@ -4,6 +4,7 @@ class Admin::FormAnswersController < Admin::BaseController
   before_action :load_resource, only: [
     :review,
     :show,
+    :eligibility,
     :update,
     :update_financials,
     :remove_audit_certificate
@@ -42,6 +43,22 @@ class Admin::FormAnswersController < Admin::BaseController
   def show
     super
     @audit_events = FormAnswerAuditor.new(@form_answer).get_audit_events
+  end
+
+  def eligibility
+    authorize resource
+  end
+
+  def update_eligibility
+    authorize resource
+
+    resource.assign_attributes(eligibility_params)
+
+    if resource.save
+      redirect_to admin_form_answer_path(resource), notice: "Eligibility status was successfully updated."
+    else
+      render :eligibility
+    end
   end
 
   def edit
@@ -92,5 +109,15 @@ class Admin::FormAnswersController < Admin::BaseController
 
   def load_versions
     @versions = FormAnswerVersionsDispatcher.new(@form_answer).versions
+  end
+
+  def eligibility_params
+    params
+      .require(:form_answer)
+      .permit(
+        :state,
+        :ineligible_reason_nominator,
+        :ineligible_reason_group
+      )
   end
 end

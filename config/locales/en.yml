@@ -42,6 +42,21 @@ en:
     eligibility/promotion:
       nominee_is_qae_ep_award_holder:
         i_dont_know: "I don't know"
+    form_answer:
+      ineligible_reason_nominator:
+        involved_in_group: Involved in running the group
+        no_knowledge: No good knowledge of the group’s work
+        no_letters_of_support: No two letters of support
+      ineligible_reason_group:
+        less_than_3_people: Less than three people
+        outside_uk: Outside the UK, Channel Islands or Isle of Man
+        in_operation_for_less_than_3_years: In operation for less than three years
+        volunteers_not_eligible_to_reside_in_uk: Volunteers not eligible to reside in the UK
+        led_by_paid_stuff: Led by paid staff
+        no_specific_benefit: No specific and direct local benefit
+        unsuccessful_in_the_past_3_years: Nominated unsuccessfully in the past 3 years
+        has_qavs_award: Received a QAVS award
+        benefits_only_animals: Operates solely for the benefit of animals
     palace_attendee:
       preferred_date:
         any: Any
@@ -274,10 +289,14 @@ en:
       application_in_progress: Nomination in progress
       submitted: Submitted
       admin_eligible: Eligible
+      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_not_eligible_duplicate: Duplicate for reference
+      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment in progress"
       local_assessment_recommended: "Local assessment: recommended"
       local_assessment_not_recommended: "Local assessment: not recommended"
-      withdrawn: Withdrawn/Ineligible
+      withdrawn: Withdrawn
       not_eligible: Not eligible
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress
@@ -292,10 +311,14 @@ en:
       application_in_progress: Nomination in progress
       submitted: Submitted
       admin_eligible: Eligible
+      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_not_eligible_duplicate: Duplicate for reference
+      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment: in progress"
       local_assessment_recommended: "Local assessment: recommended"
       local_assessment_not_recommended: "Local assessment: not recommended"
-      withdrawn: Withdrawn/Ineligible
+      withdrawn: Withdrawn
       not_eligible: Not eligible
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress

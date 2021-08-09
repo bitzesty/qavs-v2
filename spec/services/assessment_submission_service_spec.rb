@@ -38,7 +38,7 @@ describe AssessmentSubmissionService do
   end
 
   context "case summary submission" do
-    let(:form_answer) { create(:form_answer, :submitted) }
+    let(:form_answer) { create(:form_answer, :local_assessment_recommended) }
     let(:assessment) { form_answer.assessor_assignments.case_summary }
 
     it "performs state transition when case summary is submitted" do

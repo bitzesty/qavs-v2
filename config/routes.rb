@@ -221,6 +221,8 @@ Rails.application.routes.draw do
       member do
         patch :update_financials
         get :review
+        get :eligibility
+        patch :update_eligibility
       end
 
       resources :form_answer_state_transitions, only: [:create]

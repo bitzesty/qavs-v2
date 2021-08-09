@@ -8,7 +8,13 @@ class FormAnswerStateMachine
     :withdrawn,
     :not_eligible,
     :not_submitted,
+    # eligibility
     :admin_eligible,
+    :admin_eligible_duplicate,
+    :admin_not_eligible_duplicate,
+    :admin_not_eligible_nominator,
+    :admin_not_eligible_group,
+    # / eligibility
     :local_assessment_in_progress,
     :local_assessment_recommended,
     :local_assessment_not_recommended,
@@ -30,6 +36,11 @@ class FormAnswerStateMachine
   POST_SUBMISSION_STATES = [
     :submitted,
     :withdrawn,
+    :admin_eligible,
+    :admin_eligible_duplicate,
+    :admin_not_eligible_duplicate,
+    :admin_not_eligible_nominator,
+    :admin_not_eligible_group,
     :local_assessment_in_progress,
     :local_assessment_recommended,
     :local_assessment_not_recommended,
@@ -40,6 +51,22 @@ class FormAnswerStateMachine
     :not_recommended,
     :awarded,
     :not_awarded
+  ]
+
+  ELIGIBILITY_STATES = [
+    :admin_eligible,
+    :admin_eligible_duplicate,
+    :admin_not_eligible_duplicate,
+    :admin_not_eligible_nominator,
+    :admin_not_eligible_group,
+    :withdrawn
+  ]
+
+  NOT_ELIGIBLE_STATES = [
+    :admin_not_eligible_duplicate,
+    :admin_not_eligible_nominator,
+    :admin_not_eligible_group,
+    :withdrawn
   ]
 
   NOT_POSITIVE_STATES = [
@@ -54,6 +81,11 @@ class FormAnswerStateMachine
   state :not_eligible
   state :not_submitted
   state :admin_eligible
+  state :admin_eligible
+  state :admin_eligible_duplicate
+  state :admin_not_eligible_duplicate
+  state :admin_not_eligible_nominator
+  state :admin_not_eligible_group
   state :local_assessment_in_progress
   state :local_assessment_recommended
   state :local_assessment_not_recommended
@@ -161,8 +193,11 @@ class FormAnswerStateMachine
   def permitted_states_with_deadline_constraint
     if Settings.after_current_submission_deadline?
       all_states = [
-        :admin_not_eligible,
         :admin_eligible,
+        :admin_eligible_duplicate,
+        :admin_not_eligible_duplicate,
+        :admin_not_eligible_nominator,
+        :admin_not_eligible_group,
         :local_assessment_in_progress,
         :local_assessment_recommended,
         :local_assessment_not_recommended,
@@ -177,22 +212,24 @@ class FormAnswerStateMachine
       ]
 
       case object.state.to_sym
-      when :not_eligible, :admin_not_eligible
+      when :not_eligible
         []
+      when *(ELIGIBILITY_STATES - [:admin_eligible, :admin_eligible_duplicate])
+        ELIGIBILITY_STATES
       when :application_in_progress, :eligibility_in_progress
         [:not_submitted]
       when :submitted
-        [:assessment_in_progress]
+        ELIGIBILITY_STATES
       when :not_submitted
         []
-      when :admin_eligible
-        [:local_assessment_in_progress]
+      when :admin_eligible, :admin_eligible_duplicate
+        [:local_assessment_in_progress] + ELIGIBILITY_STATES
       when :local_assessment_in_progress
-        [:local_assessment_recommended, :local_assessment_not_recommended]
+        [:local_assessment_recommended, :local_assessment_not_recommended] + NOT_ELIGIBLE_STATES
       when :local_assessment_recommended
-        [:local_assessment_not_recommended]
+        [:local_assessment_not_recommended, :assessment_in_progress] + NOT_ELIGIBLE_STATES
       when :local_assessment_not_recommended
-        [:local_assessment_recommended]
+        [:local_assessment_recommended] + NOT_ELIGIBLE_STATES
       else
         all_states
       end

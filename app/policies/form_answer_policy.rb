@@ -48,6 +48,14 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? || subject.lead?(record)
   end
 
+  def eligibility?
+    admin?
+  end
+
+  def update_eligibility?
+    admin?
+  end
+
   def update_item?(item)
     admin_or_lead_or_primary = admin? || (subject.lead?(record) ||
                                subject.primary?(record))
