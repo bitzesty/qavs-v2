@@ -50,6 +50,15 @@ h4.govuk-heading-s
               wrapper_html: { class: "govuk-radios--inline" },
               label: "Is disabled access required?",
               label_html: { class: "govuk-label--s" }
+div class='govuk-notification-banner js-enabled govuk-!-display-none' role="region" aria-labelledby="govuk-notification-banner-title"
+  .govuk-notification-banner__header
+  .govuk-notification-banner__content
+    p.govuk-notification-banner__heading
+      | Please note, if one of the attendees will need assistance on the event day, for example, if they are older or have a disability, the other attendee must be able to assist them.
+    p.govuk-notification-banner__heading
+      | If this is not possible, please get in touch with the Queen’s Award for Voluntary Service (QAVS) team via email
+      =<> mail_to 'queensaward@dcms.gov.uk'
+      | or phone 0207 271 6206.
 .govuk-form-group
   = ff.label :preferred_date, label: "Preferred date and location to attend the Royal Garden Party", class: "govuk-label--s"
   = ff.hint "Please choose the location of the Royal Garden Party based on the guidance below:"
