@@ -45,16 +45,16 @@ en:
     palace_attendee:
       preferred_date:
         any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse (only for those residing in Scotland)
       alternative_date:
         any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse (only for those residing in Scotland)
         none: There is no suitable secondary date
 
   activerecord:
