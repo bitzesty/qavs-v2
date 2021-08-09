@@ -14,10 +14,10 @@
           =<> deadline_for("buckingham_palace_attendees_details", "%-d %B %Y.")
           | Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
 
-    h2.govuk-heading-m
+    h3.govuk-heading-m
       | What you need to do
 
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       | By
       =<> deadline_for("buckingham_palace_confirm_press_book_notes", "%-d %B %Y")
       | &mdash; confirm group name and citation &nbsp;
@@ -34,7 +34,7 @@
     = link_to "Confirm group name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       => deadline_for("buckingham_palace_confirm_press_book_notes", "Between %-d %B")
       =<> deadline_for("buckingham_palace_attendees_details", "and %-d %B %Y")
       | &mdash; prepare press coverage
@@ -58,7 +58,7 @@
             = link_to "The Queen's Award for Voluntary Service logo in various formats"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       => deadline_for("buckingham_palace_reception_attendee_information_due_by", "By %-d %B %Y")
       | &mdash; submit details for Royal Garden Party &nbsp;
       - if @invite.submitted
@@ -75,20 +75,20 @@
     = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.token), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-    h2.govuk-heading-m
+    h3.govuk-heading-m
       | Announcement and event dates
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       => deadline_for("buckingham_palace_attendees_details", "%d %B %Y")
       | &mdash; awards officially announced
     p.govuk-body
       | Successful groups, including your group, are announced in Gazette, GOV.UK and on the QAVS website.
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       => deadline_for("buckingham_palace_attendees_details", "%B to")
       => deadline_for("buckingham_palace_media_information", "%B %Y")
       | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
       | The Lord-Lieutenant of your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. They will be in touch to arrange a suitable date and time for you.
-    h3.govuk-heading-s
+    h4.govuk-heading-s
       => deadline_for("buckingham_palace_attendees_invite", "May to %B %Y")
       | &mdash; Royal Garden Party
     p.govuk-body
