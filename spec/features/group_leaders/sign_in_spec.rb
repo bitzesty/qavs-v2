@@ -4,11 +4,12 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 describe "GroupLeader sign in" do
-  let(:group_leader) { create(:group_leader) }
+  let(:form_answer) { create(:form_answer) }
+  let(:group_leader) { create(:group_leader, form_answer_id: form_answer.id) }
 
   it "allows group_leader to sign in" do
-    create(:citation, group_leader_id: group_leader.id)
-    create(:palace_invite)
+    create(:citation, form_answer_id: form_answer.id)
+    create(:palace_invite, form_answer_id: form_answer.id)
 
     visit group_leader_root_path
     fill_in "group_leader_email", with: group_leader.email
