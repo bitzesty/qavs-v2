@@ -23,7 +23,7 @@ class GroupLeader < ApplicationRecord
                     }
                   }
 
-  has_one :form_answer
+  belongs_to :form_answer
 
   scope :by_email, -> { order(:email) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
