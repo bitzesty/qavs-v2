@@ -366,9 +366,9 @@ CREATE TABLE public.citations (
     group_name character varying,
     body text,
     completed_at timestamp without time zone,
-    group_leader_id bigint NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    form_answer_id bigint
 );
 
 
@@ -797,7 +797,8 @@ CREATE TABLE public.group_leaders (
     updated_at timestamp(6) without time zone NOT NULL,
     first_name character varying,
     last_name character varying,
-    deleted boolean DEFAULT false NOT NULL
+    deleted boolean DEFAULT false NOT NULL,
+    form_answer_id bigint
 );
 
 
@@ -3142,10 +3143,10 @@ CREATE UNIQUE INDEX index_award_years_on_year ON public.award_years USING btree 
 
 
 --
--- Name: index_citations_on_group_leader_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_citations_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_citations_on_group_leader_id ON public.citations USING btree (group_leader_id);
+CREATE INDEX index_citations_on_form_answer_id ON public.citations USING btree (form_answer_id);
 
 
 --
@@ -3279,6 +3280,13 @@ CREATE UNIQUE INDEX index_group_leaders_on_confirmation_token ON public.group_le
 --
 
 CREATE UNIQUE INDEX index_group_leaders_on_email ON public.group_leaders USING btree (email);
+
+
+--
+-- Name: index_group_leaders_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_group_leaders_on_form_answer_id ON public.group_leaders USING btree (form_answer_id);
 
 
 --
@@ -3512,6 +3520,14 @@ ALTER TABLE ONLY public.feedbacks
 
 
 --
+-- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders
+    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
 -- Name: aggregated_award_year_pdfs fk_rails_a450856684; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3533,14 +3549,6 @@ ALTER TABLE ONLY public.support_letter_attachments
 
 ALTER TABLE ONLY public.assessor_assignments
     ADD CONSTRAINT fk_rails_bed48e0ed5 FOREIGN KEY (award_year_id) REFERENCES public.award_years(id);
-
-
---
--- Name: citations fk_rails_bf3e41ded4; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.citations
-    ADD CONSTRAINT fk_rails_bf3e41ded4 FOREIGN KEY (group_leader_id) REFERENCES public.group_leaders(id);
 
 
 --
@@ -3783,6 +3791,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210808170204'),
 ('20210808174640'),
 ('20210808191028'),
-('20210808194051');
+('20210808194051'),
+('20210809072025'),
+('20210809072320'),
+('20210809073242');
 
 
