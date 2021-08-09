@@ -4,7 +4,7 @@ RSpec.describe Citation, type: :model do
   subject {build(:citation)}
 
   describe "associations" do
-    it { should belong_to(:group_leader) }
+    it { should belong_to(:form_answer) }
   end
 
   it 'has valid a factory' do

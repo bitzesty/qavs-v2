@@ -1,6 +1,6 @@
 class Citation < ApplicationRecord
-  belongs_to :group_leader
+  belongs_to :form_answer
 
-  validates :group_leader_id, uniqueness: true
+  validates :form_answer_id, uniqueness: true
   validates :group_name, :body, presence: true
 end
