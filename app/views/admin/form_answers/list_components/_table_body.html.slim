@@ -20,12 +20,6 @@
     td.govuk-table__cell
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
-        br
-        span.assigned Assigned
-      - elsif obj.document["nominee_ceremonial_county"].present?
-        = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
-      - else
-        | Not assigned
     td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td.govuk-table__cell
       = obj.last_updated_at
