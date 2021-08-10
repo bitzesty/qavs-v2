@@ -1,4 +1,4 @@
 h1.govuk-heading-xl
-  = "Edit #{controller_name == "users" ? "applicant" : controller_name.singularize}"
+  = "Edit #{controller_name == "users" ? "applicant" : controller_name.singularize.humanize}"
 
 = render 'form', resource: @resource
