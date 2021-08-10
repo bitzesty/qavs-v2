@@ -20,7 +20,7 @@ feature "Admin edits eligibility status", js: true do
 
     click_button "Save"
 
-    within ".eligibility-status" do
+    within "#eligibility-status" do
       expect(page).to have_content("Eligible")
     end
   end
@@ -34,7 +34,7 @@ feature "Admin edits eligibility status", js: true do
 
     click_button "Save"
 
-    within ".eligibility-status" do
+    within "#eligibility-status" do
       expect(page).to have_content("Ineligible - nominator")
     end
   end
@@ -48,7 +48,7 @@ feature "Admin edits eligibility status", js: true do
 
     click_button "Save"
 
-    within ".eligibility-status" do
+    within "#eligibility-status" do
       expect(page).to have_content("Ineligible - group")
     end
   end
