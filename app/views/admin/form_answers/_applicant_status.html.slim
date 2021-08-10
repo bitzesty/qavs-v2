@@ -14,47 +14,37 @@
             | Eligibility status
           br
           - if resource.eligible?
-            strong.govuk-tag.govuk-tag--green
-              | ELIGIBLE
+            = govuk_tag('eligible', 'green')
           - else
-            strong.govuk-tag.govuk-tag--red
-              | NOT ELIGIBLE
-        
+          = govuk_tag('not eligible', 'red')
+
         p.govuk-body#local-assessment-status
           strong
             | Local assessment status
           br
-          
+
           - if resource.state == 'recommended'
-            strong.govuk-tag.govuk-tag--green
-              | RECOMMENDED
+            = govuk_tag('recommended', 'green')
           - elsif resource.state == 'not recommended'
-            strong.govuk-tag.govuk-tag--red
-              | NOT RECOMMENDED
+            = govuk_tag('not recommended', 'red')
           - elsif !resource.local_assessment_ended?
-            strong.govuk-tag.govuk-tag--yellow 
-              | IN PROGRESS
+            = govuk_tag('in progress', 'yellow')
           - else
-            strong.govuk-tag.govuk-tag--grey
-              | NOT STARTED
-        
+            = govuk_tag('not started', 'grey')
+
         p.govuk-body#national-assessment-status
           strong
             | National assessment status
           br
-          
+
           - if resource.state == 'recommended'
-            strong.govuk-tag.govuk-tag--green
-              | RECOMMENDED
+            = govuk_tag('recommended', 'green')
           - elsif resource.state == 'not recommended'
-            strong.govuk-tag.govuk-tag--red
-              | NOT RECOMMENDED
+            = govuk_tag('not recommended', 'red')
           - elsif resource.state == 'undecided'
-            strong.govuk-tag.govuk-tag--purple
-              | UNDECIDED
+            = govuk_tag('undecided', 'purple')
           - else
-            strong.govuk-tag.govuk-tag--grey
-              | PENDING
+            = govuk_tag('pending', 'grey')
       .toggable-form__edit tabindex="-1" aria-label="Change nomination status"
         .state-input
           = simple_form_for([namespace_name, resource, state],

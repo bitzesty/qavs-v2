@@ -3,8 +3,7 @@
     h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button
         ' Appraisal Form (Secondary)
-        strong.govuk-tag.govuk-tag--grey
-          | PENDING
+        = govuk_tag('pending', 'grey')
   .govuk-accordion__section-content
     = simple_form_for([namespace_name, secondary_assessment],
                       remote: true,

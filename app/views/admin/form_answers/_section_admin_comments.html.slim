@@ -3,8 +3,7 @@
     h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button id="admin-comments-heading"
         ' Admin Comments
-        strong.govuk-tag.govuk-tag--grey
-          = pluralize(@form_answer.comments.admin.count, 'comment', 'comments')
+        = govuk_tag(pluralize(@form_answer.comments.admin.count, 'comment', 'comments'), 'grey')
 
   .govuk-accordion__section-content#section-admin-comments aria-labelledby="admin-comments-heading"
     .comments-container data-comment-form=new_admin_form_answer_comment_path(@form_answer)

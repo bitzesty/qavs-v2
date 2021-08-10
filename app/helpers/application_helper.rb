@@ -151,4 +151,8 @@ module ApplicationHelper
       [label, year]
     end
   end
+
+  def govuk_tag(text, style)
+    content_tag text.upcase, :strong, class: "govuk-tag govuk-tag--#{style}"
+  end
 end

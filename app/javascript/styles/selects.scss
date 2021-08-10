@@ -154,7 +154,7 @@
 .autocomplete__option,
 .dropdown-checkboxes__option,
 .dropdown-checkboxes__selection {
-  @extend .govuk-body; 
+  @extend .govuk-body;
   margin: 0 !important;
   padding-top: 0.4rem !important;
   padding-bottom: 0.1rem !important;
@@ -178,8 +178,7 @@
   background-size:contain;
   background-repeat:no-repeat;
   background-position:50%;
-  pointer-events: none
-  ;
+  pointer-events: none;
 }
 
 .autocomplete__hint {

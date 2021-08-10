@@ -11,8 +11,8 @@ h1.govuk-heading-xl
 
   .govuk-grid-row
     = render "shared/form_answers/top_statuses_filters", f: f,
-                                                          options: FormAnswerStatus::LieutenantFilter.options,
-                                                          sub_options: FormAnswerStatus::LieutenantFilter.sub_options
+                                                          options: FormAnswerStatus::AdminFilter.collection('status'),
+                                                          sub_options: FormAnswerStatus::AdminFilter.collection('sub')
 
   .govuk-grid-row
     = render "shared/form_answers/nomination_answer_filters", f: f,
