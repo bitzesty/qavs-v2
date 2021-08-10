@@ -9,9 +9,9 @@
         | Eligibility status
       br
       - if resource.eligible?
-        = govuk_tag('eligible', 'green')
+        = govuk_tag(@form_answer.eligibility_state, 'green')
       - else
-        = govuk_tag('not eligible', 'red')
+        = govuk_tag(@form_answer.eligibility_state, 'red')
 
     p.govuk-body#local-assessment-status
       strong
