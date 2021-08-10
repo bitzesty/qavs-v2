@@ -38,14 +38,6 @@ ready = ->
   $(".edit-review-audit").on "click", (e) ->
     $(".save-review-audit").show()
 
-  $(".section-applicant-status").on "click", "a", (e) ->
-    e.preventDefault()
-    state = $(this).data("state")
-    form = $("#new_form_answer_state_transition")
-    form.find("option[value='#{state}']").prop("selected", true)
-    $(".section-applicant-status .dropdown-toggle").html($(this).data("label"))
-    form.submit()
-
   $("#new_form_answer_state_transition").on "ajax:success", (e, data, status, xhr) ->
     $(".section-applicant-status .dropdown-menu").replaceWith(data)
     if data == ""
