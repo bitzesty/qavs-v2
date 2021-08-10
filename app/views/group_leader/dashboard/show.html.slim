@@ -72,7 +72,7 @@
       =< AwardYear.current.year+1
       | . You must provide the attendee details and your preferred day for attending by
       =< deadline_for("buckingham_palace_attendees_details", "%l %P, %-d %B %Y.")
-    = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.token), class: "govuk-button govuk-button--start"
+    = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.id), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-m

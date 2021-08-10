@@ -1,12 +1,12 @@
-= simple_form_for @invite_form, as: :palace_invite, url: palace_invite_url(id: @invite.token), html: { class: 'qae-form', method: :patch } do |f|
+= simple_form_for @invite_form, as: :palace_invite, url: palace_invite_url(id: @invite.id), html: { class: 'qae-form', method: :patch } do |f|
 
-  - @invite_form.build_palace_attendee if @invite_form.palace_attendees.none?
+  - @invite_form.build_attendees if @invite_form.palace_attendees.none?
 
   fieldset.question-block.question-group
-    ul.list-add data-need-to-clear-example=true data-add-limit="2" data-default=1
+    ul
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
-        .js-add-example.govuk-form-group
+        .govuk-form-group
           - i += 1
           legend.govuk-fieldset__legend
             h3.govuk-heading-m
@@ -15,5 +15,5 @@
               | attendee
           = render "attendee_details", ff: ff, attendee: i
 
-    = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
+    = f.submit "Submit", class: "govuk-button save-palace-attendees-button", name: "submit"
     = link_to "Cancel", group_leader_root_path, class: "govuk-button govuk-button--secondary if-no-js-hide"
