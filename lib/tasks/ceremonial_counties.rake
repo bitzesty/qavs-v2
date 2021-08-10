@@ -6,11 +6,15 @@ namespace :ceremonial_counties do
     path = "#{Rails.root}/db/fixtures/ceremonial_counties.csv"
     counties = []
     CSV.foreach(path, headers: true) do |row|
-      h = row.to_hash
-      name = h["name"]
-      country = h["country"]
-     counties << CeremonialCounty.new(name: name, country: country)
+      name = row[0]
+      country = row[1]
+      counties << CeremonialCounty.new(name: name, country: country)
     end
-    CeremonialCounty.import counties, on_duplicate_key_update: [:country]
+    results = CeremonialCounty.import counties, on_duplicate_key_update: {conflict_target: [:name], columns: [:country]}
+    puts "inserted #{results.ids.count} records"
+    if results.failed_instances.any?
+      puts "failed records:"
+      puts results.failed_instances.inspect
+    end
   end
 end
