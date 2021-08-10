@@ -2,7 +2,7 @@ tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
     tr.govuk-table__row
       th.govuk-table__header scope="row"
-        = link_to polymorphic_url([namespace_name, obj], search: params.permit[:search]) do
+        = link_to polymorphic_url([namespace_name, obj]) do
           - unless obj.nominee_name.nil?
             span.ellipsis
               = obj.nominee_name
@@ -12,7 +12,7 @@ tbody.govuk-table__body
 
       td.govuk-table__cell
         - if obj.urn.present?
-          = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search])
+          = link_to obj.urn, polymorphic_url([namespace_name, obj])
         - else
           span.urn-not-generated Not yet generated
 

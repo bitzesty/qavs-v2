@@ -1,5 +1,5 @@
 - content_for :before_main_content do
-  = link_to "Back to nominations list", admin_form_answers_path(params.permit!.except(:controller, :action)), class: "govuk-back-link"
+  a class="govuk-back-link" href="javascript:history.back()", title='Back to nominations list' Back to nominations list
 
 h1.govuk-heading-xl
   = resource.nominee_name
