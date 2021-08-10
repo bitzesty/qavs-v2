@@ -1,29 +1,38 @@
 = simple_form_for [:admin, resource], as: :lieutenant, url: resource.persisted? ? admin_lieutenant_path(resource) : admin_lieutenants_path, html: { class: 'qae-form' } do |f|
-  = f.input :first_name, input_html: { class: 'small' }, label: 'First name'
+  = f.input :first_name,
+            input_html: { class: 'small' },
+            label: 'First name',
+            label_html: { class: 'govuk-label--s' }
 
-  = f.input :last_name, input_html: { class: 'small' }, label: 'Last name'
+  = f.input :last_name,
+            input_html: { class: 'small' },
+            label: 'Last name',
+            label_html: { class: 'govuk-label--s' }
 
   #email-control-group
-    = f.input :email, input_html: { class: 'large' }, label: 'Email'
+    = f.input :email,
+              input_html: { class: 'large' },
+              label_html: { class: 'govuk-label--s' }
 
   = f.association :ceremonial_county,
                   input_html: { class: "govuk-select"},
                   include_blank: false,
                   colleciton: CeremonialCounty.all,
                   label_method: :name,
-                  label: 'Lord Lieutenancy office'
+                  label: 'Lord Lieutenancy office',
+                  label_html: { class: 'govuk-label--s' }
 
 
   - if f.object.persisted?
     .question-group#password-change-panel
       #password-control-group
-        h3 = f.label :password, class: "form-label"
         .row
           .col-md-4.col-sm-6
             .input-group
               = f.input :password,
                         input_html: { class: 'medium' },
-                        label: 'Password'
+                        label: 'New password',
+                        label_html: { class: 'govuk-label--s' }
               span#password-result-span.input-group-addon
                 i#password-result.glyphicon.glyphicon-ok
         .clear
@@ -45,7 +54,8 @@
             .input-group
               = f.input :password_confirmation,
                         input_html: { class: 'medium' },
-                        label: false
+                        label: 'Confirm new password',
+                        label_html: { 'govuk-label--s' }
               span#password-confirmation-result-span.input-group-addon
                 i#password-confirmation-result.glyphicon.glyphicon-ok
         .clear
@@ -63,12 +73,12 @@
             label_html: { class: 'govuk-!-font-size-19 govuk-!-font-weight-regular govuk-!-margin-top-6 govuk-!-margin-bottom-0' }
 
   div class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
-    .govuk-button-group 
+    .govuk-button-group
       = f.submit "#{f.object.persisted? ? 'Update' : 'Add'} user",
                 class: 'govuk-button'
       = link_to "Cancel",
                 admin_lieutenants_path,
                 class: 'govuk-button govuk-button--secondary'
-      
+
       - if action_name == "edit" && policy(resource).destroy?
         = link_to 'Delete', admin_lieutenant_path(resource), data: { method: :delete, confirm: 'Are you sure?' }, class: 'govuk-button govuk-button--warning'
