@@ -6,16 +6,16 @@
         = submit_tag :submit, class: 'search-submit'
 
     .col-md-3.col-sm-4.col-xs-12.pull-right.text-right
-      = link_to new_lieutenant_lieutenant_path, class: 'new-user btn btn-secondary btn-md' do
+      = link_to new_lieutenant_lieutenant_path, class: 'new-user govuk-button govuk-button--secondary btn-secondary btn-md' do
         = "+ Add lieutenant"
   .clear
 
   - if @search.query?
     .well.search-text
-      p
+      p.govuk-body
         = "Search results for '#{@search.query}'"
         small
-          = link_to "(Clear search)", [:lieutenant, :lieutenants], class: "btn btn-link"
+          = link_to "(Clear search)", [:lieutenant, :lieutenants], class: "govuk-button btn-link"
 
   = render 'list', resources: @resources, f: f
 

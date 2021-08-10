@@ -1,24 +1,24 @@
-.form-group.palace-attendee-container class=("form-edit" if pa.errors.present? || defined?(@enable_edition))
+.govuk-form-group.palace-attendee-container class=("form-edit" if pa.errors.present? || defined?(@enable_edition))
   .form-value
     .empty-message class="#{'visuallyhidden' if palace_invite.palace_attendees.exists?}"
       p.p-empty No attendees confirmed.
 
-      = link_to "#", class: "form-edit-link pull-right"
+      = link_to "#", class: "govuk-link form-edit-link pull-right"
         span.glyphicon.glyphicon-pencil
         ' Edit
       .clear
     - if palace_invite.palace_attendees.exists?
       ul.list-unstyled
         li.well
-          = link_to "#", class: "form-edit-link pull-right"
+          = link_to "#", class: "govuk-link form-edit-link pull-right"
             span.glyphicon.glyphicon-pencil
             ' Edit
 
-          p
+          p.govuk-body
             strong= "#{pa.title} #{pa.first_name} #{pa.last_name}"
             br
             small.text-muted= pa.job_name
-          p
+          p.govuk-body
             = pa.address_1
             br
             = pa.address_2
@@ -28,11 +28,11 @@
             = pa.address_4
             br
             = pa.postcode
-          p= pa.phone_number
-          p= pa.post_nominals
+          p.govuk-link= pa.phone_number
+          p.govuk-link= pa.post_nominals
           br
           label Additional Information e.g. Wheelchair user
-          p
+          p.govuk-link
             - if pa.additional_info.present?
               = pa.additional_info
             - else

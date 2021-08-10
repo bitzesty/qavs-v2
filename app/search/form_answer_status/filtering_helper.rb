@@ -41,6 +41,12 @@ module FormAnswerStatus::FilteringHelper
     end
   end
 
+  def collection_for_select(_collection)
+    _collection.map do |k, v|
+      [v[:label], k]
+    end
+  end
+
   def supported_filter_attrs
     options.keys.map(&:to_s)
   end

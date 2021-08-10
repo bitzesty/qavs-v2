@@ -8,5 +8,5 @@ label.form-label Previous winnings
         li
           span= "#{PreviousWin::CATEGORIES.select{ |key, value| value == win["category"]}.try(:first).try(:first)} #{win["year"]}"
   - else
-    p
+    p.govuk-body
       em.text-muted No previous winnings added.

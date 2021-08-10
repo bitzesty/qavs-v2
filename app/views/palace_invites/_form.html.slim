@@ -2,8 +2,8 @@
 
   - @invite_form.build_palace_attendee if @invite_form.palace_attendees.none?
 
-  fieldset.question-block.question-group.govuk-form-group
-    ul.govuk-list data-need-to-clear-example=true data-add-limit="2" data-default=1
+  fieldset.question-block.question-group
+    ul.list-add data-need-to-clear-example=true data-add-limit="2" data-default=1
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
         .js-add-example.govuk-form-group

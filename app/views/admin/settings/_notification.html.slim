@@ -9,19 +9,16 @@ li id="notification-#{notification.id}"
       = notification.formatted_trigger_time
   - if !notification.sent?
     span.actions
-      = link_to "Edit", "#", class: "edit-notification if-no-js-hide  govuk-link"
+      = link_to "Edit", "#", class: "edit-notification if-no-js-hide  govuk-link govuk-!-margin-left-2"
 
-      - if policy(notification).destroy?
-        span.if-no-js-hide
-          '  |
-        = button_to "Delete", admin_settings_email_notification_path(notification), { onclick: "return confirm('Are you sure?')", method: :delete, remote: true }
-    .notification-edit-form.well
+    .notification-edit-form.govuk-inset-text
       = simple_form_for notification, url: admin_settings_email_notification_path(notification, year: params[:year]), remote: true, authenticity_token: true do |f|
         = f.input :trigger_at,
                   as: :separated_date_time,
                   input_html: { id: '' },
                   label: "Edit schedule"
-        .control-action
-          = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
+        .govuk-button-group
           = f.submit "Save", class: "govuk-button"
-        .clear
+          = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide btn-cancel"
+      - if policy(notification).destroy?
+        = button_to "Delete", admin_settings_email_notification_path(notification), { onclick: "return confirm('Are you sure?')", method: :delete, remote: true, class: 'govuk-button govuk-button--warning' }

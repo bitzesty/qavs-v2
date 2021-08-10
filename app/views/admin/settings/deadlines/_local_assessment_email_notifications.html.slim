@@ -1,10 +1,5 @@
-.govuk-accordion__section
-  .govuk-accordion__section-header
-    h2.govuk-accordion__section-heading
-      span.govuk-accordion__section-button
-        ' Email notification
-  .govuk-accordion__section-content
-
-    = render 'email_notification', kind: 'group_leader_notification'
-    = render 'email_notification', kind: 'local_assessment_notification'
-    = render 'email_notification', kind: 'local_assessment_reminder'
+h4.govuk-heading-s class='govuk-!-margin-bottom-2 govuk-!-margin-top-7'
+  ' Email notification
+= render 'email_notification', kind: 'group_leader_notification'
+= render 'email_notification', kind: 'local_assessment_notification'
+= render 'email_notification', kind: 'local_assessment_reminder'

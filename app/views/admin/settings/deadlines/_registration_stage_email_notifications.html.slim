@@ -1,14 +1,9 @@
-.govuk-accordion__section
-  .govuk-accordion__section-header
-    h2.govuk-accordion__section-heading
-      span.govuk-accordion__section-button
-        ' Email notification
-  .govuk-accordion__section-content
-    .panel-section id="submission_started_email_notification"
-      p.govuk-body Notify users that nominations for the new Award year are open
+h4.govuk-heading-s class='govuk-!-margin-bottom-2 govuk-!-margin-top-7'
+  ' Email notification
+p.govuk-body Notify users that nominations for the new Award year are open
 
-      p.govuk-body
-        = link_to "View email example", "#", class: "link-email-example if-no-js-hide govuk-link"
+p.govuk-body
+  = link_to "View email example", "#", class: "link-email-example if-no-js-hide govuk-link"
 
-      .email-example.well
-        = MailRenderer.new.submission_started_notification
+.email-example.well
+  = MailRenderer.new.submission_started_notification

@@ -33,14 +33,14 @@
                           available_assessors_for_select,
                           { include_blank: true }
 
-          = link_to "#", class: "form-edit-link"
+          = link_to "#", class: "form-edit-link govuk-link"
             span.glyphicon.glyphicon-pencil
             ' Edit
           .clear
-          .form-actions.text-right
+          .govuk-button-group
             span.if-no-js-hide
-              = link_to "Cancel", "#", class: "btn btn-default form-cancel-link"
-            = form.submit "Save", class: "btn btn-primary form-save-button"
+              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link"
+            = form.submit "Save", class: "govuk-button btn-primary form-save-button"
           .errors-holder
       .clear
 
@@ -62,11 +62,11 @@
 
           .form-fields
             = form.select :assessor_id, available_assessors_for_select, { include_blank: true }
-          = link_to "#", class: "form-edit-link"
+          = link_to "#", class: "form-edit-link govuk-link"
             span.glyphicon.glyphicon-pencil
             ' Edit
           .clear
-          .form-actions.text-right
+          .govuk-button-group
             span.if-no-js-hide
               = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link"
             = form.submit "Save", class: "govuk-button btn-primary form-save-button"

@@ -25,7 +25,7 @@
             = label_tag "date_started_trading_1i", "Year", class: "string optional control-label"
             input.string.optional.form-control id="date_started_trading_1i" type='text' name="form_answer[data_attributes][started_trading_year]" value="#{@form_answer.document["started_trading_year"]}"
           .clear
-          .form-actions.text-right
+          .govuk-button-group
             = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
             = f.submit "Save", class: "govuk-button btn-primary pull-right"
         .clear

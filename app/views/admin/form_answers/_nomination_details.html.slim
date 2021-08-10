@@ -1,0 +1,23 @@
+hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+p.govuk-body
+  strong
+    | Type of group
+  br
+  - if @form_answer.nominee_activity.present?
+    = NomineeActivityHelper.lookup_label_for_activity(@form_answer.nominee_activity&.to_sym)
+p.govuk-body
+  strong
+    | National assessor sub-group
+  br
+  | Sub-group 1
+p.govuk-body
+  strong
+    | Lord Lieutenancy office
+  br
+  = @form_answer.ceremonial_county&.name
+p.govuk-body
+  strong
+    | Nomination submitted on
+  br
+  = @form_answer.submitted_at&.strftime("%d %b %Y at %H:%M")

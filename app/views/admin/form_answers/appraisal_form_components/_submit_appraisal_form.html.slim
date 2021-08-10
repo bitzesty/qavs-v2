@@ -8,7 +8,7 @@
     .feedback-holder
 
     .pull-right
-      = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "btn btn-primary btn-confirm-submit"
+      = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button"
     .clear
 
 - elsif assessment.submitted?
@@ -23,7 +23,7 @@
         ' Assessment submitted
 
         .pull-right
-          = submit_tag "Unsubmit", class: "btn btn-primary"
+          = submit_tag "Unsubmit", class: "govuk-button btn-primary"
         .clear
 
 - else

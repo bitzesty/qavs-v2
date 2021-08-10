@@ -1,6 +1,6 @@
 header.page-header.group
   div
-    h1
+    h1.govuk-heading-xl
       ' Your account
 
 .article-container
@@ -9,7 +9,7 @@ header.page-header.group
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "edit_user qae-form" }, builder: SimpleForm::AccountFormBuilder) do |f|
         /= f.error_notification
 
-        h2
+        h2.govuk-heading-l
           span.steps#step-1
             span.visuallyhidden
               ' 1
@@ -20,12 +20,12 @@ header.page-header.group
         = render "accounts/form_correspondent_details", f: f
 
         fieldset
-          h2
+          h2.govuk-heading-l
             ' Your email address
           = f.input :email, input_html: { class: 'big medium'}, label_html: { class: 'visuallyhidden' }
         br
 
-        h2
+        h2.govuk-heading-l
           span.steps#step-2
             span.visuallyhidden
               ' 2
@@ -37,7 +37,7 @@ header.page-header.group
 
         br
 
-        h2
+        h2.govuk-heading-l
           span.steps#step-3
             span.visuallyhidden
               ' 3
@@ -46,7 +46,7 @@ header.page-header.group
           ' Correspondent preferences
 
         fieldset
-          h2
+          h2.govuk-heading-l
             ' How would you prefer we contact you?
           = f.input :prefered_method_of_contact, as: :radio_buttons, item_wrapper_class: 'selectable', label: false
 
@@ -55,7 +55,7 @@ header.page-header.group
         br
 
 
-        h2
+        h2.govuk-heading-l
           span.steps#step-4
             span.visuallyhidden
               ' 4
@@ -64,7 +64,7 @@ header.page-header.group
           ' Change Your Password
 
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          p
+          p.govuk-body
             ' Currently waiting confirmation for:
             = resource.unconfirmed_email
         br
@@ -134,7 +134,7 @@ header.page-header.group
           br
 
         .form-submit
-          = f.button :submit, "Update your account details", class: "button medium"
+          = f.button :submit, "Update your account details", class: "govuk-button medium"
 
         /
           h3

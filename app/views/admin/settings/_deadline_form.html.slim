@@ -7,7 +7,11 @@
       => deadline.message
       span.trigger-at.govuk-body
         = deadline.formatted_trigger_time
-    .deadline-form.govuk-inset-text
+      = link_to "Edit", "#", class: "edit-deadline govuk-link if-no-js-hide govuk-link govuk-!-margin-left-3", role: 'button'
+    - if deadline.help_message.present?
+      p.govuk-hint class="govuk-!-margin-bottom-5"
+        = deadline.help_message
+    .deadline-form.govuk-inset-text class='govuk-!-margin-bottom-7'
       = simple_form_for deadline, url: admin_settings_deadline_path(deadline, year: params[:year]), remote: true, authenticity_token: true do |f|
         .control-date
           label.control-label Set period
@@ -15,15 +19,9 @@
                     as: :separated_date_time,
                     input_html: { id: '' }
         .govuk-button-group
-          = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-cancel if-no-js-hide"
-          input type="button" value="Save" class="govuk-button btn-submit"
+          = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-cancel if-no-js-hide", role: 'button'
+          input type="submit" value="Save" class="govuk-button btn-submit"
 
-    = link_to "Edit", "#", class: "edit-deadline govuk-link if-no-js-hide govuk-link govuk-!-margin-left-3"
-
-    span.deadline-help
-      - if deadline.help_message.present?
-        .help-message-text.govuk-hint
-          = deadline.help_message
 - else
   .deadline
     span.date-time-text.govuk-body

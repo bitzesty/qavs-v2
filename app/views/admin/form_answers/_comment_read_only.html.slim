@@ -3,16 +3,5 @@
     h3.govuk-heading-m
       = comment_author(comment_read_only)
 
-  .comment-content
+  .comment-content.govuk-body
     = qae_simple_format comment_read_only.body
-
-
-  label.if-js-hide Flag
-  .comment-action
-    = l comment_read_only.created_at, format: :date_at_time
-    span.divider •
-    span.link-flag-comment
-      span.unflagged-visible
-        ' Unflagged
-      span.flagged-visible
-        ' Flagged
