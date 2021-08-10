@@ -99,7 +99,7 @@ $(function() {
       $emailField = $("[data-email-field]").attr("data-email-field").split(/\W+/).join(" ");
     }
     $passwordField.parent().parent().prepend('<input type="hidden" id="password-strength-score" name="password-strength-score" value=""/>');
-    
+
     new GOVUK.passwordStrengthIndicator({
       password_field: $passwordField,
       password_strength_guidance: $('#password-guidance'),
@@ -112,7 +112,7 @@ $(function() {
 
       update_indicator: function(guidance, strengthScore) {
         $('#password-strength-score').val(strengthScore);
-        
+
         var someProblem = false;
 
         if (guidance.indexOf('password-too-short') !== -1) {
