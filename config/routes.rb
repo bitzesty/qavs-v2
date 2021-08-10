@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
 
-  root to: QAE.production? ? redirect("https://www.gov.uk/apply-queens-award-enterprise") : "content_only#dashboard"
+  root to: QAE.production? ? redirect("https://qavs.dcms.gov.uk") : "content_only#dashboard"
 
   resource :account, only: :show do
     collection do
@@ -283,7 +283,7 @@ Rails.application.routes.draw do
 
   namespace :group_leader do
     root to: "dashboard#show"
-    
+
     resources :citations, only: [:edit, :update]
   end
 end
