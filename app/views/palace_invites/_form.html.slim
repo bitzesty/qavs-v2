@@ -13,7 +13,7 @@
               | The
               =<> TextOrdinalize.new(i).text_ordinalize
               | attendee
-          = render "attendee_details", ff: ff
+          = render "attendee_details", ff: ff, attendee: i
 
     = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
     = link_to "Cancel", group_leader_root_path, class: "govuk-button govuk-button--secondary if-no-js-hide"

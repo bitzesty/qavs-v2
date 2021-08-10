@@ -92,3 +92,17 @@ if (dropdowns.length > 0) {
     multiselect.enable()
   })
 }
+
+for (let i = 0; i < 2; i++) {
+  if ($(`#palace_invite_palace_attendees_attributes_${i}_disabled_access_true:checked`).length > 0) {
+    $(`.disabled-access-banner-${i}`).removeClass('govuk-!-display-none');
+  };
+
+  $(document).on('change', 'input.disabled-access-radio[type=radio]', function() {
+    if ($(`#palace_invite_palace_attendees_attributes_${i}_disabled_access_true:checked`).length > 0) {
+      $(`.disabled-access-banner-${i}`).removeClass('govuk-!-display-none');
+    } else {
+      $(`.disabled-access-banner-${i}`).addClass('govuk-!-display-none');
+    };
+  });
+};
