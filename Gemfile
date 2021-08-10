@@ -173,11 +173,6 @@ group :development, :test do
   gem "selenium-webdriver"
 end
 
-group :production do
-  # Log to the STDOUT and dev/prod parity when delivering assets, 12factor.net
-  gem 'rails_12factor', '~> 0.0.3'
-end
-
 group :test do
   gem 'factory_bot_rails'
   gem 'capybara', '3.33'
