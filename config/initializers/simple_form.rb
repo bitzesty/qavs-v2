@@ -87,16 +87,18 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :radio_buttons, item_wrapper_class: 'govuk-radios__item', item_label_class: 'govuk-label govuk-radios__label', class: 'govuk-form-group', error_class: "govuk-form-group--error" do |b|
-    b.use :html5
-    b.optional :readonly
+    b.wrapper tag: :fieldset, class: 'govuk-fieldset' do |bb|
+      bb.use :html5
+      bb.optional :readonly
 
-    b.use :label, wrap_with: { tag: :legend, class: 'govuk-fieldset__legend' }, tag: :h2, class: 'govuk-label govuk-label--l'
+      bb.use :label, wrap_with: { tag: :legend, class: 'govuk-fieldset__legend' }, tag: :h2, class: 'govuk-label govuk-label--l'
 
-    b.use :error, wrap_with: { class: 'govuk-error-message' }
-    b.use :hint, wrap_with: { class: 'govuk-hint' }
+      bb.use :error, wrap_with: { class: 'govuk-error-message' }
+      bb.use :hint, wrap_with: { class: 'govuk-hint' }
 
-    b.wrapper tag: :div, class: 'govuk-radios' do |ba|
-      ba.use :input, class: 'govuk-radios__input', error_class: '', valid_class: ''
+      bb.wrapper tag: :div, class: 'govuk-radios' do |ba|
+        ba.use :input, class: 'govuk-radios__input', error_class: '', valid_class: ''
+      end
     end
   end
 
