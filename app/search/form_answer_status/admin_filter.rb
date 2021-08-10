@@ -64,13 +64,25 @@ class FormAnswerStatus::AdminFilter
       label: "Application submitted",
       states: [:submitted]
     },
-    admin_not_eligible: {
-      label: "Admin: Not eligible",
-      states: [:admin_not_eligible]
-    },
     admin_eligible: {
       label: "Admin: Eligible",
       states: [:admin_eligible]
+    },
+    admin_eligible_duplicate: {
+      label: "Eligible - duplicate to access",
+      states: [:admin_eligible_duplicate]
+    },
+    admin_not_eligible_duplicate: {
+      label: "Duplicate for reference",
+      states: [:admin_not_eligible_duplicate]
+    },
+    admin_not_eligible_nominator: {
+      label: "Ineligible - nominator",
+      states: [:admin_not_eligible_nominator]
+    },
+    admin_not_eligible_group: {
+      label: "Ineligible - group",
+      states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {
       label: "Local assessment in progress",

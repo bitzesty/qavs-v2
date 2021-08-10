@@ -23,4 +23,8 @@ class FormAnswerStateTransition
   def collection
     states = form_answer.state_machine.collection(subject)
   end
+
+  def eligibility_collection
+    collection & FormAnswerStateMachine::ELIGIBILITY_STATES
+  end
 end

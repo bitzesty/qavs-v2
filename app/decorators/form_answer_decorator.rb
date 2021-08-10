@@ -142,6 +142,14 @@ class FormAnswerDecorator < ApplicationDecorator
     I18n.t(object.state.to_s, scope: "form_answers.state_short").html_safe
   end
 
+  def eligibility_state
+    if FormAnswerStateMachine::ELIGIBILITY_STATES.include?(object.state.to_sym)
+      state_short_text
+    else
+      "Eligible"
+    end
+  end
+
   def progress_text_short
     object.state.humanize
   end
