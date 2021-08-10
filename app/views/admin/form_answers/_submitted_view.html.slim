@@ -1,70 +1,16 @@
+= render "admin/form_answers/details_and_letters_of_support"
+
 .govuk-accordion data-module="govuk-accordion"
-  .govuk-accordion__section
-    .govuk-accordion__section-header
-      h2.govuk-accordion__section-heading
-        span.govuk-accordion__section-button#application-info-heading
-          ' Nomination info
-    .govuk-accordion__section-content#section-application-info aria-labelledby="application-info-heading"
-      .govuk-accordion data-module="govuk-accordion" class="govuk-!-margin-left-7"
-        = render "section_admin_comments"
-        = render "section_company_details"
-        = render "section_financial_summary"
-
-  .govuk-accordion__section
-    .govuk-accordion__section-header
-      h2.govuk-accordion__section-heading
-        span.govuk-accordion__section-button#assessment-heading
-          ' Assessment
-    .govuk-accordion__section-content#section-assessment aria-labelledby="assessment-heading"
-      .govuk-accordion data-module="govuk-accordion" class="govuk-!-margin-left-7"
-        = render "section_critical_comments"
-        = render "section_draft_notes"
-        = render "admin/form_answers/section_appraisal_form_primary"
-        = render "admin/form_answers/section_appraisal_form_secondary"
-        = render "section_appraisal_form_moderated"
-
-  - if show_case_summary_section?
-    = render "section_case_summary"
+  = render "section_admin_comments"
+  = render "admin/form_answers/section_appraisal_form_primary"
+  = render "admin/form_answers/section_appraisal_form_secondary"
+  = render "section_appraisal_form_moderated"
 
   - if show_feedback_section?
-    .govuk-accordion__section
-      .govuk-accordion__section-header
-        h2.govuk-accordion__section-heading
-          span.govuk-accordion__section-button
-            ' Feedback
-        .govuk-accordion__section-summary
-          p.govuk-hint
-            | (for not recommended nominations only)
-          p.govuk-body
-            | This will be sent to the applicants to help improve their business and/or future award nominations
-            br
-            | Note: this section is pre-populated with the Primary appraisal, so it can be edited if necessary
-          - if @form_answer.feedback_updated_by
-            p.govuk-body
-              = @form_answer.feedback_updated_by
-      .govuk-accordion__section-content#section-feedback.section-application-info role="tabpanel" aria-labelledby="feedback-heading"
-        = render "admin/feedbacks/section", form_answer: @form_answer
+    = render "admin/feedbacks/section", form_answer: @form_answer
 
   - if show_winners_section?
-    .govuk-accordion__section
-      .govuk-accordion__section-header
-        h2.govuk-accordion__section-heading
-          span.govuk-accordion__section-button
-            ' Winners
-      .govuk-accordion__section-content#section-winners aria-labelledby="winners-heading"
-        
-        .panel-group#panel-winners-parent role="tablist" aria-multiselectable="true"
-          - if show_press_summary_subsection?
-            = render "section_press_summary"
-          - if show_palace_attendees_subsection?
-            = render "section_palace_attendees"
-
-  .govuk-accordion__section
-    .govuk-accordion__section-header
-      h2.govuk-accordion__section-heading
-        span.govuk-accordion__section-button
-          ' Nomination Audit Log
-    .govuk-accordion__section-content#section-logs.section-application-info role="tabpanel" aria-labelledby="logs-heading"
-      .panel-body
-        - @audit_events.reverse.each do |log|
-          p.govuk-body = log.to_s
+    - if show_press_summary_subsection?
+      = render "section_press_summary"
+    - if show_palace_attendees_subsection?
+      = render "section_palace_attendees"

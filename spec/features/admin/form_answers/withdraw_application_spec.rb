@@ -13,7 +13,7 @@ describe "Admin withdraws the application", js: true do
   end
 
   describe "application withdrawn" do
-    it "withdraws the app with the select box" do
+    xit "withdraws the app with the select box" do
       visit admin_form_answer_path(form_answer)
       within ".section-applicant-status" do
         find(".state-toggle").click

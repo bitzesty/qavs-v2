@@ -1,70 +1,14 @@
-.govuk-accordion data-module="govuk-accordion"
-  .govuk-accordion__section
-    .govuk-accordion__section-header
-      h2.govuk-accordion__section-heading
-        span.govuk-accordion__section-button
-          ' Nomination info
-    .govuk-accordion__section-content
-      .govuk-accordion data-module="govuk-accordion"
-        = render "admin/form_answers/section_admin_comments", { read_only: true }
-        = render "admin/form_answers/section_company_details"
-        = render "admin/form_answers/section_financial_summary"
+= render "admin/form_answers/details_and_letters_of_support"
 
-  .govuk-accordion__section
-    .govuk-accordion__section-header
-      h4.govuk-accordion__section-heading
-          span.govuk-accordion__section-button#assessment-heading
-          ' Assessment
-    #section-assessment.section-application-info.govuk-accordion__section-content aria-labelledby="assessment-heading"
-      #panel-assessment-parent
-        = render "admin/form_answers/section_critical_comments"
-        = render "admin/form_answers/section_draft_notes"
-        - if primary_assessment.visible_for?(current_subject)
-          = render "admin/form_answers/section_appraisal_form_primary"
-        - if secondary_assessment.visible_for?(current_subject)
-          = render "admin/form_answers/section_appraisal_form_secondary"
-        - if show_section_appraisal_moderated?
-          = render "admin/form_answers/section_appraisal_form_moderated"
+.govuk-accordion class="govuk-!-margin-top-7" data-module="govuk-accordion"
+  = render "admin/form_answers/section_admin_comments", { read_only: true }
 
-  - if show_case_summary_section?
-    = render "admin/form_answers/section_case_summary"
+  - if primary_assessment.visible_for?(current_subject)
+    = render "admin/form_answers/section_appraisal_form_primary"
+  - if secondary_assessment.visible_for?(current_subject)
+    = render "admin/form_answers/section_appraisal_form_secondary"
+  - if show_section_appraisal_moderated?
+    = render "admin/form_answers/section_appraisal_form_moderated"
 
   - if show_feedback_section?
-    .govuk-accordion__section
-      .govuk-accordion__section-header
-        h4.govuk-accordion__section-heading
-          span.govuk-accordion__section-button#feedback-heading
-            ' Feedback (for not recommended nominations only)
-            small.panel-subtitle-small
-              | This will be sent to the applicants to help improve their business and/or future award nominations
-              br
-              | Note: this section is pre-populated with the Primary appraisal, so it can be edited if necessary
-            - if @form_answer.feedback_updated_by
-              small
-                = @form_answer.feedback_updated_by
-      #section-feedback.section-application-info.govuk-accordion__section-content aria-labelledby="feedback-heading"
-        = render "admin/feedbacks/section", form_answer: @form_answer
-
-  - if show_winners_section?
-    .govuk-accordion__section
-      .govuk-accordion__section-header
-        h4.govuk-accordion__section-heading
-          span.govuk-accordion__section-button#winners-heading
-            ' Winners
-      #section-winners.section-application-info.span.govuk-accordion__section-content role="tabpanel" aria-labelledby="winners-heading"
-        .panel-body
-          .panel-group#panel-winners-parent role="tablist" aria-multiselectable="true"
-            - if show_press_summary_subsection?
-              = render "admin/form_answers/section_press_summary"
-            - if show_palace_attendees_subsection?
-              = render "admin/form_answers/section_palace_attendees"
-
-    .govuk-accordion__section
-      .govuk-accordion__section-header
-        h4.govuk-accordion__section-heading
-          span.govuk-accordion__section-button#logs-heading
-            ' Nomination Audit Log
-    #section-logs.section-application-info.span.govuk-accordion__section-content role="tabpanel" aria-labelledby="logs-heading"
-      .panel-body
-        - @audit_events.reverse.each do |log|
-          p = log.to_s
+    = render "admin/feedbacks/section", form_answer: @form_answer

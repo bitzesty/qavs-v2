@@ -1,11 +1,9 @@
 .govuk-accordion__section
   .govuk-accordion__section-header
-    h3.govuk-accordion__section-heading
+    h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button
         ' Appraisal Form (Moderated)
-        - if moderated_assessment.last_editor_info.present?
-          small
-            = moderated_assessment.last_editor_info
+        = govuk_tag('undecided', 'purple')
 
   .govuk-accordion__section-content
     = simple_form_for([namespace_name, moderated_assessment],

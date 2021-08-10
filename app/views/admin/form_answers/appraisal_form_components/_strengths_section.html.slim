@@ -2,25 +2,17 @@
 - editable = f.object.editable_for?(current_subject)
 
 .govuk-form-group.strengths-section
-  div
-    = f.input section.rate,
-      as: :select,
-      label: false,
-      collection: form.options,
-      input_html: { class: "if-js-hide", "data-updated-section" => section.rate }
-
-    label.form-label.form-label-rag
+  fieldset.govuk-fieldset
+    legend.govuk-fieldset__legend
       = section.label
-      .btn-group.btn-rag class="#{'rag-editable' if editable}"
-        button.btn.btn-link.dropdown-toggle type="button" data-toggle="dropdown" aria-expanded="false" class="rag-#{form.option[1]}"
-          span.rag-text= form.option[0]
-          span.glyphicon.icon-rag
-          - if editable
-            span.caret
-        - if editable
-          ul.dropdown-menu.pull-right role="menu"
-            - form.options.each do |opt|
-              li class="rag-#{opt[1]}"
-                = link_to "#"
-                  span.icon-rag
-                  span.rag-text= opt[0]
+    
+    - if editable
+      = f.input section.rate,
+        as: :select,
+        label: 'Evaluate',
+        collection: form.options,
+        input_html: { "data-updated-section" => section.rate }
+
+    - else
+      p.govuk-body
+        = form.option[0]

@@ -10,14 +10,11 @@ feature "Admin view application", js: true do
 
     visit admin_form_answer_path(application)
 
-    expect(page).to have_content("View nomination")
-    expect(page).to have_content("Edit nomination")
+    expect(page).to have_content("Edit nomination and local assessment form")
 
-    application_window = window_opened_by { click_link("Edit nomination") }
-    within_window application_window do
-      expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
-    end
+    click_link("Edit nomination and local assessment form")
+    expect(page).to have_current_path edit_form_path(application)
+    expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
   end
 
   scenario "As a superadmin I can edit the nomination even when submission is due date" do
@@ -29,14 +26,12 @@ feature "Admin view application", js: true do
 
     visit admin_form_answer_path(application)
 
-    expect(page).to have_content("View nomination")
-    expect(page).to have_content("Edit nomination")
+    expect(page).to have_content("Edit nomination and local assessment form")
 
-    application_window = window_opened_by { click_link("Edit nomination") }
-    within_window application_window do
-      expect(page).to have_current_path edit_form_path(application)
-      expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
-    end
+    click_link("Edit nomination and local assessment form")
+    
+    expect(page).to have_current_path edit_form_path(application)
+    expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
   end
 end
 

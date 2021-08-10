@@ -1,8 +1,5 @@
 - if policy(@form_answer).can_download_original_pdf_of_application_before_deadline?
-
-  = link_to @form_answer.pdf_version.url,
-            class: "govuk-button btn-default btn-block",
-            target: "_blank"
-    span.glyphicon.glyphicon-file
-    span.btn-title
-      ' Download original PDF before deadline
+  = link_to 'Download nomination and local assessment form (PDF)',
+            @form_answer.pdf_version.url,
+            class: "download-link govuk-link",
+            download: true

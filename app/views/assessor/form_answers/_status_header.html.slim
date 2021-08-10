@@ -1,4 +1,4 @@
-th.filter
+th.govuk-table__header.filter scope="row"
   = f.simple_fields_for [:filters, @search.filters] do |h|
     = h.input :status,
               collection: FormAnswerStatus::AssessorFilter.options,
@@ -12,7 +12,7 @@ th.filter
               input_html: { multiple: true, class: "js-admin-filter-option if-js-hide" }
 
   .dropdown.if-no-js-hide
-    button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown" aria-expanded="true"
+    button.govuk-button.btn-default.dropdown-toggle type="button" data-toggle="dropdown" aria-expanded="true"
       ' Status:
       span.text-filter
         ' All

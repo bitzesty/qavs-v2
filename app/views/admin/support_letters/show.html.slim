@@ -7,5 +7,5 @@
 .question-group
   - %w(first_name last_name organization_name phone relationship_to_nominee address_first address_second city country postcode body).each do |attr|
     - if (answer = @support_letter.public_send(attr)).present?
-      h3 = SupportLetter.human_attribute_name(attr)
-      p = answer
+      h3.govuk-heading-m = SupportLetter.human_attribute_name(attr)
+      p.govuk-body = answer

@@ -1,9 +1,12 @@
 # require jquery-ui
+window.__settings_modal_id = 1
 
 class DeadlineForm
   constructor: (el) ->
     @form = el
     @hasChanged = false
+    @modal_id = window.__settings_modal_id + 1
+    window.__settings_modal_id += 1
     @init()
 
   init: ->
@@ -13,23 +16,26 @@ class DeadlineForm
 
   createModal: ->
     html = """
-<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>
+<div class="mm-modal" id="#{@modal_id}" aria-hidden="true">
+  <div class="mm-modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="mm-modal__container" role="dialog" aria-modal="true" aria-labelledby="#{@modal_id}-title">
+      <header class="mm-modal__header">
+        <h2 class="govuk-heading-l mm-modal__title" id="#{@modal_id}-title">
+          Are you sure you want to change the date?
+        </h2>
+        <button class="govuk-button mm-modal__close" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <div class="mm-modal__content" id="#{@modal_id}-content">
+        <p class="govuk-body">
           This could change the current status of the application and affect all users.
         </p>
-        <p>
-          Are you sure you want to change the date?
-        </p>
 
-        <br />
-
-        <p>
-          <button type="button" class="btn btn-primary confirm-date-change">Yes, change the date</button>
-          <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-        </p>
+        <div class="govuk-button-group">
+          <button type="button" class="govuk-button confirm-date-change">Yes, change the date</button>
+          <button class="govuk-button govuk-button--secondary" data-micromodal-close>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -37,6 +43,7 @@ class DeadlineForm
     """
 
     @modal = $(html)
+    $("body").append(@modal)
 
   gatherInitialValues: ->
     @date = @form.find("input.datepicker").val()
@@ -51,7 +58,7 @@ class DeadlineForm
       if e.target.value != @time and @time
         @hasChanged = true
 
-    @form.on "click", ".btn-submit", (e) =>
+    @form.on "click", ".govuk-button", (e) =>
       if @hasChanged
         e.preventDefault()
 
@@ -62,7 +69,7 @@ class DeadlineForm
     @modal.on "click", ".confirm-date-change", (e) =>
       e.preventDefault()
 
-      @modal.modal("hide")
+      MicroModal.close(@modal_id)
 
       @form.submit()
 
@@ -70,11 +77,15 @@ class DeadlineForm
       @reset()
 
   showConfirmationModal: ->
-    @modal.modal("show")
+    MicroModal.show(@modal_id)
 
   reset: ->
     @hasChanged = false
     @gatherInitialValues()
+    wrapper = @form.closest('.deadline')
+    ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
+    ($ ".deadline-form", wrapper).addClass("govuk-!-display-none")
+    ($ ".edit-deadline", wrapper).removeClass("govuk-!-display-none")
 
 
 jQuery ->

@@ -6,21 +6,18 @@ h1.govuk-heading-xl
   | Edit the eligibility status
 
 = simple_form_for [:admin, @form_answer], html: { class: "qae-form" }, method: :patch, url: update_eligibility_admin_form_answer_path(@form_answer) do |f|
-  .govuk-form-group
-    = f.input :state,
-              as: :radio_buttons,
-              collection: state.eligibility_collection.map { |s| [t(s, scope: "form_answers.state"), s] },
-              input_html: { class: "admin-eligibility-option" },
-              label: "Select the eligibility status",
-              label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
+  = f.input :state,
+            as: :radio_buttons,
+            collection: state.eligibility_collection.map { |s| [t(s, scope: "form_answers.state"), s] },
+            input_html: { class: "admin-eligibility-option" },
+            label: "Select the eligibility status",
+            label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
 
   .nominator-ineligible-reasons
-    .govuk-form-group
-      = f.input :ineligible_reason_nominator, as: :radio_buttons, label: "Select a reason why the nominator is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
+    = f.input :ineligible_reason_nominator, as: :radio_buttons, label: "Select a reason why the nominator is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
 
   .group-ineligible-reasons.hidden
-    .govuk-form-group
-      = f.input :ineligible_reason_group, as: :select, label: "Select a reason why the group is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-font-weight-bold" }, input_html: { class: "custom-select" }
+    = f.input :ineligible_reason_group, as: :select, label: "Select a reason why the group is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-font-weight-bold" }
 
   div class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
     .govuk-button-group

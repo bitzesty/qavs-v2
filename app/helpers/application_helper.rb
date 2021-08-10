@@ -145,4 +145,14 @@ module ApplicationHelper
   def current_class?(path)
     request.path == path ? "active" : ""
   end
+
+  def award_years_collection
+    [['All years', 'all_years']] + AwardYear.admin_switch.map do |year, label|
+      [label, year]
+    end
+  end
+
+  def govuk_tag(text, style)
+    content_tag :strong, text.upcase, class: "govuk-tag govuk-tag--#{style}"
+  end
 end

@@ -1,33 +1,7 @@
 .form-container.comment.show-comment class="#{'comment-flagged' if comment.flagged?}" data-signature="Updated by #{message_author_name(comment.author)} - #{l(comment.created_at, format: :date_at_time)}"
-  .overlay-delete
-    .overlay-content
-      - if comment.author?(current_subject)
-
-        p Delete this comment?
-        .btn-actions
-        = form_for [namespace_name, @form_answer, comment],
-                   html: { method: :delete, class: "destroy-comment"} do |f|
-
-            = f.submit 'Yes', class: "govuk-button btn-danger link-delete-comment-confirm"
-            ' &nbsp;
-            = link_to "No", "#", class: "govuk-button btn-default link-delete-comment-close"
-
   .comment-header
     h3.govuk-heading-m
       = comment_author(comment)
-
-      span.pull-right.if-no-js-hide
-        - if comment.author?(current_subject)
-          = link_to "#", class: "link-delete-comment"
-            ' Delete
-            span.icon-delete-comment
-      span.pull-right.if-js-hide
-
-        - if comment.author?(current_subject)
-          = form_for [namespace_name, @form_answer, comment],
-                     html: { method: :delete, class: "destroy-comment"} do |f|
-
-            = f.submit 'Delete', class: "govuk-button btn-danger link-delete-comment-confirm"
 
   .comment-content
     = qae_simple_format comment.body
@@ -35,15 +9,17 @@
   = form_for([namespace_name, @form_answer, comment],
              remote: true,
              authenticity_token: true) do |f|
-
-    label.if-js-hide Flag
-    = f.check_box :flagged, class: "flag-comment-checkbox if-js-hide"
     .comment-action
       = l comment.created_at, format: :date_at_time
-      span.divider •
-      = link_to "#flag-comment", class: "link-flag-comment js-link-flag-comment"
-        span.unflagged-visible
-          ' Mark as flagged
-        span.flagged-visible
-          ' Flagged
-    = f.submit :update, class: "if-js-hide btn btn-default"
+    = f.submit :update, class: "if-js-hide govuk-button btn-default"
+
+  span.pull-right.if-no-js-hide
+    - if comment.author?(current_subject)
+      = link_to 'Delete', [namespace_name, @form_answer, comment], method: :delete, class: "link-delete-comment govuk-link", data: { confirm: 'Are you sure you want to delete comment?' }
+  span.pull-right.if-js-hide
+
+    - if comment.author?(current_subject)
+      = form_for [namespace_name, @form_answer, comment],
+                  html: { method: :delete, class: "destroy-comment"} do |f|
+
+        = f.submit 'Delete', class: "govuk-button govuk-button--warning link-delete-comment-confirm"
