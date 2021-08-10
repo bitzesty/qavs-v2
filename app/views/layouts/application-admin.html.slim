@@ -12,8 +12,6 @@
 
   = yield :section_meta_tags
 
-  = yield :head
-
 - content_for :header_class do
   - unless landing_page?
     ' with-proposition
@@ -63,7 +61,7 @@
     #QAE class="#{'admin-mode' if admin_in_read_only_mode?} #{'layout-dev' if Rails.env.development?}"
       .govuk-width-container
         main#content.group class="govuk-main-wrapper app-main-class #{yield :page_content_class}"
-          
+
           - if params[:session_expired].present?
             = render "shared/session_expired_message"
 

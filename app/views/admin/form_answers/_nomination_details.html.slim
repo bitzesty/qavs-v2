@@ -1,22 +1,24 @@
 hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-p.govuk-body 
-  strong 
+p.govuk-body
+  strong
     | Type of group
   br
-  | Disability  
-p.govuk-body 
-  strong 
+  = NomineeActivityHelper.lookup_label_for_activity(@form_answer.nominee_activity.to_sym)
+p.govuk-body
+  strong
     | National assessor sub-group
   br
-  | Sub-group 1   
-p.govuk-body 
-  strong 
-    | Lord Lieutenancy office 
+  | Sub-group 1
+p.govuk-body
+  strong
+    | Lord Lieutenancy office
   br
-  | North Yorkshire  
-p.govuk-body 
-  strong 
+  - if @form_answer.ceremonial_county.present?
+    = @form_answer.ceremonial_county.name
+p.govuk-body
+  strong
     | Nomination submitted on
   br
-  | 10/07/2021 at 11:11am
+  - if @form_answer.submitted?
+    = @form_answer.submitted_at.strftime("%d %b %Y at %H:%M")
