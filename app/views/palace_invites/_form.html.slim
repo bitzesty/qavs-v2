@@ -2,44 +2,18 @@
 
   - @invite_form.build_palace_attendee if @invite_form.palace_attendees.none?
 
-  fieldset.question-block.question-group
-    ul.list-add data-need-to-clear-example=true data-add-limit="2" data-default=1
+  fieldset.question-block.question-group.govuk-form-group
+    ul.govuk-list data-need-to-clear-example=true data-add-limit="2" data-default=1
       - i = 0
       = f.simple_fields_for :palace_attendees do |ff|
-
-        .js-add-example
-          = hidden_field_tag "palace_invite[palace_attendees_attributes][#{i}][_remove]", "", class: 'remove'
-          a.remove-link.js-remove-link href="#" Remove
+        .js-add-example.govuk-form-group
           - i += 1
-  
-          .h3.govuk-heading-m
-            | The first attendee
+          legend.govuk-fieldset__legend
+            h3.govuk-heading-m
+              | The
+              =<> TextOrdinalize.new(i).text_ordinalize
+              | attendee
+          = render "attendee_details", ff: ff, attendee: i
 
-          p.govuk-body.text-normal 
-            | Usually this would be you, the group leader, but if you cannot attend, someone else from your group can attend instead of you.
-          p.govuk-body.text-normal 
-            | Your name and address must be the same as per form of identification that you will bring to the event.
-
-          .question-group
-            = ff.label "The attendee’s relationship to the successful group?", class: "govuk-label--s"
-            = ff.input :relationship,
-                        input_html: { class: "medium" },
-                        label: false
-
-          = render "attendee_details", ff: ff
-
-          h3.govuk-heading-m
-            | The second attendee
-
-          .question-group
-            = ff.label "What relation is the guest to the first attendee?", class: "govuk-label--s"
-            = ff.input :relationship,
-                        as: :radio_buttons,
-                        collection: [["Spouse", "spouse"], ["Partner", "partner"], ["Father or mother", "parent"], ["Other family relation", "other_family"], ["Companion", "companion"]],
-                        input_html: { class: "medium" },
-                        label: false
-
-          = render "attendee_details", ff: ff
-
-  = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
-  = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide"
+    = f.submit "Submit", class: "govuk-button save-palace-attendees-button"
+    = link_to "Cancel", group_leader_root_path, class: "govuk-button govuk-button--secondary if-no-js-hide"

@@ -44,17 +44,17 @@ en:
         i_dont_know: "I don't know"
     palace_attendee:
       preferred_date:
-        any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        any: Any date at Buckingham Palace
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse
       alternative_date:
-        any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        any: Any date at Buckingham Palace
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse
         none: There is no suitable secondary date
 
   activerecord:
