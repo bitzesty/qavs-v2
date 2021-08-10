@@ -93,6 +93,8 @@ GEM
     activerecord (6.0.3.7)
       activemodel (= 6.0.3.7)
       activesupport (= 6.0.3.7)
+    activerecord-import (1.2.0)
+      activerecord (>= 3.2)
     activestorage (6.0.3.7)
       actionpack (= 6.0.3.7)
       activejob (= 6.0.3.7)
@@ -715,6 +717,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_hash
+  activerecord-import
   amoeba (= 3.0.0)
   appsignal
   binding_of_caller

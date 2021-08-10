@@ -10,8 +10,9 @@ gem 'websocket-extensions', '~> 0.1.5'
 # SSL redirect
 gem 'rack-ssl-enforcer'
 
-# PostgreSQL
+# PostgreSQL & data import
 gem 'pg', '~> 0.20'
+gem 'activerecord-import'
 
 # Track Changes
 gem 'paper_trail', '~> 10.3'

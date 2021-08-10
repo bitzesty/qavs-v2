@@ -1,102 +1,102 @@
-﻿id,name,country
-1,Bedfordshire,England
-2,Berkshire,England
-3,Buckinghamshire,England
-4,Cambridgeshire,England
-5,Cheshire,England
-6,Cornwall,England
-7,County Durham,England
-8,Cumbria,England
-9,Derbyshire,England
-10,Devon,England
-11,Dorset,England
-12,East Sussex,England
-13,Essex,England
-14,Gloucestershire,England
-15,Greater London,England
-16,Greater Manchester,England
-17,Hampshire,England
-18,Herefordshire,England
-19,Hertfordshire,England
-20,Isle of Man,England
-21,Kent,England
-22,Lancashire,England
-23,Leicestershire,England
-24,Lincolnshire,England
-25,Merseyside,England
-26,Norfolk,England
-27,North Yorkshire,England
-28,Northamptonshire,England
-29,Northumberland,England
-30,Nottinghamshire,England
-31,Oxfordshire,England
-32,Rutland,England
-33,Shropshire,England
-34,Somerset,England
-35,South Yorkshire,England
-36,Staffordshire,England
-37,Suffolk,England
-38,Surrey,England
-39,The City and County of Bristol,England
-40,The East Riding of Yorkshire,England
-41,the Isle of Wight,England
-42,the West Midlands,England
-43,Tyne and Wear,England
-44,Warwickshire,England
-45,West Sussex,England
-46,West Yorkshire,England
-47,Wiltshire,England
-48,Worcestershire,England
-49,Guernsey ,Islands
-50,Jersey ,Islands
-51,County Antrim,Northern Ireland
-52,County Armagh,Northern Ireland
-53,County Borough of Belfast,Northern Ireland
-54,County Borough of Londonderry,Northern Ireland
-55,County Down,Northern Ireland
-56,County Fermanagh,Northern Ireland
-57,County Tyrone,Northern Ireland
-58,The City of Londonderry,Northern Ireland
-59,Aberdeenshire,Scotland
-60,Angus,Scotland
-61,Argyll and Bute,Scotland
-62,Ayrshire and Arran,Scotland
-63,Banffshire,Scotland
-64,Berwickshire,Scotland
-65,Caithness,Scotland
-66,Clackmannanshire,Scotland
-67,Dumfries & Galloway,Scotland
-68,Dunbartonshire,Scotland
-69,East Lothian,Scotland
-70,Fife,Scotland
-71,Inverness,Scotland
-72,Kincardineshire,Scotland
-73,Lanarkshire,Scotland
-74,Midlothian,Scotland
-75,Moray,Scotland
-76,Nairn,Scotland
-77,Orkney,Scotland
-78,Perth and Kinross,Scotland
-79,Renfrewshire,Scotland
-80,Ross and Cromarty,Scotland
-81,Roxburgh Etterick and Lauderdale,Scotland
-82,Shetland,Scotland
-83,Stirling and Falkirk,Scotland
-84,Sutherland,Scotland
-85,the City of Aberdeen,Scotland
-86,the City of Dundee,Scotland
-87,the City of Edinburgh,Scotland
-88,the City of Glasgow,Scotland
-89,the Stewartry of Kirkcudbright,Scotland
-90,the Western Isles,Scotland
-91,Tweeddale,Scotland
-92,West Lothian,Scotland
-93,Wigtown,Scotland
-94,Clwyd,Wales
-95,Dyfed,Wales
-96,Gwent,Wales
-97,Gwynedd,Wales
-98,Mid Glamorgan,Wales
-99,Powys,Wales
-100,South Glamorgan,Wales
-101,West Glamorgan,Wales
+﻿name,country
+Bedfordshire,England
+Berkshire,England
+Buckinghamshire,England
+Cambridgeshire,England
+Cheshire,England
+Cornwall,England
+County Durham,England
+Cumbria,England
+Derbyshire,England
+Devon,England
+Dorset,England
+East Sussex,England
+Essex,England
+Gloucestershire,England
+Greater London,England
+Greater Manchester,England
+Hampshire,England
+Herefordshire,England
+Hertfordshire,England
+Isle of Man,England
+Kent,England
+Lancashire,England
+Leicestershire,England
+Lincolnshire,England
+Merseyside,England
+Norfolk,England
+North Yorkshire,England
+Northamptonshire,England
+Northumberland,England
+Nottinghamshire,England
+Oxfordshire,England
+Rutland,England
+Shropshire,England
+Somerset,England
+South Yorkshire,England
+Staffordshire,England
+Suffolk,England
+Surrey,England
+The City and County of Bristol,England
+The East Riding of Yorkshire,England
+the Isle of Wight,England
+the West Midlands,England
+Tyne and Wear,England
+Warwickshire,England
+West Sussex,England
+West Yorkshire,England
+Wiltshire,England
+Worcestershire,England
+Guernsey ,Islands
+Jersey ,Islands
+County Antrim,Northern Ireland
+County Armagh,Northern Ireland
+County Borough of Belfast,Northern Ireland
+County Borough of Londonderry,Northern Ireland
+County Down,Northern Ireland
+County Fermanagh,Northern Ireland
+County Tyrone,Northern Ireland
+The City of Londonderry,Northern Ireland
+Aberdeenshire,Scotland
+Angus,Scotland
+Argyll and Bute,Scotland
+Ayrshire and Arran,Scotland
+Banffshire,Scotland
+Berwickshire,Scotland
+Caithness,Scotland
+Clackmannanshire,Scotland
+Dumfries & Galloway,Scotland
+Dunbartonshire,Scotland
+East Lothian,Scotland
+Fife,Scotland
+Inverness,Scotland
+Kincardineshire,Scotland
+Lanarkshire,Scotland
+Midlothian,Scotland
+Moray,Scotland
+Nairn,Scotland
+Orkney,Scotland
+Perth and Kinross,Scotland
+Renfrewshire,Scotland
+Ross and Cromarty,Scotland
+Roxburgh Etterick and Lauderdale,Scotland
+Shetland,Scotland
+Stirling and Falkirk,Scotland
+Sutherland,Scotland
+the City of Aberdeen,Scotland
+the City of Dundee,Scotland
+the City of Edinburgh,Scotland
+the City of Glasgow,Scotland
+the Stewartry of Kirkcudbright,Scotland
+the Western Isles,Scotland
+Tweeddale,Scotland
+West Lothian,Scotland
+Wigtown,Scotland
+Clwyd,Wales
+Dyfed,Wales
+Gwent,Wales
+Gwynedd,Wales
+Mid Glamorgan,Wales
+Powys,Wales
+South Glamorgan,Wales
+West Glamorgan,Wales

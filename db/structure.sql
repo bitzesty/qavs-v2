@@ -3174,6 +3174,13 @@ CREATE UNIQUE INDEX index_award_years_on_year ON public.award_years USING btree 
 
 
 --
+-- Name: index_ceremonial_counties_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_ceremonial_counties_on_name ON public.ceremonial_counties USING btree (name);
+
+
+--
 -- Name: index_citations_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3820,6 +3827,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210809072025'),
 ('20210809072320'),
 ('20210809073242'),
-('20210810173827');
+('20210810173827'),
+('20210810175339');
 
 
