@@ -26,45 +26,44 @@
   - if f.object.persisted?
     .question-group#password-change-panel
       #password-control-group
-        .row
-          .col-md-4.col-sm-6
-            .input-group
-              = f.input :password,
-                        input_html: { class: 'medium' },
-                        label: 'New password',
-                        label_html: { class: 'govuk-label--s' }
-              span#password-result-span.input-group-addon
-                i#password-result.glyphicon.glyphicon-ok
-        .clear
+        .input-group
+          = f.input :password,
+                    input_html: { class: 'medium' },
+                    label: 'New password',
+                    label_html: { class: 'govuk-label--s' }
+          span#password-result-span.input-group-addon
+            i#password-result.glyphicon.glyphicon-ok
       .guidance-panel.if-no-js-hide
         #password-guidance
-          br
-          .alert.alert-warning
-            p.govuk-body.text-underline Please improve your password
-            p#password-too-short
-              ' It must be at least 10 characters.
-            p#parts-of-email It shouldn't include part or all of your email address.
-            p#password-entropy
-              ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
+          .govuk-warning-text
+            span.govuk-warning-text__icon aria-hidden='true' !
+            strong.govuk-warning-text__text
+              span.govuk-warning-text__assistive
+                | Warning
+              | Please improve your password
+            strong.govuk-warning-text__text#password-too-short
+              | It must be at least 10 characters.
+            strong.govuk-warning-text__text#parts-of-email It shouldn't include part or all of your email address.
+            strong.govuk-warning-text__text#password-entropy
+              | It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
 
       #password-confirmation-control-group
-        h3.govuk-heading-m = f.label :password_confirmation, label: "Retype password", class: "form-label"
-        .row
-          .col-md-4.col-sm-6
-            .input-group
-              = f.input :password_confirmation,
-                        input_html: { class: 'medium' },
-                        label: 'Confirm new password',
-                        label_html: { 'govuk-label--s' }
-              span#password-confirmation-result-span.input-group-addon
-                i#password-confirmation-result.glyphicon.glyphicon-ok
-        .clear
+        .input-group
+          = f.input :password_confirmation,
+                    input_html: { class: 'medium' },
+                    label: 'Confirm new password',
+                    label_html: { class: 'govuk-label--s' }
+          span#password-confirmation-result-span.input-group-addon
+            i#password-confirmation-result.glyphicon.glyphicon-ok
 
       .if-no-js-hide
         #password-confirmation-guidance
-          br
-          .alert.alert-warning
-            p#password-confirmation-match The confirmation must match the password
+          .govuk-warning-text
+            span.govuk-warning-text__icon aria-hidden='true' !
+            strong.govuk-warning-text__text#password-confirmation-match
+              span.govuk-warning-text__assistive
+                | Warning
+              | The confirmation must match the password
 
   = f.input :role,
             as: :radio_buttons,
