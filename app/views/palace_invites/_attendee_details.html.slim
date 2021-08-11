@@ -63,20 +63,18 @@ div class='govuk-notification-banner disabled-access-banner-#{attendee - 1} js-e
 .govuk-form-group
   = ff.label :preferred_date, label: "Preferred date and location to attend the Royal Garden Party", class: "govuk-label--s"
   = ff.hint "Please choose the location of the Royal Garden Party based on the guidance below:"
-  .govuk-hint
-    ul.govuk-list.govuk-list--bullet
-        li Residents of Scotland should normally attend the Garden Party hosted at the Palace of Holyroodhouse.
-        li Residents in other parts of the UK can also opt to attend a Garden Party at the Palace of Holyroodhouse if this is easier for them.
+  ul.govuk-list.govuk-list--bullet.govuk-hint
+    li Residents of Scotland should normally attend the Garden Party hosted at the Palace of Holyroodhouse.
+    li Residents in other parts of the UK can also opt to attend a Garden Party at the Palace of Holyroodhouse if this is easier for them.
   = ff.input :preferred_date,
               as: :radio_buttons,
               label: false
 .govuk-form-group
   = ff.label :alternative_date, label: "Secondary date and location to attend the Royal Garden Party", class: "govuk-label--s"
   = ff.hint "Please choose the location of the Royal Garden Party based on the guidance below:"
-  .govuk-hint
-    ul.govuk-list.govuk-list--bullet
-        li Residents of Scotland should normally attend the Garden Party hosted at the Palace of Holyroodhouse.
-        li Residents in other parts of the UK can also opt to attend a Garden Party at the Palace of Holyroodhouse if this is easier for them.
+  ul.govuk-list.govuk-list--bullet.govuk-hint
+    li Residents of Scotland should normally attend the Garden Party hosted at the Palace of Holyroodhouse.
+    li Residents in other parts of the UK can also opt to attend a Garden Party at the Palace of Holyroodhouse if this is easier for them.
   = ff.input :alternative_date,
               as: :radio_buttons,
               label: false
