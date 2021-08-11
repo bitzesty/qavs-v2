@@ -1,4 +1,6 @@
 class Admin::DashboardController < Admin::BaseController
+  before_action :redirect_to_nominations
+
   def index
     authorize :dashboard, :index?
     @statistics = FormAnswerStatistics::Picker.new(@award_year)
@@ -18,5 +20,11 @@ class Admin::DashboardController < Admin::BaseController
 
   def totals_by_day
     authorize :dashboard, :totals_by_day?
+  end
+
+  private
+
+  def redirect_to_nominations
+    redirect_to admin_form_answers_url
   end
 end
