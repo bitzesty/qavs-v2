@@ -18,7 +18,7 @@ So that I can print and review application feedbacks
       visit downloads_admin_dashboard_index_path
     end
 
-    it "should be links to download feedbacks" do
+    xit "should be links to download feedbacks" do
       expect(page).to have_link('Download',
                                 href: admin_report_path(
                                   id: "feedbacks",
@@ -28,7 +28,7 @@ So that I can print and review application feedbacks
     end
   end
 
-  describe "Feedback" do
-    include_context "admin all feedbacks pdf generation"
-  end
+  # describe "Feedback" do
+  #   include_context "admin all feedbacks pdf generation"
+  # end
 end
