@@ -14,11 +14,11 @@ footer
             span.pagination-label
               | Back
 
+      - unless admin_in_read_only_mode?
+        li.save-quit-link
+          = link_to "Save and come back later", dashboard_path, class: "save-quit-link govuk-button govuk-button--secondary"
+
       - if step.next
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
           = link_to edit_form_url(id: @form_answer.id, step: step.next.title.parameterize), rel: "next", title: "Navigate to next part", class: "govuk-button" do
             ' Save and continue
-
-      - unless admin_in_read_only_mode?
-        li.save-quit-link
-          = link_to "Save and come back later", dashboard_path, class: "save-quit-link govuk-button govuk-button--secondary"
