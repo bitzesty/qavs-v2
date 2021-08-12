@@ -1,13 +1,18 @@
 class Users::SupportLettersController < Users::BaseController
   expose(:form_answer) do
-    current_user.account.
-                form_answers.
-                find(params[:form_answer_id])
+    if current_user
+      current_user.account.
+        form_answers.
+        find(params[:form_answer_id])
+    elsif current_admin
+      FormAnswer.find(params[:form_answer_id])
+    end
   end
+
   expose(:support_letter) do
     form_answer.support_letters.new(
       support_letter_params.merge({
-        user_id: current_user.id,
+        user_id: current_user.try(:id) || form_answer.user_id,
         manual: true,
         support_letter_attachment: attachment
       })
@@ -16,6 +21,8 @@ class Users::SupportLettersController < Users::BaseController
   expose(:attachment) do
     SupportLetterAttachment.find_by_id(support_letter_params[:attachment])
   end
+
+  skip_before_action :authenticate_user!, if: :current_admin
 
   def create
     if support_letter.save

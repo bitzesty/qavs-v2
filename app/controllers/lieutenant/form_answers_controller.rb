@@ -158,7 +158,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   def resolve_layout
     case action_name
-    when "edit", "update"
+    when "edit", "update", "save"
       "application"
     else
       "application-lieutenant"
