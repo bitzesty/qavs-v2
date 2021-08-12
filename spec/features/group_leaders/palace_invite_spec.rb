@@ -4,14 +4,15 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 def enter_attendee_details(attendee)
-  fill_in "palace_invite_palace_attendees_attributes_#{attendee-1}_relationship", with: "string"
-  fill_in "palace_invite_palace_attendees_attributes_#{attendee-1}_first_name", with: "string"
-  fill_in "palace_invite_palace_attendees_attributes_#{attendee-1}_last_name", with: "string"
-  fill_in "palace_invite_palace_attendees_attributes_#{attendee-1}_address_1", with: "string"
-  fill_in "palace_invite_palace_attendees_attributes_#{attendee-1}_postcode", with: "string"
-  choose "palace_invite_palace_attendees_attributes_#{attendee-1}_disabled_access_false"
-  choose "palace_invite_palace_attendees_attributes_#{attendee-1}_preferred_date_any"
-  choose "palace_invite_palace_attendees_attributes_#{attendee-1}_alternative_date_any"
+  prefix = "palace_invite_palace_attendees_attributes_#{attendee-1}_"
+  fill_in "#{prefix}relationship", with: "string"
+  fill_in "#{prefix}first_name", with: "string"
+  fill_in "#{prefix}last_name", with: "string"
+  fill_in "#{prefix}address_1", with: "string"
+  fill_in "#{prefix}postcode", with: "string"
+  choose "#{prefix}disabled_access_true"
+  choose "#{prefix}preferred_date_any"
+  choose "#{prefix}alternative_date_any"
 end
 
 describe "Palace invite process" do
@@ -32,9 +33,9 @@ describe "Palace invite process" do
 
     enter_attendee_details(1)
     enter_attendee_details(2)
+
     click_button "Submit"
-   
+
     expect(page).to have_selector(".notice", text: "Palace Attendees details are successfully submitted!")
-    # expect(page).to have_content("Details for Royal Garden Party")
   end
 end
