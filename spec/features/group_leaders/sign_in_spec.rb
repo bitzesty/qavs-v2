@@ -9,7 +9,6 @@ describe "GroupLeader sign in" do
 
   it "allows group_leader to sign in" do
     create(:citation, form_answer_id: form_answer.id)
-    create(:palace_invite, form_answer_id: form_answer.id)
 
     visit group_leader_root_path
     fill_in "group_leader_email", with: group_leader.email
