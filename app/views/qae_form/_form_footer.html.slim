@@ -4,10 +4,12 @@ footer
       - if current_form_is_editable? || (current_lieutenant && step.local_assessment?)
         - dashboard_link = current_subject.is_a?(Lieutenant) ? lieutenant_form_answer_url(@form_answer) : dashboard_url
         li.save-quit-link
+          - button_class = current_lieutenant.role.advanced? ? "govuk-button govuk-button--secondary" : "govuk-button"
+          - button_text = current_lieutenant.role.advanced? ? "Save and come back later" : "Save local assessment"
           span.if-js-hide
-            = button_tag "Save and come back later", class: "govuk-button save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_link }
+            = button_tag button_text, class: "#{ button_class } save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_link }
           span.if-no-js-hide
-            = link_to "Save and come back later", dashboard_link, class: " govuk-button govuk-button--secondary js-save-and-come-back"
+            = link_to button_text, dashboard_link, class: "#{ button_class } js-save-and-come-back"
 
       - if step.next_for(@form_answer, current_form_user)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
