@@ -1,25 +1,28 @@
-= simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
-  .row
-    .col-md-4.col-sm-5.col-xs-12
-      .form-group.search-input
-        = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-        = submit_tag :submit, class: 'search-submit'
+.dashboard
+  h1.govuk-heading-xl
+    | Lord Lieutenancy Office Users
+  = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
+    .govuk-grid-row
+      .govuk-grid-column-one-third
+        .form-group.search-input
+          = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
+          = submit_tag :submit, class: 'search-submit'
 
-    .col-md-3.col-sm-4.col-xs-12.pull-right.text-right
-      = link_to new_lieutenant_lieutenant_path, class: 'new-user govuk-button govuk-button--secondary btn-secondary btn-md' do
-        = "+ Add lieutenant"
-  .clear
+      .govuk-grid-column-two-thirds.text-right
+        = link_to new_lieutenant_lieutenant_path, class: 'new-user govuk-button' do
+          = "+ Add Lord Lieutenancy Office user"
+    .clear
 
-  - if @search.query?
-    .well.search-text
-      p.govuk-body
-        = "Search results for '#{@search.query}'"
-        small
-          = link_to "(Clear search)", [:lieutenant, :lieutenants], class: "govuk-button btn-link"
+    - if @search.query?
+      .well.search-text
+        p.govuk-body
+          = "Search results for '#{@search.query}'"
+          small
+            = link_to "(Clear search)", [:lieutenant, :lieutenants], class: "govuk-button btn-link"
 
-  = render 'list', resources: @resources, f: f
+    = render 'list', resources: @resources, f: f
 
-  .row
-    .col-xs-12.text-right
-      = paginate @resources
-      .clear
+    .row
+      .col-xs-12.text-right
+        = paginate @resources
+        .clear
