@@ -1,9 +1,9 @@
 h1.govuk-heading-xl
   | Nominations
-= simple_form_for @search, url: assessor_form_answers_path, method: :get, as: :search do |f|
+= simple_form_for @search, url: assessor_form_answers_path, method: :post, as: :search do |f|
   = hidden_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
   = hidden_field_tag :award_type, params[:award_type], class: "visuallyhidden"
-  
+
   .govuk-grid-row
     .govuk-grid-column-one-third
       = f.input :query, label: 'Search', input_html: { class: "medium", type: "search" }
@@ -13,7 +13,7 @@ h1.govuk-heading-xl
                                                         sub_options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.sub_options(current_assessor))
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
-  
+
   = render("assessor/form_answers/category_tabs")
 
   - # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
