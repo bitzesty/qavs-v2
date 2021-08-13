@@ -9,8 +9,7 @@
           / = submit_tag :submit, text: "Search users", class: 'search-submit'
 
       .govuk-grid-column-one-third.text-right
-        = link_to new_lieutenant_lieutenant_path, class: 'new-user govuk-button' do
-          = "+ Add Lord Lieutenancy Office user"
+        = link_to "+ Add Lord Lieutenancy Office user", new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
     .clear
 
     - if @search.query?
