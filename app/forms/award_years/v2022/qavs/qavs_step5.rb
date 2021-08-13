@@ -344,7 +344,7 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        submit "Submit assessment" do
+        submit "Submit local assessment" do
           notice %(
             <p class='govuk-hint'>
               If you have answered all the questions, you can submit your assessment now. You will be able to edit it any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
