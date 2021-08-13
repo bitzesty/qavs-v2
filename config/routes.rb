@@ -132,6 +132,9 @@ Rails.application.routes.draw do
     end
 
     resources :form_answers do
+      collection do
+        post :index
+      end
       resources :form_answer_state_transitions, only: [:create]
       resources :comments
       resources :form_answer_attachments, only: [:create, :show, :destroy]
@@ -215,6 +218,7 @@ Rails.application.routes.draw do
 
     resources :form_answers do
       collection do
+        post :index
         get :awarded_trade_applications
       end
 
@@ -272,10 +276,12 @@ Rails.application.routes.draw do
 
     resources :lieutenants, except: [:show]
     resources :form_answers, only: [:index, :show, :edit] do
+      collection do
+        post :index
+      end
       member do
         post :save
       end
-
 
       resources :form_answer_state_transitions, only: [:create]
     end
