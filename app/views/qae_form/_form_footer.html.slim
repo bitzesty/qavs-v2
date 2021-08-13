@@ -4,8 +4,8 @@ footer
       - if current_form_is_editable? || (current_lieutenant && step.local_assessment?)
         - dashboard_link = current_subject.is_a?(Lieutenant) ? lieutenant_form_answer_url(@form_answer) : dashboard_url
         li.save-quit-link
-          - button_class = (current_subject.is_a?(Lieutenant) && current_subject.role.advanced?) ? "govuk-button govuk-button--secondary" : "govuk-button"
-          - button_text = (current_subject.is_a?(Lieutenant) && current_subject.role.advanced?) ? "Save and come back later" : "Save local assessment"
+          - button_class = (current_subject.is_a?(Lieutenant) && current_subject.role.regular?) ?  "govuk-button" : "govuk-button govuk-button--secondary"
+          - button_text = (current_subject.is_a?(Lieutenant) && current_subject.role.regular?) ? "Save local assessment" : "Save and come back later"
           span.if-js-hide
             = button_tag button_text, class: "#{ button_class } save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_link }
           span.if-no-js-hide
