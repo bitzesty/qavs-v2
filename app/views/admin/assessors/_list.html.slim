@@ -26,7 +26,7 @@ table.govuk-table
             small.text-muted
               span.visible-lg
                 = assessor.formatted_last_sign_in_at_long
-              span.hidden-lg
+              span class="govuk-!-display-none"
                 = assessor.formatted_last_sign_in_at_short
           td.govuk-table__cell
             - if assessor.confirmed_at.present?

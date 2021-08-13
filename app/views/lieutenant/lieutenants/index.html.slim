@@ -3,12 +3,12 @@
     | Lord Lieutenancy Office Users
   = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
     .govuk-grid-row
-      .govuk-grid-column-one-third
-        .form-group.search-input
+      .govuk-grid-column-two-thirds
+        .form-group.search-input.govuk-grid-column-one-half
           = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-          = submit_tag :submit, class: 'search-submit'
+          / = submit_tag :submit, text: "Search users", class: 'search-submit'
 
-      .govuk-grid-column-two-thirds.text-right
+      .govuk-grid-column-one-third.text-right
         = link_to new_lieutenant_lieutenant_path, class: 'new-user govuk-button' do
           = "+ Add Lord Lieutenancy Office user"
     .clear
