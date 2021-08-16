@@ -22,6 +22,8 @@
   - unless landing_page?
     nav
       ul.govuk-header__navigation#navigation aria-label="Navigation menu"
+        li.govuk-header__navigation-item class=('active' if controller_name == 'dashboard')
+          = link_to "Dashboard", lieutenant_root_path, class: 'govuk-header__link'
         li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
           = link_to "Nominations", lieutenant_form_answers_path, class: 'govuk-header__link'
         - if policy(:lieutenant).index?
