@@ -2,12 +2,7 @@ class Assessor < ApplicationRecord
   include PgSearch::Model
   include AutosaveTokenGeneration
   include SoftDelete
-
-  AVAILABLE_ROLES = ["lead", "regular"]
-  # lead - created & assigned to Admin to specific categories
-  # has access to almost all resources from all form answers within this category
-  # regular - assigned by lead, as primary/secondary from set of all assessors assigned
-  # to specific category (award type), they act per specific form answer.
+  extend Enumerize
 
   devise :database_authenticatable,
          :recoverable, :trackable, :validatable, :confirmable,
@@ -15,7 +10,11 @@ class Assessor < ApplicationRecord
 
   include PasswordSkippable
 
-  validates :first_name, :last_name, presence: true
+  SUBGROUPS = (1..10).map { |i| "sub_group_#{i}".freeze }
+
+  enumerize :sub_group, in: SUBGROUPS
+
+  validates :first_name, :last_name, :sub_group, presence: true
   has_many :form_answer_attachments, as: :attachable
   has_many :assessor_assignments
 
@@ -43,10 +42,6 @@ class Assessor < ApplicationRecord
     super && !deleted?
   end
 
-  def self.roles
-    [["Not Assigned", nil], ["Lead Assessor", "lead"], ["Assessor", "regular"]]
-  end
-
   def applications_scope(award_year = nil)
     join = "LEFT OUTER JOIN assessor_assignments ON
     assessor_assignments.form_answer_id = form_answers.id"
@@ -64,98 +59,15 @@ class Assessor < ApplicationRecord
     ", [0, 1], id, "withdrawn")
   end
 
-  # we're using extended scope on the resource page
-  # to allow assessors to cross check progresss
-  # with account's other applications
-  # they were not assigned to
-  def extended_applications_scope
-    out = FormAnswer.where("
-      form_answers.state NOT IN (?)
-    ", "withdrawn")
-  end
-
   def full_name
     "#{first_name} #{last_name}".strip
-  end
-
-  def lead?(form_answer)
-    get_role("qavs") == "lead"
-  end
-
-  def regular?(form_answer)
-    get_role("qavs") == "regular"
-  end
-
-  def assignable?(form_answer)
-    lead?(form_answer) || regular?(form_answer)
-  end
-
-  def lead_or_assigned?(form_answer)
-    lead?(form_answer) || assigned?(form_answer)
-  end
-
-  def lead_for_any_category?
-    FormAnswer::POSSIBLE_AWARDS.any? do |cat|
-      get_role(cat) == "lead"
-    end
-  end
-
-  def lead_roles
-    FormAnswer::POSSIBLE_AWARDS.select do |cat|
-      get_role(cat) == "lead"
-    end
-  end
-
-  def categories_as_lead
-    categories.select { |_, v| v == "lead" }.keys
   end
 
   def assigned?(form_answer)
     form_answer.assessors.include?(self)
   end
 
-  def primary?(form_answer)
-    form_answer.assessor_assignments.primary.assessor_id == id
-  end
-
-  def secondary?(form_answer)
-    form_answer.assessor_assignments.secondary.assessor_id == id
-  end
-
   def timeout_in
     30.minutes
-  end
-
-  def has_access_to_award_type?(award_type)
-    categories[award_type].present?
-  end
-
-  private
-
-  def self.role_meth(category)
-    "#{category}_role"
-  end
-
-  def categories
-    out = {}
-
-    FormAnswer::POSSIBLE_AWARDS.each do |cat|
-      out[cat] = public_send(self.class.role_meth(cat))
-    end
-    out
-  end
-
-  def get_role(category)
-    public_send self.class.role_meth(category)
-  end
-
-  def assigned_categories_as(roles)
-    FormAnswer::POSSIBLE_AWARDS.map do |award|
-      award if roles.include?(get_role(award).to_s)
-    end.compact
-  end
-
-  def self.leads_for(category)
-    where(role_meth(category) => "lead")
   end
 end

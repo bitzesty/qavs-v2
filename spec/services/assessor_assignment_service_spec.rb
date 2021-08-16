@@ -12,43 +12,6 @@ describe AssessorAssignmentService do
 
   subject { described_class.new(params, assessor) }
 
-  # assigning the assessor to specific case
-  context "assessors assignment request" do
-    let(:params) do
-      {
-        assessor_assignment: {
-          assessor_id: 1
-        },
-        id: primary.id
-      }.with_indifferent_access
-    end
-
-    it "does not assign the assessed_at date" do
-      subject.save
-      expect(subject.resource.assessed_at).to be_blank
-    end
-
-    context "regular assessor" do
-      before do
-        allow(assessor).to receive(:lead?).and_return(false)
-      end
-
-      it "can not change the assigned assessor"do
-        expect(subject.permitted_params).to_not include(:assessor_id)
-      end
-    end
-
-    context "lead assessor" do
-      before do
-        allow(assessor).to receive(:lead?).and_return(true)
-      end
-
-      it "changes the assigned assessor" do
-        expect(subject.permitted_params).to include(:assessor_id)
-      end
-    end
-  end
-
   # adding assessment to the case
   context "assessment request" do
     let(:params) do
