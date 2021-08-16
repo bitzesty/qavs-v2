@@ -17,7 +17,7 @@ h1.govuk-heading-xl
     = f.input :ineligible_reason_nominator, as: :radio_buttons, label: "Select a reason why the nominator is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
 
   .group-ineligible-reasons.hidden
-    = f.input :ineligible_reason_group, as: :select, label: "Select a reason why the group is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-font-weight-bold" }
+    = f.input :ineligible_reason_group, as: :radio_buttons, label: "Select a reason why the group is ineligible", label_html: { class: "govuk-!-font-size-19 govuk-!-font-weight-bold" }
 
   div class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
     .govuk-button-group
