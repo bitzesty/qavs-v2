@@ -8,6 +8,6 @@ class GroupLeader::DashboardController < GroupLeader::BaseController
   private
 
   def palace_invite
-    current_subject.form_answer.palace_invite || PalaceInvite.create!(form_answer: current_subject.form_answer, email: current_subject.email)
+    current_subject.form_answer.palace_invite || PalaceInvite.create!(form_answer: current_subject.form_answer)
   end
 end

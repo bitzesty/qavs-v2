@@ -1,6 +1,6 @@
 h1.govuk-heading-xl
   | Nominations
-= simple_form_for @search, url: lieutenant_form_answers_path, method: :get, as: :search do |f|
+= simple_form_for @search, url: lieutenant_form_answers_path, method: :post, as: :search do |f|
   .govuk-grid-row
     .govuk-grid-column-one-third
       .form-group.search-input
@@ -20,6 +20,7 @@ h1.govuk-heading-xl
 
   .govuk-button-group
     = f.submit 'Apply filters', class: 'govuk-button'
+    = link_to "Remove filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
 
   .applications-table-wrapper
     table.govuk-table.applications-table
@@ -39,5 +40,5 @@ h1.govuk-heading-xl
           th.sortable.govuk-table__header scope="col" width="130"
             = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
         = render(partial: "list_body")
-  
+
   = paginate @form_answers

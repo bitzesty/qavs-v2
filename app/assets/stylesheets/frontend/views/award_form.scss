@@ -272,13 +272,28 @@ select.read-only {
 .step-download a {
   display: inline-block;
   position: relative;
-  text-decoration: none;
-  
+  margin-left: 30px;
+
+  &:before {
+    content: " ";
+    display: block;
+    width: 18px;
+    height: 16px;
+    background-image: image-url("icon_download.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+
+    position: absolute;
+    left: -20px;
+    top: 10px;
+  }
+
   &:focus {
     color: black;
     text-decoration: underline;
   }
-  
+
   svg {
     display: inline-block;
     height: 1.4em;

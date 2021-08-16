@@ -1,7 +1,7 @@
 h1.govuk-heading-xl
   | Nominations
 
-= simple_form_for @search, url: admin_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
+= simple_form_for @search, url: admin_form_answers_path, method: :post, as: :search, html: { class: 'search-form'} do |f|
   .govuk-grid-row
     .govuk-grid-column-one-quarter.if-js-hide
       = f.input :year, input_html: { value: params[:year] || @award_year.year }
@@ -19,7 +19,9 @@ h1.govuk-heading-xl
                                                             activity_options: FormAnswerStatus::AdminFilter.collection('activity'),
                                                             assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county'),
                                                             nomination_county_options: FormAnswerStatus::AdminFilter.collection('nomination county')
-  = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
+  .govuk-button-group
+    = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
+    = link_to "Remove filters", admin_form_answers_path, class: "govuk-button govuk-button--secondary"
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
   = render("admin/form_answers/bulk_assignment_button_top")
