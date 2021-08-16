@@ -34,7 +34,7 @@ table.govuk-table
             small.text-muted
               span.visible-lg
                 = user.formatted_last_sign_in_at_long
-              span.hidden-lg
+              span class="govuk-!-display-none"
                 = user.formatted_last_sign_in_at_short
           td.govuk-table__cell
             - if user.confirmed_at.present?
