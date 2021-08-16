@@ -38,9 +38,9 @@
       li.divider
       li.govuk-body.step-past.step-download
         - if current_user
-          = link_to "Download your nomination (PDF)", users_form_answer_path(@form_answer, format: :pdf), class: "download-pdf-link govuk-link"
+          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
         - else
-          = link_to "Download nomination and local assessment form (PDF)", lieutenant_form_answer_path(@form_answer, format: :pdf), class: "download-pdf-link govuk-link"
+          = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
 
     li.divider
     li.sidebar-helpline.govuk-body

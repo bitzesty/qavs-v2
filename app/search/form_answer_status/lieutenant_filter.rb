@@ -2,14 +2,6 @@ class FormAnswerStatus::LieutenantFilter
   extend FormAnswerStatus::FilteringHelper
 
   OPTIONS = {
-    eligibility_in_progress: {
-      label: "Eligibility in progress",
-      states: [:eligibility_in_progress]
-    },
-    application_in_progress: {
-      label: "Application in progress",
-      states: [:application_in_progress]
-    },
     admin_eligible: {
       label: "Eligible",
       states: [:admin_eligible]
@@ -53,10 +45,6 @@ class FormAnswerStatus::LieutenantFilter
     withdrawn: {
       label: "Withdrawn/Ineligible",
       states: [:withdrawn]
-    },
-    submitted: {
-      label: "Submitted",
-      states: [:submitted]
     },
     awarded: {
       label: "Awarded",

@@ -529,7 +529,13 @@ window.FormValidation =
     for question in $(".question-block")
       question = $(question)
 
-      @validateIndividualQuestion(question)
+      if $(".qae-form").data("skip-assessment-validation")
+        step = question.closest(".step-article")
+
+        if step.data("step") != "step-local-assessment-form"
+          @validateIndividualQuestion(question)
+      else
+        @validateIndividualQuestion(question)
 
     return @validates
 

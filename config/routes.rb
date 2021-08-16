@@ -224,6 +224,7 @@ Rails.application.routes.draw do
 
       member do
         patch :update_financials
+        post :save
         get :review
         get :eligibility
         patch :update_eligibility
