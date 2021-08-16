@@ -43,7 +43,7 @@ feature "Admin edits eligibility status", js: true do
     choose "Ineligible - group", allow_label_click: true
 
     within ".group-ineligible-reasons" do
-      select "Led by paid staff", from: "Select a reason why the group is ineligible"
+      choose "Led by paid staff", allow_label_click: true
     end
 
     click_button "Save"
