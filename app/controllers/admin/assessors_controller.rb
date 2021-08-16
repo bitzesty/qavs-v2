@@ -22,7 +22,7 @@ class Admin::AssessorsController < Admin::UsersController
 
     @resource.save
     location = @resource.persisted? ? admin_assessors_path : nil
-    respond_with :admin, @resource, location: location
+    respond_with :admin, @resource, location: location, notice: "User has been successfully added."
   end
 
   def update
@@ -34,7 +34,7 @@ class Admin::AssessorsController < Admin::UsersController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_assessors_path
+    respond_with :admin, @resource, location: admin_assessors_path, notice: "User has been updated."
   end
 
   def destroy
@@ -55,10 +55,8 @@ class Admin::AssessorsController < Admin::UsersController
       permit(:email,
              :password,
              :password_confirmation,
-             :company,
+             :sub_group,
              :first_name,
-             :last_name,
-             :telephone_number,
-             :qavs_role)
+             :last_name)
   end
 end

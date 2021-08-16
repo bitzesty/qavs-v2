@@ -7,17 +7,15 @@
             input_html: { class: 'small' },
             label: 'Last name'
 
-  = f.input :company,
-            input_html: { class: 'medium' },
-            label: 'Company'
+  = f.input :sub_group,
+            input_html: { class: 'govuk-select' },
+            as: :select,
+            label: 'National assessor sub-group',
+            label_html: { class: 'govuk-label--s' }
 
   = f.input :email,
             input_html: { class: 'large' },
             label: 'Email'
-
-  = f.input :telephone_number,
-            input_html: { class: "small" },
-            label: 'Telephone (optional)'
 
   - if f.object.persisted?
     .question-group#password-change-panel
@@ -60,15 +58,8 @@
               p#password-confirmation-match The confirmation must match the password
 
 
-  = f.input :qavs_role,
-            input_html: { class: "govuk-select small"},
-            as: :select,
-            collection: Assessor.roles,
-            include_blank: false,
-            label: 'QAVS'
-  
   .govuk-button-group class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
-    = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} assessor", class: 'govuk-button'
+    = f.submit "#{f.object.persisted? ? 'Update' : 'Add'} user", class: 'govuk-button'
     = link_to "Cancel",
                   admin_assessors_path,
                   class: 'govuk-button govuk-button--secondary'

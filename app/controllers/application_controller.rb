@@ -48,25 +48,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def allow_assessor_access!(fa)
-    if admin_in_read_only_mode?
-      if assessor_signed_in? && !admin_signed_in?
-        if fa.present?
-          if current_assessor.lead_or_assigned?(fa)
-            return true
-          end
-        end
-        if request.referer
-          flash[:alert] = "You have no permissions!"
-          redirect_back(fallback_location: root_path)
-        else
-          render text: "You have no permissions!"
-        end
-        return false
-      end
-    end
-  end
-
   def current_account
     current_user && current_user.account
   end

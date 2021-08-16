@@ -6,9 +6,14 @@ table.govuk-table
       th.sortable.govuk-table__header scope='col'
         = sort_link f, 'Email', @search, :email
       th.sortable.govuk-table__header scope='col'
+        = sort_link f, 'National assessor sub-group', @search, :sub_group
+      th.sortable.govuk-table__header scope='col'
         = sort_link f, 'Signed in on', @search, :last_sign_in_at
       th.sortable.govuk-table__header scope='col'
         = sort_link f, "Confirmed on", @search, :confirmed_at
+      th.sortable.govuk-table__header scope="col"
+        = sort_link f, "Locked on", @search, :locked_at
+      th
   tbody.govuk-table__body
     - if AssessorDecorator.decorate_collection(resources).none?
       tr.govuk-table__row
@@ -23,11 +28,16 @@ table.govuk-table
             = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: 'link-edit-user'
           td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis"}
           td.govuk-table__cell
+            = assessor.sub_group.text
+          td.govuk-table__cell
             small.text-muted
-              span.visible-lg
-                = assessor.formatted_last_sign_in_at_long
-              span.hidden-lg
-                = assessor.formatted_last_sign_in_at_short
+              - if assessor.last_sign_in_at.present?
+                span.visible-lg
+                  = assessor.formatted_last_sign_in_at_long
+                span.hidden-lg
+                  = assessor.formatted_last_sign_in_at_short
+              - else
+                | Never signed in
           td.govuk-table__cell
             - if assessor.confirmed_at.present?
               small.text-muted
@@ -35,3 +45,12 @@ table.govuk-table
             - else
               small.text-danger
                 ' Not confirmed
+          td.govuk-table__cell
+            - if assessor.locked_at.present?
+              small.text-muted
+                = l assessor.locked_at, format: :date_at_time
+            - else
+              small.text-muted
+                ' Not locked
+          td.govuk-table__cell
+            = link_to "Edit user", edit_admin_assessor_path(assessor)
