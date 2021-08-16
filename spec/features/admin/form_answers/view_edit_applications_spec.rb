@@ -2,7 +2,7 @@ require "rails_helper"
 include Warden::Test::Helpers
 
 feature "Admin view application", js: true do
-  scenario "As an admin I can edit the nomination if superadmin" do
+  scenario "As an admin I can edit the nomination" do
     Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
 
     application = create_application
@@ -13,11 +13,11 @@ feature "Admin view application", js: true do
     expect(page).to have_content("Edit nomination and local assessment form")
 
     click_link("Edit nomination and local assessment form")
-    expect(page).to have_current_path edit_form_path(application)
+    expect(page).to have_current_path edit_admin_form_answer_path(application)
     expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
   end
 
-  scenario "As a superadmin I can edit the nomination even when submission is due date" do
+  scenario "As an admin I can edit the nomination even when submission is due date" do
     Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
     Settings.current_submission_deadline.update(trigger_at: 1.day.ago)
 
@@ -29,8 +29,8 @@ feature "Admin view application", js: true do
     expect(page).to have_content("Edit nomination and local assessment form")
 
     click_link("Edit nomination and local assessment form")
-    
-    expect(page).to have_current_path edit_form_path(application)
+
+    expect(page).to have_current_path edit_admin_form_answer_path(application)
     expect(find_field("form[nominee_name]").value).to eq("Bitzesty")
   end
 end

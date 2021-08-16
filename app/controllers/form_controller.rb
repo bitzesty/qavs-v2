@@ -89,8 +89,6 @@ class FormController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirected = params[:next_action] == "redirect"
-
         if submitted
           @form_answer.submitted_at = Time.current
         end

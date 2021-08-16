@@ -23,6 +23,12 @@ FactoryBot.define do
       state { "local_assessment_recommended" }
     end
 
+    trait :admin_eligible do
+      submitted_at { Time.current }
+
+      state { "admin_eligible" }
+    end
+
     trait :awarded do
       submitted_at { Time.current }
       state { "awarded" }

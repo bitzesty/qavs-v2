@@ -34,7 +34,7 @@ table.govuk-table
               - if assessor.last_sign_in_at.present?
                 span.visible-lg
                   = assessor.formatted_last_sign_in_at_long
-                span.hidden-lg
+                span class="govuk-!-display-none"
                   = assessor.formatted_last_sign_in_at_short
               - else
                 | Never signed in
