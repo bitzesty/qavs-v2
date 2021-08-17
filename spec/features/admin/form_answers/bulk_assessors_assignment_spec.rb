@@ -25,7 +25,7 @@ describe "Admin assigns assessors", %(
       click_button("Bulk assign to national assessor sub-group", match: :first)
       find(:css, "#modal-bulk-assign-assessors").should be_visible
 
-      select "Sub-group 9", from: "Select national assessor sub-group"
+      custom_select "Sub-group 9", from: "Select national assessor sub-group"
 
       within "#modal-bulk-assign-assessors" do
         click_button "Bulk assign groups to national assessor sub-group"

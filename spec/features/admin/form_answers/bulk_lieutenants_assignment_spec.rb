@@ -27,7 +27,7 @@ describe "Admin assigns lieutenants", %(
       click_button("Bulk assign to Lord Lieutenancy office", match: :first)
       find(:css, "#modal-bulk-assign-lieutenants").should be_visible
 
-      select ceremonial_county_2.name, from: "Select Lord Lieutenancy office"
+      custom_select ceremonial_county_2.name, from: "Select Lord Lieutenancy office"
 
       within "#modal-bulk-assign-lieutenants" do
         click_button "Bulk assign groups to Lord Lieutenancy office"
