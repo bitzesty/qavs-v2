@@ -164,3 +164,8 @@ for (let i = 0; i < 2; i++) {
     };
   });
 };
+
+$("#accept-award").on('click', function() {
+  $('.citation').removeClass('govuk-!-display-none')
+  $('.award-acceptance-container').addClass('govuk-!-display-none')
+})
