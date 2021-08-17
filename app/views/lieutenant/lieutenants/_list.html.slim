@@ -39,4 +39,4 @@ table.govuk-table
               small.text-danger
                 ' Not confirmed
           td.govuk-table__cell
-            = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: 'link-edit-user'
+            = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: "link-edit-user", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
