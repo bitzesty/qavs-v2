@@ -1,42 +1,35 @@
 = simple_form_for [:lieutenant, resource], as: :lieutenant, url: resource.persisted? ? lieutenant_lieutenant_path(resource) : lieutenant_lieutenants_path, html: { class: 'qae-form' } do |f|
   .govuk-grid-row
     .govuk-grid-column-one-third
-      h3.govuk-heading-m = f.label :first_name, class: "form-label"
-      = f.input :first_name,
-                wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' },
-                label: false
+      .govuk-form-group
+        = f.input :first_name,
+                  label_html: { class: "govuk-label--s" }
 
   .govuk-grid-row
     .govuk-grid-column-one-third
-      h3.govuk-heading-m = f.label :last_name, class: "form-label"
-      = f.input :last_name,
-                wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' },
-                label: false
+      .govuk-form-group
+        = f.input :last_name,
+        label_html: { class: "govuk-label--s" }
 
   .govuk-grid-row#email-control-group
     .govuk-grid-column-one-half
-      h3.govuk-heading-m = f.label :email, class: "form-label"
-      = f.input :email,
-                wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' },
-                label: false
+      .govuk-form-group
+        = f.input :email,
+                  label_html: { class: "govuk-label--s" }
 
   - if f.object.persisted?
     .question-group#password-change-panel
       #password-control-group
-        h3.govuk-heading-m = f.label :password, class: "form-label"
-        .govuk-grid-row
-          .govuk-grid-column-one-half
-            .input-group
-              = f.input :password,
-                        wrapper_html: { class: 'form-group' },
-                        input_html: { class: 'form-control' },
-                        label: false
-              span#password-result-span.input-group-addon
-                i#password-result.glyphicon.glyphicon-ok
-        .clear
+        .govuk-form-group
+          .govuk-grid-row
+            .govuk-grid-column-one-half
+              .input-group
+                = f.input :password,
+                label: "New password",
+                label_html: { class: "govuk-label--s" }
+                span#password-result-span.input-group-addon
+                  i#password-result.glyphicon.glyphicon-ok
+          .clear
       .guidance-panel.if-no-js-hide
         #password-guidance
           br
@@ -49,17 +42,16 @@
               ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
 
       #password-confirmation-control-group
-        h3.govuk-heading-m = f.label :password_confirmation, label: "Retype password", class: "form-label"
-        .govuk-grid-row
-          .govuk-grid-column-one-half
-            .input-group
-              = f.input :password_confirmation,
-                        wrapper_html: { class: 'form-group' },
-                        input_html: { class: 'form-control' },
-                        label: false
-              span#password-confirmation-result-span.input-group-addon
-                i#password-confirmation-result.glyphicon.glyphicon-ok
-        .clear
+        .govuk-form-group
+          .govuk-grid-row
+            .govuk-grid-column-one-half
+              .input-group
+                = f.input :password_confirmation,
+                          label_html: { class: "govuk-label--s" },
+                          label: "Confirm new password"
+                span#password-confirmation-result-span.input-group-addon
+                  i#password-confirmation-result.glyphicon.glyphicon-ok
+          .clear
 
       .if-no-js-hide
         #password-confirmation-guidance
@@ -67,18 +59,33 @@
           .alert.alert-warning
             p#password-confirmation-match The confirmation must match the password
 
+      .govuk-form-group
+        = f.label :role, label: 'User type', class: "govuk-label--s"
+        = f.hint 'Regular users can'
+        ul.govuk-list.govuk-list--bullet.govuk-hint
+          li access the nominations assigned to their Lord Lieutenancy office
+          li complete local assessment forms, but they cannot submit them
+        = f.hint 'Advanced users can'
+        ul.govuk-list.govuk-list--bullet.govuk-hint
+          li complete and submit local assessment form
+          li recommend or not recommend each nomination for national assessment
+          li add Lord Lieutenancy office users to their Lord Lieutenancy office
+        = f.input :role,
+                  as: :radio_buttons,
+                  include_blank: false,
+                  label: false
+
   br
   .govuk-grid-row
     .govuk-grid-column-one-half
-      - if action_name == "edit" && policy(resource).destroy?
-        = link_to 'Delete', lieutenant_lieutenant_path(resource), data: { method: :delete, confirm: 'Are you sure?' }, class: 'govuk-button govuk-button--warning pull-left'
 
       .govuk-button-group
+        = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} lieutenant",
+                  class: 'govuk-button'
+
         = link_to "Cancel",
                   lieutenant_lieutenants_path,
                   class: 'govuk-button govuk-button--secondary'
 
-        ' &nbsp;
-
-        = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} lieutenant",
-                  class: 'govuk-button'
+        - if action_name == "edit" && policy(resource).destroy?
+          = link_to 'Delete', lieutenant_lieutenant_path(resource), data: { method: :delete, confirm: 'Are you sure?' }, class: 'govuk-button govuk-button--warning'
