@@ -190,3 +190,14 @@
   border-color: govuk-colour('black') !important;
   border-width: 2px;
 }
+
+.autocomplete__menu--inline {
+  position: absolute !important;
+  top: 100% !important;
+  z-index: 9999999999999 !important;
+}
+
+.mm-modal .autocomplete__wrapper {
+  width: 400px;
+  max-width: 100%;
+}
