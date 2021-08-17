@@ -16,19 +16,23 @@ Rails.application.routes.draw do
   }, path_names: {
     verify_authy: "/verify-token",
     enable_authy: "/enable-two-factor",
-    verify_authy_installation: "/verify-installation"
+    verify_authy_installation: "/verify-installation",
+    sessions: "sessions"
   }
 
   devise_for :lieutenants, controllers: {
-    confirmations: "lieutenants/confirmations"
+    confirmations: "lieutenants/confirmations",
+    sessions: "sessions"
   }
 
   devise_for :assessors, controllers: {
-    confirmations: "assessors/confirmations"
+    confirmations: "assessors/confirmations",
+    sessions: "sessions"
   }
 
   devise_for :group_leaders, controllers: {
-    confirmations: "group_leaders/confirmations"
+    confirmations: "group_leaders/confirmations",
+    sessions: "sessions"
   }
 
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
