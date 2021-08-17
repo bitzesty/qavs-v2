@@ -1,11 +1,11 @@
 = simple_form_for [:admin, resource], as: :assessor, url: resource.persisted? ? admin_assessor_path(resource) : admin_assessors_path, html: { class: 'qae-form' } do |f|
   = f.input :first_name,
             input_html: { class: 'small' },
-            label: 'First name'
+            label_html: { class: 'govuk-label--s' }
 
   = f.input :last_name,
             input_html: { class: 'small' },
-            label: 'Last name'
+            label_html: { class: 'govuk-label--s' }
 
   = f.input :sub_group,
             input_html: { class: 'govuk-select' },
@@ -14,16 +14,17 @@
             label_html: { class: 'govuk-label--s' }
 
   = f.input :email,
-            input_html: { class: 'large' },
-            label: 'Email'
+            input_html: { class: 'medium' },
+            label_html: { class: 'govuk-label--s' }
 
   - if f.object.persisted?
     .question-group#password-change-panel
       #password-control-group
         .input-group
           = f.input :password,
-                    input_html: { class: 'small' },
-                    label: 'Password'
+                    input_html: { class: 'medium' },
+                    label: 'New password',
+                    label_html: { class: 'govuk-label--s' }
           span#password-result-span.input-group-addon
             i#password-result.glyphicon.glyphicon-ok
         .clear
@@ -43,8 +44,9 @@
       #password-confirmation-control-group
         .input-group
           = f.input :password_confirmation,
-                    input_html: { class: 'small' },
-                    label: 'Retype password'
+                    input_html: { class: 'medium' },
+                    label: 'Confirm new password',
+                    label_html: { class: 'govuk-label--s' }
           span#password-confirmation-result-span.input-group-addon
             i#password-confirmation-result.glyphicon.glyphicon-ok
         .clear
