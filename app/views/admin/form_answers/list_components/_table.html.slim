@@ -21,6 +21,8 @@ table.govuk-table.applications-table class="govuk-!-margin-top-7 govuk-!-margin-
       th.govuk-table__header scope="col" width="200"
         | Type of group
       th.sortable.govuk-table__header scope="col" width="130"
+        = sort_link f, "National assessor sub-group", @search, :sub_group, disabled: @search.query?
+      th.sortable.govuk-table__header scope="col" width="130"
         = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
       th.govuk-table__header scope="col" View
   tbody.govuk-table__body

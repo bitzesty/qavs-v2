@@ -35,6 +35,13 @@ $('.bulk-assign-lieutenants-link').on('click', function(e) {
   MicroModal.show('modal-bulk-assign-lieutenants');
 })
 
+$('.bulk-assign-assessors-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  MicroModal.show('modal-bulk-assign-assessors');
+})
+
 $(document).on('click', 'button[data-micromodal-close]', function(e) {
   e.preventDefault();
   e.stopPropagation()

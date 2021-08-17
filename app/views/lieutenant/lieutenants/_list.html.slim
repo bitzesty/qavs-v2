@@ -6,9 +6,12 @@ table.govuk-table
       th.sortable.govuk-table__header scope="col"
         = sort_link f, 'Email', @search, :email
       th.sortable.govuk-table__header scope="col"
+        = sort_link f, 'Type', @search, :role
+      th.sortable.govuk-table__header scope="col"
         = sort_link f, 'Signed in on', @search, :last_sign_in_at
       th.sortable.govuk-table__header scope="col"
         = sort_link f, "Confirmed on", @search, :confirmed_at
+      th.govuk-table__header
   tbody.govuk-table__body
     - if resources.none?
       tr.govuk-table__row
@@ -19,9 +22,9 @@ table.govuk-table
     - else
       - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
         tr.govuk-table__row
-          td.govuk-table__cell.td-title
-            = link_to lieutenant.full_name, edit_lieutenant_lieutenant_path(lieutenant), class: 'link-edit-user'
+          td.govuk-table__cell = lieutenant.full_name
           td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis"}
+          td.govuk-table__cell = lieutenant.role.humanize
           td.govuk-table__cell
             small.text-muted
               span.visible-lg
@@ -35,3 +38,5 @@ table.govuk-table
             - else
               small.text-danger
                 ' Not confirmed
+          td.govuk-table__cell
+            = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: "link-edit-user", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
