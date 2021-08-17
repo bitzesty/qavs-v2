@@ -7,9 +7,7 @@
 
     .feedback-holder
 
-    .pull-right
-      = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button"
-    .clear
+    = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button"
 
 - elsif assessment.submitted?
 
@@ -20,12 +18,6 @@
     = form_tag unlock_url, method: :patch do
       = hidden_field_tag :assessment_id, assessment.id
       .feedback-holder.alert.alert-success
-        ' Assessment submitted
 
-        .pull-right
-          = submit_tag "Unsubmit", class: "govuk-button btn-primary"
-        .clear
+        = submit_tag "Unsubmit", class: "govuk-button btn-primary"
 
-- else
-  .feedback-holder.alert.alert-success
-    ' Assessment submitted

@@ -3,7 +3,10 @@ h4.govuk-heading-s class='govuk-!-margin-bottom-2 govuk-!-margin-top-7'
 p.govuk-body Notify users that nominations for the new Award year are open
 
 p.govuk-body
-  = link_to "View email example", "#", class: "link-email-example if-no-js-hide govuk-link"
+  = link_to "#", class: "link-email-example if-no-js-hide govuk-link" do
+    | View email example
+    span.govuk-visually-hidden
+      | for the registration stage email notification
 
 .email-example.well
   = MailRenderer.new.submission_started_notification

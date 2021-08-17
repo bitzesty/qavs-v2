@@ -51,10 +51,14 @@ module FormattedTime::DateTimeFor
 
     def date_time_for(*attrs)
       attrs.each do |attr|
+        day = :"#{attr}_day"
+        month = :"#{attr}_month"
+        year = :"#{attr}_year"
         date = :"#{attr}_date"
         time = :"#{attr}_time"
 
-        attr_accessible "formatted_#{date}", "formatted_#{time}" if respond_to?(:attr_accessible)
+        attr_accessible "formatted_#{day}", "formatted_#{month}",
+                        "formatted_#{year}", "formatted_#{time}" if respond_to?(:attr_accessible)
 
         formatted_time_for time
         formatted_date_for date
@@ -68,6 +72,30 @@ module FormattedTime::DateTimeFor
             end
           end
 
+          def #{day}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%d")
+            end
+          end
+
+          def #{month}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%m")
+            end
+          end
+
+          def #{year}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%Y")
+            end
+          end
+
           def #{time}
             value = #{attr}
             if value
@@ -77,18 +105,60 @@ module FormattedTime::DateTimeFor
             end
           end
 
-          def #{date}=(value)
+          def #{day}=(value)
             if #{attr}
               seconds = #{attr}.hour.hours + #{attr}.min.minutes
             end
 
-            if value
+            day = value
+            month = self.public_send("#{attr}_month")
+            year = self.public_send("#{attr}_year")
+
+            if day && month && year
               zone = Time.zone
-              self.#{attr} = zone.local(value.year, value.month, value.day)
+              self.#{attr} = zone.local(year, month, day)
 
               self.#{attr} += seconds if #{attr} && seconds
             else
-              self.#{attr} = nil
+              # self.#{attr} = nil
+            end
+          end
+
+          def #{month}=(value)
+            if #{attr}
+              seconds = #{attr}.hour.hours + #{attr}.min.minutes
+            end
+
+            month = value
+            day = self.public_send("#{attr}_day")
+            year = self.public_send("#{attr}_year")
+
+            if value && day && year
+              zone = Time.zone
+              self.#{attr} = zone.local(year, month, day)
+
+              self.#{attr} += seconds if #{attr} && seconds
+            else
+              # self.#{attr} = nil
+            end
+          end
+
+          def #{year}=(value)
+            if #{attr}
+              seconds = #{attr}.hour.hours + #{attr}.min.minutes
+            end
+
+            year = value
+            day = self.public_send("#{attr}_day")
+            month = self.public_send("#{attr}_month")
+
+            if day && month && year
+              zone = Time.zone
+              self.#{attr} = zone.local(year, month, day)
+
+              self.#{attr} += seconds if #{attr} && seconds
+            else
+              # self.#{attr} = nil
             end
           end
 
@@ -99,7 +169,7 @@ module FormattedTime::DateTimeFor
               nil
             end
 
-            self.#{attr} = time.to_time + value if time && value
+            self.#{attr} = time.to_time + value.to_i if time && value
           end
         RUBY
       end

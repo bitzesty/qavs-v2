@@ -17,7 +17,7 @@
               = f.select :ceremonial_county_id,
                         CeremonialCounty.all.pluck(:name, :id),
                         { include_blank: true },
-                        class: "govuk-select"
+                        class: "govuk-select custom-select"
 
             = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
 

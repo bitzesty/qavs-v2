@@ -1,16 +1,20 @@
 - if @email_notification && @email_notification.kind == notification.kind
   - notification = @email_notification
 
-.well.question-group.notification-new-form
-  h3 Schedule new email
+.well.govuk-inset-text.question-group.notification-new-form
+  h4.govuk-heading-s Schedule new email
   = simple_form_for notification, url: admin_settings_email_notifications_path(year: params[:year]), remote: true, authenticity_token: true do |f|
     = f.input :kind, as: :hidden
-    = f.input :trigger_at,
-              as: :separated_date_time,
-              input_html: { id: "" },
-              label: "Send at"
-
+    .govuk-form-group
+      .govuk-date-input
+        .govuk-date-input__item
+          = f.input :trigger_at_day, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Day'
+        .govuk-date-input__item
+          = f.input :trigger_at_month, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Month'
+        .govuk-date-input__item
+          = f.input :trigger_at_year, input_html: { class: 'govuk-date-input__input govuk-input--width-4' }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
+    = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time'
     .govuk-button-group
-      = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide", role: 'button'
-      = f.submit "Save", class: "govuk-button"
+      = f.submit "Save", class: "govuk-button btn-save"
+      = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide btn-cancel", role: 'button'
     .clear

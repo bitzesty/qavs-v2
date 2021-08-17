@@ -155,4 +155,11 @@ module ApplicationHelper
   def govuk_tag(text, style)
     content_tag :strong, text.upcase, class: "govuk-tag govuk-tag--#{style}"
   end
+
+  def assessment_govuk_tag(rate)
+    title = I18n.t("appraisals.evaluations.titles.#{rate}")
+    style = I18n.t("appraisals.evaluations.styles.#{rate}")
+
+    govuk_tag(title, style)
+  end
 end
