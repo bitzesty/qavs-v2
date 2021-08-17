@@ -9,8 +9,8 @@ h1.govuk-heading-xl
         = f.input :query, label: 'Search', input_html: { type: "search" }
   .govuk-grid-row
     = render "shared/form_answers/top_statuses_filters", f: f,
-                                                        options: FormAnswerStatus::LieutenantFilter.options,
-                                                        sub_options: FormAnswerStatus::LieutenantFilter.sub_options,
+                                                        options: FormAnswerStatus::LieutenantFilter.collection('status'),
+                                                        sub_options: FormAnswerStatus::LieutenantFilter.collection('sub'),
                                                         activity_options: FormAnswerStatus::LieutenantFilter.activity_options,
                                                         assigned_county_options: FormAnswerStatus::AdminFilter.county_options('assigned'),
                                                         nomination_county_options: FormAnswerStatus::AdminFilter.county_options('nomination')
