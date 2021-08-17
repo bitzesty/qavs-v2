@@ -1,7 +1,7 @@
 $black-true: #000;
 
 legend {
-  margin: 0 !important;
+ 
 
   &.light {
     font-weight: 400;
@@ -134,7 +134,7 @@ h2 > .boolean.control-label {
   appearance: none;
 
   @include core-19;
-  
+
   border: 1px solid #bbb;
   min-width: 8em;
   margin: 0;
@@ -1312,7 +1312,7 @@ fieldset.account-contact-preferences-other-ops {
 .other-organization-type {
 
   max-width: 465px !important;
-  
+
   input {
     width: 100% !important;
     display: block;
