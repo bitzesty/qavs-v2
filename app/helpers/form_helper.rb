@@ -7,14 +7,11 @@ module FormHelper
         return ops
       else
         ops[:disabled] = "disabled"
-        ops[:class] = "read-only"
       end
     elsif lieutenant_nomination? && section != :local_assessment
       ops[:disabled] = "disabled"
-      ops[:class] = "read-only"
     elsif current_form_is_not_editable? && section != :local_assessment
       ops[:disabled] = "disabled"
-      ops[:class] = "read-only"
     end
 
     ops
