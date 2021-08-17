@@ -29,7 +29,7 @@
                 label_html: { class: "govuk-label--s" }
                 span#password-result-span.input-group-addon
                   i#password-result.glyphicon.glyphicon-ok
-                  
+
       .guidance-panel.if-no-js-hide
         #password-guidance
           .govuk-warning-text
@@ -86,7 +86,7 @@
     .govuk-grid-column-one-half
 
       .govuk-button-group
-        = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} lieutenant",
+        = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} user",
                   class: 'govuk-button'
 
         = link_to "Cancel",
