@@ -22,6 +22,8 @@
         = obj.ceremonial_county.name
     td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
     td.govuk-table__cell
+      = obj.sub_group.try(:text) || "Not assigned"
+    td.govuk-table__cell
       = obj.last_updated_at
       br
       span.muted

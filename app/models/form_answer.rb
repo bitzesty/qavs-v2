@@ -31,6 +31,7 @@ class FormAnswer < ApplicationRecord
 
   enumerize :ineligible_reason_nominator, in: %w(involved_in_group no_knowledge no_letters_of_support)
   enumerize :ineligible_reason_group, in: %w(less_than_3_people outside_uk in_operation_for_less_than_3_years volunteers_not_eligible_to_reside_in_uk led_by_paid_stuff no_specific_benefit unsuccessful_in_the_past_3_years has_qavs_award benefits_only_animals)
+  enumerize :sub_group, in: Assessor::SUBGROUPS
 
   begin :associations
     belongs_to :user
