@@ -154,7 +154,6 @@ Rails.application.routes.draw do
     end
 
     resources :assessor_assignments, only: [:update]
-    resources :assessor_assignment_collections, only: [:create]
     resources :reports, only: [:index, :show]
 
     resources :assessment_submissions, only: [:create] do
@@ -269,6 +268,7 @@ Rails.application.routes.draw do
     end
 
     resources :lieutenant_assignment_collections, only: [:create]
+    resources :assessor_assignment_collections, only: [:create]
   end
 
   namespace :lieutenant do

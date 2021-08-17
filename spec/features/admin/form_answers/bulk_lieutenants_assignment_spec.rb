@@ -3,7 +3,6 @@ include Warden::Test::Helpers
 
 Warden.test_mode!
 
-# Skip because removed trait trade from form answer
 describe "Admin assigns lieutenants", %(
   As Admin
   I want to be able to assign lieutenants

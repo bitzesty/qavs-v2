@@ -35,6 +35,13 @@ $('.bulk-assign-lieutenants-link').on('click', function(e) {
   MicroModal.show('modal-bulk-assign-lieutenants');
 })
 
+$('.bulk-assign-assessors-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  MicroModal.show('modal-bulk-assign-assessors');
+})
+
 $(document).on('click', 'button[data-micromodal-close]', function(e) {
   e.preventDefault();
   e.stopPropagation()
@@ -137,7 +144,7 @@ $(".custom-select").each(function() {
 
   AccessibleAutocomplete.enhanceSelectElement({
     selectElement: field,
-    showAllValues: true, 
+    showAllValues: true,
     dropdownArrow: function() {
       return "<span class='autocomplete__arrow'></span>";
     }
@@ -157,4 +164,3 @@ for (let i = 0; i < 2; i++) {
     };
   });
 };
-

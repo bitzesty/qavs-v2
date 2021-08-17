@@ -750,7 +750,8 @@ CREATE TABLE public.form_answers (
     nominee_activity character varying,
     ceremonial_county_id integer,
     ineligible_reason_nominator character varying,
-    ineligible_reason_group character varying
+    ineligible_reason_group character varying,
+    sub_group character varying
 );
 
 
@@ -3800,6 +3801,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210809073242'),
 ('20210810173827'),
 ('20210810175339'),
-('20210816072005');
+('20210816072005'),
+('20210817084427');
 
 
