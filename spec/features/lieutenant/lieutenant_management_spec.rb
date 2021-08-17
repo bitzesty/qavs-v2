@@ -21,7 +21,7 @@ describe "Lieutenant: Lieutenant management" do
 
     fill_in "Email", with: "llkk@example.com"
 
-    click_button "Create lieutenant"
+    click_button "Create user"
 
     expect(page).to have_content "LL KK"
 
@@ -38,11 +38,11 @@ describe "Lieutenant: Lieutenant management" do
     it "can edit a lieutenant" do
       visit lieutenant_lieutenants_path
 
-      click_link "Bob Bobbers"
+      click_link "edit-bob-bobbers"
 
       fill_in "First name", with: "Rob"
 
-      click_button "Update lieutenant"
+      click_button "Update user"
 
       expect(page).to have_content "Rob Bobbers"
     end
@@ -50,7 +50,7 @@ describe "Lieutenant: Lieutenant management" do
     it "can delete a lieutenant" do
       visit lieutenant_lieutenants_path
 
-      click_link "Bob Bobbers"
+      click_link "edit-bob-bobbers"
       click_link "Delete"
 
       expect(page).to have_no_content "Rob Bobbers"
@@ -59,7 +59,7 @@ describe "Lieutenant: Lieutenant management" do
     it "can't delete own account" do
       visit lieutenant_lieutenants_path
 
-      click_link "Poor Yorick"
+      click_link "edit-poor-yorick"
       expect(page).to have_no_link "Delete"
     end
 
@@ -67,7 +67,7 @@ describe "Lieutenant: Lieutenant management" do
       create(:lieutenant, email: "ootherl@example.com", first_name: "Rob", last_name: "Robbers")
       visit lieutenant_lieutenants_path
 
-      expect(page).to have_no_link "Rob Robbers"
+      expect(page).to have_no_link "edit-rob-robbers"
     end
   end
 end
