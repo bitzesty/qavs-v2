@@ -29,17 +29,20 @@
                 label_html: { class: "govuk-label--s" }
                 span#password-result-span.input-group-addon
                   i#password-result.glyphicon.glyphicon-ok
-          .clear
+                  
       .guidance-panel.if-no-js-hide
         #password-guidance
-          br
-          .alert.alert-warning
-            p.govuk-body.text-underline Please improve your password
-            p.govuk-body#password-too-short
-              ' It must be at least 10 characters.
-            p.govuk-body#parts-of-email It shouldn't include part or all of your email address.
-            p.govuk-body#password-entropy
-              ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
+          .govuk-warning-text
+            span.govuk-warning-text__icon aria-hidden='true' !
+            strong.govuk-warning-text__text
+              span.govuk-warning-text__assistive
+                | Warning
+              | Please improve your password
+            strong.govuk-warning-text__text#password-too-short
+              | It must be at least 10 characters.
+            strong.govuk-warning-text__text#parts-of-email It shouldn't include part or all of your email address.
+            strong.govuk-warning-text__text#password-entropy
+              | It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
 
       #password-confirmation-control-group
         .govuk-form-group
@@ -55,9 +58,12 @@
 
       .if-no-js-hide
         #password-confirmation-guidance
-          br
-          .alert.alert-warning
-            p#password-confirmation-match The confirmation must match the password
+          .govuk-warning-text
+            span.govuk-warning-text__icon aria-hidden='true' !
+            strong.govuk-warning-text__text#password-confirmation-match
+              span.govuk-warning-text__assistive
+                | Warning
+              | The confirmation must match the password
 
       .govuk-form-group
         = f.label :role, label: 'User type', class: "govuk-label--s"
