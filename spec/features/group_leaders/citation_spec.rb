@@ -12,9 +12,16 @@ describe "Citation process" do
     login_group_leader(group_leader)
   end
 
-  it "allows group_leader to confirm citation" do
+  it 'hides the citation until the group leader confiorms acceptance' do
     click_link "Confirm group name and citation"
 
+    expect(page).to have_content("Do you accept the Queen's Award for Voluntary Service on behalf of your group?")
+  end
+
+  it "allows group_leader to confirm citation" do
+    click_link "Confirm group name and citation"
+    check 'accept-award'
+    
     expect(page).to have_content("Group name and citation confirmation")
 
     click_button "Submit"

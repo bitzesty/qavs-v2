@@ -10,7 +10,7 @@
         = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, nominee name not yet specified" }, class: 'govuk-link' do
           em
             ' Not yet specified
-    td.govuk-table__cell = obj.dashboard_status(current_admin.class.name)
+    td.govuk-table__cell = obj.dashboard_status
     td.govuk-table__cell = obj.document["nominee_address_postcode"]
     td.govuk-table__cell
       - if obj.document["nominee_ceremonial_county"].present?
@@ -21,6 +21,8 @@
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
     td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+    td.govuk-table__cell
+      = obj.sub_group.try(:text) || "Not assigned"
     td.govuk-table__cell
       = obj.last_updated_at
       br

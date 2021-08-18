@@ -7,10 +7,6 @@ class Users::FormAnswersController < Users::BaseController
                 .find(params[:id])
   end
 
-  before_action do
-    allow_assessor_access!(form_answer)
-  end
-
   before_action :log_download_action, only: :show
 
   def show
@@ -33,13 +29,7 @@ class Users::FormAnswersController < Users::BaseController
 
   def log_download_action
     if admin_in_read_only_mode?
-      subject = if admin_signed_in?
-        current_admin
-      else
-        current_assessor
-      end
-
-      AuditLog.create!(subject: subject, action_type: "download_form_answer", auditable: form_answer)
+      AuditLog.create!(subject: current_admin, action_type: "download_form_answer", auditable: form_answer)
     end
   end
 

@@ -17,7 +17,6 @@
   max-width: 800px;
   max-height: 100vh;
   border-radius: 4px;
-  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -41,7 +40,7 @@
   border: 0;
 }
 
-.mm-modal__header .mm-modal__close:before { 
+.mm-modal__header .mm-modal__close:before {
   content: "\2715";
   font-weight: bold; }
 
@@ -55,7 +54,7 @@
 
 .mm-modal__btn {
   font-size: 1em;
-  padding-left: 0.6em; 
+  padding-left: 0.6em;
   padding-right: 0.6em;
   padding-top: 0.6em;
   padding-bottom: 0.6em;

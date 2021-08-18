@@ -45,7 +45,7 @@ describe AssessorAssignment do
     end
   end
 
-  describe "#visible_for?" do
+  pending "#visible_for?" do
     let(:assessor1) {create(:assessor, :regular_for_all)}
     let(:assessor2) {create(:assessor, :regular_for_all)}
     let(:form_answer) {create(:form_answer)}
@@ -185,27 +185,6 @@ describe AssessorAssignment do
       expect(assessor_assignment.as_json).to eq({})
     end
   end
-
-  describe "#secondary_assessor_can_edit?" do
-    let(:form) { create(:form_answer) }
-    it 'should return true' do
-      secondary = form.assessor_assignments.secondary
-      expect(secondary.send(:secondary_assessor_can_edit?, build(:admin))).to be_truthy
-    end
-  end
-
-  describe "#assessor_assignment_to_category" do
-    let(:form) { create(:form_answer) }
-    let(:assessor1) {create(:assessor, :regular_for_all)}
-    it 'should return true' do
-      allow_any_instance_of(Assessor).to receive(:assignable?) {false}
-      secondary = form.assessor_assignments.secondary
-      secondary.assessor = assessor1
-      secondary.save
-      expect(secondary.errors[:assessor_id].present?).to be_truthy
-    end
-  end
-
 end
 
 def build_assignment_with(meth)

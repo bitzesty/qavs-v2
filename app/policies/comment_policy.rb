@@ -15,9 +15,9 @@ class CommentPolicy < ApplicationPolicy
 
   private
 
-  def lead_or_assigned?
+  def assigned?
     assessor? &&
       record.critical? &&
-      subject.lead_or_assigned?(record.commentable)
+      subject.assigned?(record.commentable)
   end
 end

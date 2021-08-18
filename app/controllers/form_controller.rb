@@ -24,10 +24,6 @@ class FormController < ApplicationController
     :submit_confirm
   ]
 
-  before_action do
-    allow_assessor_access!(@form_answer)
-  end
-
   expose(:support_letter_attachments) do
     @form_answer.support_letter_attachments.inject({}) do |r, attachment|
       r[attachment.id] = attachment
@@ -93,8 +89,6 @@ class FormController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirected = params[:next_action] == "redirect"
-
         if submitted
           @form_answer.submitted_at = Time.current
         end

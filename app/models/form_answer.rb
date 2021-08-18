@@ -31,6 +31,7 @@ class FormAnswer < ApplicationRecord
 
   enumerize :ineligible_reason_nominator, in: %w(involved_in_group no_knowledge no_letters_of_support)
   enumerize :ineligible_reason_group, in: %w(less_than_3_people outside_uk in_operation_for_less_than_3_years volunteers_not_eligible_to_reside_in_uk led_by_paid_stuff no_specific_benefit unsuccessful_in_the_past_3_years has_qavs_award benefits_only_animals)
+  enumerize :sub_group, in: Assessor::SUBGROUPS
 
   begin :associations
     belongs_to :user
@@ -101,7 +102,7 @@ class FormAnswer < ApplicationRecord
     scope :at_post_submission_stage, -> { where(state: FormAnswerStateMachine::POST_SUBMISSION_STATES) }
     scope :not_positive, -> { where(state: FormAnswerStateMachine::NOT_POSITIVE_STATES) }
     scope :in_progress, -> { where(state: ["eligibility_in_progress", "application_in_progress"]) }
-    scope :eligible_for_lieutenant, -> { where.not(state: FormAnswerStateMachine::NOT_ELIGIBLE_STATES) }
+    scope :eligible_for_lieutenant, -> { where(state: FormAnswerStatus::LieutenantFilter::OPTIONS.keys) }
 
     scope :past, -> {
       where(award_year_id: AwardYear.past.pluck(:id))
