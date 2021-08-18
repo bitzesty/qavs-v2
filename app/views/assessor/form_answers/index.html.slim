@@ -19,29 +19,29 @@ h1.govuk-heading-xl
   - # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
   = render("assessor/form_answers/bulk_assignment")
 
-
-  table.applications-table.govuk-table
-    - if @search.query?
-      caption.govuk-table__caption.govuk-table__caption--m
-        = "Search results for '#{@search.query}'"
-        = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
-    thead.govuk-table__head
-      tr.govuk-table__row
-        - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
-          th.govuk-table__header scope='col'
-            span.if-no-js-hide
-              = check_box_tag :check_all
-        th.sortable.govuk-table__header scope='col' width="250"
-          = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
-        th.govuk-table__header scope='col' width="250"
-          | Status
-        th.sortable.govuk-table__header scope='col' width="70"
-          = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
-        th.sortable.govuk-table__header scope='col' width="130"
-          = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
-        = render("assessor/form_answers/assessor_header", f: f)
-        th.sortable.govuk-table__header scope='col' width="130"
-          = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
-      = render(partial: "assessor/form_answers/list_body")
+  div role="region" aria-label="nominations list" tabindex="0"
+    table.applications-table.govuk-table
+      - if @search.query?
+        caption.govuk-table__caption.govuk-table__caption--m
+          = "Search results for '#{@search.query}'"
+          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
+      thead.govuk-table__head
+        tr.govuk-table__row
+          - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
+            th.govuk-table__header scope='col'
+              span.if-no-js-hide
+                = check_box_tag :check_all
+          th.sortable.govuk-table__header scope='col' width="250"
+            = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
+          th.govuk-table__header scope='col' width="250"
+            | Status
+          th.sortable.govuk-table__header scope='col' width="70"
+            = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
+          th.sortable.govuk-table__header scope='col' width="130"
+            = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
+          = render("assessor/form_answers/assessor_header", f: f)
+          th.sortable.govuk-table__header scope='col' width="130"
+            = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
+        = render(partial: "assessor/form_answers/list_body")
 
   = paginate @form_answers
