@@ -1,60 +1,61 @@
-table.govuk-table
-  thead.govuk-table__head
-    tr.govuk-tabke__row
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, 'Name', @search, :full_name
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, 'Email', @search, :email
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, 'Lord Lieutenancy office', @search, :ceremonial_county_name
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, 'Type', @search, :role
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, 'Signed in on', @search, :last_sign_in_at
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, "Confirmed on", @search, :confirmed_at
-      th.sortable.govuk-table__header scope="col"
-        = sort_link f, "Locked on", @search, :locked_at
-      th
-  tbody.govuk-table__body
-    - if resources.none?
-      tr.govuk-table__row
-        td.text-center colspan=100
-          br
-          p.govuk-body.p-empty No lieutenants found.
-          br
-    - else
-      - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
+div role="region" aria-label="list of lord lieutenancy office users" tabindex="0"
+  table.govuk-table
+    thead.govuk-table__head
+      tr.govuk-tabke__row
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, 'Name', @search, :full_name
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, 'Email', @search, :email
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, 'Lord Lieutenancy office', @search, :ceremonial_county_name
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, 'Type', @search, :role
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, 'Signed in on', @search, :last_sign_in_at
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, "Confirmed on", @search, :confirmed_at
+        th.sortable.govuk-table__header scope="col"
+          = sort_link f, "Locked on", @search, :locked_at
+        th
+    tbody.govuk-table__body
+      - if resources.none?
         tr.govuk-table__row
-          th.govuk-table__header scope="row"
-            = link_to lieutenant.full_name, edit_admin_lieutenant_path(lieutenant), class: 'link-edit-user'
-          td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis"}
-          td.govuk-table__cell
-            = lieutenant.ceremonial_county.name
-          td.govuk-table__cell
-            = lieutenant.role_text
-          td.govuk-table__cell
-            small.text-muted
-              - if lieutenant.last_sign_in_at.present?
-                span.visible-lg
-                  = lieutenant.formatted_last_sign_in_at_long
-                span.hidden-lg
-                  = lieutenant.formatted_last_sign_in_at_short
+          td.text-center colspan=100
+            br
+            p.govuk-body.p-empty No Lord Lieutenancy office users found.
+            br
+      - else
+        - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
+          tr.govuk-table__row
+            th.govuk-table__header scope="row"
+              = link_to lieutenant.full_name, edit_admin_lieutenant_path(lieutenant), class: 'link-edit-user'
+            td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis"}
+            td.govuk-table__cell
+              = lieutenant.ceremonial_county.name
+            td.govuk-table__cell
+              = lieutenant.role_text
+            td.govuk-table__cell
+              small.text-muted
+                - if lieutenant.last_sign_in_at.present?
+                  span.visible-lg
+                    = lieutenant.formatted_last_sign_in_at_long
+                  span.hidden-lg
+                    = lieutenant.formatted_last_sign_in_at_short
+                - else
+                  | Never signed in
+            td.govuk-table__cell
+              - if lieutenant.confirmed_at.present?
+                small.text-muted
+                  = l lieutenant.confirmed_at, format: :date_at_time
               - else
-                | Never signed in
-          td.govuk-table__cell
-            - if lieutenant.confirmed_at.present?
-              small.text-muted
-                = l lieutenant.confirmed_at, format: :date_at_time
-            - else
-              small.text-danger
-                ' Not confirmed
-          td.govuk-table__cell
-            - if lieutenant.locked_at.present?
-              small.text-muted
-                = l lieutenant.locked_at, format: :date_at_time
-            - else
-              small.text-muted
-                ' Not locked
-          td.govuk-table__cell
-            = link_to "Edit user", edit_admin_lieutenant_path(lieutenant)
+                small.text-danger
+                  ' Not confirmed
+            td.govuk-table__cell
+              - if lieutenant.locked_at.present?
+                small.text-muted
+                  = l lieutenant.locked_at, format: :date_at_time
+              - else
+                small.text-muted
+                  ' Not locked
+            td.govuk-table__cell
+              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant)

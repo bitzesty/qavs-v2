@@ -1,27 +1,28 @@
 .dashboard-table__wrapper.dashboard-report
-  table.govuk-table.dashboard-table class="govuk-!-font-size-14"
-    caption.govuk-table__caption.govuk-table__caption--m
-      | New account registrations
-      a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_month")
-        | Load data
-      button.btn.btn-primary.btn--loading.updating-data.hidden.govuk-button
-        | Updating data
+  div role="region" aria-label="new account registrations" tabindex="0"
+    table.govuk-table.dashboard-table class="govuk-!-font-size-14"
+      caption.govuk-table__caption.govuk-table__caption--m
+        | New account registrations
+        a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_month")
+          | Load data
+        button.btn.btn-primary.btn--loading.updating-data.hidden.govuk-button
+          | Updating data
 
-    thead.govuk-table__head
-      tr.govuk-table__row
-        th.bold.border-right.govuk-table__header width="150"
-          | Year
-        th.bold.border-right.govuk-table__header width="140"
-          | By end of April
-        th.bold.border-right.govuk-table__header width="140"
-          | By end of May
-        th.bold.border-right.govuk-table__header width="140"
-          | By end of June
-        th.bold.border-right.govuk-table__header width="140"
-          | By end of July
-        th.bold.border-right .govuk-table__headerwidth="140"
-          | By end of August
-        th.bold.govuk-table__header width="140"
-          | Totals on deadline
-    tbody.govuk-table__body
-      = render "admin/dashboard/totals_by_month/users_table_body"
+      thead.govuk-table__head
+        tr.govuk-table__row
+          th.bold.border-right.govuk-table__header width="150"
+            | Year
+          th.bold.border-right.govuk-table__header width="140"
+            | By end of April
+          th.bold.border-right.govuk-table__header width="140"
+            | By end of May
+          th.bold.border-right.govuk-table__header width="140"
+            | By end of June
+          th.bold.border-right.govuk-table__header width="140"
+            | By end of July
+          th.bold.border-right .govuk-table__headerwidth="140"
+            | By end of August
+          th.bold.govuk-table__header width="140"
+            | Totals on deadline
+      tbody.govuk-table__body
+        = render "admin/dashboard/totals_by_month/users_table_body"

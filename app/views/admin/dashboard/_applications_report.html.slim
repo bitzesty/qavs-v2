@@ -1,12 +1,13 @@
 .dashboard-table__wrapper.dashboard-report
-  table.dashboard-table.govuk-table class="govuk-!-font-size-14"
-    caption.govuk-table__caption.govuk-table__caption--m
-      = title
-      a.govuk-button.btn--load.update-report href=url
-        | Load data
-      button.govuk-button.btn--loading.updating-data.hidden
-        | Updating data
-    = render "admin/dashboard/totals_#{kind}/table_head"
+  div role="region" aria-label="nomination report" tabindex="0"
+    table.dashboard-table.govuk-table class="govuk-!-font-size-14"
+      caption.govuk-table__caption.govuk-table__caption--m
+        = title
+        a.govuk-button.btn--load.update-report href=url
+          | Load data
+        button.govuk-button.btn--loading.updating-data.hidden
+          | Updating data
+      = render "admin/dashboard/totals_#{kind}/table_head"
 
-    tbody.govuk-table__body
-      = render "admin/dashboard/totals_#{kind}/table_body"
+      tbody.govuk-table__body
+        = render "admin/dashboard/totals_#{kind}/table_body"

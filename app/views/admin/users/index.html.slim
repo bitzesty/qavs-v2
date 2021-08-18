@@ -10,8 +10,8 @@
               = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
               = submit_tag :submit, class: 'search-submit'
 
-          .govuk-grid-column-two-thirds.text-right
-            = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button' do
+          .govuk-grid-column-two-thirds
+            = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right' do
               = t("admin.users.new_button.#{controller_name}")
         .clear
 
@@ -24,7 +24,7 @@
 
         = render 'list', resources: @resources, f: f
 
-        .row
+        .govuk-grid-row
           .col-xs-12.text-right
             = paginate @resources
             .clear

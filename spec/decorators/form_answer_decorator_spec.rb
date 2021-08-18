@@ -82,51 +82,7 @@ describe FormAnswerDecorator do
       expect(described_class.new(form_answer).dashboard_status).to eq("Application in progress...0%")
     end
 
-    it "warns that assessors are not assigned if assessment is in progress and assessors are not assigned yet for admin section" do
-      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
-      expect(described_class.new(form_answer).dashboard_status("admin")).to eq("Assessors are not assigned")
-    end
-
-    it "returns assessors' names if assessment is in progress and assessors are assigned for admin section" do
-      assessor1 = create(:assessor, :regular_for_all, first_name: "Jon", last_name: "Snow")
-      assessor2 = create(:assessor, :regular_for_all, first_name: "Ramsay", last_name: "Snow")
-
-      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
-
-      primary = form_answer.assessor_assignments.primary
-      secondary = form_answer.assessor_assignments.secondary
-
-      primary.assessor = assessor1
-      secondary.assessor = assessor2
-      primary.save
-      secondary.save
-
-      expect(described_class.new(form_answer).dashboard_status("admin")).to eq("Jon Snow, Ramsay Snow")
-    end
-
-    it "warns that assessors are not assigned if assessment is in progress and assessors are not assigned yet for assessor section" do
-      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
-      expect(described_class.new(form_answer).dashboard_status).to eq("Assessment in progress")
-    end
-
-    it "returns assessors' names if assessment is in progress and assessors are assigned for assessor section" do
-      assessor1 = create(:assessor, :regular_for_all, first_name: "Jon", last_name: "Snow")
-      assessor2 = create(:assessor, :regular_for_all, first_name: "Ramsay", last_name: "Snow")
-
-      form_answer = create(:form_answer, :submitted, state: "assessment_in_progress")
-
-      primary = form_answer.assessor_assignments.primary
-      secondary = form_answer.assessor_assignments.secondary
-
-      primary.assessor = assessor1
-      secondary.assessor = assessor2
-      primary.save
-      secondary.save
-
-      expect(described_class.new(form_answer).dashboard_status).to eq("Assessment in progress")
-    end
-
-    it "returns application state after assessment is ended" do
+    it "returns application state after submission" do
       form_answer = create(:form_answer, :submitted, state: "not_recommended")
       expect(described_class.new(form_answer).dashboard_status).to eq("Not recommended")
 

@@ -1,18 +1,17 @@
 class LocalAssessmentSubmissionService
-  attr_reader :form_answer, :lieutenant
+  attr_reader :form_answer, :user
 
-  def initialize(form_answer, lieutenant)
+  def initialize(form_answer, user)
     @form_answer = form_answer
-    @lieutenant = lieutenant
+    @user = user
   end
 
   def submit!
-    puts form_answer.document["local_assessment_verdict"]
     case form_answer.document["local_assessment_verdict"]
     when "recommended"
-      form_answer.state_machine.perform_transition(:local_assessment_recommended, lieutenant)
+      form_answer.state_machine.perform_transition(:local_assessment_recommended, user)
     when "not_recommended"
-      form_answer.state_machine.perform_transition(:local_assessment_not_recommended, lieutenant)
+      form_answer.state_machine.perform_transition(:local_assessment_not_recommended, user)
     else
       raise ArgumentError, "FormAnswer##{form_answer.id} is not valid for state transition"
     end

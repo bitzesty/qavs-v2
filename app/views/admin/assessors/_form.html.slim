@@ -1,31 +1,30 @@
 = simple_form_for [:admin, resource], as: :assessor, url: resource.persisted? ? admin_assessor_path(resource) : admin_assessors_path, html: { class: 'qae-form' } do |f|
   = f.input :first_name,
             input_html: { class: 'small' },
-            label: 'First name'
+            label_html: { class: 'govuk-label--s' }
 
   = f.input :last_name,
             input_html: { class: 'small' },
-            label: 'Last name'
+            label_html: { class: 'govuk-label--s' }
 
-  = f.input :company,
-            input_html: { class: 'medium' },
-            label: 'Company'
+  = f.input :sub_group,
+            input_html: { class: 'govuk-select' },
+            as: :select,
+            label: 'National assessor sub-group',
+            label_html: { class: 'govuk-label--s' }
 
   = f.input :email,
-            input_html: { class: 'large' },
-            label: 'Email'
-
-  = f.input :telephone_number,
-            input_html: { class: "small" },
-            label: 'Telephone (optional)'
+            input_html: { class: 'medium' },
+            label_html: { class: 'govuk-label--s' }
 
   - if f.object.persisted?
     .question-group#password-change-panel
       #password-control-group
         .input-group
           = f.input :password,
-                    input_html: { class: 'small' },
-                    label: 'Password'
+                    input_html: { class: 'medium' },
+                    label: 'New password',
+                    label_html: { class: 'govuk-label--s' }
           span#password-result-span.input-group-addon
             i#password-result.glyphicon.glyphicon-ok
         .clear
@@ -45,8 +44,9 @@
       #password-confirmation-control-group
         .input-group
           = f.input :password_confirmation,
-                    input_html: { class: 'small' },
-                    label: 'Retype password'
+                    input_html: { class: 'medium' },
+                    label: 'Confirm new password',
+                    label_html: { class: 'govuk-label--s' }
           span#password-confirmation-result-span.input-group-addon
             i#password-confirmation-result.glyphicon.glyphicon-ok
         .clear
@@ -60,15 +60,8 @@
               p#password-confirmation-match The confirmation must match the password
 
 
-  = f.input :qavs_role,
-            input_html: { class: "govuk-select small"},
-            as: :select,
-            collection: Assessor.roles,
-            include_blank: false,
-            label: 'QAVS'
-  
   .govuk-button-group class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
-    = f.submit "#{f.object.persisted? ? 'Update' : 'Create'} assessor", class: 'govuk-button'
+    = f.submit "#{f.object.persisted? ? 'Update' : 'Add'} user", class: 'govuk-button'
     = link_to "Cancel",
                   admin_assessors_path,
                   class: 'govuk-button govuk-button--secondary'
