@@ -7,7 +7,7 @@
 
     .feedback-holder
 
-    = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button"
+    = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button if-no-js-hide"
 
 - elsif assessment.submitted?
 

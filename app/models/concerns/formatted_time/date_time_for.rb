@@ -57,8 +57,7 @@ module FormattedTime::DateTimeFor
         date = :"#{attr}_date"
         time = :"#{attr}_time"
 
-        attr_accessible "formatted_#{day}", "formatted_#{month}",
-                        "formatted_#{year}", "formatted_#{time}" if respond_to?(:attr_accessible)
+        attr_accessible "formatted_#{date}", "formatted_#{time}", "#{day}", "#{month}", "#{year}" if respond_to?(:attr_accessible)
 
         formatted_time_for time
         formatted_date_for date
@@ -105,60 +104,48 @@ module FormattedTime::DateTimeFor
             end
           end
 
-          def #{day}=(value)
+          def #{date}=value
             if #{attr}
               seconds = #{attr}.hour.hours + #{attr}.min.minutes
             end
 
-            day = value
-            month = self.public_send("#{attr}_month")
-            year = self.public_send("#{attr}_year")
-
-            if day && month && year
+            if value
               zone = Time.zone
-              self.#{attr} = zone.local(year, month, day)
+              self.#{attr} = zone.local(value)
 
               self.#{attr} += seconds if #{attr} && seconds
             else
-              # self.#{attr} = nil
+              self.#{attr} = nil
             end
+          end
+
+          def #{day}=(value)
+            instance_variable_set("@#{attr}_day", value)
+
+            attempt_forming_date_#{attr}
           end
 
           def #{month}=(value)
-            if #{attr}
-              seconds = #{attr}.hour.hours + #{attr}.min.minutes
-            end
+            instance_variable_set("@#{attr}_month", value)
 
-            month = value
-            day = self.public_send("#{attr}_day")
-            year = self.public_send("#{attr}_year")
-
-            if value && day && year
-              zone = Time.zone
-              self.#{attr} = zone.local(year, month, day)
-
-              self.#{attr} += seconds if #{attr} && seconds
-            else
-              # self.#{attr} = nil
-            end
+            attempt_forming_date_#{attr}
           end
 
           def #{year}=(value)
-            if #{attr}
-              seconds = #{attr}.hour.hours + #{attr}.min.minutes
-            end
+            instance_variable_set("@#{attr}_year", value)
 
-            year = value
-            day = self.public_send("#{attr}_day")
-            month = self.public_send("#{attr}_month")
+            attempt_forming_date_#{attr}
+          end
 
-            if day && month && year
-              zone = Time.zone
-              self.#{attr} = zone.local(year, month, day)
+          def attempt_forming_date_#{attr}
+            day = instance_variable_get("@#{attr}_day")
+            month = instance_variable_get("@#{attr}_month")
+            year = instance_variable_get("@#{attr}_year")
 
-              self.#{attr} += seconds if #{attr} && seconds
+            if day.present? && month.present? && year.present?
+              public_send("formatted_#{attr}_date=", [day, month, year].join("/"))
             else
-              # self.#{attr} = nil
+              public_send("formatted_#{attr}_date=", "")
             end
           end
 

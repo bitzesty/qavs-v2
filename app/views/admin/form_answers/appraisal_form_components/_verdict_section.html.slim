@@ -15,11 +15,6 @@
                 = qae_simple_format f.object.public_send(section.desc)
             - else
               p.govuk-hint No comment has been added yet.
-            p.govuk-body
-              - if f.object.public_send(section.desc).present?
-                = qae_simple_format f.object.public_send(section.desc)
-              - else
-                p.govuk-hint No comment has been added yet.
             - if editable
               a.govuk-link.toggable-form__trigger href="#" role="button"
                 | Edit
