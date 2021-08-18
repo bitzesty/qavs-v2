@@ -1,11 +1,5 @@
 = simple_form_for [:admin, resource], as: :assessor, url: resource.persisted? ? admin_assessor_path(resource) : admin_assessors_path, html: { class: 'qae-form' } do |f|
-  = f.input :first_name,
-            input_html: { class: 'small' },
-            label_html: { class: 'govuk-label--s' }
-
-  = f.input :last_name,
-            input_html: { class: 'small' },
-            label_html: { class: 'govuk-label--s' }
+  = render "shared/users/user_details", f: f
 
   = f.input :sub_group,
             input_html: { class: 'govuk-select' },
@@ -13,51 +7,8 @@
             label: 'National assessor sub-group',
             label_html: { class: 'govuk-label--s' }
 
-  = f.input :email,
-            input_html: { class: 'medium' },
-            label_html: { class: 'govuk-label--s' }
-
   - if f.object.persisted?
-    .question-group#password-change-panel
-      #password-control-group
-        .input-group
-          = f.input :password,
-                    input_html: { class: 'medium' },
-                    label: 'New password',
-                    label_html: { class: 'govuk-label--s' }
-          span#password-result-span.input-group-addon
-            i#password-result.glyphicon.glyphicon-ok
-        .clear
-      .guidance-panel.if-no-js-hide
-        #password-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden="true"
-              | !
-            strong.govuk-warning-text__text
-              p.text-underline Please improve your password
-              p#password-too-short
-                ' It must be at least 10 characters.
-              p#parts-of-email It shouldn't include part or all of your email address.
-              p#password-entropy
-                ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
-
-      #password-confirmation-control-group
-        .input-group
-          = f.input :password_confirmation,
-                    input_html: { class: 'medium' },
-                    label: 'Confirm new password',
-                    label_html: { class: 'govuk-label--s' }
-          span#password-confirmation-result-span.input-group-addon
-            i#password-confirmation-result.glyphicon.glyphicon-ok
-        .clear
-
-      .if-no-js-hide
-        #password-confirmation-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden="true"
-              | !
-            strong.govuk-warning-text__text
-              p#password-confirmation-match The confirmation must match the password
+    = render "shared/users/password_change", f: f
 
 
   .govuk-button-group class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
