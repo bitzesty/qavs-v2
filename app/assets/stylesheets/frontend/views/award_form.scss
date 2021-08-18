@@ -285,8 +285,8 @@ select.read-only {
     background-position: center;
 
     position: absolute;
-    left: -20px;
-    top: 10px;
+    left: -22px;
+    top: 6px;
   }
 
   &:focus {
@@ -315,7 +315,7 @@ select.read-only {
 }
 
 .download-pdf-link {
-  margin: 0.25em 0 0;
+  margin: 0.25em 1em 0;
   font-size: 1.25em;
 
   svg {
