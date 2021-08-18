@@ -3,17 +3,39 @@
     .govuk-grid-row
       .govuk-grid-column-two-thirds
         h1.govuk-heading-xl
-          | Welcome to the Queen’s Award for Voluntary Service
+          | Lieutenancy office users' dashboard
 
     .govuk-grid-row
       .govuk-grid-column-two-thirds
-        .govuk-body
-          p Thank you for conducting the local assessment for QAVS.
-          p
-            | Please submit your assessment by
-            strong  Monday, 24 January 2022.
-          p You can download the local assessment guide, which provides helpful tips on approaching the assessment and completing your report.
+        p.govuk-body
+          | Thank you for conducting the local assessment for QAVS.
+          .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title"
+            .govuk-notification-banner__header
+              h2.govuk-notification-banner__title#govuk-notification-banner-title
+                | Important
+            .govuk-notification-banner__content
+              p.govuk-notification-banner__heading
+                | Please submit your assessment by
+                strong  Monday, 24 January 2022.
+          p.govuk-body You can download the local assessment guide, which provides helpful tips on approaching the assessment and completing your report.
         .govuk-body
           = link_to "Download QAVS local assessment guide (PDF)", class: "download-link govuk-link"
         .button
           = link_to "Start reviewing nominations", lieutenant_form_answers_url, class: "govuk-button govuk-button--start"
+
+    hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
+
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        h3.govuk-heading-m
+          | Other useful resources
+        p.govuk-body
+          | You can also download promotional materials to help raise awareness of the award.
+        .govuk-body
+          = link_to "Download the QAVS leaflet and other promotional materials", class: "download-link govuk-link"
+        p.govuk-body
+          | We will share information with the successful groups directly. However, you can also find the materials to download below.
+        .govuk-body
+          = link_to "Download the media pack for the announcement", class: "download-link govuk-link"
+        .govuk-body
+          = link_to "Download the QAVS logos and Guidelines", "https://apply.qavs.dcms.gov.uk/content_only/logo_guidelines", class: "download-link govuk-link"
