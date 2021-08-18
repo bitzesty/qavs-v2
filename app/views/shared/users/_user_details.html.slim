@@ -1,0 +1,12 @@
+.govuk-form-group
+  = f.input :first_name,
+            input_html: { class: 'small' },
+            label_html: { class: 'govuk-label--s' }
+.govuk-form-group
+  = f.input :last_name,
+            input_html: { class: 'small' },
+            label_html: { class: 'govuk-label--s' }
+.govuk-form-group#email-control-group
+    = f.input :email,
+              input_html: { class: 'medium' },
+              label_html: { class: 'govuk-label--s' }

@@ -1,21 +1,5 @@
 = simple_form_for [:lieutenant, resource], as: :lieutenant, url: resource.persisted? ? lieutenant_lieutenant_path(resource) : lieutenant_lieutenants_path, html: { class: 'qae-form' } do |f|
-  .govuk-grid-row
-    .govuk-grid-column-one-third
-      .govuk-form-group
-        = f.input :first_name,
-                  label_html: { class: "govuk-label--s" }
-
-  .govuk-grid-row
-    .govuk-grid-column-one-third
-      .govuk-form-group
-        = f.input :last_name,
-        label_html: { class: "govuk-label--s" }
-
-  .govuk-grid-row#email-control-group
-    .govuk-grid-column-one-half
-      .govuk-form-group
-        = f.input :email,
-                  label_html: { class: "govuk-label--s" }
+  = render "shared/users/user_details", f: f
 
   - if f.object.persisted?
     = render "shared/users/password_change", f: f

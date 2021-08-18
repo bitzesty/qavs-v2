@@ -1,18 +1,5 @@
 = simple_form_for [:admin, resource], as: :lieutenant, url: resource.persisted? ? admin_lieutenant_path(resource) : admin_lieutenants_path, html: { class: 'qae-form' } do |f|
-  = f.input :first_name,
-            input_html: { class: 'small' },
-            label: 'First name',
-            label_html: { class: 'govuk-label--s' }
-
-  = f.input :last_name,
-            input_html: { class: 'small' },
-            label: 'Last name',
-            label_html: { class: 'govuk-label--s' }
-
-  #email-control-group
-    = f.input :email,
-              input_html: { class: 'large' },
-              label_html: { class: 'govuk-label--s' }
+  = render "shared/users/user_details", f: f
 
   = f.association :ceremonial_county,
                   input_html: { class: "govuk-select"},
