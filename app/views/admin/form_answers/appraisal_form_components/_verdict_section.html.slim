@@ -1,6 +1,5 @@
 - form = AppraisalForm.verdict_options_for(f.object, section)
 - editable = f.object.editable_for?(current_subject)
-- rag_editable = f.object.moderated_rag_editable_for?(current_subject)
 
 .govuk-notification-banner
   .govuk-notification-banner__content
@@ -11,10 +10,19 @@
         .toggable-form
           .toggable-form__read
             - if f.object.public_send(section.rate).present?
-              p.govuk-body
-                = qae_simple_format f.object.public_send(section.desc)
+              p.evaluation-rate
+                = "Decision: "
+                span.evaluation-rate
+                  = f.object.public_send(section.rate)
             - else
-              p.govuk-hint No comment has been added yet.
+              p.evaluation-rate.hidden
+
+            - if f.object.public_send(section.desc).present?
+              p.assessor-notes
+                = f.object.public_send(section.desc)
+            - else
+              p.govuk-hint.assessor-notes No comment has been added yet.
+
             - if editable
               a.govuk-link.toggable-form__trigger href="#" role="button"
                 | Edit
@@ -25,14 +33,22 @@
                       as: :select,
                       label: 'Evaluate',
                       collection: form.options,
-                      input_html: { "data-updated-section"  => section.desc}
+                      input_html: { "data-updated-section"  => section.desc, class: "evaluation-rate-input" }
 
             = f.input section.desc,
                       wrapper_html: { class: 'govuk-form-group' },
-                      input_html: { class: 'form-control js-char-count', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}"},
+                      input_html: { class: 'form-control js-char-count assessor-notes-input', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}"},
                       as: :text,
                       label: 'Notes'
 
             .govuk-button-group
-              = link_to "Save", "#", class: "govuk-button  btn-primary form-save-link pull-right if-no-js-hide", "data-updated-section" => section.desc
-              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-cancel toggable-form__cancel if-no-js-hide"
+              button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc
+                | Save
+                span.govuk-visually-hidden
+                  <= section.label
+
+                button.govuk-button.govuk-button--secondary.toggable-form__cancel.if-no-js-hide
+                  | Cancel
+                  span.govuk-visually-hidden
+                    ' changes to
+                    <= section.label

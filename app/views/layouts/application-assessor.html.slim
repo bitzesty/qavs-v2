@@ -24,9 +24,8 @@
       ul.govuk-header__navigation#navigation aria-label="Navigation menu"
         li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
           = link_to "Nominations", assessor_form_answers_path, class: 'govuk-header__link'
-        - if current_subject.lead_for_any_category?
-          li.govuk-header__navigation-item class=('active' if controller_name == 'reports')
-            = link_to "Reports", assessor_reports_path(year: @award_year.year), class: 'govuk-header__link'
+        / li.govuk-header__navigation-item class=('active' if controller_name == 'reports')
+          / = link_to "Reports", assessor_reports_path(year: @award_year.year), class: 'govuk-header__link'
         li.govuk-header__navigation-item
           = link_to "Sign out",
                     destroy_assessor_session_path,

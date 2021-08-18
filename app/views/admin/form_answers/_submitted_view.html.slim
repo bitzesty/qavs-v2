@@ -2,9 +2,9 @@
 
 .govuk-accordion data-module="govuk-accordion"
   = render "section_admin_comments"
-  = render "admin/form_answers/section_appraisal_form_primary"
-  = render "admin/form_answers/section_appraisal_form_secondary"
-  = render "section_appraisal_form_moderated"
+
+  - AssessorAssignmentsConstructor.new(resource, current_admin).assessments.each do |assessment|
+    = render "admin/form_answers/section_appraisal_form", assessment: assessment
 
   - if show_feedback_section?
     = render "admin/feedbacks/section", form_answer: @form_answer

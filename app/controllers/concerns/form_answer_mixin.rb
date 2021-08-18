@@ -63,22 +63,6 @@ module FormAnswerMixin
 
   private
 
-  def primary_assessment
-    @primary_assessment ||= resource.assessor_assignments.primary.decorate
-  end
-
-  def secondary_assessment
-    @secondary_assessment ||= resource.assessor_assignments.secondary.decorate
-  end
-
-  def moderated_assessment
-    @moderated_assessment ||= resource.assessor_assignments.moderated.decorate
-  end
-
-  def case_summary_assessment
-    @case_summary_assessment ||= resource.assessor_assignments.case_summary.decorate
-  end
-
   def allowed_params
     ops = params.require(:form_answer).permit!
     ops = ops.to_h

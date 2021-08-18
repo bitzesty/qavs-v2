@@ -74,6 +74,17 @@ class FormAnswerStateMachine
     :not_awarded
   ]
 
+  ASSESSOR_VISIBLE_STATES = [
+    :local_assessment_recommended,
+    :assessment_in_progress,
+    :disqualified,
+    :recommended,
+    :reserved,
+    :not_recommended,
+    :awarded,
+    :not_awarded
+  ]
+
   state :eligibility_in_progress, initial: true
   state :application_in_progress
   state :submitted

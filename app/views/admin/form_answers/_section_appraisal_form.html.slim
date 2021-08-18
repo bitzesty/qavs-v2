@@ -1,0 +1,24 @@
+.govuk-accordion__section
+  .govuk-accordion__section-header
+    h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
+      span.govuk-accordion__section-button
+        = "National assessor (#{assessment.assessor.full_name})"
+        = assessment_govuk_tag(assessment.submitted? ? assessment.document['verdict_rate'] : 'pending')
+
+  .govuk-accordion__section-content
+    = simple_form_for([namespace_name, assessment],
+                      remote: true,
+                      authenticity_token: true,
+                      html: { "data-type" => "json", "data-namespace" => namespace_name }) do |f|
+
+      / to change to patch later on
+      = hidden_field_tag "_method", assessment.persisted? ? "patch" : "post"
+      = hidden_field_tag :updated_section
+      = hidden_field_tag :form_answer_id, resource.id
+      = hidden_field_tag :assessor_id, f.object.assessor_id
+
+      = render_section(resource, f)
+      = f.submit "Save changes", class: "if-js-hide govuk-button btn-primary"
+    .clear
+    br
+    = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: assessment)

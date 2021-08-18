@@ -1,5 +1,4 @@
-- form = AppraisalForm.rag_options_for(f.object, section)
-
+- form = AppraisalForm.evaluation_options_for(f.object, section)
 - editable = f.object.editable_for?(current_subject)
 
 .govuk-form-group.rag-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
@@ -9,10 +8,27 @@
     div.toggable-form
       .toggable-form__read
         .govuk-body.toggable-form__content
-          - if f.object.public_send(section.desc).present?
-            = qae_simple_format f.object.public_send(section.desc)
+
+          - if f.object.public_send(section.rate).present?
+            p.evaluation-rate
+              = "Evaluation: "
+              span.evaluation-rate
+                = f.object.public_send(section.rate)
+              | &nbsp;
+              | evidence
           - else
-            p.govuk-hint No comment has been added yet.
+            p.evaluation-rate class="govuk-!-display-none"
+              = "Evaluation: "
+              span.evaluation-rate
+              | &nbsp;
+              | evidence
+
+          - if f.object.public_send(section.desc).present?
+            p.assessor-notes
+              = f.object.public_send(section.desc)
+          - else
+            p.govuk-hint.assessor-notes No comment has been added yet.
+
         - if editable
           .govuk-body
             a.govuk-link.toggable-form__trigger href="#" role="button"
@@ -24,10 +40,10 @@
                   as: :select,
                   label: 'Evaluate',
                   collection: form.options,
-                  input_html: { "data-updated-section" => section.rate }
+                  input_html: { "data-updated-section" => section.rate, class: "evaluation-rate-input" }
 
         = f.input section.desc,
-                  input_html: { class: 'form-control', "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
+                  input_html: { class: 'form-control assessor-notes-input', "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
                   as: :text,
                   label: 'Notes'
         .govuk-button-group

@@ -157,7 +157,7 @@ Rails.application.routes.draw do
       resources :draft_notes, only: [:create, :update]
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :reports, only: [:index, :show]
 
     resources :assessment_submissions, only: [:create] do

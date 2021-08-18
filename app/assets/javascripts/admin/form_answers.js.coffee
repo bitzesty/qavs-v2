@@ -49,13 +49,22 @@ ready = ->
   # $(".bulk-assign-assessors-form select").select2()
   # $(".bulk-assign-lieutenants-form select").select2()
 
-  $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
+  $("form.new_assessor_assignment").on "ajax:success", (e, data, status, xhr) ->
     form = $(this)
+    section = form.closest(".govuk-accordion__section-content")
+    console.log($("form", section).length)
+    namespace = form.data('namespace')
+    $("form", section).attr("action", "/#{namespace}/assessor_assignments/#{data['id']}")
+    $("input[name='_method']", section).val("patch")
+
+  $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
+
     form.find(".errors-holder").text("")
     form.closest(".form-group").removeClass("form-edit")
     formValueBox = form.closest(".form-group").find(".edit-value")
     formValue = form.find("select :selected").text()
     formValueBox.text(formValue)
+
   $(".section-applicant-users form").on "ajax:error", (e, data, status, xhr) ->
     form = $(this)
     errors = ""
@@ -77,8 +86,7 @@ ready = ->
     $(this).find(".feedback-holder").removeClass("error").addClass("alert alert-success")
 
     successMessage = "Assessment submitted"
-    if $(this).closest(".panel-collapse").hasClass("section-case-summary")
-      successMessage = "Case summary submitted"
+
     $(this).find(".feedback-holder").html(successMessage)
     $(this).find("input:submit").remove()
 

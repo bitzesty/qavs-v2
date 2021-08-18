@@ -9,8 +9,8 @@ h1.govuk-heading-xl
       = f.input :query, label: 'Search', input_html: { class: "medium", type: "search" }
 
     = render "shared/form_answers/top_statuses_filters", f: f,
-                                                        options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.options),
-                                                        sub_options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.sub_options(current_assessor))
+                                                        options: FormAnswerStatus::AssessorFilter.collection('status'),
+                                                        sub_options: FormAnswerStatus::AssessorFilter.collection('sub')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
 
@@ -27,10 +27,9 @@ h1.govuk-heading-xl
           = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
       thead.govuk-table__head
         tr.govuk-table__row
-          - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
-            th.govuk-table__header scope='col'
-              span.if-no-js-hide
-                = check_box_tag :check_all
+          th.govuk-table__header scope='col'
+            span.if-no-js-hide
+              = check_box_tag :check_all
           th.sortable.govuk-table__header scope='col' width="250"
             = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
           th.govuk-table__header scope='col' width="250"

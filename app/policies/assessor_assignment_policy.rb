@@ -3,25 +3,14 @@ class AssessorAssignmentPolicy < ApplicationPolicy
     record.editable_for?(subject)
   end
 
+  def create?
+    record.editable_for?(subject)
+  end
+
   def submit?
-    return true if admin_or_lead?
+    return true if admin?
 
-    record.assessor == subject || (
-      primary? &&
-      (record.primary? || record.case_summary?)
-    )
-  end
-
-  def lead?
-    subject.lead?(record.form_answer)
-  end
-
-  def primary?
-    subject.primary?(record.form_answer)
-  end
-
-  def admin_or_lead?
-    admin? || lead?
+    record.editable_for?(subject)
   end
 
   def can_be_submitted?
@@ -33,7 +22,6 @@ class AssessorAssignmentPolicy < ApplicationPolicy
   end
 
   def can_unlock?
-    record.locked? &&
-    admin_or_lead?
+    record.locked? && admin?
   end
 end

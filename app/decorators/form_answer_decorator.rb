@@ -418,22 +418,6 @@ class FormAnswerDecorator < ApplicationDecorator
     document["organisation_type"]
   end
 
-  def primary_assessor_full_name
-    object.assessors.primary.try(:full_name) || NOT_ASSIGNED
-  end
-
-  def secondary_assessor_full_name
-    object.assessors.secondary.try(:full_name) || NOT_ASSIGNED
-  end
-
-  def primary_assessment_submitted?
-    object.assessor_assignments.primary.submitted?
-  end
-
-  def secondary_assessment_submitted?
-    object.assessor_assignments.secondary.submitted?
-  end
-
   def dashboard_status
     if object.submitted?
       state_text

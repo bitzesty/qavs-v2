@@ -3,12 +3,5 @@
 .govuk-accordion class="govuk-!-margin-top-7" data-module="govuk-accordion"
   = render "admin/form_answers/section_admin_comments", { read_only: true }
 
-  - if primary_assessment.visible_for?(current_subject)
-    = render "admin/form_answers/section_appraisal_form_primary"
-  - if secondary_assessment.visible_for?(current_subject)
-    = render "admin/form_answers/section_appraisal_form_secondary"
-  - if show_section_appraisal_moderated?
-    = render "admin/form_answers/section_appraisal_form_moderated"
-
-  - if show_feedback_section?
-    = render "admin/feedbacks/section", form_answer: @form_answer
+  - AssessorAssignmentsConstructor.new(resource, current_assessor).assessments.each do |assessment|
+    = render "admin/form_answers/section_appraisal_form", assessment: assessment

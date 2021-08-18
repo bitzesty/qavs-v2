@@ -4,19 +4,11 @@ module PartialsVisibilityHelper
     return true if current_subject.lead?(@form_answer) || current_subject.primary?(@form_answer)
   end
 
-  def show_section_appraisal_moderated?
-    policy(@form_answer).show_section_appraisal_moderated?
-  end
-
   def show_winners_section?
     @form_answer.awarded? || @form_answer.recommended? || @form_answer.reserved?
   end
 
   def show_case_summary_section?
-    admin_lead_or_primary?
-  end
-
-  def show_feedback_section?
     admin_lead_or_primary?
   end
 
