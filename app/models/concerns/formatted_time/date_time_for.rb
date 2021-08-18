@@ -111,7 +111,7 @@ module FormattedTime::DateTimeFor
 
             if value
               zone = Time.zone
-              self.#{attr} = zone.local(value)
+              self.#{attr} = zone.local(value.year, value.month, value.day)
 
               self.#{attr} += seconds if #{attr} && seconds
             else
@@ -144,7 +144,7 @@ module FormattedTime::DateTimeFor
 
             if day.present? && month.present? && year.present?
               public_send("formatted_#{attr}_date=", [day, month, year].join("/"))
-            else
+            elsif !day.present? && !month.present? && !year.present? # if all are missing
               public_send("formatted_#{attr}_date=", "")
             end
           end
