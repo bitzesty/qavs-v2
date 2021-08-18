@@ -18,52 +18,7 @@
                   label_html: { class: "govuk-label--s" }
 
   - if f.object.persisted?
-    .question-group#password-change-panel
-      #password-control-group
-        .govuk-form-group
-          .govuk-grid-row
-            .govuk-grid-column-one-half
-              .input-group
-                = f.input :password,
-                label: "New password",
-                label_html: { class: "govuk-label--s" }
-                span#password-result-span.input-group-addon
-                  i#password-result.glyphicon.glyphicon-ok
-
-      .guidance-panel.if-no-js-hide
-        #password-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden='true' !
-            strong.govuk-warning-text__text
-              span.govuk-warning-text__assistive
-                | Warning
-              | Please improve your password
-            strong.govuk-warning-text__text#password-too-short
-              | It must be at least 10 characters.
-            strong.govuk-warning-text__text#parts-of-email It shouldn't include part or all of your email address.
-            strong.govuk-warning-text__text#password-entropy
-              | It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
-
-      #password-confirmation-control-group
-        .govuk-form-group
-          .govuk-grid-row
-            .govuk-grid-column-one-half
-              .input-group
-                = f.input :password_confirmation,
-                          label_html: { class: "govuk-label--s" },
-                          label: "Confirm new password"
-                span#password-confirmation-result-span.input-group-addon
-                  i#password-confirmation-result.glyphicon.glyphicon-ok
-          .clear
-
-      .if-no-js-hide
-        #password-confirmation-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden='true' !
-            strong.govuk-warning-text__text#password-confirmation-match
-              span.govuk-warning-text__assistive
-                | Warning
-              | The confirmation must match the password
+    = render "shared/users/password_change", f: f
 
       .govuk-form-group
         = f.label :role, label: 'User type', class: "govuk-label--s"

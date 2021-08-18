@@ -15,52 +15,10 @@
             label: 'Email'
 
   - if f.object.persisted?
-    .question-group#password-change-panel
-      #password-control-group
-        .input-group
-          = f.input :password,
-                    input_html: { class: 'small', "data-min-password-length" => "10" },
-                    label: 'Password'
-          span#password-result-span.input-group-addon
-            i#password-result.glyphicon.glyphicon-ok
-        .clear
-
-      .guidance-panel.if-no-js-hide
-        #password-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden="true"
-              | !
-            strong.govuk-warning-text__text
-              p.text-underline Please improve your password
-              p#password-too-short
-                ' It must be at least 10 characters.
-              p#parts-of-email It shouldn't include part or all of your email address.
-              p#password-entropy
-                ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
-
-      #password-confirmation-control-group
-        .row
-          .col-md-4.col-sm-6
-            .input-group
-              = f.input :password_confirmation,
-                        input_html: { class: 'small' },
-                        label: "Retype password"
-              span#password-confirmation-result-span.input-group-addon
-                i#password-confirmation-result.glyphicon.glyphicon-ok
-        .clear
-
-      .if-no-js-hide
-        #password-confirmation-guidance
-          .govuk-warning-text
-            span.govuk-warning-text__icon aria-hidden="true"
-              | !
-            strong.govuk-warning-text__text
-              p#password-confirmation-match The confirmation must match the password
+    = render "shared/users/password_change", f: f
 
   .govuk-button-group class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
     = f.button :submit, class: 'govuk-button'
     = link_to "Cancel", admin_admins_path, class: 'govuk-button govuk-button--secondary'
     - if action_name == "edit" && policy(resource).destroy?
       = link_to 'Delete', admin_admin_path(resource), data: { method: :delete, confirm: 'Are you sure?' }, class: 'govuk-button govuk-button--warning'
-
-        
