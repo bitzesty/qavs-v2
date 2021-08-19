@@ -27,20 +27,21 @@
       - else
         = govuk_tag('not started', 'grey')
 
-    p.govuk-body#national-assessment-status
-      strong
-        | National assessment status
-      br
+    - if admin?
+      p.govuk-body#national-assessment-status
+        strong
+          | National assessment status
+        br
 
-      - if resource.state == 'recommended'
-        = govuk_tag('recommended', 'green')
-      - elsif resource.state == 'not recommended'
-        = govuk_tag('not recommended', 'red')
-      - elsif resource.state == 'undecided'
-        = govuk_tag('undecided', 'purple')
-      - else
-        = govuk_tag('pending', 'grey')
+        - if resource.state == 'recommended'
+          = govuk_tag('recommended', 'green')
+        - elsif resource.state == 'not recommended'
+          = govuk_tag('not recommended', 'red')
+        - elsif resource.state == 'undecided'
+          = govuk_tag('undecided', 'purple')
+        - else
+          = govuk_tag('pending', 'grey')
 
-    - if policy(@form_answer).eligibility?
-      p.govuk-body
-        = link_to "Edit status", eligibility_admin_form_answer_path(@form_answer), class: "govuk-link"
+      - if policy(@form_answer).eligibility?
+        p.govuk-body
+          = link_to "Edit status", eligibility_admin_form_answer_path(@form_answer), class: "govuk-link"
