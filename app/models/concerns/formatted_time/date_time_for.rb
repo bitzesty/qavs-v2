@@ -51,10 +51,13 @@ module FormattedTime::DateTimeFor
 
     def date_time_for(*attrs)
       attrs.each do |attr|
+        day = :"#{attr}_day"
+        month = :"#{attr}_month"
+        year = :"#{attr}_year"
         date = :"#{attr}_date"
         time = :"#{attr}_time"
 
-        attr_accessible "formatted_#{date}", "formatted_#{time}" if respond_to?(:attr_accessible)
+        attr_accessible "formatted_#{date}", "formatted_#{time}", "#{day}", "#{month}", "#{year}" if respond_to?(:attr_accessible)
 
         formatted_time_for time
         formatted_date_for date
@@ -68,6 +71,30 @@ module FormattedTime::DateTimeFor
             end
           end
 
+          def #{day}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%d")
+            end
+          end
+
+          def #{month}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%m")
+            end
+          end
+
+          def #{year}
+            value = #{attr}
+            if value
+              value = value.in_time_zone(Time.zone)
+              value.to_date.strftime("%Y")
+            end
+          end
+
           def #{time}
             value = #{attr}
             if value
@@ -77,7 +104,7 @@ module FormattedTime::DateTimeFor
             end
           end
 
-          def #{date}=(value)
+          def #{date}=value
             if #{attr}
               seconds = #{attr}.hour.hours + #{attr}.min.minutes
             end
@@ -92,6 +119,36 @@ module FormattedTime::DateTimeFor
             end
           end
 
+          def #{day}=(value)
+            instance_variable_set("@#{attr}_day", value)
+
+            attempt_forming_date_#{attr}
+          end
+
+          def #{month}=(value)
+            instance_variable_set("@#{attr}_month", value)
+
+            attempt_forming_date_#{attr}
+          end
+
+          def #{year}=(value)
+            instance_variable_set("@#{attr}_year", value)
+
+            attempt_forming_date_#{attr}
+          end
+
+          def attempt_forming_date_#{attr}
+            day = instance_variable_get("@#{attr}_day")
+            month = instance_variable_get("@#{attr}_month")
+            year = instance_variable_get("@#{attr}_year")
+
+            if day.present? && month.present? && year.present?
+              public_send("formatted_#{attr}_date=", [day, month, year].join("/"))
+            elsif !day.present? && !month.present? && !year.present? # if all are missing
+              public_send("formatted_#{attr}_date=", "")
+            end
+          end
+
           def #{time}=(value)
             time = if #{date}
               Time.zone.local(#{date}.year, #{date}.month, #{date}.day)
@@ -99,7 +156,7 @@ module FormattedTime::DateTimeFor
               nil
             end
 
-            self.#{attr} = time.to_time + value if time && value
+            self.#{attr} = time.to_time + value.to_i if time && value
           end
         RUBY
       end

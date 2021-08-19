@@ -3,17 +3,18 @@
     h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button
         ' Appraisal Form (Primary)
-        = govuk_tag('pending', 'grey')
+        = assessment_govuk_tag(primary_assessment.document['verdict_rate'] || 'pending')
 
   .govuk-accordion__section-content
     = simple_form_for([namespace_name, primary_assessment],
                       remote: true,
                       authenticity_token: true,
                       html: { "data-type" => "json"}) do |f|
+      / = primary_assessment.errors.to_a
 
       = hidden_field_tag :updated_section
       = render_section(resource, f)
-      = f.submit "Save changes", class: "if-js-hide govuk-button"
+      = f.submit "Save changes", class: "if-js-hide govuk-button btn-primary"
     .clear
     br
     = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: primary_assessment)

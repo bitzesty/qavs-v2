@@ -31,4 +31,15 @@ module AdminHelper
   def message_author_name(author)
     author.present? ? author.decorate.full_name : 'author who is no longer active'
   end
+
+  def time_collection_options
+    options = []
+
+    for i in 0..24 do
+      options << ["#{i.to_s.rjust(2, '0')}:00", 60 * 60 * i]
+      options << ["#{i.to_s.rjust(2, '0')}:30", ((60 * 60 * i) + 60 * 60 * 0.5).to_i]
+    end
+
+    options
+  end
 end

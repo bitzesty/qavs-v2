@@ -10,11 +10,11 @@
           = section.label
         .toggable-form
           .toggable-form__read
-            p.govuk-body
-              - if f.object.public_send(section.desc).present?
+            - if f.object.public_send(section.rate).present?
+              p.govuk-body
                 = qae_simple_format f.object.public_send(section.desc)
-              - else
-                p.govuk-hint No comment has been added yet.
+            - else
+              p.govuk-hint No comment has been added yet.
             - if editable
               a.govuk-link.toggable-form__trigger href="#" role="button"
                 | Edit
@@ -34,5 +34,5 @@
                       label: 'Notes'
 
             .govuk-button-group
-              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
               = link_to "Save", "#", class: "govuk-button  btn-primary form-save-link pull-right if-no-js-hide", "data-updated-section" => section.desc
+              = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-cancel toggable-form__cancel if-no-js-hide"

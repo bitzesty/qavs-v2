@@ -3,7 +3,7 @@
     h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button
         ' Appraisal Form (Moderated)
-        = govuk_tag('undecided', 'purple')
+        = assessment_govuk_tag(moderated_assessment.document['verdict_rate'] || 'pending')
 
   .govuk-accordion__section-content
     = simple_form_for([namespace_name, moderated_assessment],

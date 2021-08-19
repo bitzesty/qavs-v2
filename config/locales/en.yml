@@ -107,6 +107,19 @@ en:
             password:
               weak_password: Your new password must be more complex.
 
+  appraisals:
+    evaluations:
+      titles:
+        positive: 'Recommended'
+        average: 'Recommended - weak'
+        negative: 'Not Recommended'
+        pending: 'Pending'
+      styles:
+        positive: 'green'
+        average: 'green'
+        negative: 'red'
+        pending: 'grey'
+
   time:
     formats:
       date_at_time: "%d/%m/%Y at %-l:%M%P"

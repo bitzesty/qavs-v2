@@ -29,6 +29,9 @@ class Admin::DeadlinesController < Admin::BaseController
   end
 
   def update_params
-    params.require(:deadline).permit([:formatted_trigger_at_date, :formatted_trigger_at_time])
+    params.require(:deadline).permit(:trigger_at_day,
+                                     :trigger_at_month,
+                                     :trigger_at_year,
+                                     :trigger_at_time)
   end
 end

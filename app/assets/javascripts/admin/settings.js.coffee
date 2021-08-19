@@ -104,6 +104,7 @@ jQuery ->
 
       ($ ".form-value", wrapper).addClass("govuk-!-display-none")
       ($ ".deadline-form", wrapper).removeClass("govuk-!-display-none")
+      ($ ".deadline-form", wrapper).find('input:visible,select:visible').first().focus()
       ($ e.currentTarget).addClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".edit-notification", (e) ->
@@ -114,11 +115,13 @@ jQuery ->
       ($ ".form-value", wrapper).addClass("govuk-!-display-none")
       ($ ".notification-edit-form", wrapper).removeClass("govuk-!-display-none")
       ($ ".actions", wrapper).addClass("govuk-!-display-none")
+      ($ ".notification-edit-form", wrapper).find('input:visible,select:visible,textarea:visible').first().focus()
 
     settingsWrapper.on "click", ".btn-add-schedule", (e) ->
       e.preventDefault()
       wrapper = ($ e.currentTarget).closest('.panel-section')
       ($ ".notification-form", wrapper).toggleClass("govuk-!-display-none")
+      ($ ".notification-form", wrapper).find('input:visible,select:visible,textarea:visible').first().focus()
 
     settingsWrapper.on "click", ".link-email-example", (e) ->
       e.preventDefault()
@@ -135,12 +138,14 @@ jQuery ->
         ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
         ($ ".deadline-form", wrapper).addClass("govuk-!-display-none")
         ($ ".edit-deadline", wrapper).removeClass("govuk-!-display-none")
+        ($ ".edit-deadline", wrapper).focus()
 
       else if form_well.hasClass("notification-edit-form")
         wrapper = ($ e.currentTarget).closest('li')
         ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
         ($ ".notification-edit-form", wrapper).addClass("govuk-!-display-none")
         ($ ".actions", wrapper).removeClass("govuk-!-display-none")
+        ($ ".actions", wrapper).find('a').focus()
 
       else if form_well.hasClass("notification-new-form")
         wrapper = ($ e.currentTarget).closest('.panel-section')

@@ -49,8 +49,8 @@
     <%= yield :body_start %>
     <%= render "layouts/cookie_banner" %>
 
-    <a href="#content" class="govuk-skip-link">Skip to main content</a>
 
+    <a href="#content" class="govuk-skip-link">Skip to main content</a>
 
     <% unless @omit_header %>
     <header role="banner" id="global-header" class="<%= content_for?(:header_class) ? "govuk-header #{yield(:header_class)}" : 'govuk-header' %>" role="banner" data-module="govuk-header">
@@ -87,6 +87,24 @@
 
     <div id="global-header-bar"></div>
     <!--end global-header-bar-->
+
+    <div class="govuk-width-container">
+      <div class="govuk-phase-banner">
+        <p class="govuk-phase-banner__content">
+          <strong class="govuk-tag govuk-phase-banner__content__tag">
+            BETA
+          </strong>
+          <span class="govuk-phase-banner__text">
+            This is a new service
+            <% if action_name != "feedback" %>
+              – your
+              <%= link_to "feedback", feedback_path, target: "_blank", class: 'govuk-link' %>
+              will help us to improve it.
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
 
     <%= content_for?(:content) ? yield(:content) : yield %>
 
