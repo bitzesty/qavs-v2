@@ -280,6 +280,7 @@ Rails.application.routes.draw do
 
     resources :lieutenants, except: [:show]
     resources :form_answers, only: [:index, :show, :edit] do
+      resources :support_letters, only: [:show]
       collection do
         post :index
       end
