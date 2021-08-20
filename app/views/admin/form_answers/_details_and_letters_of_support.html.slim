@@ -8,7 +8,8 @@ h3.govuk-heading-m
     = link_to (admin? ? 'Edit nomination and local assessment form' : 'View nomination and edit local assessment form'),
               [:edit, namespace_name, @form_answer],
               class: "govuk-button"
-.govuk-link.download-link
+
+.download-link.govuk-link.govuk-link--no-visited-state
   = link_to "Download nomination and local assessment form (PDF)", namespace: namespace_name, path: @form_answer, format: :pdf
 
 - if @form_answer.support_letters.any?
