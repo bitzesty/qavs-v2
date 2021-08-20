@@ -9,8 +9,7 @@ h3.govuk-heading-m
               [:edit, namespace_name, @form_answer],
               class: "govuk-button"
 
-.download-link.govuk-link.govuk-link--no-visited-state
-  = link_to "Download nomination and local assessment form (PDF)", namespace: namespace_name, path: @form_answer, format: :pdf
+= link_to "Download nomination and local assessment form (PDF)", { namespace: namespace_name, path: @form_answer, format: :pdf }, class: "govuk-link download-link govuk-link--no-visited-state"
 
 - if @form_answer.support_letters.any?
   #section-letters-of-support class="govuk-!-margin-top-7"
