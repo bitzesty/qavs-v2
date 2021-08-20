@@ -22,7 +22,7 @@
         = govuk_tag('recommended', 'green')
       - elsif resource.state == 'not recommended'
         = govuk_tag('not recommended', 'red')
-      - elsif !resource.local_assessment_ended?
+      - elsif resource.state == 'local_assessment_in_progress'
         = govuk_tag('in progress', 'yellow')
       - else
         = govuk_tag('not started', 'grey')
