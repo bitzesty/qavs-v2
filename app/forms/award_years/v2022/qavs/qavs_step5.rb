@@ -378,11 +378,18 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please give their name and explain in one sentence why they might merit this" do
+        text :nomination_local_assessment_worthy_of_honour_name, "Please give their name" do
           sub_ref "E 8.4"
+          style "medium"
+          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+        end
+
+        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain in one sentence why they might merit this" do
+          sub_ref "E 8.5"
           context %(
             <p class='govuk-hint'>Please note, the QAVS team will pass this information onto the DCMS Honours team. They might get in touch with you in due course to ask for further details.</p>
           )
+          words_max 50
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
         end
 
@@ -390,13 +397,12 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 9"
           required
           words_max 600
-
           context %(
             <p class='govuk-hint'>
               The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it. If the decision is to recommend, these opinions will be beneficial to the Awarding Committee when making their judgements.
             </p>
             <p class='govuk-hint'>Please read the guidance about the citation below:</p>
-            <ul class='govuk-list govuk-list--bullet govuk-hint'>
+            <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
               <li>The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully.</li>
               <li>Instead, the citation should try to capture what is exceptional about this particular group.</li>
                 <ul class='govuk-list govuk-list--bullet govuk-hint'>
@@ -418,6 +424,14 @@ class AwardYears::V2022::QAEForms
 
             \u2022 Instead, the citation should try to capture what is exceptional about this particular group.
 
+              \u25E6 the impact it has made on local people, particularly if the local context is challenging;
+
+              \u25E6 how its work or approach is distinctive or different from other groups doing similar things;
+
+              \u25E6 anything outstanding about the way the group is run;
+
+              \u25E6 any exemplary qualities in the volunteers themselves.
+
             \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.
 
             You can also find more detailed information in the QAVS local assessment guide.
@@ -426,7 +440,7 @@ class AwardYears::V2022::QAEForms
         end
 
         options :local_assessment_verdict, "Local assessment outcome" do
-          sub_ref "E 9"
+          sub_ref "E 10"
           classes "govuk-notification-banner govuk-notification-banner__content"
           option "recommended", "Recommended"
           option "not_recommended", "Not recommended"
