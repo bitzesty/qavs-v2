@@ -93,6 +93,7 @@ RSpec.configure do |config|
   config.include UserStepDefinitions, type: :feature
   config.include ExpectationHelper, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include PunditSpecHelper, type: :view
 
   config.raise_error_for_unimplemented_steps = true
 
