@@ -2,14 +2,7 @@
   main.govuk-main-wrapper
     .govuk-grid-row
       .govuk-grid-column-two-thirds
-        h1.govuk-heading-xl
-          | Lieutenancy office users' dashboard
-
-    .govuk-grid-row
-      .govuk-grid-column-two-thirds
-        p.govuk-body
-          | Thank you for conducting the local assessment for QAVS.
-          .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title"
+        .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title"
             .govuk-notification-banner__header
               h2.govuk-notification-banner__title#govuk-notification-banner-title
                 | Important
@@ -17,9 +10,18 @@
               p.govuk-notification-banner__heading
                 | Please submit your assessment by
                 strong  Monday, 24 January 2022.
-          p.govuk-body You can download the local assessment guide, which provides helpful tips on approaching the assessment and completing your report.
+        br
+        h1.govuk-heading-xl
+          | Welcome to the Queen’s Award for Voluntary Service
+        p.govuk-body Thank you for conducting the local assessment for QAVS.
+        p.govuk-body
+          | Please submit your assessment by
+          strong  Monday, 24 January 2022.
+
+        p.govuk-body You can download the local assessment guide, which provides helpful tips on approaching the assessment and completing your report.
         .govuk-body
-          = link_to "Download QAVS local assessment guide (PDF)", "#", class: "download-link govuk-link"
+          = link_to "Download QAVS local assessment guide (PDF)", "lieutenants_resources/200903 - QAVS Guidance for LLs 2021 Round -FINAL.pdf", download: "local_assessment_guide", class: "download-link govuk-link govuk-link--no-visited-state"
+        br
         .button
           = link_to "Start reviewing nominations", lieutenant_form_answers_url, class: "govuk-button govuk-button--start"
 
@@ -32,10 +34,11 @@
         p.govuk-body
           | You can also download promotional materials to help raise awareness of the award.
         .govuk-body
-          = link_to "Download the QAVS leaflet and other promotional materials", "#", class: "download-link govuk-link"
+          = link_to "Download the QAVS leaflet and other promotional materials", "lieutenants_resources/QAVS 21 leaflet.pdf", download: "QAVS_leaflet", class: "download-link govuk-link govuk-link--no-visited-state"
+        br
         p.govuk-body
           | We will share information with the successful groups directly. However, you can also find the materials to download below.
         .govuk-body
-          = link_to "Download the media pack for the announcement", "#", class: "download-link govuk-link"
+          = link_to "Download the media pack for the announcement", "lieutenants_resources/Media pack for Lieutenancies QAVS 2021.pdf", download: "media_pack_for_lieutenancies", class: "download-link govuk-link govuk-link--no-visited-state"
         .govuk-body
-          = link_to "Download the QAVS logos and Guidelines", "https://apply.qavs.dcms.gov.uk/content_only/logo_guidelines", class: "download-link govuk-link"
+          = link_to "Download the QAVS logos and Guidelines", "https://apply.qavs.dcms.gov.uk/content_only/logo_guidelines", class: "download-link govuk-link govuk-link--no-visited-state"

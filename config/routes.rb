@@ -288,6 +288,7 @@ Rails.application.routes.draw do
       end
 
       resources :form_answer_state_transitions, only: [:create]
+      resources :support_letters, only: [:show]
     end
   end
 
