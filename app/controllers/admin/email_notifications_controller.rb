@@ -2,7 +2,7 @@ class Admin::EmailNotificationsController < Admin::BaseController
   before_action :load_email_notification, only: [:update, :destroy]
 
   def create
-    authorize :email_notifications, :create?
+    authorize :email_notification, :create?
     @email_notification = @settings.email_notifications.build
     @email_notification.update(notification_params)
 
@@ -55,7 +55,7 @@ class Admin::EmailNotificationsController < Admin::BaseController
   end
 
   def run_notifications
-    authorize :email_notifications, :create?
+    authorize :email_notification, :create?
 
     if ::ServerEnvironment.local_or_dev_or_staging_server?
       ::Notifiers::EmailNotificationService.run
