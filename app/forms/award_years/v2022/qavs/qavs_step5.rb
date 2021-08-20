@@ -23,7 +23,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.3"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader
+          default_value :group_leader_name
           style "medium"
         end
 
@@ -39,7 +39,7 @@ class AwardYears::V2022::QAEForms
         #   sub_ref "E 1.5"
         #   form_hint "Please check that the details provided by the nominator are correct."
         #   required
-        #   default_value :group_address
+        #   default_value :group_leader_address
         # end
 
         text :local_assessment_group_leader_email, "Email of the group leader or main contact" do
