@@ -8,7 +8,7 @@
       strong
         | Eligibility status
       br
-      - if resource.eligible?
+      - if resource.was_marked_as_eligible?
         = govuk_tag(@form_answer.eligibility_state, 'green')
       - else
         = govuk_tag(@form_answer.eligibility_state, 'red')

@@ -262,6 +262,10 @@ class FormAnswer < ApplicationRecord
     state == "reserved" || state == "recommended"
   end
 
+  def was_marked_as_eligible?
+    FormAnswerStateMachine::POST_ELIGIBLE_STATES.include?(state)
+  end
+
   #
   # Hard Copy PDF generators - begin
   #
