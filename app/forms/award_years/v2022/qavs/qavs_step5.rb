@@ -12,16 +12,59 @@ class AwardYears::V2022::QAEForms
         end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
-          sub_ref "E 1.1"
+          sub_ref "E 1.2"
           form_hint "Please check that the name given by the nominator is correct."
           required
           default_value :nominee_name
           style "large"
         end
 
-        textarea :nomination_local_assessment_form_assessor_details, "Assessor's name and contact details" do
-          sub_ref "E 1.2"
+        text :local_assessment_group_leader, "Name of the group leader or main contact in the group" do
+          sub_ref "E 1.3"
+          form_hint "Please check that the details provided by the nominator are correct."
           required
+          default_value :group_leader
+          style "medium"
+        end
+
+        text :local_assessment_group_leader_position, "Position held in the group by the group leader or main contact" do
+          sub_ref "E 1.4"
+          form_hint "Please check that the details provided by the nominator are correct."
+          required
+          default_value :group_leader_position
+          style "medium"
+        end
+
+        # address :local_assessment_group_address, "Address of the group leader or main contact" do
+        #   sub_ref "E 1.5"
+        #   form_hint "Please check that the details provided by the nominator are correct."
+        #   required
+        #   default_value :group_address
+        # end
+
+        text :local_assessment_group_leader_email, "Email of the group leader or main contact" do
+          sub_ref "E 1.6"
+          form_hint "Please check that the details provided by the nominator are correct."
+          required
+          default_value :group_leader_email
+          style "large"
+        end
+
+        text :local_assessment_group_leader_phone, "Telephone of the group leader or main contact" do
+          sub_ref "E 1.7"
+          form_hint "Please check that the details provided by the nominator are correct."
+          required
+          default_value :group_leader_phone
+        end
+
+        confirm :group_details_confirmed, "Confirm group details" do
+          sub_ref "D 4"
+          required
+          text -> do
+            %(
+              I confirm that I have checked and, where required, amended the group name and group leader’s details.
+            )
+          end
         end
 
         textarea :l_citation_summary, "Citation summary" do
