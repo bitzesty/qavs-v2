@@ -21,25 +21,27 @@
         = govuk_tag('recommended', 'green')
       - elsif resource.state == 'local_assessment_not_recommended'
         = govuk_tag('not recommended', 'red')
-      - elsif resource.state == "local_assessment_in_progress"
+      - elsif resource.state == 'local_assessment_in_progress'
         = govuk_tag('in progress', 'yellow')
       - else
         = govuk_tag('not started', 'grey')
+        
+    - if admin?
+      p.govuk-body#national-assessment-status
+        strong
+          | National assessment status
+        br
+        / disabling NA status for now
+        - if false && resource.state == 'recommended'
+          = govuk_tag('recommended', 'green')
+        - elsif false && resource.state == 'not recommended'
+          = govuk_tag('not recommended', 'red')
+        - elsif false && resource.state == 'undecided'
+          = govuk_tag('undecided', 'purple')
+        - else
+          = govuk_tag('pending', 'grey')
 
-    p.govuk-body#national-assessment-status
-      strong
-        | National assessment status
-      br
-      / disabling NA status for now
-      - if false && resource.state == 'recommended'
-        = govuk_tag('recommended', 'green')
-      - elsif false && resource.state == 'not recommended'
-        = govuk_tag('not recommended', 'red')
-      - elsif false && resource.state == 'undecided'
-        = govuk_tag('undecided', 'purple')
-      - else
-        = govuk_tag('pending', 'grey')
+      - if policy(resource).eligibility?
+        p.govuk-body
+          = link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link"
 
-    - if policy(resource).eligibility?
-      p.govuk-body
-        = link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link"

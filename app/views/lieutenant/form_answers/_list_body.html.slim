@@ -4,25 +4,22 @@ tbody.govuk-table__body
       th.govuk-table__header scope="row"
         = link_to polymorphic_url([namespace_name, obj]) do
           - unless obj.nominee_name.nil?
-            span.ellipsis
+            span
               = obj.nominee_name
           - else
             em
               ' Not found
 
-      td.govuk-table__cell
-        - if obj.urn.present?
-          = link_to obj.urn, polymorphic_url([namespace_name, obj])
-        - else
-          span.urn-not-generated Not yet generated
-
       td.govuk-table__cell = obj.dashboard_status
 
-      td.td-primary-name.govuk-table__cell
-        = obj.primary_assessor_full_name
+      td.govuk-table__cell = obj.document["nominee_address_postcode"]
+
+      td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
 
       td.govuk-table__cell
         = obj.last_updated_at
         br
         span.muted
           = obj.last_updated_by
+
+      td.govuk-table__cell = link_to "View", lieutenant_form_answer_path(obj), class: 'govuk-link'

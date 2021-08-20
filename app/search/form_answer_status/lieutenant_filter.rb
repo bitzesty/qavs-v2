@@ -1,14 +1,43 @@
 class FormAnswerStatus::LieutenantFilter
   extend FormAnswerStatus::FilteringHelper
+  include NomineeActivityHelper
 
   OPTIONS = {
+    eligibility_in_progress: {
+      label: "Eligibility in progress",
+      states: [:eligibility_in_progress]
+    },
+    application_in_progress: {
+      label: "Application in progress",
+      states: [:application_in_progress]
+    },
+    applications_not_submitted: {
+      label: "Applications not submitted",
+      states: [:not_submitted]
+    },
+    submitted: {
+      label: "Application submitted",
+      states: [:submitted]
+    },
     admin_eligible: {
-      label: "Eligible",
+      label: "Admin: Eligible",
       states: [:admin_eligible]
     },
     admin_eligible_duplicate: {
       label: "Eligible - duplicate to access",
       states: [:admin_eligible_duplicate]
+    },
+    admin_not_eligible_duplicate: {
+      label: "Duplicate for reference",
+      states: [:admin_not_eligible_duplicate]
+    },
+    admin_not_eligible_nominator: {
+      label: "Ineligible - nominator",
+      states: [:admin_not_eligible_nominator]
+    },
+    admin_not_eligible_group: {
+      label: "Ineligible - group",
+      states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {
       label: "Local assessment in progress",
@@ -32,79 +61,54 @@ class FormAnswerStatus::LieutenantFilter
     },
     recommended: {
       label: "Recommended",
-      states: [:recommended]
+      states: [
+        :recommended
+      ]
+    },
+    reserve: {
+      label: "Reserved",
+      states: [
+        :reserved
+      ]
     },
     not_recommended: {
-      label: "Not Recommended",
-      states: [:not_recommended]
+      label: "Not recomended",
+      states: [
+        :not_recommended
+      ]
     },
-    reserved: {
-      label: "Reserved",
-      states: [:reserved]
+    not_eligible: {
+      label: "Not eligible",
+      states: [
+        :not_eligible
+      ]
     },
     withdrawn: {
       label: "Withdrawn/Ineligible",
-      states: [:withdrawn]
+      states: [
+        :withdrawn
+      ]
     },
     awarded: {
       label: "Awarded",
-      states: [:awarded]
+      states: [
+        :awarded
+      ]
     },
     not_awarded: {
       label: "Not Awarded",
-      states: [:not_awarded]
+      states: [
+        :not_awarded
+      ]
     }
   }
-
-  SUB_OPTIONS = {
-    missing_sic_code: {
-      label: "Missing SIC code"
-    },
-    assessors_not_assigned: {
-      label: "Assessors not assigned"
-    },
-    primary_assessment_submitted: {
-      label: "Primary Assessment submitted"
-    },
-    secondary_assessment_submitted: {
-      label: "Secondary Assessment submitted"
-    },
-    primary_and_secondary_assessments_submitted: {
-      label: "Primary and Secondary Assessments submitted"
-    },
-    primary_assessment_not_submitted: {
-      label: "Primary Assessment not submitted"
-    },
-    secondary_assessment_not_submitted: {
-      label: "Secondary Assessment not submitted"
-    },
-    recommendation_disperancy: {
-      label: "Recommendation discrepancy"
-    },
-    missing_audit_certificate: {
-      label: "Missing Verification of Commercial Figures"
-    },
-    audit_certificate_not_reviewed: {
-      label: "Verification of Commercial Figures - not reviewed yet"
-    },
-    missing_feedback: {
-      label: "Missing Feedback"
-    },
-    missing_press_summary: {
-      label: "Missing Press Summary"
-    }
-  }
-
-  def self.checked_options
-    OPTIONS.except(:eligibility_in_progress, :application_in_progress)
-  end
 
   def self.options
     OPTIONS
   end
 
-  def self.sub_options
-    SUB_OPTIONS
+  def self.checked_options
+    activity_options
   end
 
   def self.activity_options
