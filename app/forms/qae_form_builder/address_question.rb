@@ -48,6 +48,10 @@ class QAEFormBuilder
         [f.keys.first, f.values.first]
       end
     end
+
+    def input_value(options = {})
+      super.presence || answers[delegate_obj.default_value_key]
+    end
   end
 
   class AddressQuestionBuilder < QuestionBuilder
@@ -66,9 +70,13 @@ class QAEFormBuilder
     def county_context(county_context)
       @q.county_context = county_context
     end
+
+    def default_value(q_key)
+      @q.default_value_key = q_key
+    end
   end
 
   class AddressQuestion < Question
-    attr_accessor :countries, :sub_fields, :region_context, :county_context
+    attr_accessor :countries, :sub_fields, :region_context, :county_context, :default_value_key
   end
 end
