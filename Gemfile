@@ -56,7 +56,7 @@ gem 'gon', '>= 6.4.0'
 # User authentication & authorization
 gem 'devise', '~> 4.7'
 gem 'devise-authy', '>= 1.10.0'
-gem 'pundit', '~> 0.3'
+gem 'pundit', '~> 1.1'
 gem 'devise_zxcvbn', '>= 4.4.1'
 gem 'devise-security', github: "devise-security/devise-security", ref: "f83d59c5f9063466ce3948ac35ce587aeb659a0a"
 
