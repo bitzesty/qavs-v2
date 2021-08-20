@@ -1,76 +1,47 @@
 h1.govuk-heading-xl
   | Nominations
-= simple_form_for @search, url: assessor_form_answers_path, method: :get, as: :search do |f|
-  .row
-    .col-md-4.col-sm-5.col-xs-12
-      .form-group.search-input
-        = text_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
-        = text_field_tag :award_type, params[:award_type], class: "visuallyhidden"
-        = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-        = submit_tag :submit, class: 'search-submit'
+= simple_form_for @search, url: assessor_form_answers_path, method: :post, as: :search do |f|
+  = hidden_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
+  = hidden_field_tag :award_type, params[:award_type], class: "visuallyhidden"
 
-  = render "shared/form_answers/top_statuses_filters", f: f,
-                                                      options: FormAnswerStatus::AssessorFilter.options,
-                                                      sub_options: FormAnswerStatus::AssessorFilter.sub_options(current_assessor),
-                                                       activity_options: FormAnswerStatus::AssessorFilter.activity_options
+  .govuk-grid-row
+    .govuk-grid-column-one-third
+      = f.input :query, label: 'Search', input_html: { class: "medium", type: "search" }
+
+    = render "shared/form_answers/top_statuses_filters", f: f,
+                                                        options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.options),
+                                                        sub_options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.sub_options(current_assessor))
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
-  - #sort needs to be here because the sorting is done in the other form below, so in order not to break sorting, we need to duplicate it here
 
-- if @search.query?
-  .well.search-text
-    p
-      = "Search results for '#{@search.query}'"
-      small
-        = link_to "(Clear search)", assessor_form_answers_path, class: "btn btn-link"
+  = render("assessor/form_answers/category_tabs")
 
-= render("assessor/form_answers/category_tabs")
+  - # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
+  = render("assessor/form_answers/bulk_assignment")
 
-- # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
-= render("assessor/form_answers/bulk_assignment")
+  div role="region" aria-label="nominations list" tabindex="0"
+    table.applications-table.govuk-table
+      - if @search.query?
+        caption.govuk-table__caption.govuk-table__caption--m
+          = "Search results for '#{@search.query}'"
+          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
+      thead.govuk-table__head
+        tr.govuk-table__row
+          - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
+            th.govuk-table__header scope='col'
+              span.if-no-js-hide
+                = check_box_tag :check_all
+          th.sortable.govuk-table__header scope='col' width="250"
+            = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
+          th.govuk-table__header scope='col' width="250"
+            | Status
+          th.sortable.govuk-table__header scope='col' width="70"
+            = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
+          th.sortable.govuk-table__header scope='col' width="130"
+            = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
+          = render("assessor/form_answers/assessor_header", f: f)
+          th.sortable.govuk-table__header scope='col' width="130"
+            = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
+        = render(partial: "assessor/form_answers/list_body")
 
-= simple_form_for @search, url: assessor_form_answers_path, method: :get, as: :search, html: { class: 'search-form'} do |f|
-  = hidden_field_tag :award_type, category_picker.current_award_type
-  = text_field_tag :year, @award_year.year, class: "visuallyhidden"
-
-  - # status filters need to be here because the filtering is done in the other form above, so in order not to break filtering, we need to duplicate it here
-  = f.simple_fields_for [:filters, @search.filters] do |h|
-    = h.input :status,
-              collection: FormAnswerStatus::AssessorFilter.options,
-              label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
-
-    = h.input :sub_status,
-              collection: FormAnswerStatus::AssessorFilter.sub_options(current_assessor),
-              label: false,
-              input_html: { multiple: true, class: 'visuallyhidden'}
-
-  .row
-    .col-xs-12
-      table.table.applications-table
-        thead
-          tr
-            - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
-              th
-                span.if-no-js-hide
-                  = check_box_tag :check_all
-            th.sortable width="250"
-              = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
-            th.sortable width="120"
-              = sort_link f, "Reference", @search, :urn, disabled: @search.query?
-            th width="250"
-              | Status
-            th.sortable width="70"
-              = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
-            th.sortable width="130"
-              = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
-            = render("assessor/form_answers/assessor_header", f: f)
-            th.sortable width="110"
-              = sort_link f, "Flag", @search, :flag, disabled: @search.query?
-            th.sortable width="130"
-              = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
-          = render(partial: "assessor/form_answers/list_body")
-  .row
-  .col-xs-12.text-right
-    = paginate @form_answers
-    .clear
+  = paginate @form_answers

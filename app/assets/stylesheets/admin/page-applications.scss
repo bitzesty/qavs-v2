@@ -9,7 +9,6 @@
 
   .applications-filter__label {
     display: block;
-    text-transform: uppercase;
     padding-right: 10px;
     padding-top: 7px;
 
@@ -78,42 +77,6 @@
 
   a {
     font-style: normal;
-  }
-}
-
-.applications-table,
-.admin-table {
-  > tbody > tr > td {
-    padding-top: 13px;
-    padding-bottom: 12px;
-  }
-
-  td,
-  th {
-    vertical-align: top;
-  }
-
-  > tbody > tr:first-child > td {
-    padding-top: 16px;
-  }
-}
-
-.applications-table {
-  .urn-not-generated {
-    color: $grey;
-    font-style: italic;
-  }
-
-  .assigned {
-    color: $button-colour;
-  }
-
-  .icon-unflagged {
-    display: none;
-  }
-
-  > thead > tr > th {
-    border-top: none;
   }
 }
 
@@ -406,82 +369,6 @@
   }
 }
 
-.section-applicant-status {
-
-  h2,
-  p {
-    margin-bottom: 5px;
-  }
-
-  p {
-    font-size: 15px;
-
-    &.p-lg {
-      font-size: 20px;
-    }
-  }
-
-  .btn-group {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .dropdown-toggle {
-    display: inline-block;
-    padding: 0;
-    padding-right: 20px;
-    float: none;
-    color: $black;
-    font-size: 20px;
-    text-align: left;
-    text-decoration: none;
-    background-image: image-url("icon-arrow-admin-dropdown-down.png");
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 12px 9px;
-
-    @include is-retina {
-      background-image: image-url("icon-arrow-admin-dropdown-down@2.png");
-    }
-  }
-
-  .open .dropdown-toggle {
-    background-image: image-url("icon-arrow-admin-dropdown-up.png");
-
-    @include is-retina {
-      background-image: image-url("icon-arrow-admin-dropdown-up@2.png");
-    }
-  }
-
-  .state-container {
-    position: relative;
-
-    h2 {
-      position: absolute;
-      top: 0.4em;
-      left: 0;
-
-      @include screen-lg-max {
-        position: static;
-      }
-    }
-
-    .state-input {
-      text-align: right;
-
-      @include screen-lg-max {
-        text-align: left;
-      }
-    }
-
-    .dropdown-menu.pull-right {
-      @include screen-lg-max {
-        right: auto;
-      }
-    }
-  }
-}
-
 .section-applicant-users {
   &,
   .list-actions {
@@ -587,18 +474,22 @@
 }
 
 .bulk-assignment-container {
-  position: relative;
-  left: -9999px;
-  margin-top: 10px;
+  display: none;
 
   &.show-container {
-    left: 0;
+    display: flex;
+    align-items: center;
   }
 
   .show-bulk-assign & {
     .js & {
       display: none;
     }
+  }
+
+  .bulk-assign-lieutenants-link, .bulk-assign-assessors-link {
+    margin-bottom: 20px;
+    margin-right: 20px;
   }
 }
 

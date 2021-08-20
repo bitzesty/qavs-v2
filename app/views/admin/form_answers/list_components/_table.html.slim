@@ -1,25 +1,30 @@
-table.govuk-table.applications-table
-  thead.govuk-table__head
-    tr.govuk-table__row
-      th.govuk-table__header scope="col"
-        span.if-no-js-hide
-          = check_box_tag :check_all
-      th.sortable.govuk-table__header scope="col" width="450"
-        = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
-      th.sortable.govuk-table__header scope="col" width="140"
-        = sort_link f, "Reference", @search, :urn, disabled: @search.query?
-      th.govuk-table__header scope="col" width="250"
-        | Status
-      th.govuk-table__header scope="col" width="100"
-        | Postcode
-      th.govuk-table__header scope="col" width="250"
-        | Lord Lieutenancy office
-      th.govuk-table__header scope="col" width="200"
-        | Type of group
-      th.sortable.govuk-table__header scope="col" width="110"
-        = sort_link f, "Flag", @search, :flag, disabled: @search.query?
-      th.sortable.govuk-table__header scope="col" width="130"
-        = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
-      th.govuk-table__header scope="col" View
-  tbody.govuk-table__body
-    = render("admin/form_answers/list_components/table_body")
+div role="region" aria-label="nominations list" tabindex="0"
+  table.govuk-table.applications-table class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
+    - if @search.query?
+      caption.govuk-table__caption.govuk-table__caption--m
+        => "Search results for '#{@search.query}'"
+        = link_to "(Clear search)", admin_form_answers_path, class: "govuk-link govuk-!-margin-left-3"
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th.govuk-table__header scope="col"
+          span.if-no-js-hide
+            = check_box_tag :check_all
+        th.sortable.govuk-table__header scope="col" width="450"
+          = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
+        th.govuk-table__header scope="col" width="250"
+          | Status
+        th.govuk-table__header scope="col" width="100"
+          | Postcode
+        th.govuk-table__header scope="col" width="250"
+          | Lord Lieutenancy as per form
+        th.govuk-table__header scope="col" width="250"
+          | Lord Lieutenancy assigned
+        th.govuk-table__header scope="col" width="200"
+          | Type of group
+        th.sortable.govuk-table__header scope="col" width="130"
+          = sort_link f, "National assessor sub-group", @search, :sub_group, disabled: @search.query?
+        th.sortable.govuk-table__header scope="col" width="130"
+          = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
+        th.govuk-table__header scope="col" View
+    tbody.govuk-table__body
+      = render("admin/form_answers/list_components/table_body")

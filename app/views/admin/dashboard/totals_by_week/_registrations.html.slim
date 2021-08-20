@@ -1,29 +1,30 @@
 .dashboard-table__wrapper.dashboard-report
-  table.dashboard-table.govuk-table class="govuk-!-font-size-14"
-    caption
-      | New account registrations
-      a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_week")
-        | Load data
-      button.btn.btn-primary.btn--loading.updating-data.hidden
-        | Updating data
+  div role="region" aria-label="new account registrations" tabindex="0"
+    table.dashboard-table.govuk-table class="govuk-!-font-size-14"
+      caption
+        | New account registrations
+        a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_week")
+          | Load data
+        button.btn.btn-primary.btn--loading.updating-data.hidden
+          | Updating data
 
-    thead.govuk-table__head
-      tr.govuk-table__row
-        th.govuk-table__header.bold.border-right scope="col" width="150"
-          | Year
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 6 weeks before
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 5 weeks before
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 4 weeks before
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 3 weeks before
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 2 weeks before
-        th.govuk-table__header.bold.border-right scope="col" width="140"
-          | Up to end of 1 week before
-        th.govuk-table__header.bold scope="col" width="140"
-          | Totals on deadline
-    tbody
-      = render "admin/dashboard/totals_by_week/users_table_body"
+      thead.govuk-table__head
+        tr.govuk-table__row
+          th.govuk-table__header.bold.border-right scope="col" width="150"
+            | Year
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 6 weeks before
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 5 weeks before
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 4 weeks before
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 3 weeks before
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 2 weeks before
+          th.govuk-table__header.bold.border-right scope="col" width="140"
+            | Up to end of 1 week before
+          th.govuk-table__header.bold scope="col" width="140"
+            | Totals on deadline
+      tbody
+        = render "admin/dashboard/totals_by_week/users_table_body"

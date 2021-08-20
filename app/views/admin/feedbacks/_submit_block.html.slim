@@ -4,7 +4,7 @@
       .feedback-holder
 
       .pull-right
-        = submit_tag submit_feedback_title(feedback), class: "btn btn-primary btn-confirm-submit"
+        = submit_tag submit_feedback_title(feedback), class: "govuk-button btn-primary btn-confirm-submit"
       .clear
 
 - elsif feedback.submitted?
@@ -14,7 +14,7 @@
         ' Feedback Submitted
 
         .pull-right
-          = submit_tag "Unlock", class: "btn btn-primary"
+          = submit_tag "Unlock", class: "govuk-button btn-primary"
         .clear
 
   - else

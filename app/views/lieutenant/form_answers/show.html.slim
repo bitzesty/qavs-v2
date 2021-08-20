@@ -1,23 +1,15 @@
-.row
-  .col-xs-12
-    .page-header.page-header-nav
-      = link_to "‹ Back to nominations list", assessor_form_answers_path(search: params[:search], award_type: @form_answer.award_type), class: "btn btn-link btn-lg"
-      .apps-navigation
-        - if !@form_paginator.first?
-          = link_to "‹ Previous nomination", assessor_form_answer_path(@form_paginator.prev_entry, search: params[:search], award_type: params[:award_type]), class: "btn btn-link btn-lg link-prev"
-        - if !@form_paginator.last?
-          = link_to "Next nomination ›", assessor_form_answer_path(@form_paginator.next_entry, search: params[:search], award_type: params[:award_type]), class: "btn btn-link btn-lg link-next"
-        .clear
-.row.inline-form-view
-  .show-sidebar-container
-    .show-sidebar
-      = render("admin/form_answers/applicant_details")
+- content_for :before_main_content do
+  = link_to "Back to nominations list", lieutenant_form_answers_path, class: "govuk-back-link"
 
-      = render("admin/form_answers/applicant_status")
-      = render "lieutenants_section"
-      / = render("admin/form_answers/section_documents")
-      / = render("admin/form_answers/assessors_section")
-      / = render("admin/form_answers/previous_applications_section")
+h1.govuk-heading-xl
+  = resource.nominee_name
 
-  .show-main-content.submitted-view
-    = render "nomination"
+.govuk-grid-row class="govuk-!-margin-top-9"
+  .govuk-grid-column-one-third
+    = render("admin/form_answers/applicant_status")
+    = render('admin/form_answers/nomination_details')
+
+    = link_to "Complete local assessment", edit_lieutenant_form_answer_path(@form_answer), class: 'govuk-button'
+
+  .govuk-grid-column-two-thirds
+    = render partial: "nomination"

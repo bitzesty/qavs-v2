@@ -10,8 +10,9 @@ gem 'websocket-extensions', '~> 0.1.5'
 # SSL redirect
 gem 'rack-ssl-enforcer'
 
-# PostgreSQL
+# PostgreSQL & data import
 gem 'pg', '~> 0.20'
+gem 'activerecord-import'
 
 # Track Changes
 gem 'paper_trail', '~> 10.3'
@@ -170,11 +171,6 @@ group :development, :test do
   gem "pry-byebug"
   gem 'rails-controller-testing'
   gem "selenium-webdriver"
-end
-
-group :production do
-  # Log to the STDOUT and dev/prod parity when delivering assets, 12factor.net
-  gem 'rails_12factor', '~> 0.0.3'
 end
 
 group :test do

@@ -1,36 +1,37 @@
 .dashboard
-  h1.gobuk-heading-xl
+  h1.govuk-heading-xl
     | Data Export Log
-  table.govuk-table
-    colgroup
-      col width="100"
-      col width="100"
-      col width="400"
-    thead.govuk-table__head
-      tr.govuk-table__row
-        th.sortable.govuk-table__header scope="col"
-          ' Date
-        th.sortable.govuk-table__header scope="col"
-          ' User
-        th.sortable.govuk-table__header scope="col"
-          ' Data Exported
-    tbody.govuk-table__body
-      - if @audit_logs.none?
+  div role="region" aria-label="list of audit logs" tabindex="0"
+    table.govuk-table
+      colgroup
+        col width="100"
+        col width="100"
+        col width="400"
+      thead.govuk-table__head
         tr.govuk-table__row
-          td.text-center.govuk-table__cell colspan=100
-            br
-            p.p-empty No audit logs.
-            br
-      - else
-        - @audit_logs.each do |audit_log|
+          th.sortable.govuk-table__header scope="col"
+            ' Date
+          th.sortable.govuk-table__header scope="col"
+            ' User
+          th.sortable.govuk-table__header scope="col"
+            ' Data Exported
+      tbody.govuk-table__body
+        - if @audit_logs.none?
           tr.govuk-table__row
-            td.govuk-table__cell
-              = audit_log.created_at.strftime("%d/%m/%Y %-l:%M%P")
-            td.govuk-table__cell
-              = audit_log.subject.email
-            td.govuk-table__cell
-              - if audit_log.action_type != "download_form_answer"
-                = t("audit_logs.action_types.#{audit_log.action_type.gsub(/-/, '_')}")
-              - else
-                = link_to t("audit_logs.action_types.#{audit_log.action_type}"), admin_form_answers_path(audit_log.auditable)
+            td.text-center.govuk-table__cell colspan=100
+              br
+              p.p-empty No audit logs.
+              br
+        - else
+          - @audit_logs.each do |audit_log|
+            tr.govuk-table__row
+              td.govuk-table__cell
+                = audit_log.created_at.strftime("%d/%m/%Y %-l:%M%P")
+              td.govuk-table__cell
+                = audit_log.subject.email
+              td.govuk-table__cell
+                - if audit_log.action_type != "download_form_answer"
+                  = t("audit_logs.action_types.#{audit_log.action_type.gsub(/-/, '_')}")
+                - else
+                  = link_to t("audit_logs.action_types.#{audit_log.action_type}"), admin_form_answers_path(audit_log.auditable)
   = paginate @audit_logs

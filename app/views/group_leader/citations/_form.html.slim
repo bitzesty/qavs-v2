@@ -1,0 +1,40 @@
+= simple_form_for [:group_leader, @citation] do |f|
+  .govuk-form-group
+    = f.label :group_name, class: "govuk-label govuk-label--s"
+    = f.input :group_name, label: false, wrapper_class: { class: "govuk-!-width-one-half", id: "group_name" }
+
+  .govuk-form-group
+    .govuk-body
+      = f.label :body, class: 'govuk-label govuk-label--s', label: 'Citation'
+      = f.hint 'The length of your citation will depend on the length of your group name.', class: 'govuk-hint'
+      ul.govuk-list.govuk-list--bullet
+        li
+          = f.hint 'For group names under 6 words, the citation can be up to 100 characters with spaces.', class: 'govuk-hint'
+        li
+          = f.hint 'For group names of 6 words or more, the citation can be up to 70 characters with spaces.', class: 'govuk-hint'
+      = f.hint "A citation is a short phrase summarising your group's work. It can also include the name of your town or area if there is space.", class: 'govuk-hint'
+    details.govuk-details
+      summary.govuk-details__summary
+        span.govuk-details__summary-text
+          | View the citation examples
+      .govuk-details__text
+        ul.govuk-list.govuk-list--bullet
+          li Maintaining [name of park] for the benefit of the whole community.
+          li Providing vital support, raising aspirations and promoting community integration in [town].
+          li Providing financial, social, health and education services to the local community.
+          li Enriching [town], with a prime focus on its railway station, for the benefit of the whole community.
+          li Transforming a derelict stretch of canal into a wildlife haven and a vibrant community facility.
+          li Fulfilling a need whilst providing a valuable village amenity and supporting the local community.
+          li Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving.
+          li Promoting wellbeing and reducing loneliness and isolation in [town or area].
+
+    .govuk-character-count
+      = f.input :body, as: :text, label: false, class: 'govuk-textarea govuk-js-character-count', input_html: { 'rows': 3, 'maxlength': remaining_characters }
+      .govuk-hint.govuk-character-count__message aria-live="polite"
+        | You can enter up to
+        =<> remaining_characters
+        | characters
+
+  = f.submit "Submit", class: "govuk-button"
+  ' &nbsp;
+  = link_to "Cancel", group_leader_root_path, class: "govuk-button govuk-button--secondary if-no-js-hide"

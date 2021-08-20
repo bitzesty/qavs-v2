@@ -4,7 +4,6 @@ class PalaceAttendee < ApplicationRecord
   belongs_to :palace_invite
 
   validates :palace_invite,
-            :title,
             :first_name,
             :last_name,
             :address_1,

@@ -16,19 +16,23 @@ Rails.application.routes.draw do
   }, path_names: {
     verify_authy: "/verify-token",
     enable_authy: "/enable-two-factor",
-    verify_authy_installation: "/verify-installation"
+    verify_authy_installation: "/verify-installation",
+    sessions: "sessions"
   }
 
   devise_for :lieutenants, controllers: {
-    confirmations: "lieutenants/confirmations"
+    confirmations: "lieutenants/confirmations",
+    sessions: "sessions"
   }
 
   devise_for :assessors, controllers: {
-    confirmations: "assessors/confirmations"
+    confirmations: "assessors/confirmations",
+    sessions: "sessions"
   }
 
   devise_for :group_leaders, controllers: {
-    confirmations: "group_leaders/confirmations"
+    confirmations: "group_leaders/confirmations",
+    sessions: "sessions"
   }
 
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
@@ -56,7 +60,7 @@ Rails.application.routes.draw do
 
   get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
 
-  root to: QAE.production? ? redirect("https://www.gov.uk/apply-queens-award-enterprise") : "content_only#dashboard"
+  root to: QAE.production? ? redirect("https://qavs.dcms.gov.uk") : "content_only#dashboard"
 
   resource :account, only: :show do
     collection do
@@ -132,8 +136,10 @@ Rails.application.routes.draw do
     end
 
     resources :form_answers do
+      collection do
+        post :index
+      end
       resources :form_answer_state_transitions, only: [:create]
-      resources :comments
       resources :form_answer_attachments, only: [:create, :show, :destroy]
       resources :support_letters, only: [:show]
       resources :list_of_procedures, only: [:show]
@@ -152,7 +158,6 @@ Rails.application.routes.draw do
     end
 
     resources :assessor_assignments, only: [:update]
-    resources :assessor_assignment_collections, only: [:create]
     resources :reports, only: [:index, :show]
 
     resources :assessment_submissions, only: [:create] do
@@ -215,12 +220,16 @@ Rails.application.routes.draw do
 
     resources :form_answers do
       collection do
+        post :index
         get :awarded_trade_applications
       end
 
       member do
         patch :update_financials
+        post :save
         get :review
+        get :eligibility
+        patch :update_eligibility
       end
 
       resources :form_answer_state_transitions, only: [:create]
@@ -263,6 +272,7 @@ Rails.application.routes.draw do
     end
 
     resources :lieutenant_assignment_collections, only: [:create]
+    resources :assessor_assignment_collections, only: [:create]
   end
 
   namespace :lieutenant do
@@ -270,10 +280,12 @@ Rails.application.routes.draw do
 
     resources :lieutenants, except: [:show]
     resources :form_answers, only: [:index, :show, :edit] do
+      collection do
+        post :index
+      end
       member do
         post :save
       end
-
 
       resources :form_answer_state_transitions, only: [:create]
     end
@@ -281,5 +293,7 @@ Rails.application.routes.draw do
 
   namespace :group_leader do
     root to: "dashboard#show"
+
+    resources :citations, only: [:edit, :update]
   end
 end

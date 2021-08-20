@@ -29,6 +29,10 @@ class FormAnswer < ApplicationRecord
 
   mount_uploader :pdf_version, FormAnswerPdfVersionUploader
 
+  enumerize :ineligible_reason_nominator, in: %w(involved_in_group no_knowledge no_letters_of_support)
+  enumerize :ineligible_reason_group, in: %w(less_than_3_people outside_uk in_operation_for_less_than_3_years volunteers_not_eligible_to_reside_in_uk led_by_paid_stuff no_specific_benefit unsuccessful_in_the_past_3_years has_qavs_award benefits_only_animals)
+  enumerize :sub_group, in: Assessor::SUBGROUPS
+
   begin :associations
     belongs_to :user
     belongs_to :account
@@ -41,6 +45,7 @@ class FormAnswer < ApplicationRecord
     # has_one :press_summary, dependent: :destroy
     has_one :draft_note, as: :notable, dependent: :destroy
     has_one :palace_invite, dependent: :destroy
+    has_one :citation, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy
 
     belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
@@ -82,6 +87,8 @@ class FormAnswer < ApplicationRecord
     validates :user, presence: true
     validates :sic_code, format: { with: SICCode::REGEX }, allow_nil: true, allow_blank: true
     validate :validate_answers
+    validates :ineligible_reason_nominator, presence: true, if: proc { state == "admin_not_eligible_nominator" }
+    validates :ineligible_reason_group, presence: true, if: proc { state == "admin_not_eligible_group" }
   end
 
   begin :scopes
@@ -95,6 +102,7 @@ class FormAnswer < ApplicationRecord
     scope :at_post_submission_stage, -> { where(state: FormAnswerStateMachine::POST_SUBMISSION_STATES) }
     scope :not_positive, -> { where(state: FormAnswerStateMachine::NOT_POSITIVE_STATES) }
     scope :in_progress, -> { where(state: ["eligibility_in_progress", "application_in_progress"]) }
+    scope :eligible_for_lieutenant, -> { where(state: FormAnswerStatus::LieutenantFilter::OPTIONS.keys) }
 
     scope :past, -> {
       where(award_year_id: AwardYear.past.pluck(:id))

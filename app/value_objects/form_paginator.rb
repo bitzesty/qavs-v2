@@ -4,7 +4,7 @@ class FormPaginator
   def initialize(form_answer, user, full_params = {})
     @form_answer = form_answer
     @user = user
-    @params = full_params[:search] || FormAnswerSearch::DEFAULT_SEARCH
+    @params = full_params[:search] || FormAnswerSearch.default_search
 
     base_scope = if user.is_a?(Assessor)
       assessors_scope = user.applications_scope(award_year)

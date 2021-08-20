@@ -71,16 +71,6 @@ class ContentOnlyController < ApplicationController
     flash.clear
   end
 
-  def deadline_for(kind, format = "%A %d %B %Y")
-    deadline = settings.deadlines.find_by(kind: kind)
-    if deadline.present? && deadline.trigger_at.present?
-      deadline.trigger_at.strftime(format)
-    else
-      "--/--/----"
-    end
-  end
-  helper_method :deadline_for
-
   def set_unsuccessful_business_applications
     @unsuccessful_business_applications = @user_award_forms.unsuccessful_applications
   end

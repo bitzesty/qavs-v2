@@ -76,6 +76,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
              :password,
              :password_confirmation,
              :first_name,
-             :last_name)
+             :last_name,
+             :role)
   end
 end

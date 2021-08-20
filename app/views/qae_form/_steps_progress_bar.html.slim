@@ -36,15 +36,11 @@
 
     - unless QAE.hide_pdf_links?
       li.divider
-      li.step-past.step-download
+      li.govuk-body.step-past.step-download
         - if current_user
-          = link_to users_form_answer_path(@form_answer, format: :pdf)
-            = render "content_only/download_icon"
-            ' Download your nomination (PDF)
+          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
         - else
-          = link_to lieutenant_form_answer_path(@form_answer, format: :pdf)
-            = render "content_only/download_icon"
-            ' Download nomination and local assessment form (PDF)
+          = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
 
     li.divider
     li.sidebar-helpline.govuk-body

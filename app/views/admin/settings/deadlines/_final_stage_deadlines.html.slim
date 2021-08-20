@@ -1,11 +1,7 @@
-.govuk-accordion__section
-  .govuk-accordion__section-header
-    h2.govuk-accordion__section-heading
-      span.govuk-accordion__section-button
-        ' Deadlines
-  .govuk-accordion__section-content
-    = render 'deadline_form', kind: 'buckingham_palace_attendees_details'
-    = render 'deadline_form', kind: 'buckingham_palace_media_information'
-    = render 'deadline_form', kind: 'buckingham_palace_confirm_press_book_notes'
-    = render 'deadline_form', kind: 'buckingham_palace_reception_attendee_information_due_by'
-    = render 'deadline_form', kind: 'buckingham_palace_attendees_invite'
+h4.govuk-heading-s class='govuk-!-margin-bottom-2'
+  ' Deadlines
+= render 'deadline_form', kind: 'buckingham_palace_attendees_details', title: 'end of embargo date'
+= render 'deadline_form', kind: 'buckingham_palace_media_information', title: 'QAO winner release date'
+= render 'deadline_form', kind: 'buckingham_palace_confirm_press_book_notes', title: 'press book deadline'
+= render 'deadline_form', kind: 'buckingham_palace_reception_attendee_information_due_by', title: 'Buckingham Palace reception attendee information deadline'
+= render 'deadline_form', kind: 'buckingham_palace_attendees_invite', title: 'Buckingham Palace reception date'

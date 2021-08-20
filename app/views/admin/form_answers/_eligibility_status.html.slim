@@ -1,0 +1,8 @@
+strong
+  | Eligibility status
+br
+span.eligibility-status
+  = @form_answer.eligibility_state
+br
+- if policy(@form_answer).eligibility?
+  = link_to "Edit status", eligibility_admin_form_answer_path(@form_answer), class: "govuk-link"

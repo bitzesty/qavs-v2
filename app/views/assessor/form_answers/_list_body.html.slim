@@ -1,41 +1,25 @@
-tbody
+tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
-    tr
+    tr.govuk-table__row
       - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
-        td = check_box_tag :check, obj.id, false, class: "form-answer-check"
+        td.govuk-table__cell width="20" = check_box_tag :check, obj.id, false, class: "form-answer-check"
 
-      td.td-title
-      - unless obj.company_or_nominee_name.nil?
-        = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted application, for #{obj.company_or_nominee_name}" } do
-          = obj.company_or_nominee_name
-      - else
-        = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted application, company or nominee name not yet specified" }do
-          em
-            ' Not yet specified
-      td
-        = link_to obj.urn, polymorphic_url([namespace_name, obj], search: params.permit[:search]), aria: { label: "Open submitted application page, for #{obj.company_or_nominee_name.presence || "company not yet specified"} application #{ obj.urn.presence ||  obj.id}" }
-          - if obj.urn.present?
-            = obj.urn
-          - else
-            span.urn-not-generated Draft id: #{obj.id}
-      td = obj.dashboard_status
-      td = obj.sic_code
-      td = obj.applied_before ? "Yes" : ""
+      td.td-title.govuk-table__cell
+        - unless obj.company_or_nominee_name.nil?
+          = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted application, for #{obj.company_or_nominee_name}" } do
+            = obj.company_or_nominee_name
+        - else
+          = link_to polymorphic_url([namespace_name, obj], search: params[:search]), aria: { label: "View submitted application, company or nominee name not yet specified" }do
+            em
+              ' Not yet specified
+      td.govuk-table__cell = obj.dashboard_status
+      td.govuk-table__cell = obj.sic_code
+      td.govuk-table__cell
+        /= obj.applied_before ? "Yes" : ""
 
-      td.td-primary-name
+      td.td-primary-name.govuk-table__cell
         = obj.primary_assessor_full_name
-
-      td.td-secondary-name
-        = obj.secondary_assessor_full_name
-
-      td
-        - app_comments = application_comments(obj.comments_count)
-        - if app_comments.present?
-          = link_to polymorphic_url([:assessor, obj], search: params.permit[:search]) do
-            = app_comments
-        = application_flags(obj)
-        = application_flags(obj, current_subject)
-      td
+      td.govuk-table__cell
         = obj.last_updated_at
         br
         span.muted

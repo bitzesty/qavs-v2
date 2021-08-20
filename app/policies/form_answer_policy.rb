@@ -41,11 +41,19 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def submit?
-    nominator? || lieutenant? && lieutenancy_assigned? && advanced_lieutenant?
+    nominator? || lieutenant? && lieutenancy_assigned? && advanced_lieutenant? || admin?
   end
 
   def update?
     admin? || subject.lead?(record)
+  end
+
+  def eligibility?
+    admin?
+  end
+
+  def update_eligibility?
+    admin?
   end
 
   def update_item?(item)

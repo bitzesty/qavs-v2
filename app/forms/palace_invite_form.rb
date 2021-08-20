@@ -34,6 +34,11 @@ class PalaceInviteForm
     @attendees ||= invite.palace_attendees.to_a
   end
 
+  def build_attendees
+    @attendees = []
+    2.times { @attendees << invite.palace_attendees.build }
+  end
+
   def build_palace_attendee
     @attendees ||= []
     @attendees << invite.palace_attendees.build

@@ -1,5 +1,16 @@
 en:
   enumerize:
+    sub_group:
+      sub_group_1: Sub-group 1
+      sub_group_2: Sub-group 2
+      sub_group_3: Sub-group 3
+      sub_group_4: Sub-group 4
+      sub_group_5: Sub-group 5
+      sub_group_6: Sub-group 6
+      sub_group_7: Sub-group 7
+      sub_group_8: Sub-group 8
+      sub_group_9: Sub-group 9
+      sub_group_10: Sub-group 10
     user:
       qae_info_source:
         govuk: GOV.UK
@@ -42,19 +53,34 @@ en:
     eligibility/promotion:
       nominee_is_qae_ep_award_holder:
         i_dont_know: "I don't know"
+    form_answer:
+      ineligible_reason_nominator:
+        involved_in_group: Involved in running the group
+        no_knowledge: No good knowledge of the group’s work
+        no_letters_of_support: No two letters of support
+      ineligible_reason_group:
+        less_than_3_people: Less than three people
+        outside_uk: Outside the UK, Channel Islands or Isle of Man
+        in_operation_for_less_than_3_years: In operation for less than three years
+        volunteers_not_eligible_to_reside_in_uk: Volunteers not eligible to reside in the UK
+        led_by_paid_stuff: Led by paid staff
+        no_specific_benefit: No specific and direct local benefit
+        unsuccessful_in_the_past_3_years: Nominated unsuccessfully in the past 3 years
+        has_qavs_award: Received a QAVS award
+        benefits_only_animals: Operates solely for the benefit of animals
     palace_attendee:
       preferred_date:
-        any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        any: Any date at Buckingham Palace
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse
       alternative_date:
-        any: Any
-        buck_1: 15th May - Buckingham palace
-        buck_2: 31st May - Buckingham palace
-        buck_3: 5th June - Buckingham palace
-        holy: 4th July - Palace of Holyrood House (only for those residing in Scotland)
+        any: Any date at Buckingham Palace
+        buck_1: 15th May - Buckingham Palace
+        buck_2: 31st May - Buckingham Palace
+        buck_3: 5th June - Buckingham Palace
+        holy: 4th July - Palace of Holyroodhouse
         none: There is no suitable secondary date
 
   activerecord:
@@ -81,6 +107,19 @@ en:
             password:
               weak_password: Your new password must be more complex.
 
+  appraisals:
+    evaluations:
+      titles:
+        positive: 'Recommended'
+        average: 'Recommended - weak'
+        negative: 'Not Recommended'
+        pending: 'Pending'
+      styles:
+        positive: 'green'
+        average: 'green'
+        negative: 'red'
+        pending: 'grey'
+
   time:
     formats:
       date_at_time: "%d/%m/%Y at %-l:%M%P"
@@ -104,7 +143,7 @@ en:
       new_button:
         users: "Add nominator"
         lieutenants: "Add Lord Lieutenancy office user"
-        assessors: "Add National assessor"
+        assessors: "Add national assessor"
         admins: "Add Admin"
     form_answers:
       financial_summary:
@@ -274,10 +313,14 @@ en:
       application_in_progress: Nomination in progress
       submitted: Submitted
       admin_eligible: Eligible
+      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_not_eligible_duplicate: Duplicate for reference
+      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment in progress"
       local_assessment_recommended: "Local assessment: recommended"
       local_assessment_not_recommended: "Local assessment: not recommended"
-      withdrawn: Withdrawn/Ineligible
+      withdrawn: Withdrawn
       not_eligible: Not eligible
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress
@@ -292,10 +335,14 @@ en:
       application_in_progress: Nomination in progress
       submitted: Submitted
       admin_eligible: Eligible
+      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_not_eligible_duplicate: Duplicate for reference
+      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment: in progress"
       local_assessment_recommended: "Local assessment: recommended"
       local_assessment_not_recommended: "Local assessment: not recommended"
-      withdrawn: Withdrawn/Ineligible
+      withdrawn: Withdrawn
       not_eligible: Not eligible
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress

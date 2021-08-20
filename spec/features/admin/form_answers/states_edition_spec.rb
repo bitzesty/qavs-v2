@@ -12,14 +12,13 @@ describe "As Admin I want to change the applications states.", js: true do
     visit admin_form_answer_path(form_answer)
   end
 
-  it "changes the state from application_to_progress to submitted" do
+  xit "changes the state from application_to_progress to submitted" do
     within ".section-applicant-status" do
-      expect(page).to have_selector(".state-toggle", text: "Assessment in progress")
-      find('.state-toggle').click
-      within ".dropdown-menu" do
-        click_link "Recommended"
-      end
-      expect(page).to have_selector(".state-toggle", text: "Recommended")
+      expect(page).to have_selector("#local-assessment-status", text: "IN PROGRESS")
+      find('.toggable-form__trigger').click
+      choose('Recommended', from: 'Status')
+      click_button('Update')
+      expect(page).to have_selector("#local-assessment-status", text: "RECOMMENDED")
       wait_for_ajax
       expect(form_answer.reload.state).to eq("recommended")
     end

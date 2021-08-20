@@ -7,6 +7,29 @@ h1.govuk-heading-xl
         | Two representatives from the awarded groups can attend a Royal Garden Party in
         =< AwardYear.current.year+1
         | .
+      h4.govuk-heading-s
+        | Royal Garden Party attendee eligibility
+      p.govuk-body
+        | To attend the Royal Garden Party, the attendees need to meet the criteria below:
+        ul.govuk-list.govuk-list--bullet
+          li They must be volunteers from the group, rather than members of staff.
+          li They must be British, Commonwealth or European Union citizens.
+          li They must be resident in the United Kingdom.They must be over the age of 18 years.
+          li They should not have previously attended a Royal Garden Party.
 
-      - if !@invite.submitted?
-        = render 'form'
+      .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title"
+        .govuk-notification-banner__header
+          h2.govuk-notification-banner__title#govuk-notification-banner-title
+            | Important
+        .govuk-notification-banner__content
+          p.govuk-notification-banner__heading
+            | When the attendees arrive at the Royal Garden Party, they will need to bring two forms of identification that confirm their name, address and date of birth. One form of identification will need to be photographic, for example, passport or driving licence.
+          p.govuk-notification-banner__heading
+            | The attendees’ details you provide have to exactly match the details on the identification documents that the attendees will bring to the event.
+
+      p.govuk-body
+        | Please note, if one of the attendees will need assistance on the event day, for example, if they are older or have a disability, the other attendee must be able to assist them. If this is not possible, please get in touch with the Queen’s Award for Voluntary Service (QAVS) team via email
+        =<> mail_to 'queensaward@dcms.gov.uk'
+        | or phone 0207 271 6206.
+      / - if !@invite.submitted?
+      = render 'form'

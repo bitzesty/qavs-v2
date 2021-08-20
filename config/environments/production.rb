@@ -23,6 +23,11 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = true # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, max-age=31536000',
+    'Expires' => 1.year.from_now.to_formatted_s(:rfc822)
+  }
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(compress: { unused: false })
 
@@ -38,7 +43,8 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = ENV['ASSET_HOST']
-  config.static_cache_control = 'public, max-age=1000'
+  config.static_cache_control = 'public, max-age=3600'
+
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache

@@ -24,7 +24,6 @@ class AssessorAssignment < ApplicationRecord
     end
 
     validate :assessor_existence
-    validate :assessor_assignment_to_category
     validates :assessor_id,
               uniqueness: { scope: [:form_answer_id] },
               allow_nil: true
@@ -124,8 +123,7 @@ class AssessorAssignment < ApplicationRecord
 
   def owner_or_administrative?(subject)
     admin?(subject) ||
-    subject.lead?(form_answer) ||
-    primary_or_secondary_assessors_allowed?(subject)
+      subject.assigned?(form_answer)
   end
 
   def primary_or_secondary_assessors_allowed?(subject)
@@ -190,13 +188,6 @@ class AssessorAssignment < ApplicationRecord
   def assessor_existence
     if (moderated? || case_summary?) && assessor_id.present?
       errors.add(:assessor_id, "cannot be present for this kind of assessment.")
-    end
-  end
-
-  def assessor_assignment_to_category
-    return unless assessor_id_changed?
-    if assessor.present? && !assessor.assignable?(form_answer)
-      errors.add(:assessor_id, "cannot be assigned to this case.")
     end
   end
 

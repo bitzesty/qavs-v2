@@ -230,7 +230,8 @@ CREATE TABLE public.assessors (
     deleted boolean DEFAULT false,
     autosave_token character varying,
     unique_session_id character varying,
-    qavs_role character varying
+    qavs_role character varying,
+    sub_group character varying
 );
 
 
@@ -332,7 +333,8 @@ CREATE TABLE public.ceremonial_counties (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    country character varying
 );
 
 
@@ -353,6 +355,40 @@ CREATE SEQUENCE public.ceremonial_counties_id_seq
 --
 
 ALTER SEQUENCE public.ceremonial_counties_id_seq OWNED BY public.ceremonial_counties.id;
+
+
+--
+-- Name: citations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.citations (
+    id bigint NOT NULL,
+    group_name character varying,
+    body text,
+    completed_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    form_answer_id bigint
+);
+
+
+--
+-- Name: citations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.citations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: citations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.citations_id_seq OWNED BY public.citations.id;
 
 
 --
@@ -712,7 +748,10 @@ CREATE TABLE public.form_answers (
     feedback_hard_copy_generated boolean DEFAULT false,
     discrepancies_between_primary_and_secondary_appraisals json,
     nominee_activity character varying,
-    ceremonial_county_id integer
+    ceremonial_county_id integer,
+    ineligible_reason_nominator character varying,
+    ineligible_reason_group character varying,
+    sub_group character varying
 );
 
 
@@ -761,7 +800,8 @@ CREATE TABLE public.group_leaders (
     updated_at timestamp(6) without time zone NOT NULL,
     first_name character varying,
     last_name character varying,
-    deleted boolean DEFAULT false NOT NULL
+    deleted boolean DEFAULT false NOT NULL,
+    form_answer_id bigint
 );
 
 
@@ -2568,6 +2608,13 @@ ALTER TABLE ONLY public.ceremonial_counties ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: citations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.citations ALTER COLUMN id SET DEFAULT nextval('public.citations_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2798,6 +2845,14 @@ ALTER TABLE ONLY public.award_years
 
 ALTER TABLE ONLY public.ceremonial_counties
     ADD CONSTRAINT ceremonial_counties_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: citations citations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.citations
+    ADD CONSTRAINT citations_pkey PRIMARY KEY (id);
 
 
 --
@@ -3091,6 +3146,20 @@ CREATE UNIQUE INDEX index_award_years_on_year ON public.award_years USING btree 
 
 
 --
+-- Name: index_ceremonial_counties_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_ceremonial_counties_on_name ON public.ceremonial_counties USING btree (name);
+
+
+--
+-- Name: index_citations_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_citations_on_form_answer_id ON public.citations USING btree (form_answer_id);
+
+
+--
 -- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3221,6 +3290,13 @@ CREATE UNIQUE INDEX index_group_leaders_on_confirmation_token ON public.group_le
 --
 
 CREATE UNIQUE INDEX index_group_leaders_on_email ON public.group_leaders USING btree (email);
+
+
+--
+-- Name: index_group_leaders_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_group_leaders_on_form_answer_id ON public.group_leaders USING btree (form_answer_id);
 
 
 --
@@ -3451,6 +3527,14 @@ ALTER TABLE ONLY public.feedbacks
 
 ALTER TABLE ONLY public.feedbacks
     ADD CONSTRAINT fk_rails_85a1d7f049 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
+-- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders
+    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --
@@ -3709,6 +3793,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210707115136'),
 ('20210707122554'),
 ('20210803084421'),
-('20210803120605');
-
-
+('20210803120605'),
+('20210806102135'),
+('20210808194051'),
+('20210809072025'),
+('20210809072320'),
+('20210809073242'),
+('20210810173827'),
+('20210810175339'),
+('20210816072005'),
+('20210817084427');

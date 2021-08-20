@@ -22,7 +22,9 @@ $button-colour: #00823b;
 @import "admin/page-settings";
 @import "admin/page-feedback";
 @import "admin/page-dashboard";
+@import "admin/page-eligibility";
 @import "admin/date-time-picker";
+@import "admin/tables";
 @import "./micromodal";
 
 // HIGHLIGHT PLACEHOLDER BITS
@@ -45,4 +47,12 @@ $todo-black: #333;
   .todo-placeholder {
     outline: 4px solid $todo-yellow !important;
   }
+}
+
+.govuk-select {
+  padding-right: 20px
+}
+
+.govuk-notification-banner__heading {
+  max-width: 700px
 }

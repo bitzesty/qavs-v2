@@ -25,7 +25,7 @@
   = link_to "#", class: "form-edit-link pull-right" do
     span.glyphicon.glyphicon-pencil
     ' Edit
-  .form-actions.text-right
-    = link_to "Cancel", "#", class: "btn btn-default form-cancel-link if-no-js-hide"
-    = f.submit "Save", class: "btn btn-primary form-save-link pull-right"
+  .govuk-button-group
+    = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary btn-default form-cancel-link if-no-js-hide"
+    = f.submit "Save", class: "govuk-button btn-primary form-save-link pull-right"
   .clear

@@ -1,5 +1,5 @@
 li non-js-attribute=attrs["name"]
-  div
+  .govuk-button-group
     = button_to "Remove", form_form_answer_positions_url(@form_answer, position: attrs),
                           method: :delete,
                           class: "remove-link non-js-remove-link govuk-button govuk-button--warning",

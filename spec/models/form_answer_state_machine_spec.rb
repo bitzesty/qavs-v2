@@ -39,6 +39,7 @@ describe FormAnswerStateMachine do
         before { form_answer.update(state: "submitted") }
 
         it "automatically changes state to `assessment_in_progress`" do
+          pending "not clear for now if we need to change the state automatically at any point"
           expect {
             FormAnswerStateMachine.trigger_deadlines
           }.to change {

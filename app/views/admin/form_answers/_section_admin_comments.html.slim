@@ -1,18 +1,9 @@
 .govuk-accordion__section
   .govuk-accordion__section-header
-    h3.govuk-accordion__section-heading
+    h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
       span.govuk-accordion__section-button id="admin-comments-heading"
         ' Admin Comments
-        span.comments-number
-          - if @form_answer.comments.admin.any?
-            | (
-            span.number
-              = @form_answer.comments.admin.count
-            | )
-    - if @form_answer.comments.admin.any?
-      .govuk-accordion__section-summary.govuk-body
-        - last_comment = @form_answer.comments.admin.first
-        = "Updated by #{message_author_name(last_comment.author)} - #{l(last_comment.created_at, format: :date_at_time)}"
+        = govuk_tag(pluralize(@form_answer.comments.admin.count, 'comment', 'comments'), 'grey')
 
   .govuk-accordion__section-content#section-admin-comments aria-labelledby="admin-comments-heading"
     .comments-container data-comment-form=new_admin_form_answer_comment_path(@form_answer)

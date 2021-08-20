@@ -1,13 +1,17 @@
 class FormAnswerSearch < Search
   attr_reader :subject
 
-  DEFAULT_SEARCH = {
-    sort: 'company_or_nominee_name',
-    search_filter: {
-      status: FormAnswerStatus::AdminFilter.all,
-      nominee_activity: FormAnswerStatus::AdminFilter.all
+  def self.default_search
+    {
+      sort: 'company_or_nominee_name',
+      search_filter: {
+        status: FormAnswerStatus::AdminFilter.all,
+        nominee_activity: FormAnswerStatus::AdminFilter.values('activity'),
+        assigned_ceremonial_county: FormAnswerStatus::AdminFilter.values('assigned county'),
+        nominated_ceremonial_county: FormAnswerStatus::AdminFilter.values('nominated county')
+      }
     }
-  }
+  end
 
   def initialize(scope, subject)
     @subject = subject
@@ -60,6 +64,22 @@ class FormAnswerSearch < Search
 
   def filter_by_nominee_activity(scoped_results, value)
     scoped_results.where(nominee_activity: filter_klass.internal_states(value))
+  end
+
+  def filter_by_assigned_ceremonial_county(scoped_results, value)
+    value = value.map do |v|
+      v == "not_assigned" ? nil : v
+    end
+    scoped_results.where(ceremonial_county_id: value)
+  end
+
+  def filter_by_nominated_ceremonial_county(scoped_results, value)
+    county_filter_query = scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value)
+    if value.include?("not_stated")
+      scoped_results.where("(form_answers.document -> 'nominee_ceremonial_county') IS NULL").or(county_filter_query)
+    else
+      county_filter_query
+    end
   end
 
   def filter_by_sub_status(scoped_results, value)

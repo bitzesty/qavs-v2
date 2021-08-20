@@ -142,6 +142,14 @@ class FormAnswerDecorator < ApplicationDecorator
     I18n.t(object.state.to_s, scope: "form_answers.state_short").html_safe
   end
 
+  def eligibility_state
+    if FormAnswerStateMachine::ELIGIBILITY_STATES.include?(object.state.to_sym)
+      state_short_text
+    else
+      "Eligible"
+    end
+  end
+
   def progress_text_short
     object.state.humanize
   end
@@ -426,13 +434,9 @@ class FormAnswerDecorator < ApplicationDecorator
     object.assessor_assignments.secondary.submitted?
   end
 
-  def dashboard_status(user_type = "")
+  def dashboard_status
     if object.submitted?
-      if user_type.casecmp("admin").zero? && object.state == "assessment_in_progress"
-        assessment_in_progress_status
-      else
-        state_text
-      end
+      state_text
     else
       progress_text
     end
@@ -451,15 +455,6 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   private
-
-  def assessment_in_progress_status
-    if object.assessors.any?
-      names_list = object.assessors.pluck(:first_name, :last_name)
-      names_list.map { |first_name, last_name| "#{first_name} #{last_name}" }.join(", ")
-    else
-      ASSESSORS_NOT_ASSIGNED
-    end
-  end
 
   def html_full_sanitizer
     @html_full_sanitizer ||= Rails::Html::FullSanitizer.new

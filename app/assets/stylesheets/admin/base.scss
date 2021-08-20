@@ -1943,6 +1943,7 @@ table .ellipsis {
 
 .award-year-container {
   position: relative;
+  width: 150px;
 
   .award-year-label {
     position: absolute;
@@ -2133,4 +2134,12 @@ table .ellipsis {
       background: none;
     }
   }
+}
+
+.pull-left {
+ float: left;
+}
+
+.pull-right {
+  float: right;
 }

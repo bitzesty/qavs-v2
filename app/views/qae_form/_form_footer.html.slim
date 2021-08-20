@@ -1,34 +1,16 @@
 footer
   nav.pagination.no-border class="#{'pagination-alternative' unless step.next}" aria-label="Pagination for step #{step.index + 1}"
     ul.group
-      - if step.previous
-        li.previous.previous-alternate.js-step-link data-step="step-#{step.previous.title.parameterize}"
-          - back_url = current_user ? edit_form_url(step: step.previous.title.parameterize) : edit_lieutenant_form_answer_url(@form_answer, step: step.previous.title.parameterize)
-          = link_to back_url, rel: "prev", title: "Navigate to previous part", "aria-label" => "Back to #{step.previous.title}", class: 'govuk-button govuk-button--secondary' do
-            span.pagination-label
-              | Back
-            /span class="pagination-part-title"
-              = step.previous.title
-      - else
-        li.previous.previous-alternate
-          - aria_label = "Back to step " + step.index.to_s
-
-          - if step.index == 0
-            - aria_label = "Back to Useful Application Information page"
-
-          = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id], rel: "prev", title: aria_label, "aria-label" => aria_label, class: "govuk-button govuk-button--secondary" do
-            span.pagination-label
-              | Back
-
-      - if current_form_is_editable? || (current_lieutenant && step.local_assessment?)
-        - dashboard_link = current_subject.is_a?(Lieutenant) ? lieutenant_form_answer_url(@form_answer) : dashboard_url
+      - if current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)
         li.save-quit-link
+          - button_class = (current_subject.is_a?(Lieutenant) && current_subject.role.regular?) ?  "govuk-button" : "govuk-button govuk-button--secondary"
+          - button_text = (current_subject.is_a?(Lieutenant) && current_subject.role.regular?) ? "Save local assessment" : "Save and come back later"
           span.if-js-hide
-            = button_tag "Save and come back later", class: "govuk-button save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: dashboard_link }
+            = button_tag button_text, class: "#{ button_class } save-quit-link btn", value: "redirect", name: "next_action", type: "submit", data: { url: nomination_dashboard_link(@form_answer) }
           span.if-no-js-hide
-            = link_to "Save and come back later", dashboard_link, class: " govuk-button govuk-button--secondary js-save-and-come-back"
+            = link_to button_text, nomination_dashboard_link(@form_answer), class: "#{ button_class } js-save-and-come-back"
 
-      - if step.next_for(@form_answer, current_form_user)
+      - if (next_step = step.next_for(@form_answer, current_form_user)) && (!admin? || !next_step.local_assessment?)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
           - opts = possible_read_only_ops(step.opts[:id])
           - opts[:class] ||= ""
@@ -37,7 +19,24 @@ footer
             ' Save and continue
 
       - else
-        - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?)) && policy(@form_answer).submit?
+        - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)) && policy(@form_answer).submit?
           li.submit.qae-form
             button type="submit" name="submit" value="true" class="govuk-button #{step.submit.style.presence}"
               = step.submit.text
+
+    - if step.previous
+      .previous.previous-alternate.js-step-link data-step="step-#{step.previous.title.parameterize}"
+        = link_to nomination_back_url(@form_answer, step), rel: "prev", title: "Navigate to previous part", "aria-label" => "Back to #{step.previous.title}", class: 'govuk-back-link govuk-!-font-size-19' do
+          span.pagination-label
+            | Go back to previous page
+
+    - else
+      .previous.previous-alternate
+        - aria_label = "Back to step " + step.index.to_s
+
+        - if step.index == 0
+          - aria_label = "Back to Useful Application Information page"
+
+        = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id], rel: "prev", title: aria_label, "aria-label" => aria_label, class: "govuk-back-link govuk-!-font-size-19" do
+          span.pagination-label
+            | Back

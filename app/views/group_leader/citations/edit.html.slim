@@ -1,0 +1,23 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h1.govuk-heading-l
+      | Group name and citation confirmation
+
+    p.govuk-body
+      | The information in this form has been provided by your local Lord Lieutenant. However, you can edit it if needed.
+    p.govuk-body
+      | This information will appear on the certificate, QAVS website and in any media publication. Therefore, please ensure that it is accurate.
+
+    .govuk-form-group.award-acceptance-container
+      fieldset.govuk-fieldset aria-describedby="award-acceptance"
+        legend.govuk-fieldset__legend.govuk-fieldset__legend--m
+          h1.govuk-fieldset__heading
+            | Do you accept the Queen's Award for Voluntary Service on behalf of your group?
+        .govuk-checkboxes
+          .govuk-checkboxes__item
+            input.govuk-checkboxes__input#accept-award type="checkbox" name="accept-award" value="yes"
+            label.govuk-label.govuk-checkboxes__label for="accept-award"
+              | I confirm I am happy to accept the award and continue
+
+    .citation class='govuk-!-display-none'
+      = render "form"

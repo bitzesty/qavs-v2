@@ -19,7 +19,7 @@ article.group role="article"
         span.govuk-warning-text__assistive
           | Warning
       	' The entry period for the #{ AwardYear.current.year } awards has now closed.
-	br
+	    br
         ' Award winners will be announced on
         =< application_deadline_for_year(AwardYear.current, :buckingham_palace_attendees_details, "with_year")
         ' .

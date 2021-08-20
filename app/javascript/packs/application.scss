@@ -142,3 +142,41 @@ td, th {
     border-right: 2px solid #000 !important;
   }
 }
+
+.govuk-notification-banner {
+  margin-bottom: 1rem !important;
+}
+
+.js-enabled .toggable-form {
+  .toggable-form__edit {
+    display: none;
+  }
+
+  &[aria-expanded="true"] {
+    .toggable-form__read {
+      display: none;
+    }
+
+    .toggable-form__edit {
+      display: block;
+    }
+  }
+}
+
+.govuk-accordion__section-heading--with-tag {
+  @media (min-width: 1200px) {
+    margin-right: 250px;
+
+    .govuk-tag {
+      position: absolute;
+      left: calc(100% - 280px);
+    }
+  }
+}
+
+button.govuk-link {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+}

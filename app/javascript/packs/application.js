@@ -19,27 +19,27 @@ const frontend = require("govuk-frontend/govuk/all")
 require.context('govuk-frontend/govuk/assets/images', true)
 import './application.scss';
 
-import $ from 'jquery';
+import 'jquery/src/jquery';
 import MicroModal from 'micromodal';
 
 import Accordion from '../components/accordion';
 import AccessibleAutocomplete from '../vendor/accessible-autocomplete.min';
 import CheckboxMultiselect from '../vendor/checkbox-multiselect';
 
-const accordions = document.querySelectorAll('[data-module="govuk-accordion"]');
-
-Array.prototype.forEach.call(accordions, function(module) {
-  const accordion = new Accordion(module);
-  accordion.init();
-})
-
-// frontend.initAll()
+frontend.initAll()
 
 $('.bulk-assign-lieutenants-link').on('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
 
   MicroModal.show('modal-bulk-assign-lieutenants');
+})
+
+$('.bulk-assign-assessors-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  MicroModal.show('modal-bulk-assign-assessors');
 })
 
 $(document).on('click', 'button[data-micromodal-close]', function(e) {
@@ -64,7 +64,7 @@ if ($('.bulk-assignment-container').length > 0) {
 
     if (show_button) {
       $(".bulk-assignment-container").addClass("show-container")
-
+      $(".bulk-assignment-help").addClass("govuk-!-display-none")
       var selected_count = $('input[type=checkbox].form-answer-check:checked').length
       if (selected_count > 1) {
         $('.nominations-checked-total').text(selected_count +' groups selected')
@@ -73,6 +73,7 @@ if ($('.bulk-assignment-container').length > 0) {
       }
     } else {
       $(".bulk-assignment-container").removeClass("show-container")
+      $(".bulk-assignment-help").removeClass("govuk-!-display-none")
     }
   })
 }
@@ -84,10 +85,87 @@ if (dropdowns.length > 0) {
     var multiselect = new CheckboxMultiselect(dropdown, {
       singleSelectionShowDirectly: true,
       search: {
-        enabled: true
+        enabled: false
       }
     })
 
     multiselect.enable()
   })
 }
+
+$(".toggable-form").each(function() {
+  var form = $(this);
+
+  form.on('click', '.toggable-form__trigger', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    form.attr("aria-expanded", "true");
+
+    form.find('input,select,textarea').first().focus();
+  });
+
+  form.on('click', '.toggable-form__save', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    form.closest('form').find('[type="submit"]').trigger('click');
+
+    form.find('.toggable-form__read .toggable-form__content:first').text(form.find('textarea').first().val())
+    form.find('.toggable-form__read .toggable-form__content:last').text(form.find('textarea').last().val())
+
+    form.attr("aria-expanded", "false");
+    form.find('.toggable-form__trigger').focus();
+  });
+
+  form.on('click', '.toggable-form__cancel', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    form.attr("aria-expanded", "false");
+    form.find('.toggable-form__trigger').focus();
+  });
+})
+
+$('.autosubmit-on-change').each(function() {
+  var form = $(this);
+
+  form.find('input, select').on('change', function() {
+    form.submit();
+  });
+})
+
+$(".custom-select").each(function() {
+  var field = $(this)[0];
+
+  if ($(this).is(":disabled") || $(this).is("[readonly]")) {
+    return;
+  }
+
+  AccessibleAutocomplete.enhanceSelectElement({
+    selectElement: field,
+    showAllValues: true,
+    dropdownArrow: function() {
+      return "<span class='autocomplete__arrow'></span>";
+    }
+  })
+});
+
+for (let i = 0; i < 2; i++) {
+  if ($(`#palace_invite_palace_attendees_attributes_${i}_disabled_access_true:checked`).length > 0) {
+    $(`.disabled-access-banner-${i}`).removeClass('govuk-!-display-none');
+  };
+
+  $(document).on('change', 'input.disabled-access-radio[type=radio]', function() {
+    if ($(`#palace_invite_palace_attendees_attributes_${i}_disabled_access_true:checked`).length > 0) {
+      $(`.disabled-access-banner-${i}`).removeClass('govuk-!-display-none');
+    } else {
+      $(`.disabled-access-banner-${i}`).addClass('govuk-!-display-none');
+    };
+  });
+};
+
+$("#accept-award").on('click', function() {
+  $('.citation').removeClass('govuk-!-display-none')
+  $('.award-acceptance-container').addClass('govuk-!-display-none')
+})

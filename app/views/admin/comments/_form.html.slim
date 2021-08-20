@@ -4,10 +4,4 @@
       ' Add a comment
     = f.hidden_field :section
     = f.text_area :body, class: 'govuk-textarea', rows: 4, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.section}-new-comment", id: 'admin-comment-text'
-  .govuk-form-group
-    .govuk-checkboxes.govuk-checkboxes--small data-module="govuk-checkboxes"
-      .govuk-checkboxes__item
-        = f.check_box :flagged, class: 'govuk-checkboxes__input', id: 'admin-comment-flag'
-        label.govuk-label.govuk-checkboxes__label for="admin-comment-flag"
-          ' Mark as flagged
   = f.submit 'Comment', class: 'govuk-button'

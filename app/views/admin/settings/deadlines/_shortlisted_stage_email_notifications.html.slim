@@ -1,9 +1,5 @@
-.govuk-accordion__section
-  .govuk-accordion__section-header
-    h2.govuk-accordion__section-heading
-      span.govuk-accordion__section-button
-        ' Email notification
-  .govuk-accordion__section-content
-    = render 'email_notification', kind: 'local_assessment_reminder'
-    = render 'email_notification', kind: 'shortlisted_notifier'
-    = render 'email_notification', kind: 'not_shortlisted_notifier'
+h4.govuk-heading-s class='govuk-!-margin-bottom-2 govuk-!-margin-top-7'
+  ' Email notification
+= render 'email_notification', kind: 'local_assessment_reminder', title: 'shortlisted stage local assessment email notification'
+= render 'email_notification', kind: 'shortlisted_notifier', title: 'shortlisted stage shortlisted email notification'
+= render 'email_notification', kind: 'not_shortlisted_notifier', title: 'shortlisted stage not shortlisted email notification'
