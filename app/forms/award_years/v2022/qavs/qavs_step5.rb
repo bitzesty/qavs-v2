@@ -3,8 +3,12 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step5
       @qavs_step5 ||= proc do
-        header :local_assessment_general_header, "General" do
-          ref "E 1"
+        header :local_assessment_general_header, "General information" do
+        end
+
+        assessor_details :assessor_details, 'Assessor details' do
+          sub_ref "E1.1"
+          required
         end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
