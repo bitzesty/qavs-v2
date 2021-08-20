@@ -1,7 +1,3 @@
-- state = FormAnswerStateTransition.new
-- state.form_answer = resource
-- state.subject = current_subject
-
 .section-applicant-status
   .state-container
     p.govuk-body#eligibility-status
@@ -9,20 +5,23 @@
         | Eligibility status
       br
       - if resource.was_marked_as_eligible?
-        = govuk_tag(@form_answer.eligibility_state, 'green')
+        = govuk_tag(resource.eligibility_state, 'green')
+      - elsif resource.was_marked_as_ineligible?
+        = govuk_tag(resource.eligibility_state, 'red')
       - else
-        = govuk_tag(@form_answer.eligibility_state, 'red')
+        = govuk_tag('pending', 'grey')
+
 
     p.govuk-body#local-assessment-status
       strong
         | Local assessment status
       br
 
-      - if resource.state == 'recommended'
+      - if resource.was_marked_ll_recommended?
         = govuk_tag('recommended', 'green')
-      - elsif resource.state == 'not recommended'
+      - elsif resource.state == 'local_assessment_not_recommended'
         = govuk_tag('not recommended', 'red')
-      - elsif !resource.local_assessment_ended?
+      - elsif resource.state == "local_assessment_in_progress"
         = govuk_tag('in progress', 'yellow')
       - else
         = govuk_tag('not started', 'grey')
@@ -31,16 +30,16 @@
       strong
         | National assessment status
       br
-
-      - if resource.state == 'recommended'
+      / disabling NA status for now
+      - if false && resource.state == 'recommended'
         = govuk_tag('recommended', 'green')
-      - elsif resource.state == 'not recommended'
+      - elsif false && resource.state == 'not recommended'
         = govuk_tag('not recommended', 'red')
-      - elsif resource.state == 'undecided'
+      - elsif false && resource.state == 'undecided'
         = govuk_tag('undecided', 'purple')
       - else
         = govuk_tag('pending', 'grey')
 
-    - if policy(@form_answer).eligibility?
+    - if policy(resource).eligibility?
       p.govuk-body
-        = link_to "Edit status", eligibility_admin_form_answer_path(@form_answer), class: "govuk-link"
+        = link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link"
