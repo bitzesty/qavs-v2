@@ -5,7 +5,7 @@
         | Eligibility status
       br
       - if resource.was_marked_as_eligible?
-        = govuk_tag(resource.eligibility_state, 'green')
+        = govuk_tag(resource.eligibility_state, 'blue')
       - elsif resource.was_marked_as_ineligible?
         = govuk_tag(resource.eligibility_state, 'red')
       - else
@@ -25,7 +25,7 @@
         = govuk_tag('in progress', 'yellow')
       - else
         = govuk_tag('not started', 'grey')
-        
+
     - if admin?
       p.govuk-body#national-assessment-status
         strong
@@ -44,4 +44,3 @@
       - if policy(resource).eligibility?
         p.govuk-body
           = link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link"
-
