@@ -23,7 +23,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.3"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader_name
+          default_value :nominee_leader_name
           style "medium"
         end
 
@@ -31,7 +31,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.4"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader_position
+          default_value :nominee_leader_position
           style "medium"
         end
 
@@ -39,14 +39,18 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader_address
+          default_building :nominee_leader_address_building
+          default_street :nominee_leader_address_street
+          default_city :nominee_leader_address_city
+          default_county :nominee_leader_address_county
+          default_postcode :nominee_leader_address_postcode
         end
 
         text :local_assessment_group_leader_email, "Email of the group leader or main contact" do
           sub_ref "E 1.6"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader_email
+          default_value :nominee_leader_email
           style "large"
         end
 
@@ -54,7 +58,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.7"
           form_hint "Please check that the details provided by the nominator are correct."
           required
-          default_value :group_leader_phone
+          default_value :nominee_leader_telephone
         end
 
         confirm :group_details_confirmed, "Confirm group details" do

@@ -373,6 +373,7 @@ class FormAnswer < ApplicationRecord
     self.nominator_email = nominator_email_from_document
   end
 
+
   def nominee_full_name_from_document
     "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
   end
