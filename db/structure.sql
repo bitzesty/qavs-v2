@@ -753,12 +753,7 @@ CREATE TABLE public.form_answers (
     ceremonial_county_id integer,
     ineligible_reason_nominator character varying,
     ineligible_reason_group character varying,
-    sub_group character varying,
-    group_leader_name character varying,
-    group_leader_position character varying,
-    group_leader_address json,
-    group_leader_email character varying,
-    group_leader_phone character varying
+    sub_group character varying
 );
 
 
@@ -3818,6 +3813,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210816072005'),
 ('20210817084427'),
 ('20210820115154'),
-('20210820121040');
+('20210820121040'),
+('20210820174255');
 
 
