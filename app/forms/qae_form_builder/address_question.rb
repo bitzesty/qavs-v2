@@ -50,15 +50,7 @@ class QAEFormBuilder
     end
 
     def input_value(options = {})
-      super.presence || assign_default_values
-    end
-
-    def assign_default_values
-      answers[delegate_obj.default_building_value_key]
-      answers[delegate_obj.default_street_value_key]
-      answers[delegate_obj.default_city_value_key]
-      answers[delegate_obj.default_county_value_key]
-      answers[delegate_obj.default_postcode_value_key]
+      super.presence || answers[delegate_obj.default_value_key]
     end
   end
 
@@ -78,37 +70,12 @@ class QAEFormBuilder
     def county_context(county_context)
       @q.county_context = county_context
     end
-
-    def default_building(building)
-      @q.default_building_value_key = building
-    end
-
-    def default_street(street)
-      @q.default_street_value_key = street
-    end
-
-    def default_city(city)
-      @q.default_city_value_key = city
-    end
-
-    def default_county(county)
-      @q.default_county_value_key = county
-    end
-
-    def default_postcode(postcode)
-      @q.default_postcode_value_key = postcode
-    end
   end
 
   class AddressQuestion < Question
     attr_accessor :countries,
                   :sub_fields,
                   :region_context,
-                  :county_context,
-                  :default_building_value_key,
-                  :default_street_value_key,
-                  :default_city_value_key,
-                  :default_county_value_key,
-                  :default_postcode_value_key
+                  :county_context
   end
 end
