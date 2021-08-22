@@ -108,11 +108,12 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
           if submitted && saved
             LocalAssessmentSubmissionService.new(@form_answer, current_lieutenant).submit!
 
-            flash[:notice] = "Local assessment was successfully submitted."
+            flash[:success] = "Local assessment was successfully submitted."
             redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
               params[:next_step] ||= @form.steps[1].title.parameterize
+              flash[:success] = "Local assessment was successfully saved."
               redirect_to edit_lieutenant_form_answer_path(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
