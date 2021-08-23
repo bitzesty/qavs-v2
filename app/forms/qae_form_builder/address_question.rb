@@ -48,10 +48,6 @@ class QAEFormBuilder
         [f.keys.first, f.values.first]
       end
     end
-
-    def input_value(options = {})
-      super.presence || answers[delegate_obj.default_value_key]
-    end
   end
 
   class AddressQuestionBuilder < QuestionBuilder
