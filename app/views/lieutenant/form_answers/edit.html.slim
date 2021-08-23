@@ -14,3 +14,5 @@ form.qae-form.award-form data-autosave-url=save_lieutenant_form_answer_url(@form
 
     .steps-progress-content
       = render partial: 'qae_form/step', collection: @form.current_steps(@form_answer, current_form_user), locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
+
+      = render "step_error"
