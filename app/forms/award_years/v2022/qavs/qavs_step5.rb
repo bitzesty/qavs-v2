@@ -185,8 +185,12 @@ class AwardYears::V2022::QAEForms
           yes_no
           required
           context %(
-            <p class="govuk-body>If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.</p>
-            <p class="govuk-body>If the answer is ‘yes’, please answer questions E4.8 and E4.9.</p>
+            <p class="govuk-hint">
+              If the answer is 'no', please skip to section 5 - 'Role and status of volunteers'.
+            </p>
+            <p class="govuk-hint">
+              If the answer is ‘yes’, please answer questions E4.8 and E4.9.
+            </p>
           )
           pdf_context %(
             If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.
