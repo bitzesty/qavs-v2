@@ -31,7 +31,7 @@ footer
             | Go back to previous page
 
     - else
-      - if !policy(resource).lieutenant_assessment?
+      - if !policy(@form_answer).lieutenant_assessment?
         .previous.previous-alternate
           - aria_label = "Back to step " + step.index.to_s
 
