@@ -146,4 +146,8 @@ class FormAnswerPolicy < ApplicationPolicy
   def lieutenancy_assigned?
     record.ceremonial_county == subject.ceremonial_county
   end
+
+  def can_see_national_assessment_status?
+    admin? || assessor?
+  end
 end

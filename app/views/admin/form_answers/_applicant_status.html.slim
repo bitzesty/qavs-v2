@@ -26,7 +26,7 @@
       - else
         = govuk_tag('not started', 'grey')
 
-    - if admin?
+    - if policy(resource).can_see_national_assessment_status?
       p.govuk-body#national-assessment-status
         strong
           | National assessment status

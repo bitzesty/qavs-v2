@@ -38,10 +38,10 @@
 - content_for :content do
   .govuk-width-container class="govuk-!-margin-top-4 govuk-!-margin-bottom-1"
     = render "shared/offline_message"
-    - if !content_for?(:flash_disabled) && [:alert, :notice].any? { |kind| flash[kind].presence }
-      - [:alert, :notice].each do |kind|
+    - if !content_for?(:flash_disabled) && [:alert, :notice, :success].any? { |kind| flash[kind].presence }
+      - [:alert, :notice, :success].each do |kind|
         - if flash[kind]
-          .govuk-notification-banner role="region" aria-labelledby="flash-message-#{kind}-title" data-module="govuk-notification-banner"
+          .govuk-notification-banner class="govuk-notification-banner--#{ kind }" role="region" aria-labelledby="flash-message-#{kind}-title" data-module="govuk-notification-banner"
             .govuk-notification-banner__header
               h2.govuk-notification-banner__title id="flash-message-#{kind}-title"
                 = kind.to_s.titleize
