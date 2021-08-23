@@ -407,6 +407,7 @@ class AwardYears::V2022::QAEForms
             <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
               <li>The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully.</li>
               <li>Instead, the citation should try to capture what is exceptional about this particular group.</li>
+              <p>For example:</p>
                 <ul class='govuk-list govuk-list--bullet govuk-hint'>
                   <li>the impact it has made on local people, particularly if the local context is challenging;</li>
                   <li>how its work or approach is distinctive or different from other groups doing similar things;</li>
@@ -422,6 +423,7 @@ class AwardYears::V2022::QAEForms
             Please read the guidance about the citation below:
             \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully.
             \u2022 Instead, the citation should try to capture what is exceptional about this particular group.
+            For example:
               \u25E6 the impact it has made on local people, particularly if the local context is challenging;
               \u25E6 how its work or approach is distinctive or different from other groups doing similar things;
               \u25E6 anything outstanding about the way the group is run;
