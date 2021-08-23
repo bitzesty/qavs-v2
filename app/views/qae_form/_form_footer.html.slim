@@ -1,6 +1,6 @@
 footer
   nav.pagination.no-border class="#{'pagination-alternative' unless step.next}" aria-label="Pagination for step #{step.index + 1}"
-    ul.group
+    ul.govuk-button-group
       - if current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)
         li.save-quit-link
           - button_class = (current_subject.is_a?(Lieutenant) && current_subject.role.regular?) ?  "govuk-button" : "govuk-button govuk-button--secondary"
