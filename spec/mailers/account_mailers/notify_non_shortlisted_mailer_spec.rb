@@ -8,7 +8,7 @@ describe AccountMailers::NotifyNonShortlistedMailer do
 
   let(:award_title) { form_answer.decorate.award_application_title }
   let(:subject) do
-    "Queen's Awards for Voluntary Service: Thank you for applying"
+    "Queen's Awards for Enterprise: Thank you for applying"
   end
 
   describe "#notify" do
