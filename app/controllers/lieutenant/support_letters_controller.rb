@@ -1,3 +1,3 @@
-class Lieutenant::SupportLettersController < Admin::BaseController
+class Lieutenant::SupportLettersController < Lieutenant::BaseController
   include ::SupportLettersContext
 end
