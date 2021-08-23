@@ -31,12 +31,13 @@ footer
             | Go back to previous page
 
     - else
-      .previous.previous-alternate
-        - aria_label = "Back to step " + step.index.to_s
+      - if !policy(resource).lieutenant_assessment?
+        .previous.previous-alternate
+          - aria_label = "Back to step " + step.index.to_s
 
-        - if step.index == 0
-          - aria_label = "Back to Useful Application Information page"
+          - if step.index == 0
+            - aria_label = "Back to Useful Application Information page"
 
-        = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id], rel: "prev", title: aria_label, "aria-label" => aria_label, class: "govuk-back-link govuk-!-font-size-19" do
-          span.pagination-label
-            | Back
+          = link_to [:award_info, @form_answer.award_type.to_sym, form_id: @form_answer.id], rel: "prev", title: aria_label, "aria-label" => aria_label, class: "govuk-back-link govuk-!-font-size-19" do
+            span.pagination-label
+              | Back
