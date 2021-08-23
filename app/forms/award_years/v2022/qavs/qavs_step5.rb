@@ -184,16 +184,25 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.7"
           yes_no
           required
+          context %(
+            <p class="govuk-hint">
+              If the answer is 'no', please skip to section 5 - 'Role and status of volunteers'.
+            </p>
+            <p class="govuk-hint">
+              If the answer is ‘yes’, please answer questions E4.8 and E4.9.
+            </p>
+          )
+          pdf_context %(
+            If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.
+            If the answer is ‘yes’, please answer questions E4.8 and E4.9.
+          )
         end
 
         options :nomination_local_assessment_form_group_based_locally, "If its beneficiaries live elsewhere, is the group itself based entirely locally?" do
           sub_ref "E 4.8"
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
-          pdf_context %(
-            If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.
-            If the answer is ‘yes’, please answer questions E4.8 and E4.9.
-          )
+
         end
 
         textarea :nomination_local_assessment_form_how_benefits_local_and_abroad, "In what ways does the group's existence benefit the local community as well as people elsewhere?" do
