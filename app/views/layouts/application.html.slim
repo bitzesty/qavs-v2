@@ -32,10 +32,11 @@
           li.govuk-header__navigation-item
             = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'govuk-header__link'
         - elsif current_group_leader.present?
-          li.govuk-header__navigation-item
-            = link_to "Dashboard", group_leader_root_path, class: 'govuk-header__link'
-          li.govuk-header__navigation-item
-            = link_to "Sign out", destroy_group_leader_session_path, method: :delete, class: 'govuk-header__link'
+          = render "layouts/navbar/group_leader"
+        - elsif current_lieutenant.present?
+          = render "layouts/navbar/lieutenant"
+        - elsif current_admin.present?
+          = render "layouts/navbar/admin"
 
 - content_for :inside_header do
   - if landing_page?
