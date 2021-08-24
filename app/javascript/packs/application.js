@@ -165,7 +165,12 @@ for (let i = 0; i < 2; i++) {
   });
 };
 
-$("#accept-award").on('click', function() {
-  $('.citation').removeClass('govuk-!-display-none')
-  $('.award-acceptance-container').addClass('govuk-!-display-none')
+$(document).on('click', 'input[name=accept-award]', function() {
+  // if ($("#accepted-award").checked == true ) {
+  //   $('.citation').removeClass('govuk-!-display-none')
+  if ($(this).val() == 'yes') {
+    $('.citation').removeClass('govuk-!-display-none')
+  } else {
+    $('.citation').addClass('govuk-!-display-none')
+  }
 })
