@@ -55,13 +55,7 @@
     #QAE class="#{'admin-mode' if admin_in_read_only_mode?} #{'layout-dev' if Rails.env.development?}"
       .govuk-width-container
         main#content.group class="govuk-main-wrapper app-main-class #{yield :page_content_class}"
-          - if !content_for?(:flash_disabled) && [:alert, :notice].any? { |kind| flash[kind].presence }
-            .flash
-              .flash-inner
-                - [:alert, :notice].each do |kind|
-                  - if flash[kind]
-                    div class="#{kind}"
-                      = flash[kind]
+          = render "layouts/flash"
 
           - if params[:session_expired].present?
             = render "shared/session_expired_message"
