@@ -37,19 +37,6 @@ class Eligibility::Basic < Eligibility
            label: "Are you a current Queen's Award holder in any category?",
            accept: :not_nil
 
-  def eligible?
-    current_step_index = questions.index(current_step) || questions.size - 1
-    previous_questions = questions[0..current_step_index]
-
-    answers.present? && answers.all? do |question, answer|
-      if previous_questions.include?(question.to_sym)
-        answer_valid?(question, answer)
-      else
-        true
-      end
-    end
-  end
-
   def save_as_eligible!
     self.national_organisation = false
     self.based_in_uk = true
