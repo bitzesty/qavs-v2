@@ -16,8 +16,6 @@ class Admin < ApplicationRecord
 
   has_many :form_answer_attachments, as: :attachable
 
-  default_scope { where(deleted: false) }
-
   pg_search_scope :basic_search,
                   against: [
                     :first_name,
