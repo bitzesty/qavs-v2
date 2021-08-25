@@ -33,8 +33,6 @@ class Assessor < ApplicationRecord
                     }
                   }
 
-  default_scope { where(deleted: false) }
-
   scope :by_email, -> { order(:email) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
