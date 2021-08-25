@@ -82,7 +82,7 @@ class Eligibility < ApplicationRecord
   end
 
   def eligible?
-    questions.all? do |question|
+    questions.map.all? do |question|
       answer = answers && answers[question.to_s]
       answer_valid?(question, answer)
     end
