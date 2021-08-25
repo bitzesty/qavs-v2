@@ -1,1 +1,9 @@
-<%= render(template: "admins/mailer/confirmation_instructions", formats: [:text]) %>
+A QAVS administrator has created a user account for you in The Queen’s Award for Voluntary Service system. You’ll need to create a password before you can use the system.
+
+Follow the link below to create the password:
+
+<%= confirmation_url(@resource, confirmation_token: @token) %>
+
+Kind regards,
+
+The QAVS team.
