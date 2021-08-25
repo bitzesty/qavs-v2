@@ -8,9 +8,9 @@ class QAEFormBuilder
         sub_fields
       else
         [
-          {full_name: "Full name"},
-          {email: "Email"},
-          {phone_number: "Phone number"}
+          { full_name: "Full name" },
+          { email: "Email" },
+          { phone_number: "Phone number" }
         ]
       end
     end
