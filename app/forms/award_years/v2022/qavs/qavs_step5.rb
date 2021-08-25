@@ -11,6 +11,13 @@ class AwardYears::V2022::QAEForms
 
         assessor_details :assessor_details, 'Assessor details' do
           sub_ref "E1.1"
+
+          sub_fields([
+            {full_name: "Full name"},
+            {email: "Email"},
+            {phone_number: "Phone number"}
+          ])
+
           required
         end
 
@@ -41,6 +48,15 @@ class AwardYears::V2022::QAEForms
         address :local_assessment_group_address, "Address of the group leader or main contact" do
           sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
+
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
+
           required
         end
 
