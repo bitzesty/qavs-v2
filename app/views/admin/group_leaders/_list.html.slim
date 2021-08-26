@@ -31,8 +31,6 @@ div role="region" aria-label="list of group leaders" tabindex="0"
                 - if group_leader.last_sign_in_at.present?
                   span.visible-lg
                     = group_leader.formatted_last_sign_in_at_long
-                  span.hidden-lg
-                    = group_leader.formatted_last_sign_in_at_short
                 - else
                   | Never signed in
             td.govuk-table__cell

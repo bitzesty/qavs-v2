@@ -45,7 +45,6 @@
 
 - content_for :content do
   .govuk-width-container class="govuk-!-margin-top-4 govuk-!-margin-bottom-1"
-    = render "shared/offline_message"
     - if !content_for?(:flash_disabled) && [:alert, :notice].any? { |kind| flash[kind].presence }
       - [:alert, :notice].each do |kind|
         - if flash[kind]
