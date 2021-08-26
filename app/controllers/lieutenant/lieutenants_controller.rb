@@ -8,8 +8,8 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
     params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
     params[:search].permit!
 
-    @search = LieutenantSearch.new(Lieutenant.from_county(current_lieutenant.ceremonial_county)).
-                             search(params[:search])
+    @search = LieutenantSearch.new(Lieutenant.from_county(current_lieutenant.ceremonial_county))
+                              .search(params[:search])
     @resources = @search.results.page(params[:page])
   end
 
@@ -20,15 +20,14 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
 
   def create
     @resource = Lieutenant.new(resource_params)
-    @resource.role = "regular"
     @resource.ceremonial_county = current_lieutenant.ceremonial_county
     @resource.skip_password_validation = true
 
     authorize @resource, :create?
 
     if @resource.save
-      redirect_to lieutenant_lieutenants_url,
-                  notice: "Lieutenant successfully created"
+      flash[:success] = "User was successfully created."
+      redirect_to lieutenant_lieutenants_url
     else
       render :new
     end
@@ -42,10 +41,10 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
     else
       @resource.update_without_password(resource_params)
     end
-
     respond_with :lieutenant, @resource, location: lieutenant_lieutenants_path
+    flash[:success] = "User was successfully updated."
+    flash[:notice] = nil
   end
-
 
   def new
     @resource = Lieutenant.new
