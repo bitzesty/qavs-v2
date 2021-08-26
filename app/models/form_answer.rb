@@ -379,15 +379,26 @@ class FormAnswer < ApplicationRecord
       self.company_or_nominee_name = company_or_nominee_from_document
     end
 
-    assign_attributes_from_document
+    self.nominee_full_name = nominee_full_name_from_document
+    self.nominee_activity = nominee_activity_from_document
+    self.nominator_full_name = nominator_full_name_from_document
+    self.nominator_email = nominator_email_from_document
   end
 
-  def assign_attributes_from_document
-    self.nominee_full_name = "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
-    self.nominee_activity = document["nominee_activity"]
-    self.secondary_activity = document["secondary_activity"]
-    self.nominator_full_name = document["nominator_name"]
-    self.nominator_email = document["nominator_email"]
+  def nominee_full_name_from_document
+    "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
+  end
+
+  def nominee_activity_from_document
+    document["nominee_activity"]
+  end
+
+  def nominator_full_name_from_document
+    document["nominator_name"]
+  end
+
+  def nominator_email_from_document
+    document["nominator_email"]
   end
 
   def ceremonial_county_from_document

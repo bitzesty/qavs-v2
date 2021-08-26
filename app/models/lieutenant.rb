@@ -18,6 +18,8 @@ class Lieutenant < ApplicationRecord
 
   enumerize :role, in: %w(regular advanced)
 
+  default_scope { where(deleted: false) }
+
   scope :from_county, -> (county) { where(ceremonial_county_id: county.id) }
 
   pg_search_scope :basic_search,
