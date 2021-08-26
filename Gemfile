@@ -172,7 +172,6 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem "selenium-webdriver"
   gem 'axe-core-rspec'
-  gem 'webdrivers'
 end
 
 group :test do
