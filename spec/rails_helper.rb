@@ -33,6 +33,8 @@ require "shoulda/matchers"
 require "webmock/rspec"
 require 'selenium-webdriver'
 require 'cloudtasker/testing'
+require 'axe-rspec'
+require 'webdrivers/chromedriver'
 
 Dotenv.overload('.env.test')
 

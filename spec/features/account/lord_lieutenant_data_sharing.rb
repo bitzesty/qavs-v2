@@ -17,6 +17,7 @@ describe "Lord-Lieutenant data sharing" do
       expect_to_see "Organisation Details"
       expect_to_see "Contact Preferences"
       expect_to_see "Collaborators"
+      expect_to_be_accessible
     end
   end
 
