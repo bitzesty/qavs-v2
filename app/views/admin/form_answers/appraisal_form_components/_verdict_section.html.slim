@@ -13,7 +13,7 @@
               p.evaluation-rate
                 = "Decision: "
                 span.evaluation-rate
-                  = f.object.public_send(section.rate)
+                  = f.object.public_send(section.rate).humanize
             - else
               p.evaluation-rate.hidden
 

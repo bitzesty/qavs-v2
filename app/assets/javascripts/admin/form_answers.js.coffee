@@ -49,18 +49,6 @@ ready = ->
   # $(".bulk-assign-assessors-form select").select2()
   # $(".bulk-assign-lieutenants-form select").select2()
 
-  $("form.new_assessor_assignment").on "ajax:success", (e, data, status, xhr) ->
-    form = $(this)
-    section = form.closest(".govuk-accordion__section-content")
-
-    namespace = form.data('namespace')
-    $("form", section).attr("action", "/#{namespace}/assessor_assignments/#{data['id']}")
-    $("input[name='_method']", section).val("patch")
-
-    # submission form
-    submissionForm = $("form.submit-assessment")
-    $('input.assessment-id-input', submissionForm).val(data['id'])
-
   $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
 
     form.find(".errors-holder").text("")

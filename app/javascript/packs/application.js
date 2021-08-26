@@ -106,6 +106,13 @@ $(".toggable-form").each(function() {
   });
 
   form.on('click', '.toggable-form__save', function(e) {
+    if (form.closest("form").hasClass("assessment-togglable")) {
+      return // skipping all this, use standard remote: true
+    }
+
+    console.log('trig? 2');
+
+
     e.preventDefault();
     e.stopPropagation();
 

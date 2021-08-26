@@ -98,18 +98,14 @@ class AppraisalForm
     award_type = form_answer.award_type
     award_year = form_answer.award_year
 
-    assessment_types = [:rag, :verdict]
+    describable_assessment_type = :verdict
+
     const_get("#{award_type.upcase}_#{award_year.year}").map do |k, obj|
       methods = Array.new
-      methods << Array(rate(k)) if (obj[:type] != :non_rag)
-      methods << desc(k) if assessment_types.include?(obj[:type])
+      methods << Array(rate(k))
+      methods << desc(k) if describable_assessment_type == obj[:type]
       methods
     end.flatten.map(&:to_sym)
-  end
-
-  def self.diff(form_answer)
-    award_year = form_answer.award_year
-    (all.map(&:to_sym) - meths_for_award_type(form_answer)).uniq
   end
 
   def self.all

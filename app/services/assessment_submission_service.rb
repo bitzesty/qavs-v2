@@ -31,7 +31,7 @@ class AssessmentSubmissionService
   end
 
   def set_submitted_at_as_now!
-    resource.update!(
+    resource.update(
       submitted_at: DateTime.now,
       locked_at: DateTime.now
     )

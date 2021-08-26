@@ -110,9 +110,9 @@ en:
   appraisals:
     evaluations:
       titles:
-        positive: 'Recommended'
-        average: 'Recommended - weak'
-        negative: 'Not Recommended'
+        recommended: 'Recommended'
+        undecided: 'Undecided'
+        not_recommended: 'Not Recommended'
         pending: 'Pending'
       styles:
         positive: 'green'

@@ -4,4 +4,5 @@
   = render "admin/form_answers/section_admin_comments", { read_only: true }
 
   - AssessorAssignmentsConstructor.new(resource, current_assessor).assessments.each do |assessment|
-    = render "admin/form_answers/section_appraisal_form", assessment: assessment
+    .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
+      = render "admin/form_answers/section_appraisal_form", assessment: assessment

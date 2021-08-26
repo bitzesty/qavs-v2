@@ -5,15 +5,12 @@ module AssessorAssignmentContext
 
     assessment = AssessorAssignmentService.new(params, current_subject, assignment)
     authorize assessment.resource, :create?
+    assessment.save
 
     respond_to do |format|
-      if assessment.save
-        log_event
-        format.json { render json: { errors: [], id: assessment.resource.id } }
-      else
-        format.json { render status: :unprocessable_entity,
-                             json: { errors: assessment.resource.errors } }
-        Appsignal.send_error(Exception.new("Failed to save `AssessorAssignment for FormAnswer##{form_answer.id}. \n #{assessment.resource.errors} \n #{params}"))
+      format.js do
+        @assessment = assessment.resource
+        render template: "assessor/assessor_assignments/update", layout: false, content_type: 'text/javascript'
       end
 
       format.html { redirect_back(fallback_location: root_path) }
@@ -23,15 +20,13 @@ module AssessorAssignmentContext
   def update
     assessment = AssessorAssignmentService.new(params, current_subject)
     authorize assessment.resource, :update?
+    assessment.save
 
     respond_to do |format|
-      if assessment.save
-        log_event
-        format.json { render json: { errors: [], id: assessment.resource.id } }
-      else
-        format.json { render status: :unprocessable_entity,
-                             json: { errors: assessment.resource.errors } }
-        Appsignal.send_error(Exception.new("Failed to save `AssessorAssignment##{assessor_assignment.id}. \n #{assessment.resource.errors} \n #{params}"))
+      format.js do
+        @assessment = assessment.resource
+        @form_answer = @assessment.form_answer
+        render layout: false, content_type: 'text/javascript'
       end
 
       format.html { redirect_back(fallback_location: root_path) }

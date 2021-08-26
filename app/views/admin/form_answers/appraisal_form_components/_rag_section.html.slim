@@ -13,7 +13,7 @@
             p.evaluation-rate
               = "Evaluation: "
               span.evaluation-rate
-                = f.object.public_send(section.rate)
+                = f.object.public_send(section.rate).humanize
               | &nbsp;
               | evidence
           - else

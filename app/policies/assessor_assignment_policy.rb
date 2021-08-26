@@ -10,7 +10,7 @@ class AssessorAssignmentPolicy < ApplicationPolicy
   def submit?
     return true if admin?
 
-    record.editable_for?(subject)
+    record.editable_for?(subject) && record.valid_for_submission?
   end
 
   def can_be_submitted?

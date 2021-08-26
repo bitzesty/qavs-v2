@@ -6,7 +6,6 @@ class AssessorAssignment < ApplicationRecord
     validates :form_answer_id,
               presence: true
 
-    validate :award_specific_attributes
     validate :mandatory_fields_for_submitted
 
     validate do
@@ -79,6 +78,16 @@ class AssessorAssignment < ApplicationRecord
     end
   end
 
+  def valid_for_submission?
+    struct.meths_for_award_type(form_answer).each do |meth|
+      if public_send(meth).blank?
+        return false
+      end
+    end
+
+    true
+  end
+
   private
 
   def admin?(subject)
@@ -94,20 +103,12 @@ class AssessorAssignment < ApplicationRecord
     !submitted? || (submitted? && !locked?)
   end
 
-  def award_specific_attributes
-    struct.diff(form_answer).each do |att|
-      if public_send(att).present?
-        errors.add(att, "cannot be present for this Award Type")
-      end
-    end
-  end
-
   def mandatory_fields_for_submitted
     return if (!submitted? || !submission_action)
 
     struct.meths_for_award_type(form_answer).each do |meth|
       if public_send(meth).blank?
-        errors.add(meth, "cannot be blank for submitted assessment")
+        errors.add(meth, "cannot be blank")
       end
     end
   end
