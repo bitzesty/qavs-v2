@@ -38,7 +38,8 @@ require 'webdrivers/chromedriver'
 
 Dotenv.overload('.env.test')
 
-WebMock.disable_net_connect!(allow: "codeclimate.com", allow_localhost: true)
+WebMock.disable_net_connect!(allow: ["codeclimate.com", "chromedriver.storage.googleapis.com"], allow_localhost: true)
+Webdrivers.cache_time = 1.month.to_i
 
 # Require all support files.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
