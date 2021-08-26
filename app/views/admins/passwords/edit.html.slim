@@ -1,6 +1,6 @@
 - provide(:page_wrapper_class, "page-devise")
 
-h1.govuk-heading-xl Change your password
+h1.govuk-heading-xl Create a password
 
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
   /= f.error_notification
@@ -10,7 +10,7 @@ h1.govuk-heading-xl Change your password
   #password-change-panel data-email-field="#{resource.email}"
     .form-inputs-group
       #password-control-group
-        = f.input :password, required: true, label: 'New Password', autofocus: true, input_html: { class: "password-strength-meter js-disable-copy medium" }
+        = f.input :password, required: true, label: 'New password', autofocus: true, input_html: { class: "password-strength-meter js-disable-copy medium" }
 
       .guidance-panel.if-no-js-hide
         #password-guidance.govuk-warning-text
@@ -35,6 +35,6 @@ h1.govuk-heading-xl Change your password
             p#password-confirmation-match The confirmation must match the password
 
   .form-actions
-    = f.button :submit, "Change my password", class: "govuk-button button large"
+    = f.button :submit, "Create password", class: "govuk-button button large"
 
 = render "admins/shared/links"
