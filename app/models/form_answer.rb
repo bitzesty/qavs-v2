@@ -388,14 +388,11 @@ class FormAnswer < ApplicationRecord
   end
 
   def assign_attributes_from_document
-    self.nominee_activity = document["nominee_activity"]
-    self.nominator_full_name = document["nominator_name"]
-    self.nominator_email = document["nominator_email"]
-    self.secondary_activity = document["secondary_activity"]
-  end
-
-  def ceremonial_county_from_document
-    document["ceremonial_county_id"]
+    self.nominee_activity ||= document["nominee_activity"]
+    self.nominator_full_name ||= document["nominator_name"]
+    self.nominator_email ||= document["nominator_email"]
+    self.secondary_activity ||= document["secondary_activity"]
+    self.ceremonial_county_id ||= document["ceremonial_county_id"]
   end
 
   def set_account
