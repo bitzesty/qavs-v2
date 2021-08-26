@@ -9,8 +9,8 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
     authorize @citation, :update?
     @citation.completed_at = Time.now
     if @citation.update citation_params
-      redirect_to group_leader_root_path,
-      notice: "Citation successfully updated!"
+      flash[:success] = "Citation successfully updated!"
+      redirect_to group_leader_root_path
     else
       render :edit
     end
