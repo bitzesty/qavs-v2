@@ -53,6 +53,7 @@ describe  "User sees the post submission dashboard" do
 
       visit dashboard_path
       expect(page).to have_content("Your following nomination was unsuccessful.")
+      expect_to_be_accessible
     end
   end
 end

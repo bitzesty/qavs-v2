@@ -12,6 +12,7 @@ describe "User leaves feedback and admin is able to see it" do
 
     click_button "Send Feedback"
     expect(page).to have_content("Feedback was successfully sent")
+    expect_to_be_accessible
 
     login_admin(admin)
     visit admin_users_feedback_path

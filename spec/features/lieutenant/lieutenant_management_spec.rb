@@ -28,7 +28,7 @@ describe "Lieutenant: Lieutenant management" do
 
     expect(Lieutenant.last.role).to eq("regular")
     expect(Lieutenant.last.ceremonial_county).to eq(lieutenant.ceremonial_county)
-
+    expect_to_be_accessible
   end
 
   context "with existing lieutenant" do
@@ -46,6 +46,7 @@ describe "Lieutenant: Lieutenant management" do
       click_button "Update user"
 
       expect(page).to have_content "Rob Bobbers"
+      expect_to_be_accessible
     end
 
     it "can delete a lieutenant" do
@@ -55,6 +56,7 @@ describe "Lieutenant: Lieutenant management" do
       click_link "Delete"
 
       expect(page).to have_no_content "Rob Bobbers"
+      expect_to_be_accessible
     end
 
     it "can't delete own account" do

@@ -30,6 +30,7 @@ describe "Palace invite process" do
     click_link "Provide details for Royal Garden Party"
 
     expect(page).to have_content("Details for Royal Garden Party")
+    expect_to_be_accessible
 
     enter_attendee_details(1)
     enter_attendee_details(2)
@@ -37,5 +38,6 @@ describe "Palace invite process" do
     click_button "Submit"
 
     expect(page).to have_selector("#flash-message-success-title", text: "Success")
+    expect_to_be_accessible
   end
 end

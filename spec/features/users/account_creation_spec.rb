@@ -17,6 +17,7 @@ describe "Account forms" do
 
       click_button "Create account"
       expect(page).to have_content("We have just sent you an email asking to confirm your account")
+      expect_to_be_accessible
     end
   end
 end

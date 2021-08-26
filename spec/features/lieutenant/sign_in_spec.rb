@@ -14,5 +14,6 @@ describe "Lieutenant sign in" do
     click_button "Sign in"
 
     expect(page).to have_content("Welcome to the Queen’s Award for Voluntary Service")
+    expect_to_be_accessible
   end
 end

@@ -16,6 +16,7 @@ describe "Citation process" do
     click_link "Confirm group name and citation"
 
     expect(page).to have_content("Do you accept the Queen's Award for Voluntary Service on behalf of your group?")
+    expect_to_be_accessible
   end
 
   it "allows group_leader to confirm citation" do
@@ -23,9 +24,10 @@ describe "Citation process" do
     check 'accept-award'
 
     expect(page).to have_content("Group name and citation confirmation")
-
+    expect_to_be_accessible
     click_button "Submit"
 
     expect(page).to have_selector("#flash-message-success-title", text: "Success")
+    expect_to_be_accessible
   end
 end

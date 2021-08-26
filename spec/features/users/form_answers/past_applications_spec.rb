@@ -69,6 +69,7 @@ So that I see
         expect(page).to have_selector(
                             "div.dashboard-post-submission", count: 1
                         )
+        expect_to_be_accessible
       end
     end
   end

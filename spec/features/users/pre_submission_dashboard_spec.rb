@@ -13,6 +13,7 @@ describe  "User sees the pre submission dashboard" do
     it "should see message confirming that" do
       visit dashboard_path
       expect(page).to have_link("Start a new nomination", href: "/apply_qavs_award")
+      expect_to_be_accessible
     end
   end
 end

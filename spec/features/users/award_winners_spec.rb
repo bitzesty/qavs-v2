@@ -43,11 +43,13 @@ describe "award winners section" do
     expect(page).to have_content(
       "Queen's Awards for Enterprise 2021 Emblem"
     )
+    expect_to_be_accessible
   end
 
   it "don't see other year's submissions" do
     expect(page).to_not have_content(
       "Queen's Awards for Enterprise 2020 Emblem"
     )
+    expect_to_be_accessible
   end
 end

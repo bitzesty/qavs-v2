@@ -31,6 +31,7 @@ describe "Lord-Lieutenant data sharing" do
 
       it "should allow the user to view their dashboard" do
         expect(current_path).to eql(dashboard_path)
+        expect_to_be_accessible
       end
     end
 
@@ -43,6 +44,7 @@ describe "Lord-Lieutenant data sharing" do
 
       it "should direct the user to the 'Additional Contact Preferences' page" do
         expect(current_path).to eql(additional_contact_preferences_account_path)
+        expect_to_be_accessible
       end
 
       context "and submits their preference" do
@@ -53,6 +55,7 @@ describe "Lord-Lieutenant data sharing" do
 
         it "should redirect the user to their dashboard" do
           expect(current_path).to eql(dashboard_path)
+          expect_to_be_accessible
         end
       end
 
@@ -60,6 +63,7 @@ describe "Lord-Lieutenant data sharing" do
         it "should render an error" do
           click_on "Confirm"
           expect_to_see "This field cannot be blank"
+          expect_to_be_accessible
         end
       end
     end
