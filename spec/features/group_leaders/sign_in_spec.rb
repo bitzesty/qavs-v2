@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 Warden.test_mode!
 
-describe "GroupLeader sign in" do
+describe "GroupLeader sign in", js: true do
   let(:form_answer) { create(:form_answer) }
   let(:group_leader) { create(:group_leader, form_answer_id: form_answer.id) }
 

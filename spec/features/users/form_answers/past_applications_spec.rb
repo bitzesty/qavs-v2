@@ -5,7 +5,7 @@ describe "Past Applications", %q{
 As a Applicant
 I want to be able to see Past Applications for previous years
 So that I see
-} do
+}, js: true do
 
   let(:previous_year) do
     1.year.ago

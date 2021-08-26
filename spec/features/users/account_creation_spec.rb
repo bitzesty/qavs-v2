@@ -2,7 +2,7 @@ require "rails_helper"
 include Warden::Test::Helpers
 Warden.test_mode!
 
-describe "Account forms" do
+describe "Account forms", js: true do
   describe "Fill in first step form" do
     before do
       visit new_user_registration_path

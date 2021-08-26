@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-describe "Lord-Lieutenant data sharing" do
+describe "Lord-Lieutenant data sharing", js: true do
   let(:new_user) { create :user }
 
   let(:returning_user) { create(:user, :completed_profile) }

@@ -15,7 +15,7 @@ def enter_attendee_details(attendee)
   choose "#{prefix}alternative_date_any"
 end
 
-describe "Palace invite process" do
+describe "Palace invite process", js: true do
   let(:form_answer) { create(:form_answer) }
   let(:group_leader) { create(:group_leader, form_answer_id: form_answer.id) }
 

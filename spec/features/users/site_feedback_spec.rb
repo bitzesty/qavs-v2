@@ -1,7 +1,7 @@
 require "rails_helper"
 include Warden::Test::Helpers
 
-describe "User leaves feedback and admin is able to see it" do
+describe "User leaves feedback and admin is able to see it", js: true do
   let(:admin) { create :admin }
 
   it "creates feedback and admin is able to see it" do

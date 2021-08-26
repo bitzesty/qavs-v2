@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-describe "Lieutenant: Lieutenant management" do
+describe "Lieutenant: Lieutenant management", js: true do
   let(:lieutenant) { create(:lieutenant,
                             :advanced,
                             first_name: "Poor",

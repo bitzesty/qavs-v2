@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 Warden.test_mode!
 
-describe "Citation process" do
+describe "Citation process", js: true do
   let(:form_answer) { create(:form_answer) }
   let(:group_leader) { create(:group_leader, form_answer_id: form_answer.id) }
 

@@ -2,7 +2,7 @@ require "rails_helper"
 include Warden::Test::Helpers
 Warden.test_mode!
 
-describe "award winners section" do
+describe "award winners section", js: true do
   let(:user) do
     create :user, :completed_profile
   end

@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 
 Warden.test_mode!
 
-describe "Lieutenant sign in" do
+describe "Lieutenant sign in", js: true do
   let(:lieutenant) { create(:lieutenant) }
 
   it "allows lieutenant to sign in" do
