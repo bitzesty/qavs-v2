@@ -39,8 +39,6 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
                 - if lieutenant.last_sign_in_at.present?
                   span.visible-lg
                     = lieutenant.formatted_last_sign_in_at_long
-                  span.hidden-lg
-                    = lieutenant.formatted_last_sign_in_at_short
                 - else
                   | Never signed in
             td.govuk-table__cell
