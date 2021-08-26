@@ -20,15 +20,14 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
 
   def create
     @resource = Lieutenant.new(resource_params)
-    @resource.role = "regular"
     @resource.ceremonial_county = current_lieutenant.ceremonial_county
     @resource.skip_password_validation = true
 
     authorize @resource, :create?
 
     if @resource.save
-      redirect_to lieutenant_lieutenants_url,
-                  notice: "Lieutenant successfully created"
+      flash[:success] = "User successfully created"
+      redirect_to lieutenant_lieutenants_url
     else
       render :new
     end
