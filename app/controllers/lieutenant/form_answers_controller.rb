@@ -35,9 +35,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     authorize resource, :show?
 
     respond_to do |format|
-      format.html do
-        @form_paginator = FormPaginator.new(resource, current_lieutenant, params)
-      end
+      format.html
 
       format.pdf do
         if can_render_pdf_on_fly?

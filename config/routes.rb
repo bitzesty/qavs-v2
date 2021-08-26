@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   devise_for :lieutenants, controllers: {
     confirmations: "lieutenants/confirmations",
+    passwords: "lieutenants/passwords",
     sessions: "sessions"
   }
 

@@ -21,11 +21,11 @@ describe "Citation process" do
   it "allows group_leader to confirm citation" do
     click_link "Confirm group name and citation"
     check 'accept-award'
-    
+
     expect(page).to have_content("Group name and citation confirmation")
 
     click_button "Submit"
 
-    expect(page).to have_selector(".notice", text: "Citation successfully updated!")
+    expect(page).to have_selector("#flash-message-success-title", text: "Success")
   end
 end

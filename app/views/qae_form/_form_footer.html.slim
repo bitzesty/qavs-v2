@@ -12,11 +12,18 @@ footer
 
       - if (next_step = step.next_for(@form_answer, current_form_user)) && (!admin? || !next_step.local_assessment?)
         li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
-          - opts = possible_read_only_ops(step.opts[:id])
-          - opts[:class] ||= ""
-          - opts[:class] << " govuk-button"
-          = button_tag opts.merge(rel: "next", title: "Navigate to next part") do
-            ' Save and continue
+          - if !current_lieutenant
+            - opts = possible_read_only_ops(step.opts[:id])
+            - opts[:class] ||= ""
+            - opts[:class] << " govuk-button"
+            = button_tag opts.merge(rel: "next", title: "Navigate to next part") do
+              ' Save and continue
+          - else
+            = button_tag class: "govuk-button", rel: "next", title: "Navigate to next part" do
+              - if next_step.local_assessment?
+                ' View local assessment form
+              - else
+                ' View next section
 
       - else
         - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)) && policy(@form_answer).submit?
@@ -31,7 +38,7 @@ footer
             | Go back to previous page
 
     - else
-      - if !policy(@form_answer).lieutenant_assessment?
+      - if !current_lieutenant
         .previous.previous-alternate
           - aria_label = "Back to step " + step.index.to_s
 
