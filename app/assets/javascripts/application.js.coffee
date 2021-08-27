@@ -487,12 +487,12 @@ jQuery ->
     wrapper = button.closest('div.js-upload-wrapper')
 
     if count > 0
-      list.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
 
     if !max || count < max
-      button.removeClass("visuallyhidden")
+      button.removeClass("govuk-!-display-none")
     else
-      button.addClass("visuallyhidden")
+      button.addClass("govuk-!-display-none")
 
   reindexUploadListInputs = (list) ->
     idx = 0
@@ -551,14 +551,14 @@ jQuery ->
 
     upload_started = (e, data) ->
       # Show `Uploading...`
-      button.addClass("visuallyhidden")
+      button.addClass("govuk-!-display-none")
       new_el = $("<li class='js-uploading'>")
       div = $("<div>")
       label = $("<label>").text("Uploading...")
       div.append(label)
       new_el.append(div)
       list.append(new_el)
-      list.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
       wrapper.removeClass("govuk-form-group--error")
       wrapper.find(".govuk-error-message").empty()
 
@@ -577,13 +577,13 @@ jQuery ->
 
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
-      list.removeClass("visuallyhidden")
-      button.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
+      button.removeClass("govuk-!-display-none")
 
     upload_done = (e, data, link) ->
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
-      list.addClass("visuallyhidden")
+      list.addClass("govuk-!-display-none")
       wrapper.removeClass("govuk-form-group--error")
       wrapper.find(".govuk-error-message").empty()
 
@@ -630,7 +630,7 @@ jQuery ->
       list.append(new_el)
       new_el.find("textarea").val("")
       new_el.find('.js-char-count').charcount()
-      list.removeClass('visuallyhidden')
+      list.removeClass('govuk-!-display-none')
       updateUploadListVisiblity(list, button, max)
       reindexUploadListInputs(list)
 
@@ -682,40 +682,40 @@ jQuery ->
   if $(".eligibility_current_holder").size() > 0
     $(".eligibility_current_holder input").change () ->
       if $(this).val() == "true"
-        $("#current-holder-info").removeClass("visuallyhidden")
+        $("#current-holder-info").removeClass("govuk-!-display-none")
       else
-        $("#current-holder-info").addClass("visuallyhidden")
+        $("#current-holder-info").addClass("govuk-!-display-none")
 
   # Show innovation amount info when the amount is greater than 1 on innovation eligibility
   if $(".innovative_amount_input").size() > 0
     $(".innovative_amount_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
-        $("#innovative-amount-info").removeClass("visuallyhidden")
+        $("#innovative-amount-info").removeClass("govuk-!-display-none")
       else
-        $("#innovative-amount-info").addClass("visuallyhidden")
+        $("#innovative-amount-info").addClass("govuk-!-display-none")
 
   # Show text about submitting multiple applications when the number of eligible initiatives is greater than 1
   if $(".number_of_eligible_initiatives_input").size() > 0
     $(".number_of_eligible_initiatives_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
-        $("#number-of-eligible-initiatives-info").removeClass("visuallyhidden")
+        $("#number-of-eligible-initiatives-info").removeClass("govuk-!-display-none")
       else
-        $("#number-of-eligible-initiatives-info").addClass("visuallyhidden")
+        $("#number-of-eligible-initiatives-info").addClass("govuk-!-display-none")
 
   # Show the eligibility failure contact message
   if $("#basic-eligibility-failure-submit").size() > 0
     $(document).on "click", "#basic-eligibility-failure-submit", (e) ->
       e.preventDefault()
       if $(this).closest("form").find("input:checked").val()
-        $("#basic-eligibility-failure-answered").addClass("visuallyhidden")
-        $("#basic-eligibility-failure-show").removeClass("visuallyhidden")
+        $("#basic-eligibility-failure-answered").addClass("govuk-!-display-none")
+        $("#basic-eligibility-failure-show").removeClass("govuk-!-display-none")
 
   # Change your eligibility answers for award eligibility
   if $(".award-finish-previous-answers").size() > 0
     $(document).on "click", ".award-finish-previous-answers a", (e) ->
       e.preventDefault()
-      $("#form_eligibility_show").addClass("visuallyhidden")
-      $("#form_eligibility_questions").removeClass("visuallyhidden")
+      $("#form_eligibility_show").addClass("govuk-!-display-none")
+      $("#form_eligibility_questions").removeClass("govuk-!-display-none")
 
   $(".question-block .js-button-add").each ->
     question = $(this).closest(".question-block")
@@ -723,7 +723,7 @@ jQuery ->
     li_size = question.find(".list-add > li:visible").size()
 
     if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
-      if li_size + 1 >= add_limit_attr
+      if li_size + 1 > add_limit_attr
         question.find(".js-button-add").addClass("govuk-!-display-none")
 
   # Clicking `+ Add` on certain questions add fields
@@ -753,8 +753,18 @@ jQuery ->
             question.find(".js-button-add").addClass("govuk-!-display-none")
 
         if can_add
-          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\d+)\]/g, "$1#{li_size}]")
-          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\{index\})\]/g, "$1#{li_size}]")
+          highest_index = 0
+          question.find(".list-add > li:visible").each ->
+            name = $(this).find(".js-system-tag").data('new-hidden-input-name')
+            p = name.split('form[supporter_letters_list][')
+            p2 = p[1].split(']')
+            console.log(p2)
+            index = parseInt(p2[0], 10)
+            highest_index = Math.max(highest_index, index)
+
+          new_index = highest_index + 1
+          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\d+)\]/g, "$1#{new_index}]")
+          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\{index\})\]/g, "$1#{new_index}]")
 
           question.find(".list-add").append("<li class='js-add-example js-list-item'>#{add_eg}</li>")
           question.find(".list-add").find("li:last-child input").prop("disabled", false)
@@ -791,17 +801,18 @@ jQuery ->
       parent_ul = $(this).closest("ul")
       $(this).closest(".govuk-form-group")
              .find(".js-button-add")
-             .removeClass("visuallyhidden")
+             .removeClass("govuk-!-display-none")
 
       if $(this).hasClass("remove-supporter")
 
-        url = $(this).attr("href")
-        $.ajax
-          url: url
-          type: 'DELETE'
+        url = $(this).data('url')
+        if url && url != '#'
+          $.ajax
+            url: url
+            type: 'DELETE'
 
       if $(this).data("remove-association")
-        $(this).closest("li").addClass("visuallyhidden")
+        $(this).closest("li").addClass("govuk-!-display-none")
         $("input.remove", $(this).closest("li")).val("1")
       else
         $(this).closest("li").remove()
