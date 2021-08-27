@@ -21,6 +21,13 @@ class AwardYears::V2022::QAEForms
           nominee_activities
         end
 
+        dropdown :secondary_activity, "Please select the group's secondary area of activity (optional)" do
+          sub_ref "A 1.3"
+          required
+          option "", "Please select"
+          nominee_activities
+        end
+
         address :nominee_address, "Address of group" do
           sub_ref "A 1.3"
           required
