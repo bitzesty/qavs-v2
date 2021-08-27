@@ -25,8 +25,6 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -753,13 +751,7 @@ CREATE TABLE public.form_answers (
     ceremonial_county_id integer,
     ineligible_reason_nominator character varying,
     ineligible_reason_group character varying,
-    sub_group character varying,
-    group_leader_phone character varying,
-    group_leader_email character varying,
-    group_leader_address json,
-    group_leader_position character varying,
-    group_leader_name character varying,
-    secondary_activity character varying
+    sub_group character varying
 );
 
 
@@ -895,22 +887,22 @@ CREATE TABLE public.palace_attendees (
     title character varying,
     first_name character varying,
     last_name character varying,
+    job_name character varying,
     post_nominals character varying,
     address_1 character varying,
     address_2 character varying,
     address_3 character varying,
     address_4 character varying,
     postcode character varying,
+    phone_number character varying,
+    additional_info text,
     palace_invite_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     relationship character varying,
     disabled_access boolean,
     preferred_date character varying,
-    alternative_date character varying,
-    job_name character varying,
-    phone_number character varying,
-    additional_info character varying
+    alternative_date character varying
 );
 
 
@@ -3800,16 +3792,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210707081708'),
 ('20210707115136'),
 ('20210707122554'),
-('20210802223731'),
-('20210802225239'),
 ('20210803084421'),
 ('20210803120605'),
-('20210805191655'),
 ('20210806102135'),
-('20210806201610'),
-('20210808170204'),
-('20210808174640'),
-('20210808191028'),
 ('20210808194051'),
 ('20210809072025'),
 ('20210809072320'),
@@ -3817,10 +3802,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210810173827'),
 ('20210810175339'),
 ('20210816072005'),
-('20210817084427'),
-('20210820115154'),
-('20210820121040'),
-('20210826105740'),
-('20210826124140');
-
-
+('20210817084427');
