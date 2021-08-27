@@ -29,7 +29,7 @@ class AwardYears::V2022::QAEForms
         end
 
         address :nominee_address, "Address of group" do
-          sub_ref "A 1.3"
+          sub_ref "A 1.4"
           required
           sub_fields([
             { building: "Building" },
@@ -41,22 +41,22 @@ class AwardYears::V2022::QAEForms
         end
 
         ceremonial_county :nominee_ceremonial_county, "Lieutenancy county (if known)" do
-          sub_ref "A 1.4"
+          sub_ref "A 1.5"
           counties
         end
 
         text :nominee_phone, "Telephone number" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           style "small"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.7"
+          sub_ref "A 1.8"
           form_hint "Social media accounts if known"
           words_max 100
           rows 2
