@@ -56,7 +56,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     params[:search] ||= {
       sort: "company_or_nominee_name",
       search_filter: {
-        nominee_activity: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
       }
     }
     params[:search].permit!
