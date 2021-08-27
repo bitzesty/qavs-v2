@@ -20,7 +20,11 @@
     td.govuk-table__cell
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
-    td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+    td.govuk-table__cell
+      = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+      br
+      - if obj.secondary_activity?
+        = NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
     td.govuk-table__cell
       = obj.sub_group.try(:text) || "Not assigned"
     td.govuk-table__cell
