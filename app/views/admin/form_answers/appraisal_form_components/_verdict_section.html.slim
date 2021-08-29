@@ -1,5 +1,5 @@
 - form = AppraisalForm.verdict_options_for(f.object, section)
-- editable = f.object.editable_for?(current_subject)
+- editable = policy(f.object).update?
 
 .govuk-notification-banner
   .govuk-notification-banner__content

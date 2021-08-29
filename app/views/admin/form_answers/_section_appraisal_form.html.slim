@@ -5,7 +5,7 @@
       = assessment_govuk_tag(assessment.submitted? ? assessment.document['verdict_rate'] : 'pending')
 
 .govuk-accordion__section-content
-  - if policy(assessment).update?
+  - if policy(assessment).show?
     = simple_form_for([namespace_name, assessment],
                       remote: true,
                       authenticity_token: true,

@@ -13,6 +13,5 @@ FactoryBot.define do
 
   factory :assessor_assignment_moderated, class: AssessorAssignment do
     association :form_answer
-    position { "moderated" }
   end
 end

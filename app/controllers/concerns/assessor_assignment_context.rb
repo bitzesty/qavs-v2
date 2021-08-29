@@ -10,7 +10,7 @@ module AssessorAssignmentContext
     respond_to do |format|
       format.js do
         @assessment = assessment.resource
-        render template: "assessor/assessor_assignments/update", layout: false, content_type: 'text/javascript'
+        render template: "#{namespace_name}/assessor_assignments/update", layout: false, content_type: 'text/javascript'
       end
 
       format.html { redirect_back(fallback_location: root_path) }

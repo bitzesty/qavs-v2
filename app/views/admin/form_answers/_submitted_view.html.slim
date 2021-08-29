@@ -4,10 +4,8 @@
   = render "section_admin_comments"
 
   - AssessorAssignmentsConstructor.new(resource, current_admin).assessments.each do |assessment|
-    = render "admin/form_answers/section_appraisal_form", assessment: assessment
-
-  - if show_feedback_section?
-    = render "admin/feedbacks/section", form_answer: @form_answer
+    .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
+      = render "admin/form_answers/section_appraisal_form", assessment: assessment
 
   - if show_winners_section?
     - if show_press_summary_subsection?

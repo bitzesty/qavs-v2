@@ -6,9 +6,10 @@ Warden.test_mode!
 describe "Admin submits appraisal form", %(
   As Admin
   I want to be able to edit, submit the appraisal form.
-), js: true, skip: true do
+), js: true do
 
   let(:scope) { :admin }
+  let(:assessor) { create(:assessor) }
   let(:subject) { create(:admin) }
 
   it_behaves_like "successful appraisal form edition"

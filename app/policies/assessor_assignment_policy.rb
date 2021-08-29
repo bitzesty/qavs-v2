@@ -1,6 +1,10 @@
 class AssessorAssignmentPolicy < ApplicationPolicy
+  def show?
+    admin? || record.editable_for?(subject) || record.submitted?
+  end
+
   def update?
-    record.editable_for?(subject)
+    record.editable_for?(subject) && !record.locked?
   end
 
   def create?

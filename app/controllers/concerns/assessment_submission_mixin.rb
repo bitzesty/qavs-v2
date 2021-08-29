@@ -8,7 +8,8 @@ module AssessmentSubmissionMixin
 
     respond_to do |format|
       format.html do
-        redirect_to [namespace_name, resource.form_answer]
+        redirect_to [namespace_name, resource.form_answer],
+                    success: "The assessment has been submitted."
       end
     end
   end

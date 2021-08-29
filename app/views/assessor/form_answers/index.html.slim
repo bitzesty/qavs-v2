@@ -16,8 +16,6 @@ h1.govuk-heading-xl
 
   = render("assessor/form_answers/category_tabs")
 
-  - # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
-  = render("assessor/form_answers/bulk_assignment")
 
   div role="region" aria-label="nominations list" tabindex="0"
     table.applications-table.govuk-table

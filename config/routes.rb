@@ -259,7 +259,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :assessment_submissions, only: [:create] do
       patch :unlock, on: :member
     end
