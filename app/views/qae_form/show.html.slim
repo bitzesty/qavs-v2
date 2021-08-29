@@ -19,8 +19,10 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
           h2.govuk-error-summary__title#letters-of-support-error-title There was a problem submitting the form
           .govuk-error-summary__body
             p.govuk-body
-              ' You need to request or upload at least 2 letters of support.
+              ' Upload at least two letters of support.
             p.govuk-body
               = link_to "Add more letters of support", form_form_answer_supporters_path(@form_answer), class: 'govuk-link'
 
       = render partial: 'qae_form/step', collection: @form.current_steps(@form_answer, current_form_user), locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
+
+      = render "qae_form/step_error"

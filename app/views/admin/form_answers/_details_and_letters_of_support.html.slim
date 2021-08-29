@@ -1,16 +1,17 @@
-h3.govuk-heading-m 
+h3.govuk-heading-m
   | Nomination and local assessment form
 
 .govuk-button-group
   - if policy(resource).review?
     = link_to 'View nomination', [:review, namespace_name, @form_answer], class: "govuk-button"
   - if policy(resource).edit?
-    = link_to 'Edit nomination and local assessment form', [:edit, namespace_name, @form_answer], class: "govuk-button"
-= render "admin/form_answers/docs/download_original_application_pdf_before_deadline"
+    = render "#{namespace_name}/form_answers/edit_nomination_links"
+
+= link_to "Download nomination and local assessment form (PDF)", { namespace: namespace_name, path: @form_answer, format: :pdf }, class: "govuk-link download-link govuk-link--no-visited-state"
 
 - if @form_answer.support_letters.any?
   #section-letters-of-support class="govuk-!-margin-top-7"
-    h3.govuk-heading-m 
+    h3.govuk-heading-m
       | Letters of support
     = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.support_letters.first, adjective: 'first'
     - if @form_answer.support_letters.second.present?

@@ -3,7 +3,7 @@
 .article-related-positioning-container
   .article-container.group
     article.group role="article"
-      h1.govuk-heading-xl Change your password
+      h1.govuk-heading-xl Create a password
       = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
         /= f.error_notification
         = f.input :reset_password_token, as: :hidden
@@ -14,7 +14,7 @@
             #password-control-group
               = f.input :password,
                         required: true,
-                        label: 'New Password',
+                        label: 'New password',
                         autofocus: true,
                         input_html: { class: "password-strength-meter js-disable-copy govuk-input--width-10",
                                       data: { min_password_length: "10"},
@@ -32,7 +32,7 @@
 
             #password-confirmation-control-group
               = f.input :password_confirmation,
-                        label: "Confirm your new password",
+                        label: "Confirm password",
                         required: true,
                         input_html: { class: "js-disable-copy govuk-input--width-10",
                                       autocomplete: "off" }
@@ -43,6 +43,6 @@
                   p#password-confirmation-match The confirmation must match the password
 
         .form-actions
-          = f.button :submit, "Change my password"
+          = f.button :submit, "Create password"
 
       = render "users/shared/links"

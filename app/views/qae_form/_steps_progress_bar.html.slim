@@ -58,5 +58,9 @@
             | Important
         .govuk-notification-banner__content
           p.govuk-notification-banner__heading
-            | Submission deadline is
-            =< submission_deadline.decorate.formatted_trigger_time
+            - if lieutenant_nomination?
+              | Local assessment submission deadline is
+              =< local_assessment_submission_deadline.decorate.formatted_trigger_time
+            - else
+              | Submission deadline is
+              =< submission_deadline.decorate.formatted_trigger_time

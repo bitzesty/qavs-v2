@@ -56,10 +56,6 @@ class FormAnswerSearch < Search
     scoped_results.where(state: filter_klass.internal_states(value))
   end
 
-  def filter_by_nominee_activity(scoped_results, value)
-    scoped_results.where(nominee_activity: filter_klass.internal_states(value))
-  end
-
   def filter_by_assigned_ceremonial_county(scoped_results, value)
     value = value.map do |v|
       v == "not_assigned" ? nil : v

@@ -4,7 +4,7 @@
       = "Name of the #{adjective} supporter"
     br
     = support_letter.full_name
-  
+
   p.govuk-body
     strong
       | Relationship to the group
@@ -15,10 +15,9 @@
     - sl_attachment = support_letter.support_letter_attachment
 
     - if sl_attachment.clean?
-      - if namespace_name.to_s != 'lieutenant'
-        = link_to "Download the #{adjective} letter of support (PDF)",
-                  [namespace_name, support_letter.form_answer, support_letter],
-                  download: true, class: "govuk-link download-link"
+      = link_to "Download the #{adjective} letter of support (PDF)",
+                [namespace_name, support_letter.form_answer, support_letter],
+                download: true, class: "govuk-link download-link govuk-link--no-visited-state"
 
     - elsif sl_attachment.attachment_scan_results.to_s == "infected"
       .govuk-error-message
@@ -29,7 +28,6 @@
         = "Scanning '#{sl_attachment.original_filename}' file"
 
   - else
-    - if namespace_name.to_s != 'lieutenant'
-      = link_to "Download the #{adjective} letter of support (PDF)",
-                [namespace_name, support_letter.form_answer, support_letter],
-                download: true, class: "govuk-link download-link"
+    = link_to "Download the #{adjective} letter of support (PDF)",
+              [namespace_name, support_letter.form_answer, support_letter],
+              download: true, class: "govuk-link download-link govuk-link--no-visited-state"

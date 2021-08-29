@@ -35,9 +35,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     authorize resource, :show?
 
     respond_to do |format|
-      format.html do
-        @form_paginator = FormPaginator.new(resource, current_lieutenant, params)
-      end
+      format.html
 
       format.pdf do
         if can_render_pdf_on_fly?
@@ -58,7 +56,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     params[:search] ||= {
       sort: "company_or_nominee_name",
       search_filter: {
-        status: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+        nominee_activity: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
       }
     }
     params[:search].permit!
@@ -108,7 +106,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
           if submitted && saved
             LocalAssessmentSubmissionService.new(@form_answer, current_lieutenant).submit!
 
-            flash[:notice] = "Local assessment was successfully submitted."
+            flash[:success] = "Local assessment was successfully submitted."
             redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
@@ -135,6 +133,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
 
         if params[:form].present? && @form_answer.eligible? && @form_answer.save
+          flash[:success] = "Local assessment was successfully saved."
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
             FormAnswerUserSubmissionService.new(@form_answer).perform

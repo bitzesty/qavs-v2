@@ -1,6 +1,7 @@
 class Admin::FormAnswersController < Admin::BaseController
   include FormAnswerMixin
   include FormAnswerSubmissionMixin
+  include FormAnswersPdf
 
   layout :resolve_layout
 
@@ -68,7 +69,24 @@ class Admin::FormAnswersController < Admin::BaseController
 
   def show
     super
-    @audit_events = FormAnswerAuditor.new(@form_answer).get_audit_events
+
+    respond_to do |format|
+      format.html do
+        @audit_events = FormAnswerAuditor.new(resource).get_audit_events
+      end
+
+      format.pdf do
+        if can_render_pdf_on_fly?
+          pdf = resource.decorate.pdf_generator(current_admin, pdf_blank_mode)
+          send_data pdf.render,
+                    filename: resource.decorate.pdf_filename,
+                    type: "application/pdf",
+                    disposition: 'attachment'
+        else
+          render_hard_copy_pdf
+        end
+      end
+    end
   end
 
   def save

@@ -8,19 +8,15 @@ h1.govuk-heading-xl
         = text_field_tag :award_type, params[:award_type], class: "visuallyhidden"
         = f.input :query, label: 'Search', input_html: { type: "search" }
   .govuk-grid-row
-    = render "shared/form_answers/top_statuses_filters", f: f,
-                                                        options: FormAnswerStatus::LieutenantFilter.collection('status'),
-                                                        sub_options: FormAnswerStatus::LieutenantFilter.collection('sub'),
-                                                        activity_options: FormAnswerStatus::LieutenantFilter.activity_options,
-                                                        assigned_county_options: FormAnswerStatus::AdminFilter.county_options('assigned'),
-                                                        nomination_county_options: FormAnswerStatus::AdminFilter.county_options('nomination')
+    = render "activity_filter", f: f,
+                                activity_options: FormAnswerStatus::LieutenantFilter.collection('activity')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
   - #sort needs to be here because the sorting is done in the other form below, so in order not to break sorting, we need to duplicate it here
 
   .govuk-button-group
-    = f.submit 'Apply filters', class: 'govuk-button'
-    = link_to "Remove filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
+    = f.submit 'Search and apply filters', class: 'govuk-button'
+    = link_to "Clear search and filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
 
   .applications-table-wrapper
     div role="region" aria-label="nominations list" tabindex="0"
@@ -33,13 +29,15 @@ h1.govuk-heading-xl
           tr
             th.sortable.govuk-table__header scope="col" width="250"
               = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
-            th.sortable.govuk-table__header scope="col" width="120"
-              = sort_link f, "Reference", @search, :urn, disabled: @search.query?
             th.govuk-table__header scope="col" width="250"
               | Status
-            = render("assessor/form_answers/assessor_header", f: f)
+            th.govuk-table__header scope="col" width="100"
+              | Postcode
+            th.govuk-table__header scope="col" width="200"
+              | Type of group
             th.sortable.govuk-table__header scope="col" width="130"
               = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
+            th.govuk-table__header scope="col" View
           = render(partial: "list_body")
 
   = paginate @form_answers

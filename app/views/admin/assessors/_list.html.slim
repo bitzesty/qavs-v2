@@ -35,8 +35,6 @@ div role="region" aria-label="list of national assessors" tabindex="0"
                 - if assessor.last_sign_in_at.present?
                   span.visible-lg
                     = assessor.formatted_last_sign_in_at_long
-                  span class="govuk-!-display-none"
-                    = assessor.formatted_last_sign_in_at_short
                 - else
                   | Never signed in
             td.govuk-table__cell

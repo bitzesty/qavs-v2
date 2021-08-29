@@ -49,8 +49,6 @@ module FormAnswerMixin
 
   def show
     authorize resource, :show?
-
-    @form_paginator = FormPaginator.new(@form_answer, current_subject, params)
   end
 
   def review

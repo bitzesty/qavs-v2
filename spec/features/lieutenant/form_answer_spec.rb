@@ -18,7 +18,7 @@ describe "Lieutenant: Nomination process", js: true do
     visit lieutenant_form_answers_path
 
     click_link "Bit Zesty"
-    click_link "Complete local assessment"
+    click_link "View nomination form"
 
     expect(page).to have_current_path edit_lieutenant_form_answer_path(fa)
     click_link("A. Nominee")

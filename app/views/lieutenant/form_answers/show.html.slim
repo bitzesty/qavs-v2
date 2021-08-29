@@ -9,7 +9,5 @@ h1.govuk-heading-xl
     = render("admin/form_answers/applicant_status")
     = render('admin/form_answers/nomination_details')
 
-    = link_to "Complete local assessment", edit_lieutenant_form_answer_path(@form_answer), class: 'govuk-button'
-
   .govuk-grid-column-two-thirds
-    = render partial: "nomination"
+    = render "nomination"
