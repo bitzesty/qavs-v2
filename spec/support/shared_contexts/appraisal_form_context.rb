@@ -28,7 +28,7 @@ shared_context "successful appraisal form edition" do
       assert_verdict_change
 
       within "#assessment-assessor-#{assessor.id}" do
-        click_button "Submit appraisal"
+        click_button "Submit assessment"
       end
 
       expect(page).to have_text("The assessment has been submitted.")
