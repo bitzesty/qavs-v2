@@ -24,12 +24,12 @@
 
         .feedback-holder
 
-        = submit_tag "Submit appraisal", class: "govuk-button if-no-js-hide"
+        = submit_tag (assessment.submitted? ? "Re-submit assessment" : "Submit assessment"), class: "govuk-button if-no-js-hide"
 
 - elsif assessment.submitted?
-  .govuk-notification-banner
-    .govuk-notification-banner__content
-      - if policy(assessment).can_unlock?
+  - if policy(assessment).can_unlock?
+    .govuk-notification-banner
+      .govuk-notification-banner__content
         p
           | If you want to allow the assessor to make any changes, please unlock the assessment by clicking the button below.
 
@@ -38,5 +38,8 @@
           .feedback-holder.alert.alert-success
 
             = submit_tag "Unlock", class: "govuk-button govuk-button--secondary"
-      - else
-        | If you need to make changes to your assessment, please get in touch with the QAVS team.
+  - elsif assessment.editable_for?(current_subject)
+    .govuk-notification-banner
+      .govuk-notification-banner__content
+        p
+          | If you need to make changes to your assessment, please get in touch with the QAVS team.
