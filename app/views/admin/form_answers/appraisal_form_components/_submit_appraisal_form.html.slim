@@ -1,22 +1,42 @@
 - if policy(assessment).can_be_submitted? || policy(assessment).can_be_re_submitted?
-  = form_tag(url_for([namespace_name, :assessment_submissions]),
-            authenticity_token: true,
-            class: "submit-assessment")
+  .govuk-notification-banner
+    .govuk-notification-banner__content
 
-    = hidden_field_tag :assessment_id, assessment.id
+      p class="govuk-!-font-weight-bold"
+        | Assessment submission
 
-    .feedback-holder
+      - if current_admin
+        p
+          | You can submit the assessment on behalf of the assessor
+        p
+          | Once the assessment is submitted, other assessors for this nomination will be able to see it. And the assessor will see other assessments that have already been submitted for this nomination.
+      - else
+        p
+          | You need to submit your assessment to see other assessments that have already been submitted for this nomination and so that other assessors can see your one.
+        p
+          | Please note, if you need to make changes after submitting your assessment, you will have to get in touch with the QAVS team.
 
-    = submit_tag (assessment.submitted? ? "Re-submit appraisal" : "Submit appraisal"), class: "govuk-button if-no-js-hide"
+      = form_tag(url_for([namespace_name, :assessment_submissions]),
+                authenticity_token: true,
+                class: "submit-assessment")
+
+        = hidden_field_tag :assessment_id, assessment.id
+
+        .feedback-holder
+
+        = submit_tag "Submit appraisal", class: "govuk-button if-no-js-hide"
 
 - elsif assessment.submitted?
+  .govuk-notification-banner
+    .govuk-notification-banner__content
+      - if policy(assessment).can_unlock?
+        p
+          | If you want to allow the assessor to make any changes, please unlock the assessment by clicking the button below.
 
-  - if policy(assessment).can_unlock?
+        = form_tag unlock_admin_assessment_submission_url(assessment), method: :patch do
+          = hidden_field_tag :assessment_id, assessment.id
+          .feedback-holder.alert.alert-success
 
-    - unlock_url = namespace_name == :admin ? unlock_admin_assessment_submission_url(assessment) : unlock_assessor_assessment_submission_url(assessment)
-
-    = form_tag unlock_url, method: :patch do
-      = hidden_field_tag :assessment_id, assessment.id
-      .feedback-holder.alert.alert-success
-
-        = submit_tag "Unsubmit", class: "govuk-button btn-primary"
+            = submit_tag "Unlock", class: "govuk-button govuk-button--secondary"
+      - else
+        | If you need to make changes to your assessment, please get in touch with the QAVS team.

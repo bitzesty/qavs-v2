@@ -1,54 +1,53 @@
 - form = AppraisalForm.verdict_options_for(f.object, section)
 - editable = policy(f.object).update?
 
-.govuk-notification-banner
-  .govuk-notification-banner__content
-    .govuk-form-group.verdict-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
-      fieldset.govuk-fieldset
-        legend.govuk-fieldset__legend class="govuk-!-font-weight-bold"
-          = section.label
-        .toggable-form
-          .toggable-form__read
-            - if f.object.public_send(section.rate).present?
-              p.evaluation-rate
-                = "Decision: "
-                span.evaluation-rate
-                  = f.object.public_send(section.rate).humanize
-            - else
-              p.evaluation-rate.hidden
+.govuk-form-group.verdict-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
+  fieldset.govuk-fieldset
+    legend.govuk-fieldset__legend class="govuk-!-font-weight-bold"
+      = section.label
+    .toggable-form
+      .toggable-form__read
+        .govuk-body.toggable-form__content
+          - if f.object.public_send(section.rate).present?
+            p.evaluation-rate
+              = "Decision: "
+              span.evaluation-rate
+                = f.object.public_send(section.rate).humanize
+          - else
+            p.evaluation-rate.hidden
 
-            - if f.object.public_send(section.desc).present?
-              p.assessor-notes
-                = f.object.public_send(section.desc)
-            - else
-              p.govuk-hint.assessor-notes No comment has been added yet.
+          - if f.object.public_send(section.desc).present?
+            p.assessor-notes
+              = f.object.public_send(section.desc)
+          - else
+            p.govuk-hint.assessor-notes No comment has been added yet.
 
-            - if editable
-              a.govuk-link.toggable-form__trigger href="#" role="button"
-                | Edit
-                span.govuk-visually-hidden
-                  | overall verdict
-          .toggable-form__edit
-            = f.input section.rate,
-                      as: :select,
-                      label: 'Evaluate',
-                      collection: form.options,
-                      input_html: { "data-updated-section"  => section.desc, class: "evaluation-rate-input" }
+          - if editable
+            a.govuk-link.toggable-form__trigger href="#" role="button"
+              | Edit
+              span.govuk-visually-hidden
+                | overall verdict
+      .toggable-form__edit
+        = f.input section.rate,
+                  as: :select,
+                  label: 'Evaluate',
+                  collection: form.options,
+                  input_html: { "data-updated-section"  => section.desc, class: "evaluation-rate-input" }
 
-            = f.input section.desc,
-                      wrapper_html: { class: 'govuk-form-group' },
-                      input_html: { class: 'form-control js-char-count assessor-notes-input', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}"},
-                      as: :text,
-                      label: 'Notes'
+        = f.input section.desc,
+                  wrapper_html: { class: 'govuk-form-group' },
+                  input_html: { class: 'form-control js-char-count assessor-notes-input', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}"},
+                  as: :text,
+                  label: 'Notes'
 
-            .govuk-button-group
-              button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc
-                | Save
-                span.govuk-visually-hidden
-                  <= section.label
+        .govuk-button-group
+          button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc
+            | Save
+            span.govuk-visually-hidden
+              <= section.label
 
-                button.govuk-button.govuk-button--secondary.toggable-form__cancel.if-no-js-hide
-                  | Cancel
-                  span.govuk-visually-hidden
-                    ' changes to
-                    <= section.label
+            button.govuk-button.govuk-button--secondary.toggable-form__cancel.if-no-js-hide
+              | Cancel
+              span.govuk-visually-hidden
+                ' changes to
+                <= section.label
