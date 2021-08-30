@@ -115,9 +115,9 @@ en:
         not_recommended: 'Not Recommended'
         pending: 'Pending'
       styles:
-        positive: 'green'
-        average: 'green'
-        negative: 'red'
+        recommended: 'green'
+        undecided: 'purple'
+        not_recommended: 'red'
         pending: 'grey'
 
   time:

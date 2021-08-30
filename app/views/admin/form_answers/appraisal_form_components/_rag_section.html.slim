@@ -10,24 +10,19 @@
         .govuk-body.toggable-form__content
 
           - if f.object.public_send(section.rate).present?
-            p.evaluation-rate
-              = "Evaluation: "
-              span.evaluation-rate
-                = f.object.public_send(section.rate).humanize
-              | &nbsp;
-              | evidence
-          - else
-            p.evaluation-rate class="govuk-!-display-none"
-              = "Evaluation: "
-              span.evaluation-rate
-              | &nbsp;
+            p.govuk-body
+              span class="govuk-!-font-weight-bold"
+                = "Evaluation: "
+              => f.object.public_send(section.rate).humanize
               | evidence
 
           - if f.object.public_send(section.desc).present?
-            p.assessor-notes
+            span class="govuk-!-font-weight-bold"
+              | Notes
+            p.govuk-body
               = f.object.public_send(section.desc)
           - else
-            p.govuk-hint.assessor-notes No comment has been added yet.
+            p.govuk-hint No comment has been added yet.
 
         - if editable
           .govuk-body

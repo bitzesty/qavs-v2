@@ -23,3 +23,6 @@
     .clear
     br
     = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: assessment)
+  - else
+    p.govuk-body
+      | You need to submit your assessment to see other assessments that have already been submitted.

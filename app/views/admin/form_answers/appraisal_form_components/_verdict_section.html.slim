@@ -9,15 +9,15 @@
       .toggable-form__read
         .govuk-body.toggable-form__content
           - if f.object.public_send(section.rate).present?
-            p.evaluation-rate
-              = "Decision: "
-              span.evaluation-rate
-                = f.object.public_send(section.rate).humanize
-          - else
-            p.evaluation-rate.hidden
+            p.govuk-body
+              span class="govuk-!-font-weight-bold"
+                = "Decision: "
+              = f.object.public_send(section.rate).humanize
 
           - if f.object.public_send(section.desc).present?
-            p.assessor-notes
+            span class="govuk-!-font-weight-bold"
+              | Notes
+            p.govuk-body
               = f.object.public_send(section.desc)
           - else
             p.govuk-hint.assessor-notes No comment has been added yet.
