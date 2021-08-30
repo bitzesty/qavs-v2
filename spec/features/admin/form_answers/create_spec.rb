@@ -19,7 +19,7 @@ feature "Admin creates nomination", js: true do
       click_link("Start a new nomination")
       click_button("Mark as eligible and create nomination")
 
-      expect(page).to have_content("A. Nominee")
+      expect(page).to have_content("A. Group information")
     end
   end
 end

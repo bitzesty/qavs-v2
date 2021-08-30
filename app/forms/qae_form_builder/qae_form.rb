@@ -19,8 +19,8 @@ class QAEFormBuilder
       QAEFormDecorator.new self, options
     end
 
-    def step title, short_title, options = {}, &block
-      step = Step.new self, title, short_title, options
+    def step title, options = {}, &block
+      step = Step.new self, title, options
 
       builder = StepBuilder.new step
       builder.instance_eval &block if block_given?
