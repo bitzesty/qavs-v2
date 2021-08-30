@@ -393,7 +393,6 @@ class FormAnswer < ApplicationRecord
       self.nominator_full_name = document["nominator_name"]
       self.nominator_email = document["nominator_email"]
       self.secondary_activity = document["secondary_activity"]
-      self.ceremonial_county_id = document["nominee_ceremonial_county"]
     end
   end
 
