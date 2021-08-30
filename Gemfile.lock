@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/bitzesty/carrierwave-google-storage.git
-  revision: 61d916058bee4042ed37366501c6dd27a52df5aa
-  ref: 61d916058bee4042ed37366501c6dd27a52df5aa
+  revision: ef7587b921936c48ff9d36bb95186d080f159d66
+  ref: ef7587b921936c48ff9d36bb95186d080f159d66
   specs:
     carrierwave-google-storage (0.7.3)
       addressable
