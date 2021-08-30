@@ -7,23 +7,25 @@ module FormAnswerFilteringTestHelper
     button = find('#apply-nomination-filters')
 
     ['status', 'sub-status', 'nominated-lieutenancy', 'assigned-lieutenancy', 'activity'].each do |field|
-      within ".#{field}-filter" do
-        filter_dropdown = find(".dropdown-checkboxes__selection")
-        filter_dropdown.click
+      if page.has_css?(".#{field}-filter")
+        within ".#{field}-filter" do
+          filter_dropdown = find(".dropdown-checkboxes__selection")
+          filter_dropdown.click
 
-        expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
+          expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
 
-        within ".dropdown-checkboxes__list" do
-          all(".dropdown-checkboxes__option").each do |option|
-            # next if li.all(".label-contents").count == 0
+          within ".dropdown-checkboxes__list" do
+            all(".dropdown-checkboxes__option").each do |option|
+              # next if li.all(".label-contents").count == 0
 
-            # content = li.first(".label-contents")
-            if option.text.to_s == val
-              option.click
-              filter_dropdown.click
-              button.click
+              # content = li.first(".label-contents")
+              if option.text.to_s == val
+                option.click
+                filter_dropdown.click
+                button.click
 
-              return
+                return
+              end
             end
           end
         end
