@@ -86,7 +86,7 @@ gem 'nokogiri'
 # Uploads
 gem 'carrierwave', '~> 2.2.2'
 gem 'google-cloud-storage', '~> 1.34.1'
-gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'ef7587b921936c48ff9d36bb95186d080f159d66'
+gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: '40e9d62280fad13735d74c45ccc5c1a015fe5f6b'
 gem 'vigilion', '~> 1.0.4'
 gem 'vigilion-rails'
 
