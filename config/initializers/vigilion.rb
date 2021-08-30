@@ -6,6 +6,8 @@ Vigilion.configure do |config|
   # Integration strategy (default is :url)
   # config.integration = :local
 
+  config.debug = true
+
   # By default vigilion will be bypassed in development and test environments.
   # Disable vigilion scanning entirely even in production environments:
   # config.loopback = true
