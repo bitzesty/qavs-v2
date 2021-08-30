@@ -40,6 +40,15 @@ GIT
       cocaine
       orm_adapter (~> 0.5.0)
 
+GIT
+  remote: https://github.com/vigilion/vigilion-rails.git
+  revision: 696f5773149979ca73e690d83421e05295b4d118
+  ref: 696f5773149979ca73e690d83421e05295b4d118
+  specs:
+    vigilion-rails (2.0.0)
+      rails (>= 4.2.0)
+      vigilion (~> 1.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -672,9 +681,6 @@ GEM
       faraday
       faraday-detailed_logger
       faraday_middleware
-    vigilion-rails (2.0.0)
-      rails (>= 4.2.0)
-      vigilion (~> 1.0.4)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -803,7 +809,7 @@ DEPENDENCIES
   turnip (~> 4.2.0)
   uglifier (>= 2.7.2)
   vigilion (~> 1.0.4)
-  vigilion-rails
+  vigilion-rails!
   virtus
   web-console
   webmock (= 3.13.0)
