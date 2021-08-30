@@ -43,6 +43,7 @@
 - content_for :content do
   .govuk-width-container class="govuk-!-margin-top-4 govuk-!-margin-bottom-1"
     = render "layouts/flash"
+
     = yield :before_main_content
 
   #wrapper.guide.smart-answer.answer class="#{yield :page_wrapper_class}"

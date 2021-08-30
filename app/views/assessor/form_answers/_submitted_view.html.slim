@@ -3,12 +3,13 @@
 .govuk-accordion class="govuk-!-margin-top-7" data-module="govuk-accordion"
   = render "admin/form_answers/section_admin_comments", { read_only: true }
 
-  - if primary_assessment.visible_for?(current_subject)
-    = render "admin/form_answers/section_appraisal_form_primary"
-  - if secondary_assessment.visible_for?(current_subject)
-    = render "admin/form_answers/section_appraisal_form_secondary"
-  - if show_section_appraisal_moderated?
-    = render "admin/form_answers/section_appraisal_form_moderated"
+  - AssessorAssignmentsConstructor.new(resource, current_assessor).assessments.each do |assessment|
+    .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
+      = render "admin/form_answers/section_appraisal_form", assessment: assessment
 
-  - if show_feedback_section?
-    = render "admin/feedbacks/section", form_answer: @form_answer
+  .govuk-accordion__section
+    .govuk-accordion__section-header
+      h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
+        span.govuk-accordion__section-button
+          | National assessment and Royal approval
+          = assessment_govuk_tag('pending')
