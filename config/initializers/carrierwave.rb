@@ -3,11 +3,11 @@ CarrierWave.configure do |config|
     config.storage                             = :gcloud
     config.gcloud_bucket                       = ENV['GCLOUD_BUCKET']
     config.gcloud_bucket_is_public             = false
-    config.gcloud_authenticated_url_expiration = 1200
+    config.gcloud_authenticated_url_expiration = 1800
     config.gcloud_content_disposition          = 'attachment'          # or you can skip this
 
     config.gcloud_attributes = {
-      expires: 1200
+      expires: 1800
     }
 
     config.gcloud_credentials = {
