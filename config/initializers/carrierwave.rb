@@ -1,7 +1,6 @@
 CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage                             = :gcloud
-    config.cache_storage                       = :file
     config.gcloud_bucket                       = ENV['GCLOUD_BUCKET']
     config.gcloud_bucket_is_public             = false
     config.gcloud_authenticated_url_expiration = 1800
