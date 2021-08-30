@@ -17,11 +17,3 @@ Vigilion.configure do |config|
   # Specify different loopback_response (default is 'clean')
   # config.loopback_response = 'infected'
 end
-# Override scan url for GCP Storage key
-module Vigilion
-  class HTTP
-    def scan_url(key, url, options = {})
-      send scan: options.merge({ key: key, url: url })
-    end
-  end
-end
