@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/bitzesty/carrierwave-google-storage.git
-  revision: 40e9d62280fad13735d74c45ccc5c1a015fe5f6b
-  ref: 40e9d62280fad13735d74c45ccc5c1a015fe5f6b
+  revision: 10750338454bb8f7e04d84187169f4999b344b87
+  ref: 10750338454bb8f7e04d84187169f4999b344b87
   specs:
     carrierwave-google-storage (1.0.0)
       activemodel (>= 3.2.0)
