@@ -167,7 +167,6 @@ CREATE TABLE public.assessor_assignments (
     id integer NOT NULL,
     form_answer_id integer NOT NULL,
     assessor_id integer,
-    "position" integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     document public.hstore,
@@ -3104,13 +3103,6 @@ CREATE INDEX index_assessor_assignments_on_award_year_id ON public.assessor_assi
 
 
 --
--- Name: index_assessor_assignments_on_form_answer_id_and_position; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_assessor_assignments_on_form_answer_id_and_position ON public.assessor_assignments USING btree (form_answer_id, "position");
-
-
---
 -- Name: index_assessors_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3802,4 +3794,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210810173827'),
 ('20210810175339'),
 ('20210816072005'),
-('20210817084427');
+('20210817084427'),
+('20210819140008');
+
+
