@@ -352,3 +352,17 @@ en:
       not_recommended: Not recommended
       awarded: Awarded
       not_awarded: Not awarded
+  form:
+    step_titles:
+      user:
+        nominee: "Group information"
+        recommendation: "Recommendation"
+        letters_of_support: "Letters of Support"
+        submit_step: "Nominator details & submission"
+        local_assessment_form: "Local assessment form"
+      other:
+        nominee: "Group information"
+        recommendation: "Nominator’s Recommendation"
+        letters_of_support: "Letters of Support"
+        submit_step: "Nominator details"
+        local_assessment_form: "Local assessment form"

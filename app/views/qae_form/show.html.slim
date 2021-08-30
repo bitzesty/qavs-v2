@@ -5,7 +5,7 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
 
   input name="authenticity_token" type="hidden" value=form_authenticity_token
 
-  = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title.parameterize)
+  = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title_to_param)
 
   h1.govuk-heading-xl
     = @form.title
