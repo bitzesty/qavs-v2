@@ -131,4 +131,8 @@ class FormAnswerPolicy < ApplicationPolicy
   def can_see_national_assessment_status?
     admin? || assessor?
   end
+
+  def can_download_attachments?
+    admin? || assessor? || lieutenant?
+  end
 end
