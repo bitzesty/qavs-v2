@@ -4,7 +4,7 @@ module RegionHelper
     "Aberdeenshire": "Scotland",
     "Angus": "Scotland",
     "Argyll and Bute": "Scotland",
-    "Befordshire": "East of England",
+    "Bedfordshire": "East of England",
     "Berkshire": "South East",
     "Bristol": "South West",
     "Buckinghamshire": "South East",

@@ -126,7 +126,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 3.1"
           context %(
             <p class='govuk-hint'>
-              Please discuss with a group and provide a <strong>short summary of the group's work in one sentence that is no longer than 100 characters, including spaces</strong>. It can also include the name of the town or area.
+              Please discuss with a group and provide a short summary of the group's work in one sentence that is no longer than 100 characters, including spaces. It can also include the name of the town or area.
             </p>
             <p class='govuk-hint'>The citation will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service.</p>
             <p class='govuk-hint'>Please see the examples below:</p>
@@ -169,12 +169,8 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_benefits_made, "What difference does the group make in meeting the need described above?" do
           sub_ref "E 4.3"
           context %(
-            <p class='govuk-hint'>
-              <strong>Please include direct benefits, but also any indirect benefits</strong>. For example, preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.
-            </p>
-            <p class='govuk-hint'>
-              <strong>Provide evidence to support this</strong>, for example, number of people helped, visitor numbers.
-            </p>
+            <p class='govuk-hint'>Please include direct benefits, but also any indirect benefits. For example, preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.</p>
+            <p class='govuk-hint'>Provide evidence to support this, for example, number of people helped, visitor numbers.</p>
           )
           required
         end
@@ -200,14 +196,6 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.7"
           yes_no
           required
-          context %(
-            <p class="govuk-hint">
-              If the answer is 'no', please skip to section 5 - 'Role and status of volunteers'.
-            </p>
-            <p class="govuk-hint">
-              If the answer is ‘yes’, please answer questions E4.8 and E4.9.
-            </p>
-          )
           pdf_context %(
             If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.
             If the answer is ‘yes’, please answer questions E4.8 and E4.9.

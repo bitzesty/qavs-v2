@@ -13,7 +13,7 @@ h1.govuk-heading-xl
                                               assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
-  
+
   .govuk-button-group
     = f.submit 'Search and apply filters', class: 'govuk-button'
     = link_to "Clear search and filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"

@@ -9,11 +9,12 @@ describe "Admin assigns lieutenants", %(
 ), js: true do
 
   let(:subject) { create(:admin) }
-  let!(:settings) { create(:settings, :expired_submission_deadlines) }
   let!(:ceremonial_county_1) { create(:ceremonial_county, name: "A") }
   let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
   let!(:form_answer_1) { create(:form_answer, :submitted) }
   let!(:form_answer_2) { create(:form_answer, :submitted) }
+  let!(:settings) { create(:settings, :expired_submission_deadlines) }
+
 
   describe "Form submission" do
     before do
@@ -23,7 +24,6 @@ describe "Admin assigns lieutenants", %(
 
     it "assigns the lieutenant" do
       first("#check_all").set(true)
-
       click_button("Bulk assign to Lord Lieutenancy office", match: :first)
       find(:css, "#modal-bulk-assign-lieutenants").should be_visible
 
