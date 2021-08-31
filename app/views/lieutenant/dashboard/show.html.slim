@@ -9,14 +9,17 @@
             .govuk-notification-banner__content
               p.govuk-notification-banner__heading
                 | Please submit your assessment by
-                strong  Monday, 24 January 2022.
+                strong
+                  =< local_assessment_submission_deadline.decorate.formatted_trigger_time
         br
         h1.govuk-heading-xl
           | Welcome to the Queen’s Award for Voluntary Service
         p.govuk-body Thank you for conducting the local assessment for QAVS.
         p.govuk-body
           | Please submit your assessment by
-          strong  Monday, 24 January 2022.
+          strong
+            =< local_assessment_submission_deadline.decorate.formatted_trigger_time
+            | .
 
         p.govuk-body You can download the local assessment guide, which provides helpful tips on approaching the assessment and completing your report.
         .govuk-body
