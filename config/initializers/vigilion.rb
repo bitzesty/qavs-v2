@@ -16,4 +16,5 @@ Vigilion.configure do |config|
   config.loopback = ENV["DISABLE_VIRUS_SCANNER"] == "true"
   # Specify different loopback_response (default is 'clean')
   # config.loopback_response = 'infected'
+  config.active_job = ENV["VIRUS_SCANNER_ACTIVE_JOB"] == "true"
 end
