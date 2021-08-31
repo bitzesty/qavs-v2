@@ -43,6 +43,17 @@ module FormHelper
     end
   end
 
+  def letter_of_support_pdf_url(letter)
+    if current_lieutenant
+      namespace_name = :lieutenant
+    elsif current_admin
+      namespace_name = :admin
+    elsif current_assessor
+      namespace_name = :assessor
+    end
+    [namespace_name, letter.form_answer, letter]
+  end
+
   def nomination_back_url(nomination, step)
     if current_user
       edit_form_url(step: step.previous.title.parameterize)
