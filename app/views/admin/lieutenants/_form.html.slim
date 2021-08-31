@@ -12,21 +12,7 @@
   - if f.object.persisted?
     = render "shared/users/password_change", f: f
 
-  .govuk-form-group
-    = f.label :role, label: 'User type', class: "govuk-label--s"
-    = f.hint 'Regular users can'
-    ul.govuk-list.govuk-list--bullet.govuk-hint
-      li access the nominations assigned to their Lord Lieutenancy office
-      li complete local assessment forms, but they cannot submit them
-    = f.hint 'Advanced users can'
-    ul.govuk-list.govuk-list--bullet.govuk-hint
-      li complete and submit local assessment form
-      li recommend or not recommend each nomination for national assessment
-      li add Lord Lieutenancy office users to their Lord Lieutenancy office
-    = f.input :role,
-              as: :radio_buttons,
-              include_blank: false,
-              label: false
+  = render "lieutenant/lieutenants/user_types", f: f
 
   div class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
     .govuk-button-group

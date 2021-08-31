@@ -196,14 +196,22 @@ class QAEFormBuilder
   end
 
   class Step
-    attr_accessor :title, :short_title, :opts, :questions, :form, :context, :submit
+    attr_accessor :title_key, :opts, :questions, :form, :context, :submit
 
-    def initialize form, title, short_title, opts={}
+    def initialize form, title_key, opts={}
       @form = form
-      @title = title
-      @short_title = short_title
+      @title_key = title_key
       @opts = opts
       @questions = []
+    end
+
+    def title(scope = :user)
+      I18n.t("form.step_titles.#{scope}.#{title_key}")
+    end
+    alias :short_title :title
+
+    def title_to_param
+      title_key.gsub("_", "-")
     end
 
     def local_assessment?

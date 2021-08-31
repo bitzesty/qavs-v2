@@ -1,0 +1,4 @@
+.govuk-button-group
+  = link_to 'View nomination form', [:edit, namespace_name, @form_answer], class: "govuk-button"
+
+  = link_to 'Complete local assessment form', [:edit, namespace_name, @form_answer, anchor: "local-assessment-form"], class: "govuk-button"
