@@ -6,7 +6,7 @@ module FormAnswerFilteringTestHelper
   def click_status_option(val)
     button = find('#apply-nomination-filters')
 
-    ['status', 'sub-status', 'nominated-lieutenancy', 'assigned-lieutenancy', 'activity'].each do |field|
+    ['status', 'sub-status', 'activity', 'nominated-lieutenancy', 'assigned-lieutenancy'].each do |field|
       if page.has_css?(".#{field}-filter")
         within ".#{field}-filter" do
           filter_dropdown = find(".dropdown-checkboxes__selection")
