@@ -12,7 +12,6 @@ h1.govuk-heading-xl
                                 activity_options: FormAnswerStatus::LieutenantFilter.collection('activity')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
-  - #sort needs to be here because the sorting is done in the other form below, so in order not to break sorting, we need to duplicate it here
 
   .govuk-button-group
     = f.submit 'Search and apply filters', class: 'govuk-button'

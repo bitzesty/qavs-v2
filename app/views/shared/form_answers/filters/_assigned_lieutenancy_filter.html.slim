@@ -1,0 +1,5 @@
+.govuk-grid-column-one-quarter.applications-filter.assigned-lieutenancy-filter
+  = g.input :assigned_ceremonial_county,
+            collection: options,
+            label: 'Lord Lieutenancy assigned',
+            input_html: { multiple: true, class: 'js-admin-filter-option'}

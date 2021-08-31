@@ -1,0 +1,3 @@
+= f.simple_fields_for [:filters, @search.filters] do |g|
+  = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: assigned_county_options
+  = render "shared/form_answers/filters/activity_filter", g: g, options: activity_options
