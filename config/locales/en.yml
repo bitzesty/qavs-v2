@@ -113,12 +113,18 @@ en:
         recommended: 'Recommended'
         undecided: 'Undecided'
         not_recommended: 'Not Recommended'
+        no_royal_approval: 'No Royal approval'
+        shortlisted: 'Shortlisted'
+        awarded: 'Awarded'
         pending: 'Pending'
       styles:
         recommended: 'green'
         undecided: 'purple'
         not_recommended: 'red'
         pending: 'grey'
+        no_royal_approval: 'red'
+        shortlisted: 'green'
+        awarded: 'green'
 
   time:
     formats:

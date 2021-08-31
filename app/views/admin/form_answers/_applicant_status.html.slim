@@ -31,13 +31,15 @@
         strong
           | National assessment status
         br
-        / disabling NA status for now
-        - if false && resource.state == 'recommended'
-          = govuk_tag('recommended', 'green')
-        - elsif false && resource.state == 'not recommended'
-          = govuk_tag('not recommended', 'red')
-        - elsif false && resource.state == 'undecided'
-          = govuk_tag('undecided', 'purple')
+
+        - if resource.final_state?
+          - case resource.state
+          - when "shortlisted", "awarded"
+            = govuk_tag(resource.state.humanize, 'green')
+          - when "not_recommended", "no_royal_approval"
+            = govuk_tag(resource.state.humanize, 'red')
+          - when "undecided"
+            = govuk_tag(resource.state.humanize, 'purple')
         - else
           = govuk_tag('pending', 'grey')
 

@@ -1,0 +1,68 @@
+- verdict = @admin_verdict || resource.build_admin_verdict
+.govuk-accordion__section.final-verdict-section class=("govuk-accordion__section--expanded" if verdict.errors.any?)
+  .govuk-accordion__section-header
+    h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
+      span.govuk-accordion__section-button
+        | National assessment and Royal approval
+        - if resource.final_state?
+          = assessment_govuk_tag(resource.state)
+        - else
+          = assessment_govuk_tag('pending')
+
+  .govuk-accordion__section-content
+    p.govuk-hint
+      | Only QAVS administrators can add national assessment and Royal approval outcome.
+
+    = simple_form_for verdict,
+                      url: [:update_verdict, :admin, resource],
+                      method: :post,
+                      html: { class: "final-verdict-togglable" } do |f|
+      .toggable-form aria-expanded=verdict.errors.any?.to_s
+        .toggable-form__read
+          .govuk-body.toggable-form__content
+            legend.govuk-fieldset__legend class="govuk-!-font-weight-bold"
+              | National assessment and Royal approval
+
+            - if verdict.persisted?
+              p.govuk-body
+                span class="govuk-!-font-weight-bold"
+                  | Outcome:
+                =< verdict.outcome.text
+            - if verdict.description?
+              span class="govuk-!-font-weight-bold"
+                | Notes
+              p.govuk-body
+                = verdict.description
+            - else
+              p.govuk-hint No outcome has been saved yet.
+
+
+          - if policy(verdict).create?
+            .govuk-body
+               a.govuk-link.toggable-form__trigger href="#" role="button"
+                 | Edit
+                 span.govuk-visually-hidden
+                   ' national assessment and Royal approval outcome
+
+
+        - if policy(verdict).create?
+          .toggable-form__edit
+            .govuk-grid-row
+              .govuk-grid-column-one-third
+                = f.input :outcome,
+                          as: :select,
+                          label: "Select outcome",
+                          input_html: { class: "custom-select" }
+
+            = f.input :description,
+                      as: :text
+
+            .govuk-button-group
+              button.govuk-button.toggable-form__save
+                | Save
+                span.govuk-visually-hidden
+                  ' national assessment and Royal approval outcome
+              button.govuk-button.govuk-button--secondary.toggable-form__cancel.if-no-js-hide
+                | Cancel
+                span.govuk-visually-hidden
+                  ' changes to national assessment and Royal approval outcome

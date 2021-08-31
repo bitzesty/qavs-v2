@@ -42,11 +42,11 @@ class FormAnswer < ApplicationRecord
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
     has_one :feedback, dependent: :destroy
-    # has_one :press_summary, dependent: :destroy
     has_one :draft_note, as: :notable, dependent: :destroy
     has_one :palace_invite, dependent: :destroy
     has_one :citation, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy
+    has_one :admin_verdict, dependent: :destroy
 
     belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
     belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id
@@ -71,7 +71,7 @@ class FormAnswer < ApplicationRecord
 
   begin :scopes
     scope :for_year, -> (year) { joins(:award_year).where(award_years: { year: year }) }
-    scope :shortlisted, -> { where(state: %w(reserved recommended)) }
+    scope :shortlisted, -> { where(state: %w(shortlisted)) }
     scope :not_shortlisted, -> { where(state: "not_recommended") }
     scope :winners, -> { where(state: "awarded") }
     scope :unsuccessful_applications, -> { submitted.where("state not in ('awarded', 'withdrawn')") }
@@ -237,7 +237,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def shortlisted?
-    state == "reserved" || state == "recommended"
+    state == "shortlisted"
   end
 
   def was_marked_as_eligible?
@@ -327,6 +327,9 @@ class FormAnswer < ApplicationRecord
   def agree_sharing_of_details_with_lieutenancies?
     user.agree_sharing_of_details_with_lieutenancies ? "Yes" : "No"
   end
+
+  def final_state?
+    FormAnswerStateMachine::FINAL_VERDICT_STATES.include?(state.to_sym)  end
 
   private
 

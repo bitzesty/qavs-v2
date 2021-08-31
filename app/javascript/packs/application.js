@@ -110,8 +110,9 @@ $(".toggable-form").each(function() {
       return // skipping all this, use standard remote: true
     }
 
-    console.log('trig? 2');
-
+    if (form.closest("form").hasClass("final-verdict-togglable")) {
+      return // skipping all this, use standard remote: true
+    }
 
     e.preventDefault();
     e.stopPropagation();
@@ -145,6 +146,10 @@ $(".toggable-form").each(function() {
     form.attr("aria-expanded", "false");
     form.find('.toggable-form__trigger').focus();
   });
+
+  if (form.attr("aria-expanded") == "true") {
+    $(".toggable-form__trigger", form).click()
+  }
 })
 
 $('.autosubmit-on-change').each(function() {

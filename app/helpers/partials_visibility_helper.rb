@@ -1,10 +1,10 @@
 module PartialsVisibilityHelper
   def show_winners_section?
-    @form_answer.awarded? || @form_answer.recommended? || @form_answer.reserved?
+    @form_answer.awarded? || @form_answer.shortlisted?
   end
 
   def show_press_summary_subsection?
-    (@form_answer.awarded? || @form_answer.recommended? || @form_answer.reserved?) &&
+    (@form_answer.awarded? || @form_answer.shortlisted?) &&
       admin_or_assined_assessor?
   end
 
