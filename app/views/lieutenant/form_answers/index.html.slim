@@ -8,8 +8,8 @@ h1.govuk-heading-xl
         = text_field_tag :award_type, params[:award_type], class: "visuallyhidden"
         = f.input :query, label: 'Search', input_html: { type: "search" }
   .govuk-grid-row
-    = render "activity_filter", f: f,
-                                activity_options: FormAnswerStatus::LieutenantFilter.collection('activity type')
+    = render "filters", f: f,
+                        activity_options: FormAnswerStatus::LieutenantFilter.collection('activity type')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
 
