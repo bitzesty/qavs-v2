@@ -107,6 +107,7 @@ class FormAnswer < ApplicationRecord
     before_save :set_progress
     before_save :set_region
     before_save :assign_searching_attributes
+    before_save :assign_attributes_from_document
 
     before_create :set_account
     before_create :set_user_info
@@ -358,29 +359,17 @@ class FormAnswer < ApplicationRecord
     end
 
     self.nominee_full_name = nominee_full_name_from_document
-    self.nominee_activity = nominee_activity_from_document
-    self.nominator_full_name = nominator_full_name_from_document
-    self.nominator_email = nominator_email_from_document
   end
 
   def nominee_full_name_from_document
     "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
   end
 
-  def nominee_activity_from_document
-    document["nominee_activity"]
-  end
-
-  def nominator_full_name_from_document
-    document["nominator_name"]
-  end
-
-  def nominator_email_from_document
-    document["nominator_email"]
-  end
-
-  def ceremonial_county_from_document
-    document["ceremonial_county_id"]
+  def assign_attributes_from_document
+    self.nominee_activity = document["nominee_activity"]
+    self.nominator_full_name = document["nominator_name"]
+    self.nominator_email = document["nominator_email"]
+    self.secondary_activity = document["secondary_activity"]
   end
 
   def set_account

@@ -15,7 +15,7 @@ module FormAnswerStatus::FilteringHelper
       collection_mapping(options)
     when 'sub'
       collection_mapping(sub_options)
-    when 'activity'
+    when 'activity type'
       collection_mapping(activity_options)
     when 'nomination county'
       collection_mapping(county_options('nomination'))
