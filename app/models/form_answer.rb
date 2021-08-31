@@ -388,12 +388,10 @@ class FormAnswer < ApplicationRecord
   end
 
   def assign_attributes_from_document
-    unless submitted_and_after_the_deadline?
-      self.nominee_activity = document["nominee_activity"]
-      self.nominator_full_name = document["nominator_name"]
-      self.nominator_email = document["nominator_email"]
-      self.secondary_activity = document["secondary_activity"]
-    end
+    self.nominee_activity = document["nominee_activity"]
+    self.nominator_full_name = document["nominator_name"]
+    self.nominator_email = document["nominator_email"]
+    self.secondary_activity = document["secondary_activity"]
   end
 
   def set_account
