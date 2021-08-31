@@ -20,19 +20,19 @@
           ' Form
         ul
           - for step in @form.current_steps(@form_answer, current_form_user) do
-           li.js-step-link.js-step-condition.govuk-body data-step="step-#{step.title.parameterize}" class=('step-current' if (!current_step && step.index == 0) || current_step == step.title.parameterize)
+           li.js-step-link.js-step-condition.govuk-body data-step="step-#{step.title_to_param}" class=('step-current' if (!current_step && step.index == 0) || current_step == step.title_to_param)
              - if step.opts[:id] == :letters_of_support_step
-               = link_to form_form_answer_supporters_path(@form_answer), class: "js-step-link js-step-condition govuk-link", data: { step: "step-#{step.title.parameterize}" } do
+               = link_to form_form_answer_supporters_path(@form_answer), class: "js-step-link js-step-condition govuk-link", data: { step: "step-#{step.title_to_param}" } do
                  span
                    span.step-number
                      ' #{step_letters[step.index]}.
-                   = step.short_title.html_safe
+                   = step.short_title(current_user ? :user : :other).html_safe
              - else
-               = link_to edit_form_path(@form_answer.id, step: step.title.parameterize), class: "js-step-link js-step-condition govuk-link", data: { step: "step-#{step.title.parameterize}" } do
+               = link_to edit_form_path(@form_answer.id, step: step.title_to_param), class: "js-step-link js-step-condition govuk-link", data: { step: "step-#{step.title_to_param}" } do
                  span
                    span.step-number
                      ' #{step_letters[step.index]}.
-                   = step.short_title.html_safe
+                   = step.short_title(current_user ? :user : :other).html_safe
 
     - unless QAE.hide_pdf_links?
       li.divider

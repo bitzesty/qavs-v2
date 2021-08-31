@@ -29,22 +29,14 @@ module FormAnswerFilteringTestHelper
         end
       end
     end
-    
+
     fail "NotFoundOption"
   end
 
   def assign_dummy_assessors(form_answers, assessor)
     Array(form_answers).each do |fa|
-      p = fa.assessor_assignments.primary
-      p.assessor_id = assessor.id
-      p.save!
-    end
-  end
-
-  def assign_dummy_feedback(form_answers, submitted = true)
-    Array(form_answers).each do |fa|
-      feedback = fa.build_feedback(submitted: submitted)
-      feedback.save(validate: false)
+      fa.sub_group = assessor.sub_group
+      fa.save!
     end
   end
 

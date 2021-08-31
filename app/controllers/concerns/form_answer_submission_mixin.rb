@@ -30,7 +30,7 @@ module FormAnswerSubmissionMixin
 
   def updating_step
     @form_answer.award_form.steps.detect do |s|
-      s.title.parameterize == params[:current_step_id].gsub("step-", "")
+      s.title_to_param == params[:current_step_id].gsub("step-", "")
     end.decorate
   end
 end

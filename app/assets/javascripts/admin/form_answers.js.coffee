@@ -50,12 +50,13 @@ ready = ->
   # $(".bulk-assign-lieutenants-form select").select2()
 
   $(".section-applicant-users form").on "ajax:success", (e, data, status, xhr) ->
-    form = $(this)
+
     form.find(".errors-holder").text("")
     form.closest(".form-group").removeClass("form-edit")
     formValueBox = form.closest(".form-group").find(".edit-value")
     formValue = form.find("select :selected").text()
     formValueBox.text(formValue)
+
   $(".section-applicant-users form").on "ajax:error", (e, data, status, xhr) ->
     form = $(this)
     errors = ""
@@ -77,8 +78,7 @@ ready = ->
     $(this).find(".feedback-holder").removeClass("error").addClass("alert alert-success")
 
     successMessage = "Assessment submitted"
-    if $(this).closest(".panel-collapse").hasClass("section-case-summary")
-      successMessage = "Case summary submitted"
+
     $(this).find(".feedback-holder").html(successMessage)
     $(this).find("input:submit").remove()
 

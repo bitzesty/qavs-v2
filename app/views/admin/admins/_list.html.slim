@@ -27,8 +27,6 @@
               small.text-muted
                 span.visible-lg
                   = admin.formatted_last_sign_in_at_long
-                span.hidden-lg
-                  = admin.formatted_last_sign_in_at_short
             td.govuk-table__cell
               - if admin.confirmed_at.present?
                 small.text-muted
