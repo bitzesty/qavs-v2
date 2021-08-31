@@ -1,6 +1,6 @@
 = f.simple_fields_for [:filters, @search.filters] do |g|
   .govuk-grid-column-one-third.applications-filter.activity-filter
-    = g.input :nominee_activity,
+    = g.input :activity_type,
               collection: activity_options,
               label: 'Type of group',
               input_html: { multiple: true, class: 'js-admin-filter-option'}
