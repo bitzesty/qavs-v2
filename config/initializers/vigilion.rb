@@ -18,3 +18,11 @@ Vigilion.configure do |config|
   # config.loopback_response = 'infected'
   config.active_job = ENV["VIRUS_SCANNER_ACTIVE_JOB"] == "true"
 end
+
+module Vigilion
+  class HTTP
+    def scan_url(key, url, options = {})
+      send scan: options.merge({ key: key, url: url })
+    end
+  end
+end
