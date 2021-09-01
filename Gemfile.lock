@@ -49,6 +49,17 @@ GIT
       rails (>= 6.0.3.7)
       vigilion (~> 1.0.4)
 
+GIT
+  remote: https://github.com/vigilion/vigilion-ruby.git
+  revision: 7d6a7e5b93d8491c30b10cf95773be003c6ab579
+  ref: 7d6a7e5
+  specs:
+    vigilion (1.0.4)
+      addressable (~> 2)
+      faraday
+      faraday-detailed_logger
+      faraday_middleware
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -694,11 +705,6 @@ GEM
     unf_ext (0.0.7.6)
     unicode-display_width (1.4.0)
     unicode_utils (1.4.0)
-    vigilion (1.0.4)
-      addressable (~> 2)
-      faraday
-      faraday-detailed_logger
-      faraday_middleware
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -826,7 +832,7 @@ DEPENDENCIES
   timecop
   turnip (~> 4.2.0)
   uglifier (>= 2.7.2)
-  vigilion (~> 1.0.4)
+  vigilion (~> 1.0.4)!
   vigilion-rails!
   virtus
   web-console

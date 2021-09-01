@@ -17,12 +17,6 @@ Vigilion.configure do |config|
   # Specify different loopback_response (default is 'clean')
   # config.loopback_response = 'infected'
   config.active_job = ENV["VIRUS_SCANNER_ACTIVE_JOB"] == "true"
-end
 
-module Vigilion
-  class HTTP
-    def scan_url(key, url, options = {})
-      send scan: options.merge({ key: key, url: url })
-    end
-  end
+  config.do_not_unencode = true
 end
