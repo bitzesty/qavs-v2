@@ -12,12 +12,7 @@
           = f.submit "Search", class: 'govuk-button'
           = link_to "Clear search", [:admin, controller_name.to_sym], class: "govuk-button govuk-button--secondary"
         .govuk-grid-row
-          p.govuk-body-l.govuk-grid-column-two-thirds class="govuk-!-font-weight-bold"
-            - if @search.query?
-              = user_search_count(@resources)
-            - else
-              = user_default_count(@resources)
-              .clear
+          = render "shared/users/search_count"
         .govuk-button-group
           = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right' do
             = t("admin.users.new_button.#{controller_name}")

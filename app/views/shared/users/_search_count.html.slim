@@ -1,0 +1,6 @@
+p.govuk-body-l.govuk-grid-column-two-thirds class="govuk-!-font-weight-bold"
+  - if @search.query?
+    = user_search_count(@resources)
+  - else
+    = user_default_count(@resources)
+    .clear
