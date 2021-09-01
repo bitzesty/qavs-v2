@@ -1,6 +1,6 @@
 .dashboard
   h1.govuk-heading-xl
-    | Lieutenancy office users
+    = t("admin.users.role_headers.#{controller_name}")
   = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
     .govuk-grid-row
       .govuk-grid-column-two-thirds
@@ -13,7 +13,7 @@
       = render "shared/users/search_count"
 
     .govuk-button-group
-      = link_to "Add Lieutenancy office user", new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
+      = link_to t("admin.users.new_button.#{controller_name}"), new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
     .clear
 
     = render 'list', resources: @resources, f: f
