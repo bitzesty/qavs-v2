@@ -6,7 +6,7 @@ include FormAnswerFilteringTestHelper
 Warden.test_mode!
 
 describe "As Assessor I want to filter applications", js: true do
-  let!(:assessor) { create(:assessor, :lead_for_all) }
+  let!(:assessor) { create(:assessor) }
   let!(:ceremonial_county) { create(:ceremonial_county) }
 
   before do
