@@ -59,7 +59,7 @@ class Form::AwardsController < Form::NonJsDynamicListsFormSectionController
 
       redirect_to edit_form_url(
         id: @form_answer.id,
-        step: step.title.parameterize,
+        step: step.title_to_param,
         anchor: anchor,
       )
     else
@@ -79,7 +79,7 @@ class Form::AwardsController < Form::NonJsDynamicListsFormSectionController
 
     redirect_to edit_form_url(
       id: @form_answer.id,
-      step: step.title.parameterize,
+      step: step.title_to_param,
       anchor: anchor
     )
   end
@@ -101,7 +101,7 @@ class Form::AwardsController < Form::NonJsDynamicListsFormSectionController
 
       redirect_to edit_form_url(
         id: @form_answer.id,
-        step: step.title.parameterize,
+        step: step.title_to_param,
         anchor: anchor
       )
     else
