@@ -42,8 +42,8 @@ GIT
 
 GIT
   remote: https://github.com/vigilion/vigilion-rails.git
-  revision: 2bed73f6385df32b798af02188f084a03a3e2a63
-  ref: 2bed73f6385df32b798af02188f084a03a3e2a63
+  revision: be2be70ddbe58ed7236bf8123b16b207f6236e3b
+  ref: be2be70ddbe58ed7236bf8123b16b207f6236e3b
   specs:
     vigilion-rails (2.0.0)
       rails (>= 6.0.3.7)
