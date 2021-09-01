@@ -88,7 +88,7 @@ gem 'carrierwave', '~> 2.2.2'
 gem 'google-cloud-storage', '~> 1.34.1'
 gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'c706a21c6c25045cae2e39bcab5bf594af0bcf46'
 gem 'vigilion', '~> 1.0.4'
-gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '2f87b8db3de3e2624a99e14ffbe7d3a6f831118f'
+gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '2de544fbfece7a29c4b2a0f5ada62dfe2cc230bf'
 
 # Background jobs
 gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf'
