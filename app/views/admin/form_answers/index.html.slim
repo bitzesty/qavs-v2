@@ -11,14 +11,14 @@ h1.govuk-heading-xl
 
   .govuk-grid-row
     = render "shared/form_answers/top_statuses_filters", f: f,
-                                                          options: FormAnswerStatus::AdminFilter.collection('status'),
-                                                          sub_options: FormAnswerStatus::AdminFilter.collection('sub')
+                                                         options: FormAnswerStatus::AdminFilter.collection('status'),
+                                                         sub_options: FormAnswerStatus::AdminFilter.collection('sub')
 
   .govuk-grid-row
-    = render "shared/form_answers/nomination_answer_filters", f: f,
-                                                            activity_options: FormAnswerStatus::AdminFilter.collection('activity type'),
-                                                            assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county'),
-                                                            nomination_county_options: FormAnswerStatus::AdminFilter.collection('nomination county')
+    = render "admin/form_answers/nomination_answer_filters", f: f,
+                                                             activity_options: FormAnswerStatus::AdminFilter.collection('activity type'),
+                                                             assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county'),
+                                                             nomination_county_options: FormAnswerStatus::AdminFilter.collection('nomination county')
   .govuk-button-group
     = f.submit 'Apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
     = link_to "Remove filters", admin_form_answers_path, class: "govuk-button govuk-button--secondary"

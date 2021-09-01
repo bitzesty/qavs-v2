@@ -80,10 +80,4 @@ class FormAnswerStatus::LieutenantFilter
   def self.checked_options
     activity_options
   end
-
-  def self.activity_options
-    Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
-  end
 end
