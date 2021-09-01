@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -750,7 +752,8 @@ CREATE TABLE public.form_answers (
     ceremonial_county_id integer,
     ineligible_reason_nominator character varying,
     ineligible_reason_group character varying,
-    sub_group character varying
+    sub_group character varying,
+    secondary_activity character varying
 );
 
 
@@ -3795,6 +3798,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210810175339'),
 ('20210816072005'),
 ('20210817084427'),
-('20210819140008');
+('20210819140008'),
+('20210826124140');
 
 
