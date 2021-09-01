@@ -35,15 +35,16 @@ module SearchHelper
   end
 
   def user_search_count(resource)
-    resource.none? ? "No users found" : "Showing " + user_count(resource)
+     "Showing " + user_count(resource) unless resource.none?
   end
 
   def user_default_count(resource)
-    resource.none? ? "No users found" : "Showing all " + user_count(resource)
+    "Showing all " + user_count(resource) unless resource.none?
   end
 
   def user_count(resource)
-    user_type = t("admin.users.role_headers.#{controller_name}").downcase
+    user_type = t("admin.users.role_headers.#{controller_name}")
+    user_type = user_type.downcase unless controller_name == :lieutenant
     user_type = resource.count == 1 ? user_type.singularize : user_type
     "#{resource.count.to_s} #{user_type}"
   end
