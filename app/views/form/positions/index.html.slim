@@ -11,7 +11,7 @@ header.page-header.group.page-header-over-sidebar
 
 .steps-progress-container
   .steps-progress-content
-    = render 'qae_form/form_header', form: @form, current_step: step.title.parameterize
+    = render 'qae_form/form_header', form: @form, current_step: step.title_to_param
 
     .article-container.article-container-wider.step-article.step-current
       article.group role="article"
@@ -45,5 +45,5 @@ header.page-header.group.page-header-over-sidebar
             - else
               ' + Add role
 
-    = render "qae_form/steps_progress_bar", current_step: step.title.parameterize
+    = render "qae_form/steps_progress_bar", current_step: step.title_to_param
     = render "form/supporters/footer", step: step

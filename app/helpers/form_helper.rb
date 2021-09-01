@@ -45,11 +45,11 @@ module FormHelper
 
   def nomination_back_url(nomination, step)
     if current_user
-      edit_form_url(step: step.previous.title.parameterize)
+      edit_form_url(step: step.previous.title_to_param)
     elsif current_lieutenant
-      edit_lieutenant_form_answer_url(nomination, step: step.previous.title.parameterize)
+      edit_lieutenant_form_answer_url(nomination, step: step.previous.title_to_param)
     elsif current_admin
-      edit_admin_form_answer_url(nomination, step: step.previous.title.parameterize)
+      edit_admin_form_answer_url(nomination, step: step.previous.title_to_param)
     end
   end
 
@@ -67,7 +67,7 @@ module FormHelper
     return unless step
 
     steps = form.steps
-    steps.map! { |s| s.title.parameterize }
+    steps.map! { |s| s.title_to_param }
 
     index = steps.index(step)
 
