@@ -19,7 +19,7 @@ describe "Admin: Lieutenant management" do
 
     fill_in "Email", with: "llkk@example.com"
 
-    select "Bounty County", from: "Lord Lieutenancy office"
+    select "Bounty County", from: "Lieutenancy office"
     choose "Regular"
 
     click_button "Add user"

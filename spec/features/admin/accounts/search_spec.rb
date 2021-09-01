@@ -19,7 +19,7 @@ describe "Users search", "
       it "search for users with first name", js: true do
         within ".search-input" do
           fill_in "search_query", with: user.first_name
-          click "Search"
+          click_button "Search"
         end
 
         within ".govuk-table" do
