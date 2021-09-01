@@ -86,4 +86,19 @@ module FormAnswerHelper
   def show_bulk_lieutenants_assignment?
     policy(:lieutenant_assignment_collection).create? && Settings.after_current_submission_deadline?
   end
+
+  def user_search_count(resource)
+    user_type = t("admin.users.role_headers.#{controller_name}").singularize
+    resource == 1 ? user_type.singularize : user_type
+    if resource.none?
+      "No users found"
+    else
+      "Showing"
+      unless @search.query?
+        "all"
+      resource.count
+      if resource.count == 1
+        t("admin.users.role_headers.#{controller_name}").singularize
+        t("admin.users.role_headers.#{controller_name}")
+  end
 end

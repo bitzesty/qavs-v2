@@ -136,15 +136,20 @@ en:
     users:
       role_headers:
         users: "Nominators"
-        lieutenants: "Lord Lieutenancy office users"
+        lieutenants: "Lieutenancy office users"
         assessors: "National assessors"
         group_leaders: "Group leaders"
         admins: "Admins"
       new_button:
         users: "Add nominator"
-        lieutenants: "Add Lord Lieutenancy office user"
+        lieutenants: "Add Lieutenancy office user"
         assessors: "Add national assessor"
         admins: "Add Admin"
+      edit_button:
+        users: "Edit nominator"
+        lieutenants: "Edit Lieutenancy office user"
+        assessors: "Edit national assessor"
+        group_leaders: "Edit group leader"
     form_answers:
       financial_summary:
         years_row:

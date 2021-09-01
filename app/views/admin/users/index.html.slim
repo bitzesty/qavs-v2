@@ -7,11 +7,24 @@
         .govuk-grid-row
           .govuk-grid-column-one-third
             .form-group.search-input
-              = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
+              = f.input :query, label: "Search", input_html: { class: "form-control", type: "search" }
         .govuk-button-group
           = f.submit "Search", class: 'govuk-button'
           = link_to "Clear search", [:admin, controller_name.to_sym], class: "govuk-button govuk-button--secondary"
-
+        .govuk-grid-row
+          p.govuk-body.govuk-grid-column-two-thirds class="govuk-!-font-weight-bold"
+            - if @resources.none?
+              | No users found
+            - else
+              | Showing
+              - unless @search.query?
+                |  all
+              =<> @resources.count
+              - if @resources.count == 1
+                = t("admin.users.role_headers.#{controller_name}").singularize
+              - else
+                = t("admin.users.role_headers.#{controller_name}")
+              .clear
         .govuk-button-group
           = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right' do
             = t("admin.users.new_button.#{controller_name}")
