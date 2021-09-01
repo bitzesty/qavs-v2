@@ -44,7 +44,7 @@ module SearchHelper
 
   def user_count(resource)
     user_type = t("admin.users.role_headers.#{controller_name}")
-    user_type = user_type.downcase unless controller_name == :lieutenant
+    user_type = user_type.downcase unless controller_name == "lieutenants"
     user_type = resource.count == 1 ? user_type.singularize : user_type
     "#{resource.count.to_s} #{user_type}"
   end
