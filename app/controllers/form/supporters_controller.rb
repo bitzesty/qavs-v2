@@ -1,4 +1,6 @@
 class Form::SupportersController < Form::BaseController
+  include Pundit
+
   def create
     @supporter = @form_answer.supporters.build(supporter_params)
     @supporter.user = current_user
