@@ -33,4 +33,18 @@ module SearchHelper
       field
     end
   end
+
+  def user_search_count(resource)
+    resource.none? ? "No users found" : "Showing " + user_count(resource)
+  end
+
+  def user_default_count(resource)
+    resource.none? ? "No users found" : "Showing all " + user_count(resource)
+  end
+
+  def user_count(resource)
+    user_type = t("admin.users.role_headers.#{controller_name}").downcase
+    user_type = resource.count == 1 ? user_type.singularize : user_type
+    "#{resource.count.to_s} #{user_type}"
+  end
 end
