@@ -110,13 +110,13 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
             redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
-              params[:next_step] ||= @form.steps[1].title.parameterize
+              params[:next_step] ||= @form.steps[1].title_to_param
               redirect_to edit_lieutenant_form_answer_path(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               # avoid redirecting to supporters page
               if !params[:step] || params[:step] == "letters-of-support"
-                params[:step] = @form.steps.first.title.parameterize
+                params[:step] = @form.steps.first.title_to_param
               end
 
               render template: "lieutenants/form_answers/edit"
