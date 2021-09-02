@@ -1,11 +1,17 @@
 .govuk-fieldset role="group" aria-labelledby="q_#{question.key}_label" id="q_#{question.key}"
-  .govuk-form-group
-    label.govuk-label for="primary_assessor_name"
-      | Full name of the first assessor
-    span.govuk-error-message
-    input.govuk-input.govuk-input--width-20.js-trigger-autosave#primary_assessor_name type="text" name=question.input_name(suffix: 'primary_assessor_name') value=question.input_value(suffix: 'primary_assessor_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
-  .govuk-form-group
-    label.govuk-label for="secondary_assessor_name"
-      | Full name of the second assessor (if applicable)
-    span.govuk-error-message
-    input.govuk-input.govuk-input--width-20.js-trigger-autosave.not-required#secondary_assessor_name type="text" name=question.input_name(suffix: 'secondary_assessor_name') value=question.input_value(suffix: 'secondary_assessor_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
+  - question.rendering_sub_fields.each do |sub_field_block|
+    - sub_field_key = sub_field_block[0]
+    - sub_field_title = sub_field_block[1]
+    .govuk-form-group
+      label.govuk-label for=question.input_name(suffix: sub_field_key) value=question.input_value(suffix: sub_field_key)
+        = sub_field_title
+      span.govuk-error-message
+        span.govuk-visually-hidden
+          | Error:
+        - if @form_answer.validator_errors&.dig(question.hash_key(suffix: sub_field_key))
+          =< @form_answer.validator_errors[question.hash_key(suffix: sub_field_key)]
+      .clear
+
+      - klass = "govuk-input--width-20"
+      - klass <<(QAEFormBuilder::AssessorDetailsQuestionValidator::NO_VALIDATION_SUB_FIELDS.exclude?(sub_field_key) ? " required" : " not-required")
+      input.govuk-input.js-trigger-autosave class=klass type="text" id=question.input_name(suffix: sub_field_key) value=question.input_value(suffix: sub_field_key) name=question.input_name(suffix: sub_field_key) autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
