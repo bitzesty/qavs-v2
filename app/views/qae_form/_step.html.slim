@@ -10,7 +10,8 @@
       == step.context
 
     - if step.notice
-      == format_submit_notice(step.notice)
+      .govuk-inset-text
+        == format_submit_notice(step.notice)
     = render partial: "qae_form/question", collection: step.questions, locals: { answers: answers, attachments: attachments }
     - if step.submit
       = render partial: "qae_form/step_submit", object: step.submit, as: 'submit'

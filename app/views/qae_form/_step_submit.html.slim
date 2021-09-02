@@ -4,12 +4,9 @@
       = render "qae_form/pdf_link"
 
   - if submit.notice && (!current_lieutenant || current_lieutenant.role.advanced?)
-    br
-    .application-notice.info-notice
+    .govuk-inset-text
       == format_submit_notice(submit.notice)
   - if submit.alternative_notices && current_lieutenant.role.regular?
-    br
     - submit.alternative_notices.each do |n|
-      .application-notice.info-notice
+      .govuk-inset-text
         == format_submit_notice(n)
-    br
