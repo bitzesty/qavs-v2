@@ -26,8 +26,8 @@ div role="region" aria-label="list of national assessors" tabindex="0"
         - AssessorDecorator.decorate_collection(resources).each do |assessor|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: 'link-edit-user'
-            td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis"}
+              = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: "govuk-link"
+            td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
               = assessor.sub_group.text
             td.govuk-table__cell
@@ -52,4 +52,4 @@ div role="region" aria-label="list of national assessors" tabindex="0"
                 small.text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_assessor_path(assessor)
+              = link_to "Edit user", edit_admin_assessor_path(assessor), class: "govuk-link"
