@@ -56,7 +56,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     params[:search] ||= {
       sort: "company_or_nominee_name",
       search_filter: {
-        nominee_activity: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
       }
     }
     params[:search].permit!
@@ -133,7 +133,6 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
 
         if params[:form].present? && @form_answer.eligible? && @form_answer.save
-          flash[:success] = "Local assessment was successfully saved."
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
             FormAnswerUserSubmissionService.new(@form_answer).perform

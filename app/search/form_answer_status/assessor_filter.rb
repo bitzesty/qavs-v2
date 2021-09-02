@@ -95,9 +95,4 @@ class FormAnswerStatus::AssessorFilter
     SUB_OPTIONS
   end
 
-  def self.activity_options
-    option = Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
-  end
 end

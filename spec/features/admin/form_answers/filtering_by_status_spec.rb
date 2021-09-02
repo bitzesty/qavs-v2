@@ -10,7 +10,6 @@ describe "As Admin I want to filter applications", js: true do
   let!(:ceremonial_county_1) { create(:ceremonial_county, name: "A") }
   let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
 
-
   before do
     @forms = []
     @forms << create(:form_answer, state: "not_submitted")

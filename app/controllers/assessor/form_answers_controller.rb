@@ -15,12 +15,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= {
-      sort: "company_or_nominee_name",
-      search_filter: {
-        status: FormAnswerStatus::AssessorFilter::checked_options.invert.values
-      }
-    }
+    params[:search] ||= FormAnswerSearch.default_search
     params[:search].permit!
     scope = current_assessor.applications_scope(
       @award_year
