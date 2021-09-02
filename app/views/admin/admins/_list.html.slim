@@ -36,4 +36,4 @@
                 small.text-danger
                   ' Not confirmed
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_admin_path(admin), class: "govuk-link"
+              = link_to "Edit user", edit_admin_admin_path(admin), class: "govuk-link", id: "edit-#{ admin.first_name.downcase }-#{ admin.last_name.downcase }"

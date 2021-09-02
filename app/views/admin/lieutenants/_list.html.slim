@@ -56,4 +56,4 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
                 small.text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant), class: "govuk-link"
+              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant), class: "govuk-link", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"

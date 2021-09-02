@@ -48,4 +48,4 @@ div role="region" aria-label="list of group leaders" tabindex="0"
                 small.text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_group_leader_path(group_leader), class: "govuk-link"
+              = link_to "Edit user", edit_admin_group_leader_path(group_leader), class: "govuk-link", id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }"
