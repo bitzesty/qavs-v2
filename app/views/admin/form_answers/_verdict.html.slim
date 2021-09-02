@@ -28,7 +28,6 @@
                 span class="govuk-!-font-weight-bold"
                   | Outcome:
                 =< verdict.outcome.text
-            - if verdict.description?
               span class="govuk-!-font-weight-bold"
                 | Notes
               p.govuk-body
@@ -36,14 +35,12 @@
             - else
               p.govuk-hint No outcome has been saved yet.
 
-
           - if policy(verdict).create?
             .govuk-body
                a.govuk-link.toggable-form__trigger href="#" role="button"
                  | Edit
                  span.govuk-visually-hidden
                    ' national assessment and Royal approval outcome
-
 
         - if policy(verdict).create?
           .toggable-form__edit
