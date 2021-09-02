@@ -1,6 +1,6 @@
 class QAEFormBuilder
   class AssessorDetailsQuestionValidator < QuestionValidator
-    NO_VALIDATION_SUB_FIELDS = [:secondary_assessor_name]
+    NO_VALIDATION_SUB_FIELDS = [:secondary_assessor_name, :phone]
     def errors
       result = super
 

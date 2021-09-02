@@ -12,6 +12,6 @@
           =< @form_answer.validator_errors[question.hash_key(suffix: sub_field_key)]
       .clear
 
-      - klass = "govuk-input--width-20"
+      - klass = "#{sub_field_title.parameterize == "phone-number-optional" ? "govuk-input--width-10" : "govuk-input--width-20"}"
       - klass <<(QAEFormBuilder::AssessorDetailsQuestionValidator::NO_VALIDATION_SUB_FIELDS.exclude?(sub_field_key) ? " required" : " not-required")
       input.govuk-input.js-trigger-autosave class=klass type="text" id=question.input_name(suffix: sub_field_key) value=question.input_value(suffix: sub_field_key) name=question.input_name(suffix: sub_field_key) autocomplete="off" *possible_read_only_ops(question.step.opts[:id])

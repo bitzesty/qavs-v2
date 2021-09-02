@@ -203,12 +203,13 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.8"
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
-
+          required
         end
 
         textarea :nomination_local_assessment_form_how_benefits_local_and_abroad, "In what ways does the group's existence benefit the local community as well as people elsewhere?" do
           sub_ref "E 4.9"
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
+          required
         end
 
         header :local_assessments_volunteers_header, "Role and status of volunteers" do
@@ -392,17 +393,30 @@ class AwardYears::V2022::QAEForms
 
         text :nomination_local_assessment_worthy_of_honour_name, "Please give the name of the person you are recommending" do
           sub_ref "E 8.4"
-          style "medium"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          required
+          style "medium"
         end
 
         textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain in one sentence why they might merit this" do
           sub_ref "E 8.5"
+          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           context %(
             <p class='govuk-hint'>Please note, the QAVS team will pass this information onto the DCMS Honours team. They might get in touch with you in due course to ask for further details.</p>
           )
+          required
           words_max 50
+        end
+
+        assessor_details :assessor_nominating_member_worthy_of_honour, "Assessor recommending an individual for a national Honour details" do
+          sub_ref "E 8.6"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          required
+          sub_fields([
+            { full_name: "Full name" },
+            { email: "Email address" },
+            { phone: "Phone number (optional)", ignore_validation: true }
+          ])
         end
 
         textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant evaluation summary" do
