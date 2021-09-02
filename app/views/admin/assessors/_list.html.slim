@@ -14,7 +14,7 @@ div role="region" aria-label="list of national assessors" tabindex="0"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
-        th
+        th.govuk-table__header
     tbody.govuk-table__body
       - if AssessorDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
