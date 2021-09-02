@@ -36,7 +36,7 @@ describe Notifiers::EmailNotificationService do
 
   context "shortlisted_notifier" do
     let(:kind) { "shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "recommended") }
+    let(:form_answer) { create(:form_answer, state: "shortlisted") }
 
     it "triggers current notification" do
       mailer = double(deliver_later!: true)

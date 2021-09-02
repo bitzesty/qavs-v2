@@ -147,10 +147,6 @@ class FormAnswerStateMachine
     if Settings.after_current_submission_deadline?
       current_year = Settings.current.award_year
 
-      current_year.form_answers.where(state: "submitted").find_each do |fa|
-        fa.state_machine.perform_transition("assessment_in_progress")
-      end
-
       current_year.form_answers.in_progress.find_each do |fa|
         fa.state_machine.perform_transition("not_submitted")
       end
@@ -188,17 +184,6 @@ class FormAnswerStateMachine
     meta = get_metadata(subject)
     transition_to :submitted, meta
     object.update(submitted_at: Time.current)
-  end
-
-
-  def assign_lead_verdict(verdict, subject)
-    new_state = {
-      "negative" => :not_recommended,
-      "average" => :reserved,
-      "positive" => :recommended
-    }[verdict]
-
-    perform_transition(new_state, subject)
   end
 
   def after_eligibility_step_progress
