@@ -13,7 +13,7 @@ end
 
 step "I edit user" do
   step "I go to user management page"
-  find(".link-edit-user").click
+  click_link 'Edit user'
 
   fill_in 'Email', with: 'user@example.com'
 
