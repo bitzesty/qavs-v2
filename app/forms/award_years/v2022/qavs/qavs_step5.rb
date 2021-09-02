@@ -3,6 +3,9 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step5
       @qavs_step5 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background</p>
+        )
         header :local_assessment_general_header, "General information" do
           context %(
             <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the QAVS local assessment guide that you can download from your dashboard page. The guide provides helpful tips on approaching the assessment.<p>
@@ -457,6 +460,20 @@ class AwardYears::V2022::QAEForms
               If you are not ready to submit yet, you can save your assessment and come back later.
             </p>
           )
+          alternative_notices [%(
+              <p class='govuk-hint'>
+                You will be able to edit the assessment any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
+              </p>
+            ),%(
+            <p class='govuk-hint'>
+              <strong>
+                Only main lieutenancy office users can submit the assessment.
+              </strong>
+            </p>
+            <p class='govuk-hint'>
+              Please save your assessment and inform your main point of contact at the lieutenancy office that it is ready for their review.
+            </p>
+          )]
         end
       end
     end

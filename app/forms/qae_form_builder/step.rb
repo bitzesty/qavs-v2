@@ -160,6 +160,10 @@ class QAEFormBuilder
       end
     end
 
+    def notice notice
+      @step.notice = notice
+    end
+
     private
 
     def create_question builder_klass, klass, id, title, opts={}, &block
@@ -182,13 +186,17 @@ class QAEFormBuilder
       @submit.notice = notice
     end
 
+    def alternative_notices notices
+      @submit.alternative_notices = notices
+    end
+
     def style style
       @submit.style = style
     end
   end
 
   class StepSubmit
-    attr_accessor :notice, :style, :text
+    attr_accessor :notice, :style, :text, :alternative_notices
 
     def initialize text
       @text = text
@@ -196,7 +204,7 @@ class QAEFormBuilder
   end
 
   class Step
-    attr_accessor :title_key, :opts, :questions, :form, :context, :submit
+    attr_accessor :title_key, :opts, :questions, :form, :context, :submit, :notice
 
     def initialize form, title_key, opts={}
       @form = form
