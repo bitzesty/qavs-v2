@@ -1,16 +1,11 @@
 .govuk-fieldset role="group" aria-labelledby="q_#{question.key}_label" id="q_#{question.key}"
   .govuk-form-group
-    label.govuk-label for="full-name"
-      | Full name
+    label.govuk-label for="primary_assessor_name"
+      | Full name of the first assessor
     span.govuk-error-message
-    input.govuk-input.govuk-input--width-20.js-trigger-autosave#full-name type="text" name=question.input_name(suffix: 'full_name') value=question.input_value(suffix: 'full_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
+    input.govuk-input.govuk-input--width-20.js-trigger-autosave#primary_assessor_name type="text" name=question.input_name(suffix: 'primary_assessor_name') value=question.input_value(suffix: 'primary_assessor_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
   .govuk-form-group
-    label.govuk-label for="email"
-      | Email
+    label.govuk-label for="secondary_assessor_name"
+      | Full name of the second assessor (if applicable)
     span.govuk-error-message
-    input.govuk-input.govuk-input--width-20.js-trigger-autosave#email type="text" name=question.input_name(suffix: 'email') value=question.input_value(suffix: 'email') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
-  .govuk-form-group
-    label.govuk-label for="phone"
-      | Phone number
-    span.govuk-error-message
-    input.govuk-input.govuk-input--width-10.js-trigger-autosave#phone type="text" name=question.input_name(suffix: 'phone_number') value=question.input_value(suffix: 'phone_number') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])
+    input.govuk-input.govuk-input--width-20.js-trigger-autosave.not-required#secondary_assessor_name type="text" name=question.input_name(suffix: 'secondary_assessor_name') value=question.input_value(suffix: 'secondary_assessor_name') autocomplete="off" *possible_read_only_ops(question.step.opts[:id])

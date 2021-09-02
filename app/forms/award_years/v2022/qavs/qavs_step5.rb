@@ -10,14 +10,7 @@ class AwardYears::V2022::QAEForms
         end
 
         assessor_details :assessor_details, 'Assessor details' do
-          sub_ref "E1.1"
-
-          sub_fields([
-            {full_name: "Full name"},
-            {email: "Email"},
-            {phone_number: "Phone number"}
-          ])
-
+          sub_ref "E 1.1"
           required
         end
 
