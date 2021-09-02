@@ -7,7 +7,7 @@ div role="region" aria-label="list of nominators" tabindex="0"
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Email', @search, :email
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Company', @search, :company_name
+          = sort_link f, 'Group name', @search, :company_name
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Signed in on', @search, :last_sign_in_at
         th.sortable.govuk-table__header scope="col"
@@ -25,10 +25,10 @@ div role="region" aria-label="list of nominators" tabindex="0"
         - UserDecorator.decorate_collection(resources).each do |user|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to edit_admin_user_path(user), class: "link-edit-user" do
+              = link_to edit_admin_user_path(user), class: "govuk-link" do
                 span.ellipsis
                   = user.full_name
-            td.govuk-table__cell = mail_to user.email, user.email, {class: "ellipsis"}
+            td.govuk-table__cell = mail_to user.email, user.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell = user.company
             td.govuk-table__cell
               small.text-muted
