@@ -390,7 +390,7 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        text :nomination_local_assessment_worthy_of_honour_name, "Please give their name" do
+        text :nomination_local_assessment_worthy_of_honour_name, "Please give the name of the person you are recommending" do
           sub_ref "E 8.4"
           style "medium"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
