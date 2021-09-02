@@ -23,8 +23,8 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
       - else
         - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
           tr.govuk-table__row
-            td.govuk-table__cell = lieutenant.full_name
-            td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis"}
+            td.govuk-table__cell = link_to lieutenant.full_name, edit_admin_lieutenant_path(lieutenant), class: "govuk-link"
+            td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell = lieutenant.role.humanize
             td.govuk-table__cell
               small.text-muted
@@ -40,4 +40,4 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
                 small.text-danger
                   ' Not confirmed
             td.govuk-table__cell
-              = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: "link-edit-user", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
+              = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: "govuk-link", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
