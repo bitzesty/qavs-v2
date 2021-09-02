@@ -10,7 +10,7 @@ class Admin::FormAnswersController < Admin::BaseController
     :show,
     :eligibility,
     :update,
-    :update_financials,
+    :update_verdict,
     :save,
     :remove_audit_certificate
   ]
@@ -72,6 +72,7 @@ class Admin::FormAnswersController < Admin::BaseController
 
     respond_to do |format|
       format.html do
+        @admin_verdict = resource.admin_verdict
         @audit_events = FormAnswerAuditor.new(resource).get_audit_events
       end
 
@@ -178,6 +179,20 @@ class Admin::FormAnswersController < Admin::BaseController
     end
   end
 
+  def update_verdict
+    @admin_verdict = resource.admin_verdict || resource.build_admin_verdict
+
+    authorize @admin_verdict, :update?
+
+    @admin_verdict.attributes = verdict_params
+
+    if @admin_verdict.save
+      redirect_to [:admin, resource], success: "National assessment and Royal approval outcome successfully saved."
+    else
+      render :show
+    end
+  end
+
   def edit
     authorize resource
     @form = resource.award_form.decorate(answers: HashWithIndifferentAccess.new(resource.document))
@@ -240,5 +255,12 @@ class Admin::FormAnswersController < Admin::BaseController
     else
       "application-admin"
     end
+  end
+
+  def verdict_params
+    params.require(:admin_verdict).permit(
+      :outcome,
+      :description
+    )
   end
 end

@@ -25,8 +25,6 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -56,6 +54,39 @@ CREATE SEQUENCE public.accounts_id_seq
 --
 
 ALTER SEQUENCE public.accounts_id_seq OWNED BY public.accounts.id;
+
+
+--
+-- Name: admin_verdicts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admin_verdicts (
+    id bigint NOT NULL,
+    outcome character varying,
+    description text,
+    form_answer_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: admin_verdicts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.admin_verdicts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: admin_verdicts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.admin_verdicts_id_seq OWNED BY public.admin_verdicts.id;
 
 
 --
@@ -2561,6 +2592,13 @@ ALTER TABLE ONLY public.accounts ALTER COLUMN id SET DEFAULT nextval('public.acc
 
 
 --
+-- Name: admin_verdicts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts ALTER COLUMN id SET DEFAULT nextval('public.admin_verdicts_id_seq'::regclass);
+
+
+--
 -- Name: admins id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2783,6 +2821,14 @@ ALTER TABLE ONLY public.versions ALTER COLUMN id SET DEFAULT nextval('public.ver
 
 ALTER TABLE ONLY public.accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_verdicts admin_verdicts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts
+    ADD CONSTRAINT admin_verdicts_pkey PRIMARY KEY (id);
 
 
 --
@@ -3054,6 +3100,13 @@ ALTER TABLE ONLY public.versions
 --
 
 CREATE INDEX index_accounts_on_owner_id ON public.accounts USING btree (owner_id);
+
+
+--
+-- Name: index_admin_verdicts_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_admin_verdicts_on_form_answer_id ON public.admin_verdicts USING btree (form_answer_id);
 
 
 --
@@ -3485,6 +3538,14 @@ ALTER TABLE ONLY public.support_letter_attachments
 
 
 --
+-- Name: admin_verdicts fk_rails_23f1653342; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts
+    ADD CONSTRAINT fk_rails_23f1653342 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
 -- Name: palace_invites fk_rails_40aaf5af73; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3799,6 +3860,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210816072005'),
 ('20210817084427'),
 ('20210819140008'),
-('20210826124140');
+('20210826124140'),
+('20210831085355');
 
 

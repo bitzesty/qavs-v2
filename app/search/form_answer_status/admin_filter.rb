@@ -3,44 +3,8 @@ class FormAnswerStatus::AdminFilter
   include NomineeActivityHelper
 
   SUB_OPTIONS = {
-    missing_sic_code: {
-      label: "Missing SIC code"
-    },
     assessors_not_assigned: {
       label: "Assessors not assigned"
-    },
-    primary_assessment_submitted: {
-      label: "Primary Assessment submitted"
-    },
-    secondary_assessment_submitted: {
-      label: "Secondary Assessment submitted"
-    },
-    primary_and_secondary_assessments_submitted: {
-      label: "Primary and Secondary Assessments submitted"
-    },
-    primary_assessment_not_submitted: {
-      label: "Primary Assessment not submitted"
-    },
-    secondary_assessment_not_submitted: {
-      label: "Secondary Assessment not submitted"
-    },
-    recommendation_disperancy: {
-      label: "Recommendation discrepancy"
-    },
-    missing_audit_certificate: {
-      label: "Missing Verification of Commercial Figures"
-    },
-    audit_certificate_not_reviewed: {
-      label: "Verification of Commercial Figures - not reviewed yet"
-    },
-    missing_feedback: {
-      label: "Missing Feedback"
-    },
-    missing_press_summary: {
-      label: "Missing Press Summary",
-      properties: {
-        checked: "checked"
-      }
     },
     missing_rsvp_details: {
       label: "Missing RSVP Details"
@@ -96,24 +60,10 @@ class FormAnswerStatus::AdminFilter
       label: "Local assessment: not recommended",
       states: [:local_assessment_not_recommended]
     },
-    assessment_in_progress: {
-      label: "Assessment in progress",
-      states: [:assessment_in_progress]
-    },
-    disqualified: {
-      label: "Disqualified - No Verification of Commercial Figures",
-      states: [:disqualified]
-    },
     recommended: {
-      label: "Recommended",
+      label: "Shortlisted",
       states: [
-        :recommended
-      ]
-    },
-    reserve: {
-      label: "Reserved",
-      states: [
-        :reserved
+        :shortlisted
       ]
     },
     not_recommended: {
@@ -126,6 +76,18 @@ class FormAnswerStatus::AdminFilter
       label: "Not eligible",
       states: [
         :not_eligible
+      ]
+    },
+    undecided: {
+      label: "Undecided",
+      states: [
+        :undecided
+      ]
+    },
+    no_royal_approval: {
+      label: "No Royal approval",
+      states: [
+        :no_royal_approval
       ]
     },
     withdrawn: {

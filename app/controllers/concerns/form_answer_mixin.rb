@@ -31,22 +31,6 @@ module FormAnswerMixin
     end
   end
 
-  def update_financials
-    authorize @form_answer, :update_financials?
-    @form_answer.financial_data = financial_data_ops
-    @form_answer.save
-
-    if request.xhr?
-      head :ok, content_type: "text/html"
-
-      return
-    else
-      flash.notice = "Financial data updated"
-      redirect_to action: :show
-      return
-    end
-  end
-
   def show
     authorize resource, :show?
   end
