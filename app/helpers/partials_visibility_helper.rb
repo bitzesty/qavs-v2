@@ -5,11 +5,11 @@ module PartialsVisibilityHelper
 
   def show_press_summary_subsection?
     (@form_answer.awarded? || @form_answer.shortlisted?) &&
-      admin_or_assined_assessor?
+      admin_or_assigned_assessor?
   end
 
   def show_palace_attendees_subsection?
-    @form_answer.awarded? && admin_or_assined_assessor?
+    @form_answer.awarded? && admin_or_assigned_assessor?
   end
 
   def show_form_answer_attachment?(attachment)
@@ -22,7 +22,7 @@ module PartialsVisibilityHelper
 
   private
 
-  def admin_or_assined_assessor?
+  def admin_or_assigned_assessor?
     current_subject.is_a?(Admin) ||
     current_subject.assigned?(@form_answer)
   end
