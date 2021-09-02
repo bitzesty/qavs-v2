@@ -21,8 +21,8 @@
         - AdminDecorator.decorate_collection(resources).each do |admin|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to admin.full_name, edit_admin_admin_path(admin), class: 'link-edit-user'
-            td.govuk-table__cell = mail_to admin.email, admin.email, {class: "ellipsis"}
+              = link_to admin.full_name, edit_admin_admin_path(admin), class: "govuk-link"
+            td.govuk-table__cell = mail_to admin.email, admin.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
               small.text-muted
                 span.visible-lg
