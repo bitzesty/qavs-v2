@@ -24,8 +24,8 @@ div role="region" aria-label="list of group leaders" tabindex="0"
         - GroupLeaderDecorator.decorate_collection(resources).each do |group_leader|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: 'link-edit-user'
-            td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis"}
+              = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: "govuk-link"
+            td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
               small.text-muted
                 - if group_leader.last_sign_in_at.present?
@@ -48,4 +48,4 @@ div role="region" aria-label="list of group leaders" tabindex="0"
                 small.text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_group_leader_path(group_leader)
+              = link_to "Edit user", edit_admin_group_leader_path(group_leader), class: "govuk-link"
