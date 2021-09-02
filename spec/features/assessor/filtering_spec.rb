@@ -12,7 +12,7 @@ describe "As Assessor I want to filter applications", js: true do
   before do
     @forms = []
     4.times do
-      @forms << create(:form_answer, state: "assessment_in_progress", sub_group: assessor.sub_group)
+      @forms << create(:form_answer, state: "local_assessment_recommended", sub_group: assessor.sub_group)
     end
 
     @forms.each.map do |form|
