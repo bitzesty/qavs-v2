@@ -6,6 +6,7 @@ class AwardYears::V2022::QAEForms
         notice %(
           <p class=govuk-body>Please note your answers are being saved automatically in the background</p>
         )
+
         header :local_assessment_general_header, "General information" do
           context %(
             <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the QAVS local assessment guide that you can download from your dashboard page. The guide provides helpful tips on approaching the assessment.<p>
