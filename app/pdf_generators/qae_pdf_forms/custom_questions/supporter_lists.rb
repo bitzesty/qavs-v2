@@ -14,8 +14,7 @@ module QaePdfForms::CustomQuestions::SupporterLists
         relationship_to_nominee: entry.relationship_to_nominee
       }
 
-      manually_upload_option = filled_answers["manually_upload"].to_s
-      render_supporter(entry, ops) if manually_upload_option == "yes"
+      render_supporter(entry, ops)
     end
   end
 
