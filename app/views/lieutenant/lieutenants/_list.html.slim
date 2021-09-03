@@ -27,17 +27,17 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
             td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell = lieutenant.role.humanize
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 span.visible-lg
                   = lieutenant.formatted_last_sign_in_at_long
                 span class="govuk-!-display-none"
                   = lieutenant.formatted_last_sign_in_at_short
             td.govuk-table__cell
               - if lieutenant.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l lieutenant.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               = link_to "Edit user", edit_lieutenant_lieutenant_path(lieutenant), class: "govuk-link", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
