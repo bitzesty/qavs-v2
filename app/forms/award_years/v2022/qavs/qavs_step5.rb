@@ -3,6 +3,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step5
       @qavs_step5 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background</p>
+        )
+
         header :local_assessment_general_header, "General information" do
           context %(
             <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the QAVS local assessment guide that you can download from your dashboard page. The guide provides helpful tips on approaching the assessment.<p>
@@ -10,15 +14,12 @@ class AwardYears::V2022::QAEForms
         end
 
         assessor_details :assessor_details, 'Assessor details' do
-          sub_ref "E1.1"
-
-          sub_fields([
-            {full_name: "Full name"},
-            {email: "Email"},
-            {phone_number: "Phone number"}
-          ])
-
+          sub_ref "E 1.1"
           required
+          sub_fields([
+            { primary_assessor_name: "Full name of the first assessor" },
+            { secondary_assessor_name: "Full name of the second assessor (if applicable)", ignore_validation: true }
+          ])
         end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
@@ -206,12 +207,13 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.8"
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
-
+          required
         end
 
         textarea :nomination_local_assessment_form_how_benefits_local_and_abroad, "In what ways does the group's existence benefit the local community as well as people elsewhere?" do
           sub_ref "E 4.9"
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
+          required
         end
 
         header :local_assessments_volunteers_header, "Role and status of volunteers" do
@@ -393,19 +395,32 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        text :nomination_local_assessment_worthy_of_honour_name, "Please give their name" do
+        text :nomination_local_assessment_worthy_of_honour_name, "Please give the name of the person you are recommending" do
           sub_ref "E 8.4"
-          style "medium"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          required
+          style "medium"
         end
 
         textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain in one sentence why they might merit this" do
           sub_ref "E 8.5"
+          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           context %(
             <p class='govuk-hint'>Please note, the QAVS team will pass this information onto the DCMS Honours team. They might get in touch with you in due course to ask for further details.</p>
           )
+          required
           words_max 50
+        end
+
+        assessor_details :assessor_nominating_member_worthy_of_honour, "Assessor recommending an individual for a national Honour details" do
+          sub_ref "E 8.6"
+          required
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          sub_fields([
+            { full_name: "Full name" },
+            { email: "Email address" },
+            { phone: "Phone number (optional)", ignore_validation: true }
+          ])
         end
 
         textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant evaluation summary" do
@@ -464,6 +479,20 @@ class AwardYears::V2022::QAEForms
               If you are not ready to submit yet, you can save your assessment and come back later.
             </p>
           )
+          alternative_notices [%(
+              <p class='govuk-hint'>
+                You will be able to edit the assessment any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
+              </p>
+            ),%(
+            <p class='govuk-hint'>
+              <strong>
+                Only main lieutenancy office users can submit the assessment.
+              </strong>
+            </p>
+            <p class='govuk-hint'>
+              Please save your assessment and inform your main point of contact at the lieutenancy office that it is ready for their review.
+            </p>
+          )]
         end
       end
     end
