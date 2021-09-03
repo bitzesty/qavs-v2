@@ -9,9 +9,10 @@ describe "Admin assigns assessors", %(
 ), js: true do
 
   let(:subject) { create(:admin) }
-  let!(:settings) { create(:settings, :expired_submission_deadlines) }
   let!(:form_answer_1) { create(:form_answer, :submitted) }
   let!(:form_answer_2) { create(:form_answer, :submitted) }
+  let!(:settings) { create(:settings, :expired_submission_deadlines) }
+
 
   describe "Form submission" do
     before do

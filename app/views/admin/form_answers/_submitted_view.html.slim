@@ -7,6 +7,9 @@
     .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
       = render "admin/form_answers/section_appraisal_form", assessment: assessment
 
+  = render "admin/form_answers/verdict"
+
+
   - if show_winners_section?
     - if show_press_summary_subsection?
       = render "section_press_summary"

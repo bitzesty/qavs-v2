@@ -37,11 +37,14 @@
     - unless QAE.hide_pdf_links?
       li.divider
       li.govuk-body.step-past.step-download
-        - if current_user
-          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
-        - else
+        - if policy(:form_answer).can_download_attachments?
           = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
-
+          -if @form_answer.support_letters.any?
+            = render "qae_form/supporter_letter_attachments", adjective: 'first', letter: @form_answer.support_letters.first
+            - if @form_answer.support_letters.second.present?
+              = render "qae_form/supporter_letter_attachments", adjective: 'second', letter: @form_answer.support_letters.second
+        - else
+          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
     li.divider
     li.sidebar-helpline.govuk-body
       ' Need help? Call us on
@@ -51,16 +54,12 @@
       ' Alternatively, email us at
       = link_to "queensaward@dcms.gov.uk", "mailto:queensaward@dcms.gov.uk"
 
-    - if submission_deadline && submission_deadline.trigger_at
+    - if submission_deadline && submission_deadline.trigger_at && !lieutenant_nomination?
       .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner"
         .govuk-notification-banner__header
           h2.govuk-notification-banner__title#govuk-notification-banner-title
             | Important
         .govuk-notification-banner__content
           p.govuk-notification-banner__heading
-            - if lieutenant_nomination?
-              | Local assessment submission deadline is
-              =< local_assessment_submission_deadline.decorate.formatted_trigger_time
-            - else
-              | Submission deadline is
-              =< submission_deadline.decorate.formatted_trigger_time
+            | Submission deadline is
+            =< submission_deadline.decorate.formatted_trigger_time

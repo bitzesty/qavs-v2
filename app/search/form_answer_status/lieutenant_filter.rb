@@ -3,18 +3,6 @@ class FormAnswerStatus::LieutenantFilter
   include NomineeActivityHelper
 
   OPTIONS = {
-    eligibility_in_progress: {
-      label: "Eligibility in progress",
-      states: [:eligibility_in_progress]
-    },
-    application_in_progress: {
-      label: "Application in progress",
-      states: [:application_in_progress]
-    },
-    applications_not_submitted: {
-      label: "Applications not submitted",
-      states: [:not_submitted]
-    },
     submitted: {
       label: "Application submitted",
       states: [:submitted]
@@ -26,18 +14,6 @@ class FormAnswerStatus::LieutenantFilter
     admin_eligible_duplicate: {
       label: "Eligible - duplicate to access",
       states: [:admin_eligible_duplicate]
-    },
-    admin_not_eligible_duplicate: {
-      label: "Duplicate for reference",
-      states: [:admin_not_eligible_duplicate]
-    },
-    admin_not_eligible_nominator: {
-      label: "Ineligible - nominator",
-      states: [:admin_not_eligible_nominator]
-    },
-    admin_not_eligible_group: {
-      label: "Ineligible - group",
-      states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {
       label: "Local assessment in progress",
@@ -51,24 +27,10 @@ class FormAnswerStatus::LieutenantFilter
       label: "Local assessment: not recommended",
       states: [:local_assessment_not_recommended]
     },
-    assessment_in_progress: {
-      label: "Assessment in progress",
-      states: [:assessment_in_progress]
-    },
-    disqualified: {
-      label: "Disqualified - No Verification of Commercial Figures",
-      states: [:disqualified]
-    },
     recommended: {
-      label: "Recommended",
+      label: "Shortlisted",
       states: [
-        :recommended
-      ]
-    },
-    reserve: {
-      label: "Reserved",
-      states: [
-        :reserved
+        :shortlisted
       ]
     },
     not_recommended: {
@@ -83,10 +45,22 @@ class FormAnswerStatus::LieutenantFilter
         :not_eligible
       ]
     },
-    withdrawn: {
-      label: "Withdrawn/Ineligible",
+    undecided: {
+      label: "Undecided",
       states: [
-        :withdrawn
+        :undecided
+      ]
+    },
+    no_royal_approval: {
+      label: "No Royal approval",
+      states: [
+        :no_royal_approval
+      ]
+    },
+    not_eligible: {
+      label: "Not eligible",
+      states: [
+        :not_eligible
       ]
     },
     awarded: {
@@ -109,11 +83,5 @@ class FormAnswerStatus::LieutenantFilter
 
   def self.checked_options
     activity_options
-  end
-
-  def self.activity_options
-    option = Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
   end
 end

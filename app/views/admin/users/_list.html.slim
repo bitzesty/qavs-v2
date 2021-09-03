@@ -19,7 +19,7 @@ div role="region" aria-label="list of nominators" tabindex="0"
         tr.govuk-table__row
           td.text-center colspan=100
             br
-            p.p-empty No users found.
+            p.p-empty No nominators found.
             br
       - else
         - UserDecorator.decorate_collection(resources).each do |user|

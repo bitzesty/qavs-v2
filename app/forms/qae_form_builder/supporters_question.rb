@@ -1,6 +1,6 @@
 class QAEFormBuilder
   class SupportersQuestionValidator < QuestionValidator
-    MIN_LIMIT = 2
+    MIN_LIMIT = 0
 
     def errors
       result = super
