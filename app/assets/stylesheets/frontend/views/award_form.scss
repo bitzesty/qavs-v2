@@ -44,7 +44,7 @@
 
   .help-notice {
     background-image: image-url("icon-important-red.png");
-    color: $error-colour;
+    color: $govuk-blue;
 
     // Retina
     @media only screen and (-webkit-min-device-pixel-ratio: 2), not all, not all, not all, only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
@@ -56,6 +56,19 @@
       font-weight: normal;
     }
   }
+}
+
+.step-error-header {
+  color: $govuk-red;
+}
+
+.step-error-icon {
+  background-color: $govuk-red;
+  border-color: $govuk-red
+}
+
+.step-error-bullet {
+  color: $govuk-blue
 }
 
 .show-error-page & {
@@ -224,10 +237,8 @@ select.read-only {
 }
 
 .js-review-sections {
-  list-style-image: image-url("bullet-disc-5px-red.gif");
-
   a {
-    color: $error-colour;
+    color: $govuk-blue;
   }
 }
 
