@@ -27,11 +27,14 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
             td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell = lieutenant.role.humanize
             td.govuk-table__cell
-              .text-muted
-                span.visible-lg
-                  = lieutenant.formatted_last_sign_in_at_long
-                span class="govuk-!-display-none"
-                  = lieutenant.formatted_last_sign_in_at_short
+              - if lieutenant.last_sign_in_at.present?
+                .text-muted
+                  span.visible-lg
+                    = lieutenant.formatted_last_sign_in_at_long
+                  span class="govuk-!-display-none"
+                    = lieutenant.formatted_last_sign_in_at_short
+              - else
+                | Never signed in
             td.govuk-table__cell
               - if lieutenant.confirmed_at.present?
                 .text-muted

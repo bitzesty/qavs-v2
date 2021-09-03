@@ -25,9 +25,12 @@
               = link_to admin.full_name, edit_admin_admin_path(admin), class: "govuk-link"
             td.govuk-table__cell = mail_to admin.email, admin.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
-              .text-muted
-                span.visible-lg
-                  = admin.formatted_last_sign_in_at_long
+              - if admin.last_sign_in_at.present?
+                .text-muted
+                  span.visible-lg
+                    = admin.formatted_last_sign_in_at_long
+              - else
+                | Never signed in
             td.govuk-table__cell
               - if admin.confirmed_at.present?
                 .text-muted

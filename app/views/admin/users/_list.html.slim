@@ -29,11 +29,14 @@ div role="region" aria-label="list of nominators" tabindex="0"
                   = user.full_name
             td.govuk-table__cell = mail_to user.email, user.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
-              .text-muted
-                span.visible-lg
-                  = user.formatted_last_sign_in_at_long
-                span class="govuk-!-display-none"
-                  = user.formatted_last_sign_in_at_short
+              - if user.last_sign_in_at.present?
+                .text-muted
+                  span.visible-lg
+                    = user.formatted_last_sign_in_at_long
+                  span class="govuk-!-display-none"
+                    = user.formatted_last_sign_in_at_short
+              - else
+                | Never signed in
             td.govuk-table__cell
               - if user.confirmed_at.present?
                 .text-muted
