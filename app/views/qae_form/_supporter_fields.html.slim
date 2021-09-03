@@ -46,7 +46,7 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
     button.govuk-button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=users_form_answer_support_letters_url(@form_answer)
       | Submit letter of support
 
-  - if !persisted?
+  - if !persisted
     .visible-read-only
       .govuk-warning-text
         span.govuk-warning-text__icon aria-hidden="true"
