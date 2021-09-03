@@ -19,7 +19,6 @@ class AwardYears::V2022::QAEForms
           classes "question-support-uploads"
           limit 2
           default 1
-          list_type :manual_upload
         end
       end
     end
