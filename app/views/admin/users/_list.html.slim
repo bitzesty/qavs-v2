@@ -29,17 +29,17 @@ div role="region" aria-label="list of nominators" tabindex="0"
                   = user.full_name
             td.govuk-table__cell = mail_to user.email, user.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 span.visible-lg
                   = user.formatted_last_sign_in_at_long
                 span class="govuk-!-display-none"
                   = user.formatted_last_sign_in_at_short
             td.govuk-table__cell
               - if user.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l user.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               - if user.locked_at.present?
