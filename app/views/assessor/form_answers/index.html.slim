@@ -7,17 +7,18 @@ h1.govuk-heading-xl
   .govuk-grid-row
     .govuk-grid-column-one-third
       = f.input :query, label: 'Search', input_html: { class: "medium", type: "search" }
-
-    = render "shared/form_answers/top_statuses_filters", f: f,
-                                                        options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.options),
-                                                        sub_options: FormAnswerStatus::AssessorFilter.collection_for_select(FormAnswerStatus::AssessorFilter.sub_options(current_assessor))
+  .govuk-grid-row
+    = render "assessor/form_answers/filters", f: f,
+                                              activity_options: FormAnswerStatus::AssessorFilter.collection('activity type'),
+                                              assigned_county_options: FormAnswerStatus::AssessorFilter.collection('assigned county')
 
   = hidden_field_tag "search[sort]", params[:search][:sort]
 
-  = render("assessor/form_answers/category_tabs")
+  .govuk-button-group
+    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
+    = link_to "Clear search and filters", assessor_form_answers_path, class: "govuk-button govuk-button--secondary"
 
-  - # this bulk assignment form breaks the flow of the sorting + filtering forms, as the form needs to do a update somewhere else than the forms above and below. So you'll see some duplication of fields. Commented on them so no one removes them by accident
-  = render("assessor/form_answers/bulk_assignment")
+  = render("assessor/form_answers/category_tabs")
 
   div role="region" aria-label="nominations list" tabindex="0"
     table.applications-table.govuk-table
@@ -27,21 +28,17 @@ h1.govuk-heading-xl
           = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
       thead.govuk-table__head
         tr.govuk-table__row
-          - if current_subject.categories_as_lead.include?(category_picker.current_award_type)
-            th.govuk-table__header scope='col'
-              span.if-no-js-hide
-                = check_box_tag :check_all
-          th.sortable.govuk-table__header scope='col' width="250"
-            = sort_link f, "Company", @search, :company_or_nominee_name, disabled: @search.query?
-          th.govuk-table__header scope='col' width="250"
+          th.sortable.govuk-table__header scope="col" width="250"
+            = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
+          th.govuk-table__header scope="col" width="250"
             | Status
-          th.sortable.govuk-table__header scope='col' width="70"
-            = sort_link f, "SIC Code", @search, :sic_code, disabled: @search.query?
-          th.sortable.govuk-table__header scope='col' width="130"
-            = sort_link f, "Applied before", @search, :applied_before, disabled: @search.query?
-          = render("assessor/form_answers/assessor_header", f: f)
-          th.sortable.govuk-table__header scope='col' width="130"
+          th.govuk-table__header scope="col" width="200"
+            | Lord Lieutenancy assigned
+          th.govuk-table__header scope="col" width="200"
+            | Type of group
+          th.sortable.govuk-table__header scope="col" width="130"
             = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
-        = render(partial: "assessor/form_answers/list_body")
+          th.govuk-table__header scope="col" View
+        = render(partial: "list_body")
 
   = paginate @form_answers

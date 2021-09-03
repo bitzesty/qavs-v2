@@ -106,13 +106,34 @@ $(".toggable-form").each(function() {
   });
 
   form.on('click', '.toggable-form__save', function(e) {
+    if (form.closest("form").hasClass("assessment-togglable")) {
+      return // skipping all this, use standard remote: true
+    }
+
+    if (form.closest("form").hasClass("final-verdict-togglable")) {
+      return // skipping all this, use standard remote: true
+    }
+
     e.preventDefault();
     e.stopPropagation();
 
     form.closest('form').find('[type="submit"]').trigger('click');
 
-    form.find('.toggable-form__read .toggable-form__content:first').text(form.find('textarea').first().val())
-    form.find('.toggable-form__read .toggable-form__content:last').text(form.find('textarea').last().val())
+    if (form.find('textarea.assessor-notes-input').length) {
+      form.find('p.assessor-notes').text(form.find('textarea.assessor-notes-input').first().val());
+      form.find('p.assessor-notes').removeClass('govuk-hint');
+
+    } else {
+      form.find('.toggable-form__read .toggable-form__content:first').text(form.find('textarea').first().val());
+      form.find('.toggable-form__read .toggable-form__content:last').text(form.find('textarea').last().val());
+    }
+
+    if (form.find('select.evaluation-rate-input').length) {
+      var val = form.find('select.evaluation-rate-input').first().val();
+      form.find('span.evaluation-rate').text(val);
+      form.find('p.evaluation-rate').removeClass("govuk-!-display-none");
+
+    }
 
     form.attr("aria-expanded", "false");
     form.find('.toggable-form__trigger').focus();
@@ -125,6 +146,10 @@ $(".toggable-form").each(function() {
     form.attr("aria-expanded", "false");
     form.find('.toggable-form__trigger').focus();
   });
+
+  if (form.attr("aria-expanded") == "true") {
+    $(".toggable-form__trigger", form).click()
+  }
 })
 
 $('.autosubmit-on-change').each(function() {

@@ -11,23 +11,14 @@ class Assessor::FormAnswersController < Assessor::BaseController
   end
 
   helper_method :resource,
-                :primary_assessment,
-                :secondary_assessment,
-                :moderated_assessment,
-                :case_summary_assessment,
                 :category_picker
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= {
-      sort: "company_or_nominee_name",
-      search_filter: {
-        status: FormAnswerStatus::AssessorFilter::checked_options.invert.values
-      }
-    }
+    params[:search] ||= FormAnswerSearch.default_search
     params[:search].permit!
     scope = current_assessor.applications_scope(
-      params[:year].to_s == "all_years" ? nil : @award_year
+      @award_year
     )
 
     if params[:search][:query].blank? && category_picker.show_award_tabs_for_assessor?
@@ -50,7 +41,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
   private
 
   def resource
-    @form_answer ||= current_assessor.extended_applications_scope.find(params[:id]).decorate
+    @form_answer ||= current_assessor.applications_scope(@award_year).find(params[:id]).decorate
   end
 
   def category_picker

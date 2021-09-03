@@ -63,7 +63,7 @@ SimpleForm.setup do |config|
     b.use :input, class: 'govuk-select'
   end
 
-  config.wrappers :textarea, class: 'govuk-form-group' do |b|
+  config.wrappers :textarea, class: 'govuk-form-group', error_class: "govuk-form-group--error" do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength

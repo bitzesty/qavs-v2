@@ -42,11 +42,11 @@ class FormAnswer < ApplicationRecord
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
     has_one :feedback, dependent: :destroy
-    # has_one :press_summary, dependent: :destroy
     has_one :draft_note, as: :notable, dependent: :destroy
     has_one :palace_invite, dependent: :destroy
     has_one :citation, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy
+    has_one :admin_verdict, dependent: :destroy
 
     belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
     belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id
@@ -58,29 +58,7 @@ class FormAnswer < ApplicationRecord
     has_many :comments, as: :commentable, dependent: :destroy
     has_many :form_answer_transitions, autosave: false
     has_many :assessor_assignments, dependent: :destroy
-    has_many :lead_or_primary_assessor_assignments,
-             -> { where.not(submitted_at: nil)
-                       .where(position: [3, 4])
-                       .order(position: :desc) },
-             class_name: "AssessorAssignment",
-             foreign_key: :form_answer_id
-    has_many :assessors, through: :assessor_assignments do
-      def primary
-        where(assessor_assignments:
-          {
-            position: 0
-          }
-        ).first
-      end
-
-      def secondary
-        where(assessor_assignments:
-          {
-            position: 1
-          }
-        ).first
-      end
-    end
+    has_many :assessors, foreign_key: :sub_group, primary_key: :sub_group
   end
 
   begin :validations
@@ -93,7 +71,7 @@ class FormAnswer < ApplicationRecord
 
   begin :scopes
     scope :for_year, -> (year) { joins(:award_year).where(award_years: { year: year }) }
-    scope :shortlisted, -> { where(state: %w(reserved recommended)) }
+    scope :shortlisted, -> { where(state: %w(shortlisted)) }
     scope :not_shortlisted, -> { where(state: "not_recommended") }
     scope :winners, -> { where(state: "awarded") }
     scope :unsuccessful_applications, -> { submitted.where("state not in ('awarded', 'withdrawn')") }
@@ -129,6 +107,7 @@ class FormAnswer < ApplicationRecord
     before_save :set_progress
     before_save :set_region
     before_save :assign_searching_attributes
+    before_save :assign_attributes_from_document
 
     before_create :set_account
     before_create :set_user_info
@@ -259,7 +238,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def shortlisted?
-    state == "reserved" || state == "recommended"
+    state == "shortlisted"
   end
 
   def was_marked_as_eligible?
@@ -350,6 +329,9 @@ class FormAnswer < ApplicationRecord
     user.agree_sharing_of_details_with_lieutenancies ? "Yes" : "No"
   end
 
+  def final_state?
+    FormAnswerStateMachine::FINAL_VERDICT_STATES.include?(state.to_sym)  end
+
   private
 
   def set_award_year
@@ -380,29 +362,17 @@ class FormAnswer < ApplicationRecord
     end
 
     self.nominee_full_name = nominee_full_name_from_document
-    self.nominee_activity = nominee_activity_from_document
-    self.nominator_full_name = nominator_full_name_from_document
-    self.nominator_email = nominator_email_from_document
   end
 
   def nominee_full_name_from_document
     "#{document['nominee_info_first_name']} #{document['nominee_info_last_name']}".strip
   end
 
-  def nominee_activity_from_document
-    document["nominee_activity"]
-  end
-
-  def nominator_full_name_from_document
-    document["nominator_name"]
-  end
-
-  def nominator_email_from_document
-    document["nominator_email"]
-  end
-
-  def ceremonial_county_from_document
-    document["ceremonial_county_id"]
+  def assign_attributes_from_document
+    self.nominee_activity = document["nominee_activity"]
+    self.nominator_full_name = document["nominator_name"]
+    self.nominator_email = document["nominator_email"]
+    self.secondary_activity = document["secondary_activity"]
   end
 
   def set_account

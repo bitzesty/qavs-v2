@@ -59,12 +59,6 @@ class FormController < ApplicationController
       if params[:step] == "letters-of-support"
         redirect_to form_form_answer_supporters_path(@form_answer)
         return
-      elsif params[:step] == "add-website-address-documents" && params[:form_refresh].blank?
-        redirect_to form_form_answer_form_attachments_url(@form_answer)
-        return
-      elsif params[:step] == "nominee-background"
-        redirect_to form_form_answer_positions_url(@form_answer)
-        return
       end
 
       if this_form_eligible?
@@ -94,7 +88,7 @@ class FormController < ApplicationController
         end
 
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
-        @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
+        @form_answer.current_step = params[:current_step] || @form.steps.first.title_to_param
         if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
@@ -118,13 +112,13 @@ class FormController < ApplicationController
             redirect_to submit_confirm_url(@form_answer)
           else
             if saved
-              params[:next_step] ||= @form.steps[1].title.parameterize
+              params[:next_step] ||= @form.steps[1].title_to_param
               redirect_to edit_form_url(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               # avoid redirecting to supporters page
               if !params[:step] || params[:step] == "letters-of-support"
-                params[:step] = @form.steps.first.title.parameterize
+                params[:step] = @form.steps.first.title_to_param
               end
 
               render template: "qae_form/show"

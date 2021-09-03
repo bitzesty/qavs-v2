@@ -3,10 +3,10 @@ class AssessorAssignmentService
   DESC_REGEX = /_desc$/
   RATE_REGEX = /_rate$/
 
-  def initialize(params, current_subject)
+  def initialize(params, current_subject, new_resource = nil)
     @params = params
     @current_subject = current_subject
-    @resource = AssessorAssignment.find(params[:id])
+    @resource = new_resource || AssessorAssignment.find(params[:id])
     normalize_params
   end
 

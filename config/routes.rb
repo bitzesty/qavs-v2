@@ -158,7 +158,7 @@ Rails.application.routes.draw do
       resources :draft_notes, only: [:create, :update]
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :reports, only: [:index, :show]
 
     resources :assessment_submissions, only: [:create] do
@@ -226,7 +226,7 @@ Rails.application.routes.draw do
       end
 
       member do
-        patch :update_financials
+        post :update_verdict
         post :save
         get :review
         get :eligibility
@@ -238,17 +238,7 @@ Rails.application.routes.draw do
       resources :form_answer_attachments, only: [:create, :show, :destroy]
       resources :support_letters, only: [:show]
       resources :list_of_procedures, only: [:show]
-      resources :feedbacks, only: [:create, :update] do
-        member do
-          post :submit
-          post :unlock
-        end
-
-        get :download_pdf, on: :collection
-      end
-      resources :case_summaries, only: [:index]
       resources :draft_notes, only: [:create, :update]
-      resources :review_corp_responsibility, only: [:create]
     end
 
     resource :settings, only: [:show] do
@@ -260,7 +250,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :assessment_submissions, only: [:create] do
       patch :unlock, on: :member
     end

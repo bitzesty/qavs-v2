@@ -19,7 +19,8 @@ class Assessor < ApplicationRecord
   has_many :assessor_assignments
 
   has_many :form_answers,
-           through: :assessor_assignments
+           foreign_key: :sub_group,
+           primary_key: :sub_group
 
   pg_search_scope :basic_search,
                   against: [
@@ -40,21 +41,8 @@ class Assessor < ApplicationRecord
     super && !deleted?
   end
 
-  def applications_scope(award_year = nil)
-    join = "LEFT OUTER JOIN assessor_assignments ON
-    assessor_assignments.form_answer_id = form_answers.id"
-
-    scope = if award_year
-      award_year.form_answers
-    else
-      FormAnswer
-    end
-
-    out = scope.joins(join)
-    out.where("
-      (assessor_assignments.position in (?) AND assessor_assignments.assessor_id = ?)
-      AND form_answers.state NOT IN (?)
-    ", [0, 1], id, "withdrawn")
+  def applications_scope(award_year)
+    award_year.form_answers.where(state: FormAnswerStateMachine::ASSESSOR_VISIBLE_STATES, sub_group: sub_group)
   end
 
   def full_name

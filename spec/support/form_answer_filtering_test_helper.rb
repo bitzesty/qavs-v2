@@ -6,45 +6,39 @@ module FormAnswerFilteringTestHelper
   def click_status_option(val)
     button = find('#apply-nomination-filters')
 
-    ['status', 'sub-status', 'nominated-lieutenancy', 'assigned-lieutenancy', 'activity'].each do |field|
-      within ".#{field}-filter" do
-        filter_dropdown = find(".dropdown-checkboxes__selection")
-        filter_dropdown.click
+    ['status', 'sub-status', 'activity', 'nominated-lieutenancy', 'assigned-lieutenancy'].each do |field|
+      if page.has_css?(".#{field}-filter")
+        within ".#{field}-filter" do
+          filter_dropdown = find(".dropdown-checkboxes__selection")
+          filter_dropdown.click
 
-        expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
+          expect(page).to have_selector(".dropdown-checkboxes--open", visible: true)
 
-        within ".dropdown-checkboxes__list" do
-          all(".dropdown-checkboxes__option").each do |option|
-            # next if li.all(".label-contents").count == 0
+          within ".dropdown-checkboxes__list" do
+            all(".dropdown-checkboxes__option").each do |option|
+              # next if li.all(".label-contents").count == 0
 
-            # content = li.first(".label-contents")
-            if option.text.to_s == val
-              option.click
-              filter_dropdown.click
-              button.click
+              # content = li.first(".label-contents")
+              if option.text.to_s == val
+                option.click
+                filter_dropdown.click
+                button.click
 
-              return
+                return
+              end
             end
           end
         end
       end
     end
-    
+
     fail "NotFoundOption"
   end
 
   def assign_dummy_assessors(form_answers, assessor)
     Array(form_answers).each do |fa|
-      p = fa.assessor_assignments.primary
-      p.assessor_id = assessor.id
-      p.save!
-    end
-  end
-
-  def assign_dummy_feedback(form_answers, submitted = true)
-    Array(form_answers).each do |fa|
-      feedback = fa.build_feedback(submitted: submitted)
-      feedback.save(validate: false)
+      fa.sub_group = assessor.sub_group
+      fa.save!
     end
   end
 

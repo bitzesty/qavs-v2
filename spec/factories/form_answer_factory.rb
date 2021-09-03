@@ -23,6 +23,12 @@ FactoryBot.define do
       state { "local_assessment_recommended" }
     end
 
+    trait :local_assessment_not_recommended do
+      submitted_at { Time.current }
+
+      state { "local_assessment_not_recommended" }
+    end
+
     trait :admin_eligible do
       submitted_at { Time.current }
 
@@ -34,9 +40,9 @@ FactoryBot.define do
       state { "awarded" }
     end
 
-    trait :recommended do
+    trait :shortlisted do
       submitted_at { Time.current }
-      state { "recommended" }
+      state { "shortlisted" }
     end
 
     trait :withdrawn do

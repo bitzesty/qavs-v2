@@ -6,6 +6,8 @@ Vigilion.configure do |config|
   # Integration strategy (default is :url)
   # config.integration = :local
 
+  config.debug = true
+
   # By default vigilion will be bypassed in development and test environments.
   # Disable vigilion scanning entirely even in production environments:
   # config.loopback = true
@@ -14,4 +16,7 @@ Vigilion.configure do |config|
   config.loopback = ENV["DISABLE_VIRUS_SCANNER"] == "true"
   # Specify different loopback_response (default is 'clean')
   # config.loopback_response = 'infected'
+  config.active_job = ENV["VIRUS_SCANNER_ACTIVE_JOB"] == "true"
+
+  config.do_not_unencode = true
 end

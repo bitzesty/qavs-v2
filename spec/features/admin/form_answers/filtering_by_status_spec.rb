@@ -10,7 +10,6 @@ describe "As Admin I want to filter applications", js: true do
   let!(:ceremonial_county_1) { create(:ceremonial_county, name: "A") }
   let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
 
-
   before do
     @forms = []
     @forms << create(:form_answer, state: "not_submitted")
@@ -56,28 +55,14 @@ describe "As Admin I want to filter applications", js: true do
     # 4 Applications
     assert_results_number(4)
 
-    click_status_option("Missing SIC code")
-    assert_results_number(3)
-
     # Add assesors to all applications and check filter
-    assign_dummy_assessors(@forms, create(:assessor, :lead_for_all))
+    assign_dummy_assessors(@forms, create(:assessor))
     click_status_option("Assessors not assigned")
     assert_results_number(0)
 
     # Uncheck filter
     click_status_option("Assessors not assigned")
-    assert_results_number(3)
-
-    # Add feedback to the first 3 applications and check filter
-    first_three_forms = @forms.slice(0..2)
-    assign_dummy_feedback(first_three_forms)
-    click_status_option("Missing Feedback")
-    assert_results_number(1)
-
-    # Add press summary to all applications and check filter
-    # assign_dummy_press_summary(@forms)
-    # click_status_option("Missing Press Summary")
-    # assert_results_number(0)
+    assert_results_number(4)
   end
 
   it "filters by assigned ceremonial county" do
@@ -99,7 +84,7 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(4)
     assign_activity(@forms.first, "ART")
 
-    # Untick sport activity filter 
+    # Untick sport activity filter
     click_status_option("Sports")
     assert_results_number(1)
   end
