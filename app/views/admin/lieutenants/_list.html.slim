@@ -35,7 +35,7 @@ div role="region" aria-label="list of lieutenancy office users" tabindex="0"
             td.govuk-table__cell
               = lieutenant.role_text
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 - if lieutenant.last_sign_in_at.present?
                   span.visible-lg
                     = lieutenant.formatted_last_sign_in_at_long
@@ -43,17 +43,17 @@ div role="region" aria-label="list of lieutenancy office users" tabindex="0"
                   | Never signed in
             td.govuk-table__cell
               - if lieutenant.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l lieutenant.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               - if lieutenant.locked_at.present?
-                small.text-muted
+                .text-muted
                   = l lieutenant.locked_at, format: :date_at_time
               - else
-                small.text-muted
+                .text-muted
                   ' Not locked
             td.govuk-table__cell
               = link_to "Edit user", edit_admin_lieutenant_path(lieutenant), class: "govuk-link", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
