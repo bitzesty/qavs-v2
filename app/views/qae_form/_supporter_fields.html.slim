@@ -3,7 +3,7 @@
 = supporter.inspect
 
 li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
-  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"]) *possible_read_only_ops(question.step.opts[:id])
+  input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"] *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
 
   .govuk-form-group
