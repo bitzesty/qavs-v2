@@ -40,9 +40,9 @@ FactoryBot.define do
       state { "awarded" }
     end
 
-    trait :recommended do
+    trait :shortlisted do
       submitted_at { Time.current }
-      state { "recommended" }
+      state { "shortlisted" }
     end
 
     trait :withdrawn do

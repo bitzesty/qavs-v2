@@ -15,16 +15,34 @@ class FormAnswerStatus::AssessorFilter
       states: [:disqualified]
     },
     recommended: {
-      label: "Recommended",
-      states: [:recommended]
+      label: "Shortlisted",
+      states: [
+        :shortlisted
+      ]
     },
     not_recommended: {
-      label: "Not Recommended",
-      states: [:not_recommended]
+      label: "Not recomended",
+      states: [
+        :not_recommended
+      ]
     },
-    reserved: {
-      label: "Reserved",
-      states: [:reserved]
+    not_eligible: {
+      label: "Not eligible",
+      states: [
+        :not_eligible
+      ]
+    },
+    undecided: {
+      label: "Undecided",
+      states: [
+        :undecided
+      ]
+    },
+    no_royal_approval: {
+      label: "No Royal approval",
+      states: [
+        :no_royal_approval
+      ]
     },
     withdrawn: {
       label: "Withdrawn/Ineligible",
@@ -44,42 +62,10 @@ class FormAnswerStatus::AssessorFilter
     }
   }
 
+
   SUB_OPTIONS = {
-    missing_sic_code: {
-      label: "Missing SIC code"
-    },
     assessors_not_assigned: {
       label: "Assessors not assigned"
-    },
-    primary_assessment_submitted: {
-      label: "Primary Assessment submitted"
-    },
-    secondary_assessment_submitted: {
-      label: "Secondary Assessment submitted"
-    },
-    primary_and_secondary_assessments_submitted: {
-      label: "Primary and Secondary Assessments submitted"
-    },
-    primary_assessment_not_submitted: {
-      label: "Primary Assessment not submitted"
-    },
-    secondary_assessment_not_submitted: {
-      label: "Secondary Assessment not submitted"
-    },
-    recommendation_disperancy: {
-      label: "Recommendation discrepancy"
-    },
-    missing_audit_certificate: {
-      label: "Missing Verification of Commercial Figures"
-    },
-    audit_certificate_not_reviewed: {
-      label: "Verification of Commercial Figures - not reviewed yet"
-    },
-    missing_feedback: {
-      label: "Missing Feedback"
-    },
-    missing_press_summary: {
-      label: "Missing Press Summary"
     }
   }
 

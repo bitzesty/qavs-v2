@@ -27,30 +27,34 @@ class FormAnswerStatus::LieutenantFilter
       label: "Local assessment: not recommended",
       states: [:local_assessment_not_recommended]
     },
-    assessment_in_progress: {
-      label: "Assessment in progress",
-      states: [:assessment_in_progress]
-    },
-    disqualified: {
-      label: "Disqualified - No Verification of Commercial Figures",
-      states: [:disqualified]
-    },
     recommended: {
-      label: "Recommended",
+      label: "Shortlisted",
       states: [
-        :recommended
-      ]
-    },
-    reserve: {
-      label: "Reserved",
-      states: [
-        :reserved
+        :shortlisted
       ]
     },
     not_recommended: {
       label: "Not recomended",
       states: [
         :not_recommended
+      ]
+    },
+    not_eligible: {
+      label: "Not eligible",
+      states: [
+        :not_eligible
+      ]
+    },
+    undecided: {
+      label: "Undecided",
+      states: [
+        :undecided
+      ]
+    },
+    no_royal_approval: {
+      label: "No Royal approval",
+      states: [
+        :no_royal_approval
       ]
     },
     not_eligible: {

@@ -1,4 +1,4 @@
-div role="region" aria-label="list of lord lieutenancy office users" tabindex="0"
+div role="region" aria-label="list of lieutenancy office users" tabindex="0"
   table.govuk-table
     thead.govuk-table__head
       tr.govuk-tabke__row
@@ -7,7 +7,7 @@ div role="region" aria-label="list of lord lieutenancy office users" tabindex="0
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Email', @search, :email
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Lord Lieutenancy office', @search, :ceremonial_county_name
+          = sort_link f, 'Lieutenancy office', @search, :ceremonial_county_name
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Type', @search, :role
         th.sortable.govuk-table__header scope="col"

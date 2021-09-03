@@ -16,6 +16,10 @@ class AwardYears::V2022::QAEForms
         assessor_details :assessor_details, 'Assessor details' do
           sub_ref "E 1.1"
           required
+          sub_fields([
+            { primary_assessor_name: "Full name of the first assessor" },
+            { secondary_assessor_name: "Full name of the second assessor (if applicable)", ignore_validation: true }
+          ])
         end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
@@ -410,8 +414,8 @@ class AwardYears::V2022::QAEForms
 
         assessor_details :assessor_nominating_member_worthy_of_honour, "Assessor recommending an individual for a national Honour details" do
           sub_ref "E 8.6"
-          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           required
+          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           sub_fields([
             { full_name: "Full name" },
             { email: "Email address" },
