@@ -25,15 +25,15 @@
               = link_to admin.full_name, edit_admin_admin_path(admin), class: "govuk-link"
             td.govuk-table__cell = mail_to admin.email, admin.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 span.visible-lg
                   = admin.formatted_last_sign_in_at_long
             td.govuk-table__cell
               - if admin.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l admin.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               = link_to "Edit user", edit_admin_admin_path(admin), class: "govuk-link", id: "edit-#{ admin.first_name.downcase }-#{ admin.last_name.downcase }"
