@@ -12,15 +12,15 @@ describe "Admin: Lieutenant management" do
   it "can create a lieutenant" do
     visit admin_lieutenants_path
 
-    click_link "Add Lord Lieutenancy office user"
+    click_link "Add Lieutenancy office user"
 
     fill_in "First name", with: "LL"
     fill_in "Last name", with: "KK"
 
     fill_in "Email", with: "llkk@example.com"
 
-    select "Bounty County", from: "Lord Lieutenancy office"
-    choose "Regular"
+    select "Bounty County", from: "Lieutenancy office"
+    choose "Restricted Lieutenancy office user"
 
     click_button "Add user"
 

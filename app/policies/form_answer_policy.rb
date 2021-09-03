@@ -62,10 +62,6 @@ class FormAnswerPolicy < ApplicationPolicy
     !lieutenant? && (admin? || subject.assigned?(record))
   end
 
-  def update_financials?
-    !lieutenant && (admin? || subject.lead?(record) || subject.primary?(record))
-  end
-
   def assign_assessor?
     !lieutenant? && (admin? || subject.lead?(record))
   end
@@ -130,5 +126,9 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def can_see_national_assessment_status?
     admin? || assessor?
+  end
+
+  def can_download_attachments?
+    admin? || assessor? || lieutenant?
   end
 end

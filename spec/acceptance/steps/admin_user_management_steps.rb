@@ -8,16 +8,16 @@ step "I create new user" do
 
   fill_in 'Email', with: 'user@example.com'
 
-  click_button "Save"
+  click_button "Add user"
 end
 
 step "I edit user" do
   step "I go to user management page"
-  find(".link-edit-user").click
+  click_link 'Edit user'
 
   fill_in 'Email', with: 'user@example.com'
 
-  click_button "Save"
+  click_button "Update user"
 end
 
 step "I should see user in the list" do

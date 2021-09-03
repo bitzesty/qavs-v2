@@ -12,7 +12,7 @@ div role="region" aria-label="list of group leaders" tabindex="0"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
-        th
+        th.govuk-table__header
     tbody.govuk-table__body
       - if resources.none?
         tr.govuk-table__row
@@ -24,10 +24,10 @@ div role="region" aria-label="list of group leaders" tabindex="0"
         - GroupLeaderDecorator.decorate_collection(resources).each do |group_leader|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: 'link-edit-user'
-            td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis"}
+              = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: "govuk-link"
+            td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 - if group_leader.last_sign_in_at.present?
                   span.visible-lg
                     = group_leader.formatted_last_sign_in_at_long
@@ -35,17 +35,17 @@ div role="region" aria-label="list of group leaders" tabindex="0"
                   | Never signed in
             td.govuk-table__cell
               - if group_leader.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l group_leader.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               - if group_leader.locked_at.present?
-                small.text-muted
+                .text-muted
                   = l group_leader.locked_at, format: :date_at_time
               - else
-                small.text-muted
+                .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_group_leader_path(group_leader)
+              = link_to "Edit user", edit_admin_group_leader_path(group_leader), class: "govuk-link", id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }"

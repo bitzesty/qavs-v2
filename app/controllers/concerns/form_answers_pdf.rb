@@ -24,7 +24,6 @@ module FormAnswersPdf
   end
 
   def render_hard_copy_pdf
-    raise resource.local_assessment_ended?.to_yaml
     if resource.pdf_version.present?
       redirect_to resource.pdf_version.url
     else

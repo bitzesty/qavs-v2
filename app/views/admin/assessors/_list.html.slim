@@ -14,7 +14,7 @@ div role="region" aria-label="list of national assessors" tabindex="0"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
-        th
+        th.govuk-table__header
     tbody.govuk-table__body
       - if AssessorDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
@@ -26,12 +26,12 @@ div role="region" aria-label="list of national assessors" tabindex="0"
         - AssessorDecorator.decorate_collection(resources).each do |assessor|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: 'link-edit-user'
-            td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis"}
+              = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: "govuk-link"
+            td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis govuk-link"}
             td.govuk-table__cell
               = assessor.sub_group.text
             td.govuk-table__cell
-              small.text-muted
+              .text-muted
                 - if assessor.last_sign_in_at.present?
                   span.visible-lg
                     = assessor.formatted_last_sign_in_at_long
@@ -39,17 +39,17 @@ div role="region" aria-label="list of national assessors" tabindex="0"
                   | Never signed in
             td.govuk-table__cell
               - if assessor.confirmed_at.present?
-                small.text-muted
+                .text-muted
                   = l assessor.confirmed_at, format: :date_at_time
               - else
-                small.text-danger
+                .text-danger
                   ' Not confirmed
             td.govuk-table__cell
               - if assessor.locked_at.present?
-                small.text-muted
+                .text-muted
                   = l assessor.locked_at, format: :date_at_time
               - else
-                small.text-muted
+                .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_assessor_path(assessor)
+              = link_to "Edit user", edit_admin_assessor_path(assessor), class: "govuk-link", id: "edit-#{ assessor.first_name.downcase }-#{ assessor.last_name.downcase }"

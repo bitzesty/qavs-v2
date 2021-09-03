@@ -20,7 +20,7 @@ describe "Lieutenant: Lieutenant management" do
     fill_in "Last name", with: "KK"
 
     fill_in "Email", with: "llkk@example.com"
-    choose "Regular"
+    choose "Restricted Lieutenancy office user"
 
     click_button "Create user"
 
