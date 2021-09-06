@@ -341,6 +341,7 @@ en:
       not_recommended: Not recommended
       awarded: Awarded
       not_awarded: Not awarded
+      shortlisted: Shortlisted
     state_short:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
@@ -363,6 +364,7 @@ en:
       not_recommended: Not recommended
       awarded: Awarded
       not_awarded: Not awarded
+      shortlisted: Shortlisted
   form:
     step_titles:
       user:
