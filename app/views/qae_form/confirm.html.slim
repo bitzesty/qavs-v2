@@ -5,28 +5,21 @@
   - ordinal_sufix = ActiveSupport::Inflector.ordinal(day)
   - notification_date = "#{month} #{day}#{ordinal_sufix}"
 
-h1.govuk-heading-xl Confirmation of submission
-
-.govuk-notification-banner.govuk-notification-banner--success role="alert" aria-labelledby="confirmation-banner-title" data-module="govuk-notification-banner"
-  .govuk-notification-banner__header
-    h2.govuk-notification-banner__title#govuk-notification-banner-title
-      | Success
-  .govuk-notification-banner__content
-    p.govuk-body
-      ' Thank you,
-    br
-    p.govuk-body
-      ' Your nomination for The Queen's Award for Voluntary Service Award was submitted. We have sent you an email confirming your submission.
-    br
-    p.govuk-body
-      ' You can still edit your submitted nomination up until
-      = application_deadline(:submission_end)
-      ' .
-
 .govuk-width-container
   .article-related-positioning-container
   .article-container
     article.group role="article"
+      .govuk-panel.govuk-panel--confirmation
+        .govuk-panel__body
+          strong Nomination for the Queen’s Award for Voluntary service was submitted.
+      br
+      p.govuk-body We have sent you an email confiriming your submission.
+
+      p.govuk-body
+        | You can still edit your submitted nomination up until
+        =<> application_deadline(:submission_end)
+        | .
+
       .form-download
         p.govuk-body
           = render "qae_form/pdf_link"
