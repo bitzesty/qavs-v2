@@ -13,8 +13,14 @@ class AwardYears::V2022::QAEForms
           )
           hint "What are the allowed file formats?", %(
             <p class='govuk-hint'>
-              Letters of support must be uploaded as PDF documents when submitting this form.
+              Letter of support must be no larger than 5 MB.
             </p>
+            <p class='govuk-hint'>
+              They can be:
+              <br>
+              Images in jpg, jpeg and png formats;
+              <br>
+              Files in doc, docx, odt, pdf and txt formats.
           )
           classes "question-support-uploads"
           limit 2

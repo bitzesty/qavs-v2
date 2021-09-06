@@ -1,13 +1,17 @@
 .article-container.article-container-wider.step-article.step-error
   article.group
     .inner
-      .application-notice.help-notice
-        p
-          ' Your assessment failed to submit.
+      .govuk-warning-text
+        span.govuk-warning-text__icon.error-icon.step-error-icon aria-hidden="true"
+          | !
+        strong.govuk-warning-text__text
+          span.govuk-warning-text__assistive
+            | Warning
+          p.govuk-body-l.step-error-header class="govuk-!-font-weight-bold" Your assessment failed to submit.
 
-        p
-          ' Your assessment failed to submit because some mandatory questions are not answered. Please answer all the questions that have red validation message.
+          p.govuk-body
+            | Your assessment failed to submit because some mandatory questions are not answered. Please answer all the questions that have red validation message.
 
-        p Review questions flagged in red in the
+          p.govuk-body. Review questions flagged in red in the
 
-        ul.js-review-sections
+          ul.js-review-sections.govuk-list.govuk-list--bullet.step-error-bullet

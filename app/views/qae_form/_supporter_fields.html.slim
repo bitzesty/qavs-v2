@@ -1,7 +1,4 @@
-- persisted = supporter["support_letter_id"].present?
-= persisted
-= supporter.inspect
-
+- persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
 li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
   input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"] *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
@@ -46,18 +43,10 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
     button.govuk-button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=users_form_answer_support_letters_url(@form_answer)
       | Submit letter of support
 
-  - if !persisted
-    .visible-read-only
-      .govuk-warning-text
-        span.govuk-warning-text__icon aria-hidden="true"
-          | !
-        strong.govuk-warning-text__text
-          ' Letter of support uploaded
-
   - if !admin_in_read_only_mode?
     - if supporter["support_letter_id"].present? && @form_answer.support_letters.find_by_id(supporter["support_letter_id"])
       - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
     - else
       - url = "#"
-    button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link data-url=url
+    button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link class="#{'read_only' if admin_in_read_only_mode?}"
       | Remove
