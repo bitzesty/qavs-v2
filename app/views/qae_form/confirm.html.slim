@@ -26,25 +26,40 @@
 
       h2.govuk-heading-l
         ' What happens next
-      h3.govuk-heading-m October/November
 
-      p.govuk-body Independent assessment of all nominations received and a shortlist is drawn up. The Queen's Awards Office undertakes due diligence checks of the shortlisted candidates.
+      h3.govuk-heading-m September 2021
 
-      h3.govuk-heading-m January
+      p.govuk-body Eligibility of submitted nominations is checked.
 
-      p.govuk-body Shortlisted candidates considered by the Enterprise Promotion Assessment Committee.
+      h3.govuk-heading-m October 2021 - January 2022
 
-      h3.govuk-heading-m March
+      p.govuk-body Local Lieutenancies conduct due diligence and visit eligible groups.
 
-      p.govuk-body The final shortlist is reviewed by the Prime Minister, and approved by HM The Queen.
-      p.govuk-body Successful nominees are notified.
+      h3.govuk-heading-m February - mid March 2022
 
-      - if notification_date
-        h3.govuk-heading-m = month
+      p.govuk-body National Assessors consider recommended groups and decide on a shortlist.
 
+      h3.govuk-heading-m April 2022
 
-        p.govuk-body Nominators of both successful and unsuccessful nominees informed.
-        p.govuk-body #{notification_date} – winners are announced publicly.
+      p.govuk-body Royal approval of shortlisted groups.
 
-      h3.govuk-heading-m July
-      p.govuk-body All winning individuals and their nominators attend Buckingham Palace reception hosted by Her Majesty The Queen.
+      h3.govuk-heading-m 2 June 2022
+
+      p.govuk-body Awards officially announced in The Gazette, GOV.UK and on the QAVS website.
+
+      h3.govuk-heading-m June - September 2022
+
+      p.govuk-body Lord Lieutenants present Awards to the successful groups (usually at their premises).
+
+      h3.govuk-heading-m May 2023
+
+      p.govuk-body Two representatives from the awarded groups attend a Royal Garden Party.
+
+      br
+
+      p.govuk-body
+        | Return to
+        =<> link_to "nominations", dashboard_path, class: 'govuk-link govuk-link--no-visited-state'
+        | or
+        =< link_to "sign out", destroy_user_session_path, method: :delete, class: 'govuk-link govuk-link--no-visited-state'
+        | .
