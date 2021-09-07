@@ -3,9 +3,6 @@ class Admin < ApplicationRecord
   include AutosaveTokenGeneration
   include SoftDelete
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-
   devise :authy_authenticatable, :database_authenticatable,
          :recoverable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable, :session_limitable
@@ -59,5 +56,12 @@ class Admin < ApplicationRecord
 
   def min_password_score
     3
+  end
+
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
   end
 end

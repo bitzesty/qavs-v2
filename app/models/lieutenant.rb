@@ -3,11 +3,9 @@ class Lieutenant < ApplicationRecord
   include PgSearch::Model
   include SoftDelete
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable,
-         :lockable, :zxcvbnable, :timeoutable,
+         :confirmable, :lockable, :zxcvbnable, :timeoutable,
          :session_limitable, :trackable
 
   include PasswordSkippable
@@ -52,5 +50,13 @@ class Lieutenant < ApplicationRecord
   def password_required?
     return false if skip_password_validation
     super
+  end
+
+  private
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
   end
 end
