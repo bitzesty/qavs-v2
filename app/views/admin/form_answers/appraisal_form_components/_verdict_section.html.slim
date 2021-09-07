@@ -16,7 +16,7 @@
 
           - if f.object.public_send(section.desc).present?
             span class="govuk-!-font-weight-bold"
-              | Notes
+              | Notes (minimum 50 characters required)
             p.govuk-body
               = f.object.public_send(section.desc)
           - else
@@ -38,7 +38,7 @@
                   wrapper_html: { class: 'govuk-form-group' },
                   input_html: { class: 'form-control js-char-count assessor-notes-input', rows: 5, "data-word-max" => 1200, "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}"},
                   as: :text,
-                  label: 'Notes'
+                  label: 'Notes (minimum 50 characters required)'
 
         .govuk-button-group
           button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc

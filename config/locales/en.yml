@@ -212,13 +212,13 @@ en:
     trade_submission_start: "This date is when the applications for the International Trade award of the current award year become available."
     development_submission_start: "This date is when the applications for the Sustainable Development award of the current award year become available."
     mobility_submission_start: "This date is when the applications for the Promoting Opportunity award of the current award year become available."
-    submission_end: "Applicants will no longer be able to edit or submit their nominations after this date. This date will be pulled into the Reminder to submit the nominations email."
+    submission_end: "Nominators will no longer be able to edit or submit their nominations after this date. This date will be pulled into the Reminder to submit the nominations email."
     local_assessment_submission_end: This date is displayed for the lieutenants to remind them about the local assessment deadline.
-    buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
-    buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
-    buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning business applicants of their success, and the email to the heads of organisations."
-    buckingham_palace_reception_attendee_information_due_by: "Winners will not be able to submit attendees details after this date. This date will be pulled into the Buckingham Palace Invite email - to heads of winning organisations only."
-    buckingham_palace_attendees_invite: "This date will be pulled into the email notifying all winning business applicants of their success, the email to the heads of organisations and the Buckingham Palace Invite email."
+    buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
+    buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
+    buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
+    buckingham_palace_reception_attendee_information_due_by: "Winners will not be able to submit attendees details after this date. This date will be pulled into the Buckingham Palace Invite email - to heads of nominations only."
+    buckingham_palace_attendees_invite: "This date will be pulled into the email notifying all winning nominations of their success, the email to the heads of organisations and the Buckingham Palace Invite email."
     audit_certificates: "Shortlisted applicants will have up until this date to submit their Verification of Commercial Figures. This date will be pulled into the email notifying shortlisted applicants of their success, and the reminder to submit Verification of Commercial Figures email."
 
   email_notification_help_messages:
@@ -238,15 +238,15 @@ en:
     group_leader_notification: "Notification sent to group leaders about the nomination"
     local_assessment_notification: "Notification to start the local assessment"
     local_assessment_reminder: "Reminder to submit the local assessment form"
-    winners_notification: "WINNERS : Email notifying all winning business applicants of their success & requesting their confirmation of their Press Book entry."
-    winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning applicants who haven't submitted yet)."
+    winners_notification: "WINNERS : Email notifying all winning nominations of their success & requesting their confirmation of their Press Book entry."
+    winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
     winners_head_of_organisation_notification: "WINNERS : Success email to the 'Head of Organisation' of the Business categories Winner."
     buckingham_palace_invite: "WINNERS : Buckingham Palace Invite - to heads of winning organisations only."
     unsuccessful_notification: "UNSUCCESSFUL: Email notification to unsuccessful Business categories Registered Account holder."
     unsuccessful_ep_notification: "UNSUCCESSFUL: Email notification of unsuccessful QAVS nominations."
-    shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted applicants of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
+    shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted nominators of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
     shortlisted_audit_certificate_reminder: "SHORTLISTED : Reminder to submit Verification of Commercial Figures (External Accountant's Report & list of procedures) for shortlisted applicants who have not yet done so."
-    not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful applicants."
+    not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful nominators."
 
   custom_login_messages:
     we_just_sent_you_confirmation_email: We have just sent you an email asking to confirm your account.
@@ -341,6 +341,7 @@ en:
       not_recommended: Not recommended
       awarded: Awarded
       not_awarded: Not awarded
+      shortlisted: Shortlisted
     state_short:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
@@ -363,6 +364,7 @@ en:
       not_recommended: Not recommended
       awarded: Awarded
       not_awarded: Not awarded
+      shortlisted: Shortlisted
   form:
     step_titles:
       user:

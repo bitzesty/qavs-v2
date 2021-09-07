@@ -11,6 +11,8 @@
       - else
         = govuk_tag('pending', 'grey')
 
+      - if policy(resource).eligibility?
+        =< link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link govuk-link--no-visited-state"
 
     p.govuk-body#local-assessment-status
       strong
@@ -42,7 +44,3 @@
             = govuk_tag(resource.state.humanize, 'purple')
         - else
           = govuk_tag('pending', 'grey')
-
-      - if policy(resource).eligibility?
-        p.govuk-body
-          = link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link"
