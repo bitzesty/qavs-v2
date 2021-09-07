@@ -2,8 +2,6 @@ class GroupLeader < ApplicationRecord
   include SoftDelete
   include PgSearch::Model
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable
@@ -37,5 +35,13 @@ class GroupLeader < ApplicationRecord
   def password_required?
     return false if skip_password_validation
     super
+  end
+
+  private
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
   end
 end
