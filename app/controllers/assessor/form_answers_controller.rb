@@ -36,7 +36,6 @@ class Assessor::FormAnswersController < Assessor::BaseController
   def show
     super
     @audit_events = FormAnswerAuditor.new(@form_answer).get_audit_events
-    @admin_verdict = resource.admin_verdict || resource.build_admin_verdict
   end
 
   private
