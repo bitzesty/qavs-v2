@@ -7,7 +7,7 @@ class Lieutenant < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :zxcvbnable, :timeoutable,
+         :lockable, :zxcvbnable, :timeoutable,
          :session_limitable, :trackable
 
   include PasswordSkippable
