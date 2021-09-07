@@ -5,6 +5,10 @@
       .govuk-summary-list__row
         dt.govuk-summary-list__key
           = eligibility.class.label(question).html_safe
+          - if final_eligibility_page?(step) && !@already_has_invalid_questions && !eligibility.answer_valid?(question, answer)
+            - @already_has_invalid_questions = true
+            div class="govuk-!-padding-top-4"
+            ' This excludes you from entering the Queen's Award for Voluntary Service
         dd.govuk-summary-list__value
           - if eligibility.class.boolean_question?(question)
             - unless answer.nil?
@@ -23,9 +27,3 @@
               ' Change
               span.visuallyhidden
                 = ' answer to' + eligibility.class.label(question)
-
-      - if final_eligibility_page?(step) && !@already_has_invalid_questions && !eligibility.answer_valid?(question, answer)
-        - @already_has_invalid_questions = true
-        .govuk-summary-list__row
-          dt.govuk-summary-list__key
-            ' This excludes you from entering the Queen's Award for Voluntary Service
