@@ -148,7 +148,7 @@ class FormAnswer < ApplicationRecord
           AwardYears::V2022::QAEForms # default value
         end
       else
-        raise ArgumentError, "Can not find award form for the nomination"
+        raise ArgumentError, "Can not find award form for the nomination in year: #{award_year.year}"
       end
 
       form_class.qavs
