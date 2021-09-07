@@ -18,7 +18,7 @@
 
           - if f.object.public_send(section.desc).present?
             span class="govuk-!-font-weight-bold"
-              | Notes
+              | Notes (optional)
             p.govuk-body
               = f.object.public_send(section.desc)
           - else
