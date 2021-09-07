@@ -53,4 +53,12 @@ class Lieutenant < ApplicationRecord
     return false if skip_password_validation
     super
   end
+
+  private
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
+  end
 end
