@@ -248,6 +248,10 @@ Rails.application.routes.draw do
           post :run_notifications
         end
       end
+
+      member do
+        post :bulk_award_nominations
+      end
     end
 
     resources :assessor_assignments, only: [:create, :update]
