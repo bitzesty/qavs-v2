@@ -7,6 +7,7 @@
 #= require vendor/file_upload/jquery.fileupload-process
 #= require vendor/file_upload/jquery.fileupload-validate
 #= require select2.full.min
+#= require moment.min
 #= require Countable
 
 # crypt.io: secures browser storage with the SJCL crypto library

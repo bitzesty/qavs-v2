@@ -1,6 +1,9 @@
 wrapper = $("#notification-" + "<%= @email_notification.id %>");
 
 <% if @email_notification.valid? %>
+  $(".notification-edit-form", wrapper).find('.govuk-error-message').remove()
+  $(".notification-edit-form .govuk-date-input", wrapper).parent().removeClass("govuk-form-group--error");
+
   $(".form-value", wrapper).removeClass("govuk-!-display-none");
   $(".notification-edit-form", wrapper).addClass("govuk-!-display-none");
   $(".actions", wrapper).removeClass("govuk-!-display-none");
@@ -8,5 +11,10 @@ wrapper = $("#notification-" + "<%= @email_notification.id %>");
   $(".notification-edit-form input.timepicker", wrapper).val("<%= @email_notification.formatted_trigger_at_time %>");
   $(".trigger-at", wrapper).html("<%= @email_notification.decorate.formatted_trigger_time %>");
 <% else %>
-  $(".notification-edit-form input", wrapper).closest(".govuk-form-group").addClass("govuk-form-group--error");
+  $(".notification-edit-form", wrapper).find('.govuk-error-message').remove()
+  $(".notification-edit-form .govuk-date-input", wrapper).parent().addClass("govuk-form-group--error");
+
+  error = $("<span class='govuk-error-message'></span>")
+  error.insertBefore($(".notification-edit-form .govuk-date-input", wrapper))
+  $(".notification-edit-form .govuk-date-input", wrapper).parent().find('.govuk-error-message').html("This date is invalid")
 <% end %>

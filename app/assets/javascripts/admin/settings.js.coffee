@@ -10,6 +10,13 @@ class DeadlineForm
     @init()
 
   init: ->
+    @date_wrapper = @form.find(".govuk-date-input").parent()
+    @time_wrapper = @date_wrapper.next()
+
+    @day = @date_wrapper.find(".govuk-date-input__item").eq(0).find('input')
+    @month = @date_wrapper.find(".govuk-date-input__item").eq(1).find('input')
+    @year = @date_wrapper.find(".govuk-date-input__item").eq(2).find('input')
+
     @createModal()
     @gatherInitialValues()
     @bindEvents()
@@ -46,19 +53,35 @@ class DeadlineForm
     $("body").append(@modal)
 
   gatherInitialValues: ->
-    @date = @form.find("input.datepicker").val()
-    @time = @form.find("input.timepicker").val()
+    @original_day = @day.val()
+    @original_month = @month.val()
+    @original_year = @year.val()
+
+    @original_time = @time_wrapper.find('input').val()
 
   bindEvents: ->
-    @form.find("input.datepicker").on "change", (e) =>
-      if e.target.value != @date and @date
+    @day.on "change", (e) =>
+      if e.target.value != @original_day and @original_day
         @hasChanged = true
 
-    @form.find("input.timepicker").on "change", (e) =>
-      if e.target.value != @time and @time
+    @month.on "change", (e) =>
+      if e.target.value != @original_month and @original_month
+        @hasChanged = true
+
+    @year.on "change", (e) =>
+      if e.target.value != @original_year and @original_year
+        @hasChanged = true
+
+    @time_wrapper.find("select").on "change", (e) =>
+      if e.target.value != @original_time and @original_time
         @hasChanged = true
 
     @form.on "click", ".govuk-button", (e) =>
+      if !@validateDate()
+        e.preventDefault()
+        e.stopPropagation()
+        return
+
       if @hasChanged
         e.preventDefault()
 
@@ -86,6 +109,27 @@ class DeadlineForm
     ($ ".form-value", wrapper).removeClass("govuk-!-display-none")
     ($ ".deadline-form", wrapper).addClass("govuk-!-display-none")
     ($ ".edit-deadline", wrapper).removeClass("govuk-!-display-none")
+
+  validateDate: ->
+    unless @date_wrapper.find(".govuk-error-message").length > 0
+      $("<span class='govuk-error-message'></span>").insertBefore(@date_wrapper.find(".govuk-date-input"))
+
+    @date_wrapper.removeClass("govuk-form-group--error")
+    @date_wrapper.find('.govuk-error-message').empty()
+
+    if !@day.val() || !@month.val() || !@year.val()
+      @date_wrapper.addClass("govuk-form-group--error")
+      @date_wrapper.find('.govuk-error-message').html("This field is required")
+      return false
+
+    date = "#{@day.val()}/#{@month.val()}/#{@year.val()}"
+
+    if !moment(date, 'DD/MM/YYYY', true).isValid()
+      @date_wrapper.addClass("govuk-form-group--error")
+      @date_wrapper.find('.govuk-error-message').html("This date is invalid")
+      return false
+
+    return true
 
 
 jQuery ->
@@ -126,7 +170,7 @@ jQuery ->
     settingsWrapper.on "click", ".link-email-example", (e) ->
       e.preventDefault()
       wrapper = ($ e.currentTarget).closest('.panel-section')
-      ($ ".email-example", wrapper).toggleClass("govuk-!-display-none")
+      ($ ".email-example", wrapper).toggl eClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".btn-cancel", (e) ->
       e.preventDefault()
