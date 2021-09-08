@@ -6,13 +6,11 @@ div role="region" aria-label="nominations in progress" tabindex="0"
 
       tr.govuk-table__row
         td.govuk-table__cell class="govuk-!-width-one-half"
-          p.govuk-body
-            = award.company_or_nominee_name
-            small
-              = award.awarded? ? "Successful" : "Unsuccessful"
+          = award.company_or_nominee_name
+          small
+            = award.awarded? ? "Successful" : "Unsuccessful"
         td.govuk-table__cell.pull-right
-          p.govuk-body
-            = render "content_only/past_applications/download_pdf_link", award: award
+          = render "content_only/past_applications/download_pdf_link", award: award
 
-            - if award.not_submitted?
-              | The nomination was not submitted on time.
+          - if award.not_submitted?
+            | The nomination was not submitted on time.
