@@ -16,7 +16,7 @@ end
 unless Assessor.exists?
   assessor_args = {
     email: "assessor@example.com",
-    sub_group: "sub_group_1"
+    sub_group: "sub_group_1",
     password: SecureRandom.alphanumeric(12),
     first_name: "First name",
     last_name: "Last name",

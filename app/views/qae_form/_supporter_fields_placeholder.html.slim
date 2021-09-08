@@ -31,13 +31,6 @@ li.js-add-example class="govuk-!-display-none"
   button.govuk-button.button-alt.js-save-collection data-save-collection-url=users_form_answer_support_letters_url(@form_answer) disabled=true
     | Submit letter of support
 
-  .visible-read-only
-    .govuk-warning-text
-      span.govuk-warning-text__icon aria-hidden="true"
-        | !
-      strong.govuk-warning-text__text
-        ' Letter of support uploaded
-
   p
     - if !admin_in_read_only_mode?
       button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.govuk-button.govuk-button--warning
