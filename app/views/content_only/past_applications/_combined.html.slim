@@ -9,10 +9,7 @@ div role="region" aria-label="nominations in progress" tabindex="0"
           p.govuk-body
             = award.company_or_nominee_name
             small
-              - if award.awarded?
-                ' Successful
-              - else
-                ' Unsuccessful
+              = award.awarded? ? "Successful" : "Unsuccessful"
         td.govuk-table__cell.pull-right
           p.govuk-body
             = render "content_only/past_applications/download_pdf_link", award: award
