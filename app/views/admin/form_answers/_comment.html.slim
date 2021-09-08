@@ -1,8 +1,9 @@
-.form-container.comment.show-comment class="#{'comment-flagged' if comment.flagged?}" data-signature="Updated by #{message_author_name(comment.author)} - #{l(comment.created_at, format: :date_at_time)}"
+.form-container.comment.show-comment.govuk-body class="#{'comment-flagged' if comment.flagged?}" data-signature="Updated by #{message_author_name(comment.author)} - #{l(comment.created_at, format: :date_at_time)}"
   .comment-header
     h3.govuk-heading-m
       = comment_author(comment)
-
+    .comment-caption
+      = l comment.created_at, format: :date_at_time
   .comment-content
     = qae_simple_format comment.body
 
@@ -10,13 +11,13 @@
              remote: true,
              authenticity_token: true) do |f|
     .comment-action
-      = l comment.created_at, format: :date_at_time
+
     = f.submit :update, class: "if-js-hide govuk-button btn-default"
 
-  span.pull-right.if-no-js-hide
+  span.if-no-js-hide
     - if comment.author?(current_subject)
-      = link_to 'Delete', [namespace_name, @form_answer, comment], method: :delete, class: "link-delete-comment govuk-link", data: { confirm: 'Are you sure you want to delete comment?' }
-  span.pull-right.if-js-hide
+      = link_to 'Delete', [namespace_name, @form_answer, comment], method: :delete, class: "link-delete-comment", data: { confirm: 'Are you sure you want to delete comment?' }
+  span.if-js-hide
 
     - if comment.author?(current_subject)
       = form_for [namespace_name, @form_answer, comment],
