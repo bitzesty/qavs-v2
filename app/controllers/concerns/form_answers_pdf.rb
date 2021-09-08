@@ -14,6 +14,10 @@ module FormAnswersPdf
     #    PDF on fly for previous award years)
     #
 
+
+    # temporarily disabling hard copy pdfs
+    return true
+
     pdf_blank_mode ||
     !resource.local_assessment_ended? ||
     (
@@ -27,7 +31,7 @@ module FormAnswersPdf
     if resource.pdf_version.present?
       redirect_to resource.pdf_version.url
     else
-      if !admin_in_read_only_mode?
+      if current_user
         redirect_to dashboard_path,
                     notice: "PDF version for your application is not available!"
       else
