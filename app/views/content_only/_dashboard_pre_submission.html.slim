@@ -1,7 +1,5 @@
 .govuk-width-container.app-width-container
   - if @user_award_forms.any?
-    h3.govuk-heading-m
-      ' Current Nominations
     = render "current_nominations", award_applications: @user_award_forms
 
     br
