@@ -170,7 +170,7 @@ jQuery ->
     settingsWrapper.on "click", ".link-email-example", (e) ->
       e.preventDefault()
       wrapper = ($ e.currentTarget).closest('.panel-section')
-      ($ ".email-example", wrapper).toggl eClass("govuk-!-display-none")
+      ($ ".email-example", wrapper).toggleClass("govuk-!-display-none")
 
     settingsWrapper.on "click", ".btn-cancel", (e) ->
       e.preventDefault()
