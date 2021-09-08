@@ -4,7 +4,5 @@
     = award_year.year
 
   .dashboard-post-submission
-    .article-related-positioning-container
-      .article-container.article-container-widest
-        article.group role="article"
-          = render "content_only/past_applications/combined", past_applications: apps
+    .govuk-width-container.app-width-container
+      = render "content_only/past_applications/combined", past_applications: apps
