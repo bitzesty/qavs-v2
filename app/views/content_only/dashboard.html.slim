@@ -12,7 +12,7 @@
 /   = render "dashboard_deadline_banner"
 
 - if Settings.after_current_submission_deadline_start? || past_applications.present?
-  h1.govuk-heading-xl
+  h1.govuk-heading-xl class="govuk-!-width-two-thirds"
     => AwardYear.current.year
     ' award nominations (current)
 

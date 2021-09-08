@@ -1,22 +1,16 @@
-.container-split
-  
-- past_applications.each do |award|
-  - award = award.decorate
+div role="region" aria-label="nominations in progress" tabindex="0"
+  table.govuk-table class="govuk-!-width-two-thirds"
+    tbody.govuk-table__body
+    - past_applications.each do |award|
+      - award = award.decorate
 
-  .container-split.award-list
-    .content-left
-      h3.govuk-heading-m
-        = award.company_or_nominee_name
-        small
-          - if award.awarded?
-            ' Successful
-          - else
-            ' Unsuccessful
-    .content-right.content-offset-24
-      = render "content_only/past_applications/download_pdf_link", award: award
+      tr.govuk-table__row
+        td.govuk-table__cell class="govuk-!-width-one-half"
+          = award.company_or_nominee_name
+          small
+            = award.awarded? ? "Successful" : "Unsuccessful"
+        td.govuk-table__cell.pull-right
+          = render "content_only/past_applications/download_pdf_link", award: award
 
-      - if award.not_submitted?
-        p The nomination was not submitted on time.
-    .clear
-br
-br
+          - if award.not_submitted?
+            | The nomination was not submitted on time.
