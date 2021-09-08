@@ -1,3 +1,6 @@
+/li.govuk-header__navigation-item class=('active' if controller_name == 'dashboard')
+  = link_to "Dashboard", admin_dashboard_index_path, class: 'govuk-header__link'
+
 - if policy(:form_answer).index?
   li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
     = link_to "Nominations", admin_form_answers_path, class: 'govuk-header__link'
