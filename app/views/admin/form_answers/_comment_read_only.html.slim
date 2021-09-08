@@ -2,7 +2,7 @@
   .comment-header
     h3.govuk-heading-m
       = comment_author(comment_read_only)
-    .comment-caption
+    span.govuk-caption-m
       = l comment_read_only.created_at, format: :date_at_time
 
   .comment-content.govuk-body
