@@ -147,6 +147,20 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    case resource_or_scope
+    when :admin
+      new_admin_session_path
+    when :assessor
+      new_assessor_session_path
+    when :lieutenant
+      new_lieutenant_session_path
+    else
+      new_user_session_path
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
       :sign_up,
