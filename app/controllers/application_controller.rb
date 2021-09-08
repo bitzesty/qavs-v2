@@ -2,7 +2,7 @@ require "app_responder"
 include AuditHelper
 
 class ApplicationController < ActionController::Base
-  add_flash_types :success
+  add_flash_types :success, :success_template
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

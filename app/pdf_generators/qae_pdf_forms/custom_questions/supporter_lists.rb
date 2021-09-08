@@ -1,10 +1,6 @@
 module QaePdfForms::CustomQuestions::SupporterLists
   def render_supporters
-    entries = if question.list_type == :manual_upload
-      form_answer.support_letters.manual
-    else
-      form_answer.supporters
-    end
+    entries = form_answer.support_letters.manual
 
     if entries.present? && form_pdf.pdf_blank_mode.blank?
       render_supporters_list(entries)
@@ -18,8 +14,7 @@ module QaePdfForms::CustomQuestions::SupporterLists
         relationship_to_nominee: entry.relationship_to_nominee
       }
 
-      manually_upload_option = filled_answers["manually_upload"].to_s
-      render_supporter(entry, ops) if manually_upload_option == "yes"
+      render_supporter(entry, ops)
     end
   end
 
