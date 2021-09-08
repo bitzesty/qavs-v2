@@ -5,6 +5,29 @@ class Admin::SettingsController < Admin::BaseController
     authorize :setting, :show?
   end
 
+  def bulk_award_nominations
+    authorize :setting, :show?
+
+    FormAnswer.transaction do
+      ids = @settings
+              .award_year
+              .form_answers
+              .shortlisted
+              .pluck(:id)
+
+      AdminVerdict
+        .where(form_answer_id: ids)
+        .update_all(outcome: "awarded")
+
+      FormAnswer
+        .where(id: ids)
+        .update_all(state: "awarded")
+    end
+
+    redirect_to admin_settings_path(year: @settings.award_year.year),
+                success_template: "bulk_award_success"
+  end
+
   private
 
   def load_email_notifications

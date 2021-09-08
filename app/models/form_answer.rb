@@ -71,7 +71,7 @@ class FormAnswer < ApplicationRecord
 
   begin :scopes
     scope :for_year, -> (year) { joins(:award_year).where(award_years: { year: year }) }
-    scope :shortlisted, -> { where(state: %w(shortlisted)) }
+    scope :shortlisted, -> { where(state: "shortlisted") }
     scope :not_shortlisted, -> { where(state: "not_recommended") }
     scope :winners, -> { where(state: "awarded") }
     scope :unsuccessful_applications, -> { submitted.where("state not in ('awarded', 'withdrawn')") }
