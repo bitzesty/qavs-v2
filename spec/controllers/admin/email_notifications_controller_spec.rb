@@ -11,7 +11,7 @@ RSpec.describe Admin::EmailNotificationsController do
   describe "POST create" do
     it "should create a resource" do
       post :create, params: { email_notification: FactoryBot.attributes_for(:email_notification, formatted_trigger_at_date: Date.today.strftime("%d/%m/%Y"), formatted_trigger_at_time: '1:00') }
-      expect(response).to redirect_to admin_settings_path
+      expect(response).to have_http_status(:ok)
       expect(EmailNotification.count).to eq 2
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Admin::EmailNotificationsController do
   describe "PUT update" do
     it "should update a resource" do
       put :update, params: { id: email_notification.id, email_notification: { kind: "unsuccessful_notification" } }
-      expect(response).to redirect_to admin_settings_path
+      expect(response).to have_http_status(:ok)
       expect(EmailNotification.first.kind).to eq "unsuccessful_notification"
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe Admin::EmailNotificationsController do
   describe "Delete destroy" do
     it "should destroy a resource" do
       delete :destroy, params: { id: email_notification.id }
-      expect(response).to redirect_to admin_settings_path
+      expect(response).to have_http_status(:ok)
       expect(EmailNotification.count).to eq 0
     end
   end
