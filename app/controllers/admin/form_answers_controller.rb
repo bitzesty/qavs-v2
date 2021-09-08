@@ -72,7 +72,6 @@ class Admin::FormAnswersController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        @admin_verdict = resource.admin_verdict
         @audit_events = FormAnswerAuditor.new(resource).get_audit_events
       end
 

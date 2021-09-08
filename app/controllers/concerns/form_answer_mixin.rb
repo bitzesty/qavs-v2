@@ -33,6 +33,7 @@ module FormAnswerMixin
 
   def show
     authorize resource, :show?
+    @admin_verdict = resource.admin_verdict
   end
 
   def review

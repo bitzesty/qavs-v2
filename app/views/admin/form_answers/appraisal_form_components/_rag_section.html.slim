@@ -18,7 +18,7 @@
 
           - if f.object.public_send(section.desc).present?
             span class="govuk-!-font-weight-bold"
-              | Notes
+              | Notes (optional)
             p.govuk-body
               = f.object.public_send(section.desc)
           - else
@@ -40,7 +40,7 @@
         = f.input section.desc,
                   input_html: { class: 'form-control assessor-notes-input', "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
                   as: :text,
-                  label: 'Notes'
+                  label: 'Notes (optional)'
         .govuk-button-group
           button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc
             | Save

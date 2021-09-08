@@ -56,4 +56,12 @@ class Assessor < ApplicationRecord
   def timeout_in
     30.minutes
   end
+
+  private
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
+  end
 end

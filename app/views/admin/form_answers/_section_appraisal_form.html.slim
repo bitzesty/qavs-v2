@@ -23,6 +23,7 @@
     .clear
     br
     = render("admin/form_answers/appraisal_form_components/submit_appraisal_form", assessment: assessment)
+  - elsif policy(assessment).own_assignment_submitted?(current_assessor, assessment)
+    p.govuk-body You cannot view this assessment as the assessor has not submitted it yet.
   - else
-    p.govuk-body
-      | You need to submit your assessment to see other assessments that have already been submitted.
+    p.govuk-body You need to submit your assessment to see other assessments that have already been submitted.

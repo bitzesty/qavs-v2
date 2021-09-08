@@ -191,4 +191,10 @@ class User < ApplicationRecord
     form_answers.each { |f| f.update(user_full_name: full_name) } if full_name_changed
   end
 
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
+  end
 end

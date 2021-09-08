@@ -33,30 +33,8 @@
         h3.govuk-heading-m
           = award.company_or_nominee_name
       .content-right.content-offset-24
-        / Nominators don't get any options after submision
-          - if award.press_summary.present? && award.press_summary.submitted?
-            ul.post-dashboard-actions
-              li
-                - if award.press_summary.applicant_submitted?
-                  ' Press Book Notes
-                - else
-                  = link_to "Press Book Notes", users_form_answer_press_summary_url(award, token: award.press_summary.token)
-                span.award-info
-                  span.pull-right
-                    ' Due by
-                    = application_deadline_short(:buckingham_palace_confirm_press_book_notes)
-                  - if award.press_summary.applicant_submitted?
-                    span.label-status.label-status-green
-                      ' Complete
-                  - else
-                    = link_to users_form_answer_press_summary_url(award, token: award.press_summary.token)
-                      span.label-status.label-status-red
-                        ' Incomplete
-            .clear
-          - else
-            p You will be notified when your press book notes are ready.
 
-          = render "content_only/post_submission/palace_invite_info", award: award if Settings.buckingham_palace_invites_stage?
+        = render "content_only/post_submission/palace_invite_info", award: award if Settings.buckingham_palace_invites_stage?
       .clear
   br
   .container-split
