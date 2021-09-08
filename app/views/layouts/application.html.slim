@@ -21,7 +21,9 @@
   - unless landing_page?
     nav
       ul.govuk-header__navigation#navigation aria-label="Navigation menu"
-        - if current_admin.present?
+        - if current_user.present?
+          = render "layouts/navbar/user"
+        - elsif current_admin.present?
           = render "layouts/navbar/admin"
         - elsif current_group_leader.present?
           = render "layouts/navbar/group_leader"
@@ -29,8 +31,7 @@
           = render "layouts/navbar/lieutenant"
         - elsif current_assessor.present?
           = render "layouts/navbar/assessor"
-        - elsif current_user.present?
-          = render "layouts/navbar/user"
+
 
 - content_for :inside_header do
   - if landing_page?
