@@ -16,8 +16,12 @@ footer
             - opts = possible_read_only_ops(step.opts[:id])
             - opts[:class] ||= ""
             - opts[:class] << " govuk-button"
-            = button_tag opts.merge(rel: "next", title: "Navigate to next part") do
-              ' Save and continue
+            - if opts.key?(:disabled)
+              = button_tag class: 'govuk-button bypass-autosave bypass-validations', rel: 'next' do
+                | Continue to the next step
+            - else
+              = button_tag opts.merge(rel: "next", title: "Navigate to next part") do
+                ' Save and continue
           - else
             = button_tag class: "govuk-button", rel: "next", title: "Navigate to next part" do
               - if next_step.local_assessment?
