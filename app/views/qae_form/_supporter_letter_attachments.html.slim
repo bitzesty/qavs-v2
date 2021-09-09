@@ -1,2 +1,2 @@
-- if letter.present? && letter.support_letter_attachment.clean?
+- if letter.present? && letter.support_letter_attachment&.clean?
   = link_to "Download the #{adjective} letter of support (PDF)", letter_of_support_pdf_url(letter), class: "download-pdf-link govuk-link"

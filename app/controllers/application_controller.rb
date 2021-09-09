@@ -125,7 +125,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_subject
 
   def current_form_user
-    current_user || current_lieutenant || current_admin
+    current_user || current_lieutenant || current_admin || current_assessor
   end
   helper_method :current_form_user
 
@@ -146,6 +146,20 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    case resource_or_scope
+    when :admin
+      new_admin_session_path
+    when :assessor
+      new_assessor_session_path
+    when :lieutenant
+      new_lieutenant_session_path
+    else
+      new_user_session_path
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(

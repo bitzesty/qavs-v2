@@ -1,7 +1,9 @@
-.comment class="#{'comment-flagged' if comment_read_only.flagged?}"
-  .comment-header-m
+.comment.form-container class="#{'comment-flagged' if comment_read_only.flagged?}"
+  .comment-header
     h3.govuk-heading-m
       = comment_author(comment_read_only)
+    span.govuk-caption-m
+      = l comment_read_only.created_at, format: :date_at_time
 
   .comment-content.govuk-body
     = qae_simple_format comment_read_only.body

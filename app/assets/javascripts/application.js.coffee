@@ -322,7 +322,7 @@ jQuery ->
     else
       $(this).closest(".js-step-link").attr("data-step")
 
-    window.FormValidation.validateStep()
+    window.FormValidation.validateStep() unless $(this).hasClass("bypass-validations")
 
     #
     # Make a switch to next section if this is not same tab only
@@ -379,7 +379,7 @@ jQuery ->
       else
         CollaboratorsLog.log("[STANDART MODE] ----------------------- ")
 
-        autosave()
+        autosave() unless $(this).hasClass('.bypass-autosave')
 
         if $(this).hasClass "js-next-link"
           if $("body").hasClass("tried-submitting")

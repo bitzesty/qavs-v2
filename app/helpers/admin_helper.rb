@@ -19,7 +19,7 @@ module AdminHelper
     author = entry.author
 
     if author.present?
-      base = author.email
+      base = author.full_name
       base += " (deleted account)" if author.deleted?
 
       base

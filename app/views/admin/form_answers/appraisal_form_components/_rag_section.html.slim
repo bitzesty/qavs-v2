@@ -1,7 +1,7 @@
 - form = AppraisalForm.evaluation_options_for(f.object, section)
 - editable = policy(f.object).update?
 
-.govuk-form-group.rag-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
+.govuk-form-group.rag-section.form-container class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
   fieldset.govuk-fieldset
     legend.govuk-fieldset__legend class="govuk-!-font-weight-bold"
       = section.label
