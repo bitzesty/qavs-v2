@@ -3,5 +3,6 @@ class LieutenantMailers::LocalAssessmentNotificationMailer < ApplicationMailer
 
   def notify(lieutenant_id)
     @lieutenant = Lieutenant.find(lieutenant_id)
+    @current_year = AwardYear.current.year
   end
 end

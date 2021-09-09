@@ -1,16 +1,21 @@
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  = @lieutenant.full_name
-  | ,
+  | Dear Lord-Lieutenants and Colleagues,
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  | If you have already submitted your local assessments please ignore this message.
+  | This is a reminder that the deadline for submitting your local assessment reports is on
+  =< @deadline
+  | . You can continue the local assessments and submit, via the link below:
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  ' This is a reminder that the deadline for submitting your local assessments for a Queen's Award for Voluntary Service is on #{@deadline}.
+  = link_to lieutenant_form_answers_url, lieutenant_form_answers_url
 
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
+  | Please contact the QAVS team if you are having any problems submitting the form.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
-  ' Thank you,
+  | Thank you,
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
+  | The QAVS Team
   br
-  br
-  ' The Queen's Awards Office
+  = mail_to "queensaward@dcms.gov.uk"
