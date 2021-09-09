@@ -3,6 +3,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step4
       @qavs_step4 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
+        )
+
         header :nominator_details_header, "Details of person making the nomination" do
           ref "D 1"
         end
