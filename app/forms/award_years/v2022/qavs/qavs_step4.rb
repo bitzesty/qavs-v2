@@ -91,10 +91,10 @@ class AwardYears::V2022::QAEForms
 
         submit "Submit nomination" do
           notice %(
-            <p class='govuk-hint'>
+            <p class='govuk-body'>
               If you have answered all the questions, you can submit your nomination now. You will be able to edit it any time before [SUBMISSION_ENDS_TIME].
             </p>
-            <p class='govuk-hint'>
+            <p class='govuk-body'>
               If you are not ready to submit yet, you can save your nomination and come back later.
             </p>
           )
