@@ -1217,7 +1217,6 @@ table .ellipsis {
   margin-bottom: 15px;
 
   &:first-child {
-    padding-top: 0;
     border-top: none;
   }
 }
@@ -1227,7 +1226,7 @@ table .ellipsis {
 
   h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     line-height: 1.5;
   }
@@ -1298,11 +1297,7 @@ table .ellipsis {
 }
 
 .link-delete-comment {
-  display: inline-block;
-  position: relative;
-  padding-right: 15px;
-  font-size: 14px;
-  font-weight: normal;
+  color: #d4351c;
 
   .show-delete-comment & {
     display: none;

@@ -8,7 +8,7 @@ describe "Adding final verdict", js: true do
     login_admin(admin)
   end
 
-  it "is unavaliable when nominatino is not ready" do
+  it "is unavaliable when nomination is not ready" do
     form_answer = create(:form_answer, :submitted)
     visit admin_form_answer_path(form_answer)
 
@@ -34,7 +34,7 @@ describe "Adding final verdict", js: true do
 
       custom_select "Shortlisted", from: "Select outcome"
 
-      fill_in "Description", with: "Desc"
+      fill_in "Notes", with: "Desc"
 
       click_button "Save"
     end
