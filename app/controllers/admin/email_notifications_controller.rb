@@ -71,6 +71,10 @@ class Admin::EmailNotificationsController < Admin::BaseController
   end
 
   def notification_params
-    params.require(:email_notification).permit([:formatted_trigger_at_date, :formatted_trigger_at_time, :kind])
+    params.require(:email_notification).permit([:trigger_at_day,
+                                                :trigger_at_month,
+                                                :trigger_at_year,
+                                                :trigger_at_time,
+                                                :kind])
   end
 end

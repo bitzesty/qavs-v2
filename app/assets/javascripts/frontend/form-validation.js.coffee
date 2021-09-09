@@ -14,6 +14,8 @@ window.FormValidation =
       container.closest("label").find(".govuk-error-message").empty()
     else if container.closest('.question-matrix').length > 0
       container.closest("td").find(".govuk-error-message").empty()
+    else if container.closest('.question-block').data('answer').indexOf('address') > -1
+      container.closest(".govuk-form-group").find(".govuk-error-message").empty()
     else
       container.closest(".question-block").find(".govuk-error-message").empty()
     container.closest(".govuk-form-group--error").removeClass("govuk-form-group--error")
@@ -433,6 +435,12 @@ window.FormValidation =
       @appendMessage(question, "Select a maximum of " + selection_limit)
       @addErrorClass(question)
 
+  validateAddressQuestion: (question, triggeringElement) ->
+    return unless triggeringElement
+    if not @validateSingleQuestion(triggeringElement.closest('.govuk-form-group'))
+      @logThis(question, "validateRequiredQuestion", "This field is required")
+      @addErrorMessage(triggeringElement.closest('.govuk-form-group'), "This field is required")
+
 
   # It's for easy debug of validation errors
   # As it really tricky to find out the validation which blocks form
@@ -453,14 +461,20 @@ window.FormValidation =
   hookIndividualValidations: ->
     self = @
 
-    $(document).on "change", ".question-block input, .question-block select, .question-block textarea", ->
-      self.clearErrors $(this)
-      self.validateIndividualQuestion($(@).closest(".question-block"), $(@))
+    ["change"].forEach (event) ->
+      $(document).on event, ".question-block input:not(.autocomplete__input), .question-block select, .question-block textarea", ->
+        self.clearErrors $(this)
+        self.validateIndividualQuestion($(@).closest(".question-block"), $(@))
 
   validateIndividualQuestion: (question, triggeringElement) ->
-    if question.hasClass("question-required") and not question.hasClass("question-date-by-years") and not question.hasClass("question-money-by-years") and not question.hasClass("question-matrix")
-      # console.log "validateRequiredQuestion"
+    if question.hasClass("question-required") and (!question.data('answer') || question.data('answer').indexOf('address') is -1) and not question.hasClass("question-date-by-years") and not question.hasClass("question-money-by-years") and not question.hasClass("question-matrix")
       @validateRequiredQuestion(question)
+
+    if question.hasClass("question-required") and question.data('answer') and question.data('answer').indexOf('address') > -1
+      if triggeringElement
+        @validateAddressQuestion(question, triggeringElement)
+      else
+        @validateRequiredQuestion(question)
 
     if question.hasClass("question-number")
       # console.log "validateNumber"
