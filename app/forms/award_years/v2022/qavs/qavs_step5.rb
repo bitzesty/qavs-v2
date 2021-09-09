@@ -4,7 +4,7 @@ class AwardYears::V2022::QAEForms
     def qavs_step5
       @qavs_step5 ||= proc do
         notice %(
-          <p class=govuk-body>Please note your answers are being saved automatically in the background</p>
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
         header :local_assessment_general_header, "General information" do

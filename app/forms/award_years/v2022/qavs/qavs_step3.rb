@@ -2,6 +2,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step3
       @qavs_step3 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
+        )
+
         supporters :supporter_letters_list, "" do
           ref "C 1"
           context %(
