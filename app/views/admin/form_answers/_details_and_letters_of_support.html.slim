@@ -2,8 +2,6 @@ h3.govuk-heading-m
   | Nomination and local assessment form
 
 .govuk-button-group
-  - if policy(resource).review?
-    = link_to 'View nomination', [:review, namespace_name, @form_answer], class: "govuk-button"
   - if policy(resource).edit?
     = render "#{namespace_name}/form_answers/edit_nomination_links"
 

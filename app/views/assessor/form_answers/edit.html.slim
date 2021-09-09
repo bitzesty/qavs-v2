@@ -1,0 +1,21 @@
+- provide(:page_wrapper_class, "page-award-form")
+
+- content_for :before_main_content do
+  = link_to "Go back to #{@form_answer.nominee_name} nomination summary page", assessor_form_answer_path(@form_answer), class: "govuk-back-link"
+
+form.qae-form.award-form data-autosave-url="#" action="#" method="POST" data-attachments-url=attachments_url(@form_answer) novalidate=true
+
+  input name="authenticity_token" type="hidden" value=form_authenticity_token
+
+  = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title_to_param)
+
+  h1.govuk-heading-xl
+    = @form.title
+
+  .steps-progress-container.min-height-800
+    = render "qae_form/steps_progress_bar", current_step: params[:step]
+
+    .steps-progress-content
+      = render partial: 'qae_form/step', collection: @form.current_steps(@form_answer, current_form_user), locals: {form: @form, answers: (HashWithIndifferentAccess.new(@form_answer.document || {})), attachments: HashWithIndifferentAccess.new(@attachments)}
+
+      = render "step_error"

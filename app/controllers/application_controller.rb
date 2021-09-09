@@ -125,7 +125,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_subject
 
   def current_form_user
-    current_user || current_lieutenant || current_admin
+    current_user || current_lieutenant || current_admin || current_assessor
   end
   helper_method :current_form_user
 

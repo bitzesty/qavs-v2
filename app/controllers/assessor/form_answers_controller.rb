@@ -1,13 +1,30 @@
 class Assessor::FormAnswersController < Assessor::BaseController
   include FormAnswerMixin
+  include FormAnswersPdf
 
   before_action :load_resource, only: [:update_financials]
+  layout :resolve_layout
 
-  expose(:financial_pointer) do
-    FormFinancialPointer.new(@form_answer, {
-      exclude_ignored_questions: true,
-      financial_summary_view: true
-    })
+  expose(:all_form_questions) do
+    @form_answer.award_form.steps.map(&:questions).flatten
+  end
+
+  expose(:questions_with_references) do
+    all_form_questions.select do |q|
+      !q.is_a?(QAEFormBuilder::HeaderQuestion) &&
+      (q.ref.present? || q.sub_ref.present?)
+    end
+  end
+
+  expose(:support_letter_attachments) do
+    resource.support_letter_attachments.inject({}) do |r, attachment|
+      r[attachment.id] = attachment
+      r
+    end
+  end
+
+  expose(:original_form_answer) do
+    resource.original_form_answer
   end
 
   helper_method :resource,
@@ -34,8 +51,29 @@ class Assessor::FormAnswersController < Assessor::BaseController
   end
 
   def show
-    super
-    @audit_events = FormAnswerAuditor.new(@form_answer).get_audit_events
+    authorize resource, :show?
+
+    respond_to do |format|
+      format.html
+
+      format.pdf do
+        if can_render_pdf_on_fly?
+          pdf = resource.decorate.pdf_generator(current_assessor, pdf_blank_mode)
+          send_data pdf.render,
+                    filename: resource.decorate.pdf_filename,
+                    type: "application/pdf",
+                    disposition: 'attachment'
+        else
+          render_hard_copy_pdf
+        end
+      end
+    end
+  end
+
+  def edit
+    authorize resource, :edit?
+
+    @form = resource.award_form.decorate(answers: HashWithIndifferentAccess.new(resource.document))
   end
 
   private
@@ -46,5 +84,15 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def category_picker
     CurrentAwardTypePicker.new(current_subject, params)
+  end
+
+
+  def resolve_layout
+    case action_name
+    when "edit"
+      "application"
+    else
+      "application-lieutenant"
+    end
   end
 end

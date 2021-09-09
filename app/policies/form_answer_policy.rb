@@ -3,27 +3,17 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? || assessor? || lieutenant?
   end
 
-  def review?
-    record.award_year.current? &&
-    (
-
-      !lieutenant? &&
-      (admin? ||
-       subject.assigned?(record))
-    )
-  end
-
   def show?
     admin? || assessor? || (lieutenant? && lieutenancy_assigned?)
   end
 
   def lieutenant_assessment?
-    (lieutenant? && lieutenancy_assigned?) || admin?
+    (lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?
   end
 
   def edit?
     deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    ((lieutenant? && lieutenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
+    ((lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?) && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def submit?
@@ -130,5 +120,11 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def can_download_attachments?
     admin? || assessor? || lieutenant?
+  end
+
+  private
+
+  def assigned_assessor?
+    assessor? && subject.assigned?(record)
   end
 end

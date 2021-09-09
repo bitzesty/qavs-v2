@@ -12,6 +12,8 @@ module FormHelper
       ops[:disabled] = "disabled"
     elsif current_form_is_not_editable? && section != :local_assessment
       ops[:disabled] = "disabled"
+    elsif current_assessor
+      ops[:disabled] = "disabled"
     end
 
     ops
@@ -40,6 +42,8 @@ module FormHelper
       lieutenant_form_answer_path(nomination, format: :pdf)
     elsif current_admin
       admin_form_answer_path(nomination, format: :pdf)
+    elsif current_assessor
+      assessor_form_answer_path(nomination, format: :pdf)
     end
   end
 
@@ -61,6 +65,8 @@ module FormHelper
       edit_lieutenant_form_answer_url(nomination, step: step.previous.title_to_param)
     elsif current_admin
       edit_admin_form_answer_url(nomination, step: step.previous.title_to_param)
+    elsif current_assessor
+      edit_assessor_form_answer_url(nomination, step: step.previous.title_to_param)
     end
   end
 
@@ -69,6 +75,8 @@ module FormHelper
       lieutenant_form_answer_url(nomination)
     elsif admin?
       admin_form_answer_url(nomination)
+    elsif current_assessor
+      assessor_form_answer_url(nomination)
     else
       dashboard_url
     end
