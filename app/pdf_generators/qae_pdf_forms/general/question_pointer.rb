@@ -360,7 +360,7 @@ class QaePdfForms::General::QuestionPointer
         else
           form_pdf.indent 7.mm do
             question.options.each do |answer|
-              unless answer.value == ""
+              unless answer.value.blank?
                 question_option_box answer.text
                 render_context_for_option(question, answer)
               end
