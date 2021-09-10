@@ -97,7 +97,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties).pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
     end
   end
 
@@ -105,7 +105,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
     end
   end
 
