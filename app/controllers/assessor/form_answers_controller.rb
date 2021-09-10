@@ -92,7 +92,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
     when "edit"
       "application"
     else
-      "application-lieutenant"
+      "application-assessor"
     end
   end
 end
