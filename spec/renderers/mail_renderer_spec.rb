@@ -3,7 +3,7 @@ require "rails_helper"
 describe MailRenderer do
   describe "#submission_started_notification" do
     let(:login_link) do
-      "http://www.queens-awards-enterprise.service.gov.uk/users/sign_in"
+      "http://www.queens-award-voluntary-service.gov.uk/users/sign_in"
     end
 
     let(:user_full_name) do
@@ -36,7 +36,7 @@ describe MailRenderer do
 
   describe "#reminder_to_submit" do
     it "renders e-mail" do
-      link = "http://www.queens-awards-enterprise.service.gov.uk/form/0"
+      link = "http://www.queens-award-voluntary-service.gov.uk/form/0"
       rendered = described_class.new.reminder_to_submit
       expect(rendered).to match(link)
     end
@@ -46,6 +46,22 @@ describe MailRenderer do
     it "renders e-mail" do
       rendered = described_class.new.group_leader_notification
       expect(rendered).to match("Jane Campton")
+    end
+  end
+
+  describe "#local_assessment_notification" do
+    it "renders e-mail" do
+      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_notification
+      expect(rendered).to match(link)
+    end
+  end
+
+  describe "#local_assessment_reminder" do
+    it "renders e-mail" do
+      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_reminder
+      expect(rendered).to match(link)
     end
   end
 
