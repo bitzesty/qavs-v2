@@ -7,7 +7,7 @@ p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 
   | . You can continue the local assessments and submit, via the link below:
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  = link_to lieutenant_form_answers_url, lieutenant_form_answers_url
+  = link_to lieutenant_form_answers_url, lieutenant_form_answers_url, class: "govuk-link govuk-link--no-visited-state"
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
   | Please contact the QAVS team if you are having any problems submitting the form.
@@ -18,4 +18,4 @@ p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
   | The QAVS Team
   br
-  = mail_to "queensaward@dcms.gov.uk"
+  = mail_to "queensaward@dcms.gov.uk", "queensaward@dcms.gov.uk", class: "govuk-link govuk-link--no-visited-state"
