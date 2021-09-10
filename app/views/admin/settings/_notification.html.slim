@@ -11,8 +11,9 @@ li id="notification-#{notification.id}"
     span.actions
       = link_to "#", class: "edit-notification if-no-js-hide  govuk-link govuk-!-margin-left-2", role: 'button' do
         | Edit
-        span.govuk-visually-hidden
-          = "#{title} notification #{index + 1}: "
+        - if index.present?
+          span.govuk-visually-hidden
+            = " notification #{index + 1}: "
 
     .notification-edit-form.govuk-inset-text
       = simple_form_for notification, url: admin_settings_email_notification_path(notification, year: params[:year]), remote: true, authenticity_token: true do |f|
