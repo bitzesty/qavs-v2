@@ -3,7 +3,7 @@ class PalaceInviteForm
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_reader :invite
+  attr_reader :invite, :attendees_consent
 
   def initialize(invite)
     @invite = invite
@@ -24,6 +24,7 @@ class PalaceInviteForm
   end
 
   def valid?
+    puts invite.errors.inspect
     invite.valid? &&
     palace_attendees.count > 0 &&
     palace_attendees.count <= 2 &&
