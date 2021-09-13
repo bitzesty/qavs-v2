@@ -5,7 +5,7 @@ class MailRenderer
     include Rails.application.routes.url_helpers
 
     def default_url_options
-      { host: "www.queens-awards-enterprise.service.gov.uk" }
+      { host: "apply.qavs.dcms.gov.uk" }
     end
   end
 
@@ -125,18 +125,20 @@ class MailRenderer
     assigns = {}
 
     assigns[:form_answer] = form_answer
-    assigns[:name] = "Mr Smith"
-    assigns[:deadline] = deadline("buckingham_palace_attendees_details")
-    assigns[:media_deadline] = deadline_str(
-      "buckingham_palace_media_information",
-      "%A %d %B %Y"
-    )
-    assigns[:book_notes_deadline] = deadline_str(
-      "buckingham_palace_confirm_press_book_notes",
-      "%A %d %B %Y"
-    )
+    assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
+    assigns[:token] = "tpscrttkn"
 
-    render(assigns, "account_mailers/business_apps_winners_mailer/preview/notify")
+    # assigns[:deadline] = deadline("buckingham_palace_attendees_details")
+    # assigns[:media_deadline] = deadline_str(
+    #   "buckingham_palace_media_information",
+    #   "%A %d %B %Y"
+    # )
+    # assigns[:book_notes_deadline] = deadline_str(
+    #   "buckingham_palace_confirm_press_book_notes",
+    #   "%A %d %B %Y"
+    # )
+
+    render(assigns, "account_mailers/group_leader_invite_mailer/preview/notify")
   end
 
   def winners_head_of_organisation_notification
@@ -195,6 +197,10 @@ class MailRenderer
 
   def dummy_user(first_name, last_name, company_name)
     User.new(first_name: first_name, last_name: last_name, company_name: company_name).decorate
+  end
+
+  def dummy_group_leader(first_name, last_name)
+    GroupLeader.new(first_name: first_name, last_name: last_name).decorate
   end
 
   def dummy_lieutenant(first_name = "Jay", last_name = "Doe")

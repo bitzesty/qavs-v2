@@ -47,6 +47,7 @@ class FormAnswer < ApplicationRecord
     has_one :citation, dependent: :destroy
     has_one :form_answer_progress, dependent: :destroy
     has_one :admin_verdict, dependent: :destroy
+    has_one :group_leader
 
     belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
     belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id
@@ -173,6 +174,14 @@ class FormAnswer < ApplicationRecord
 
   def document
     super || {}
+  end
+
+  def group_leader_first_name
+    document['local_assessment_group_leader'].split(" ")[0]
+  end
+
+  def group_leader_last_name
+    document['local_assessment_group_leader'].split(" ")[1..-1].join(" ")
   end
 
   def award_type

@@ -3,7 +3,7 @@ class GroupLeader < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable,
-         :recoverable, :trackable, :validatable, :confirmable,
+         :recoverable, :trackable, :validatable,
          :zxcvbnable, :lockable, :timeoutable
 
   include PasswordSkippable

@@ -1,0 +1,11 @@
+Dear <%= @group_leader.full_name %>,
+
+We would like to inform you that your group has been awarded.
+
+Please set your password and provide nesessary details with the link below:
+
+<%= edit_group_leader_password_url(reset_password_token: @token) %>
+
+Thank you,
+
+The Queen's Awards Office

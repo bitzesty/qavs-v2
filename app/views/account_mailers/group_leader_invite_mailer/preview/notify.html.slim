@@ -1,0 +1,20 @@
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Dear
+  =< @group_leader.full_name
+  | ,
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | We would like to inform you that your group has been awarded.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Please set your password and provide nesessary details with the link below:
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  - reset_url = edit_group_leader_password_url(reset_password_token: @token)
+  = link_to reset_url, reset_url
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Thank you,
+  br
+  br
+  | The Queen's Awards Office
