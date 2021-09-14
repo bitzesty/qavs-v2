@@ -16,7 +16,7 @@ h1.govuk-heading-xl Queen's Award for Voluntary Service Nomination
           - else
             .previous-answers
               - if @form_answer.eligible?
-                .eligibility-passed
+                .eligibility-passed role="alert"
                   p.govuk-body-l You are eligible to begin your nomination.
                   p.govuk-body-l Before you start your nomination, please check your eligibility answers are correct.
 
@@ -26,7 +26,7 @@ h1.govuk-heading-xl Queen's Award for Voluntary Service Nomination
                   br
 
               - else
-                .eligibility-failed
+                .eligibility-failed role="alert"
                   p.govuk-body-l
                     ' At the moment you are
                     strong not eligible

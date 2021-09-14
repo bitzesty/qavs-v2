@@ -8,6 +8,7 @@ window.SupportLetters =
     SupportLetters.clean_up_system_tags(el)
     SupportLetters.enable_item_fields_and_controls(el)
     SupportLetters.fileupload_init(el.find(".js-support-letter-attachment"))
+    el.find('input,textarea,select').first().focus()
 
   fileupload_init: (el) ->
     $el = $(el)
@@ -78,7 +79,7 @@ window.SupportLetters =
     $(document).on 'click', '.js-save-collection', (e) ->
       e.preventDefault()
       e.stopPropagation()
-      
+
       button = $(this)
       parent = $(this).closest("li")
 

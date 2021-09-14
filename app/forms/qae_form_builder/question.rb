@@ -103,7 +103,8 @@ class QAEFormBuilder
       type = delegate_obj.class.name.demodulize.underscore
 
       legend_types = [
-        "header_question"
+        "header_question",
+        "checkbox_seria_question"
       ]
 
       legend_types.include?(type)

@@ -1,4 +1,5 @@
 - content_for?(:title) ? yield(:title) : "Queen's Award for Voluntary Service"
+- content_for :service_root, '/'
 
 - content_for :head do
   = stylesheet_link_tag "application.css"
