@@ -36,25 +36,14 @@
               span#password-result-span.input-group-addon
                 i#password-result.glyphicon.glyphicon-ok
 
-            .guidance-panel.if-no-js-hide
-              #password-guidance.application-notice.help-notice
-                .alert.alert-warning
-                  p.text-underline Please improve your password
-                  p#password-too-short
-                    ' It must be at least 10 characters.
-                  p#parts-of-email It shouldn't include part or all of your email address.
-                  p#password-entropy
-                    ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
+            = render "shared/users/password_guidance"
 
             #password-confirmation-control-group
               = f.input :password_confirmation, required: true, label: 'Password confirmation', input_html: { class: "js-disable-copy medium govuk-input--width-10" }
               span#password-confirmation-result-span.input-group-addon
               i#password-confirmation-result.glyphicon.glyphicon-ok
 
-            .if-no-js-hide
-              #password-confirmation-guidance.application-notice.help-notice
-                .alert.alert-warning
-                  p#password-confirmation-match The confirmation must match the password
+            = render "shared/users/password_confirmation_guidance"
 
         = f.error :agreed_with_privacy_policy
         = f.input :agreed_with_privacy_policy, as: :boolean, label: "I have read and accepted the #{link_to 'terms and conditions of the privacy statement', privacy_path, target: '_blank'}".html_safe
