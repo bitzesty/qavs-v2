@@ -5,7 +5,10 @@ class MailRenderer
     include Rails.application.routes.url_helpers
 
     def default_url_options
-      { host: "apply.qavs.dcms.gov.uk" }
+      {
+        host: "apply.qavs.dcms.gov.uk",
+        protocol: "https"
+      }
     end
   end
 
@@ -192,7 +195,7 @@ class MailRenderer
   private
 
   def render(assigns, template)
-    view = View.new(ActionController::Base.view_paths, assigns)
+    view = View.new(ActionView::LookupContext.new(ActionController::Base.view_paths), assigns)
     view.render(template: template)
   end
 
