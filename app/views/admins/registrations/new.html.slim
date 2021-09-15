@@ -5,7 +5,7 @@ h1.govuk-heading-xl Create an account
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   /= f.error_notification
 
-  = f.input :email, required: true, autofocus: true, label: 'Email', input_html: {autocomplete: "off", class: "large"}
+  = f.input :email, required: true, autofocus: false, label: 'Email', input_html: {autocomplete: "off", class: "large"}
 
   .question-body
     = f.input :password,

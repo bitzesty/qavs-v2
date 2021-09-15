@@ -37,7 +37,17 @@ FactoryBot.define do
 
     trait :awarded do
       submitted_at { Time.current }
+      association :group_leader, factory: :group_leader
       state { "awarded" }
+
+      document do
+        FormAnswer::DocumentParser.parse_json_document(
+          JSON.parse(
+            File.read(Rails.root.join("spec/fixtures/form_answer_qavs_with_la.json"))
+          )
+        )
+      end
+
     end
 
     trait :shortlisted do

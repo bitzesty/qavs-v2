@@ -21,6 +21,10 @@ class GroupLeader::BaseController < ApplicationController
     current_group_leader
   end
 
+  def current_nomination
+    current_group_leader.form_answer
+  end
+
   private
 
   def user_not_authorized
