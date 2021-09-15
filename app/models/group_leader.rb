@@ -38,6 +38,7 @@ class GroupLeader < ApplicationRecord
   end
 
   private
+
   # Do not raise an error if already confirmed.
   def pending_any_confirmation
     if (!confirmed? || pending_reconfirmation?)

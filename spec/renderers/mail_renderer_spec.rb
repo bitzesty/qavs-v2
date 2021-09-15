@@ -3,7 +3,7 @@ require "rails_helper"
 describe MailRenderer do
   describe "#submission_started_notification" do
     let(:login_link) do
-      "http://www.queens-awards-enterprise.service.gov.uk/users/sign_in"
+      "http://apply.qavs.dcms.gov.uk/users/sign_in"
     end
 
     let(:user_full_name) do
@@ -36,7 +36,7 @@ describe MailRenderer do
 
   describe "#reminder_to_submit" do
     it "renders e-mail" do
-      link = "http://www.queens-awards-enterprise.service.gov.uk/form/0"
+      link = "http://apply.qavs.dcms.gov.uk/form/0"
       rendered = described_class.new.reminder_to_submit
       expect(rendered).to match(link)
     end
@@ -68,8 +68,11 @@ describe MailRenderer do
   describe "#winners_notification" do
     it "renders e-mail" do
       rendered = described_class.new.winners_notification
-      expect(rendered).to match("Mr Smith")
-      expect(rendered).to match(deadline_str("%A %d %B %Y"))
+      expect(rendered).to match("Jane Doe")
+      expect(rendered).to match("Everyday Charity")
+      expect(rendered).to match("http://apply.qavs.dcms.gov.uk/group_leaders/password/edit?reset_password_token=tpscrttkn")
+
+      # expect(rendered).to match(deadline_str("%A %d %B %Y"))
     end
   end
 

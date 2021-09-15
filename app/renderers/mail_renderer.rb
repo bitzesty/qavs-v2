@@ -124,9 +124,10 @@ class MailRenderer
   def winners_notification
     assigns = {}
 
-    assigns[:form_answer] = form_answer
+    assigns[:group_name] = "Everyday Charity"
     assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
     assigns[:token] = "tpscrttkn"
+    assigns[:year] = form_answer.award_year.year
 
     # assigns[:deadline] = deadline("buckingham_palace_attendees_details")
     # assigns[:media_deadline] = deadline_str(

@@ -7,6 +7,7 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
 
   def update
     authorize @citation, :update?
+
     @citation.completed_at = Time.now
     if @citation.update citation_params
       flash[:success] = "Citation successfully updated!"
