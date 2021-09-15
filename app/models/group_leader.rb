@@ -3,7 +3,7 @@ class GroupLeader < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable,
-         :recoverable, :trackable, :validatable, :confirmable,
+         :recoverable, :trackable, :validatable,
          :zxcvbnable, :lockable, :timeoutable
 
   include PasswordSkippable
@@ -37,7 +37,12 @@ class GroupLeader < ApplicationRecord
     super
   end
 
+  def timeout_in
+    60.minutes
+  end
+
   private
+
   # Do not raise an error if already confirmed.
   def pending_any_confirmation
     if (!confirmed? || pending_reconfirmation?)

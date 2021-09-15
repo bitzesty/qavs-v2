@@ -5,7 +5,10 @@ class MailRenderer
     include Rails.application.routes.url_helpers
 
     def default_url_options
-      { host: "www.queens-award-voluntary-service.gov.uk" }
+      {
+        host: "apply.qavs.dcms.gov.uk",
+        protocol: "https"
+      }
     end
   end
 
@@ -124,19 +127,22 @@ class MailRenderer
   def winners_notification
     assigns = {}
 
-    assigns[:form_answer] = form_answer
-    assigns[:name] = "Mr Smith"
-    assigns[:deadline] = deadline("buckingham_palace_attendees_details")
-    assigns[:media_deadline] = deadline_str(
-      "buckingham_palace_media_information",
-      "%A %d %B %Y"
-    )
-    assigns[:book_notes_deadline] = deadline_str(
-      "buckingham_palace_confirm_press_book_notes",
-      "%A %d %B %Y"
-    )
+    assigns[:group_name] = "Everyday Charity"
+    assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
+    assigns[:token] = "tpscrttkn"
+    assigns[:year] = form_answer.award_year.year
 
-    render(assigns, "account_mailers/business_apps_winners_mailer/preview/notify")
+    # assigns[:deadline] = deadline("buckingham_palace_attendees_details")
+    # assigns[:media_deadline] = deadline_str(
+    #   "buckingham_palace_media_information",
+    #   "%A %d %B %Y"
+    # )
+    # assigns[:book_notes_deadline] = deadline_str(
+    #   "buckingham_palace_confirm_press_book_notes",
+    #   "%A %d %B %Y"
+    # )
+
+    render(assigns, "account_mailers/group_leader_invite_mailer/preview/notify")
   end
 
   def winners_head_of_organisation_notification
@@ -189,12 +195,16 @@ class MailRenderer
   private
 
   def render(assigns, template)
-    view = View.new(ActionController::Base.view_paths, assigns)
+    view = View.new(ActionView::LookupContext.new(ActionController::Base.view_paths), assigns)
     view.render(template: template)
   end
 
   def dummy_user(first_name, last_name, company_name)
     User.new(first_name: first_name, last_name: last_name, company_name: company_name).decorate
+  end
+
+  def dummy_group_leader(first_name, last_name)
+    GroupLeader.new(first_name: first_name, last_name: last_name).decorate
   end
 
   def dummy_lieutenant(first_name = "Jay", last_name = "Doe")
