@@ -1,12 +1,12 @@
 class GroupLeader::AccountsController < GroupLeader::BaseController
   def edit
     @user = current_group_leader
-    authorize @user, :edit?
+    authorize @user, :update_account_details?
   end
 
   def update_password
     @user = current_group_leader
-    authorize @user, :update?
+    authorize @user, :update_account_details?
     if @user.update_with_password(password_params)
       flash[:success] = 'Your account details were successfully saved'
       bypass_sign_in(@user)
