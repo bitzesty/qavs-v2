@@ -297,5 +297,11 @@ Rails.application.routes.draw do
     root to: "dashboard#show"
 
     resources :citations, only: [:edit, :update]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 end

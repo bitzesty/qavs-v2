@@ -8,7 +8,7 @@ class GroupLeaderPolicy < AdminPolicy
   end
 
   def update?
-    admin?
+    admin? || group_leader?
   end
 
   def destroy?
