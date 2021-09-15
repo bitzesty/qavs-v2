@@ -37,6 +37,10 @@ class GroupLeader < ApplicationRecord
     super
   end
 
+  def timeout_in
+    60.minutes
+  end
+
   private
 
   # Do not raise an error if already confirmed.
