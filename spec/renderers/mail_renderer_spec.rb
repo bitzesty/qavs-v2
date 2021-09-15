@@ -51,7 +51,7 @@ describe MailRenderer do
 
   describe "#local_assessment_notification" do
     it "renders e-mail" do
-      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
       rendered = described_class.new.local_assessment_notification
       expect(rendered).to match(link)
     end
@@ -59,7 +59,7 @@ describe MailRenderer do
 
   describe "#local_assessment_reminder" do
     it "renders e-mail" do
-      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
       rendered = described_class.new.local_assessment_reminder
       expect(rendered).to match(link)
     end
