@@ -272,6 +272,7 @@ jQuery ->
 
     window.location.hash = "##{step.substr(5)}"
     $(".js-step-condition[data-step='#{step}']").addClass("step-current")
+    $(".js-step-condition[data-step='#{step}']").focus()
 
     # Show past link status
     $(".steps-progress-bar .js-step-link.step-past").removeClass("step-past")
@@ -926,6 +927,7 @@ jQuery ->
       spacer.insertAfter($(this).parent().find(".hint"))
 
       CKEDITOR.replace this,
+        title: group.find('label').first().text(),
         toolbar: 'mini'
         height: 200
         wordcount:

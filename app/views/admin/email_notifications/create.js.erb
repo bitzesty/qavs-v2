@@ -1,7 +1,7 @@
 wrapper = $("#email_notification_" + "<%= @email_notification.kind %>");
 
 <% if @email_notification.valid? %>
-  $("ul.notifications", wrapper).append('<%= escape_javascript(render "admin/settings/notification", notification: @email_notification.decorate) %>');
+  $("ul.notifications", wrapper).append('<%= escape_javascript(render "admin/settings/notification", notification: @email_notification.decorate, title: '', index: @email_notifications.select { |n| n.kind == @email_notification.kind }.size) %>');
   $(".notification-edit-form, .notification-form", wrapper).addClass("govuk-!-display-none");
 
   $(".new_email_notification .timepicker", wrapper).val(null);

@@ -97,7 +97,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties).pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
     end
   end
 
@@ -105,7 +105,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
     end
   end
 
@@ -145,9 +145,38 @@ class Notifiers::EmailNotificationService
   end
 
   def winners_notification(award_year)
-    gather_data_and_send_emails!(
+    winners = award_year.form_answers.winners
+
+    gl_emails = winners.map do |w|
+      # creating citations in one go as well
+      w.build_citation(
+        group_name: w.document["nomination_local_assessment_form_nominee_name"],
+        body: w.document["l_citation_summary"]
+      ).save!
+
+      {
+        id: w.id,
+        email: w.document["local_assessment_group_leader_email"],
+        first_name: w.group_leader_first_name,
+        last_name: w.group_leader_last_name
+      }
+    end
+
+    gl_emails.each do |attrs|
+      next if GroupLeader.where(email: attrs[:email]).exists?
+
+      gl = GroupLeader.create!(
+        email: attrs[:email],
+        first_name: attrs[:first_name],
+        last_name: attrs[:last_name],
+        skip_password_validation: true,
+        form_answer_id: attrs[:id]
+      )
+    end
+
+    send_emails_to_group_leaders!(
       award_year.form_answers.winners,
-      AccountMailers::BusinessAppsWinnersMailer
+      AccountMailers::GroupLeaderInviteMailer
     )
   end
 
@@ -215,6 +244,15 @@ class Notifiers::EmailNotificationService
       mailer.notify(
         entry[:form_answer_id],
         entry[:collaborator_id]
+      ).deliver_later!
+    end
+  end
+
+ def send_emails_to_group_leaders!(data, mailer)
+    data.includes(:group_leader).each do |entry|
+      mailer.notify(
+        entry.id,
+        entry.group_leader.id
       ).deliver_later!
     end
   end

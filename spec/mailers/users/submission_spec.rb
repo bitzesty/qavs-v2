@@ -9,7 +9,7 @@ describe Users::SubmissionMailer do
                       user: user
   end
 
-  let(:subject) { "nomination successfully created!" }
+  let(:subject) { "QAVS Nomination Received" }
 
   before do
     form_answer
@@ -19,7 +19,7 @@ describe Users::SubmissionMailer do
     let(:mail) { Users::SubmissionMailer.success(user.id, form_answer.id) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("[Queen's Award for Voluntary Service] #{subject}")
+      expect(mail.subject).to eq("#{subject}")
       expect(mail.to).to eq([user.email])
       expect(mail.from).to eq(["no-reply@qavs.dcms.gov.uk"])
     end

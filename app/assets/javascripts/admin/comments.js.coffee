@@ -21,6 +21,9 @@ ready = ->
         else
           numberWrapper.html("(<span class='number'>1</span>)")
 
+        commented = $('<div role="alert" class="govuk-visually-hidden">Comment was successfully created</div>')
+        $('.comments-container').append(commented)
+
         commentWrapper = that.parents(".comments-container").find(".show-comment").first()
 
         signatureWrapper = that.closest(".panel").find(".panel-heading .signature")
@@ -29,6 +32,9 @@ ready = ->
           signatureWrapper.html(commentWrapper.data("signature"))
         else
           signatureWrapper.html("")
+      error: ->
+        commented = $('<div role="alert" class="govuk-visually-hidden">Failed to create comment. Please, try again</div>')
+        $('.comments-container').append(commented)
 
 
   $('body').on 'submit', '.destroy-comment', (e) ->
@@ -47,6 +53,9 @@ ready = ->
           else
             numberWrapper.html("")
 
+        commented = $('<div role="alert" class="govuk-visually-hidden">Comment was successfully deleted</div>')
+        $('.comments-container').append(commented)
+
         commentWrapper = $($(@).closest(".panel").find(".comments-container .show-comment")[1])
         signatureWrapper = $(@).closest(".panel").find(".panel-heading .signature")
 
@@ -56,6 +65,9 @@ ready = ->
           signatureWrapper.html("")
 
         $(@).parents('.comment').remove()
+      error: ->
+        commented = $('<div role="alert" class="govuk-visually-hidden">Failed to delete comment. Please, try again.</div>')
+        $('.comments-container').append(commented)
 
 
   toggleFlagged()

@@ -53,16 +53,19 @@ describe Notifiers::EmailNotificationService do
 
   context "winners_notifier" do
     let(:kind) { "winners_notification" }
-    let(:form_answer) { create(:form_answer, :awarded) }
+    let!(:form_answer) { create(:form_answer, :awarded) }
 
     it "triggers current notification" do
       mailer = double(deliver_later!: true)
-      expect(AccountMailers::BusinessAppsWinnersMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
+      expect(AccountMailers::GroupLeaderInviteMailer).to receive(:notify) { mailer }
 
-      described_class.run
+      expect {
+        described_class.run
+      }.to change {
+        GroupLeader.count
+      }
+
+      expect(form_answer.citation).to be
 
       expect(current_notification.reload).to be_sent
     end
@@ -153,7 +156,7 @@ describe Notifiers::EmailNotificationService do
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
     it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
+      expect(LieutenantsMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
                                                                     lieutenant.id
                                                                   ) { mailer }
 
@@ -171,7 +174,7 @@ describe Notifiers::EmailNotificationService do
     let!(:lieutenant) { create(:lieutenant) }
 
     it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
+      expect(LieutenantsMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
                                                                     lieutenant.id
                                                                   ) { mailer }
 

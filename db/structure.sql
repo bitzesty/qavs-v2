@@ -853,7 +853,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id bigint
+    form_answer_id integer
 );
 
 
@@ -3613,14 +3613,6 @@ ALTER TABLE ONLY public.feedbacks
 
 ALTER TABLE ONLY public.feedbacks
     ADD CONSTRAINT fk_rails_85a1d7f049 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
--- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.group_leaders
-    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --
