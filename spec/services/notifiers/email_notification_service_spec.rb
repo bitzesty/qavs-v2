@@ -156,7 +156,7 @@ describe Notifiers::EmailNotificationService do
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
     it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
+      expect(LieutenantsMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
                                                                     lieutenant.id
                                                                   ) { mailer }
 
@@ -174,7 +174,7 @@ describe Notifiers::EmailNotificationService do
     let!(:lieutenant) { create(:lieutenant) }
 
     it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
+      expect(LieutenantsMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
                                                                     lieutenant.id
                                                                   ) { mailer }
 

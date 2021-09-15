@@ -5,6 +5,7 @@ class Admin::EmailNotificationsController < Admin::BaseController
     authorize :email_notification, :create?
     @email_notification = @settings.email_notifications.build
     @email_notification.update(notification_params)
+    @email_notifications = @settings.email_notifications
 
     respond_to do |format|
       format.html do

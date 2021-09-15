@@ -1,15 +1,14 @@
 <%= "Dear #{@recipient.full_name}," %>
 
-Thank you for submitting your nomination for The Queen's Award for Voluntary Service <%= AwardYear.current.year %>.
-
-You can view and download your submissions (and edit up until <%= remove_html_tags(application_deadline(:submission_end)) %>) by logging into your account:
+Thank you for your nomination for The Queen’s Award for Voluntary Service (QAVS). You can access and download it via your QAVS account:
 <%= dashboard_url %>
 
-To find out more on what happens next visit please review The Queen’s Award for Voluntary Service timeline information page:
-<%= timeline_url %>
+We will now assess the group for eligibility and will only contact you again if we require further clarification. If the group is eligible, the Lord Lieutenant in the county will contact the group leader to arrange an informal visit.  Group leaders will be notified of the eventual outcome shortly before the Award is announced next June.
 
-If you have any further queries about the nomination process you can call us on 0207 271 6206 or email us queensaward@dcms.gov.uk.
+If you have any further queries about the nomination process you can call us on 0207 271 6206 or email us <%= mail_to "queensaward@dcms.gov.uk" %>.
 
-Kind regards,
+Kind regards
 
-The Queen's Awards Office
+The QAVS team
+
+This email is from an unmanaged mailbox. To contact the QAVS team please email <%= mail_to "queensaward@dcms.gov.uk" %> or phone 0207 271 6206.

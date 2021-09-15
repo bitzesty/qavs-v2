@@ -12,7 +12,7 @@
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 
         #email-control-group
-          = f.input :email, required: true, autofocus: true, label: 'Email', input_html: {autocomplete: "off", class: 'govuk-input--width-20'}, error: !signup_email_already_exists?(f.object)
+          = f.input :email, required: true, autofocus: false, label: 'Email', input_html: {autocomplete: "off", class: 'govuk-input--width-20'}, error: !signup_email_already_exists?(f.object)
 
           - if signup_email_already_exists?(f.object)
             .guidance-panel.account-notice

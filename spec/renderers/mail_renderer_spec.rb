@@ -49,6 +49,22 @@ describe MailRenderer do
     end
   end
 
+  describe "#local_assessment_notification" do
+    it "renders e-mail" do
+      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_notification
+      expect(rendered).to match(link)
+    end
+  end
+
+  describe "#local_assessment_reminder" do
+    it "renders e-mail" do
+      link = "http://www.queens-award-voluntary-service.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_reminder
+      expect(rendered).to match(link)
+    end
+  end
+
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_notification

@@ -1,9 +1,13 @@
-<%= @lieutenant.full_name %>,
+Dear Lord-Lieutenants and Colleagues,
 
-If you have already submitted your local assessments please ignore this message.
+This is a reminder that the deadline for submitting your local assessment reports is on <%= @deadline %>. You can continue the local assessments and submit, via the link below:
 
-This is a reminder that the deadline for submitting your local assessments for a Queen's Award for Voluntary Service is on #{@deadline}.
+<%= lieutenant_form_answers_url %>
+
+Please contact the QAVS team if you are having any problems submitting the form.
 
 Thank you,
 
-The Queen's Awards Office
+The QAVS Team
+
+<%= mail_to "queensaward@dcms.gov.uk" %>

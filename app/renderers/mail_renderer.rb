@@ -208,7 +208,7 @@ class MailRenderer
   end
 
   def dummy_lieutenant(first_name = "Jay", last_name = "Doe")
-    Lieutenant.new(first_name: first_name, last_name: last_name).decorate
+    Lieutenant.new(first_name: first_name, last_name: last_name, ceremonial_county_id: 1).decorate
   end
 
   def form_answer
