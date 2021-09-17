@@ -162,4 +162,10 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
       "application-lieutenant"
     end
   end
+
+  def updating_step
+    @form_answer.award_form.steps.detect do |s|
+      s.local_assessment?
+    end.decorate
+  end
 end
