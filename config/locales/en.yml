@@ -339,7 +339,7 @@ en:
       not_recommended: Not recommended
       awarded: Royal approval - awarded
       not_awarded: Not awarded
-      shortlisted: Shortlisted
+      shortlisted: National assessment shortlisted
     state_short:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
@@ -363,7 +363,7 @@ en:
       not_recommended: Not recommended
       awarded: Royal approval - awarded
       not_awarded: Not awarded
-      shortlisted: Shortlisted
+      shortlisted: National assessment shortlisted
   form:
     step_titles:
       user:

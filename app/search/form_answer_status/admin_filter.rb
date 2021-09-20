@@ -61,7 +61,7 @@ class FormAnswerStatus::AdminFilter
       states: [:local_assessment_not_recommended]
     },
     recommended: {
-      label: "Shortlisted",
+      label: "National assessment shortlisted",
       states: [
         :shortlisted
       ]
