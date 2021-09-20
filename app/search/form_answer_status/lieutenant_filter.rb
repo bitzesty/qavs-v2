@@ -12,7 +12,7 @@ class FormAnswerStatus::LieutenantFilter
       states: [:admin_eligible]
     },
     admin_eligible_duplicate: {
-      label: "Eligible - duplicate to access",
+      label: "Eligible by admin - duplicate to assess",
       states: [:admin_eligible_duplicate]
     },
     local_assessment_in_progress: {

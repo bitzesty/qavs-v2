@@ -322,7 +322,7 @@ en:
       submitted: Nomination submitted
       applications_not_submitted: Nomination not submitted
       admin_eligible: Eligible by admin
-      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_eligible_duplicate: Eligible by admin - duplicate to assess
       admin_not_eligible_duplicate: Duplicate for reference
       admin_not_eligible_nominator: Ineligible - nominator
       admin_not_eligible_group: Ineligible - group
@@ -346,7 +346,7 @@ en:
       submitted: Nomination submitted
       applications_not_submitted: Nomination not submitted
       admin_eligible: Eligible by admin
-      admin_eligible_duplicate: Eligible - duplicate to access
+      admin_eligible_duplicate: Eligible by admin - duplicate to assess
       admin_not_eligible_duplicate: Duplicate for reference
       admin_not_eligible_nominator: Ineligible - nominator
       admin_not_eligible_group: Ineligible - group
