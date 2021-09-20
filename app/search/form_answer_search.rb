@@ -92,9 +92,7 @@ class FormAnswerSearch < Search
       when "missing_rsvp_details"
         out = out.joins(
           "LEFT OUTER JOIN palace_invites on palace_invites.form_answer_id = form_answers.id"
-        ).joins(
-          "LEFT OUTER JOIN palace_attendees ON palace_attendees.palace_invite_id = palace_invites.id"
-        ).where("palace_invites.id IS NULL OR palace_attendees.id IS NULL")
+        ).where("palace_invites.submitted IS NOT TRUE")
       end
     end
 

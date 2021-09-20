@@ -13,7 +13,7 @@ class FormAnswerStatus::AdminFilter
       label: "Citation form not submitted"
     },
     missing_rsvp_details: {
-      label: "Missing RSVP Details"
+      label: "Royal Garden Party form not submitted"
     }
   }
 
