@@ -49,38 +49,44 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(2)
   end
 
-  it "filters by sub options" do
-    # 4 Applications
-    assert_results_number(4)
+  describe "filters by sub options" do
+    before do
+      # 4 Applications
+      assert_results_number(4)
+    end
 
+    it "filters by citation not submitted" do
+      create(:citation, :submitted, form_answer_id: @forms.last.id)
+
+      click_status_option("Citation form not submitted")
+      assert_results_number(3)
+    end
+
+    it "filters by palace invite not submitted" do
+      create(:palace_invite, :submitted, form_answer_id: @forms.last.id)
+
+      click_status_option("Royal Garden Party form not submitted")
+      assert_results_number(3)
+    end
+
+    it "filters by Lord Lieutenant not assigned" do
+      assign_ceremonial_county(@forms.first, ceremonial_county_1)
+
+      click_status_option("Lord Lieutenancy not assigned")
+      assert_results_number(3)
+    end
+
+    it "filters by national assessor not assigned" do
     # Add assesors to all applications and check filter
     assign_dummy_assessors(@forms, create(:assessor))
+    
     click_status_option("National assessors not assigned")
     assert_results_number(0)
 
     # Uncheck filter
     click_status_option("National assessors not assigned")
     assert_results_number(4)
-
-    assign_ceremonial_county(@forms.first, ceremonial_county_1)
-    click_status_option("Lord Lieutenancy not assigned")
-    assert_results_number(3)
-  end
-
-  it "filters by citation not submitted" do
-    assert_results_number(4)
-    create(:citation, :submitted, form_answer_id: @forms.last.id)
-
-    click_status_option("Citation form not submitted")
-    assert_results_number(3)
-  end
-
-  it "filters by palace invite not submitted" do
-    assert_results_number(4)
-    create(:palace_invite, :submitted, form_answer_id: @forms.last.id)
-
-    click_status_option("Royal Garden Party form not submitted")
-    assert_results_number(3)
+    end
   end
 
   it "filters by assigned ceremonial county" do
