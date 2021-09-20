@@ -68,9 +68,6 @@ class AwardYears::V2022::QAEForms
               I have read and understood the contents of the <a href="https://qavs.dcms.gov.uk/privacy-policy/">Privacy Notice</a>
             )
           end
-          pdf_context %(
-            I have read and understood the contents of the Pivacy Notice
-          )
         end
 
         confirm :group_leader_aware, "" do
