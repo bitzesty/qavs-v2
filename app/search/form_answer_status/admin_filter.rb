@@ -53,11 +53,11 @@ class FormAnswerStatus::AdminFilter
       states: [:local_assessment_in_progress]
     },
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     local_assessment_not_recommended: {
-      label: "Local assessment: not recommended",
+      label: "Local assessment - not recommended",
       states: [:local_assessment_not_recommended]
     },
     recommended: {

@@ -3,7 +3,7 @@ class FormAnswerStatus::AssessorFilter
 
   OPTIONS = {
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     assessment_in_progress: {
