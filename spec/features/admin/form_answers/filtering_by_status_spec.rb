@@ -38,10 +38,10 @@ describe "As Admin I want to filter applications", js: true do
     # 4 Applications
     assert_results_number(4)
 
-    click_status_option("Application in progress")
+    click_status_option("Nomination in progress")
     assert_results_number(2)
 
-    click_status_option("Application in progress")
+    click_status_option("Nomination in progress")
     assert_results_number(4)
 
     click_status_option("Applications not submitted")

@@ -17,7 +17,7 @@ class FormAnswerStatus::AdminFilter
       states: [:eligibility_in_progress]
     },
     application_in_progress: {
-      label: "Application in progress",
+      label: "Nomination in progress",
       states: [:application_in_progress]
     },
     applications_not_submitted: {
