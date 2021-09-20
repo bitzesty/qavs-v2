@@ -34,7 +34,7 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     not_recommended: {
-      label: "Not recomended",
+      label: "National assessment - not recommended",
       states: [
         :not_recommended
       ]
