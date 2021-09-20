@@ -10,6 +10,7 @@ class FormAnswerStateMachine
     :not_submitted,
     # eligibility
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
@@ -37,6 +38,7 @@ class FormAnswerStateMachine
     :submitted,
     :withdrawn,
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
@@ -54,6 +56,7 @@ class FormAnswerStateMachine
 
   ELIGIBILITY_STATES = [
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
@@ -122,7 +125,7 @@ class FormAnswerStateMachine
   state :not_eligible
   state :not_submitted
   state :admin_eligible
-  state :admin_eligible
+  state :admin_pending_eligibility
   state :admin_eligible_duplicate
   state :admin_not_eligible_duplicate
   state :admin_not_eligible_nominator
@@ -219,6 +222,7 @@ class FormAnswerStateMachine
     if Settings.after_current_submission_deadline?
       all_states = [
         :admin_eligible,
+        :admin_pending_eligibility,
         :admin_eligible_duplicate,
         :admin_not_eligible_duplicate,
         :admin_not_eligible_nominator,
