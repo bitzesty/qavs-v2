@@ -150,16 +150,12 @@ class FormAnswerDecorator < ApplicationDecorator
     end
   end
 
-  def progress_text_short
-    I18n.t "form_answers.state.#{ object.state }"
-  end
-
   def nominee_name
     object.document["nominee_name"]
   end
 
   def progress_text
-    out = progress_text_short
+    out = state_short_text
     out += "...#{fill_progress_in_percents}" if object.application_in_progress?
     out
   end
