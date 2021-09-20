@@ -41,11 +41,11 @@ class FormAnswerStatus::AdminFilter
       states: [:admin_not_eligible_duplicate]
     },
     admin_not_eligible_nominator: {
-      label: "Ineligible - nominator",
+      label: "Ineligible by admin - nominator",
       states: [:admin_not_eligible_nominator]
     },
     admin_not_eligible_group: {
-      label: "Ineligible - group",
+      label: "Ineligible by admin - group",
       states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {

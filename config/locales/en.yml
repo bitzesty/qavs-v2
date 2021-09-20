@@ -324,7 +324,7 @@ en:
       admin_eligible: Eligible by admin
       admin_eligible_duplicate: Eligible by admin - duplicate to assess
       admin_not_eligible_duplicate: Duplicate for reference
-      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_nominator: Ineligible by admin - nominator
       admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment in progress"
       local_assessment_recommended: "Local assessment: recommended"
@@ -348,7 +348,7 @@ en:
       admin_eligible: Eligible by admin
       admin_eligible_duplicate: Eligible by admin - duplicate to assess
       admin_not_eligible_duplicate: Duplicate for reference
-      admin_not_eligible_nominator: Ineligible - nominator
+      admin_not_eligible_nominator: Ineligible by admin - nominator
       admin_not_eligible_group: Ineligible - group
       local_assessment_in_progress: "Local assessment: in progress"
       local_assessment_recommended: "Local assessment: recommended"
