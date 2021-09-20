@@ -48,7 +48,7 @@ class Admin::UsersController < Admin::BaseController
     authorize @resource, :update?
 
     @resource.send_confirmation_instructions
-    flash[:notice] = "Confirmation instructions were successfully sent to #{@resource.decorate.full_name} (#{@resource.email})"
+    flash[:success] = "Confirmation instructions were successfully sent to #{@resource.decorate.full_name} (#{@resource.email})"
     respond_with :admin, @resource,
                  location: admin_users_path
   end
@@ -57,7 +57,7 @@ class Admin::UsersController < Admin::BaseController
     authorize @resource, :update?
 
     @resource.unlock_access!
-    flash[:notice] = "User #{@resource.decorate.full_name} (#{@resource.email}) successfully unlocked!"
+    flash[:success] = "User #{@resource.decorate.full_name} (#{@resource.email}) successfully unlocked!"
     respond_with :admin, @resource,
                  location: edit_admin_user_path(@resource)
   end

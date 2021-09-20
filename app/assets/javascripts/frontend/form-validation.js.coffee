@@ -10,7 +10,7 @@ window.FormValidation =
     $(".steps-progress-bar .js-step-link").removeClass("step-errors")
 
   clearErrors: (container) ->
-    if container.closest(".question-financial").size() > 0
+    if container.closest(".question-financial").length > 0
       container.closest("label").find(".govuk-error-message").empty()
     else if container.closest('.question-matrix').length > 0
       container.closest("td").find(".govuk-error-message").empty()
@@ -373,7 +373,7 @@ window.FormValidation =
       rootThis = @
       question.find(".validate-date-start-end").each () ->
         # Whether we need to validate if date is ongoing
-        if $(this).find(".validate-date-end input[disabled]").size() == 0
+        if $(this).find(".validate-date-end input[disabled]").length == 0
           startYear = parseInt($(this).find(".validate-date-start .js-date-input-year").val())
           startMonth = parseInt($(this).find(".validate-date-start .js-date-input-month").val())
           startDate = "01/#{startMonth}/#{startYear}"
@@ -422,7 +422,7 @@ window.FormValidation =
       return
 
   validateSupportLetters: (question) ->
-    lettersReceived = $(".js-support-letter-received").size()
+    lettersReceived = $(".js-support-letter-received").length
     if lettersReceived < 2
       @logThis(question, "validateSupportLetters", "Upload at least two letters of support")
       @appendMessage(question, "Upload at least two letters of support")
@@ -521,7 +521,7 @@ window.FormValidation =
       # console.log "validateCurrentAwards"
       @validateCurrentAwards(question)
 
-    if question.find(".validate-date-start-end").size() > 0
+    if question.find(".validate-date-start-end").length > 0
       # console.log "validateDateStartEnd"
       @validateDateStartEnd(question)
 
