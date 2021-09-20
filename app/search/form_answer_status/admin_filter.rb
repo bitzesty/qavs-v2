@@ -25,7 +25,7 @@ class FormAnswerStatus::AdminFilter
       states: [:not_submitted]
     },
     submitted: {
-      label: "Application submitted",
+      label: "Nomination submitted",
       states: [:submitted]
     },
     admin_eligible: {

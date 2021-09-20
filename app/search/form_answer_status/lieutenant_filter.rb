@@ -4,7 +4,7 @@ class FormAnswerStatus::LieutenantFilter
 
   OPTIONS = {
     submitted: {
-      label: "Application submitted",
+      label: "Nomination submitted",
       states: [:submitted]
     },
     admin_eligible: {

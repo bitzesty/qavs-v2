@@ -319,7 +319,7 @@ en:
     state:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
-      submitted: Submitted
+      submitted: Nomination submitted
       admin_eligible: Eligible
       admin_eligible_duplicate: Eligible - duplicate to access
       admin_not_eligible_duplicate: Duplicate for reference
@@ -342,7 +342,7 @@ en:
     state_short:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
-      submitted: Submitted
+      submitted: Nomination submitted
       admin_eligible: Eligible
       admin_eligible_duplicate: Eligible - duplicate to access
       admin_not_eligible_duplicate: Duplicate for reference
