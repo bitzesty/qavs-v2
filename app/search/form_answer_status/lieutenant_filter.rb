@@ -8,7 +8,7 @@ class FormAnswerStatus::LieutenantFilter
       states: [:submitted]
     },
     admin_eligible: {
-      label: "Admin: Eligible",
+      label: "Eligible by admin",
       states: [:admin_eligible]
     },
     admin_eligible_duplicate: {
