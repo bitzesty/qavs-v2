@@ -16,7 +16,7 @@ feature "Admin edits eligibility status", js: true do
   end
 
   scenario "As an admin I can make nomination eligible" do
-    choose "Eligible", allow_label_click: true
+    choose "Eligible by admin", allow_label_click: true
 
     click_button "Save"
 
@@ -26,7 +26,7 @@ feature "Admin edits eligibility status", js: true do
   end
 
   scenario "As an admin I can mark a nominator as ineligible" do
-    choose "Ineligible - nominator", allow_label_click: true
+    choose "Ineligible by admin - nominator", allow_label_click: true
 
     within ".nominator-ineligible-reasons" do
       choose "No good knowledge of the group’s work", allow_label_click: true
@@ -40,7 +40,7 @@ feature "Admin edits eligibility status", js: true do
   end
 
   scenario "As an admin I can mark a group as ineligible" do
-    choose "Ineligible - group", allow_label_click: true
+    choose "Ineligible by admin - group", allow_label_click: true
 
     within ".group-ineligible-reasons" do
       choose "Led by paid staff", allow_label_click: true
