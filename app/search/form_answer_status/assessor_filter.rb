@@ -27,7 +27,7 @@ class FormAnswerStatus::AssessorFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]

@@ -73,7 +73,7 @@ class FormAnswerStatus::AdminFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]

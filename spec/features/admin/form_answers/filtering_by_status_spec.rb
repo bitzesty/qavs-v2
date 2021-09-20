@@ -47,7 +47,7 @@ describe "As Admin I want to filter applications", js: true do
     click_status_option("Applications not submitted")
     assert_results_number(3)
 
-    click_status_option("Not eligible")
+    click_status_option("Ineligible - questionnaire")
     assert_results_number(2)
   end
 

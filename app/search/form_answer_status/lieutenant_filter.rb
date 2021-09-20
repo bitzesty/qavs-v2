@@ -40,7 +40,7 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
@@ -58,7 +58,7 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
