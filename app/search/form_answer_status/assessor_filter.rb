@@ -15,7 +15,7 @@ class FormAnswerStatus::AssessorFilter
       states: [:disqualified]
     },
     recommended: {
-      label: "National assessment shortlisted",
+      label: "National assessment - shortlisted",
       states: [
         :shortlisted
       ]
