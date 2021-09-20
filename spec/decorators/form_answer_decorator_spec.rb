@@ -84,7 +84,7 @@ describe FormAnswerDecorator do
 
     it "returns application state after submission" do
       form_answer = create(:form_answer, :submitted, state: "not_recommended")
-      expect(described_class.new(form_answer).dashboard_status).to eq("Not recommended")
+      expect(described_class.new(form_answer).dashboard_status).to eq("National assessment - not recommended")
 
       form_answer.update_column(:state, "not_awarded")
       expect(described_class.new(form_answer).dashboard_status).to eq("Not awarded")
