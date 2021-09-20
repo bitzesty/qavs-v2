@@ -151,7 +151,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def progress_text_short
-    object.state.humanize
+    I18n.t "form_answers.state.#{ object.state }"
   end
 
   def nominee_name
