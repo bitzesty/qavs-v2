@@ -52,7 +52,7 @@ class AwardYears::V2022::QAEForms
           )
           check_options [
             ["national_newspaper", "National newspaper"],
-            ["local_newspaper", "Local newsaper"],
+            ["local_newspaper", "Local newspaper"],
             ["tv_radio", "TV/radio"],
             ["internet", "Internet"],
             ["word_of_mouth", "Word of mouth"],
