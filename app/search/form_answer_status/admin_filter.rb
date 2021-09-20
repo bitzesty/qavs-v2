@@ -38,6 +38,10 @@ class FormAnswerStatus::AdminFilter
       label: "Eligible by admin",
       states: [:admin_eligible]
     },
+    admin_pending_eligibility: {
+      label: "Admin: Pending Eligibility",
+      states: [:admin_pending_eligibility]
+    },
     admin_eligible_duplicate: {
       label: "Eligible by admin - duplicate to assess",
       states: [:admin_eligible_duplicate]

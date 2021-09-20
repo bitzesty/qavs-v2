@@ -8,8 +8,10 @@
         = govuk_tag(resource.eligibility_state, 'blue')
       - elsif resource.was_marked_as_ineligible?
         = govuk_tag(resource.eligibility_state, 'red')
-      - else
+      - elsif resource.state == 'admin_pending_eligibility'
         = govuk_tag('pending', 'grey')
+      - else
+        = govuk_tag('new', 'grey')
 
       - if policy(resource).eligibility?
         =< link_to "Edit status", eligibility_admin_form_answer_path(resource), class: "govuk-link govuk-link--no-visited-state"
