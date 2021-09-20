@@ -46,7 +46,7 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]

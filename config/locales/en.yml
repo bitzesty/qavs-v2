@@ -337,6 +337,7 @@ en:
       recommended: Recommended
       reserved: Reserved
       not_recommended: National assessment - not recommended
+      undecided: National assessment - undecided
       awarded: Royal approval - awarded
       not_awarded: Not awarded
       shortlisted: National assessment - shortlisted
@@ -361,6 +362,7 @@ en:
       recommended: Recommended
       reserved: Reserved
       not_recommended: National assessment - not recommended
+      undecided: National assessment - undecided
       awarded: Royal approval - awarded
       not_awarded: Not awarded
       shortlisted: National assessment - shortlisted

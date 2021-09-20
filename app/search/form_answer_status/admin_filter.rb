@@ -79,7 +79,7 @@ class FormAnswerStatus::AdminFilter
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]

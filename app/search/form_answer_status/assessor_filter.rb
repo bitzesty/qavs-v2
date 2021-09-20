@@ -33,7 +33,7 @@ class FormAnswerStatus::AssessorFilter
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]
