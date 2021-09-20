@@ -337,7 +337,7 @@ en:
       recommended: Recommended
       reserved: Reserved
       not_recommended: Not recommended
-      awarded: Awarded
+      awarded: Royal approval - awarded
       not_awarded: Not awarded
       shortlisted: Shortlisted
     state_short:
@@ -361,7 +361,7 @@ en:
       recommended: Recommended
       reserved: Reserved
       not_recommended: Not recommended
-      awarded: Awarded
+      awarded: Royal approval - awarded
       not_awarded: Not awarded
       shortlisted: Shortlisted
   form:

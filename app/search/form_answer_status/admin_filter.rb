@@ -97,7 +97,7 @@ class FormAnswerStatus::AdminFilter
       ]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [
         :awarded
       ]

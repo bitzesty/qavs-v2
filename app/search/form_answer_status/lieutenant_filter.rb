@@ -64,7 +64,7 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [
         :awarded
       ]

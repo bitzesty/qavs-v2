@@ -53,7 +53,7 @@ class FormAnswerStatus::AssessorFilter
       states: [:submitted]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [:awarded]
     },
     not_awarded: {
