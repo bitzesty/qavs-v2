@@ -21,7 +21,7 @@ class FormAnswerStatus::AdminFilter
       states: [:application_in_progress]
     },
     applications_not_submitted: {
-      label: "Applications not submitted",
+      label: "Nomination not submitted",
       states: [:not_submitted]
     },
     submitted: {
