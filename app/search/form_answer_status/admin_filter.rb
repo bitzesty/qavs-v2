@@ -9,6 +9,9 @@ class FormAnswerStatus::AdminFilter
     lord_lieutenancy_not_assigned: {
       label: "Lord Lieutenancy not assigned"
     },
+    citation_not_submitted: {
+      label: "Citation form not submitted"
+    },
     missing_rsvp_details: {
       label: "Missing RSVP Details"
     }

@@ -16,13 +16,12 @@ describe "As Admin I want to filter applications", js: true do
     @forms << create(:form_answer, state: "application_in_progress")
     @forms << create(:form_answer, state: "not_eligible")
     @forms << create(:form_answer, state: "application_in_progress")
-
+    create(:citation, :submitted, form_answer_id: @forms.last.id)
     # 0111 - is default sic_code, came from spec/fixtures/*.json
     # as it is required field
     # so that we are cleaning it up for last 3
     #
     @forms.last(3).map do |form|
-      form.document["sic_code"] = nil
       form.document["nominee_ceremonial_county"] = ceremonial_county_1.id
     end
 
@@ -69,10 +68,17 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(3)
   end
 
+  it "filters by citation not submitted" do
+    assert_results_number(4)
+
+    click_status_option("Citation form not submitted")
+    assert_results_number(3)
+  end
+
   it "filters by assigned ceremonial county" do
     assert_results_number(4)
     assign_ceremonial_county(@forms.first, ceremonial_county_1)
-
+    puts @forms.last.citation.completed_at
     click_status_option("Not assigned")
     assert_results_number(1)
   end

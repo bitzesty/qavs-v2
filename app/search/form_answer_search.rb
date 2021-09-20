@@ -85,6 +85,10 @@ class FormAnswerSearch < Search
         out = out.where(sub_group: nil)
       when "lord_lieutenancy_not_assigned"
         out = out.where(ceremonial_county_id: nil)
+      when "citation_not_submitted"
+        out = out.joins(
+          "LEFT OUTER JOIN citations ON citations.form_answer_id = form_answers.id"
+        ).where("citations.completed_at IS NULL")
       when "missing_rsvp_details"
         out = out.joins(
           "LEFT OUTER JOIN palace_invites on palace_invites.form_answer_id = form_answers.id"
