@@ -422,9 +422,6 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0704)
-    mimemagic (0.4.3)
-      nokogiri (~> 1)
-      rake
     mini_magick (4.11.0)
     mini_mime (1.1.1)
     mini_portile2 (2.6.1)
@@ -778,7 +775,6 @@ DEPENDENCIES
   lograge
   mail-notify (~> 1.0)
   meta_request
-  mimemagic (>= 0.3.9)
   nilify_blanks
   nokogiri
   paper_trail (~> 10.3)
