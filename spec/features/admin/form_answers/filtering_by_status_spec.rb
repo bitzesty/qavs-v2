@@ -57,11 +57,11 @@ describe "As Admin I want to filter applications", js: true do
 
     # Add assesors to all applications and check filter
     assign_dummy_assessors(@forms, create(:assessor))
-    click_status_option("Assessors not assigned")
+    click_status_option("National assessors not assigned")
     assert_results_number(0)
 
     # Uncheck filter
-    click_status_option("Assessors not assigned")
+    click_status_option("National assessors not assigned")
     assert_results_number(4)
   end
 

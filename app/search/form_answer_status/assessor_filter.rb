@@ -65,7 +65,7 @@ class FormAnswerStatus::AssessorFilter
 
   SUB_OPTIONS = {
     assessors_not_assigned: {
-      label: "Assessors not assigned"
+      label: "National assessors not assigned"
     }
   }
 

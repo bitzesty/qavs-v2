@@ -4,7 +4,7 @@ class FormAnswerStatus::AdminFilter
 
   SUB_OPTIONS = {
     assessors_not_assigned: {
-      label: "Assessors not assigned"
+      label: "National assessors not assigned"
     },
     missing_rsvp_details: {
       label: "Missing RSVP Details"
