@@ -45,7 +45,7 @@ class FormAnswerStatus::AssessorFilter
       ]
     },
     withdrawn: {
-      label: "Withdrawn/Ineligible",
+      label: "Withdrawn",
       states: [:withdrawn]
     },
     submitted: {
