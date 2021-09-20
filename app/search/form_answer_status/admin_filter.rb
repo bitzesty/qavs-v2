@@ -6,6 +6,9 @@ class FormAnswerStatus::AdminFilter
     assessors_not_assigned: {
       label: "National assessors not assigned"
     },
+    lord_lieutenancy_not_assigned: {
+      label: "Lord Lieutenancy not assigned"
+    },
     missing_rsvp_details: {
       label: "Missing RSVP Details"
     }

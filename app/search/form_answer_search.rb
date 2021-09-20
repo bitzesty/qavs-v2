@@ -83,6 +83,8 @@ class FormAnswerSearch < Search
       case v
       when "assessors_not_assigned"
         out = out.where(sub_group: nil)
+      when "lord_lieutenancy_not_assigned"
+        out = out.where(ceremonial_county_id: nil)
       when "missing_rsvp_details"
         out = out.joins(
           "LEFT OUTER JOIN palace_invites on palace_invites.form_answer_id = form_answers.id"

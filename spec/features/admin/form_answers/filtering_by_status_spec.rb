@@ -63,6 +63,10 @@ describe "As Admin I want to filter applications", js: true do
     # Uncheck filter
     click_status_option("National assessors not assigned")
     assert_results_number(4)
+
+    assign_ceremonial_county(@forms.first, ceremonial_county_1)
+    click_status_option("Lord Lieutenancy not assigned")
+    assert_results_number(3)
   end
 
   it "filters by assigned ceremonial county" do
