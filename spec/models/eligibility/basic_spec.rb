@@ -57,7 +57,7 @@ RSpec.describe Eligibility::Basic, type: :model do
   end
 
   describe "#save_as_eligible" do
-    let(:eligibility) { FactoryBot.create(:basic_eligibility) }
+    let(:eligibility) { build(:basic_eligibility, answers: {}) }
 
     it "saves and marks eligibilty as eligible" do
       eligibility.save_as_eligible!
