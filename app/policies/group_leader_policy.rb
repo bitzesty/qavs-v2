@@ -14,4 +14,8 @@ class GroupLeaderPolicy < AdminPolicy
   def destroy?
     admin?
   end
+
+  def update_account_details?
+    admin? || group_leader?
+  end
 end

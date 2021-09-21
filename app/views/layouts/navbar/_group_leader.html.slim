@@ -1,4 +1,6 @@
 li.govuk-header__navigation-item
   = link_to "Dashboard", group_leader_root_path, class: 'govuk-header__link'
 li.govuk-header__navigation-item
+  = link_to "Account details", edit_group_leader_account_path, class: 'govuk-header__link'
+li.govuk-header__navigation-item
   = link_to "Sign out", destroy_group_leader_session_path, method: :delete, class: 'govuk-header__link'

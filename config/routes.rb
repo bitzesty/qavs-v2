@@ -136,6 +136,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
+
     resources :form_answers do
       collection do
         post :index
@@ -268,6 +274,12 @@ Rails.application.routes.draw do
 
     resources :lieutenant_assignment_collections, only: [:create]
     resources :assessor_assignment_collections, only: [:create]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :lieutenant do
@@ -285,11 +297,22 @@ Rails.application.routes.draw do
       resources :form_answer_state_transitions, only: [:create]
       resources :support_letters, only: [:show]
     end
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :group_leader do
     root to: "dashboard#show"
 
     resources :citations, only: [:edit, :update]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 end
