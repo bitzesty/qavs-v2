@@ -4,49 +4,53 @@ class FormAnswerStatus::LieutenantFilter
 
   OPTIONS = {
     submitted: {
-      label: "Application submitted",
+      label: "Nomination submitted",
       states: [:submitted]
     },
     admin_eligible: {
-      label: "Admin: Eligible",
+      label: "Eligible by admin",
       states: [:admin_eligible]
     },
     admin_eligible_duplicate: {
-      label: "Eligible - duplicate to access",
+      label: "Eligible by admin - duplicate to assess",
       states: [:admin_eligible_duplicate]
+    },
+    admin_not_eligible_duplicate: {
+      label: "Duplicate for reference",
+      states: [:admin_not_eligible_duplicate]
     },
     local_assessment_in_progress: {
       label: "Local assessment in progress",
       states: [:local_assessment_in_progress]
     },
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     local_assessment_not_recommended: {
-      label: "Local assessment: not recommended",
+      label: "Local assessment - not recommended",
       states: [:local_assessment_not_recommended]
     },
     recommended: {
-      label: "Shortlisted",
+      label: "National assessment - shortlisted",
       states: [
         :shortlisted
       ]
     },
     not_recommended: {
-      label: "Not recomended",
+      label: "National assessment - not recommended",
       states: [
         :not_recommended
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]
@@ -58,13 +62,13 @@ class FormAnswerStatus::LieutenantFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [
         :awarded
       ]

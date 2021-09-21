@@ -81,14 +81,24 @@ class FormAnswerSearch < Search
 
     value.each do |v|
       case v
+      when "lord_lieutenancy_not_assigned"
+        out = out.where(ceremonial_county_id: nil)
+      when "local_assessment_not_started"
+        out = out.lieutenancy_assigned.where(state: %w[admin_eligible admin_eligible_duplicate])
       when "assessors_not_assigned"
         out = out.where(sub_group: nil)
+      when "national_assessment_outcome_pending"
+        out = out.joins(
+          "LEFT OUTER JOIN admin_verdicts ON admin_verdicts.form_answer_id = form_answers.id"
+        ).where("admin_verdicts IS NULL")
+      when "citation_not_submitted"
+        out = out.joins(
+          "LEFT OUTER JOIN citations ON citations.form_answer_id = form_answers.id"
+        ).where("citations.completed_at IS NULL")
       when "missing_rsvp_details"
         out = out.joins(
           "LEFT OUTER JOIN palace_invites on palace_invites.form_answer_id = form_answers.id"
-        ).joins(
-          "LEFT OUTER JOIN palace_attendees ON palace_attendees.palace_invite_id = palace_invites.id"
-        ).where("palace_invites.id IS NULL OR palace_attendees.id IS NULL")
+        ).where("palace_invites.submitted IS NOT TRUE")
       end
     end
 

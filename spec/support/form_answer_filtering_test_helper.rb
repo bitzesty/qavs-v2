@@ -55,4 +55,11 @@ module FormAnswerFilteringTestHelper
       fa.save!(validate: false)
     end
   end
+
+  def assign_new_state(form_answers, state)
+    Array(form_answers).each do |fa|
+      fa.state = state
+      fa.save!(validate: false)
+    end
+  end
 end
