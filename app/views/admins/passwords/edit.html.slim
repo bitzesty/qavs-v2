@@ -7,7 +7,7 @@ h1.govuk-heading-xl Create a password
   = f.input :reset_password_token, as: :hidden
   = f.full_error :reset_password_token
 
-  = render "shared/users/password_change"
+  = render "shared/users/password_change", f: f
 
   .form-actions
     = f.button :submit, "Create password", class: "govuk-button button large"
