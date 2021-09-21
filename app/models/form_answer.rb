@@ -82,6 +82,7 @@ class FormAnswer < ApplicationRecord
     scope :not_positive, -> { where(state: FormAnswerStateMachine::NOT_POSITIVE_STATES) }
     scope :in_progress, -> { where(state: ["eligibility_in_progress", "application_in_progress"]) }
     scope :eligible_for_lieutenant, -> { where(state: FormAnswerStatus::LieutenantFilter::OPTIONS.keys) }
+    scope :lieutenancy_assigned, -> { where.not(ceremonial_county_id: nil) }
 
     scope :past, -> {
       where(award_year_id: AwardYear.past.pluck(:id))

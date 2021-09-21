@@ -3,11 +3,23 @@ class FormAnswerStatus::AdminFilter
   include NomineeActivityHelper
 
   SUB_OPTIONS = {
+    lord_lieutenancy_not_assigned: {
+      label: "Lord Lieutenancy not assigned"
+    },
+    local_assessment_not_started: {
+      label: "Local assessment not started"
+    },
     assessors_not_assigned: {
-      label: "Assessors not assigned"
+      label: "National assessors not assigned"
+    },
+    national_assessment_outcome_pending: {
+      label: "National assessment outcome pending"
+    },
+    citation_not_submitted: {
+      label: "Citation form not submitted"
     },
     missing_rsvp_details: {
-      label: "Missing RSVP Details"
+      label: "Royal Garden Party form not submitted"
     }
   }
 
@@ -17,19 +29,19 @@ class FormAnswerStatus::AdminFilter
       states: [:eligibility_in_progress]
     },
     application_in_progress: {
-      label: "Application in progress",
+      label: "Nomination in progress",
       states: [:application_in_progress]
     },
     applications_not_submitted: {
-      label: "Applications not submitted",
+      label: "Nomination not submitted",
       states: [:not_submitted]
     },
     submitted: {
-      label: "Application submitted",
+      label: "Nomination submitted",
       states: [:submitted]
     },
     admin_eligible: {
-      label: "Admin: Eligible",
+      label: "Eligible by admin",
       states: [:admin_eligible]
     },
     admin_pending_eligibility: {
@@ -37,7 +49,7 @@ class FormAnswerStatus::AdminFilter
       states: [:admin_pending_eligibility]
     },
     admin_eligible_duplicate: {
-      label: "Eligible - duplicate to access",
+      label: "Eligible by admin - duplicate to assess",
       states: [:admin_eligible_duplicate]
     },
     admin_not_eligible_duplicate: {
@@ -45,11 +57,11 @@ class FormAnswerStatus::AdminFilter
       states: [:admin_not_eligible_duplicate]
     },
     admin_not_eligible_nominator: {
-      label: "Ineligible - nominator",
+      label: "Ineligible by admin - nominator",
       states: [:admin_not_eligible_nominator]
     },
     admin_not_eligible_group: {
-      label: "Ineligible - group",
+      label: "Ineligible by admin - group",
       states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {
@@ -57,33 +69,33 @@ class FormAnswerStatus::AdminFilter
       states: [:local_assessment_in_progress]
     },
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     local_assessment_not_recommended: {
-      label: "Local assessment: not recommended",
+      label: "Local assessment - not recommended",
       states: [:local_assessment_not_recommended]
     },
     recommended: {
-      label: "Shortlisted",
+      label: "National assessment - shortlisted",
       states: [
         :shortlisted
       ]
     },
     not_recommended: {
-      label: "Not recomended",
+      label: "National assessment - not recommended",
       states: [
         :not_recommended
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]
@@ -95,13 +107,13 @@ class FormAnswerStatus::AdminFilter
       ]
     },
     withdrawn: {
-      label: "Withdrawn/Ineligible",
+      label: "Withdrawn",
       states: [
         :withdrawn
       ]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [
         :awarded
       ]
