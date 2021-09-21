@@ -91,6 +91,8 @@ class Admin::UsersController < Admin::BaseController
   def resource_params
     params.require(:user).permit(
       :email,
+      :first_name,
+      :last_name,
       :current_password,
       :password,
       :password_confirmation
