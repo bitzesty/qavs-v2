@@ -63,11 +63,12 @@ describe "As Admin I want to filter applications", js: true do
     end
 
     it "filters by local assessment not started" do
-      assign_ceremonial_county(@forms.last, ceremonial_county_1)
+      assign_ceremonial_county(@forms.last(2), ceremonial_county_1)
       assign_new_state(@forms, "admin_eligible")
+      assign_new_state(@forms.last, "admin_eligible_duplicate")
 
       click_status_option("Local assessment not started")
-      assert_results_number(1)
+      assert_results_number(2)
     end
 
     it "filters by national assessor not assigned" do

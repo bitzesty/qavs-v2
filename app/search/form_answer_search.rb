@@ -84,7 +84,7 @@ class FormAnswerSearch < Search
       when "lord_lieutenancy_not_assigned"
         out = out.where(ceremonial_county_id: nil)
       when "local_assessment_not_started"
-        out = out.where(state: :admin_eligible).where.not(ceremonial_county_id: nil)
+        out = out.lieutenancy_assigned.where(state: :admin_eligible).or(out.lieutenancy_assigned.where(state: :admin_eligible_duplicate))
       when "assessors_not_assigned"
         out = out.where(sub_group: nil)
       when "national_assessment_outcome_pending"
