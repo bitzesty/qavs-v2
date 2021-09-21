@@ -12,6 +12,9 @@ class FormAnswerStatus::AdminFilter
     assessors_not_assigned: {
       label: "National assessors not assigned"
     },
+    national_assessment_outcome_pending: {
+      label: "National assessment outcome pending"
+    },
     citation_not_submitted: {
       label: "Citation form not submitted"
     },

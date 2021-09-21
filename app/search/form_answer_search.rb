@@ -87,6 +87,10 @@ class FormAnswerSearch < Search
         out = out.where(state: :admin_eligible).where.not(ceremonial_county_id: nil)
       when "assessors_not_assigned"
         out = out.where(sub_group: nil)
+      when "national_assessment_outcome_pending"
+        out = out.joins(
+          "LEFT OUTER JOIN admin_verdicts ON admin_verdicts.form_answer_id = form_answers.id"
+        ).where("admin_verdicts IS NULL")
       when "citation_not_submitted"
         out = out.joins(
           "LEFT OUTER JOIN citations ON citations.form_answer_id = form_answers.id"

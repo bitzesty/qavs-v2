@@ -82,6 +82,14 @@ describe "As Admin I want to filter applications", js: true do
       assert_results_number(4)
     end
 
+    it "filters by national assessment outcome pending" do
+      assign_dummy_assessors(@forms, create(:assessor))
+      create(:admin_verdict, form_answer_id: @forms.last.id)
+
+      click_status_option("National assessment outcome pending")
+      assert_results_number(3)
+    end
+
     it "filters by citation not submitted" do
       create(:citation, :submitted, form_answer_id: @forms.last.id)
 
