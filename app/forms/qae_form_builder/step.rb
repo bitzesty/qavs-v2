@@ -229,6 +229,5 @@ class QAEFormBuilder
     def decorate options = {}
       StepDecorator.new self, options
     end
-
   end
 end
