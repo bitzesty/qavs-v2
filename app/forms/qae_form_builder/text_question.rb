@@ -1,5 +1,17 @@
 class QAEFormBuilder
   class TextQuestionValidator < QuestionValidator
+    # regex source: https://www.w3resource.com/javascript/form/email-validation.php
+    EMAIL_REGEX = /\A\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+\z/
+
+    def errors
+      result = super
+
+      if question.email? && question.input_value.present? && !question.input_value.match(EMAIL_REGEX)
+        result[question.hash_key] = "Is not a valid email"
+      end
+
+      result
+    end
   end
 
   class TextQuestionBuilder < QuestionBuilder
@@ -18,6 +30,10 @@ class QAEFormBuilder
 
   class TextQuestion < Question
     attr_accessor :type, :style, :default_value_key
+
+    def email?
+      type.to_s == "email"
+    end
   end
 
   class TextQuestionDecorator < QuestionDecorator
