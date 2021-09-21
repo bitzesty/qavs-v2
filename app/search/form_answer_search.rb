@@ -81,10 +81,12 @@ class FormAnswerSearch < Search
 
     value.each do |v|
       case v
-      when "assessors_not_assigned"
-        out = out.where(sub_group: nil)
       when "lord_lieutenancy_not_assigned"
         out = out.where(ceremonial_county_id: nil)
+      when "local_assessment_not_started"
+        out = out.where(state: :admin_eligible).where.not(ceremonial_county_id: nil)
+      when "assessors_not_assigned"
+        out = out.where(sub_group: nil)
       when "citation_not_submitted"
         out = out.joins(
           "LEFT OUTER JOIN citations ON citations.form_answer_id = form_answers.id"

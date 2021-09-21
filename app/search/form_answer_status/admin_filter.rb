@@ -3,11 +3,14 @@ class FormAnswerStatus::AdminFilter
   include NomineeActivityHelper
 
   SUB_OPTIONS = {
-    assessors_not_assigned: {
-      label: "National assessors not assigned"
-    },
     lord_lieutenancy_not_assigned: {
       label: "Lord Lieutenancy not assigned"
+    },
+    local_assessment_not_started: {
+      label: "Local assessment not started"
+    },
+    assessors_not_assigned: {
+      label: "National assessors not assigned"
     },
     citation_not_submitted: {
       label: "Citation form not submitted"
