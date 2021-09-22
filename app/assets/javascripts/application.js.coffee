@@ -919,6 +919,9 @@ jQuery ->
 
   if $('.js-ckeditor').length > 0
 
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/notification/plugin.js' );
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/wordcount/plugin.js' );
+
     $('.js-ckeditor').each (index) ->
       group = $(this).closest(".govuk-form-group")
 
@@ -927,7 +930,24 @@ jQuery ->
 
       CKEDITOR.replace this,
         title: group.find('label').first().text(),
-        toolbar: 'mini'
+        language: 'en'
+        toolbar_mini: [
+          {name: 'p1', items: ["Cut", "Copy", "PasteText", "-", "Undo", "Redo"]},
+          {name: 'p2', items: ["Bold", "Italic",  "-", "RemoveFormat"]},
+          {name: 'p3', items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']}
+        ]
+        toolbar: "mini";
+        extraPlugins: 'wordcount'
+
+        wordcount: {
+          showParagraphs: false,
+          showWordCount: true
+        }
+
+        removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
+        disableNativeSpellChecker: false
+
+        allowedContent: 'h1 h2 h3 blockquote p ul ol li em i strong b i br'
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')
