@@ -123,24 +123,27 @@ describe Notifiers::EmailNotificationService do
       doc = not_submitted.document
       doc["nominee_leader_name"] = "Rob Becket"
       doc["nominee_leader_email"] = "rob@example.com"
+      doc["nominee_name"] = "Odyssey"
       not_submitted.document = doc
       not_submitted.save!
 
       doc = submitted.document
       doc["nominee_leader_name"] = "Alice Becket"
       doc["nominee_leader_email"] = "alice@example.com"
+      doc["nominee_name"] = "Kotu"
       submitted.document = doc
       submitted.save!
 
       doc = dup_submitted.document
       doc["nominee_leader_name"] = "Alice Becket"
       doc["nominee_leader_email"] = "alice@example.com"
+      doc["nominee_name"] = "Kotu"
       dup_submitted.document = doc
       dup_submitted.save!
     end
 
     it "sends one notification to the submitted group leader" do
-      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with("alice@example.com", "Alice Becket").once { mailer }
+      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with("alice@example.com", "Alice Becket", "Kotu").once { mailer }
 
       described_class.run
 

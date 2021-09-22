@@ -84,11 +84,11 @@ class Notifiers::EmailNotificationService
       email = nomination.document["nominee_leader_email"]
       group_name = nomination.document["nominee_name"]
       # making sure we only send 1 email per email
-      group_leaders[email] = { email: email, name: name, group_name: group_name }
+      group_leaders[email] = { name: name, group_name: group_name }
     end
 
-    group_leaders.each do |gl|
-      AccountMailers::GroupLeaderMailer.notify(gl[:email], gl[:name], gl[:group_name]).deliver_later!
+    group_leaders.each do |email, v|
+      AccountMailers::GroupLeaderMailer.notify(email, v[:name], v[:group_name]).deliver_later!
     end
   end
 
