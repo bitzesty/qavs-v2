@@ -154,18 +154,34 @@ describe Notifiers::EmailNotificationService do
   describe "#local_assessment_notification" do
     let(:kind) { "local_assessment_notification" }
     let(:mailer) { double(deliver_later!: true) }
-
-    let!(:lieutenant) { create(:lieutenant) }
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
-    it "triggers current notification" do
-      expect(LieutenantsMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
-                                                                    lieutenant.id
-                                                                  ) { mailer }
+    context "for advanced lieutenants" do
+      let!(:lieutenant) { create(:lieutenant, :advanced) }
 
-      described_class.run
+      it "triggers current notification" do
+        expect(LieutenantsMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
 
-      expect(current_notification.reload).to be_sent
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "for regular lieutenants" do
+      let!(:lieutenant) { create(:lieutenant) }
+
+      it "does not send a notification" do
+        expect(LieutenantsMailers::LocalAssessmentNotificationMailer).not_to receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
     end
   end
 
@@ -173,7 +189,6 @@ describe Notifiers::EmailNotificationService do
   describe "#local_assessment_reminder" do
     let(:kind) { "local_assessment_reminder" }
     let(:mailer) { double(deliver_later!: true) }
-
     let!(:lieutenant) { create(:lieutenant) }
 
     it "triggers current notification" do

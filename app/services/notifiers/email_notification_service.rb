@@ -95,7 +95,7 @@ class Notifiers::EmailNotificationService
   def local_assessment_notification(award_year)
     ceremonial_counties = award_year.form_answers.submitted.pluck(:ceremonial_county_id).uniq
 
-    lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties).pluck(:id)
+    lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties, role: "advanced" ).pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
       LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
