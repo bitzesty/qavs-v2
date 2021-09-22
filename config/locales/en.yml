@@ -206,7 +206,7 @@ en:
     buckingham_palace_invite: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
 
   email_notification_headers:
-    award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
+    award_year_open_notifier: "Notify users that the nominations for the new Award year are open."
     submission_started_notification: "Notify users that nominations for the new Award year are open"
     reminder_to_submit: "Reminder to submit the nominations"
     group_leader_notification: "Notification sent to group leaders about the nomination"
