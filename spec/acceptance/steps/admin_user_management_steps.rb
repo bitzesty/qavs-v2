@@ -7,7 +7,8 @@ step "I create new user" do
   click_link "Add nominator"
 
   fill_in 'Email', with: 'user@example.com'
-
+  fill_in 'First name', with: "Mana"
+  fill_in "Last name", with: "O'Lana"
   click_button "Add user"
 end
 

@@ -42,9 +42,9 @@ Rails.application.routes.draw do
   get "/timeline"                                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/timeline")
   get "/additional_information_and_contact"             => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
   get "/apply-for-queens-award-for-enterprise"          => redirect("https://www.gov.uk/apply-queens-award-enterprise")
+  get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
 
   get "/sign_up_complete"                               => "content_only#sign_up_complete",                               as: "sign_up_complete"
-  get "/privacy"                                        => "content_only#privacy",                                        as: "privacy"
   get "/cookies"                                        => "content_only#cookies",                                        as: "cookies"
 
   get  "/new_qavs_form"                                 => "form#new_qavs_form",                                          as: "new_qavs_form"
@@ -133,6 +133,12 @@ Rails.application.routes.draw do
     resources :palace_invites, only: [] do
       member do
         post :submit
+      end
+    end
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
       end
     end
 
@@ -268,6 +274,12 @@ Rails.application.routes.draw do
 
     resources :lieutenant_assignment_collections, only: [:create]
     resources :assessor_assignment_collections, only: [:create]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :lieutenant do
@@ -285,11 +297,22 @@ Rails.application.routes.draw do
       resources :form_answer_state_transitions, only: [:create]
       resources :support_letters, only: [:show]
     end
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :group_leader do
     root to: "dashboard#show"
 
     resources :citations, only: [:edit, :update]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 end

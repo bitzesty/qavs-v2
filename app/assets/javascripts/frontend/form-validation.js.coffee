@@ -10,10 +10,8 @@ window.FormValidation =
     $(".steps-progress-bar .js-step-link").removeClass("step-errors")
 
   clearErrors: (container) ->
-    if container.closest(".question-financial").size() > 0
+    if container.closest(".question-financial").length > 0
       container.closest("label").find(".govuk-error-message").empty()
-    else if container.closest('.question-matrix').length > 0
-      container.closest("td").find(".govuk-error-message").empty()
     else if container.closest('.question-block').data('answer').indexOf('address') > -1
       container.closest(".govuk-form-group").find(".govuk-error-message").empty()
     else
@@ -113,6 +111,14 @@ window.FormValidation =
     if q.val() isnt $("input[name='#{matchName}']").val()
       @logThis(question, "validateMatchQuestion", "Emails don't match")
       @addErrorMessage(question, "Emails don't match")
+
+  # regex source: https://www.w3resource.com/javascript/form/email-validation.php
+  validateEmailQuestion: (question) ->
+    val = String(question.find("input[type='email']").val()).toLowerCase()
+
+    if not /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)
+      @logThis(question, "validateEmailQuestion", "Not a valid email")
+      @addErrorMessage(question, "Not a valid email")
 
   validateMaxDate: (question) ->
     val = question.find("input[type='text']").val()
@@ -292,88 +298,12 @@ window.FormValidation =
         @appendMessage($(subquestion), errorText)
         @addErrorClass(question)
 
-  validateMoneyByYears: (question) ->
-    inputCellsCounter = 0
-
-    # Checking if question has min value for first year
-    financialConditionalBlock = question.find(".js-financial-conditional").first()
-    firstYearMinValue = financialConditionalBlock.data("first-year-min-value")
-    if typeof(firstYearMinValue) != typeof(undefined)
-      firstYearMinValidation = true
-
-    for subquestion in question.find("input")
-      subq = $(subquestion)
-      qParent = subq.closest(".js-fy-entries")
-      errContainer = subq.closest(".span-financial")
-
-      shownQuestion = true
-      for conditional in $(subquestion).parents('.js-conditional-question')
-        if !$(conditional).hasClass('show-question')
-          shownQuestion = false
-
-      if shownQuestion
-        inputCellsCounter += 1
-
-        if not subq.val() and question.hasClass("question-required")
-          @logThis(question, "validateMoneyByYears", "This field is required")
-          @appendMessage(errContainer, "This field is required")
-          @addErrorClass(question)
-          continue
-        else if not subq.val()
-          continue
-
-        value = subq.val().toString()
-
-        if not $.trim(value).match(@numberRegex)
-          @logThis(question, "validateMoneyByYears", "Not a valid currency value")
-          @appendMessage(errContainer, "Not a valid currency value")
-          @addErrorClass(question)
-        else
-          # if value is valid currency and it's first cell and
-          # and question has min value for first year value
-          # and value less than min value
-          if inputCellsCounter == 1 && firstYearMinValidation && (value < firstYearMinValue)
-            message = financialConditionalBlock.data("first-year-min-validation-message")
-            @logThis(question, "validateMoneyByYears", message)
-            @appendMessage(errContainer, message)
-            @addErrorClass(question)
-
-  validateDateByYears: (question) ->
-    for subquestionBlock in question.find(".js-fy-entry-container.show-question .date-input")
-      subq = $(subquestionBlock)
-      qParent = subq.closest(".js-fy-entries")
-      errorsContainer = qParent.find(".govuk-error-message").html()
-
-      day = subq.find("input.js-fy-day").val()
-      month = subq.find("input.js-fy-month").val()
-      year = subq.find("input.js-fy-year").val()
-
-      if (not day or not month or not year)
-        if question.hasClass("question-required") && errorsContainer.length < 1
-          @appendMessage(qParent, "This field is required")
-          @addErrorClass(question)
-      else
-        complexDateString = day + "/" + month + "/" + year
-        date = @toDate(complexDateString)
-        currentDate = new Date()
-
-        if not date.isValid()
-          @logThis(question, "validateDateByYears", "Not a valid date")
-          @appendMessage(qParent, "Not a valid date")
-          @addErrorClass(question)
-        # temporary condition
-        else if parseInt(year) > 2021 || parseInt(year) < 2012
-          @logThis(question, "validateDateByYears", "the year must be from 2012 to 2021")
-          @appendMessage(qParent, "the year must be from 2012 to 2021")
-          @addErrorClass(question)
-
-
   validateDateStartEnd: (question) ->
     if question.find(".validate-date-start-end").length > 0
       rootThis = @
       question.find(".validate-date-start-end").each () ->
         # Whether we need to validate if date is ongoing
-        if $(this).find(".validate-date-end input[disabled]").size() == 0
+        if $(this).find(".validate-date-end input[disabled]").length == 0
           startYear = parseInt($(this).find(".validate-date-start .js-date-input-year").val())
           startMonth = parseInt($(this).find(".validate-date-start .js-date-input-month").val())
           startDate = "01/#{startMonth}/#{startYear}"
@@ -422,7 +352,7 @@ window.FormValidation =
       return
 
   validateSupportLetters: (question) ->
-    lettersReceived = $(".js-support-letter-received").size()
+    lettersReceived = $(".js-support-letter-received").length
     if lettersReceived < 2
       @logThis(question, "validateSupportLetters", "Upload at least two letters of support")
       @appendMessage(question, "Upload at least two letters of support")
@@ -467,7 +397,7 @@ window.FormValidation =
         self.validateIndividualQuestion($(@).closest(".question-block"), $(@))
 
   validateIndividualQuestion: (question, triggeringElement) ->
-    if question.hasClass("question-required") and (!question.data('answer') || question.data('answer').indexOf('address') is -1) and not question.hasClass("question-date-by-years") and not question.hasClass("question-money-by-years") and not question.hasClass("question-matrix")
+    if question.hasClass("question-required") and (!question.data('answer') || question.data('answer').indexOf('address') is -1) and not question.find('input[type=email]').length
       @validateRequiredQuestion(question)
 
     if question.hasClass("question-required") and question.data('answer') and question.data('answer').indexOf('address') > -1
@@ -476,6 +406,9 @@ window.FormValidation =
       else
         @validateRequiredQuestion(question)
 
+    if question.find('input[type=email]').length
+      @validateEmailQuestion(question)
+
     if question.hasClass("question-number")
       # console.log "validateNumber"
       @validateNumber(question)
@@ -483,14 +416,6 @@ window.FormValidation =
     if question.hasClass("question-year")
       # console.log "validateYear"
       @validateYear(question)
-
-    if question.hasClass("question-money-by-years")
-      # console.log "validateMoneyByYears"
-      @validateMoneyByYears(question)
-
-    if question.hasClass("question-date-by-years") &&
-       (question.hasClass("one-option-by-years") || question.find(".show-question").length == (question.find(".js-conditional-question").length - 1))
-      @validateDateByYears(question)
 
     if question.find(".match").length
       # console.log "validateMatchQuestion"
@@ -521,7 +446,7 @@ window.FormValidation =
       # console.log "validateCurrentAwards"
       @validateCurrentAwards(question)
 
-    if question.find(".validate-date-start-end").size() > 0
+    if question.find(".validate-date-start-end").length > 0
       # console.log "validateDateStartEnd"
       @validateDateStartEnd(question)
 

@@ -24,34 +24,7 @@ en:
         word_of_mouth: Word of mouth
         other: Other
     eligibility/basic:
-      kind:
-        application: Apply for an organisation award
-        nomination: Nominate an individual
       current_holder:
-        i_dont_know: "I don't know"
-    eligibility/innovation:
-      innovative_product:
-        skip: "Skip Innovation eligibility"
-    eligibility/development:
-      sustainable_development:
-        skip: "Skip Sustainable Development eligibility"
-    eligibility/trade:
-      sales_above_100_000_pounds:
-        skip: "Skip International Trade eligibility"
-      qae_for_trade_award_year:
-        before_2010: Prior to 2010
-        before_2011: Prior to 2011
-        before_2012: Prior to 2012
-        before_2013: Prior to 2013
-        before_2014: Prior to 2014
-        before_2015: Prior to 2015
-        before_2016: Prior to 2016
-        before_2017: Prior to 2017
-        before_2018: Prior to 2018
-        before_2019: Prior to 2019
-        before_2020: Prior to 2020
-    eligibility/promotion:
-      nominee_is_qae_ep_award_holder:
         i_dont_know: "I don't know"
     form_answer:
       ineligible_reason_nominator:
@@ -319,49 +292,54 @@ en:
     state:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
-      submitted: Submitted
-      admin_eligible: Eligible
-      admin_eligible_duplicate: Eligible - duplicate to access
+      submitted: Nomination submitted
+      applications_not_submitted: Nomination not submitted
+      admin_eligible: Eligible by admin
+      admin_eligible_duplicate: Eligible by admin - duplicate to assess
+      admin_pending_eligibility: "Eligibility pending"
       admin_not_eligible_duplicate: Duplicate for reference
-      admin_not_eligible_nominator: Ineligible - nominator
-      admin_not_eligible_group: Ineligible - group
+      admin_not_eligible_nominator: Ineligible by admin - nominator
+      admin_not_eligible_group: Ineligible by admin - group
       local_assessment_in_progress: "Local assessment in progress"
-      local_assessment_recommended: "Local assessment: recommended"
-      local_assessment_not_recommended: "Local assessment: not recommended"
+      local_assessment_recommended: "Local assessment - recommended"
+      local_assessment_not_recommended: "Local assessment - not recommended"
       withdrawn: Withdrawn
-      not_eligible: Not eligible
+      not_eligible: Ineligible - questionnaire
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress
       disqualified: Disqualified - No Verification of Commercial Figures
       recommended: Recommended
       reserved: Reserved
-      not_recommended: Not recommended
-      awarded: Awarded
+      not_recommended: National assessment - not recommended
+      undecided: National assessment - undecided
+      awarded: Royal approval - awarded
       not_awarded: Not awarded
-      shortlisted: Shortlisted
+      shortlisted: National assessment - shortlisted
     state_short:
       eligibility_in_progress: Eligibility in progress
       application_in_progress: Nomination in progress
-      submitted: Submitted
-      admin_eligible: Eligible
-      admin_eligible_duplicate: Eligible - duplicate to access
+      submitted: Nomination submitted
+      applications_not_submitted: Nomination not submitted
+      admin_eligible: Eligible by admin
+      admin_eligible_duplicate: Eligible by admin - duplicate to assess
       admin_not_eligible_duplicate: Duplicate for reference
-      admin_not_eligible_nominator: Ineligible - nominator
-      admin_not_eligible_group: Ineligible - group
-      local_assessment_in_progress: "Local assessment: in progress"
-      local_assessment_recommended: "Local assessment: recommended"
-      local_assessment_not_recommended: "Local assessment: not recommended"
+      admin_not_eligible_nominator: Ineligible by admin - nominator
+      admin_not_eligible_group: Ineligible by admin - group
+      local_assessment_in_progress: "Local assessment - in progress"
+      local_assessment_recommended: "Local assessment - recommended"
+      local_assessment_not_recommended: "Local assessment - not recommended"
       withdrawn: Withdrawn
-      not_eligible: Not eligible
+      not_eligible: Ineligible - questionnaire
       not_submitted: Not submitted
       assessment_in_progress: Assessment in progress
       disqualified: Disqualified - <br /> No Verification of <br /> Commercial Figures
       recommended: Recommended
       reserved: Reserved
-      not_recommended: Not recommended
-      awarded: Awarded
+      not_recommended: National assessment - not recommended
+      undecided: National assessment - undecided
+      awarded: Royal approval - awarded
       not_awarded: Not awarded
-      shortlisted: Shortlisted
+      shortlisted: National assessment - shortlisted
   form:
     step_titles:
       user:

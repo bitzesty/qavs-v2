@@ -3,7 +3,7 @@ class FormAnswerStatus::AssessorFilter
 
   OPTIONS = {
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     assessment_in_progress: {
@@ -15,7 +15,7 @@ class FormAnswerStatus::AssessorFilter
       states: [:disqualified]
     },
     recommended: {
-      label: "Shortlisted",
+      label: "National assessment - shortlisted",
       states: [
         :shortlisted
       ]
@@ -27,13 +27,13 @@ class FormAnswerStatus::AssessorFilter
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
     },
     undecided: {
-      label: "Undecided",
+      label: "National assessment - undecided",
       states: [
         :undecided
       ]
@@ -45,7 +45,7 @@ class FormAnswerStatus::AssessorFilter
       ]
     },
     withdrawn: {
-      label: "Withdrawn/Ineligible",
+      label: "Withdrawn",
       states: [:withdrawn]
     },
     submitted: {
@@ -53,7 +53,7 @@ class FormAnswerStatus::AssessorFilter
       states: [:submitted]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [:awarded]
     },
     not_awarded: {
@@ -65,7 +65,7 @@ class FormAnswerStatus::AssessorFilter
 
   SUB_OPTIONS = {
     assessors_not_assigned: {
-      label: "Assessors not assigned"
+      label: "National assessors not assigned"
     }
   }
 
