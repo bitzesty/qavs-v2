@@ -82,6 +82,7 @@ class MailRenderer
     assigns = {}
 
     assigns[:group_leader_name] = "Jane Campton"
+    assigns[:group_name] = "Endeavour"
     assigns[:form_answer] = form_answer
 
     render(assigns, "account_mailers/group_leader_mailer/preview/notify")
