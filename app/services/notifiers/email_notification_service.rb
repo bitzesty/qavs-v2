@@ -88,7 +88,7 @@ class Notifiers::EmailNotificationService
     end
 
     group_leaders.each do |gl|
-      AccountMailers::GroupLeaderMailer.notify(gl.email, gl.name, gl.group_name).deliver_later!
+      AccountMailers::GroupLeaderMailer.notify(gl[:email], gl[:name], gl[:group_name]).deliver_later!
     end
   end
 
