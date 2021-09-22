@@ -11,6 +11,10 @@ describe AccountMailers::ReminderToSubmitMailer do
     )
   }
 
+  before do
+    Settings.current_submission_deadline.update(trigger_at: 10.days.ago)
+  end
+
   describe "#notify" do
     it "renders the headers" do
       expect(mail.to).to eq([user.email])
