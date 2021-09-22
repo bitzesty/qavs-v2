@@ -185,7 +185,7 @@ en:
     trade_submission_start: "This date is when the applications for the International Trade award of the current award year become available."
     development_submission_start: "This date is when the applications for the Sustainable Development award of the current award year become available."
     mobility_submission_start: "This date is when the applications for the Promoting Opportunity award of the current award year become available."
-    submission_end: "Nominators will no longer be able to edit or submit their nominations after this date. This date will be pulled into the Reminder to submit the nominations email."
+    submission_end: "Nominators will no longer be able to submit their nominations after this date. After this date, the lieutenancies will be able to see nominations assigned to them. This date will be pulled into the ‘Reminder to submit the nominations’ email."
     local_assessment_submission_end: This date is displayed for the lieutenants to remind them about the local assessment deadline.
     buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
     buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
