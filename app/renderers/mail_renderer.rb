@@ -70,10 +70,10 @@ class MailRenderer
 
   def reminder_to_submit
     assigns = {}
-
+    kind = "submission_end"
     assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
     assigns[:form_answer] = form_answer
-    assigns[:deadline] = deadline_str("submission_end", "%l %P on %A on #{ deadline("submission_end").day.ordinalize } %B %Y")
+    assigns[:deadline] = long_deadline_format(kind)
 
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
@@ -98,9 +98,9 @@ class MailRenderer
 
   def local_assessment_reminder
     assigns = {}
-
+    kind = "local_assessment_submission_end"
     assigns[:lieutenant] = dummy_lieutenant
-    assigns[:deadline] = deadline_str("local_assessment_submission_end", "%A %d %B %Y")
+    assigns[:deadline] = long_deadline_format(kind)
 
     render(assigns, "lieutenants_mailers/local_assessment_reminder_mailer/preview/notify")
   end
@@ -234,5 +234,10 @@ class MailRenderer
     Settings.current.deadlines.find_by(
       kind: kind
     ).try :trigger_at
+  end
+
+  def long_deadline_format(kind)
+    # 5 pm on Wednesday on 22nd September 2021
+    deadline_str(kind, "%l %P on %A on #{ deadline(kind).day.ordinalize } %B %Y")
   end
 end
