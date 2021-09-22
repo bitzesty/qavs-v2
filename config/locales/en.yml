@@ -196,6 +196,7 @@ en:
 
   email_notification_help_messages:
     award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
+    reminder_to_submit: "Sent to: nominators who have started but not submitted nominations."
     group_leader_notification: "This email will be sent to group leaders notifying them about the nomination"
     local_assessment_notification: "This email will be sent out to Lieutenants to notify them about available local assessments in their ceremonial county"
     local_assessment_reminder: "This email will be sent out to Lieutenants to remind them to submit their local assessment forms"
@@ -207,7 +208,7 @@ en:
   email_notification_headers:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
     submission_started_notification: "Notify users that nominations for the new Award year are open"
-    reminder_to_submit: Reminder to submit the nominations (to all those who have started but not yet submitted nominations).
+    reminder_to_submit: "Reminder to submit the nominations"
     group_leader_notification: "Notification sent to group leaders about the nomination"
     local_assessment_notification: "Notification to start the local assessment"
     local_assessment_reminder: "Reminder to submit the local assessment form"
