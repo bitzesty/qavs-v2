@@ -36,6 +36,7 @@ describe MailRenderer do
 
   describe "#reminder_to_submit" do
     it "renders e-mail" do
+      Settings.current_submission_deadline.update(trigger_at: 10.days.ago)
       link = "https://apply.qavs.dcms.gov.uk/form/0"
       rendered = described_class.new.reminder_to_submit
       expect(rendered).to match(link)
