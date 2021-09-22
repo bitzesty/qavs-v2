@@ -10,7 +10,7 @@ p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
   | You can continue your nomination and submission, via the link below:
   br
-  = link_to edit_form_url(id: @form_answer.id), edit_form_url(id: @form_answer.id)
+  = link_to edit_form_url(id: @form_answer.id), edit_form_url(id: @form_answer.id), class: "govuk-link govuk-link--no-visited-state"
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
   | Thank you,
