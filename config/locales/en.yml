@@ -179,7 +179,7 @@ en:
     audit_certificates: Verification of Commercial Figures (External Accountant's Report & list of procedures) due by
 
   deadline_help_messages:
-    award_year_switch: "This date marks the start of the new award year, and will update the website accordingly. Users will not yet be able to start any nominations"
+    award_year_switch: "This date marks the start of the new award year, and will update the website accordingly."
     submission_start: "This date is when the nominations for the current award year become available."
     innovation_submission_start: "This date is when the applications for the Innovation award of the current award year become available."
     trade_submission_start: "This date is when the applications for the International Trade award of the current award year become available."
