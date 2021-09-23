@@ -137,6 +137,7 @@ class MailRenderer
     assigns[:award_year] = form.award_year.year
     assigns[:group_name] = "Synergy"
     assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
+    assigns[:citation_deadline] = deadline_str("buckingham_palace_confirm_press_book_notes", "%-d %B")
 
     render(assigns, "group_leaders_mailers/winners_head_of_organisation_mailer/preview/notify")
   end

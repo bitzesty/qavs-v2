@@ -10,8 +10,8 @@ class GroupLeaders::WinnersHeadOfOrganisationMailer < ApplicationMailer
 
     deadlines = Settings.current.deadlines
 
-    @end_of_embargo_date =
-      deadlines.end_of_embargo.strftime("%-d %B")
+    @end_of_embargo_date = deadlines.end_of_embargo.strftime("%-d %B")
+    @citation_deadline = deadlines.deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B")
 
     @subject = "Subject: Queen’s Award for Voluntary Service - in confidence"
 
