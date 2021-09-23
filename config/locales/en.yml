@@ -167,7 +167,7 @@ en:
     submission_start: Submission period starts on
     submission_end: Submission period closes on
     local_assessment_submission_end: Local assessment period ends on
-    buckingham_palace_attendees_details: HM The Queen's Birthday (end of embargo)
+    buckingham_palace_attendees_details: Official announcement (end of embargo)
     buckingham_palace_media_information: QAO provides information to the media of the winners on
     buckingham_palace_confirm_press_book_notes: Press Book Entry confirmation due by
     buckingham_palace_reception_attendee_information_due_by: Buckingham Palace reception attendee information due by
@@ -179,7 +179,7 @@ en:
     submission_start: "This date is when the nominations for the current award year become available."
     submission_end: "Nominators will no longer be able to submit their nominations after this date. After this date, the lieutenancies will be able to see nominations assigned to them. This date will be pulled into the ‘Reminder to submit the nominations’ email."
     local_assessment_submission_end: "This date is displayed for the lieutenancy users to remind them about the local assessment deadline. However, it is a soft deadline and lieutenancy users can submit their assessments past this deadline."
-    buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
+    buckingham_palace_attendees_details: "This date marks the end of the embargo preventing awardees publicly announcing their success. This date will be pulled into the “Notification to group leaders that their group has been successful” email and will be shown in the group leader’s dashboard."
     buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
     buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
     buckingham_palace_reception_attendee_information_due_by: "Winners will not be able to submit attendees details after this date. This date will be pulled into the Buckingham Palace Invite email - to heads of nominations only."
