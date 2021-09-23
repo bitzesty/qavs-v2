@@ -169,7 +169,7 @@ en:
     local_assessment_submission_end: Local assessment period ends on
     buckingham_palace_attendees_details: Official announcement (end of embargo)
     buckingham_palace_media_information: QAO provides information to the media of the winners on
-    buckingham_palace_confirm_press_book_notes: Press Book Entry confirmation due by
+    buckingham_palace_confirm_press_book_notes: Citation form due by
     buckingham_palace_reception_attendee_information_due_by: Buckingham Palace reception attendee information due by
     buckingham_palace_attendees_invite: Buckingham Palace Reception on
     audit_certificates: Verification of Commercial Figures (External Accountant's Report & list of procedures) due by
@@ -181,7 +181,7 @@ en:
     local_assessment_submission_end: "This date is displayed for the lieutenancy users to remind them about the local assessment deadline. However, it is a soft deadline and lieutenancy users can submit their assessments past this deadline."
     buckingham_palace_attendees_details: "This date marks the end of the embargo preventing awardees publicly announcing their success. This date will be pulled into the “Notification to group leaders that their group has been successful” email and will be shown in the group leader’s dashboard."
     buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
-    buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
+    buckingham_palace_confirm_press_book_notes: "This date will be pulled into the “Notification to group leaders that their group has been successful” email and will be shown in the group leader’s dashboard."
     buckingham_palace_reception_attendee_information_due_by: "Winners will not be able to submit attendees details after this date. This date will be pulled into the Buckingham Palace Invite email - to heads of nominations only."
     buckingham_palace_attendees_invite: "This date will be pulled into the email notifying all winning nominations of their success, the email to the heads of organisations and the Buckingham Palace Invite email."
     audit_certificates: "Shortlisted applicants will have up until this date to submit their Verification of Commercial Figures. This date will be pulled into the email notifying shortlisted applicants of their success, and the reminder to submit Verification of Commercial Figures email."
