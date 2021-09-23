@@ -25,6 +25,14 @@ module TriggerAtDecorator
     object.trigger_at.strftime(str_format)
   end
 
+  def long_mail_reminder
+    trigger_at = object.strftime("%l %P")
+    trigger_at = "midnight" if midnight?
+    trigger_at = "midday" if midday?
+
+    object.strftime("#{ trigger_at } on %A on #{ formatted_trigger_date("with_year") }")
+  end
+
   private
 
   def placeholder

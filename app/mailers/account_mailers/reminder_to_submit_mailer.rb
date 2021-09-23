@@ -2,9 +2,7 @@ class AccountMailers::ReminderToSubmitMailer < AccountMailers::BaseMailer
   def notify(form_answer_id, collaborator_id)
     @form_answer = FormAnswer.find(form_answer_id)
     @user = @form_answer.user
-    deadline = Settings.current_submission_deadline
-    deadline_day = deadline.trigger_at.day
-    @deadline = deadline.strftime("%l %P on %A on #{deadline_day.ordinalize} %B %Y")
+    @deadline = Settings.current_submission_deadline.decorate.long_mail_reminder
     collaborator = User.find(collaborator_id)
 
     subject = "QAVS nomination - reminder to submit"
