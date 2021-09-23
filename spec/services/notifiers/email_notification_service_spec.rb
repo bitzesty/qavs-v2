@@ -17,60 +17,6 @@ describe Notifiers::EmailNotificationService do
     form_answer.user
   end
 
-  context "not_shortlisted_notifier" do
-    let(:kind) { "not_shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "not_recommended") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyNonShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "shortlisted_notifier" do
-    let(:kind) { "shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "shortlisted") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "winners_notifier" do
-    let(:kind) { "winners_notification" }
-    let!(:form_answer) { create(:form_answer, :awarded) }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::GroupLeaderInviteMailer).to receive(:notify) { mailer }
-
-      expect {
-        described_class.run
-      }.to change {
-        GroupLeader.count
-      }
-
-      expect(form_answer.citation).to be
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
   describe "#reminder_to_submit" do
     let(:kind) { "reminder_to_submit" }
     let(:mailer) { double(deliver_later!: true) }
@@ -220,6 +166,46 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
+  context "winners_head_of_organisation_notification" do
+    let(:kind) { "winners_head_of_organisation_notification" }
+    let!(:form_answer) { create(:form_answer, :awarded) }
+
+    it "triggers current notification" do
+      mailer = double(deliver_later!: true)
+      expect(GroupLeadersMailers::WinnersHeadOfOrganisationMailer).to receive(:notify) { mailer }
+
+      expect {
+        described_class.run
+      }.to change {
+        GroupLeader.count
+      }
+
+      expect(form_answer.citation).to be
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
+  context "winners_notifier" do
+    # let(:kind) { "winners_notification" }
+    # let!(:form_answer) { create(:form_answer, :awarded) }
+
+    # it "triggers current notification" do
+    #   mailer = double(deliver_later!: true)
+    #   expect(AccountMailers::GroupLeaderInviteMailer).to receive(:notify) { mailer }
+
+    #   expect {
+    #     described_class.run
+    #   }.to change {
+    #     GroupLeader.count
+    #   }
+
+    #   expect(form_answer.citation).to be
+
+    #   expect(current_notification.reload).to be_sent
+    # end
+  end
+
   context "unsuccessful_notification" do
     let(:kind) { "unsuccessful_notification" }
 
@@ -238,18 +224,32 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
-  context "winners_head_of_organisation_notification" do
-    let(:kind) { "winners_head_of_organisation_notification" }
-    let(:user) { create(:user) }
-
-    let(:form_answer) do
-      create(:form_answer, :awarded)
-    end
+  context "not_shortlisted_notifier" do
+    let(:kind) { "not_shortlisted_notifier" }
+    let(:form_answer) { create(:form_answer, state: "not_recommended") }
 
     it "triggers current notification" do
       mailer = double(deliver_later!: true)
-      expect(Users::WinnersHeadOfOrganisationMailer).to receive(:notify).with(
-        form_answer.id
+      expect(AccountMailers::NotifyNonShortlistedMailer).to receive(:notify).with(
+        form_answer.id,
+        user.id
+      ) { mailer }
+
+      described_class.run
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
+  context "shortlisted_notifier" do
+    let(:kind) { "shortlisted_notifier" }
+    let(:form_answer) { create(:form_answer, state: "shortlisted") }
+
+    it "triggers current notification" do
+      mailer = double(deliver_later!: true)
+      expect(AccountMailers::NotifyShortlistedMailer).to receive(:notify).with(
+        form_answer.id,
+        user.id
       ) { mailer }
 
       described_class.run

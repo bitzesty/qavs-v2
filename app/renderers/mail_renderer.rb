@@ -132,10 +132,11 @@ class MailRenderer
     assigns = {}
     form = form_answer
 
-    assigns[:group_leader_name] = "John Smith"
+    assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
     assigns[:group_name] = "Synergy"
+    assigns[:token] = "securetoken"
     assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
     assigns[:citation_deadline] = deadline_str("buckingham_palace_confirm_press_book_notes", "%-d %B")
 
