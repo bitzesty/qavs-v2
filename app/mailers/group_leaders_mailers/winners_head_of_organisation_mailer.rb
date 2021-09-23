@@ -1,5 +1,3 @@
-# To 'Group Leaders' of the successful nominations
-
 class GroupLeadersMailers::WinnersHeadOfOrganisationMailer < ApplicationMailer
   def notify(form_answer_id, gl_id)
     @form_answer = FormAnswer.find(form_answer_id).decorate
@@ -13,7 +11,7 @@ class GroupLeadersMailers::WinnersHeadOfOrganisationMailer < ApplicationMailer
     deadlines = Settings.current.deadlines
 
     @end_of_embargo_date = deadlines.end_of_embargo.strftime("%-d %B")
-    @citation_deadline = deadlines.deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B")
+    @citation_deadline = deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B")
 
     @subject = "Queen’s Award for Voluntary Service - in confidence"
 
