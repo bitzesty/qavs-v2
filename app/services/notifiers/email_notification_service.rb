@@ -176,10 +176,19 @@ class Notifiers::EmailNotificationService
     )
   end
 
+  def unsuccessful_group_leaders_notification(award_year)
+    gather_data_and_send_emails!(
+      award_year.form_answers.unsuccessful_applications,
+      GroupLeadersMailers::UnsuccessfulNominationMailer,
+      "group_leader"
+    )
+  end
+
   def unsuccessful_notification(award_year)
     gather_data_and_send_emails!(
       award_year.form_answers.unsuccessful_applications,
-      AccountMailers::UnsuccessfulFeedbackMailer
+      AccountMailers::UnsuccessfulFeedbackMailer,
+      "nominator"
     )
   end
 
@@ -264,9 +273,24 @@ class Notifiers::EmailNotificationService
     collaborator_data
   end
 
-  def gather_data_and_send_emails!(scope, mailer)
-    collaborator_data = formatted_collaborator_data(scope)
-    send_emails_to_collaborators!(collaborator_data, mailer)
+  def formatted_group_leader_data(scope)
+    data = []
+
+    scope.each do |form_answer|
+      data << { form_answer_id: form_answer.id, group_leader_id: form_answer.group_leader.id }
+    end
+    data
+  end
+
+  def gather_data_and_send_emails!(scope, mailer, recipient)
+    case recipient
+    when "nominator"
+      collaborator_data = formatted_collaborator_data(scope)
+      send_emails_to_collaborators!(collaborator_data, mailer)
+    when "group_leader"
+      group_leader_data = formatted_group_leader_data(scope)
+      send_emails_to_group_leaders!(group_leader_data, mailer)
+    end
   end
 
   def send_emails_to_collaborators!(data, mailer)
