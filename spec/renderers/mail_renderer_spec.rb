@@ -60,6 +60,7 @@ describe MailRenderer do
 
   describe "#local_assessment_reminder" do
     it "renders e-mail" do
+      Settings.current_local_assessment_submission_deadline.update(trigger_at: 10.days.ago)
       link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
       rendered = described_class.new.local_assessment_reminder
       expect(rendered).to match(link)
