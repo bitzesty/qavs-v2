@@ -128,6 +128,19 @@ class MailRenderer
     render(assigns, "account_mailers/notify_shortlisted_mailer/preview/notify")
   end
 
+  def winners_head_of_organisation_notification
+    assigns = {}
+    form = form_answer
+
+    assigns[:group_leader_name] = "John Smith"
+    assigns[:form_answer] = form
+    assigns[:award_year] = form.award_year.year
+    assigns[:group_name] = "Synergy"
+    assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
+
+    render(assigns, "group_leaders_mailers/winners_head_of_organisation_mailer/preview/notify")
+  end
+
   def winners_notification
     assigns = {}
 
@@ -147,29 +160,6 @@ class MailRenderer
     # )
 
     render(assigns, "account_mailers/group_leader_invite_mailer/preview/notify")
-  end
-
-  def winners_head_of_organisation_notification
-    assigns = {}
-    form = form_answer
-
-    assigns[:name] = "Mr Smith"
-    assigns[:form_answer] = form
-    assigns[:award_year] = form.award_year.year
-    assigns[:urn] = "QAXXXX/#{assigns[:award_year].to_s[2..-1]}I"
-    assigns[:head_email] = "john@example.com"
-    assigns[:head_of_business_full_name] = "Jon Doe"
-
-    assigns[:end_of_embargo_day] = deadline_str("buckingham_palace_attendees_details", "%A %-d %B %Y")
-    assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B %Y")
-    assigns[:press_book_entry_datetime] = deadline_str("buckingham_palace_confirm_press_book_notes", "%d %B %Y")
-
-    assigns[:media_deadline] = deadline_str(
-      "buckingham_palace_media_information",
-      "%A %d %B %Y"
-    )
-
-    render(assigns, "users/winners_head_of_organisation_mailer/preview/notify")
   end
 
   def buckingham_palace_invite

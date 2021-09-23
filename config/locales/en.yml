@@ -196,6 +196,7 @@ en:
     winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
     unsuccessful_notification: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
     buckingham_palace_invite: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
+    winners_head_of_organisation_notification: "Sent to: Awarded group leaders"
 
   email_notification_headers:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open."
@@ -205,8 +206,8 @@ en:
     local_assessment_notification: "Notification to start local assessments"
     local_assessment_reminder: "Reminder to submit the local assessment form"
     winners_notification: "WINNERS : Email notifying all winning nominations of their success & requesting their confirmation of their Press Book entry."
-    winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
-    winners_head_of_organisation_notification: "WINNERS : Success email to the 'Head of Organisation' of the Business categories Winner."
+    winners_reminder_to_submit: "WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
+    winners_head_of_organisation_notification: "SUCCESSFUL: Notification to group leaders that their group has been successful"
     buckingham_palace_invite: "WINNERS : Buckingham Palace Invite - to heads of winning organisations only."
     unsuccessful_notification: "UNSUCCESSFUL: Email notification to unsuccessful Business categories Registered Account holder."
     unsuccessful_ep_notification: "UNSUCCESSFUL: Email notification of unsuccessful QAVS nominations."

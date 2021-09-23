@@ -94,13 +94,6 @@ describe MailRenderer do
     end
   end
 
-  describe "#winners_head_of_organisation_notification" do
-    it "renders e-mail" do
-      rendered = described_class.new.winners_head_of_organisation_notification
-      expect(rendered).to match("Congratulations on winning a Queen's Award")
-    end
-  end
-
   def deadline_str(format="%d/%m/%Y")
     DateTime.new(Date.current.year, 9, 21, 10, 30)
             .strftime(format)

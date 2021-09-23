@@ -140,6 +140,15 @@ class Notifiers::EmailNotificationService
     send_emails_to_collaborators!(collaborator_data, Users::AuditCertificateRequestMailer)
   end
 
+  # to 'Group Leaders' of winning nominations
+  def winners_head_of_organisation_notification(award_year)
+    awarded_application_ids = award_year.form_answers.winners.pluck(:id)
+
+    awarded_application_ids.each do |form_answer_id|
+      GroupLeaders::WinnersHeadOfOrganisationMailer.notify(form_answer_id).deliver_later!
+    end
+  end
+
   def unsuccessful_notification(award_year)
     gather_data_and_send_emails!(
       award_year.form_answers.unsuccessful_applications,
@@ -181,15 +190,6 @@ class Notifiers::EmailNotificationService
       award_year.form_answers.winners,
       AccountMailers::GroupLeaderInviteMailer
     )
-  end
-
-  # to 'Head of Organisation' of the Successful Business categories winners
-  def winners_head_of_organisation_notification(award_year)
-    awarded_application_ids = award_year.form_answers.winners.pluck(:id)
-
-    awarded_application_ids.each do |form_answer_id|
-      Users::WinnersHeadOfOrganisationMailer.notify(form_answer_id).deliver_later!
-    end
   end
 
   def buckingham_palace_invite(award_year)
