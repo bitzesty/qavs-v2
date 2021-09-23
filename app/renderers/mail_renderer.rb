@@ -27,6 +27,7 @@ class MailRenderer
 
   def award_year_open_notifier
     assigns = {}
+
     assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
 
     render(assigns, "users/award_year_open_notification_mailer/preview/notify")
@@ -70,10 +71,10 @@ class MailRenderer
 
   def reminder_to_submit
     assigns = {}
-    kind = "submission_end"
+
     assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
     assigns[:form_answer] = form_answer
-    assigns[:deadline] = long_deadline_format(kind)
+    assigns[:deadline] = Settings.current_submission_deadline.decorate.long_mail_reminder
 
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
@@ -98,15 +99,16 @@ class MailRenderer
 
   def local_assessment_reminder
     assigns = {}
-    kind = "local_assessment_submission_end"
+
     assigns[:lieutenant] = dummy_lieutenant
-    assigns[:deadline] = long_deadline_format(kind)
+    assigns[:deadline] = Settings.current_local_assessment_submission_deadline.decorate.long_mail_reminder
 
     render(assigns, "lieutenants_mailers/local_assessment_reminder_mailer/preview/notify")
   end
 
   def not_shortlisted_notifier
     assigns = {}
+
     assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
     assigns[:current_year] = AwardYear.current.year
     render(assigns, "account_mailers/notify_non_shortlisted_mailer/preview/notify")
@@ -114,6 +116,7 @@ class MailRenderer
 
   def shortlisted_notifier
     assigns = {}
+
     assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
     assigns[:form_answer] = form_answer
     assigns[:company_name] = "Massive Dynamic"
@@ -234,10 +237,5 @@ class MailRenderer
     Settings.current.deadlines.find_by(
       kind: kind
     ).try :trigger_at
-  end
-
-  def long_deadline_format(kind)
-    # 5 pm on Wednesday on 22nd September 2021
-    deadline_str(kind, "%l %P on %A on #{ deadline(kind).day.ordinalize } %B %Y")
   end
 end
