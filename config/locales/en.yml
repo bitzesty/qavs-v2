@@ -175,7 +175,7 @@ en:
     audit_certificates: Verification of Commercial Figures (External Accountant's Report & list of procedures) due by
 
   deadline_help_messages:
-    award_year_switch: This date marks the start of the new award year, and will update the website accordingly. U̶s̶e̶r̶s̶ ̶w̶i̶l̶l̶ ̶n̶o̶t̶ ̶y̶e̶t̶ ̶b̶e̶ ̶a̶b̶l̶e̶ ̶t̶o̶ ̶s̶t̶a̶r̶t̶ ̶a̶n̶y̶ ̶n̶o̶m̶i̶n̶a̶t̶i̶o̶n̶s̶
+    award_year_switch: This date marks the start of the new award year, and will update the website accordingly.
     submission_start: "This date is when the nominations for the current award year become available."
     submission_end: "Nominators will no longer be able to submit their nominations after this date. After this date, the lieutenancies will be able to see nominations assigned to them. This date will be pulled into the ‘Reminder to submit the nominations’ email."
     local_assessment_submission_end: "This date is displayed for the lieutenancy users to remind them about the local assessment deadline. However, it is a soft deadline and lieutenancy users can submit their assessments past this deadline."
