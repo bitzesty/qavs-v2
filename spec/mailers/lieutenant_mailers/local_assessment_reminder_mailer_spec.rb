@@ -10,6 +10,9 @@ describe LieutenantsMailers::LocalAssessmentReminderMailer do
       lieutenant.id
     )
   }
+  let(:subject) {
+    "Reminder to submit assessments"
+  }
 
   before do
     Settings.current_local_assessment_submission_deadline.update(trigger_at: 10.days.ago)
@@ -17,6 +20,7 @@ describe LieutenantsMailers::LocalAssessmentReminderMailer do
 
   describe "#notify" do
     it "renders the headers" do
+      expect(mail.subject).to eq subject
       expect(mail.to).to eq([lieutenant.email])
       expect(mail.from).to eq(["no-reply@qavs.dcms.gov.uk"])
     end

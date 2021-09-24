@@ -21,7 +21,8 @@ describe AccountMailers::NotifySuccessfulNominationsMailer do
 
     it "renders the body" do
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
-      expect(mail.body.raw_source).to include("Thank you for your nomination for #{ group_name } for The Queen’s Award for Voluntary Service (QAVS).  We are delighted to inform you that the group was recommended to Her Majesty The Queen by our National Assessment Committee and duly approved for the Award.")
+      expect(mail.body.raw_source).to match(group_name)
+      expect(mail.body.raw_source).to match("We are delighted to inform you that the group was recommended to Her Majesty")
     end
   end
 end
