@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe GroupLeadersMailers::WinnersHeadOfOrganisationMailer do
+describe GroupLeadersMailers::UnsuccessfulNominationMailer do
   let(:form_answer) { create :form_answer, :awarded }
 
   let(:mail) {
