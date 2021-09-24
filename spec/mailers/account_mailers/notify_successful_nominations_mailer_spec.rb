@@ -21,8 +21,10 @@ describe AccountMailers::NotifySuccessfulNominationsMailer do
 
     it "renders the body" do
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
-      expect(mail.body.raw_source).to match(group_name)
+      link = 'http://example.com/awardees'
+      expect(mail.body.raw_source).to match group_name
       expect(mail.body.raw_source).to match("We are delighted to inform you that the group was recommended to Her Majesty")
+      expect(mail.body.raw_source).to match link
     end
   end
 end
