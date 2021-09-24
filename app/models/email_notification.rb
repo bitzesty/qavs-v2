@@ -14,6 +14,7 @@ class EmailNotification < ApplicationRecord
                          :shortlisted_notifier,
                          :not_shortlisted_notifier,
                          :winners_head_of_organisation_notification,
+                         :unsuccessful_group_leaders_notification,
                          :buckingham_palace_invite
                        ]
 
