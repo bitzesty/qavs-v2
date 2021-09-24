@@ -131,8 +131,9 @@ class MailRenderer
   def winners_head_of_organisation_notification
     assigns = {}
     form = form_answer
+    group_leader = dummy_group_leader
 
-    assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
+    assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
     assigns[:group_name] = "Synergy"
@@ -144,6 +145,15 @@ class MailRenderer
   end
 
   def unsuccessful_group_leaders_notification
+    assigns = {}
+    form = form_answer
+
+    assigns[:group_leader_name] = "John Smith"
+    assigns[:form_answer] = form
+    assigns[:award_year] = form.award_year.year
+    assigns[:group_name] = "Synergy"
+
+    render(assigns, "group_leaders_mailers/unsuccessful_nomination_mailer/preview/notify")
   end
 
   def winners_notification
@@ -202,7 +212,7 @@ class MailRenderer
     User.new(first_name: first_name, last_name: last_name, company_name: company_name).decorate
   end
 
-  def dummy_group_leader(first_name, last_name)
+  def dummy_group_leader(first_name = "Jane", last_name = "Doe")
     GroupLeader.new(first_name: first_name, last_name: last_name).decorate
   end
 

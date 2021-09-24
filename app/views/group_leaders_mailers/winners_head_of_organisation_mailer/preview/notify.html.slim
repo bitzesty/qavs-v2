@@ -42,7 +42,8 @@ p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30
   | Please follow the link below to login to the The Queen’s Award for Voluntary Service system to confirm the details and to access additional information about your award:
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  = link_to group_leader_root_url, group_leader_root_url, class: "govuk-link govuk-link--no-visited-state"
+  - url = edit_group_leader_password_url(reset_password_token: @token)
+  = link_to url, url, class: "govuk-link govuk-link--no-visited-state"
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
   | If you are not the correct person for us to contact, or if your organisation does not want to receive the Award, please get in touch with us directly.

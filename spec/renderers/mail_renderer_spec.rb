@@ -67,6 +67,24 @@ describe MailRenderer do
     end
   end
 
+  describe "#winners_head_of_organisation_notification" do
+    it "renders e-mail" do
+      link = "https://apply.qavs.dcms.gov.uk/group_leaders/password/edit?reset_password_token=securetoken"
+      rendered = described_class.new.winners_head_of_organisation_notification
+      expect(rendered).to match("Jane Doe")
+      expect(rendered).to match("Synergy")
+      expect(rendered).to include(link)
+    end
+  end
+
+  describe "#unsuccessful_group_leaders_notification" do
+    it "renders e-mail" do
+      rendered = described_class.new.unsuccessful_group_leaders_notification
+      expect(rendered).to match("Synergy")
+      expect(rendered).to match("John Smith")
+    end
+  end
+
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_notification
