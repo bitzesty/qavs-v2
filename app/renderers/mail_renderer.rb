@@ -143,6 +143,9 @@ class MailRenderer
     render(assigns, "group_leaders_mailers/winners_head_of_organisation_mailer/preview/notify")
   end
 
+  def unsuccessful_group_leaders_notification
+  end
+
   def winners_notification
     assigns = {}
 

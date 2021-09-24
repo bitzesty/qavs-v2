@@ -58,23 +58,6 @@ class Notifiers::EmailNotificationService
     )
   end
 
-  def reminder_to_submit(award_year)
-    collaborator_data = []
-    scope = award_year.form_answers.where(submitted_at: nil)
-
-    scope.each do |form_answer|
-      form_answer.collaborators.each do |collaborator|
-        if collaborator.notification_when_submission_deadline_is_coming?
-          collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-        end
-      end
-    end
-
-    send_emails_to_collaborators!(
-      collaborator_data, AccountMailers::ReminderToSubmitMailer
-    )
-  end
-
   def group_leader_notification(award_year)
     submitted_nominations = award_year.form_answers.submitted
     group_leaders = {}
@@ -126,20 +109,6 @@ class Notifiers::EmailNotificationService
     )
   end
 
-  def shortlisted_audit_certificate_reminder(award_year)
-    collaborator_data = []
-
-    award_year.form_answers.shortlisted.each do |form_answer|
-      next if form_answer.audit_certificate && form_answer.list_of_procedures
-
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    send_emails_to_collaborators!(collaborator_data, Users::AuditCertificateRequestMailer)
-  end
-
   # to 'Group Leaders' of winning nominations
   def winners_head_of_organisation_notification(award_year)
     winners = award_year.form_answers.winners
@@ -177,18 +146,15 @@ class Notifiers::EmailNotificationService
   end
 
   def unsuccessful_group_leaders_notification(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.unsuccessful_applications,
-      GroupLeadersMailers::UnsuccessfulNominationMailer,
-      "group_leader"
-    )
+    award_year.form_answers.unsuccessful_applications.each do |form_answer|
+      GroupLeadersMailers::UnsuccessfulNominationMailer.notify(form_answer.id).deliver_later!
+    end
   end
 
   def unsuccessful_notification(award_year)
     gather_data_and_send_emails!(
       award_year.form_answers.unsuccessful_applications,
-      AccountMailers::UnsuccessfulFeedbackMailer,
-      "nominator"
+      AccountMailers::UnsuccessfulFeedbackMailer
     )
   end
 
@@ -273,24 +239,9 @@ class Notifiers::EmailNotificationService
     collaborator_data
   end
 
-  def formatted_group_leader_data(scope)
-    data = []
-
-    scope.each do |form_answer|
-      data << { form_answer_id: form_answer.id, group_leader_id: form_answer.group_leader.id }
-    end
-    data
-  end
-
-  def gather_data_and_send_emails!(scope, mailer, recipient)
-    case recipient
-    when "nominator"
-      collaborator_data = formatted_collaborator_data(scope)
-      send_emails_to_collaborators!(collaborator_data, mailer)
-    when "group_leader"
-      group_leader_data = formatted_group_leader_data(scope)
-      send_emails_to_group_leaders!(group_leader_data, mailer)
-    end
+  def gather_data_and_send_emails!(scope, mailer)
+    collaborator_data = formatted_collaborator_data(scope)
+    send_emails_to_collaborators!(collaborator_data, mailer)
   end
 
   def send_emails_to_collaborators!(data, mailer)

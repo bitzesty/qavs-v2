@@ -169,9 +169,9 @@ describe Notifiers::EmailNotificationService do
   context "winners_head_of_organisation_notification" do
     let(:kind) { "winners_head_of_organisation_notification" }
     let!(:form_answer) { create(:form_answer, :awarded) }
+    let(:mailer) { double(deliver_later!: true) }
 
     it "triggers current notification" do
-      mailer = double(deliver_later!: true)
       expect(GroupLeadersMailers::WinnersHeadOfOrganisationMailer).to receive(:notify) { mailer }
 
       expect {
@@ -181,6 +181,21 @@ describe Notifiers::EmailNotificationService do
       }
 
       expect(form_answer.citation).to be
+
+      expect(current_notification.reload).to be_sent
+    end
+  end
+
+  context "unsuccessful_group_leaders_notification" do
+    let(:kind) { "unsuccessful_group_leaders_notification" }
+    let!(:form_answer) { create(:form_answer, :not_awarded) }
+    let(:mailer) { double(deliver_later!: true) }
+
+    it "triggers current notification" do
+      expect(GroupLeadersMailers::UnsuccessfulNominationMailer).to receive(:notify).with(
+                                                                    form_answer.id
+                                                                  ) { mailer }
+      described_class.run
 
       expect(current_notification.reload).to be_sent
     end
