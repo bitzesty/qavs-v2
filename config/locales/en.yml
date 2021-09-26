@@ -198,7 +198,9 @@ en:
     winners_notification_html: |
       Important! Please schedule this to be sent on the day after the official announcement.<br>
       Sent to: Nominators of successful groups
-    unsuccessful_notification_html: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
+    unsuccessful_notification_html: |
+      Important! Please schedule this to be sent a few days after the official announcement (to allow time to deal with initial enquiries from the successful ones).<br>
+      Sent to: Nominators of unsuccessful groups
     buckingham_palace_invite_html: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
 
   email_notification_headers:
@@ -213,7 +215,7 @@ en:
     winners_head_of_organisation_notification: "SUCCESSFUL: Notification to group leaders that their group has been successful"
     unsuccessful_group_leaders_notification: "UNSUCCESSFUL: Notification to unsuccessful group leaders"
     buckingham_palace_invite: "WINNERS : Buckingham Palace Invite - to heads of winning organisations only."
-    unsuccessful_notification: "UNSUCCESSFUL: Email notification to unsuccessful Business categories Registered Account holder."
+    unsuccessful_notification: "UNSUCCESSFUL:  Email to nominators that their nominations have been unsuccessful"
     unsuccessful_ep_notification: "UNSUCCESSFUL: Email notification of unsuccessful QAVS nominations."
     shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted nominators of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
     not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful nominators."
