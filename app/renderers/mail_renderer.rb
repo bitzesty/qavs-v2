@@ -33,18 +33,6 @@ class MailRenderer
     render(assigns, "users/award_year_open_notification_mailer/preview/notify")
   end
 
-  def unsuccessful_notification
-    assigns = {}
-
-    assigns[:name] = "Mr Smith"
-    assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
-    assigns[:form_answer] = form_answer
-    assigns[:year] = AwardYear.closed.year
-    form_answer.urn = "QA0001/16I"
-
-    render(assigns, "account_mailers/unsuccessful_feedback_mailer/preview/notify")
-  end
-
   def unsuccessful_ep_notification
     assigns = {}
 
@@ -163,6 +151,15 @@ class MailRenderer
     assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
 
     render(assigns, "account_mailers/notify_successful_nominations_mailer/preview/notify")
+  end
+
+  def unsuccessful_notification
+    assigns = {}
+
+    assigns[:form_answer] = form_answer
+    assigns[:group_name] = "Massive Dynamic"
+
+    render(assigns, "account_mailers/notify_unsuccessful_nominations_mailer/preview/notify")
   end
 
   def buckingham_palace_invite

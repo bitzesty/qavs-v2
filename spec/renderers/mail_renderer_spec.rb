@@ -96,9 +96,10 @@ describe MailRenderer do
 
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
+      link = "https://www.gov.uk/honours"
       rendered = described_class.new.unsuccessful_notification
-      expect(rendered).to match("Mr Smith")
-      expect(rendered).to match("QA0001/16I")
+      expect(rendered).to match "Massive Dynamic"
+      expect(rendered).to match link
     end
   end
 
