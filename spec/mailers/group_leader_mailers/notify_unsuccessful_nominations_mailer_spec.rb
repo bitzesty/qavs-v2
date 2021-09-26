@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe GroupLeadersMailers::UnsuccessfulNominationMailer do
-  let(:form_answer) { create :form_answer, :awarded }
+describe GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer do
+  let(:form_answer) { create :form_answer, :not_awarded }
 
   let(:mail) {
-    GroupLeadersMailers::UnsuccessfulNominationMailer.notify(
+    GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(
       form_answer.id
     )
   }

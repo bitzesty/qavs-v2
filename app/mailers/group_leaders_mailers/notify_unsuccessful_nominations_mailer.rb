@@ -1,4 +1,4 @@
-class GroupLeadersMailers::UnsuccessfulNominationMailer < ApplicationMailer
+class GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer < ApplicationMailer
   def notify(form_answer_id)
     @form_answer = FormAnswer.find(form_answer_id).decorate
     @group_leader_name = @form_answer.document["local_assessment_group_leader"]

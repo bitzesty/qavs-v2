@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
   get "/awardees"                                       => redirect("https://qavs.dcms.gov.uk/awardees/")
+  get "/honours"                                        => redirect("https://www.gov.uk/honours")
 
   get "/sign_up_complete"                               => "content_only#sign_up_complete",                               as: "sign_up_complete"
   get "/cookies"                                        => "content_only#cookies",                                        as: "cookies"

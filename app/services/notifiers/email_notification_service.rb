@@ -147,7 +147,7 @@ class Notifiers::EmailNotificationService
 
   def unsuccessful_group_leaders_notification(award_year)
     award_year.form_answers.unsuccessful_applications.each do |form_answer|
-      GroupLeadersMailers::UnsuccessfulNominationMailer.notify(form_answer.id).deliver_later!
+      GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
     end
   end
 
@@ -158,10 +158,9 @@ class Notifiers::EmailNotificationService
   end
 
   def unsuccessful_notification(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.unsuccessful_applications,
-      AccountMailers::UnsuccessfulFeedbackMailer
-    )
+    award_year.form_answers.unsuccessful_applications.each do |form_answer|
+      AccountMailers::NotifyUnSuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+    end
   end
 
   def buckingham_palace_invite(award_year)

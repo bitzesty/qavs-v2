@@ -153,7 +153,7 @@ class MailRenderer
     assigns[:award_year] = form.award_year.year
     assigns[:group_name] = "Massive Dynamic"
 
-    render(assigns, "group_leaders_mailers/unsuccessful_nomination_mailer/preview/notify")
+    render(assigns, "group_leaders_mailers/notify_unsuccessful_nominations_mailer/preview/notify")
   end
 
   def winners_notification

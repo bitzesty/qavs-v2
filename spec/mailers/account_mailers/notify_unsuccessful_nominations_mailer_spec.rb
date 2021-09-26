@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe AccountMailers::NotifySuccessfulNominationsMailer do
+describe AccountMailers::NotifyUnsuccessfulNominationsMailer do
   let(:user) { create :user }
-  let(:form_answer) { create :form_answer, :awarded, user: user }
+  let(:form_answer) { create :form_answer, :not_awarded, user: user }
   let(:mail) {
-    AccountMailers::NotifySuccessfulNominationsMailer.notify(
+    AccountMailers::NotifyUnsuccessfulNominationsMailer.notify(
       form_answer.id
     )
   }
@@ -20,10 +20,11 @@ describe AccountMailers::NotifySuccessfulNominationsMailer do
     end
 
     it "renders the body" do
+      puts form_answer.state
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
-      link = 'http://example.com/awardees'
+      link = 'http://example.com/honours'
       expect(mail.body.raw_source).to match group_name
-      expect(mail.body.raw_source).to match "We are delighted to inform you that the group was recommended to Her Majesty"
+      expect(mail.body.raw_source).to match("The standard was extremely high and, in the end, the group was not selected for the Award")
       expect(mail.body.raw_source).to match link
     end
   end

@@ -192,7 +192,7 @@ describe Notifiers::EmailNotificationService do
     let(:mailer) { double(deliver_later!: true) }
 
     it "triggers current notification" do
-      expect(GroupLeadersMailers::UnsuccessfulNominationMailer).to receive(:notify).with(
+      expect(GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer).to receive(:notify).with(
                                                                     form_answer.id
                                                                   ) { mailer }
       described_class.run
@@ -222,9 +222,8 @@ describe Notifiers::EmailNotificationService do
 
     it "triggers current notification" do
       mailer = double(deliver_later!: true)
-      expect(AccountMailers::UnsuccessfulFeedbackMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
+      expect(AccountMailers::NotifyUnsuccessfulNominationsMailer).to receive(:notify).with(
+        form_answer.id
       ) { mailer }
 
       described_class.run
