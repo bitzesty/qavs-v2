@@ -159,7 +159,7 @@ class Notifiers::EmailNotificationService
 
   def unsuccessful_notification(award_year)
     award_year.form_answers.unsuccessful_applications.each do |form_answer|
-      AccountMailers::NotifyUnSuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+      AccountMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
     end
   end
 
