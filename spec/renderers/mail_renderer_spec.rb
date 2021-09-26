@@ -80,15 +80,19 @@ describe MailRenderer do
   describe "#unsuccessful_group_leaders_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_group_leaders_notification
-      expect(rendered).to match("Synergy")
+      expect(rendered).to match("Massive Dynamic")
       expect(rendered).to match("John Smith")
     end
   end
 
-  # describe "#successful_nominations_notification" do
-  #   it "renders e-mail" do
-  #     rendered = described_class.new.successful_notification
-  #     expect(rendered).to match("")
+  describe "#successful_nominations_notification" do
+    it "renders e-mail" do
+      link = "https://apply.qavs.dcms.gov.uk/awardees"
+      rendered = described_class.new.winners_notification
+      expect(rendered).to match(link)
+      expect(rendered).to match("Synergy")
+    end
+  end
 
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
@@ -103,17 +107,6 @@ describe MailRenderer do
       rendered = described_class.new.unsuccessful_ep_notification
       expect(rendered).to match("Jon Doe")
       expect(rendered).to match("Nominee Name")
-    end
-  end
-
-  describe "#winners_notification" do
-    it "renders e-mail" do
-      rendered = described_class.new.winners_notification
-      expect(rendered).to match("Jane Doe")
-      expect(rendered).to match("Everyday Charity")
-      expect(rendered).to include("https://apply.qavs.dcms.gov.uk/group_leaders/password/edit?reset_password_token=tpscrttkn")
-
-      # expect(rendered).to match(deadline_str("%A %d %B %Y"))
     end
   end
 

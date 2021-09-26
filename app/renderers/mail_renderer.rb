@@ -151,7 +151,7 @@ class MailRenderer
     assigns[:group_leader_name] = "John Smith"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
-    assigns[:group_name] = "Synergy"
+    assigns[:group_name] = "Massive Dynamic"
 
     render(assigns, "group_leaders_mailers/unsuccessful_nomination_mailer/preview/notify")
   end
@@ -159,22 +159,10 @@ class MailRenderer
   def winners_notification
     assigns = {}
 
-    assigns[:group_name] = "Everyday Charity"
-    assigns[:group_leader] = dummy_group_leader("Jane", "Doe")
-    assigns[:token] = "tpscrttkn"
-    assigns[:year] = form_answer.award_year.year
+    assigns[:group_name] = "Synergy"
+    assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
 
-    # assigns[:deadline] = deadline("buckingham_palace_attendees_details")
-    # assigns[:media_deadline] = deadline_str(
-    #   "buckingham_palace_media_information",
-    #   "%A %d %B %Y"
-    # )
-    # assigns[:book_notes_deadline] = deadline_str(
-    #   "buckingham_palace_confirm_press_book_notes",
-    #   "%A %d %B %Y"
-    # )
-
-    render(assigns, "account_mailers/group_leader_invite_mailer/preview/notify")
+    render(assigns, "account_mailers/notify_successful_nominations_mailer/preview/notify")
   end
 
   def buckingham_palace_invite
