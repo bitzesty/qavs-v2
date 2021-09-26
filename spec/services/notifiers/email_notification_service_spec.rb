@@ -202,23 +202,17 @@ describe Notifiers::EmailNotificationService do
   end
 
   context "winners_notifier" do
-    # let(:kind) { "winners_notification" }
-    # let!(:form_answer) { create(:form_answer, :awarded) }
+    let(:kind) { "winners_notification" }
+    let!(:form_answer) { create(:form_answer, :awarded) }
 
-    # it "triggers current notification" do
-    #   mailer = double(deliver_later!: true)
-    #   expect(AccountMailers::GroupLeaderInviteMailer).to receive(:notify) { mailer }
+    it "triggers current notification" do
+      mailer = double(deliver_later!: true)
+      expect(AccountMailers::NotifySuccessfulNominationsMailer).to receive(:notify) { mailer }
 
-    #   expect {
-    #     described_class.run
-    #   }.to change {
-    #     GroupLeader.count
-    #   }
+      described_class.run
 
-    #   expect(form_answer.citation).to be
-
-    #   expect(current_notification.reload).to be_sent
-    # end
+      expect(current_notification.reload).to be_sent
+    end
   end
 
   context "unsuccessful_notification" do

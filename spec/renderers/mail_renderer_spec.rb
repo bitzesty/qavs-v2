@@ -85,6 +85,11 @@ describe MailRenderer do
     end
   end
 
+  # describe "#successful_nominations_notification" do
+  #   it "renders e-mail" do
+  #     rendered = described_class.new.successful_notification
+  #     expect(rendered).to match("")
+
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       rendered = described_class.new.unsuccessful_notification

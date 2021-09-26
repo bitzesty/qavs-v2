@@ -151,46 +151,16 @@ class Notifiers::EmailNotificationService
     end
   end
 
+  def winners_notification(award_year)
+    award_year.form_answers.winners.each do |form_answer|
+      AccountMailers::NotifySuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+    end
+  end
+
   def unsuccessful_notification(award_year)
     gather_data_and_send_emails!(
       award_year.form_answers.unsuccessful_applications,
       AccountMailers::UnsuccessfulFeedbackMailer
-    )
-  end
-
-  def winners_notification(award_year)
-    winners = award_year.form_answers.winners
-
-    gl_emails = winners.map do |w|
-      # creating citations in one go as well
-      w.build_citation(
-        group_name: w.document["nomination_local_assessment_form_nominee_name"],
-        body: w.document["l_citation_summary"]
-      ).save!
-
-      {
-        id: w.id,
-        email: w.document["local_assessment_group_leader_email"],
-        first_name: w.group_leader_first_name,
-        last_name: w.group_leader_last_name
-      }
-    end
-
-    gl_emails.each do |attrs|
-      next if GroupLeader.where(email: attrs[:email]).exists?
-
-      gl = GroupLeader.create!(
-        email: attrs[:email],
-        first_name: attrs[:first_name],
-        last_name: attrs[:last_name],
-        skip_password_validation: true,
-        form_answer_id: attrs[:id]
-      )
-    end
-
-    send_emails_to_group_leaders!(
-      award_year.form_answers.winners,
-      AccountMailers::GroupLeaderInviteMailer
     )
   end
 
