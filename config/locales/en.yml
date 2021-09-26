@@ -187,17 +187,19 @@ en:
     audit_certificates: "Shortlisted applicants will have up until this date to submit their Verification of Commercial Figures. This date will be pulled into the email notifying shortlisted applicants of their success, and the reminder to submit Verification of Commercial Figures email."
 
   email_notification_help_messages:
-    award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
-    reminder_to_submit: "Sent to: nominators who have started but not submitted nominations."
-    group_leader_notification: "Send to: All group leaders who have been nominated"
-    local_assessment_notification: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
-    local_assessment_reminder: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
-    shortlisted_notifier: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
-    winners_head_of_organisation_notification: "Sent to: Awarded group leaders"
-    unsuccessful_group_leaders_notification: "Sent to: Not recommended group leaders"
-    winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
-    unsuccessful_notification: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
-    buckingham_palace_invite: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
+    award_year_open_notifier_html: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
+    reminder_to_submit_html: "Sent to: nominators who have started but not submitted nominations."
+    group_leader_notification_html: "Send to: All group leaders who have been nominated"
+    local_assessment_notification_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
+    local_assessment_reminder_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
+    shortlisted_notifier_html: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
+    winners_head_of_organisation_notification_html: "Sent to: Awarded group leaders"
+    unsuccessful_group_leaders_notification_html: "Sent to: Not recommended group leaders"
+    winners_notification_html: |
+      Important! Please schedule this to be sent on the day after the official announcement.<br>
+      Sent to: Nominators of successful groups
+    unsuccessful_notification_html: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
+    buckingham_palace_invite_html: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
 
   email_notification_headers:
     award_year_open_notifier: "Notify users that the nominations for the new Award year are open."
@@ -206,7 +208,7 @@ en:
     group_leader_notification: "Email informing group leaders that the group has been nominated"
     local_assessment_notification: "Notification to start local assessments"
     local_assessment_reminder: "Reminder to submit the local assessment form"
-    winners_notification: "WINNERS : Email notifying all winning nominations of their success & requesting their confirmation of their Press Book entry."
+    winners_notification: "SUCCESSFUL: Email to nominators that their nominations have been successful"
     winners_reminder_to_submit: "WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
     winners_head_of_organisation_notification: "SUCCESSFUL: Notification to group leaders that their group has been successful"
     unsuccessful_group_leaders_notification: "UNSUCCESSFUL: Notification to unsuccessful group leaders"
