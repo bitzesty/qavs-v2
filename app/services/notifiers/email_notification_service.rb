@@ -179,12 +179,7 @@ class Notifiers::EmailNotificationService
     end
 
     form_answer_ids.each do |form_answer_id|
-      #
-      # 1: to Head of Organization
-      AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id).deliver_later!
-      #
-      # 2: to Press Contact
-      AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id, true).deliver_later!
+      GroupLeaders::BuckinghamPalaceInviteMailer.invite(form_answer_id).deliver_later!
     end
   end
 

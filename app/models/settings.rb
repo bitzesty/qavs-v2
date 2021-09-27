@@ -39,6 +39,12 @@ class Settings < ApplicationRecord
       end
     end
 
+    def current_palace_reception_attendee_information_deadline
+      Rails.cache.fetch("buckingham_palace_reception_attendee_information_due_by", expires_in: 1.minute) do
+        current.deadlines.buckingham_palace_reception_attendee_information_due_by
+      end
+    end
+
     def winner_notification_date
       Rails.cache.fetch("winners_notification", expires_in: 1.minute) do
         current.winners_email_notification.try(:trigger_at).presence

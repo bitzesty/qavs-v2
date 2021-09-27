@@ -164,17 +164,13 @@ class MailRenderer
 
   def buckingham_palace_invite
     assigns = {}
+    form = form_answer
+    group_leader = dummy_group_leader
 
-    assigns[:form_answer] = form_answer
-    assigns[:name] = "John Smith"
-    assigns[:token] = "securetoken"
-
-    reception_date = AwardYear.buckingham_palace_reception_date
-    reception_date = DateTime.new(Date.current.year, 7, 11, 18, 00) if reception_date.blank?
-
-    assigns[:reception_date] = reception_date.strftime(
-      "%A #{reception_date.day.ordinalize} %B %Y"
-    )
+    assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
+    assigns[:form_answer] = form
+    assigns[:award_year] = form.award_year.year
+    assigns[:group_name] = "Synergy"
 
     palace_attendees_due = AwardYear.buckingham_palace_reception_attendee_information_due_by
     palace_attendees_due = DateTime.new(Date.current.year, 5, 6, 00, 00) if palace_attendees_due.blank?

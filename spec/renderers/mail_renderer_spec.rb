@@ -103,13 +103,23 @@ describe MailRenderer do
     end
   end
 
-  describe "#unsuccessful_ep_notification" do
+  describe "#buckingham_palace_invite" do
     it "renders e-mail" do
-      rendered = described_class.new.unsuccessful_ep_notification
-      expect(rendered).to match("Jon Doe")
-      expect(rendered).to match("Nominee Name")
+      link = "https://apply.qavs.dcms.gov.uk/group_leaders"
+      rendered = described_class.new.buckingham_palace_invite
+      expect(rendered).to match(link)
+      expect(rendered).to match("Synergy")
+      expect(rendered).to match("Jane Doe")
     end
   end
+
+  # describe "#unsuccessful_ep_notification" do
+  #   it "renders e-mail" do
+  #     rendered = described_class.new.unsuccessful_ep_notification
+  #     expect(rendered).to match("Jon Doe")
+  #     expect(rendered).to match("Nominee Name")
+  #   end
+  # end
 
   def deadline_str(format="%d/%m/%Y")
     DateTime.new(Date.current.year, 9, 21, 10, 30)
