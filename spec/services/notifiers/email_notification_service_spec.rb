@@ -87,7 +87,7 @@ describe Notifiers::EmailNotificationService do
     end
 
     it "sends one notification to the submitted group leader" do
-      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with("alice@example.com", "Alice Becket", "Alpha").once { mailer }
+      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with(submitted.id).once { mailer }
 
       described_class.run
 

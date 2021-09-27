@@ -50,19 +50,8 @@ class Notifiers::EmailNotificationService
   end
 
   def group_leader_notification(award_year)
-    submitted_nominations = award_year.form_answers.submitted
-    group_leaders = {}
-
-    submitted_nominations.each do |nomination|
-      name = nomination.document["nominee_leader_name"]
-      email = nomination.document["nominee_leader_email"]
-      group_name = nomination.document["nominee_name"]
-      # making sure we only send 1 email per email
-      group_leaders[email] = { name: name, group_name: group_name }
-    end
-
-    group_leaders.each do |email, v|
-      AccountMailers::GroupLeaderMailer.notify(email, v[:name], v[:group_name]).deliver_later!
+    award_year.form_answers.submitted.each do |form_answer|
+      AccountMailers::GroupLeaderMailer.notify(form_answer.id).deliver_later!
     end
   end
 
