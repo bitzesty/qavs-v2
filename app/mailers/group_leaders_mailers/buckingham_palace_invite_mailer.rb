@@ -1,5 +1,5 @@
 class GroupLeadersMailers::BuckinghamPalaceInviteMailer < ApplicationMailer
-  def notify(form_answer_id, gl_id)
+  def invite(form_answer_id, gl_id)
     @form_answer = FormAnswer.find(form_answer_id).decorate
     @group_leader = GroupLeader.find(gl_id)
     @group_leader_name = "#{@group_leader.first_name} #{@group_leader.last_name}"

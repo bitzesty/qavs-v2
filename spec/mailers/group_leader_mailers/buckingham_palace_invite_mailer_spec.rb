@@ -7,7 +7,7 @@ describe GroupLeadersMailers::BuckinghamPalaceInviteMailer do
                               email: form_answer.document["local_assessment_group_leader_email"] }
 
   let(:mail) {
-    GroupLeadersMailers::BuckinghamPalaceInviteMailer.notify(
+    GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(
       form_answer.id, group_leader.id
     )
   }

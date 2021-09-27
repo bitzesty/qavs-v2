@@ -164,22 +164,9 @@ class Notifiers::EmailNotificationService
   end
 
   def buckingham_palace_invite(award_year)
-    form_answer_ids = []
-
-    award_year.form_answers.winners.each do |form_answer|
-
-      invite = PalaceInvite.where(
-        email: form_answer.decorate.head_email,
-        form_answer_id: form_answer.id
-      ).first_or_create
-
-      unless invite.submitted?
-        form_answer_ids << form_answer.id
-      end
-    end
-
-    form_answer_ids.each do |form_answer_id|
-      GroupLeaders::BuckinghamPalaceInviteMailer.invite(form_answer_id).deliver_later!
+   award_year.form_answers.winners.each do |form_answer|
+    group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
+      GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_later!
     end
   end
 

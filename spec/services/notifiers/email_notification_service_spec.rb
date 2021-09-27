@@ -277,6 +277,32 @@ describe Notifiers::EmailNotificationService do
     end
   end
 
+  describe "buckingham_palace_invite" do
+    let(:kind) { "buckingham_palace_invite" }
+    let(:mailer) { double(deliver_later!: true) }
+
+    context "winning nomination" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "triggers current notification" do
+        group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
+        expect(GroupLeadersMailers::BuckinghamPalaceInviteMailer).to receive(:invite).with(
+          form_answer.id, group_leader.id
+        ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "unsuccessful nomination" do
+      let!(:form_answer) { create(:form_answer, :not_awarded) }
+      it "does not trigger notification" do
+        expect(GroupLeadersMailers::BuckinghamPalaceInviteMailer).to_not receive(:invite) { mailer }
+      end
+    end
+  end
+
   context "not_shortlisted_notifier" do
     let(:kind) { "not_shortlisted_notifier" }
     let(:form_answer) { create(:form_answer, state: "not_recommended") }
