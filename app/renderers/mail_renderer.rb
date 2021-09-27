@@ -48,7 +48,7 @@ class MailRenderer
   def reminder_to_submit
     assigns = {}
 
-    assigns[:user] = dummy_user("Jon", "Doe", "Jane's Company")
+    assigns[:user_name] = "Jon Doe"
     assigns[:form_answer] = form_answer
     assigns[:deadline] = Settings.current_submission_deadline.decorate.long_mail_reminder
 
@@ -134,7 +134,7 @@ class MailRenderer
 
   def winners_notification
     assigns = {}
-
+    assigns[:user_name] = "Jon Doe"
     assigns[:group_name] = "Synergy"
     assigns[:end_of_embargo_date] = deadline_str("buckingham_palace_attendees_details", "%-d %B")
 
@@ -143,7 +143,7 @@ class MailRenderer
 
   def unsuccessful_notification
     assigns = {}
-
+    assigns[:user_name] = "Jon Doe"
     assigns[:form_answer] = form_answer
     assigns[:group_name] = "Massive Dynamic"
 
@@ -173,7 +173,7 @@ class MailRenderer
     view.render(template: template)
   end
 
-  def dummy_user(first_name, last_name, company_name)
+  def dummy_user(first_name = "Jon", last_name = "Doe", company_name = "Jane's Company")
     User.new(first_name: first_name, last_name: last_name, company_name: company_name).decorate
   end
 
