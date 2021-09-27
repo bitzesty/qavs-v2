@@ -170,7 +170,6 @@ class MailRenderer
     assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
-    assigns[:group_name] = "Synergy"
 
     palace_attendees_due = AwardYear.buckingham_palace_reception_attendee_information_due_by
     palace_attendees_due = DateTime.new(Date.current.year, 5, 6, 00, 00) if palace_attendees_due.blank?
@@ -179,7 +178,7 @@ class MailRenderer
       "%A, #{palace_attendees_due.day.ordinalize} %B %Y"
     )
 
-    render(assigns, "account_mailers/buckingham_palace_invite_mailer/preview/invite")
+    render(assigns, "group_leaders_mailers/buckingham_palace_invite_mailer/preview/invite")
   end
 
   private

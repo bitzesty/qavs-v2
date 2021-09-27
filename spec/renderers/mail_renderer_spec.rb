@@ -105,10 +105,9 @@ describe MailRenderer do
 
   describe "#buckingham_palace_invite" do
     it "renders e-mail" do
-      link = "https://apply.qavs.dcms.gov.uk/group_leaders"
+      link = "https://apply.qavs.dcms.gov.uk/group_leader"
       rendered = described_class.new.buckingham_palace_invite
       expect(rendered).to match(link)
-      expect(rendered).to match("Synergy")
       expect(rendered).to match("Jane Doe")
     end
   end
