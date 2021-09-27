@@ -112,14 +112,6 @@ describe MailRenderer do
     end
   end
 
-  # describe "#unsuccessful_ep_notification" do
-  #   it "renders e-mail" do
-  #     rendered = described_class.new.unsuccessful_ep_notification
-  #     expect(rendered).to match("Jon Doe")
-  #     expect(rendered).to match("Nominee Name")
-  #   end
-  # end
-
   def deadline_str(format="%d/%m/%Y")
     DateTime.new(Date.current.year, 9, 21, 10, 30)
             .strftime(format)

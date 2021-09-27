@@ -10,7 +10,6 @@ class EmailNotification < ApplicationRecord
                          :local_assessment_reminder,
                          :winners_notification,
                          :unsuccessful_notification,
-                         :unsuccessful_ep_notification,
                          :shortlisted_notifier,
                          :not_shortlisted_notifier,
                          :winners_head_of_organisation_notification,

@@ -216,7 +216,6 @@ en:
     unsuccessful_group_leaders_notification: "UNSUCCESSFUL: Notification to unsuccessful group leaders"
     buckingham_palace_invite: "SUCCESSFUL: Garden party invite email"
     unsuccessful_notification: "UNSUCCESSFUL:  Email to nominators that their nominations have been unsuccessful"
-    unsuccessful_ep_notification: "UNSUCCESSFUL: Email notification of unsuccessful QAVS nominations."
     shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted nominators of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
     not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful nominators."
 
