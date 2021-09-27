@@ -22,7 +22,7 @@ describe AccountMailers::NotifyUnsuccessfulNominationsMailer do
     it "renders the body" do
       puts form_answer.state
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
-      link = "https://www.gov.uk/honours"
+      link = "http://example.com/honours"
       expect(mail.body.raw_source).to match group_name
       expect(mail.body.raw_source).to match "The standard was extremely high and, in the end, the group was not selected for the Award"
       expect(mail.body.raw_source).to match link
