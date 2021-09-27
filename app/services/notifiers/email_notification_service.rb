@@ -75,20 +75,6 @@ class Notifiers::EmailNotificationService
     end
   end
 
-  def shortlisted_notifier(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.shortlisted,
-      AccountMailers::NotifyShortlistedMailer
-    )
-  end
-
-  def not_shortlisted_notifier(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.not_shortlisted,
-      AccountMailers::NotifyNonShortlistedMailer
-    )
-  end
-
   # to 'Group Leaders' of winning nominations
   def winners_head_of_organisation_notification(award_year)
     winners = award_year.form_answers.winners
@@ -157,32 +143,6 @@ class Notifiers::EmailNotificationService
   end
 
   private
-
-  def formatted_collaborator_data(scope)
-    collaborator_data = []
-
-    scope.each do |form_answer|
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    collaborator_data
-  end
-
-  def gather_data_and_send_emails!(scope, mailer)
-    collaborator_data = formatted_collaborator_data(scope)
-    send_emails_to_collaborators!(collaborator_data, mailer)
-  end
-
-  def send_emails_to_collaborators!(data, mailer)
-    data.each do |entry|
-      mailer.notify(
-        entry[:form_answer_id],
-        entry[:collaborator_id]
-      ).deliver_later!
-    end
-  end
 
   def send_emails_to_group_leaders!(data, mailer)
     data.includes(:group_leader).each do |entry|

@@ -20,20 +20,6 @@ describe MailRenderer do
     end
   end
 
-  describe "#shortlisted_notifier" do
-    it "renders e-mail" do
-      rendered = described_class.new.shortlisted_notifier
-      expect(rendered).to match("Jon Doe")
-    end
-  end
-
-  describe "#not_shortlisted_notifier" do
-    it "renders e-mail" do
-      rendered = described_class.new.not_shortlisted_notifier
-      expect(rendered).to match("Jon Doe")
-    end
-  end
-
   describe "#reminder_to_submit" do
     it "renders e-mail" do
       Settings.current_submission_deadline.update(trigger_at: 10.days.ago)

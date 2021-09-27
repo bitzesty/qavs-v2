@@ -190,7 +190,6 @@ en:
     group_leader_notification_html: "Send to: All group leaders who have been nominated"
     local_assessment_notification_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
     local_assessment_reminder_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
-    shortlisted_notifier_html: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
     winners_head_of_organisation_notification_html: "Sent to: Awarded group leaders"
     unsuccessful_group_leaders_notification_html: "Sent to: Not recommended group leaders"
     winners_notification_html: |
@@ -214,8 +213,6 @@ en:
     unsuccessful_group_leaders_notification: "UNSUCCESSFUL: Notification to unsuccessful group leaders"
     buckingham_palace_invite: "SUCCESSFUL: Garden party invite email"
     unsuccessful_notification: "UNSUCCESSFUL:  Email to nominators that their nominations have been unsuccessful"
-    shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted nominators of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
-    not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful nominators."
 
   custom_login_messages:
     we_just_sent_you_confirmation_email: We have just sent you an email asking to confirm your account.

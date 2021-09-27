@@ -25,10 +25,6 @@ describe  "User sees the post submission dashboard" do
       visit dashboard_path
       expect_to_have_blank_dashboard
 
-      settings.email_notifications.create!(
-        kind: "shortlisted_notifier",
-        trigger_at: DateTime.now - 1.year
-      )
       visit dashboard_path
 
       form_answer.update_column(:state, "awarded")
@@ -58,7 +54,6 @@ describe  "User sees the post submission dashboard" do
 end
 
 def expect_to_have_blank_dashboard
-  expect(page).to_not have_content("Shortlisted")
   expect(page).to_not have_content("Unsuccessful")
   expect(page).to_not have_content("Successful")
 end

@@ -300,38 +300,4 @@ describe Notifiers::EmailNotificationService do
       end
     end
   end
-
-  context "not_shortlisted_notifier" do
-    let(:kind) { "not_shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "not_recommended") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyNonShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "shortlisted_notifier" do
-    let(:kind) { "shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "shortlisted") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
 end

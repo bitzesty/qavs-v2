@@ -10,8 +10,6 @@ class EmailNotification < ApplicationRecord
                          :local_assessment_reminder,
                          :winners_notification,
                          :unsuccessful_notification,
-                         :shortlisted_notifier,
-                         :not_shortlisted_notifier,
                          :winners_head_of_organisation_notification,
                          :unsuccessful_group_leaders_notification,
                          :buckingham_palace_invite
@@ -32,10 +30,6 @@ class EmailNotification < ApplicationRecord
 
   def passed?
     trigger_at && trigger_at < Time.zone.now
-  end
-
-  def self.not_shortlisted
-    where(kind: "not_shortlisted_notifier")
   end
 
   def self.not_awarded

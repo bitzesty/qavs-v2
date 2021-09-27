@@ -82,28 +82,6 @@ class MailRenderer
     render(assigns, "lieutenants_mailers/local_assessment_reminder_mailer/preview/notify")
   end
 
-  def not_shortlisted_notifier
-    assigns = {}
-
-    assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
-    assigns[:current_year] = AwardYear.current.year
-    render(assigns, "account_mailers/notify_non_shortlisted_mailer/preview/notify")
-  end
-
-  def shortlisted_notifier
-    assigns = {}
-
-    assigns[:user] = dummy_user("Jon", "Doe", "John's Company")
-    assigns[:form_answer] = form_answer
-    assigns[:company_name] = "Massive Dynamic"
-
-
-    assigns[:deadline_time] = deadline_str("audit_certificates", "%H:%M")
-    assigns[:deadline_date] = deadline_str("audit_certificates")
-
-    render(assigns, "account_mailers/notify_shortlisted_mailer/preview/notify")
-  end
-
   def winners_head_of_organisation_notification
     assigns = {}
     form = form_answer

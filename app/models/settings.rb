@@ -60,14 +60,6 @@ class Settings < ApplicationRecord
       DateTime.now >= deadline if deadline.present?
     end
 
-    def after_shortlisting_stage?
-      deadline = Rails.cache.fetch("shortlisted_notifier_notification", expires_in: 1.minute) do
-        current.email_notifications.where(kind: "shortlisted_notifier").first
-      end
-
-      DateTime.now >= deadline.trigger_at if deadline.present?
-    end
-
     def winners_stage?
       deadline = Rails.cache.fetch("winners_notification_notification", expires_in: 1.minute) do
         current.winners_email_notification
@@ -101,12 +93,6 @@ class Settings < ApplicationRecord
       award_year_switch_deadline < Time.zone.now && (
         after_current_submission_deadline_start?
       )
-    end
-
-    def not_shortlisted_deadline
-      Rails.cache.fetch("not_shortlisted_notifier_notification", expires_in: 1.minute) do
-        current.email_notifications.not_shortlisted.first.try(:trigger_at)
-      end
     end
 
     def not_awarded_deadline

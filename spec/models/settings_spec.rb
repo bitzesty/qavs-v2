@@ -21,11 +21,6 @@ describe Settings do
       expect(target).to eq Settings.winner_notification_date
     end
 
-    it ".not_shortlisted_deadline should filter correctly" do
-      target = Settings.current.email_notifications.not_shortlisted.first.try(:trigger_at)
-      expect(target).to eq Settings.not_shortlisted_deadline
-    end
-
     it ".not_awarded_deadline should filter correctly" do
       target = Settings.current.email_notifications.not_awarded.first.try(:trigger_at)
       expect(target).to eq Settings.not_awarded_deadline
