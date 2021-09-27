@@ -61,6 +61,8 @@ Rails.application.routes.draw do
 
   get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
 
+  get "/pre_sign_in"                                    => "content_only#pre_sign_in",                                    as: "pre_sign_in"
+
   root to: QAE.production? ? redirect("https://qavs.dcms.gov.uk") : "content_only#dashboard"
 
   resource :account, only: :show do
