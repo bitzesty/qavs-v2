@@ -158,8 +158,11 @@ class MailRenderer
     assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
-    assigns[:palace_invite_deadline] = Settings.current_palace_reception_attendee_information_deadline.decorate.formatted_mailer_deadline
-
+    if Settings.current_palace_reception_attendee_information_deadline.trigger_at
+      assigns[:palace_invite_deadline] = Settings.current_palace_reception_attendee_information_deadline.decorate.formatted_mailer_deadline
+    else
+      assigns[:palace_invite_deadline] = "[Buckingham Palace reception attendee information due by]"
+    end
     render(assigns, "group_leaders_mailers/buckingham_palace_invite_mailer/preview/invite")
   end
 

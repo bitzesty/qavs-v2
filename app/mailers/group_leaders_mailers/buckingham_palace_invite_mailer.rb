@@ -1,4 +1,4 @@
-class GroupLeadersMailers::BuckinghamPalaceInviteMailer < ApplicationMailer
+class GroupLeadersMailers::BuckinghamPalaceInviteMailer < AccountMailers::BaseMailer
   def invite(form_answer_id, gl_id)
     @form_answer = FormAnswer.find(form_answer_id).decorate
     @group_leader = GroupLeader.find(gl_id)
