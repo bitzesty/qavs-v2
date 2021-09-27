@@ -1,7 +1,7 @@
 - provide(:page_wrapper_class, "page-devise")
 
 h1.govuk-heading-xl
-  = resource.model_name == "Lieutenant" ? "Lieutenancy" : resource.model_name
+  = I18n.t "devise.sessions.new.#{ resource.model_name}", default: resource.model_name
   '  - Sign in
 
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
