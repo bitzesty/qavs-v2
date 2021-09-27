@@ -39,7 +39,7 @@ class EmailNotification < ApplicationRecord
   end
 
   def self.not_awarded
-    where(kind: ["unsuccessful_group_leaders_notification", "unsuccessful_notification"])
+    where(kind: "unsuccessful_notification")
   end
 
   private
