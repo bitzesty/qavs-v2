@@ -28,8 +28,7 @@ describe Notifiers::EmailNotificationService do
 
       it "triggers current notification" do
         expect(AccountMailers::ReminderToSubmitMailer).to receive(:notify).with(
-          form_answer.id,
-          user.id
+          form_answer.id
         ) { mailer }
 
         described_class.run
@@ -45,8 +44,7 @@ describe Notifiers::EmailNotificationService do
 
       it "does not send email notification" do
         expect(AccountMailers::ReminderToSubmitMailer).not_to receive(:notify).with(
-          form_answer.id,
-          user.id
+          form_answer.id
         ) { mailer }
 
         described_class.run

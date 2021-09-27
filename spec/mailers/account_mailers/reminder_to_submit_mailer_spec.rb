@@ -6,8 +6,7 @@ describe AccountMailers::ReminderToSubmitMailer do
 
   let(:mail) {
     AccountMailers::ReminderToSubmitMailer.notify(
-      form_answer.id,
-      user.id
+      form_answer.id
     )
   }
 
