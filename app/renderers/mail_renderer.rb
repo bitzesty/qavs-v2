@@ -162,7 +162,7 @@ class MailRenderer
     palace_attendees_due = AwardYear.buckingham_palace_reception_attendee_information_due_by
     palace_attendees_due = DateTime.new(Date.current.year, 5, 6, 00, 00) if palace_attendees_due.blank?
 
-    assigns[:palace_attendees_due] = palace_attendees_due.strftime(
+    assigns[:palace_invite_deadline] = palace_attendees_due.strftime(
       "%A, #{palace_attendees_due.day.ordinalize} %B %Y"
     )
 
