@@ -12,11 +12,11 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   validates :agreed_with_privacy_policy, acceptance: { allow_nil: false, accept: '1' }, on: :create
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   # First step validations
   validates :title, presence: true, if: -> { first_step? }
-  validates :first_name, presence: true, if: -> { first_step? }
-  validates :last_name, presence: true, if: -> { first_step? }
   validates :job_title, presence: true, if: -> { first_step? }
   validates :phone_number, presence: true, if: -> { first_step? }
 

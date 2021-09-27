@@ -44,6 +44,7 @@ class Eligibility::Basic < Eligibility
     self.benefits_animals_only = false
     self.has_at_least_three_people = true
     self.years_operating = 3
+    self.current_holder = "i_dont_know"
 
     save
   end

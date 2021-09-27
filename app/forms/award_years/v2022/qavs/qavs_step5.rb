@@ -65,6 +65,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.6"
           form_hint "Please check that the details provided by the nominator are correct."
           required
+          type "email"
           default_value :nominee_leader_email
           style "large"
         end

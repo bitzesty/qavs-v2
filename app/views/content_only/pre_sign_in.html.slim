@@ -1,0 +1,16 @@
+- provide(:page_wrapper_class, "page-devise")
+
+.article-related-positioning-container
+  .article-container.group
+    article.group role="article"
+      h1.govuk-heading-xl
+        | Sign in to Queen’s Award for Voluntary Service
+      p.govuk-body
+        ' Sign in to the Queen’s Award for Voluntary Service as a:
+
+      p.govuk-body
+        = link_to "Nominator", new_user_session_path, class: 'govuk-link'
+      p.govuk-body
+        = link_to "Group Leader", new_group_leader_session_path, class: 'govuk-link'
+      p.govuk-body
+        = link_to "Lieutenancy user", new_lieutenant_session_path, class: 'govuk-link'

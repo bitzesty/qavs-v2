@@ -24,8 +24,14 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? || subject.assigned?(record)
   end
 
+  # if we display no eligiblity options
+  # we hide edit eligibility status link
   def eligibility?
-    admin?
+    state = FormAnswerStateTransition.new
+    state.form_answer = record
+    state.subject = subject
+
+    admin? && state.eligibility_collection.any?
   end
 
   def update_eligibility?

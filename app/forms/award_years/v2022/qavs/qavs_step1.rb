@@ -99,6 +99,7 @@ class AwardYears::V2022::QAEForms
         text :nominee_leader_email, "Email" do
           sub_ref "A 2.4"
           required
+          type "email"
           style "large"
         end
 

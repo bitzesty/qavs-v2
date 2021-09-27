@@ -47,6 +47,7 @@ class AwardYears::V2022::QAEForms
         text :nominator_email, "Email address" do
           sub_ref "D 1.6"
           style "large"
+          type "email"
           required
         end
 

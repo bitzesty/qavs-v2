@@ -1,11 +1,10 @@
-#= require jquery
+#= require jquery3
 #= require jquery_ujs
 #= require vendor/file_upload/jquery.ui.widget
 #= require vendor/file_upload/jquery.iframe-transport
 #= require vendor/file_upload/jquery.fileupload
 #= require vendor/file_upload/jquery.fileupload-process
 #= require vendor/file_upload/jquery.fileupload-validate
-#= require ckeditor/init
 #= require ./ckeditor/config.js
 #= require Countable
 #= require moment.min
@@ -171,7 +170,7 @@ jQuery ->
     # $(".js-financial-year-changed-dates .js-fy-entries").each ->
     #  if $(this).find("input.js-fy-year").val() == ""
     #    parent_fy = $(this).parent().find(".js-fy-entries")
-    #    this_year = fy_year - (parent_fy.size() - parent_fy.index($(this)) - 1)
+    #    this_year = fy_year - (parent_fy.length - parent_fy.index($(this)) - 1)
     #    $(this).find("input.js-fy-year").val(this_year)
 
     # fy_latest_changed_input.find("input").attr("disabled", "disabled")
@@ -288,7 +287,7 @@ jQuery ->
 
   if window.location.hash
     step = window.location.hash.substr(1)
-    if $(".js-step-condition[data-step='step-#{step}']").size() > 0
+    if $(".js-step-condition[data-step='step-#{step}']").length > 0
       showAwardStep("step-#{step}")
       # Resize textareas that were previously hidden
       resetResizeTextarea()
@@ -680,7 +679,7 @@ jQuery ->
       false
 
   # Show current holder info when they are a current holder on basic eligibility current holder question
-  if $(".eligibility_current_holder").size() > 0
+  if $(".eligibility_current_holder").length > 0
     $(".eligibility_current_holder input").change () ->
       if $(this).val() == "true"
         $("#current-holder-info").removeClass("govuk-!-display-none")
@@ -688,7 +687,7 @@ jQuery ->
         $("#current-holder-info").addClass("govuk-!-display-none")
 
   # Show innovation amount info when the amount is greater than 1 on innovation eligibility
-  if $(".innovative_amount_input").size() > 0
+  if $(".innovative_amount_input").length > 0
     $(".innovative_amount_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
         $("#innovative-amount-info").removeClass("govuk-!-display-none")
@@ -696,7 +695,7 @@ jQuery ->
         $("#innovative-amount-info").addClass("govuk-!-display-none")
 
   # Show text about submitting multiple applications when the number of eligible initiatives is greater than 1
-  if $(".number_of_eligible_initiatives_input").size() > 0
+  if $(".number_of_eligible_initiatives_input").length > 0
     $(".number_of_eligible_initiatives_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
         $("#number-of-eligible-initiatives-info").removeClass("govuk-!-display-none")
@@ -704,7 +703,7 @@ jQuery ->
         $("#number-of-eligible-initiatives-info").addClass("govuk-!-display-none")
 
   # Show the eligibility failure contact message
-  if $("#basic-eligibility-failure-submit").size() > 0
+  if $("#basic-eligibility-failure-submit").length > 0
     $(document).on "click", "#basic-eligibility-failure-submit", (e) ->
       e.preventDefault()
       if $(this).closest("form").find("input:checked").val()
@@ -712,7 +711,7 @@ jQuery ->
         $("#basic-eligibility-failure-show").removeClass("govuk-!-display-none")
 
   # Change your eligibility answers for award eligibility
-  if $(".award-finish-previous-answers").size() > 0
+  if $(".award-finish-previous-answers").length > 0
     $(document).on "click", ".award-finish-previous-answers a", (e) ->
       e.preventDefault()
       $("#form_eligibility_show").addClass("govuk-!-display-none")
@@ -721,7 +720,7 @@ jQuery ->
   $(".question-block .js-button-add").each ->
     question = $(this).closest(".question-block")
     add_limit_attr = question.find(".list-add").attr("data-add-limit")
-    li_size = question.find(".list-add > li:visible").size()
+    li_size = question.find(".list-add > li:visible").length
 
     if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
       if li_size + 1 > add_limit_attr
@@ -737,13 +736,13 @@ jQuery ->
       question = $(this).closest(".question-block")
       add_eg = question.find(".js-add-example").html()
 
-      if question.find(".list-add").size() > 0
+      if question.find(".list-add").length > 0
         can_add = true
 
         # Are there add limits
         add_limit_attr = question.find(".list-add").attr("data-add-limit")
 
-        li_size = question.find(".list-add > li:visible").size()
+        li_size = question.find(".list-add > li:visible").length
 
         if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
 
@@ -822,7 +821,7 @@ jQuery ->
       triggerAutosave()
 
   questionAddDefaultReached = (ul) ->
-    if ul.size() > 0
+    if ul.length > 0
       attr = ul.attr("data-default")
       hasAttrDefault = false
 
@@ -831,7 +830,7 @@ jQuery ->
 
       if hasAttrDefault
         ul.removeClass("js-default-reached")
-        if ul.find("li").not(".hidden").size() <= attr
+        if ul.find("li").not(".hidden").length <= attr
           ul.addClass("js-default-reached")
 
   $(".list-add").each ->
@@ -876,7 +875,7 @@ jQuery ->
   # Remove alerts from registration page as soon as user starts typing
   $(".page-devise input").on 'keypress keydown keyup change', () ->
     $(this).closest(".field-with-errors").removeClass("field-with-errors")
-    if $(this).closest(".form-inputs-group").size() > 0
+    if $(this).closest(".form-inputs-group").length > 0
       $(this).closest(".form-inputs-group").find(".error").remove()
     else
       $(this).closest(".question-body").find(".error").remove()
@@ -920,6 +919,9 @@ jQuery ->
 
   if $('.js-ckeditor').length > 0
 
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/notification/plugin.js' );
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/wordcount/plugin.js' );
+
     $('.js-ckeditor').each (index) ->
       group = $(this).closest(".govuk-form-group")
 
@@ -928,7 +930,24 @@ jQuery ->
 
       CKEDITOR.replace this,
         title: group.find('label').first().text(),
-        toolbar: 'mini'
+        language: 'en'
+        toolbar_mini: [
+          {name: 'p1', items: ["Cut", "Copy", "PasteText", "-", "Undo", "Redo"]},
+          {name: 'p2', items: ["Bold", "Italic",  "-", "RemoveFormat"]},
+          {name: 'p3', items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']}
+        ]
+        toolbar: "mini";
+        extraPlugins: 'wordcount'
+
+        wordcount: {
+          showParagraphs: false,
+          showWordCount: true
+        }
+
+        removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
+        disableNativeSpellChecker: false
+
+        allowedContent: 'h1 h2 h3 blockquote p ul ol li em i strong b i br'
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')

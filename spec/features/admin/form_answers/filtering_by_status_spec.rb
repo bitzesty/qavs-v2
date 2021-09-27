@@ -16,13 +16,11 @@ describe "As Admin I want to filter applications", js: true do
     @forms << create(:form_answer, state: "application_in_progress")
     @forms << create(:form_answer, state: "not_eligible")
     @forms << create(:form_answer, state: "application_in_progress")
-
     # 0111 - is default sic_code, came from spec/fixtures/*.json
     # as it is required field
     # so that we are cleaning it up for last 3
     #
     @forms.last(3).map do |form|
-      form.document["sic_code"] = nil
       form.document["nominee_ceremonial_county"] = ceremonial_county_1.id
     end
 
@@ -38,31 +36,74 @@ describe "As Admin I want to filter applications", js: true do
     # 4 Applications
     assert_results_number(4)
 
-    click_status_option("Application in progress")
+    click_status_option("Nomination in progress")
     assert_results_number(2)
 
-    click_status_option("Application in progress")
+    click_status_option("Nomination in progress")
     assert_results_number(4)
 
-    click_status_option("Applications not submitted")
+    click_status_option("Nomination not submitted")
     assert_results_number(3)
 
-    click_status_option("Not eligible")
+    click_status_option("Ineligible - questionnaire")
     assert_results_number(2)
   end
 
-  it "filters by sub options" do
-    # 4 Applications
-    assert_results_number(4)
+  describe "filters by sub options" do
+    before do
+      # 4 Applications
+      assert_results_number(4)
+    end
 
-    # Add assesors to all applications and check filter
-    assign_dummy_assessors(@forms, create(:assessor))
-    click_status_option("Assessors not assigned")
-    assert_results_number(0)
+    it "filters by Lord Lieutenant not assigned" do
+      assign_ceremonial_county(@forms.first, ceremonial_county_1)
 
-    # Uncheck filter
-    click_status_option("Assessors not assigned")
-    assert_results_number(4)
+      click_status_option("Lord Lieutenancy not assigned")
+      assert_results_number(3)
+    end
+
+    it "filters by local assessment not started" do
+      assign_ceremonial_county(@forms.last(2), ceremonial_county_1)
+      assign_new_state(@forms, "admin_eligible")
+      assign_new_state(@forms.last, "admin_eligible_duplicate")
+
+      click_status_option("Local assessment not started")
+      assert_results_number(2)
+    end
+
+    it "filters by national assessor not assigned" do
+      # Add assesors to all applications and check filter
+      assign_dummy_assessors(@forms, create(:assessor))
+
+      click_status_option("National assessors not assigned")
+      assert_results_number(0)
+
+      # Uncheck filter
+      click_status_option("National assessors not assigned")
+      assert_results_number(4)
+    end
+
+    it "filters by national assessment outcome pending" do
+      assign_dummy_assessors(@forms, create(:assessor))
+      create(:admin_verdict, form_answer_id: @forms.last.id)
+
+      click_status_option("National assessment outcome pending")
+      assert_results_number(3)
+    end
+
+    it "filters by citation not submitted" do
+      create(:citation, :submitted, form_answer_id: @forms.last.id)
+
+      click_status_option("Citation form not submitted")
+      assert_results_number(3)
+    end
+
+    it "filters by palace invite not submitted" do
+      create(:palace_invite, :submitted, form_answer_id: @forms.last.id)
+
+      click_status_option("Royal Garden Party form not submitted")
+      assert_results_number(3)
+    end
   end
 
   it "filters by assigned ceremonial county" do

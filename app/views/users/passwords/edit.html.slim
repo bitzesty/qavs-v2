@@ -9,38 +9,7 @@
         = f.input :reset_password_token, as: :hidden
         = f.full_error :reset_password_token
 
-        #password-change-panel data-email-field="#{resource.email}"
-          .form-inputs-group
-            #password-control-group
-              = f.input :password,
-                        required: true,
-                        label: 'New password',
-                        autofocus: true,
-                        input_html: { class: "password-strength-meter js-disable-copy govuk-input--width-10",
-                                      data: { min_password_length: "10"},
-                                      autocomplete: "off" }
-
-            .guidance-panel.if-no-js-hide
-              #password-guidance.application-notice.help-notice
-                .alert.alert-warning
-                  p.govuk-body.text-underline Please improve your password
-                  p.govuk-body#password-too-short
-                    ' It must be at least 10 characters.
-                  p.govuk-body#parts-of-email It shouldn't include part or all of your email address.
-                  p.govuk-body#password-entropy
-                    ' It must be more complex. Consider using whole sentences (with spaces), lyrics or phrases to make it more memorable.
-
-            #password-confirmation-control-group
-              = f.input :password_confirmation,
-                        label: "Confirm password",
-                        required: true,
-                        input_html: { class: "js-disable-copy govuk-input--width-10",
-                                      autocomplete: "off" }
-
-            .if-no-js-hide
-              #password-confirmation-guidance.application-notice.help-notice
-                .alert.alert-warning
-                  p#password-confirmation-match The confirmation must match the password
+        = render "shared/users/password_change", f: f
 
         .form-actions
           = f.button :submit, "Create password"

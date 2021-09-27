@@ -112,7 +112,7 @@ module ApplicationHelper
   # Custom version of http://apidock.com/rails/v4.2.1/ActionView/Helpers/TextHelper/simple_format
   # Because we do not need tag wrappers
   def qae_simple_format(text)
-    text = sanitize(text)
+    text = sanitize(text, scrubber: QavsSanitizer.new)
     paragraphs = split_paragraphs(text)
 
     if paragraphs.present?
