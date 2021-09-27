@@ -16,7 +16,6 @@ class Deadline < ApplicationRecord
     "buckingham_palace_attendees_details",
     "buckingham_palace_attendees_invite",
     "buckingham_palace_confirm_press_book_notes",
-    "buckingham_palace_media_information",
     "buckingham_palace_reception_attendee_information_due_by"
   ]
 
@@ -57,10 +56,6 @@ class Deadline < ApplicationRecord
 
     def buckingham_palace_attendees_invite
       where(kind: "buckingham_palace_attendees_invite").first
-    end
-
-    def buckingham_palace_media_information
-      where(kind: "buckingham_palace_media_information").first
     end
 
     def buckingham_palace_reception_attendee_information_due_by
