@@ -33,6 +33,14 @@ module TriggerAtDecorator
     object.strftime("#{ trigger_at } on %A on #{ formatted_trigger_date("with_year") }")
   end
 
+  def formatted_mailer_deadline
+    trigger_at = object.strftime("%l %P")
+    trigger_at = "midnight" if midnight?
+    trigger_at = "midday" if midday?
+
+    object.strftime("#{ trigger_at }, #{ formatted_trigger_date("with_year") }")
+  end
+
   private
 
   def placeholder

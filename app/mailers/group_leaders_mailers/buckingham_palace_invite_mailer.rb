@@ -8,7 +8,7 @@ class GroupLeadersMailers::BuckinghamPalaceInviteMailer < ApplicationMailer
 
     deadlines = Settings.current.deadlines
 
-    @palace_invite_deadline = deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.long_mail_reminder
+    @palace_invite_deadline = deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
 
     @subject = "QAVS Invitations to a Royal Garden Party - action required"
 

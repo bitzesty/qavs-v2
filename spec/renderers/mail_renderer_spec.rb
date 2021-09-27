@@ -105,6 +105,7 @@ describe MailRenderer do
 
   describe "#buckingham_palace_invite" do
     it "renders e-mail" do
+      Settings.current_palace_reception_attendee_information_deadline.update(trigger_at: 10.days.from_now)
       link = "https://apply.qavs.dcms.gov.uk/group_leader"
       rendered = described_class.new.buckingham_palace_invite
       expect(rendered).to match(link)
