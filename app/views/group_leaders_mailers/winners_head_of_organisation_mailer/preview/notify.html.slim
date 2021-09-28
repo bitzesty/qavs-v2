@@ -1,0 +1,63 @@
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  = "Dear #{@group_leader_name},"
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | We were delighted to receive a nomination for
+  =<> @group_name
+  | for The Queen’s Award for Voluntary Service. I am writing to let you know the outcome and to request some immediate details from you.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Her Majesty The Queen has approved the QAVS National Assessment Committee’s recommendation that the volunteers of
+  =<> @group_name
+  | should receive The Queen’s Award for Voluntary Service (QAVS)
+  =< @award_year
+  | . This represents a tremendous achievement and we hope that the group’s volunteers will feel immensely proud of it.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  strong Confidentiality
+  br
+  | This notification has been sent to you in confidence and it is important that you do not reveal the news before the official announcement on
+  =<> @end_of_embargo_date
+  | from Buckingham Palace. Members of your group can be informed, but any breach of confidence outside the group could result in the withdrawal of the Award.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  strong What will happen next?
+  br
+  | As an awardee, your group’s name and citation will be published in a special edition of The Gazette on
+  =< @end_of_embargo_date
+  | , available to view online and purchase as a special addition. You will also receive:
+  ul
+    li A signed certificate from Her Majesty The Queen, presented locally by the Lord-Lieutenant for your county
+    li A crystal award with the QAVS insignia, presented with your certificate
+    li An invitation for two people to attend a Royal Garden Party between May and June next year
+    li Permission to use the official QAVS logo
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  strong What you must do by #{ @citation_deadline }:
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | We need you to provide some basic details to help us get everything ready for the announcement.  This includes confirming your acceptance of the award, your group name and a citation, which summarises the group’s activity.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Please follow the link below to login to the The Queen’s Award for Voluntary Service system to confirm the details and to access additional information about your award:
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  - url = edit_group_leader_password_url(reset_password_token: @token)
+  = link_to url, url, class: "govuk-link govuk-link--no-visited-state"
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | If you are not the correct person for us to contact, or if your organisation does not want to receive the Award, please get in touch with us directly.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Please accept our warmest congratulations on receiving this Award.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | With best wishes
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | The Queen’s Award for Voluntary Service Team
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | This email is from an unmanaged mailbox. To contact the QAVS team please email
+  =<> mail_to "queensaward@dcms.gov.uk", "queensaward@dcms.gov.uk", class: "govuk-link govuk-link--no-visited-state"
+  | or phone 0207 271 6206.

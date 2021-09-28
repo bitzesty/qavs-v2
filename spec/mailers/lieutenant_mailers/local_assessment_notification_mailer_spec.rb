@@ -10,9 +10,13 @@ describe LieutenantsMailers::LocalAssessmentNotificationMailer do
       lieutenant.id
     )
   }
+  let(:subject) {
+    "Nominations are ready for you to assess"
+  }
 
   describe "#notify" do
     it "renders the headers" do
+      expect(subject).to eq subject
       expect(mail.to).to eq([lieutenant.email])
       expect(mail.from).to eq(["no-reply@qavs.dcms.gov.uk"])
     end

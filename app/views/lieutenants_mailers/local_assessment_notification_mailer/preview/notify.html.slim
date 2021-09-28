@@ -3,15 +3,12 @@ p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
   | The QAVS nominations for
-  =<> AwardYear.current.year
+  =<> @award_year
   | are now available to assess.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
   | There are currently
-  - if @lieutenant.ceremonial_county
-    =<> @lieutenant.ceremonial_county.form_answers.count
-  - else
-    | 0
+  =<> @total
   | nominations to assess for your county. You can view them by logging in to your QAVS account via
   =< link_to lieutenant_form_answers_url, lieutenant_form_answers_url, class: "govuk-link govuk-link--no-visited-state"
   | .
