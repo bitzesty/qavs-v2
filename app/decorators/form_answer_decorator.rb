@@ -56,7 +56,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def award_type_short_name
-    "QAVS"
+    "qavs"
   end
 
   def award_application_title
