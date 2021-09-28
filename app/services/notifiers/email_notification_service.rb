@@ -32,7 +32,7 @@ class Notifiers::EmailNotificationService
     user_ids.each do |user_id|
       Users::AwardYearOpenNotificationMailer.notify(
         user_id
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 
@@ -44,13 +44,13 @@ class Notifiers::EmailNotificationService
     scope = award_year.form_answers.where(submitted_at: nil)
 
     scope.each do |form_answer|
-      AccountMailers::ReminderToSubmitMailer.notify(form_answer.id).deliver_later!
+      AccountMailers::ReminderToSubmitMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def group_leader_notification(award_year)
     award_year.form_answers.submitted.each do |form_answer|
-      AccountMailers::GroupLeaderMailer.notify(form_answer.id).deliver_later!
+      AccountMailers::GroupLeaderMailer.notify(form_answer.id).deliver_now!
     end
   end
 
@@ -60,7 +60,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties, role: "advanced").pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_now!
     end
   end
 
@@ -70,7 +70,7 @@ class Notifiers::EmailNotificationService
     lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties, role: "advanced").pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_now!
     end
   end
 
@@ -112,26 +112,26 @@ class Notifiers::EmailNotificationService
 
   def unsuccessful_group_leaders_notification(award_year)
     award_year.form_answers.unsuccessful_applications.each do |form_answer|
-      GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+      GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def winners_notification(award_year)
     award_year.form_answers.winners.each do |form_answer|
-      AccountMailers::NotifySuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+      AccountMailers::NotifySuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def unsuccessful_notification(award_year)
     award_year.form_answers.unsuccessful_applications.each do |form_answer|
-      AccountMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_later!
+      AccountMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def buckingham_palace_invite(award_year)
    award_year.form_answers.winners.each do |form_answer|
     group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
-      GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_later!
+      GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_now!
     end
   end
 
@@ -148,7 +148,7 @@ class Notifiers::EmailNotificationService
       mailer.notify(
         entry.id,
         entry.group_leader.id
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 
@@ -162,7 +162,7 @@ class Notifiers::EmailNotificationService
       Users::SubmissionStartedNotificationMailer.notify(
         user_id,
         award_type
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 end
