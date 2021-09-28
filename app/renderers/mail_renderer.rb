@@ -50,7 +50,12 @@ class MailRenderer
 
     assigns[:user_name] = "Jon Doe"
     assigns[:form_answer] = form_answer
-    assigns[:deadline] = Settings.current_submission_deadline.decorate.long_mail_reminder
+    deadline = Settings.current_submission_deadline
+    if deadline.trigger_at
+      assigns[:deadline] = deadline.decorate.long_mail_reminder
+    else
+      assigns[:deadline] = "[submission period closes deadline]"
+    end
 
     render(assigns, "account_mailers/reminder_to_submit_mailer/preview/notify")
   end
@@ -77,7 +82,12 @@ class MailRenderer
     assigns = {}
 
     assigns[:lieutenant] = dummy_lieutenant
-    assigns[:deadline] = Settings.current_local_assessment_submission_deadline.decorate.long_mail_reminder
+    deadline = Settings.current_local_assessment_submission_deadline
+    if deadline.trigger_at
+      assigns[:deadline] = deadline.decorate.long_mail_reminder
+    else
+      assigns[:deadline] = ["local assessment period ends deadline"]
+    end
 
     render(assigns, "lieutenants_mailers/local_assessment_reminder_mailer/preview/notify")
   end
@@ -136,10 +146,11 @@ class MailRenderer
     assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
-    if Settings.current_palace_reception_attendee_information_deadline.trigger_at
-      assigns[:palace_invite_deadline] = Settings.current_palace_reception_attendee_information_deadline.decorate.formatted_mailer_deadline
+    deadline = Settings.current_palace_reception_attendee_information_deadline
+    if deadline.trigger_at
+      assigns[:palace_invite_deadline] = deadline.decorate.formatted_mailer_deadline
     else
-      assigns[:palace_invite_deadline] = "[Buckingham Palace reception attendee information due by]"
+      assigns[:palace_invite_deadline] = "[Buckingham Palace reception attendee information due by deadline]"
     end
     render(assigns, "group_leaders_mailers/buckingham_palace_invite_mailer/preview/invite")
   end
