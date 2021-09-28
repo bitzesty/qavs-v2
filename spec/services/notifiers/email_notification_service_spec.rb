@@ -19,7 +19,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "#reminder_to_submit" do
     let(:kind) { "reminder_to_submit" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "for not submitted aplications" do
       let(:form_answer) do
@@ -60,7 +60,7 @@ describe Notifiers::EmailNotificationService do
     let!(:dup_submitted) { create(:form_answer) }
 
     let(:kind) { "group_leader_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
 
     before do
@@ -97,7 +97,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "#local_assessment_notification" do
     let(:kind) { "local_assessment_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
     context "for advanced lieutenants" do
@@ -132,7 +132,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "#local_assessment_reminder" do
     let(:kind) { "local_assessment_reminder" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
     context "for advanced lieutenants" do
@@ -166,7 +166,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "winners_head_of_organisation_notification" do
     let(:kind) { "winners_head_of_organisation_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "winning nominations" do
       let!(:form_answer) { create(:form_answer, :awarded) }
@@ -201,7 +201,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "unsuccessful_group_leaders_notification" do
     let(:kind) { "unsuccessful_group_leaders_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "winning nominations" do
       let!(:form_answer) { create(:form_answer, :awarded) }
@@ -227,7 +227,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "winners_notifier" do
     let(:kind) { "winners_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "winning nominations" do
       let!(:form_answer) { create(:form_answer, :awarded) }
@@ -250,7 +250,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "unsuccessful_notification" do
     let(:kind) { "unsuccessful_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "winning nominations" do
     let(:form_answer) { create(:form_answer, :awarded) }
@@ -277,7 +277,7 @@ describe Notifiers::EmailNotificationService do
 
   describe "buckingham_palace_invite" do
     let(:kind) { "buckingham_palace_invite" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "winning nomination" do
       let!(:form_answer) { create(:form_answer, :awarded) }
