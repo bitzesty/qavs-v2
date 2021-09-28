@@ -89,45 +89,25 @@ Cloudtasker.configure do |config|
 
     default_schedule = {
       "email_notification_service" => {
-        "cron" => "0 * * * *",
+        "cron" => "*/30 * * * *",
         "worker" => "Scheduled::EmailNotificationServiceWorker"
-      },
-      "trigger_audit_deadlines" => {
-        "cron" => "0 * * * *",
-        "worker" => "Scheduled::AuditDeadlineWorker"
-      },
-      "trigger_submission_deadlines" => {
-        "cron" => "0 * * * *",
-        "worker" => "Scheduled::SubmissionDeadlineWorker"
-      },
-      "form_data_pdf_hard_copy_generation_service" => {
-        "cron" => "30 0 * * *",
-        "worker" => "HardCopyPdfGenerators::Collection::FormDataWorker"
-      },
-      "case_summary_pdf_hard_copy_generation_service" => {
-        "cron" => "30 2 * * *",
-        "worker" => "HardCopyPdfGenerators::Collection::CaseSummaryWorker"
-      },
-      "feedback_pdf_hard_copy_generation_service" => {
-        "cron" => "30 4 * * *",
-        "worker" => "HardCopyPdfGenerators::Collection::FeedbackWorker"
-      },
-      "aggregated_case_summary_pdf_hard_copy_generation_service" => {
-        "cron" => "10 5 * * *",
-        "worker" => "HardCopyPdfGenerators::Aggregated::CaseSummariesWorker"
-      },
-      "aggregated_feedback_pdf_hard_copy_generation_service" => {
-        "cron" => "30 5 * * *",
-        "worker" => "HardCopyPdfGenerators::Aggregated::FeedbacksWorker"
-      },
-      "debounce_check_service" => {
-        "cron" => "50 5 * * *",
-        "worker" => "Scheduled::DebounceApiScanWorker"
-      },
-      "rescan_service" => {
-        "cron" => "30 1 * * *",
-        "worker" => "Scheduled::RescanServiceWorker"
       }
+      # "trigger_submission_deadlines" => {
+      #   "cron" => "0 * * * *",
+      #   "worker" => "Scheduled::SubmissionDeadlineWorker"
+      # },
+      # "form_data_pdf_hard_copy_generation_service" => {
+      #   "cron" => "30 0 * * *",
+      #   "worker" => "HardCopyPdfGenerators::Collection::FormDataWorker"
+      # },
+      # "debounce_check_service" => {
+      #   "cron" => "50 5 * * *",
+      #   "worker" => "Scheduled::DebounceApiScanWorker"
+      # },
+      # "rescan_service" => {
+      #   "cron" => "30 1 * * *",
+      #   "worker" => "Scheduled::RescanServiceWorker"
+      # }
     }
 
     Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
