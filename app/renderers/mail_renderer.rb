@@ -74,6 +74,7 @@ class MailRenderer
     assigns = {}
 
     assigns[:lieutenant] = dummy_lieutenant
+    assigns[:award_year] = AwardYear.current.year
     assigns[:total] = 5
     render(assigns, "lieutenants_mailers/local_assessment_notification_mailer/preview/notify")
   end
