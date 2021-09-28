@@ -130,7 +130,7 @@ Cloudtasker.configure do |config|
       }
     }
 
-  #  Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
+    Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
 
   end
 
