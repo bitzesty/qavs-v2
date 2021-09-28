@@ -91,23 +91,23 @@ Cloudtasker.configure do |config|
       "email_notification_service" => {
         "cron" => "*/30 * * * *",
         "worker" => "Scheduled::EmailNotificationServiceWorker"
-      },
-      "trigger_submission_deadlines" => {
-        "cron" => "0 * * * *",
-        "worker" => "Scheduled::SubmissionDeadlineWorker"
-      },
-      "form_data_pdf_hard_copy_generation_service" => {
-        "cron" => "30 0 * * *",
-        "worker" => "HardCopyPdfGenerators::Collection::FormDataWorker"
-      },
-      "debounce_check_service" => {
-        "cron" => "50 5 * * *",
-        "worker" => "Scheduled::DebounceApiScanWorker"
-      },
-      "rescan_service" => {
-        "cron" => "30 1 * * *",
-        "worker" => "Scheduled::RescanServiceWorker"
       }
+      # "trigger_submission_deadlines" => {
+      #   "cron" => "0 * * * *",
+      #   "worker" => "Scheduled::SubmissionDeadlineWorker"
+      # },
+      # "form_data_pdf_hard_copy_generation_service" => {
+      #   "cron" => "30 0 * * *",
+      #   "worker" => "HardCopyPdfGenerators::Collection::FormDataWorker"
+      # },
+      # "debounce_check_service" => {
+      #   "cron" => "50 5 * * *",
+      #   "worker" => "Scheduled::DebounceApiScanWorker"
+      # },
+      # "rescan_service" => {
+      #   "cron" => "30 1 * * *",
+      #   "worker" => "Scheduled::RescanServiceWorker"
+      # }
     }
 
     Cloudtasker::Cron::Schedule.load_from_hash!(default_schedule)
