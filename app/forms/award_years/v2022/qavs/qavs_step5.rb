@@ -403,7 +403,7 @@ class AwardYears::V2022::QAEForms
           style "medium"
         end
 
-        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain in one sentence why they might merit this" do
+        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain why they might merit this" do
           sub_ref "E 8.5"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           context %(
