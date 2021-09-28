@@ -190,7 +190,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def award_type_full_name
-    "Queen's Award for Voluntary Service"
+    "QAVS"
   end
 
   def head_of_business
