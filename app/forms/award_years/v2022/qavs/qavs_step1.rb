@@ -21,13 +21,13 @@ class AwardYears::V2022::QAEForms
         dropdown :nominee_activity, "Please select the group's main area of activity" do
           sub_ref "A 1.2"
           required
-          option "", "Please select"
+          option "", ""
           nominee_activities
         end
 
         dropdown :secondary_activity, "Please select the group's secondary area of activity (optional)" do
           sub_ref "A 1.3"
-          option "", "Please select"
+          option "", ""
           nominee_activities
         end
 
@@ -45,6 +45,7 @@ class AwardYears::V2022::QAEForms
 
         ceremonial_county :nominee_ceremonial_county, "Lieutenancy county (if known)" do
           sub_ref "A 1.5"
+          option "", ""
           counties
         end
 
