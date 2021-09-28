@@ -186,7 +186,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def award_type
-    "QAVS"
+    "qavs"
   end
 
   def award_type_full_name
