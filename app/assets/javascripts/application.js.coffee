@@ -962,3 +962,42 @@ jQuery ->
   #
   # Init WYSYWYG editor for QAE Form textareas - end
   #
+
+
+  #cookie settings
+
+  if $('.cookie-settings').length > 0
+    saveButton = document.querySelector('.save-cookie-settings')
+    cookieForm = document.querySelector('.cookie-save-form')
+
+    return if !saveButton
+
+    analyticsConsent = Cookies.get('analytics_cookies_consent_status')
+
+    if analyticsConsent is 'yes'
+      document.getElementById('cookies-analytics-yes').checked = true
+    if analyticsConsent is 'no'
+      document.getElementById('cookies-analytics-no').checked = true
+
+    cookieForm.addEventListener 'submit', (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+
+      analyticsRadio = document.querySelector('input[name="cookies-analytics"]:checked')
+      analyticsValue = if analyticsRadio then analyticsRadio.value else null
+
+      if analyticsValue
+        Cookies.set('analytics_cookies_consent_status', analyticsValue, { expires: 365 })
+
+      Cookies.set('general_cookie_consent_status', 'yes', { expires: 365 })
+
+      existingMessage = document.querySelector('.save-cookie-message')
+
+      if existingMessage
+        existingMessage.parentNode.removeChild(existingMessage)
+
+      message = document.createElement('p')
+      message.classList.add('save-cookie-message')
+      message.setAttribute('role', 'alert')
+      message.innerHTML = 'Your cookie preferences were successfully saved. These preferences will be valid for 1 year.'
+      saveButton.insertAdjacentElement('afterend', message)

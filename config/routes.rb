@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   get "/sign_up_complete"                               => "content_only#sign_up_complete",                               as: "sign_up_complete"
   get "/cookies"                                        => "content_only#cookies",                                        as: "cookies"
+  get "/cookie_policy"                                  => "content_only#cookie_policy",                                  as: "cookie_policy"
 
   get  "/new_qavs_form"                                 => "form#new_qavs_form",                                          as: "new_qavs_form"
 
