@@ -64,14 +64,16 @@ h1.govuk-heading-xl
 
       div role="region" aria-label="cookie consent status" tabindex="2"
         table.govuk-table
-            thead.govuk-table__head
+            thead.govuk-table__body
               tr.govuk-table__row
-                td.govuk-table__cell gaconsent
+                td.govuk-table__cell general_cookie_consent_status
+                td.govuk-table__cell
+                  | Remembers whether you’ve set any cookie preference and is used to hide the cookie banner.
+                td.govuk-table__cell 1 year
+              tr.govuk-table__row
+                td.govuk-table__cell analytics_cookies_consent_status
                 td.govuk-table__cell
                   | Used to store your preference if you allow analytics tracking cookies, e.g. Google Analytics.
-                  br
-                  br
-                  | This controls the cookie banner since we only ask for analytics cookies.
                 td.govuk-table__cell 1 year
 
 
