@@ -1,0 +1,14 @@
+li.govuk-header__navigation-item class=('active' if controller_name == 'dashboard')
+  = link_to "Dashboard", lieutenant_root_path, class: 'govuk-header__link'
+li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
+  = link_to "Nominations", lieutenant_form_answers_path, class: 'govuk-header__link'
+- if policy(:lieutenant).index?
+  li.govuk-header__navigation-item class=('active' if controller_name == 'lieutenants')
+    = link_to "Users", lieutenant_lieutenants_path, class: 'govuk-header__link'
+li.govuk-header__navigation-item
+  = link_to "Account details", edit_lieutenant_account_path, class: 'govuk-header__link'
+li.govuk-header__navigation-item
+  = link_to "Sign out",
+            destroy_lieutenant_session_path,
+            method: :delete,
+            class: 'govuk-header__link'

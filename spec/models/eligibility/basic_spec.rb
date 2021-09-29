@@ -31,16 +31,17 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.national_organisation = false
       eligibility.based_in_uk = true
 
-      expect(eligibility).to be_eligible
+      expect(eligibility).to_not be_eligible
     end
 
     it 'is eligible when all questions are answered correctly' do
-      eligibility.national_organisation = false
       eligibility.based_in_uk = true
       eligibility.are_majority_volunteers = true
       eligibility.benefits_animals_only = false
+      eligibility.national_organisation = false
       eligibility.has_at_least_three_people = true
       eligibility.years_operating = 3
+      eligibility.current_holder = "no"
 
       expect(eligibility).to be_eligible
     end
@@ -56,7 +57,7 @@ RSpec.describe Eligibility::Basic, type: :model do
   end
 
   describe "#save_as_eligible" do
-    let(:eligibility) { Eligibility::Basic.new(account: account) }
+    let(:eligibility) { build(:basic_eligibility, answers: {}) }
 
     it "saves and marks eligibilty as eligible" do
       eligibility.save_as_eligible!

@@ -3,6 +3,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step1
       @qavs_step1 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
+        )
+
         header :nominee_details_header, "Group Details" do
           ref "A 1"
         end
@@ -17,12 +21,18 @@ class AwardYears::V2022::QAEForms
         dropdown :nominee_activity, "Please select the group's main area of activity" do
           sub_ref "A 1.2"
           required
-          option "", "Please select"
+          option "", ""
+          nominee_activities
+        end
+
+        dropdown :secondary_activity, "Please select the group's secondary area of activity (optional)" do
+          sub_ref "A 1.3"
+          option "", ""
           nominee_activities
         end
 
         address :nominee_address, "Address of group" do
-          sub_ref "A 1.3"
+          sub_ref "A 1.4"
           required
           sub_fields([
             { building: "Building" },
@@ -34,22 +44,23 @@ class AwardYears::V2022::QAEForms
         end
 
         ceremonial_county :nominee_ceremonial_county, "Lieutenancy county (if known)" do
-          sub_ref "A 1.4"
+          sub_ref "A 1.5"
+          option "", ""
           counties
         end
 
         text :nominee_phone, "Telephone number" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           style "small"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.7"
+          sub_ref "A 1.8"
           form_hint "Social media accounts if known"
           words_max 100
           rows 2
@@ -89,6 +100,7 @@ class AwardYears::V2022::QAEForms
         text :nominee_leader_email, "Email" do
           sub_ref "A 2.4"
           required
+          type "email"
           style "large"
         end
 

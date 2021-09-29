@@ -7,7 +7,7 @@ RSpec.describe Form::AwardsController do
 
   before do
     sign_in user
-    allow(controller).to receive(:step).and_return(double(title: 'test'))
+    allow(controller).to receive(:step).and_return(double(title_to_param: 'test'))
     allow(controller).to receive(:question).and_return(double({}))
   end
 

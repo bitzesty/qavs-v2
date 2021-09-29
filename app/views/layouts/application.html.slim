@@ -1,4 +1,5 @@
 - content_for?(:title) ? yield(:title) : "Queen's Award for Voluntary Service"
+- content_for :service_root, '/'
 
 - content_for :head do
   = stylesheet_link_tag "application.css"
@@ -21,21 +22,17 @@
   - unless landing_page?
     nav
       ul.govuk-header__navigation#navigation aria-label="Navigation menu"
-        - if show_navigation_links?
-          li.govuk-header__navigation-item
-            = link_to "Nominations", dashboard_path, class: 'govuk-header__link'
-          li.govuk-header__navigation-item
-            = link_to "Useful information", useful_information_account_path, class: 'govuk-header__link'
-          li.govuk-header__navigation-item
-            = link_to "Account details", password_settings_account_path, class: 'govuk-header__link'
         - if current_user.present?
-          li.govuk-header__navigation-item
-            = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'govuk-header__link'
+          = render "layouts/navbar/user"
+        - elsif current_admin.present?
+          = render "layouts/navbar/admin"
         - elsif current_group_leader.present?
-          li.govuk-header__navigation-item
-            = link_to "Dashboard", group_leader_root_path, class: 'govuk-header__link'
-          li.govuk-header__navigation-item
-            = link_to "Sign out", destroy_group_leader_session_path, method: :delete, class: 'govuk-header__link'
+          = render "layouts/navbar/group_leader"
+        - elsif current_lieutenant.present?
+          = render "layouts/navbar/lieutenant"
+        - elsif current_assessor.present?
+          = render "layouts/navbar/assessor"
+
 
 - content_for :inside_header do
   - if landing_page?
@@ -49,19 +46,13 @@
 
 - content_for :content do
   .govuk-width-container class="govuk-!-margin-top-4 govuk-!-margin-bottom-1"
-    = render "shared/offline_message"
+    = yield :before_main_content
 
   #wrapper.guide.smart-answer.answer class="#{yield :page_wrapper_class}"
     #QAE class="#{'admin-mode' if admin_in_read_only_mode?} #{'layout-dev' if Rails.env.development?}"
       .govuk-width-container
         main#content.group class="govuk-main-wrapper app-main-class #{yield :page_content_class}"
-          - if !content_for?(:flash_disabled) && [:alert, :notice].any? { |kind| flash[kind].presence }
-            .flash
-              .flash-inner
-                - [:alert, :notice].each do |kind|
-                  - if flash[kind]
-                    div class="#{kind}"
-                      = flash[kind]
+          = render "layouts/flash"
 
           - if params[:session_expired].present?
             = render "shared/session_expired_message"

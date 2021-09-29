@@ -34,21 +34,8 @@ class Eligibility::Basic < Eligibility
 
   property :current_holder,
            values: %w[yes no i_dont_know],
-           label: "Are you a current Queen's Award holder in any category?",
-           accept: :not_nil
-
-  def eligible?
-    current_step_index = questions.index(current_step) || questions.size - 1
-    previous_questions = questions[0..current_step_index]
-
-    answers.present? && answers.all? do |question, answer|
-      if previous_questions.include?(question.to_sym)
-        answer_valid?(question, answer)
-      else
-        true
-      end
-    end
-  end
+           label: "Has the group received a QAVS in the past?",
+           accept: :not_yes
 
   def save_as_eligible!
     self.national_organisation = false
@@ -57,6 +44,7 @@ class Eligibility::Basic < Eligibility
     self.benefits_animals_only = false
     self.has_at_least_three_people = true
     self.years_operating = 3
+    self.current_holder = "i_dont_know"
 
     save
   end

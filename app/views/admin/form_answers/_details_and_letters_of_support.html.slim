@@ -2,12 +2,8 @@ h3.govuk-heading-m
   | Nomination and local assessment form
 
 .govuk-button-group
-  - if policy(resource).review?
-    = link_to 'View nomination', [:review, namespace_name, @form_answer], class: "govuk-button"
   - if policy(resource).edit?
-    = link_to (admin? ? 'Edit nomination and local assessment form' : 'View nomination and edit local assessment form'),
-              [:edit, namespace_name, @form_answer],
-              class: "govuk-button"
+    = render "#{namespace_name}/form_answers/edit_nomination_links"
 
 = link_to "Download nomination and local assessment form (PDF)", { namespace: namespace_name, path: @form_answer, format: :pdf }, class: "govuk-link download-link govuk-link--no-visited-state"
 

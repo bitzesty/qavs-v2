@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -42,6 +44,7 @@ CREATE TABLE public.accounts (
 --
 
 CREATE SEQUENCE public.accounts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -54,6 +57,39 @@ CREATE SEQUENCE public.accounts_id_seq
 --
 
 ALTER SEQUENCE public.accounts_id_seq OWNED BY public.accounts.id;
+
+
+--
+-- Name: admin_verdicts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admin_verdicts (
+    id bigint NOT NULL,
+    outcome character varying,
+    description text,
+    form_answer_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: admin_verdicts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.admin_verdicts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: admin_verdicts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.admin_verdicts_id_seq OWNED BY public.admin_verdicts.id;
 
 
 --
@@ -97,6 +133,7 @@ CREATE TABLE public.admins (
 --
 
 CREATE SEQUENCE public.admins_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -133,6 +170,7 @@ CREATE TABLE public.aggregated_award_year_pdfs (
 --
 
 CREATE SEQUENCE public.aggregated_award_year_pdfs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -167,7 +205,6 @@ CREATE TABLE public.assessor_assignments (
     id integer NOT NULL,
     form_answer_id integer NOT NULL,
     assessor_id integer,
-    "position" integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     document public.hstore,
@@ -185,6 +222,7 @@ CREATE TABLE public.assessor_assignments (
 --
 
 CREATE SEQUENCE public.assessor_assignments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -240,6 +278,7 @@ CREATE TABLE public.assessors (
 --
 
 CREATE SEQUENCE public.assessors_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -275,6 +314,7 @@ CREATE TABLE public.audit_logs (
 --
 
 CREATE SEQUENCE public.audit_logs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -311,6 +351,7 @@ CREATE TABLE public.award_years (
 --
 
 CREATE SEQUENCE public.award_years_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -414,6 +455,7 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -448,6 +490,7 @@ CREATE TABLE public.deadlines (
 --
 
 CREATE SEQUENCE public.deadlines_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -484,6 +527,7 @@ CREATE TABLE public.draft_notes (
 --
 
 CREATE SEQUENCE public.draft_notes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -519,6 +563,7 @@ CREATE TABLE public.eligibilities (
 --
 
 CREATE SEQUENCE public.eligibilities_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -553,6 +598,7 @@ CREATE TABLE public.email_notifications (
 --
 
 CREATE SEQUENCE public.email_notifications_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -590,6 +636,7 @@ CREATE TABLE public.feedbacks (
 --
 
 CREATE SEQUENCE public.feedbacks_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -629,6 +676,7 @@ CREATE TABLE public.form_answer_attachments (
 --
 
 CREATE SEQUENCE public.form_answer_attachments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -659,6 +707,7 @@ CREATE TABLE public.form_answer_progresses (
 --
 
 CREATE SEQUENCE public.form_answer_progresses_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -694,6 +743,7 @@ CREATE TABLE public.form_answer_transitions (
 --
 
 CREATE SEQUENCE public.form_answer_transitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -751,7 +801,8 @@ CREATE TABLE public.form_answers (
     ceremonial_county_id integer,
     ineligible_reason_nominator character varying,
     ineligible_reason_group character varying,
-    sub_group character varying
+    sub_group character varying,
+    secondary_activity character varying
 );
 
 
@@ -760,6 +811,7 @@ CREATE TABLE public.form_answers (
 --
 
 CREATE SEQUENCE public.form_answers_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -801,7 +853,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id bigint
+    form_answer_id integer
 );
 
 
@@ -911,6 +963,7 @@ CREATE TABLE public.palace_attendees (
 --
 
 CREATE SEQUENCE public.palace_attendees_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -945,6 +998,7 @@ CREATE TABLE public.palace_invites (
 --
 
 CREATE SEQUENCE public.palace_invites_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -978,6 +1032,7 @@ CREATE TABLE public.previous_wins (
 --
 
 CREATE SEQUENCE public.previous_wins_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1015,6 +1070,7 @@ CREATE TABLE public.scans (
 --
 
 CREATE SEQUENCE public.scans_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1055,6 +1111,7 @@ CREATE TABLE public.settings (
 --
 
 CREATE SEQUENCE public.settings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1087,6 +1144,7 @@ CREATE TABLE public.site_feedbacks (
 --
 
 CREATE SEQUENCE public.site_feedbacks_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1123,6 +1181,7 @@ CREATE TABLE public.support_letter_attachments (
 --
 
 CREATE SEQUENCE public.support_letter_attachments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1168,6 +1227,7 @@ CREATE TABLE public.support_letters (
 --
 
 CREATE SEQUENCE public.support_letters_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2470,6 +2530,7 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2501,6 +2562,7 @@ CREATE TABLE public.version_associations (
 --
 
 CREATE SEQUENCE public.version_associations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2537,6 +2599,7 @@ CREATE TABLE public.versions (
 --
 
 CREATE SEQUENCE public.versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2556,6 +2619,13 @@ ALTER SEQUENCE public.versions_id_seq OWNED BY public.versions.id;
 --
 
 ALTER TABLE ONLY public.accounts ALTER COLUMN id SET DEFAULT nextval('public.accounts_id_seq'::regclass);
+
+
+--
+-- Name: admin_verdicts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts ALTER COLUMN id SET DEFAULT nextval('public.admin_verdicts_id_seq'::regclass);
 
 
 --
@@ -2781,6 +2851,14 @@ ALTER TABLE ONLY public.versions ALTER COLUMN id SET DEFAULT nextval('public.ver
 
 ALTER TABLE ONLY public.accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_verdicts admin_verdicts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts
+    ADD CONSTRAINT admin_verdicts_pkey PRIMARY KEY (id);
 
 
 --
@@ -3055,6 +3133,13 @@ CREATE INDEX index_accounts_on_owner_id ON public.accounts USING btree (owner_id
 
 
 --
+-- Name: index_admin_verdicts_on_form_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_admin_verdicts_on_form_answer_id ON public.admin_verdicts USING btree (form_answer_id);
+
+
+--
 -- Name: index_admins_on_authy_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3101,13 +3186,6 @@ CREATE UNIQUE INDEX index_assessor_assignments_on_assessor_id_and_form_answer_id
 --
 
 CREATE INDEX index_assessor_assignments_on_award_year_id ON public.assessor_assignments USING btree (award_year_id);
-
-
---
--- Name: index_assessor_assignments_on_form_answer_id_and_position; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_assessor_assignments_on_form_answer_id_and_position ON public.assessor_assignments USING btree (form_answer_id, "position");
 
 
 --
@@ -3490,6 +3568,14 @@ ALTER TABLE ONLY public.support_letter_attachments
 
 
 --
+-- Name: admin_verdicts fk_rails_23f1653342; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_verdicts
+    ADD CONSTRAINT fk_rails_23f1653342 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
 -- Name: palace_invites fk_rails_40aaf5af73; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3527,14 +3613,6 @@ ALTER TABLE ONLY public.feedbacks
 
 ALTER TABLE ONLY public.feedbacks
     ADD CONSTRAINT fk_rails_85a1d7f049 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
--- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.group_leaders
-    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --
@@ -3802,4 +3880,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210810173827'),
 ('20210810175339'),
 ('20210816072005'),
-('20210817084427');
+('20210817084427'),
+('20210819140008'),
+('20210826124140'),
+('20210831085355');
+
+

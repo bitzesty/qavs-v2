@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 2.7.3'
 
-gem 'rails', '~> 6.0.3.4'
+gem 'rails', '~> 6.0.4.1'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -22,14 +22,14 @@ gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-rails', '>= 2.0.0'
 gem 'slim-rails', '~> 3.2.0'
 gem 'coffee-rails', '5.0'
-gem 'jquery-rails', '4.3.5'
+gem 'jquery-rails', '4.4.0'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
 gem 'uglifier', '>= 2.7.2'
 gem 'js_cookie_rails', '2.1.4'
-gem 'ckeditor', github: 'galetahub/ckeditor', ref: "752bca97f78e5c5df3fbd876e51a06918da804e2"
+gem 'ckeditor'
 gem 'webpacker', '6.0.0.beta.7'
 
 # Autolinking in admin mass user mailer
@@ -85,9 +85,10 @@ gem 'nokogiri'
 
 # Uploads
 gem 'carrierwave', '~> 2.2.2'
-gem 'carrierwave-google-storage', github: "rondy/carrierwave-google-storage", ref: "8f0ea2060f393a00e238e466c8009b585d24e148"
-gem 'vigilion', '~> 1.0.4'
-gem 'vigilion-rails'
+gem 'google-cloud-storage', '~> 1.34.1'
+gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'c706a21c6c25045cae2e39bcab5bf594af0bcf46'
+gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
+gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '59def7b69589d702b6d14a5ec5b1c77c22e21065'
 
 # Background jobs
 gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf'
@@ -142,10 +143,6 @@ gem 'shog'
 # Used to convert HTML to text, with the exception of whitelisted attributes.
 # This makes it easier for us to display HTML content within PDF documents.
 gem 'sanitize'
-
-# https://github.com/minad/mimemagic/issues/98
-gem "mimemagic", ">= 0.3.9"
-
 
 group :development do
   gem 'letter_opener'

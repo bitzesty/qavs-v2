@@ -3,41 +3,18 @@ class FormAnswerPolicy < ApplicationPolicy
     admin? || assessor? || lieutenant?
   end
 
-  # if subject is a lead or admin
-  # or the assessment is submitted, and it's a primary assessor
-  # or the assessment is submitted, and it's an application from previous award years and the subject is an assessor
-  def show_section_appraisal_moderated?
-    subject.lead?(record) ||
-      (
-        record.assessor_assignments.moderated.submitted? &&
-        (
-          subject.primary?(record) ||
-          (assessor? && record.from_previous_years?)
-        )
-      )
-  end
-
-  def review?
-    record.award_year.current? &&
-    (
-
-      !lieutenant? &&
-      (admin? ||
-       subject.lead_or_assigned?(record))
-    )
-  end
-
   def show?
     admin? || assessor? || (lieutenant? && lieutenancy_assigned?)
   end
 
   def lieutenant_assessment?
-    (lieutenant? && lieutenancy_assigned?) || admin?
+    (lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?
   end
 
   def edit?
-    deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    ((lieutenant? && lieutenancy_assigned?) || admin?) && (!deadline.present? || DateTime.now <= deadline)
+    # deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
+    ((lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?)
+    # && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def submit?
@@ -45,11 +22,17 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def update?
-    admin? || subject.lead?(record)
+    admin? || subject.assigned?(record)
   end
 
+  # if we display no eligiblity options
+  # we hide edit eligibility status link
   def eligibility?
-    admin?
+    state = FormAnswerStateTransition.new
+    state.form_answer = record
+    state.subject = subject
+
+    admin? && state.eligibility_collection.any?
   end
 
   def update_eligibility?
@@ -57,13 +40,12 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def update_item?(item)
-    admin_or_lead_or_primary = admin? || (subject.lead?(record) ||
-                               subject.primary?(record))
+    admin_or_assessor = admin? || subject.assigned?(record)
 
     if item.in? [:previous_wins, :sic_code]
-      admin_or_lead_or_primary
+      admin_or_assessor
     else
-      admin_or_lead_or_primary &&
+      admin_or_assessor &&
           record.submitted_and_after_the_deadline? &&
           update?
     end
@@ -74,11 +56,7 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def can_update_by_admin_lead_and_primary_assessors?
-    !lieutenant? && (admin? || subject.lead?(record) || subject.primary?(record))
-  end
-
-  def update_financials?
-    !lieutenant && (admin? || subject.lead?(record) || subject.primary?(record))
+    !lieutenant? && (admin? || subject.assigned?(record))
   end
 
   def assign_assessor?
@@ -99,10 +77,6 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def download_feedback_pdf?
     admin? && record.submitted? && record.feedback.present?
-  end
-
-  def download_case_summary_pdf?
-    admin? && record.in_positive_state? && record.lead_or_primary_assessor_assignments.any?
   end
 
   def download_list_of_procedures_pdf?
@@ -149,5 +123,15 @@ class FormAnswerPolicy < ApplicationPolicy
 
   def can_see_national_assessment_status?
     admin? || assessor?
+  end
+
+  def can_download_attachments?
+    admin? || assessor? || lieutenant?
+  end
+
+  private
+
+  def assigned_assessor?
+    assessor? && subject.assigned?(record)
   end
 end

@@ -12,6 +12,8 @@ module FormHelper
       ops[:disabled] = "disabled"
     elsif current_form_is_not_editable? && section != :local_assessment
       ops[:disabled] = "disabled"
+    elsif current_assessor
+      ops[:disabled] = "disabled"
     end
 
     ops
@@ -40,16 +42,31 @@ module FormHelper
       lieutenant_form_answer_path(nomination, format: :pdf)
     elsif current_admin
       admin_form_answer_path(nomination, format: :pdf)
+    elsif current_assessor
+      assessor_form_answer_path(nomination, format: :pdf)
     end
+  end
+
+  def letter_of_support_pdf_url(letter)
+    if current_lieutenant
+      namespace_name = :lieutenant
+    elsif current_admin
+      namespace_name = :admin
+    elsif current_assessor
+      namespace_name = :assessor
+    end
+    [namespace_name, letter.form_answer, letter]
   end
 
   def nomination_back_url(nomination, step)
     if current_user
-      edit_form_url(step: step.previous.title.parameterize)
+      edit_form_url(step: step.previous.title_to_param)
     elsif current_lieutenant
-      edit_lieutenant_form_answer_url(nomination, step: step.previous.title.parameterize)
+      edit_lieutenant_form_answer_url(nomination, step: step.previous.title_to_param)
     elsif current_admin
-      edit_admin_form_answer_url(nomination, step: step.previous.title.parameterize)
+      edit_admin_form_answer_url(nomination, step: step.previous.title_to_param)
+    elsif current_assessor
+      edit_assessor_form_answer_url(nomination, step: step.previous.title_to_param)
     end
   end
 
@@ -58,6 +75,8 @@ module FormHelper
       lieutenant_form_answer_url(nomination)
     elsif admin?
       admin_form_answer_url(nomination)
+    elsif current_assessor
+      assessor_form_answer_url(nomination)
     else
       dashboard_url
     end
@@ -67,7 +86,7 @@ module FormHelper
     return unless step
 
     steps = form.steps
-    steps.map! { |s| s.title.parameterize }
+    steps.map! { |s| s.title_to_param }
 
     index = steps.index(step)
 

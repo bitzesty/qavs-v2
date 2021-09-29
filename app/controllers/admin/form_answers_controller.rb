@@ -1,6 +1,7 @@
 class Admin::FormAnswersController < Admin::BaseController
   include FormAnswerMixin
   include FormAnswerSubmissionMixin
+  include FormAnswersPdf
 
   layout :resolve_layout
 
@@ -9,7 +10,7 @@ class Admin::FormAnswersController < Admin::BaseController
     :show,
     :eligibility,
     :update,
-    :update_financials,
+    :update_verdict,
     :save,
     :remove_audit_certificate
   ]
@@ -68,7 +69,24 @@ class Admin::FormAnswersController < Admin::BaseController
 
   def show
     super
-    @audit_events = FormAnswerAuditor.new(@form_answer).get_audit_events
+
+    respond_to do |format|
+      format.html do
+        @audit_events = FormAnswerAuditor.new(resource).get_audit_events
+      end
+
+      format.pdf do
+        if can_render_pdf_on_fly?
+          pdf = resource.decorate.pdf_generator(current_admin, pdf_blank_mode)
+          send_data pdf.render,
+                    filename: resource.decorate.pdf_filename,
+                    type: "application/pdf",
+                    disposition: 'attachment'
+        else
+          render_hard_copy_pdf
+        end
+      end
+    end
   end
 
   def save
@@ -86,7 +104,7 @@ class Admin::FormAnswersController < Admin::BaseController
         end
 
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
-        @form_answer.current_step = params[:current_step] || @form.steps.first.title.parameterize
+        @form_answer.current_step = params[:current_step] || @form.steps.first.title_to_param
         if params[:form].present? && @form_answer.eligible? && (saved = @form_answer.save)
           if submitted_was_changed
             @form_answer.state_machine.submit(current_admin)
@@ -110,13 +128,13 @@ class Admin::FormAnswersController < Admin::BaseController
             redirect_to admin_form_answer_url(@form_answer)
           else
             if saved
-              params[:next_step] ||= @form.steps[1].title.parameterize
+              params[:next_step] ||= @form.steps[1].title_to_param
               redirect_to edit_admin_form_answer_url(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               # avoid redirecting to supporters page
               if !params[:step] || params[:step] == "letters-of-support"
-                params[:step] = @form.steps.first.title.parameterize
+                params[:step] = @form.steps.first.title_to_param
               end
 
               render template: "admin/form_answers/edit"
@@ -160,6 +178,20 @@ class Admin::FormAnswersController < Admin::BaseController
     end
   end
 
+  def update_verdict
+    @admin_verdict = resource.admin_verdict || resource.build_admin_verdict
+
+    authorize @admin_verdict, :update?
+
+    @admin_verdict.attributes = verdict_params
+
+    if @admin_verdict.save
+      redirect_to [:admin, resource], success: "National assessment and Royal approval outcome successfully saved."
+    else
+      render :show
+    end
+  end
+
   def edit
     authorize resource
     @form = resource.award_form.decorate(answers: HashWithIndifferentAccess.new(resource.document))
@@ -195,11 +227,7 @@ class Admin::FormAnswersController < Admin::BaseController
 
   private
 
-  helper_method :resource,
-                :primary_assessment,
-                :secondary_assessment,
-                :moderated_assessment,
-                :case_summary_assessment
+  helper_method :resource
 
   def resource
     @form_answer ||= load_resource
@@ -226,5 +254,12 @@ class Admin::FormAnswersController < Admin::BaseController
     else
       "application-admin"
     end
+  end
+
+  def verdict_params
+    params.require(:admin_verdict).permit(
+      :outcome,
+      :description
+    )
   end
 end

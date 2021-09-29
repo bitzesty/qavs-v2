@@ -32,14 +32,10 @@ class QAEFormBuilder
     def default(value)
       @q.default = value
     end
-
-    def list_type list_type
-      @q.list_type = list_type
-    end
   end
 
   class SupportersQuestion < Question
-    attr_accessor :limit, :default, :list_type
+    attr_accessor :limit, :default
   end
 
   class SupportersQuestionDecorator < MultiQuestionDecorator

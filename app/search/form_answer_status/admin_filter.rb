@@ -3,47 +3,23 @@ class FormAnswerStatus::AdminFilter
   include NomineeActivityHelper
 
   SUB_OPTIONS = {
-    missing_sic_code: {
-      label: "Missing SIC code"
+    lord_lieutenancy_not_assigned: {
+      label: "Lord Lieutenancy not assigned"
+    },
+    local_assessment_not_started: {
+      label: "Local assessment not started"
     },
     assessors_not_assigned: {
-      label: "Assessors not assigned"
+      label: "National assessors not assigned"
     },
-    primary_assessment_submitted: {
-      label: "Primary Assessment submitted"
+    national_assessment_outcome_pending: {
+      label: "National assessment outcome pending"
     },
-    secondary_assessment_submitted: {
-      label: "Secondary Assessment submitted"
-    },
-    primary_and_secondary_assessments_submitted: {
-      label: "Primary and Secondary Assessments submitted"
-    },
-    primary_assessment_not_submitted: {
-      label: "Primary Assessment not submitted"
-    },
-    secondary_assessment_not_submitted: {
-      label: "Secondary Assessment not submitted"
-    },
-    recommendation_disperancy: {
-      label: "Recommendation discrepancy"
-    },
-    missing_audit_certificate: {
-      label: "Missing Verification of Commercial Figures"
-    },
-    audit_certificate_not_reviewed: {
-      label: "Verification of Commercial Figures - not reviewed yet"
-    },
-    missing_feedback: {
-      label: "Missing Feedback"
-    },
-    missing_press_summary: {
-      label: "Missing Press Summary",
-      properties: {
-        checked: "checked"
-      }
+    citation_not_submitted: {
+      label: "Citation form not submitted"
     },
     missing_rsvp_details: {
-      label: "Missing RSVP Details"
+      label: "Royal Garden Party form not submitted"
     }
   }
 
@@ -53,23 +29,27 @@ class FormAnswerStatus::AdminFilter
       states: [:eligibility_in_progress]
     },
     application_in_progress: {
-      label: "Application in progress",
+      label: "Nomination in progress",
       states: [:application_in_progress]
     },
     applications_not_submitted: {
-      label: "Applications not submitted",
+      label: "Nomination not submitted",
       states: [:not_submitted]
     },
     submitted: {
-      label: "Application submitted",
+      label: "Nomination submitted",
       states: [:submitted]
     },
     admin_eligible: {
-      label: "Admin: Eligible",
+      label: "Eligible by admin",
       states: [:admin_eligible]
     },
+    admin_pending_eligibility: {
+      label: "Admin: Pending Eligibility",
+      states: [:admin_pending_eligibility]
+    },
     admin_eligible_duplicate: {
-      label: "Eligible - duplicate to access",
+      label: "Eligible by admin - duplicate to assess",
       states: [:admin_eligible_duplicate]
     },
     admin_not_eligible_duplicate: {
@@ -77,11 +57,11 @@ class FormAnswerStatus::AdminFilter
       states: [:admin_not_eligible_duplicate]
     },
     admin_not_eligible_nominator: {
-      label: "Ineligible - nominator",
+      label: "Ineligible by admin - nominator",
       states: [:admin_not_eligible_nominator]
     },
     admin_not_eligible_group: {
-      label: "Ineligible - group",
+      label: "Ineligible by admin - group",
       states: [:admin_not_eligible_group]
     },
     local_assessment_in_progress: {
@@ -89,53 +69,51 @@ class FormAnswerStatus::AdminFilter
       states: [:local_assessment_in_progress]
     },
     local_assessment_recommended: {
-      label: "Local assessment: recommended",
+      label: "Local assessment - recommended",
       states: [:local_assessment_recommended]
     },
     local_assessment_not_recommended: {
-      label: "Local assessment: not recommended",
+      label: "Local assessment - not recommended",
       states: [:local_assessment_not_recommended]
     },
-    assessment_in_progress: {
-      label: "Assessment in progress",
-      states: [:assessment_in_progress]
-    },
-    disqualified: {
-      label: "Disqualified - No Verification of Commercial Figures",
-      states: [:disqualified]
-    },
     recommended: {
-      label: "Recommended",
+      label: "National assessment - shortlisted",
       states: [
-        :recommended
-      ]
-    },
-    reserve: {
-      label: "Reserved",
-      states: [
-        :reserved
+        :shortlisted
       ]
     },
     not_recommended: {
-      label: "Not recomended",
+      label: "National assessment - not recommended",
       states: [
         :not_recommended
       ]
     },
     not_eligible: {
-      label: "Not eligible",
+      label: "Ineligible - questionnaire",
       states: [
         :not_eligible
       ]
     },
+    undecided: {
+      label: "National assessment - undecided",
+      states: [
+        :undecided
+      ]
+    },
+    no_royal_approval: {
+      label: "No Royal approval",
+      states: [
+        :no_royal_approval
+      ]
+    },
     withdrawn: {
-      label: "Withdrawn/Ineligible",
+      label: "Withdrawn",
       states: [
         :withdrawn
       ]
     },
     awarded: {
-      label: "Awarded",
+      label: "Royal approval - awarded",
       states: [
         :awarded
       ]
@@ -154,23 +132,5 @@ class FormAnswerStatus::AdminFilter
 
   def self.sub_options
     SUB_OPTIONS
-  end
-
-  def self.activity_options
-    Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
-  end
-
-  def self.county_options(type)
-    if type == 'assigned'
-      options = Hash[not_assigned: { label: "Not assigned" }]
-    elsif type == 'nomination'
-      options = Hash[not_stated: { label: "Not stated" }]
-    end
-    CeremonialCounty.all.collect { |county|
-      options[county.id] = { label: county.name }
-    }
-    options
   end
 end

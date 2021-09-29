@@ -1,11 +1,10 @@
-#= require jquery
+#= require jquery3
 #= require jquery_ujs
 #= require vendor/file_upload/jquery.ui.widget
 #= require vendor/file_upload/jquery.iframe-transport
 #= require vendor/file_upload/jquery.fileupload
 #= require vendor/file_upload/jquery.fileupload-process
 #= require vendor/file_upload/jquery.fileupload-validate
-#= require ckeditor/init
 #= require ./ckeditor/config.js
 #= require Countable
 #= require moment.min
@@ -171,7 +170,7 @@ jQuery ->
     # $(".js-financial-year-changed-dates .js-fy-entries").each ->
     #  if $(this).find("input.js-fy-year").val() == ""
     #    parent_fy = $(this).parent().find(".js-fy-entries")
-    #    this_year = fy_year - (parent_fy.size() - parent_fy.index($(this)) - 1)
+    #    this_year = fy_year - (parent_fy.length - parent_fy.index($(this)) - 1)
     #    $(this).find("input.js-fy-year").val(this_year)
 
     # fy_latest_changed_input.find("input").attr("disabled", "disabled")
@@ -272,6 +271,7 @@ jQuery ->
 
     window.location.hash = "##{step.substr(5)}"
     $(".js-step-condition[data-step='#{step}']").addClass("step-current")
+    $(".js-step-condition[data-step='#{step}']").focus()
 
     # Show past link status
     $(".steps-progress-bar .js-step-link.step-past").removeClass("step-past")
@@ -287,7 +287,7 @@ jQuery ->
 
   if window.location.hash
     step = window.location.hash.substr(1)
-    if $(".js-step-condition[data-step='step-#{step}']").size() > 0
+    if $(".js-step-condition[data-step='step-#{step}']").length > 0
       showAwardStep("step-#{step}")
       # Resize textareas that were previously hidden
       resetResizeTextarea()
@@ -322,7 +322,7 @@ jQuery ->
     else
       $(this).closest(".js-step-link").attr("data-step")
 
-    window.FormValidation.validateStep()
+    window.FormValidation.validateStep() unless $(this).hasClass("bypass-validations")
 
     #
     # Make a switch to next section if this is not same tab only
@@ -379,7 +379,7 @@ jQuery ->
       else
         CollaboratorsLog.log("[STANDART MODE] ----------------------- ")
 
-        autosave()
+        autosave() unless $(this).hasClass('.bypass-autosave')
 
         if $(this).hasClass "js-next-link"
           if $("body").hasClass("tried-submitting")
@@ -487,12 +487,12 @@ jQuery ->
     wrapper = button.closest('div.js-upload-wrapper')
 
     if count > 0
-      list.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
 
     if !max || count < max
-      button.removeClass("visuallyhidden")
+      button.removeClass("govuk-!-display-none")
     else
-      button.addClass("visuallyhidden")
+      button.addClass("govuk-!-display-none")
 
   reindexUploadListInputs = (list) ->
     idx = 0
@@ -551,14 +551,14 @@ jQuery ->
 
     upload_started = (e, data) ->
       # Show `Uploading...`
-      button.addClass("visuallyhidden")
+      button.addClass("govuk-!-display-none")
       new_el = $("<li class='js-uploading'>")
       div = $("<div>")
       label = $("<label>").text("Uploading...")
       div.append(label)
       new_el.append(div)
       list.append(new_el)
-      list.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
       wrapper.removeClass("govuk-form-group--error")
       wrapper.find(".govuk-error-message").empty()
 
@@ -577,13 +577,13 @@ jQuery ->
 
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
-      list.removeClass("visuallyhidden")
-      button.removeClass("visuallyhidden")
+      list.removeClass("govuk-!-display-none")
+      button.removeClass("govuk-!-display-none")
 
     upload_done = (e, data, link) ->
       # Remove `Uploading...`
       list.find(".js-uploading").remove()
-      list.addClass("visuallyhidden")
+      list.addClass("govuk-!-display-none")
       wrapper.removeClass("govuk-form-group--error")
       wrapper.find(".govuk-error-message").empty()
 
@@ -630,7 +630,7 @@ jQuery ->
       list.append(new_el)
       new_el.find("textarea").val("")
       new_el.find('.js-char-count').charcount()
-      list.removeClass('visuallyhidden')
+      list.removeClass('govuk-!-display-none')
       updateUploadListVisiblity(list, button, max)
       reindexUploadListInputs(list)
 
@@ -679,51 +679,51 @@ jQuery ->
       false
 
   # Show current holder info when they are a current holder on basic eligibility current holder question
-  if $(".eligibility_current_holder").size() > 0
+  if $(".eligibility_current_holder").length > 0
     $(".eligibility_current_holder input").change () ->
       if $(this).val() == "true"
-        $("#current-holder-info").removeClass("visuallyhidden")
+        $("#current-holder-info").removeClass("govuk-!-display-none")
       else
-        $("#current-holder-info").addClass("visuallyhidden")
+        $("#current-holder-info").addClass("govuk-!-display-none")
 
   # Show innovation amount info when the amount is greater than 1 on innovation eligibility
-  if $(".innovative_amount_input").size() > 0
+  if $(".innovative_amount_input").length > 0
     $(".innovative_amount_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
-        $("#innovative-amount-info").removeClass("visuallyhidden")
+        $("#innovative-amount-info").removeClass("govuk-!-display-none")
       else
-        $("#innovative-amount-info").addClass("visuallyhidden")
+        $("#innovative-amount-info").addClass("govuk-!-display-none")
 
   # Show text about submitting multiple applications when the number of eligible initiatives is greater than 1
-  if $(".number_of_eligible_initiatives_input").size() > 0
+  if $(".number_of_eligible_initiatives_input").length > 0
     $(".number_of_eligible_initiatives_input").bind "propertychange change click keyup input paste", ->
       if $(this).val() > 1
-        $("#number-of-eligible-initiatives-info").removeClass("visuallyhidden")
+        $("#number-of-eligible-initiatives-info").removeClass("govuk-!-display-none")
       else
-        $("#number-of-eligible-initiatives-info").addClass("visuallyhidden")
+        $("#number-of-eligible-initiatives-info").addClass("govuk-!-display-none")
 
   # Show the eligibility failure contact message
-  if $("#basic-eligibility-failure-submit").size() > 0
+  if $("#basic-eligibility-failure-submit").length > 0
     $(document).on "click", "#basic-eligibility-failure-submit", (e) ->
       e.preventDefault()
       if $(this).closest("form").find("input:checked").val()
-        $("#basic-eligibility-failure-answered").addClass("visuallyhidden")
-        $("#basic-eligibility-failure-show").removeClass("visuallyhidden")
+        $("#basic-eligibility-failure-answered").addClass("govuk-!-display-none")
+        $("#basic-eligibility-failure-show").removeClass("govuk-!-display-none")
 
   # Change your eligibility answers for award eligibility
-  if $(".award-finish-previous-answers").size() > 0
+  if $(".award-finish-previous-answers").length > 0
     $(document).on "click", ".award-finish-previous-answers a", (e) ->
       e.preventDefault()
-      $("#form_eligibility_show").addClass("visuallyhidden")
-      $("#form_eligibility_questions").removeClass("visuallyhidden")
+      $("#form_eligibility_show").addClass("govuk-!-display-none")
+      $("#form_eligibility_questions").removeClass("govuk-!-display-none")
 
   $(".question-block .js-button-add").each ->
     question = $(this).closest(".question-block")
     add_limit_attr = question.find(".list-add").attr("data-add-limit")
-    li_size = question.find(".list-add > li:visible").size()
+    li_size = question.find(".list-add > li:visible").length
 
     if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
-      if li_size + 1 >= add_limit_attr
+      if li_size + 1 > add_limit_attr
         question.find(".js-button-add").addClass("govuk-!-display-none")
 
   # Clicking `+ Add` on certain questions add fields
@@ -736,13 +736,13 @@ jQuery ->
       question = $(this).closest(".question-block")
       add_eg = question.find(".js-add-example").html()
 
-      if question.find(".list-add").size() > 0
+      if question.find(".list-add").length > 0
         can_add = true
 
         # Are there add limits
         add_limit_attr = question.find(".list-add").attr("data-add-limit")
 
-        li_size = question.find(".list-add > li:visible").size()
+        li_size = question.find(".list-add > li:visible").length
 
         if ((typeof(add_limit_attr) != typeof(undefined)) && add_limit_attr != false)
 
@@ -753,8 +753,18 @@ jQuery ->
             question.find(".js-button-add").addClass("govuk-!-display-none")
 
         if can_add
-          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\d+)\]/g, "$1#{li_size}]")
-          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\{index\})\]/g, "$1#{li_size}]")
+          highest_index = 0
+          question.find(".list-add > li:visible").each ->
+            name = $(this).find(".js-system-tag").data('new-hidden-input-name')
+            p = name.split('form[supporter_letters_list][')
+            p2 = p[1].split(']')
+            console.log(p2)
+            index = parseInt(p2[0], 10)
+            highest_index = Math.max(highest_index, index)
+
+          new_index = highest_index + 1
+          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\d+)\]/g, "$1#{new_index}]")
+          add_eg = add_eg.replace(/((\w+|_)\[(\w+|_)\]\[)(\{index\})\]/g, "$1#{new_index}]")
 
           question.find(".list-add").append("<li class='js-add-example js-list-item'>#{add_eg}</li>")
           question.find(".list-add").find("li:last-child input").prop("disabled", false)
@@ -791,17 +801,18 @@ jQuery ->
       parent_ul = $(this).closest("ul")
       $(this).closest(".govuk-form-group")
              .find(".js-button-add")
-             .removeClass("visuallyhidden")
+             .removeClass("govuk-!-display-none")
 
       if $(this).hasClass("remove-supporter")
 
-        url = $(this).attr("href")
-        $.ajax
-          url: url
-          type: 'DELETE'
+        url = $(this).data('url')
+        if url && url != '#'
+          $.ajax
+            url: url
+            type: 'DELETE'
 
       if $(this).data("remove-association")
-        $(this).closest("li").addClass("visuallyhidden")
+        $(this).closest("li").addClass("govuk-!-display-none")
         $("input.remove", $(this).closest("li")).val("1")
       else
         $(this).closest("li").remove()
@@ -810,7 +821,7 @@ jQuery ->
       triggerAutosave()
 
   questionAddDefaultReached = (ul) ->
-    if ul.size() > 0
+    if ul.length > 0
       attr = ul.attr("data-default")
       hasAttrDefault = false
 
@@ -819,7 +830,7 @@ jQuery ->
 
       if hasAttrDefault
         ul.removeClass("js-default-reached")
-        if ul.find("li").not(".hidden").size() <= attr
+        if ul.find("li").not(".hidden").length <= attr
           ul.addClass("js-default-reached")
 
   $(".list-add").each ->
@@ -864,7 +875,7 @@ jQuery ->
   # Remove alerts from registration page as soon as user starts typing
   $(".page-devise input").on 'keypress keydown keyup change', () ->
     $(this).closest(".field-with-errors").removeClass("field-with-errors")
-    if $(this).closest(".form-inputs-group").size() > 0
+    if $(this).closest(".form-inputs-group").length > 0
       $(this).closest(".form-inputs-group").find(".error").remove()
     else
       $(this).closest(".question-body").find(".error").remove()
@@ -908,6 +919,9 @@ jQuery ->
 
   if $('.js-ckeditor').length > 0
 
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/notification/plugin.js' );
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/wordcount/plugin.js' );
+
     $('.js-ckeditor').each (index) ->
       group = $(this).closest(".govuk-form-group")
 
@@ -915,7 +929,25 @@ jQuery ->
       spacer.insertAfter($(this).parent().find(".hint"))
 
       CKEDITOR.replace this,
-        toolbar: 'mini'
+        title: group.find('label').first().text(),
+        language: 'en'
+        toolbar_mini: [
+          {name: 'p1', items: ["Cut", "Copy", "PasteText", "-", "Undo", "Redo"]},
+          {name: 'p2', items: ["Bold", "Italic",  "-", "RemoveFormat"]},
+          {name: 'p3', items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']}
+        ]
+        toolbar: "mini";
+        extraPlugins: 'wordcount'
+
+        wordcount: {
+          showParagraphs: false,
+          showWordCount: true
+        }
+
+        removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
+        disableNativeSpellChecker: false
+
+        allowedContent: 'h1 h2 h3 blockquote p ul ol li em i strong b i br'
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')

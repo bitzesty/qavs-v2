@@ -1,0 +1,11 @@
+li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
+  = link_to "Nominations", assessor_form_answers_path, class: 'govuk-header__link'
+/ li.govuk-header__navigation-item class=('active' if controller_name == 'reports')
+  / = link_to "Reports", assessor_reports_path(year: @award_year.year), class: 'govuk-header__link'
+li.govuk-header__navigation-item
+  = link_to "Account details", edit_assessor_account_path, class: 'govuk-header__link'
+li.govuk-header__navigation-item
+  = link_to "Sign out",
+            destroy_assessor_session_path,
+            method: :delete,
+            class: 'govuk-header__link'

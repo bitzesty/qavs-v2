@@ -17,60 +17,9 @@ describe Notifiers::EmailNotificationService do
     form_answer.user
   end
 
-  context "not_shortlisted_notifier" do
-    let(:kind) { "not_shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "not_recommended") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyNonShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "shortlisted_notifier" do
-    let(:kind) { "shortlisted_notifier" }
-    let(:form_answer) { create(:form_answer, state: "recommended") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::NotifyShortlistedMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "winners_notifier" do
-    let(:kind) { "winners_notification" }
-    let(:form_answer) { create(:form_answer, :awarded) }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::BusinessAppsWinnersMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
   describe "#reminder_to_submit" do
     let(:kind) { "reminder_to_submit" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
     context "for not submitted aplications" do
       let(:form_answer) do
@@ -79,8 +28,7 @@ describe Notifiers::EmailNotificationService do
 
       it "triggers current notification" do
         expect(AccountMailers::ReminderToSubmitMailer).to receive(:notify).with(
-          form_answer.id,
-          user.id
+          form_answer.id
         ) { mailer }
 
         described_class.run
@@ -96,8 +44,7 @@ describe Notifiers::EmailNotificationService do
 
       it "does not send email notification" do
         expect(AccountMailers::ReminderToSubmitMailer).not_to receive(:notify).with(
-          form_answer.id,
-          user.id
+          form_answer.id
         ) { mailer }
 
         described_class.run
@@ -113,31 +60,34 @@ describe Notifiers::EmailNotificationService do
     let!(:dup_submitted) { create(:form_answer) }
 
     let(:kind) { "group_leader_notification" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
 
 
     before do
       doc = not_submitted.document
       doc["nominee_leader_name"] = "Rob Becket"
       doc["nominee_leader_email"] = "rob@example.com"
+      doc["nominee_name"] = "Odyssey"
       not_submitted.document = doc
       not_submitted.save!
 
       doc = submitted.document
       doc["nominee_leader_name"] = "Alice Becket"
       doc["nominee_leader_email"] = "alice@example.com"
+      doc["nominee_name"] = "Alpha"
       submitted.document = doc
       submitted.save!
 
       doc = dup_submitted.document
       doc["nominee_leader_name"] = "Alice Becket"
       doc["nominee_leader_email"] = "alice@example.com"
+      doc["nominee_name"] = "Alpha"
       dup_submitted.document = doc
       dup_submitted.save!
     end
 
     it "sends one notification to the submitted group leader" do
-      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with("alice@example.com", "Alice Becket").once { mailer }
+      expect(AccountMailers::GroupLeaderMailer).to receive(:notify).with(submitted.id).once { mailer }
 
       described_class.run
 
@@ -147,75 +97,207 @@ describe Notifiers::EmailNotificationService do
 
   describe "#local_assessment_notification" do
     let(:kind) { "local_assessment_notification" }
-    let(:mailer) { double(deliver_later!: true) }
-
-    let!(:lieutenant) { create(:lieutenant) }
+    let(:mailer) { double(deliver_now!: true) }
     let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
-    it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
-                                                                    lieutenant.id
-                                                                  ) { mailer }
+    context "for advanced lieutenants" do
+      let!(:lieutenant) { create(:lieutenant, :advanced) }
 
-      described_class.run
+      it "triggers current notification" do
+        expect(LieutenantsMailers::LocalAssessmentNotificationMailer).to receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
 
-      expect(current_notification.reload).to be_sent
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "for regular lieutenants" do
+      let!(:lieutenant) { create(:lieutenant) }
+
+      it "does not send a notification" do
+        expect(LieutenantsMailers::LocalAssessmentNotificationMailer).not_to receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
     end
   end
 
 
   describe "#local_assessment_reminder" do
     let(:kind) { "local_assessment_reminder" }
-    let(:mailer) { double(deliver_later!: true) }
+    let(:mailer) { double(deliver_now!: true) }
+    let!(:form_answer) { create(:form_answer, :submitted, ceremonial_county: lieutenant.ceremonial_county) }
 
-    let!(:lieutenant) { create(:lieutenant) }
+    context "for advanced lieutenants" do
+      let!(:lieutenant) { create(:lieutenant, :advanced) }
 
-    it "triggers current notification" do
-      expect(LieutenantMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
-                                                                    lieutenant.id
-                                                                  ) { mailer }
+      it "triggers current notification" do
+        expect(LieutenantsMailers::LocalAssessmentReminderMailer).to receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
 
-      described_class.run
+        described_class.run
 
-      expect(current_notification.reload).to be_sent
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "for regular lieutenants" do
+      let!(:lieutenant) { create(:lieutenant) }
+
+      it "does not send a notification" do
+        expect(LieutenantsMailers::LocalAssessmentReminderMailer).to_not receive(:notify).with(
+                                                                      lieutenant.id
+                                                                    ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
     end
   end
 
-  context "unsuccessful_notification" do
-    let(:kind) { "unsuccessful_notification" }
-
-    let(:form_answer) { create(:form_answer, :submitted, state: "not_awarded") }
-
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(AccountMailers::UnsuccessfulFeedbackMailer).to receive(:notify).with(
-        form_answer.id,
-        user.id
-      ) { mailer }
-
-      described_class.run
-
-      expect(current_notification.reload).to be_sent
-    end
-  end
-
-  context "winners_head_of_organisation_notification" do
+  describe "winners_head_of_organisation_notification" do
     let(:kind) { "winners_head_of_organisation_notification" }
-    let(:user) { create(:user) }
+    let(:mailer) { double(deliver_now!: true) }
 
-    let(:form_answer) do
-      create(:form_answer, :awarded)
+    context "winning nominations" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "triggers current notification" do
+        expect(GroupLeadersMailers::WinnersHeadOfOrganisationMailer).to receive(:notify) { mailer }
+
+        expect {
+          described_class.run
+        }.to change {
+          GroupLeader.count
+        }
+
+        expect(form_answer.citation).to be
+
+        expect(current_notification.reload).to be_sent
+      end
     end
 
-    it "triggers current notification" do
-      mailer = double(deliver_later!: true)
-      expect(Users::WinnersHeadOfOrganisationMailer).to receive(:notify).with(
-        form_answer.id
-      ) { mailer }
+    context "unsuccessful nominations" do
+      let!(:form_answer) { create(:form_answer, :not_awarded) }
+      it "does not trigger notification" do
+        expect(GroupLeadersMailers::WinnersHeadOfOrganisationMailer).to_not receive(:notify) { mailer }
 
-      described_class.run
+        expect {
+          described_class.run
+        }.to_not change {
+          GroupLeader.count
+        }
+      end
+    end
+  end
 
-      expect(current_notification.reload).to be_sent
+  describe "unsuccessful_group_leaders_notification" do
+    let(:kind) { "unsuccessful_group_leaders_notification" }
+    let(:mailer) { double(deliver_now!: true) }
+
+    context "winning nominations" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "does not trigger notification" do
+        expect(GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer).to_not receive(:notify).with(
+                                                                      form_answer.id
+                                                                    ) { mailer }
+      end
+    end
+
+    context "winning nominations" do
+      let!(:form_answer) { create(:form_answer, :not_awarded) }
+      it "triggers current notification" do
+        expect(GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer).to receive(:notify).with(
+                                                                      form_answer.id
+                                                                    ) { mailer }
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+  end
+
+  describe "winners_notifier" do
+    let(:kind) { "winners_notification" }
+    let(:mailer) { double(deliver_now!: true) }
+
+    context "winning nominations" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "triggers current notification" do
+        expect(AccountMailers::NotifySuccessfulNominationsMailer).to receive(:notify) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "unsuccessful nominations" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "does not trigger notification" do
+        expect(AccountMailers::NotifySuccessfulNominationsMailer).to_not receive(:notify) { mailer }
+      end
+    end
+  end
+
+  describe "unsuccessful_notification" do
+    let(:kind) { "unsuccessful_notification" }
+    let(:mailer) { double(deliver_now!: true) }
+
+    context "winning nominations" do
+    let(:form_answer) { create(:form_answer, :awarded) }
+      it "does not trigger notification" do
+        expect(AccountMailers::NotifyUnsuccessfulNominationsMailer).to_not receive(:notify).with(
+          form_answer.id
+        ) { mailer }
+      end
+    end
+
+    context "unsuccessful nominations" do
+      let(:form_answer) { create(:form_answer, :not_awarded) }
+      it "triggers current notification" do
+        expect(AccountMailers::NotifyUnsuccessfulNominationsMailer).to receive(:notify).with(
+          form_answer.id
+        ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+  end
+
+  describe "buckingham_palace_invite" do
+    let(:kind) { "buckingham_palace_invite" }
+    let(:mailer) { double(deliver_now!: true) }
+
+    context "winning nomination" do
+      let!(:form_answer) { create(:form_answer, :awarded) }
+      it "triggers current notification" do
+        group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
+        expect(GroupLeadersMailers::BuckinghamPalaceInviteMailer).to receive(:invite).with(
+          form_answer.id, group_leader.id
+        ) { mailer }
+
+        described_class.run
+
+        expect(current_notification.reload).to be_sent
+      end
+    end
+
+    context "unsuccessful nomination" do
+      let!(:form_answer) { create(:form_answer, :not_awarded) }
+      it "does not trigger notification" do
+        expect(GroupLeadersMailers::BuckinghamPalaceInviteMailer).to_not receive(:invite) { mailer }
+      end
     end
   end
 end

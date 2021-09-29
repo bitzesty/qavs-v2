@@ -150,16 +150,12 @@ class FormAnswerDecorator < ApplicationDecorator
     end
   end
 
-  def progress_text_short
-    object.state.humanize
-  end
-
   def nominee_name
     object.document["nominee_name"]
   end
 
   def progress_text
-    out = progress_text_short
+    out = state_short_text
     out += "...#{fill_progress_in_percents}" if object.application_in_progress?
     out
   end
@@ -416,22 +412,6 @@ class FormAnswerDecorator < ApplicationDecorator
 
   def organisation_type
     document["organisation_type"]
-  end
-
-  def primary_assessor_full_name
-    object.assessors.primary.try(:full_name) || NOT_ASSIGNED
-  end
-
-  def secondary_assessor_full_name
-    object.assessors.secondary.try(:full_name) || NOT_ASSIGNED
-  end
-
-  def primary_assessment_submitted?
-    object.assessor_assignments.primary.submitted?
-  end
-
-  def secondary_assessment_submitted?
-    object.assessor_assignments.secondary.submitted?
   end
 
   def dashboard_status

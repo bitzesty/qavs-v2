@@ -12,11 +12,11 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   validates :agreed_with_privacy_policy, acceptance: { allow_nil: false, accept: '1' }, on: :create
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   # First step validations
   validates :title, presence: true, if: -> { first_step? }
-  validates :first_name, presence: true, if: -> { first_step? }
-  validates :last_name, presence: true, if: -> { first_step? }
   validates :job_title, presence: true, if: -> { first_step? }
   validates :phone_number, presence: true, if: -> { first_step? }
 
@@ -78,14 +78,6 @@ class User < ApplicationRecord
       order(id: :asc).where(
         "debounce_api_latest_check_at IS NULL OR debounce_api_latest_check_at < ?", 6.months.ago
       )
-    }
-    scope :want_to_receive_opening_notification_for_at_least_one_award, -> () {
-      where("
-        notification_when_innovation_award_open IS TRUE OR
-        notification_when_trade_award_open IS TRUE OR
-        notification_when_development_award_open IS TRUE OR
-        notification_when_mobility_award_open IS TRUE
-      ")
     }
   end
 
@@ -191,4 +183,10 @@ class User < ApplicationRecord
     form_answers.each { |f| f.update(user_full_name: full_name) } if full_name_changed
   end
 
+  # Do not raise an error if already confirmed.
+  def pending_any_confirmation
+    if (!confirmed? || pending_reconfirmation?)
+      yield
+    end
+  end
 end

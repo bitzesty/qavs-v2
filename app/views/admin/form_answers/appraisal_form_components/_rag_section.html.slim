@@ -1,18 +1,29 @@
-- form = AppraisalForm.rag_options_for(f.object, section)
+- form = AppraisalForm.evaluation_options_for(f.object, section)
+- editable = policy(f.object).update?
 
-- editable = f.object.editable_for?(current_subject)
-
-.govuk-form-group.rag-section class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
+.govuk-form-group.rag-section.form-container class="#{'form-edit' if f.object.public_send(section.desc).blank? && editable} form-#{section.label.parameterize}"
   fieldset.govuk-fieldset
     legend.govuk-fieldset__legend class="govuk-!-font-weight-bold"
       = section.label
     div.toggable-form
       .toggable-form__read
         .govuk-body.toggable-form__content
+
+          - if f.object.public_send(section.rate).present?
+            p.govuk-body
+              span class="govuk-!-font-weight-bold"
+                = "Evaluation: "
+              => f.object.public_send(section.rate).humanize
+              | evidence
+
           - if f.object.public_send(section.desc).present?
-            = qae_simple_format f.object.public_send(section.desc)
+            span class="govuk-!-font-weight-bold"
+              | Notes (optional)
+            p.govuk-body
+              = f.object.public_send(section.desc)
           - else
             p.govuk-hint No comment has been added yet.
+
         - if editable
           .govuk-body
             a.govuk-link.toggable-form__trigger href="#" role="button"
@@ -24,12 +35,12 @@
                   as: :select,
                   label: 'Evaluate',
                   collection: form.options,
-                  input_html: { "data-updated-section" => section.rate }
+                  input_html: { "data-updated-section" => section.rate, class: "evaluation-rate-input" }
 
         = f.input section.desc,
-                  input_html: { class: 'form-control', "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
+                  input_html: { class: 'form-control assessor-notes-input', "data-behavior" => "autosave", "data-autosave-key" => "#{@form_answer.id}-#{f.object.id}-#{section.desc}" },
                   as: :text,
-                  label: 'Notes'
+                  label: 'Notes (optional)'
         .govuk-button-group
           button.govuk-button.toggable-form__save.if-no-js-hide data-updated-section=section.desc
             | Save

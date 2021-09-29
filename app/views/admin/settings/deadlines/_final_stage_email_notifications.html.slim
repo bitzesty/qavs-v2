@@ -1,6 +1,8 @@
 h4.govuk-heading-s class='govuk-!-margin-bottom-2 govuk-!-margin-top-7'
-  ' Email notification
-= render 'email_notification', kind: 'winners_notification', title: 'final stage winners email'
+  ' Email notifications
 = render 'email_notification', kind: 'winners_head_of_organisation_notification', title: 'final stage winners head of organization email'
-= render 'email_notification', kind: 'buckingham_palace_invite', title: 'palace invites email'
+= render 'email_notification', kind: 'unsuccessful_group_leaders_notification', title: 'final stage unsuccessful group leaders email'
+= render 'email_notification', kind: 'winners_notification', title: 'final stage winners email'
 = render 'email_notification', kind: 'unsuccessful_notification', title: 'final stage unsuccessful email'
+= render 'email_notification', kind: 'buckingham_palace_invite', title: 'palace invites email'
+

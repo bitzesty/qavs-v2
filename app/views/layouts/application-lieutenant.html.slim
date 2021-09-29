@@ -1,5 +1,6 @@
 - content_for?(:title) ? yield(:title) : "Queen's Award for Voluntary Service"
 - content_for :html_class, 'html-admin'
+- content_for :service_root, '/lieutenant'
 
 - content_for :head do
   = stylesheet_link_tag "application-admin.css"
@@ -22,32 +23,11 @@
   - unless landing_page?
     nav
       ul.govuk-header__navigation#navigation aria-label="Navigation menu"
-        li.govuk-header__navigation-item class=('active' if controller_name == 'dashboard')
-          = link_to "Dashboard", lieutenant_root_path, class: 'govuk-header__link'
-        li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
-          = link_to "Nominations", lieutenant_form_answers_path, class: 'govuk-header__link'
-        - if policy(:lieutenant).index?
-          li.govuk-header__navigation-item class=('active' if controller_name == 'lieutenants')
-            = link_to "Users", lieutenant_lieutenants_path, class: 'govuk-header__link'
-        li.govuk-header__navigation-item
-          = link_to "Sign out",
-                    destroy_lieutenant_session_path,
-                    method: :delete,
-                    class: 'govuk-header__link'
+        = render "layouts/navbar/lieutenant"
 
 - content_for :content do
   .govuk-width-container class="govuk-!-margin-top-4 govuk-!-margin-bottom-1"
-    = render "shared/offline_message"
-    - if !content_for?(:flash_disabled) && [:alert, :notice, :success].any? { |kind| flash[kind].presence }
-      - [:alert, :notice, :success].each do |kind|
-        - if flash[kind]
-          .govuk-notification-banner class="govuk-notification-banner--#{ kind }" role="region" aria-labelledby="flash-message-#{kind}-title" data-module="govuk-notification-banner"
-            .govuk-notification-banner__header
-              h2.govuk-notification-banner__title id="flash-message-#{kind}-title"
-                = kind.to_s.titleize
-            .govuk-notification-banner__content
-              .govuk-notification-banner__heading
-                = flash[kind]
+    = render "layouts/flash"
     = yield :before_main_content
 
   #wrapper.guide.smart-answer.answer class="#{yield :page_wrapper_class}"

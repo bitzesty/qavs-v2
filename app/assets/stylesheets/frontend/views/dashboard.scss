@@ -155,6 +155,11 @@
       float: right;
     }
   }
+
+  small {
+    display: block;
+    color: $grey-1;
+  }
 }
 
 .dashboard-post & {
@@ -300,12 +305,6 @@ $status-green: #3b816f;
 
 .press-summary-action-devider {
   margin-right: 12px;
-}
-
-.press_summary_comment {
-  .char-text-limit {
-    margin-top: 32px;
-  }
 }
 
 .palace-attendees-action-devider {

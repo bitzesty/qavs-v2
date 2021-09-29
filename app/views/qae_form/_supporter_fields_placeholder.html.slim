@@ -1,60 +1,37 @@
 li.js-add-example class="govuk-!-display-none"
-  input.js-support-entry-id type="hidden" name="form[#{question.key}][{index}][#{question.list_type == :manuall_upload ? "support_letter_id" : "supporter_id"}]" disabled=true
-  .js-system-tag data-new-hidden-input-name="form[#{question.key}][{index}][#{question.list_type == :manuall_upload ? "support_letter_id" : "supporter_id"}]"
+  input.js-support-entry-id type="hidden" name="form[#{question.key}][{index}][support_letter_id]" disabled=true
+  .js-system-tag data-new-hidden-input-name="form[#{question.key}][{index}][support_letter_id]"
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][first_name]"
       ' First Name
     span.govuk-error-message
     input.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][first_name]" id="form[#{question.key}][{index}][first_name]" type="text" disabled=true
     p.govuk-body.visible-read-only
-  
+
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][last_name]"
       ' Surname
     span.govuk-error-message
     input.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][last_name]" id="form[#{question.key}][{index}][last_name]" type="text" disabled=true
     p.govuk-body.visible-read-only
-  
+
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][relationship_to_nominee]"
       ' Relationship to Nominee
     span.govuk-error-message
     input.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][relationship_to_nominee]" id="form[#{question.key}][{index}][relationship_to_nominee]" type="text" disabled=true
     p.govuk-body.visible-read-only
-  
-  - if question.list_type == :manual_upload
-    .govuk-form-group
-      label.govuk-label for="form[#{question.key}][{index}][letter_of_support]"
-        ' Letter of Support
-      span.govuk-error-message
-      input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][{index}][letter_of_support]" id="form[#{question.key}][{index}][letter_of_support]" type='file' disabled=true
-  - else
-    .govuk-form-group
-      label.govuk-label for="form[#{question.key}][{index}][email]"
-        ' Email address
-      span.govuk-error-message
-      input.js-support-letter-email.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][email]" id="form[#{question.key}][{index}][email]" type="text" disabled=true
-      p.govuk-body.visible-read-only
-  button.govuk-button.button-alt.js-save-collection data-save-collection-url=(question.list_type == :manual_upload ? users_form_answer_support_letters_url(@form_answer) : users_form_answer_supporters_url(@form_answer)) disabled=true
-    - if question.list_type == :manual_upload
-      | Submit letter of support
-    - else
-      | Send support request
-  
-  .visible-read-only
-    .govuk-warning-text
-      span.govuk-warning-text__icon aria-hidden="true"
-        | !
-      strong.govuk-warning-text__text
-        - if question.list_type == :manual_upload
-          ' Letter of support uploaded
-        - else
-          ' Support request sent
-    
+
+  .govuk-form-group
+    label.govuk-label for="form[#{question.key}][{index}][letter_of_support]"
+      ' Letter of Support
+    span.govuk-error-message
+    input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][{index}][letter_of_support]" id="form[#{question.key}][{index}][letter_of_support]" type='file' disabled=true
+
+  button.govuk-button.button-alt.js-save-collection data-save-collection-url=users_form_answer_support_letters_url(@form_answer) disabled='disabled'
+    | Submit letter of support
+
   p
-    - if admin_in_read_only_mode?
-      button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.govuk-button.govuk-button--warning disabled="disabled"
-        | Remove
-    - else
-      button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.govuk-button.govuk-button--warning
+    - if !admin_in_read_only_mode?
+      button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.govuk-button.govuk-button--warning.visible-read-only
         | Remove

@@ -40,8 +40,8 @@ RSpec.describe FormAnswer, type: :model do
 
   describe "#shortlisted?" do
     it 'should return correct result' do
-      form_answer.state = 'reserved'
-      expect(form_answer.shortlisted?).to be_truthy
+      form_answer.state = 'shortlisted'
+      expect(form_answer).to be_shortlisted
     end
   end
 
@@ -141,8 +141,7 @@ RSpec.describe FormAnswer, type: :model do
     describe "state helpers" do
       it "exposes the state as ? method" do
         expect(build(:form_answer, state: "not_awarded")).to be_not_awarded
-        expect(build(:form_answer, state: "reserved")).to be_reserved
-        expect(build(:form_answer, state: "recommended")).to be_recommended
+        expect(build(:form_answer, state: "undecided")).to be_undecided
       end
     end
 

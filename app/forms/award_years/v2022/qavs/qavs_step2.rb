@@ -3,6 +3,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step2
       @qavs_step2 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
+        )
+
         header :recommendation, "" do
           context %(
             <h3 class='govuk-heading-m'>About this section</h3>
@@ -48,7 +52,7 @@ class AwardYears::V2022::QAEForms
           )
           check_options [
             ["national_newspaper", "National newspaper"],
-            ["local_newspaper", "Local newsaper"],
+            ["local_newspaper", "Local newspaper"],
             ["tv_radio", "TV/radio"],
             ["internet", "Internet"],
             ["word_of_mouth", "Word of mouth"],
@@ -56,7 +60,7 @@ class AwardYears::V2022::QAEForms
             ["charity", "Voluntary organisation/charity"],
             ["event", "Local event"],
             ["library", "Local library"],
-            ["council", "Local Council"], 
+            ["council", "Local Council"],
             ["other", "Other"]
           ]
         end

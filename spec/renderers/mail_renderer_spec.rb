@@ -3,7 +3,7 @@ require "rails_helper"
 describe MailRenderer do
   describe "#submission_started_notification" do
     let(:login_link) do
-      "http://www.queens-awards-enterprise.service.gov.uk/users/sign_in"
+      "https://apply.qavs.dcms.gov.uk/users/sign_in"
     end
 
     let(:user_full_name) do
@@ -20,23 +20,10 @@ describe MailRenderer do
     end
   end
 
-  describe "#shortlisted_notifier" do
-    it "renders e-mail" do
-      rendered = described_class.new.shortlisted_notifier
-      expect(rendered).to match("Jon Doe")
-    end
-  end
-
-  describe "#not_shortlisted_notifier" do
-    it "renders e-mail" do
-      rendered = described_class.new.not_shortlisted_notifier
-      expect(rendered).to match("Jon Doe")
-    end
-  end
-
   describe "#reminder_to_submit" do
     it "renders e-mail" do
-      link = "http://www.queens-awards-enterprise.service.gov.uk/form/0"
+      Settings.current_submission_deadline.update(trigger_at: 10.days.ago)
+      link = "https://apply.qavs.dcms.gov.uk/form/0"
       rendered = described_class.new.reminder_to_submit
       expect(rendered).to match(link)
     end
@@ -49,34 +36,66 @@ describe MailRenderer do
     end
   end
 
-  describe "#unsuccessful_notification" do
+  describe "#local_assessment_notification" do
     it "renders e-mail" do
-      rendered = described_class.new.unsuccessful_notification
-      expect(rendered).to match("Mr Smith")
-      expect(rendered).to match("QA0001/16I")
+      link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_notification
+      expect(rendered).to match(link)
     end
   end
 
-  describe "#unsuccessful_ep_notification" do
+  describe "#local_assessment_reminder" do
     it "renders e-mail" do
-      rendered = described_class.new.unsuccessful_ep_notification
-      expect(rendered).to match("Jon Doe")
-      expect(rendered).to match("Nominee Name")
-    end
-  end
-
-  describe "#winners_notification" do
-    it "renders e-mail" do
-      rendered = described_class.new.winners_notification
-      expect(rendered).to match("Mr Smith")
-      expect(rendered).to match(deadline_str("%A %d %B %Y"))
+      Settings.current_local_assessment_submission_deadline.update(trigger_at: 10.days.ago)
+      link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
+      rendered = described_class.new.local_assessment_reminder
+      expect(rendered).to match(link)
     end
   end
 
   describe "#winners_head_of_organisation_notification" do
     it "renders e-mail" do
+      link = "https://apply.qavs.dcms.gov.uk/group_leaders/password/edit?reset_password_token=securetoken"
       rendered = described_class.new.winners_head_of_organisation_notification
-      expect(rendered).to match("Congratulations on winning a Queen's Award")
+      expect(rendered).to match("Jane Doe")
+      expect(rendered).to match("Synergy")
+      expect(rendered).to include(link)
+    end
+  end
+
+  describe "#unsuccessful_group_leaders_notification" do
+    it "renders e-mail" do
+      rendered = described_class.new.unsuccessful_group_leaders_notification
+      expect(rendered).to match("Massive Dynamic")
+      expect(rendered).to match("John Smith")
+    end
+  end
+
+  describe "#successful_nominations_notification" do
+    it "renders e-mail" do
+      link = "https://apply.qavs.dcms.gov.uk/awardees"
+      rendered = described_class.new.winners_notification
+      expect(rendered).to match(link)
+      expect(rendered).to match("Synergy")
+    end
+  end
+
+  describe "#unsuccessful_notification" do
+    it "renders e-mail" do
+      link = "https://www.gov.uk/honours"
+      rendered = described_class.new.unsuccessful_notification
+      expect(rendered).to match "Massive Dynamic"
+      expect(rendered).to match link
+    end
+  end
+
+  describe "#buckingham_palace_invite" do
+    it "renders e-mail" do
+      Settings.current_palace_reception_attendee_information_deadline.update(trigger_at: 10.days.from_now)
+      link = "https://apply.qavs.dcms.gov.uk/group_leader"
+      rendered = described_class.new.buckingham_palace_invite
+      expect(rendered).to match(link)
+      expect(rendered).to match("Jane Doe")
     end
   end
 

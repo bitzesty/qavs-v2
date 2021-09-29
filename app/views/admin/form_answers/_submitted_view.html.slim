@@ -2,15 +2,13 @@
 
 .govuk-accordion data-module="govuk-accordion"
   = render "section_admin_comments"
-  = render "admin/form_answers/section_appraisal_form_primary"
-  = render "admin/form_answers/section_appraisal_form_secondary"
-  = render "section_appraisal_form_moderated"
 
-  - if show_feedback_section?
-    = render "admin/feedbacks/section", form_answer: @form_answer
+  - AssessorAssignmentsConstructor.new(resource, current_admin).assessments.each do |assessment|
+    .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
+      = render "admin/form_answers/section_appraisal_form", assessment: assessment
+
+  = render "admin/form_answers/verdict"
 
   - if show_winners_section?
-    - if show_press_summary_subsection?
-      = render "section_press_summary"
     - if show_palace_attendees_subsection?
       = render "section_palace_attendees"

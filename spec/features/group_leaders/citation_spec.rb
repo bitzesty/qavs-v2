@@ -27,6 +27,6 @@ describe "Citation process" do
 
     click_button "Submit"
 
-    expect(page).to have_selector(".notice", text: "Citation successfully updated!")
+    expect(page).to have_selector("#flash-message-success-title", text: "Success")
   end
 end

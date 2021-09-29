@@ -10,26 +10,27 @@ class FormAnswerStateMachine
     :not_submitted,
     # eligibility
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
     :admin_not_eligible_group,
     # / eligibility
+    # local assessment
     :local_assessment_in_progress,
     :local_assessment_recommended,
     :local_assessment_not_recommended,
-    :assessment_in_progress,
-    :disqualified,
-    :recommended,
-    :reserved,
+    # / local assessment
+    :no_royal_approval,
+    :shortlisted,
     :not_recommended,
+    :undecided,
     :awarded,
     :not_awarded
   ]
 
   POSITIVE_STATES = [
-    :reserved,
-    :recommended,
+    :shortlisted,
     :awarded
   ]
 
@@ -37,6 +38,7 @@ class FormAnswerStateMachine
     :submitted,
     :withdrawn,
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
@@ -44,17 +46,17 @@ class FormAnswerStateMachine
     :local_assessment_in_progress,
     :local_assessment_recommended,
     :local_assessment_not_recommended,
-    :assessment_in_progress,
-    :disqualified,
-    :recommended,
-    :reserved,
+    :no__approval,
+    :shortlisted,
     :not_recommended,
+    :undecided,
     :awarded,
     :not_awarded
   ]
 
   ELIGIBILITY_STATES = [
     :admin_eligible,
+    :admin_pending_eligibility,
     :admin_eligible_duplicate,
     :admin_not_eligible_duplicate,
     :admin_not_eligible_nominator,
@@ -74,30 +76,46 @@ class FormAnswerStateMachine
     :not_awarded
   ]
 
+  ASSESSOR_VISIBLE_STATES = [
+    :local_assessment_recommended,
+    :no_royal_approval,
+    :shortlisted,
+    :not_recommended,
+    :undecided,
+    :awarded,
+    :not_awarded
+  ]
+
   POST_ELIGIBLE_STATES = [
     :admin_eligible,
     :admin_eligible_duplicate,
     :local_assessment_in_progress,
     :local_assessment_recommended,
     :local_assessment_not_recommended,
-    :assessment_in_progress,
-    :disqualified,
-    :recommended,
-    :reserved,
+    :no_royal_approval,
+    :shortlisted,
     :not_recommended,
+    :undecided,
     :awarded,
     :not_awarded
   ]
 
   POST_LA_POSITIVE_STATES = [
     :local_assessment_recommended,
-    :assessment_in_progress,
-    :disqualified,
-    :recommended,
-    :reserved,
+    :no_royal_approval,
+    :shortlisted,
     :not_recommended,
+    :undecided,
     :awarded,
     :not_awarded
+  ]
+
+  FINAL_VERDICT_STATES = [
+    :shortlisted,
+    :not_recommended,
+    :no_royal_approval,
+    :undecided,
+    :awarded
   ]
 
   state :eligibility_in_progress, initial: true
@@ -107,7 +125,7 @@ class FormAnswerStateMachine
   state :not_eligible
   state :not_submitted
   state :admin_eligible
-  state :admin_eligible
+  state :admin_pending_eligibility
   state :admin_eligible_duplicate
   state :admin_not_eligible_duplicate
   state :admin_not_eligible_nominator
@@ -115,11 +133,10 @@ class FormAnswerStateMachine
   state :local_assessment_in_progress
   state :local_assessment_recommended
   state :local_assessment_not_recommended
-  state :assessment_in_progress
-  state :disqualified
-  state :recommended
-  state :reserved
+  state :shortlisted
   state :not_recommended
+  state :no_royal_approval
+  state :undecided
   state :awarded
   state :not_awarded
 
@@ -132,10 +149,6 @@ class FormAnswerStateMachine
   def self.trigger_deadlines
     if Settings.after_current_submission_deadline?
       current_year = Settings.current.award_year
-
-      current_year.form_answers.where(state: "submitted").find_each do |fa|
-        fa.state_machine.perform_transition("assessment_in_progress")
-      end
 
       current_year.form_answers.in_progress.find_each do |fa|
         fa.state_machine.perform_transition("not_submitted")
@@ -176,17 +189,6 @@ class FormAnswerStateMachine
     object.update(submitted_at: Time.current)
   end
 
-
-  def assign_lead_verdict(verdict, subject)
-    new_state = {
-      "negative" => :not_recommended,
-      "average" => :reserved,
-      "positive" => :recommended
-    }[verdict]
-
-    perform_transition(new_state, subject)
-  end
-
   def after_eligibility_step_progress
     if object.eligible? # already eligible
       perform_simple_transition :application_in_progress
@@ -220,6 +222,7 @@ class FormAnswerStateMachine
     if Settings.after_current_submission_deadline?
       all_states = [
         :admin_eligible,
+        :admin_pending_eligibility,
         :admin_eligible_duplicate,
         :admin_not_eligible_duplicate,
         :admin_not_eligible_nominator,
@@ -228,10 +231,10 @@ class FormAnswerStateMachine
         :local_assessment_recommended,
         :local_assessment_not_recommended,
         :assessment_in_progress,
-        :recommended,
-        :reserved,
+        :shortlisted,
+        :no_royal_approval,
+        :undecided,
         :not_recommended,
-        :disqualified,
         :awarded,
         :not_awarded,
         :withdrawn
@@ -253,9 +256,11 @@ class FormAnswerStateMachine
       when :local_assessment_in_progress
         [:local_assessment_recommended, :local_assessment_not_recommended] + NOT_ELIGIBLE_STATES
       when :local_assessment_recommended
-        [:local_assessment_not_recommended, :assessment_in_progress] + NOT_ELIGIBLE_STATES
+        [:local_assessment_not_recommended, :assessment_in_progress] + NOT_ELIGIBLE_STATES + FINAL_VERDICT_STATES
       when :local_assessment_not_recommended
         [:local_assessment_recommended] + NOT_ELIGIBLE_STATES
+      when *FINAL_VERDICT_STATES
+        FINAL_VERDICT_STATES
       else
         all_states
       end

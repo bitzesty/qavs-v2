@@ -23,6 +23,12 @@ FactoryBot.define do
       state { "local_assessment_recommended" }
     end
 
+    trait :local_assessment_not_recommended do
+      submitted_at { Time.current }
+
+      state { "local_assessment_not_recommended" }
+    end
+
     trait :admin_eligible do
       submitted_at { Time.current }
 
@@ -31,12 +37,22 @@ FactoryBot.define do
 
     trait :awarded do
       submitted_at { Time.current }
+      association :group_leader, factory: :group_leader
       state { "awarded" }
+
+      document do
+        FormAnswer::DocumentParser.parse_json_document(
+          JSON.parse(
+            File.read(Rails.root.join("spec/fixtures/form_answer_qavs_with_la.json"))
+          )
+        )
+      end
+
     end
 
-    trait :recommended do
+    trait :shortlisted do
       submitted_at { Time.current }
-      state { "recommended" }
+      state { "shortlisted" }
     end
 
     trait :withdrawn do
@@ -51,6 +67,14 @@ FactoryBot.define do
     trait :not_awarded do
       submitted_at { Time.current }
       state { "not_awarded" }
+
+      document do
+        FormAnswer::DocumentParser.parse_json_document(
+          JSON.parse(
+            File.read(Rails.root.join("spec/fixtures/form_answer_qavs_with_la.json"))
+          )
+        )
+      end
     end
 
     trait :reserved do

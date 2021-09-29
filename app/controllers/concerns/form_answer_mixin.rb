@@ -31,26 +31,9 @@ module FormAnswerMixin
     end
   end
 
-  def update_financials
-    authorize @form_answer, :update_financials?
-    @form_answer.financial_data = financial_data_ops
-    @form_answer.save
-
-    if request.xhr?
-      head :ok, content_type: "text/html"
-
-      return
-    else
-      flash.notice = "Financial data updated"
-      redirect_to action: :show
-      return
-    end
-  end
-
   def show
     authorize resource, :show?
-
-    @form_paginator = FormPaginator.new(@form_answer, current_subject, params)
+    @admin_verdict = resource.admin_verdict
   end
 
   def review
@@ -62,22 +45,6 @@ module FormAnswerMixin
   end
 
   private
-
-  def primary_assessment
-    @primary_assessment ||= resource.assessor_assignments.primary.decorate
-  end
-
-  def secondary_assessment
-    @secondary_assessment ||= resource.assessor_assignments.secondary.decorate
-  end
-
-  def moderated_assessment
-    @moderated_assessment ||= resource.assessor_assignments.moderated.decorate
-  end
-
-  def case_summary_assessment
-    @case_summary_assessment ||= resource.assessor_assignments.case_summary.decorate
-  end
 
   def allowed_params
     ops = params.require(:form_answer).permit!

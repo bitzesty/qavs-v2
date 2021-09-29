@@ -7,10 +7,6 @@ RSpec.describe EmailNotification do
   end
 
   describe 'scopes & class methods' do
-    it ".not_shortlisted should filter correctly" do
-      target = EmailNotification.where(kind: "not_shortlisted_notifier").to_sql
-      expect(target).to eq EmailNotification.not_shortlisted.to_sql
-    end
 
     it ".not_awarded should filter correctly" do
       target =  EmailNotification.where(kind: "unsuccessful_notification").to_sql

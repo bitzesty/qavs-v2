@@ -2,6 +2,8 @@ require "app_responder"
 include AuditHelper
 
 class ApplicationController < ActionController::Base
+  add_flash_types :success, :success_template
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception, prepend: true
@@ -123,7 +125,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_subject
 
   def current_form_user
-    current_user || current_lieutenant || current_admin
+    current_user || current_lieutenant || current_admin || current_assessor
   end
   helper_method :current_form_user
 
@@ -145,10 +147,26 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    case resource_or_scope
+    when :admin
+      new_admin_session_path
+    when :assessor
+      new_assessor_session_path
+    when :lieutenant
+      new_lieutenant_session_path
+    else
+      new_user_session_path
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
       :sign_up,
       keys: [
+        :first_name,
+        :last_name,
         :email,
         :password,
         :password_confirmation,

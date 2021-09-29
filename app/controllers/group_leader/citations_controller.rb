@@ -2,15 +2,16 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
   before_action :load_citation
 
   def edit
-    authorize :citation, :edit?
+    authorize @citation, :edit?
   end
 
   def update
     authorize @citation, :update?
+
     @citation.completed_at = Time.now
     if @citation.update citation_params
-      redirect_to group_leader_root_path,
-      notice: "Citation successfully updated!"
+      flash[:success] = "Citation successfully updated!"
+      redirect_to group_leader_root_path
     else
       render :edit
     end
@@ -18,11 +19,11 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
 
   private
 
-    def load_citation
-      @citation = Citation.find params[:id]
-    end
+  def load_citation
+    @citation = current_nomination.citation
+  end
 
-    def citation_params
-      params.require(:citation).permit(:group_name, :body)
-    end
+  def citation_params
+    params.require(:citation).permit(:group_name, :body)
+  end
 end

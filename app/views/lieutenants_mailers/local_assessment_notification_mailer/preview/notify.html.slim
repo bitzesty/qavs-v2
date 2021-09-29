@@ -1,14 +1,28 @@
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  = @lieutenant.full_name
-  |,
+  | Dear Lord-Lieutenant and Colleagues,
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  | Log in to check which assessments you've been assigned to.
+  | The QAVS nominations for
+  =<> @award_year
+  | are now available to assess.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  = link_to lieutenant_form_answers_url, lieutenant_form_answers_url
+  | There are currently
+  =<> @total
+  | nominations to assess for your county. You can view them by logging in to your QAVS account via
+  =< link_to lieutenant_form_answers_url, lieutenant_form_answers_url, class: "govuk-link govuk-link--no-visited-state"
+  | .
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | We are grateful for your ongoing work to promote the Awards in your county. Please do contact us if you need any advice.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
-  ' Thank you,
-  br
-  ' The Queen's Awards Office
+  | Kind regards
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
+  | The QAVS team
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
+  | This email is from an unmanaged mailbox. To contact the QAVS team please email
+  =<> mail_to "queensaward@dcms.gov.uk", "queensaward@dcms.gov.uk", class: "govuk-link govuk-link--no-visited-state"
+  | or phone 0207 271 6206.

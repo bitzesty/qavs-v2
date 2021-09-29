@@ -96,35 +96,62 @@ if (dropdowns.length > 0) {
 $(".toggable-form").each(function() {
   var form = $(this);
 
-  form.on('click', '.toggable-form__trigger', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+  (function(form) {
+    form.on('click', '.toggable-form__trigger', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-    form.attr("aria-expanded", "true");
+      form.attr("aria-expanded", "true");
 
-    form.find('input,select,textarea').first().focus();
-  });
+      form.find('input,select,textarea').first().focus();
+    });
 
-  form.on('click', '.toggable-form__save', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    form.on('click', '.toggable-form__save', function(e) {
+      if (form.closest("form").hasClass("assessment-togglable")) {
+        return // skipping all this, use standard remote: true
+      }
 
-    form.closest('form').find('[type="submit"]').trigger('click');
+      if (form.closest("form").hasClass("final-verdict-togglable")) {
+        return // skipping all this, use standard remote: true
+      }
 
-    form.find('.toggable-form__read .toggable-form__content:first').text(form.find('textarea').first().val())
-    form.find('.toggable-form__read .toggable-form__content:last').text(form.find('textarea').last().val())
+      e.preventDefault();
+      e.stopPropagation();
 
-    form.attr("aria-expanded", "false");
-    form.find('.toggable-form__trigger').focus();
-  });
+      form.closest('form').find('[type="submit"]').trigger('click');
 
-  form.on('click', '.toggable-form__cancel', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+      if (form.find('textarea.assessor-notes-input').length) {
+        form.find('p.assessor-notes').text(form.find('textarea.assessor-notes-input').first().val());
+        form.find('p.assessor-notes').removeClass('govuk-hint');
 
-    form.attr("aria-expanded", "false");
-    form.find('.toggable-form__trigger').focus();
-  });
+      } else {
+        form.find('.toggable-form__read .toggable-form__content:first').text(form.find('textarea').first().val());
+        form.find('.toggable-form__read .toggable-form__content:last').text(form.find('textarea').last().val());
+      }
+
+      if (form.find('select.evaluation-rate-input').length) {
+        var val = form.find('select.evaluation-rate-input').first().val();
+        form.find('span.evaluation-rate').text(val);
+        form.find('p.evaluation-rate').removeClass("govuk-!-display-none");
+
+      }
+
+      form.attr("aria-expanded", "false");
+      form.find('.toggable-form__trigger').focus();
+    });
+
+    form.on('click', '.toggable-form__cancel', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      form.attr("aria-expanded", "false");
+      form.find('.toggable-form__trigger').focus();
+    });
+
+    if (form.attr("aria-expanded") == "true") {
+      $(".toggable-form__trigger", form).click()
+    }
+  })(form);
 })
 
 $('.autosubmit-on-change').each(function() {

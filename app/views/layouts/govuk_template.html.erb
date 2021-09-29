@@ -73,7 +73,7 @@
           </a>
         </div>
         <div class="govuk-header__content">
-          <a href="#" class="govuk-header__link govuk-header__link--service-name">
+          <a href="<%= yield :service_root %>" class="govuk-header__link govuk-header__link--service-name">
             Queen's Award for Voluntary Service
           </a>
           <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide navigation menu">Menu</button>
@@ -133,6 +133,7 @@
 
     <div id="global-app-error" class="app-error hidden"></div>
 
+    <%= javascript_include_tag Ckeditor.cdn_url %>
     <%= javascript_pack_tag 'application' %>
 
     <% if should_enable_js? %>

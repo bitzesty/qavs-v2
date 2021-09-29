@@ -1,36 +1,10 @@
 module PartialsVisibilityHelper
-  def show_section_case_summary?
-    return false unless moderated_assessment.submitted?
-    return true if current_subject.lead?(@form_answer) || current_subject.primary?(@form_answer)
-  end
-
-  def show_section_appraisal_moderated?
-    policy(@form_answer).show_section_appraisal_moderated?
-  end
-
   def show_winners_section?
-    @form_answer.awarded? || @form_answer.recommended? || @form_answer.reserved?
-  end
-
-  def show_case_summary_section?
-    admin_lead_or_primary?
-  end
-
-  def show_feedback_section?
-    admin_lead_or_primary?
-  end
-
-  def show_press_summary_subsection?
-    (@form_answer.awarded? || @form_answer.recommended? || @form_answer.reserved?) &&
-      admin_lead_or_primary?
+    @form_answer.awarded? || @form_answer.shortlisted?
   end
 
   def show_palace_attendees_subsection?
-    @form_answer.awarded? && admin_lead_or_primary?
-  end
-
-  def show_bulk_assignment?
-    current_subject.categories_as_lead.include?(category_picker.current_award_type)
+    @form_answer.awarded? && admin_or_assigned_assessor?
   end
 
   def show_form_answer_attachment?(attachment)
@@ -43,9 +17,8 @@ module PartialsVisibilityHelper
 
   private
 
-  def admin_lead_or_primary?
+  def admin_or_assigned_assessor?
     current_subject.is_a?(Admin) ||
-    current_subject.lead?(@form_answer) ||
-    current_subject.primary?(@form_answer)
+    current_subject.assigned?(@form_answer)
   end
 end

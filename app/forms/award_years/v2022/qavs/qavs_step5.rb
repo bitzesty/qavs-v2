@@ -3,6 +3,10 @@ class AwardYears::V2022::QAEForms
   class << self
     def qavs_step5
       @qavs_step5 ||= proc do
+        notice %(
+          <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
+        )
+
         header :local_assessment_general_header, "General information" do
           context %(
             <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the QAVS local assessment guide that you can download from your dashboard page. The guide provides helpful tips on approaching the assessment.<p>
@@ -10,8 +14,12 @@ class AwardYears::V2022::QAEForms
         end
 
         assessor_details :assessor_details, 'Assessor details' do
-          sub_ref "E1.1"
+          sub_ref "E 1.1"
           required
+          sub_fields([
+            { primary_assessor_name: "Full name of the first assessor" },
+            { secondary_assessor_name: "Full name of the second assessor (if applicable)", ignore_validation: true }
+          ])
         end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
@@ -41,6 +49,15 @@ class AwardYears::V2022::QAEForms
         address :local_assessment_group_address, "Address of the group leader or main contact" do
           sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
+
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
+
           required
         end
 
@@ -48,6 +65,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 1.6"
           form_hint "Please check that the details provided by the nominator are correct."
           required
+          type "email"
           default_value :nominee_leader_email
           style "large"
         end
@@ -110,7 +128,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 3.1"
           context %(
             <p class='govuk-hint'>
-              Please discuss with a group and provide a <strong>short summary of the group's work in one sentence that is no longer than 100 characters, including spaces</strong>. It can also include the name of the town or area.
+              Please discuss with a group and provide a short summary of the group's work in one sentence that is no longer than 100 characters, including spaces. It can also include the name of the town or area.
             </p>
             <p class='govuk-hint'>The citation will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service.</p>
             <p class='govuk-hint'>Please see the examples below:</p>
@@ -153,12 +171,8 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_benefits_made, "What difference does the group make in meeting the need described above?" do
           sub_ref "E 4.3"
           context %(
-            <p class='govuk-hint'>
-              <strong>Please include direct benefits, but also any indirect benefits</strong>. For example, preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.
-            </p>
-            <p class='govuk-hint'>
-              <strong>Provide evidence to support this</strong>, for example, number of people helped, visitor numbers.
-            </p>
+            <p class='govuk-hint'>Please include direct benefits, but also any indirect benefits. For example, preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.</p>
+            <p class='govuk-hint'>Provide evidence to support this, for example, number of people helped, visitor numbers.</p>
           )
           required
         end
@@ -184,14 +198,6 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.7"
           yes_no
           required
-          context %(
-            <p class="govuk-hint">
-              If the answer is 'no', please skip to section 5 - 'Role and status of volunteers'.
-            </p>
-            <p class="govuk-hint">
-              If the answer is ‘yes’, please answer questions E4.8 and E4.9.
-            </p>
-          )
           pdf_context %(
             If the answer is ‘no’, please skip to section 5 - ‘Role and status of volunteers’.
             If the answer is ‘yes’, please answer questions E4.8 and E4.9.
@@ -202,12 +208,13 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.8"
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
-
+          required
         end
 
         textarea :nomination_local_assessment_form_how_benefits_local_and_abroad, "In what ways does the group's existence benefit the local community as well as people elsewhere?" do
           sub_ref "E 4.9"
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
+          required
         end
 
         header :local_assessments_volunteers_header, "Role and status of volunteers" do
@@ -389,19 +396,32 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        text :nomination_local_assessment_worthy_of_honour_name, "Please give their name" do
+        text :nomination_local_assessment_worthy_of_honour_name, "Please give the name of the person you are recommending" do
           sub_ref "E 8.4"
-          style "medium"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          required
+          style "medium"
         end
 
-        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain in one sentence why they might merit this" do
+        textarea :nomination_local_assessment_worthy_of_honur_reasons, "Please explain why they might merit this" do
           sub_ref "E 8.5"
+          conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           context %(
             <p class='govuk-hint'>Please note, the QAVS team will pass this information onto the DCMS Honours team. They might get in touch with you in due course to ask for further details.</p>
           )
+          required
           words_max 50
+        end
+
+        assessor_details :assessor_nominating_member_worthy_of_honour, "Assessor recommending an individual for a national Honour details" do
+          sub_ref "E 8.6"
+          required
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
+          sub_fields([
+            { full_name: "Full name" },
+            { email: "Email address" },
+            { phone: "Phone number (optional)", ignore_validation: true }
+          ])
         end
 
         textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant evaluation summary" do
@@ -453,13 +473,27 @@ class AwardYears::V2022::QAEForms
 
         submit "Submit local assessment" do
           notice %(
-            <p class='govuk-hint'>
+            <p class='govuk-body'>
               If you have answered all the questions, you can submit your assessment now. You will be able to edit it any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
             </p>
-            <p class='govuk-hint'>
+            <p class='govuk-body'>
               If you are not ready to submit yet, you can save your assessment and come back later.
             </p>
           )
+          alternative_notices [%(
+              <p class='govuk-body'>
+                You will be able to edit the assessment any time before [LIEUTENANT_SUBMISSION_ENDS_TIME].
+              </p>
+            ),%(
+            <p class='govuk-body'>
+              <strong>
+                Only main lieutenancy office users can submit the assessment.
+              </strong>
+            </p>
+            <p class='govuk-body'>
+              Please save your assessment and inform your main point of contact at the lieutenancy office that it is ready for their review.
+            </p>
+          )]
         end
       end
     end

@@ -1,0 +1,36 @@
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  = "Dear #{@group_leader_name},"
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | As you know, two volunteers from each group receiving The Queen's Award for Voluntary Service in
+  =<> @award_year
+  | will be invited to attend a Royal Garden Party in
+  =< @award_year + 1
+  | . We are writing to ask for details of the two volunteers who will represent your group.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | You will need to follow the link below to login to The Queen’s Award for Voluntary Service system. This will explain:
+  ul
+    li the possible dates and venues for the Garden Parties
+    li the exact details we need for each person
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | You will be asked to enter the attendees' details and their preferred day for attending on an online form. Their details need to be absolutely correct, so do check this carefully with them.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  = link_to group_leader_root_url, group_leader_root_url, class: "govuk-link govuk-link--no-visited-state"
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | We will need this information by
+  =< @palace_invite_deadline
+  | . If you are experiencing any problems with this you can contact the QAVS team at
+  =< mail_to "queensaward@dcms.gov.uk", "queensaward@dcms.gov.uk", class: "govuk-link govuk-link--no-visited-state"
+  | .
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | If you are no longer the correct person for us to contact, please get in touch with us.
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
+  | Kind regards,
+  br
+  | The Queen’s Award for Voluntary Service Team

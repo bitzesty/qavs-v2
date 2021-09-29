@@ -2,7 +2,7 @@ tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
     tr.govuk-table__row
       th.govuk-table__header scope="row"
-        = link_to polymorphic_url([namespace_name, obj]) do
+        = link_to polymorphic_url([namespace_name, obj]), class: 'govuk-link' do
           - unless obj.nominee_name.nil?
             span
               = obj.nominee_name
@@ -14,7 +14,11 @@ tbody.govuk-table__body
 
       td.govuk-table__cell = obj.document["nominee_address_postcode"]
 
-      td.govuk-table__cell = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+      td.govuk-table__cell
+        = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+        br
+        - if obj.secondary_activity?
+          = NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
 
       td.govuk-table__cell
         = obj.last_updated_at

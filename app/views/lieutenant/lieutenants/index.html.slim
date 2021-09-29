@@ -1,23 +1,20 @@
 .dashboard
   h1.govuk-heading-xl
-    | Lord Lieutenancy office users
+    = t("admin.users.role_headers.#{controller_name}")
   = simple_form_for @search, url: "#", method: :get, as: :search, html: { class: "search-form" } do |f|
     .govuk-grid-row
       .govuk-grid-column-two-thirds
-        .form-group.search-input.govuk-grid-column-one-half
-          = f.input :query, label: false, input_html: { class: "form-control", placeholder: "Search...", type: "search" }
-          / = submit_tag :submit, text: "Search users", class: 'search-submit'
+        .search-input
+          = f.input :query, label: "Search", input_html: { class: "form-control govuk-!-width-one-half", type: "search" }
+    .govuk-button-group
+      = f.submit "Search", class: 'govuk-button'
+      = link_to "Clear search", lieutenant_lieutenants_path, class: "govuk-button govuk-button--secondary"
+    .govuk-grid-row
+      = render "shared/users/search_count"
 
-      .govuk-grid-column-one-third.text-right
-        = link_to "+ Add Lord Lieutenancy Office user", new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
+    .govuk-button-group
+      = link_to t("admin.users.new_button.#{controller_name}"), new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
     .clear
-
-    - if @search.query?
-      .well.search-text
-        p.govuk-body
-          = "Search results for '#{@search.query}'"
-          small
-            = link_to "(Clear search)", [:lieutenant, :lieutenants], class: "govuk-button btn-link"
 
     = render 'list', resources: @resources, f: f
 

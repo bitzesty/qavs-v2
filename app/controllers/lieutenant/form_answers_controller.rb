@@ -35,9 +35,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     authorize resource, :show?
 
     respond_to do |format|
-      format.html do
-        @form_paginator = FormPaginator.new(resource, current_lieutenant, params)
-      end
+      format.html
 
       format.pdf do
         if can_render_pdf_on_fly?
@@ -58,7 +56,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     params[:search] ||= {
       sort: "company_or_nominee_name",
       search_filter: {
-        nominee_activity: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
       }
     }
     params[:search].permit!
@@ -112,13 +110,13 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
             redirect_to lieutenant_form_answer_url(@form_answer)
           else
             if saved
-              params[:next_step] ||= @form.steps[1].title.parameterize
+              params[:next_step] ||= @form.steps[1].title_to_param
               redirect_to edit_lieutenant_form_answer_path(@form_answer, step: params[:next_step])
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               # avoid redirecting to supporters page
               if !params[:step] || params[:step] == "letters-of-support"
-                params[:step] = @form.steps.first.title.parameterize
+                params[:step] = @form.steps.first.title_to_param
               end
 
               render template: "lieutenants/form_answers/edit"
@@ -135,7 +133,6 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
         submitted_was_changed = @form_answer.submitted_at_changed? && @form_answer.submitted_at_was.nil?
 
         if params[:form].present? && @form_answer.eligible? && @form_answer.save
-          flash[:success] = "Local assessment was successfully saved."
           if submitted_was_changed
             @form_answer.state_machine.submit(current_user)
             FormAnswerUserSubmissionService.new(@form_answer).perform
@@ -164,5 +161,11 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     else
       "application-lieutenant"
     end
+  end
+
+  def updating_step
+    @form_answer.award_form.steps.detect do |s|
+      s.local_assessment?
+    end.decorate
   end
 end

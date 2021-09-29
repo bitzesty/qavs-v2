@@ -2,8 +2,8 @@ footer
   nav.pagination.no-border class="#{'pagination-alternative' unless step.next}" role="navigation" aria-label="Pagination"
     ul.group
       - if step.previous
-        li.previous.previous-alternate.js-step-link data-step="step-#{step.previous.title.parameterize}"
-          = link_to edit_form_url(id: @form_answer.id, step: step.previous.title.parameterize), rel: "prev", title: "Navigate to previous part", class: 'govuk-button govuk-button--secondary' do
+        li.previous.previous-alternate.js-step-link data-step="step-#{step.previous.title_to_param}"
+          = link_to edit_form_url(id: @form_answer.id, step: step.previous.title_to_param), rel: "prev", title: "Navigate to previous part", class: 'govuk-button govuk-button--secondary' do
             span.pagination-label
               | Back
             /span class="pagination-part-title"
@@ -19,6 +19,6 @@ footer
           = link_to "Save and come back later", dashboard_path, class: "save-quit-link govuk-button govuk-button--secondary"
 
       - if step.next
-        li.submit.js-next-link.js-step-link data-step="step-#{step.next.title.parameterize}"
-          = link_to edit_form_url(id: @form_answer.id, step: step.next.title.parameterize), rel: "next", title: "Navigate to next part", class: "govuk-button" do
+        li.submit.js-next-link.js-step-link data-step="step-#{step.next.title_to_param}"
+          = link_to edit_form_url(id: @form_answer.id, step: step.next.title_to_param), rel: "next", title: "Navigate to next part", class: "govuk-button" do
             ' Save and continue

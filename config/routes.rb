@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   devise_for :lieutenants, controllers: {
     confirmations: "lieutenants/confirmations",
+    passwords: "lieutenants/passwords",
     sessions: "sessions"
   }
 
@@ -42,8 +43,12 @@ Rails.application.routes.draw do
   get "/additional_information_and_contact"             => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
   get "/apply-for-queens-award-for-enterprise"          => redirect("https://www.gov.uk/apply-queens-award-enterprise")
 
+
+  get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
+  get "/awardees"                                       => redirect("https://qavs.dcms.gov.uk/awardees/")
+  get "/honours"                                        => redirect("https://www.gov.uk/honours")
+
   get "/sign_up_complete"                               => "content_only#sign_up_complete",                               as: "sign_up_complete"
-  get "/privacy"                                        => "content_only#privacy",                                        as: "privacy"
   get "/cookies"                                        => "content_only#cookies",                                        as: "cookies"
 
   get  "/new_qavs_form"                                 => "form#new_qavs_form",                                          as: "new_qavs_form"
@@ -59,6 +64,8 @@ Rails.application.routes.draw do
   get "/award_info_qavs"                                => "content_only#award_info_qavs",                                as: "award_info_qavs"
 
   get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
+
+  get "/pre_sign_in"                                    => "content_only#pre_sign_in",                                    as: "pre_sign_in"
 
   root to: QAE.production? ? redirect("https://qavs.dcms.gov.uk") : "content_only#dashboard"
 
@@ -135,6 +142,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
+
     resources :form_answers do
       collection do
         post :index
@@ -157,7 +170,7 @@ Rails.application.routes.draw do
       resources :draft_notes, only: [:create, :update]
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :reports, only: [:index, :show]
 
     resources :assessment_submissions, only: [:create] do
@@ -225,7 +238,7 @@ Rails.application.routes.draw do
       end
 
       member do
-        patch :update_financials
+        post :update_verdict
         post :save
         get :review
         get :eligibility
@@ -237,17 +250,7 @@ Rails.application.routes.draw do
       resources :form_answer_attachments, only: [:create, :show, :destroy]
       resources :support_letters, only: [:show]
       resources :list_of_procedures, only: [:show]
-      resources :feedbacks, only: [:create, :update] do
-        member do
-          post :submit
-          post :unlock
-        end
-
-        get :download_pdf, on: :collection
-      end
-      resources :case_summaries, only: [:index]
       resources :draft_notes, only: [:create, :update]
-      resources :review_corp_responsibility, only: [:create]
     end
 
     resource :settings, only: [:show] do
@@ -257,9 +260,13 @@ Rails.application.routes.draw do
           post :run_notifications
         end
       end
+
+      member do
+        post :bulk_award_nominations
+      end
     end
 
-    resources :assessor_assignments, only: [:update]
+    resources :assessor_assignments, only: [:create, :update]
     resources :assessment_submissions, only: [:create] do
       patch :unlock, on: :member
     end
@@ -273,6 +280,12 @@ Rails.application.routes.draw do
 
     resources :lieutenant_assignment_collections, only: [:create]
     resources :assessor_assignment_collections, only: [:create]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :lieutenant do
@@ -290,11 +303,22 @@ Rails.application.routes.draw do
       resources :form_answer_state_transitions, only: [:create]
       resources :support_letters, only: [:show]
     end
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   namespace :group_leader do
     root to: "dashboard#show"
 
     resources :citations, only: [:edit, :update]
+
+    resource :account, only: [:edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 end

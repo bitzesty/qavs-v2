@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe FormAnswerStateTransition do
-  let(:form_answer) { create(:form_answer, :submitted, state: :recommended) }
+  let(:form_answer) { create(:form_answer, :submitted, :shortlisted) }
 
   describe "#collection" do
     before do
@@ -10,28 +10,17 @@ describe FormAnswerStateTransition do
       allow(Settings).to receive(:after_current_submission_deadline?).and_return(true)
     end
 
-    it "returns all states for admin" do
+    it "returns final verdict states for admin" do
       admin = create(:admin)
 
       subject.subject = admin
 
       expected = [
-        :admin_eligible,
-        :admin_eligible_duplicate,
-        :admin_not_eligible_duplicate,
-        :admin_not_eligible_nominator,
-        :admin_not_eligible_group,
-        :local_assessment_in_progress,
-        :local_assessment_recommended,
-        :local_assessment_not_recommended,
-        :assessment_in_progress,
-        :recommended,
-        :reserved,
+        :shortlisted,
         :not_recommended,
-        :disqualified,
-        :awarded,
-        :not_awarded,
-        :withdrawn
+        :no_royal_approval,
+        :undecided,
+        :awarded
       ]
 
       expect(subject.collection).to eq(expected)

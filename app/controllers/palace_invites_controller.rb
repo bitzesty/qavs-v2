@@ -7,10 +7,10 @@ class PalaceInvitesController < ApplicationController
       @invite_form.update(palace_invite_attributes.to_h.merge({ submitted: params[:submit].present? }))
       log_event
       if @invite.submitted?
-        flash.notice = "Palace Attendees details are successfully submitted!"
+        flash[:success] = "Palace Attendees details are successfully submitted!"
         redirect_to group_leader_root_path
       else
-        flash.notice = "Attendee details have been successfully updated"
+        flash[:success] = "Attendee details have been successfully updated"
         redirect_to group_leader_root_path
       end
     else

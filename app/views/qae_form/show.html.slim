@@ -5,7 +5,7 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
 
   input name="authenticity_token" type="hidden" value=form_authenticity_token
 
-  = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title.parameterize)
+  = hidden_field_tag :current_step_id, (params[:step].present? ? params[:step] : @form.steps.first.title_to_param)
 
   h1.govuk-heading-xl
     = @form.title
@@ -19,7 +19,7 @@ form.qae-form.award-form data-autosave-url=save_form_url(@form_answer) action=sa
           h2.govuk-error-summary__title#letters-of-support-error-title There was a problem submitting the form
           .govuk-error-summary__body
             p.govuk-body
-              ' You need to request or upload at least 2 letters of support.
+              ' Upload at least two letters of support.
             p.govuk-body
               = link_to "Add more letters of support", form_form_answer_supporters_path(@form_answer), class: 'govuk-link'
 
