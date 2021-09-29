@@ -11,7 +11,7 @@
       .govuk-notification-banner__content
         p.govuk-notification-banner__heading
           | There is a strict embargo preventing public announcement or publication of any Awards information until
-          =< @end_of_embargo.strftime("%-d %B %Y")
+          =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
           | . Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
 
     h3.govuk-heading-m
@@ -19,7 +19,7 @@
 
     h4.govuk-heading-s
       | By
-      =<> @citation_deadline.strftime("%-d %B %Y")
+      =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
       | &mdash; confirm group name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
@@ -29,22 +29,22 @@
           | Incomplete
     p.govuk-body
       | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by
-      =< @citation_deadline.decorate.formatted_mailer_deadline
+      =< @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
       | . If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
     = link_to "Confirm group name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h4.govuk-heading-s
       | Between 1 April and
-      =<> @end_of_embargo.strftime("%-d %B %Y")
+      =<> @deadlines.end_of_embargo.strftime("%-d %B %Y")
       | &mdash; prepare press coverage
     p.govuk-body
       | Please note, there is a strict embargo preventing public announcement or publication of any Awards information until
-      =< @end_of_embargo.decorate.formatted_mailer_deadline
+      =< @deadlines.end_of_embargo.decorate.formatted_mailer_deadline
       | .
     p.govuk-body
       | However, you can share additional information with - we may be able to include it in our press coverage. You can also approach your press contacts to arrange coverage around your Award. However, make it clear that they cannot publish anything until
-      =< @end_of_embargo.strftime("%-d %B %Y")
+      =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
       | .
     details.govuk-details
       summary.govuk-details__summary
@@ -62,7 +62,7 @@
 
     h4.govuk-heading-s
       | By
-      =<> @party_invite_deadline.strftime("%-d %B %Y")
+      =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
       | &mdash; submit details for Royal Garden Party &nbsp;
       - if @invite.submitted
         strong.govuk-tag.govuk-tag--blue
@@ -74,7 +74,7 @@
       | Two representatives from the awarded groups can attend a Royal Garden Party in
       =< AwardYear.current.year
       | . You must provide the attendee details and your preferred day for attending by
-      =< @party_invite_deadline.decorate.formatted_mailer_deadline
+      =< @deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
       | .
     = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.id), class: "govuk-button govuk-button--start"
 
