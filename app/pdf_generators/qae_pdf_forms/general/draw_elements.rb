@@ -4,7 +4,7 @@ require 'open-uri'
 module QaePdfForms::General::DrawElements
   DEFAULT_OFFSET = 110.mm
   IMAGES_PATH = "#{Rails.root}/app/assets/images/".freeze
-  LOGO_ICON = "logo-pdf.png".freeze
+  LOGO_ICON = "QAVS-logo_tall_grey_3x.png".freeze
   ATTACHMENT_ICON = "icon-attachment.png".freeze
   ALERT_ICON = "icon-important-print.png".freeze
   ALERT_BIG_ICON = "icon-important-big-print.png".freeze
@@ -118,8 +118,8 @@ module QaePdfForms::General::DrawElements
 
   def render_logo
     image "#{IMAGES_PATH}#{LOGO_ICON}",
-          at: [0, 137.5.mm + DEFAULT_OFFSET],
-          width: 25.mm
+          at: [10.mm, 137.5.mm + DEFAULT_OFFSET],
+          width: 15.mm
   end
 
   def render_urn
