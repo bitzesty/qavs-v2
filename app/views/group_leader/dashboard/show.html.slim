@@ -10,13 +10,17 @@
           | Important
       .govuk-notification-banner__content
         p.govuk-notification-banner__heading
-          | There is a strict embargo preventing public announcement or publication of any Awards information until 2 June 2022. Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
+          | There is a strict embargo preventing public announcement or publication of any Awards information until
+          =<> @end_of_embargo.strftime("%-d %B %Y")
+          | . Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
 
     h3.govuk-heading-m
       | What you need to do
 
     h4.govuk-heading-s
-      | By 16 May 2022 &mdash; confirm group name and citation &nbsp;
+      | By
+      =<> @citation_deadline.strftime("%-d %B %Y")
+      | &mdash; confirm group name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -24,7 +28,9 @@
         strong.govuk-tag.govuk-tag--red
           | Incomplete
     p.govuk-body
-      | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by midday, 16 May 2022. If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
+      | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by
+      =< @citation_deadline.decorate.formatted_mailer_deadline
+      | . If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
     = link_to "Confirm group name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
