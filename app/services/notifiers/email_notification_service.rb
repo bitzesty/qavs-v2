@@ -1,4 +1,5 @@
 class Notifiers::EmailNotificationService
+  include ActionView::Helpers::SanitizeHelper
   attr_reader :email_notifications
 
   def self.run
@@ -82,7 +83,7 @@ class Notifiers::EmailNotificationService
       # creating citations in one go as well
       w.build_citation(
         group_name: w.document["nomination_local_assessment_form_nominee_name"],
-        body: w.document["l_citation_summary"]
+        body: sanitize(w.document["l_citation_summary"], tags: [])
       ).save!
 
       {
