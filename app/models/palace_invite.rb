@@ -6,7 +6,7 @@ class PalaceInvite < ApplicationRecord
   validates :form_answer_id, presence: true,
                              uniqueness: true
 
-  validates :attendees_consent, acceptance: { allow_nil: false, accept: '1' }
+  validates :attendees_consent, acceptance: { allow_nil: false, accept: '1' }, :on => :update
 
   before_create :set_token
 

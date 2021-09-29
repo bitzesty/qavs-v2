@@ -33,7 +33,8 @@ describe "Palace invite process" do
 
     enter_attendee_details(1)
     enter_attendee_details(2)
-
+    check 'I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household.'
+    
     click_button "Submit"
 
     expect(page).to have_selector("#flash-message-success-title", text: "Success")
