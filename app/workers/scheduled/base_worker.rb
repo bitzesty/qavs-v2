@@ -1,5 +1,5 @@
 module Scheduled
   class BaseWorker
-    include Cloudtasker::Worker
+    include Sidekiq::Worker
   end
 end
