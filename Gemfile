@@ -91,7 +91,8 @@ gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
 gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '59def7b69589d702b6d14a5ec5b1c77c22e21065'
 
 # Background jobs
-gem 'cloudtasker', github: 'bitzesty/cloudtasker', ref: 'fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf'
+gem 'sidekiq', "~> 5.2"
+gem 'sidekiq-cron', "~> 1.1"
 
 # CORS configuration
 gem 'rack-cors', '~> 1.0'
@@ -183,4 +184,5 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.3'
   gem 'timecop'
   gem 'webmock', '3.13.0'
+  gem 'rspec-sidekiq'
 end
