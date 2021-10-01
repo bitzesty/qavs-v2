@@ -39,4 +39,4 @@ h1.govuk-heading-xl
             th.govuk-table__header scope="col" View
           = render(partial: "list_body")
 
-  = paginate @form_answers
+  = paginate @form_answers, params: { search: nil }
