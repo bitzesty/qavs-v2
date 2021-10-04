@@ -512,7 +512,7 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_volunteer_inclusivity_plans, "How does the group actively encourage a wide range of people to volunteer?" do
           sub_ref "E 7.2"
           context %(
-            <p class='govuk-hint'>This may include encouraging people from a range of ages, backgrounds, ethnicities and abilities.  For example, they may do so by placing leaflets in social centres or libraries, posting welcoming messages on social media or their website, or providing training opportunities for unemployed volunteers.</p>
+            <p class='govuk-hint'>This may include encouraging people from a range of ages, backgrounds, ethnicities, and abilities who might be marginalised.  For example, they may do so by placing leaflets in social centres or libraries, posting welcoming messages on social media or websites or providing training opportunities for unemployed volunteers.</p>
           )
           required
         end
@@ -520,15 +520,25 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_beneficiary_inclusivity_measures, "How does the group reach out to potential beneficiaries that might face barriers to accessing the group’s services?" do
           sub_ref "E 7.3"
           context %(
-            <p class='govuk-hint'>For example, people with mental health conditions, disabled people, lonely or isolated, older people or unemployed.</p>
+            <p class='govuk-hint'>Points to consider:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>How does the group advertise its services, and who would be likely to hear about them?</li>
+              <li>Is there evidence that they try to reach potential beneficiaries who might face barriers to accessing the group’s services? For example, this may include people with mental health conditions, disabled people, lonely or isolated, older people, or unemployed.</li>
+            </ul>
           )
           required
         end
 
-        textarea :nomination_local_assessment_form_services_accessibility, "Does the group take any practical steps to make the group's services accessible?" do
+        textarea :nomination_local_assessment_form_services_accessibility, "How does the group take practical steps to make its services accessible?" do
           sub_ref "E 7.4"
           context %(
-            <p class='govuk-hint'>For example, by improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format.</p>
+            <p class='govuk-hint'>Points to consider:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>Is everyone in the community who might need the service able to access it?</li>
+              <li>Is the service free or is there a charge for using the facilities or programmes?</li>
+              <li>Does the group give equal treatment to everyone, for example, to people from different religious or cultural backgrounds, BAME, LGBTQ+, and disabled people?</li>
+              <li>Can they describe any practical steps taken? These may include improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format.</li>
+            </ul>
           )
           required
         end
