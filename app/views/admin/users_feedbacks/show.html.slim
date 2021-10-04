@@ -1,8 +1,10 @@
 .dashboard
   h1.govuk-heading-xl
     | Feedback
-  div role="region" aria-label="feedback list" tabindex="0"
-    table.govuk-table
+  div role="region" aria-labelledby="table-list-feedback-caption" tabindex="0"
+    table.govuk-table#table-list-feedback
+    caption.govuk-visually-hidden#table-list-feedback-caption
+      | feedback list
       colgroup
         col width="100"
         col width="100"

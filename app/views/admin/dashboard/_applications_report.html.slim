@@ -1,7 +1,7 @@
 .dashboard-table__wrapper.dashboard-report
-  div role="region" aria-label="nomination report" tabindex="0"
-    table.dashboard-table.govuk-table class="govuk-!-font-size-14"
-      caption.govuk-table__caption.govuk-table__caption--m
+  div role="region" aria-labelledby="table-nomination-report-caption" tabindex="0"
+    table.dashboard-table.govuk-table#table-nomination-report class="govuk-!-font-size-14"
+      caption.govuk-table__caption.govuk-table__caption--m#table-nomination-report-caption
         = title
         a.govuk-button.btn--load.update-report href=url
           | Load data

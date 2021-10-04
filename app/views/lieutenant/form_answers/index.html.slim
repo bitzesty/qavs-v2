@@ -18,8 +18,10 @@ h1.govuk-heading-xl
     = link_to "Clear search and filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
 
   .applications-table-wrapper
-    div role="region" aria-label="nominations list" tabindex="0"
-      table.govuk-table.applications-table
+    div role="region" aria-labelledby="table-list-nominations-caption" tabindex="0"
+      table.govuk-table.applications-table#table-list-nominations
+        caption.govuk-visually-hidden#table-list-nominations-caption
+          | nominations list
         - if @search.query?
           caption.govuk-table__caption.govuk-table__caption--m
             => "Search results for '#{@search.query}'"

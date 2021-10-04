@@ -1,6 +1,8 @@
 - if award_applications && award_applications.any?
-  div role="region" aria-label="nominations in progress" tabindex="0"
-    table.govuk-table class="govuk-!-width-two-thirds"
+  div role="region" aria-labelledby="table-list-nomination-in-process-caption" tabindex="0"
+    table.govuk-table#table-list-nomination-in-process class="govuk-!-width-two-thirds"
+    caption.govuk-visually-hidden#table-list-nomination-in-process-caption
+      | nominations in progress
       tbody.govuk-table__body
         - award_applications.each_with_index do |award, index|
           tr.govuk-table__row
