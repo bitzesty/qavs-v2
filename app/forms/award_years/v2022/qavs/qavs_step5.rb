@@ -139,20 +139,26 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 3.1"
           context %(
             <p class='govuk-hint'>
-              Please discuss with a group and provide a short summary of the group's work in one sentence that is no longer than 100 characters, including spaces. It can also include the name of the town or area.
+              Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service. It should not include the group’s name.
             </p>
-            <p class='govuk-hint'>The citation will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service.</p>
-            <p class='govuk-hint'>Please see the examples below:</p>
-            <ul govuk-list>
-              <li class='govuk-hint'>"Maintaining [name of park] for the benefit of the whole community."</li>
-              <li class='govuk-hint'>"Providing vital support, raising aspirations and promoting community integration in [town]."</li>
-              <li class='govuk-hint'>"Providing financial, social, health and education services to the local community."</li>
-              <li class='govuk-hint'>"Enriching [town], with a prime focus on its railway station, for the benefit of the whole community."</li>
-              <li class='govuk-hint'>"Transforming a derelict stretch of canal into a wildlife haven and a vibrant community facility."</li>
-              <li class='govuk-hint'>"Fulfilling a need whilst providing a valuable village amenity and supporting the local community."</li>
-              <li class='govuk-hint'>"Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving."</li>
-              <li class='govuk-hint'>"Promoting wellbeing and reducing loneliness and isolation in [town or area]."</li>
-            </ul>
+            <p class='govuk-hint'>Citations typically use the present participle tense, whereby the verbs end in ‘ing’. For example, “maintaining” instead of “maintain”. See the examples below.</p>
+            <p class='govuk-hint'>Character limit: 100 (including spaces)</p>
+            <details class="govuk-details" data-module="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  View short citation examples
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <ul govuk-list>
+                  <li class='govuk-hint'>"Maintaining [name of the park] for the benefit of the whole community."</li>
+                  <li class='govuk-hint'>"Providing financial, social, health and education services to the local community."</li>
+                  <li class='govuk-hint'>"Transforming a derelict stretch of the canal into a wildlife haven and a vibrant community facility."</li>
+                  <li class='govuk-hint'>"Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving."</li>
+                  <li class='govuk-hint'>"Promoting wellbeing and reducing loneliness and isolation in [town or area]."</li>
+                </ul>
+              </div>
+            </details>
           )
           required
           words_max 100
