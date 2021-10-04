@@ -132,13 +132,6 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        options :nomination_local_assessment_form_volunteers_right_of_residence, "Do at least half the volunteers have the right of residence in the UK?" do
-          sub_ref "E 2.5"
-          form_hint "This is an eligibility matter for the Honours System that needs simple confirmation with the group. If the answer is no, please get in touch with the QAVS team before continuing with the assessment."
-          yes_no
-          required
-        end
-
         header :local_assessment_citation_header, "Citation" do
         end
 
