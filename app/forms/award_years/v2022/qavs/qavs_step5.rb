@@ -368,41 +368,94 @@ class AwardYears::V2022::QAEForms
           )
         end
 
-        textarea :nomination_local_assessment_form_wider_affiliations, "Is the group affiliated to a wider group, for example, as a branch, member or partner?" do
+        textarea :nomination_local_assessment_form_wider_affiliations, "Describe if and how the group is affiliated to any wider group?" do
           sub_ref "E 6.1"
           context %(
-            <p class='govuk-hint'>Please describe the relationship and the degree of control. For example, does the larger group control the activity of the nominated group or simply act as a source of advice or quality assurance?</p>
+            <p class='govuk-hint'>Points to consider</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>What is the relationship between the nominated group and the wider group? For example, a branch, member, or partner?</li>
+              <li>Does the larger group control the activity of the nominated group, and if so, what aspects?</li>
+              <li>To what degree does the wider group give the nominated group autonomy, only acting as a source of advice or quality assurance for them?</li>
+              <li>Are there any examples of ways in which the group has taken the initiative to develop its own approach?</li>
+            </ul>
           )
+          required
+        end
+
+        textarea :nomination_local_assessment_form_financial_stability_concerns, "Describe if there are any concerns about the group’s financial stability and ability to manage finances." do
+          sub_ref "E 6.2"
+          context %(
+            <p class='govuk-hint'>Please note, you do not need to have a financial background to complete this aspect of the assessment. Just follow the guidance below.</p>
+            <details class="govuk-details" data-module="financial-stability-guidance">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  View guidance on assessing financial stability and group’s ability to manage its finances.
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <p class='govuk-body'><strong>Information you need when evaluating a larger organisation</strong></p>
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>Annual accounts</li>
+                  <li>Management accounts - the latest annual accounts may be almost a year old. Management accounts will provide up-to-date financial figures.</li>
+                  <li>You may also consider reviewing cash flow forecasts and budgets.</li>
+                </ul>
+                <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
+                <p class='govuk-body'>Up-to-date income and expenditure data could be in any form - for example, a manual entry book or spreadsheet.</p>
+                <p class='govuk-body'>You could also ask to see the latest bank statements.</p>
+                <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
+                <p class='govuk-body'>When evaluating the group’s financial stability, the main consideration is whether the group can manage fluctuations in income. To do so, consider the following:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>Is the group balancing its income with expenditure?</li>
+                  <li>How reliable are the group's income sources? Are they over-reliant on a small number of income sources, and are any of them at risk?</li>
+                  <li>Does the group have an appropriate level of cash reserves to meet immediate financial commitments, including recurring expenditures, such as rent and payroll?</li>
+                  <li>Does the group have any debts or other fixed financial obligations? Can the group meet those obligations?</li>
+                </ul>
+                <p class='govuk-body'><strong>Evaluating the group’s ability to manage finances effectively</strong></p>
+                <p class='govuk-body'>Is the group maintaining proper accounting records that are appropriate for their size and circumstances?</p>
+                <p class='govuk-body'>In the case of a formally registered or incorporated group, are they submitting their accounts on time to their official registering body, for example, Charity Commission or Companies House? Are their finances published and discussed at an Annual General Meeting?</p>
+                <p class='govuk-body'>Are the funds used for the purposes for which they are intended?</p>
+              </div>
+            </details>
+            )
           required
         end
 
         textarea :nomination_local_assessment_form_funds_source, "Where does the group get its funds from?" do
-          sub_ref "E 6.2"
-          required
-        end
-
-        textarea :nomination_local_assessment_form_financial_stability_concerns, "Please describe if there are any concerns about the group’s financial stability" do
           sub_ref "E 6.3"
+          context %(
+            <p class='govuk-hint'>Describe the main sources of the group's income. Are these income sources at risk? Are there any plans in place to mitigate those risks?</p>
+          )
           required
         end
 
-        textarea :nomination_local_assessment_form_safeguarding_procedures, "Please describe what safeguarding procedures the group has to ensure that children and vulnerable adults are well protected" do
+
+        textarea :nomination_local_assessment_form_safeguarding_procedures, "Describe what safeguarding procedures the group has to ensure that children and adults at risk are well protected and whether these procedures are sufficient." do
           sub_ref "E 6.4"
           context %(
-            <p class='govuk-hint'>This may include criminal record checks or having a policy on child protection and insurance indemnity.</p>
+            <p class='govuk-hint'>This may include criminal record checks, a child-protection policy, specialised training and insurance indemnity.</p>
+            <p class='govuk-hint'>Points to consider:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>Does the group work with children or adults at risk? If not directly, might the volunteers have contact with them without a responsible adult or carer present?</li>
+              <li>Does the group have a safeguarding policy, which is a document that outlines how they will keep children or adults at risk safe? If so, how often is the policy reviewed?</li>
+            </ul>
+            <p class='govuk-hint'>Please note, even if the group doesn’t work directly with children or adults at risk, they might deal with them as visitors, for example, in museums, and therefore should have a clear policy setting out their approach.</p>
           )
           required
         end
 
-        textarea :nomination_local_assessment_form_adequate_insurance, "Does the group have adequate insurance to cover volunteers and members of the public with whom they interact?" do
+        textarea :nomination_local_assessment_form_adequate_insurance, "Describe if the group has adequate insurance to cover volunteers and members of the public with whom they interact." do
           sub_ref "E 6.5"
           context %(
-            <p class='govuk-hint'>This may include public liability insurance or employee liability insurance. Please specify.</p>
+            <p class='govuk-hint'>Points to consider:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>Which, if any, aspects of the group’s work require insurance? This may include public or employee liability insurance.</li>
+              <li>Are specific insurances needed? For example, are volunteer drivers covered in case of accidents?</li>
+            </ul>
           )
           required
         end
 
-        textarea :nomination_local_assessment_form_relevant_accreditions, "If relevant to the services delivered, has the group been successfully accredited by a professional body or regulator?" do
+        textarea :nomination_local_assessment_form_relevant_accreditions, "If relevant to the services delivered, has the group been accredited by a professional body or regulator? If so, please specify." do
           sub_ref "E 6.6"
           context %(
             <p class='govuk-hint'>For example, Ofsted, Care Quality Commission, HSE.</p>
@@ -410,10 +463,10 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_quality_mark, "Has the group achieved any quality mark?" do
+        textarea :nomination_local_assessment_form_quality_mark, "Has the group achieved any quality mark? If so, please specify." do
           sub_ref "E 6.7"
           context %(
-            <p class='govuk-hint'>For example, from a national sports body or a national umbrella organisation?</p>
+            <p class='govuk-hint'>For example, from a national sports body or a national umbrella organisation.</p>
           )
           required
         end
@@ -423,11 +476,15 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_involvement_from_local_bodies, "Do any local bodies such as the local authority, police, health, faith or other community organisations have any involvement, or support in the activities of the group?" do
+        textarea :nomination_local_assessment_form_involvement_from_local_bodies, "Describe if any local bodies have any involvement or support in the activities of the group." do
           sub_ref "E 6.9"
           context %(
-            <p class='govuk-hint'>Please check with the authorities during your assessment and state their views about the group.</p>
-            <p class='govuk-hint'>Please include your findings below.</p>
+            <p class='govuk-hint'>This may include the local authority, police, health, faith, or other community organisations.</p>
+            <p class='govuk-hint'>Please check the views of any relevant authorities and state whether:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>The group has a good reputation with local authorities and community organisations;</li>
+              <li>The group works in partnership with any local bodies? If so, do these organisations consider the partnership to be positive and constructive?</li>
+            </ul>
           )
           required
         end
@@ -435,7 +492,11 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_adverse_information, "As far as you are aware, is there any adverse information that might affect the reputation of the group or its volunteers?" do
           sub_ref "E 6.10"
           context %(
-            <p class='govuk-hint'>For example, are they involved in any disputes or other complaint procedures, or is there any negative publicity about them?</p>
+            <ul class="govuk-list govuk-list--bullet govuk-hint">
+              <li>Are the group or volunteers involved in any disputes or other complaint procedures? This could include vexatious complainants.</li>
+              <li>Is there any negative publicity about them?</li>
+            </ul>
+            <p class='govuk-hint'>We recommend that you conduct an internet search, check local press sites and social media. You can then explore any issues with the group. It is important to spot any potential reputational issues at an early stage.</p>
           )
           required
         end
