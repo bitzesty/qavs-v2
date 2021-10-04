@@ -95,6 +95,16 @@ class AwardYears::V2022::QAEForms
           end
         end
 
+        confirm :group_eligibility_confirmed, "Confirm group's eligibility" do
+          sub_ref "E 1.9"
+          required
+          text -> do
+            %(
+              I confirm that I have checked the group’s eligibility for the award as per the criteria below.
+            )
+          end
+        end
+
         header :local_assessment_key_facts_header, "Key facts" do
         end
 
