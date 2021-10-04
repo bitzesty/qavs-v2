@@ -103,6 +103,46 @@ class AwardYears::V2022::QAEForms
               I confirm that I have checked the group’s eligibility for the award as per the criteria below.
             )
           end
+          context %(
+            <details class="govuk-details" data-module="eligibility-criteria">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  View eligibility criteria
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <p class='govuk-hint'>The group must:</p>
+                <ul class='govuk-list govuk-list--bullet govuk-hint'>
+                  <li>be made up of three or more people</li>
+                  <li>be based in the UK, Channel Islands or Isle of Man</li>
+                  <li>have been in operation for at least three years before the date of nomination</li>
+                  <li>have over half its volunteers eligible to reside in the UK</li>
+                  <li>be led by volunteers, not by paid staff (we would normally expect at least half the group’s members to be volunteers)</li>
+                </ul>
+                <p class='govuk-hint'>The group must not:</p>
+                <ul class='govuk-list govuk-list--bullet govuk-hint'>
+                  <li>have been nominated unsuccessfully for a QAVS award in the past 3 years</li>
+                  <li>have already received a QAVS award</li>
+                  <li>operate solely for the benefit of animals (unless it can demonstrate that its work provides significant other benefits to the local community)</li>
+                </ul>
+                <p class='govuk-hint'>Important</p>
+                <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
+                  <li>Groups must provide specific and direct benefits to a community through their work. Groups will be considered ineligible where their sole purpose is to support one or more other groups that provide direct benefits (for example, fundraising and providing grants or other resources).</li>
+                  <li>QAVS awards are not intended for national organisations. A national group that has local branches would not itself be suitable. A group can be nominated if it is a branch of, or affiliated to, a larger regional or national organisation. However, it will be expected to have initiated and developed a distinctive approach locally and be able to show a high degree of autonomy and self-determination.</li>
+                  <li>Groups based within or in support of a public service (such as a hospital, police force or school) are eligible, but you will need to be able to demonstrate that:
+                    <ul class='govuk-list govuk-list--bullet govuk-hint'>
+                      <li>the group has a separate identity from the statutory organisation and is clearly under the leadership of volunteers, rather than simply following instructions from paid staff in the organisation</li>
+                      <li>the group is an established, long-term volunteer group with its own unique identity and a governance structure, rather than being part of a wider scheme or a school-led volunteering initiative</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          )
+        end
+
+        textarea :local_assessment_eligibility_comment, "Comments about eligibility (optional)" do
+          sub_ref "E 1.10"
         end
 
         header :local_assessment_key_facts_header, "Key facts" do
@@ -142,19 +182,19 @@ class AwardYears::V2022::QAEForms
               Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service. It should not include the group’s name.
             </p>
             <p class='govuk-hint'>Citations typically use the present participle tense, whereby the verbs end in ‘ing’. For example, “maintaining” instead of “maintain”. See the examples below.</p>
-            <details class="govuk-details" data-module="govuk-details">
+            <details class="govuk-details" data-module="citation-examples">
               <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
                   View short citation examples
                 </span>
               </summary>
               <div class="govuk-details__text">
-                <ul govuk-list>
-                  <li class='govuk-hint'>"Maintaining [name of the park] for the benefit of the whole community."</li>
-                  <li class='govuk-hint'>"Providing financial, social, health and education services to the local community."</li>
-                  <li class='govuk-hint'>"Transforming a derelict stretch of the canal into a wildlife haven and a vibrant community facility."</li>
-                  <li class='govuk-hint'>"Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving."</li>
-                  <li class='govuk-hint'>"Promoting wellbeing and reducing loneliness and isolation in [town or area]."</li>
+                <ul class="govuk-list govuk-list--bullet govuk-hint">
+                  <li>Maintaining [name of the park] for the benefit of the whole community.</li>
+                  <li>Providing financial, social, health and education services to the local community.</li>
+                  <li>Transforming a derelict stretch of the canal into a wildlife haven and a vibrant community facility.</li>
+                  <li>Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving.</li>
+                  <li>Promoting wellbeing and reducing loneliness and isolation in [town or area].</li>
                 </ul>
               </div>
             </details>
@@ -182,7 +222,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.2"
           context %(
             <p class='govuk-hint'>For example:
-              <ul govuk-list>
+              <ul class="govuk-list govuk-list--bullet govuk-hint">
                 <li>Describe the need, for example, gaps in local provision, lack of similar facilities.</li>
                 <li>How and when was the need for the group’s work established.</li>
                 <li>If the group actively reviews whether the need is still there and whether it is changing?</li>
@@ -198,7 +238,7 @@ class AwardYears::V2022::QAEForms
           context %(
             <p class='govuk-hint'>Please include direct benefits, but also any indirect benefits, such as preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.</p>
             <p class='govuk-hint'>Points to consider:
-              <ul govuk-list>
+              <ul class="govuk-list govuk-list--bullet govuk-hint">
                 <li>How has the group made a difference to individual people and the local community?</li>
                 <li>Has the group done anything particularly different or innovative compared with similar groups?  What stands out about the group’s approach or impact?</li>
                 <li>Any evidence, data, examples to show the impact, such as the number of people helped, visitor numbers, surveys.</li>
@@ -212,7 +252,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.4"
           context %(
             <p class='govuk-hint'>Points to consider:
-              <ul govuk-list>
+              <ul class="govuk-list govuk-list--bullet govuk-hint">
                 <li>How much control does the parent group have over the way the group runs? Does the group have the freedom to make their local approach distinctive? If so, how have they done that?</li>
                 <li>Can they give examples of doing things better or differently from the other branches in their organisation?</li>
               </ul>
@@ -233,7 +273,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "E 4.6"
           context %(
             <p class='govuk-hint'>
-              <ul govuk-list>
+              <ul class="govuk-list govuk-list--bullet govuk-hint">
                 <li>Please be specific when describing the area. For example, if describing a rural setting, explain how far away the nearest large town is and its population size. Is it hard to muster volunteers for various reasons?</li>
                 <li>Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, please provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.</li>
               </ul>
@@ -279,7 +319,7 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_staff_roles, "What roles are covered by paid staff, and what is their relationship to the volunteers, for example, supervision, support?" do
+        textarea :nomination_local_assessment_form_staff_roles, "What roles are covered by paid staff and what is their relationship to the volunteers (for example, supervision, support)?" do
           sub_ref "E 5.2"
           required
         end
@@ -287,7 +327,7 @@ class AwardYears::V2022::QAEForms
         textarea :nomination_local_assessment_form_volunteer_work_volume, "Please give an idea of the volume of work put in by volunteers" do
           sub_ref "E 5.3"
           context %(
-            <p class='govuk-hint'>If possible, provide metrics, for example, ‘x’ number of volunteering hours are provided by ‘y’ volunteers each week; or the number of volunteers expressed as full time equivalents (FTEs).</p>
+            <p class='govuk-hint'>If possible, provide metrics, for example, ‘X number of volunteering hours are provided by ‘y’ volunteers each week; or the number of volunteers expressed as full time equivalents (FTEs).</p>
           )
           required
         end
@@ -297,10 +337,11 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_volunteer_representation_in_leadership_roles, "How are volunteers represented in key leadership roles? In what ways are volunteers leading, setting direction and acting as an inspiration to the rest of the group?" do
+        textarea :nomination_local_assessment_form_volunteer_representation_in_leadership_roles, "How are volunteers represented in key leadership roles?" do
           sub_ref "E 5.5"
           context %(
-            <p class='govuk-hint'>We look for volunteer-led groups, with volunteers having a key input in decision making at all levels. If relevant, please state what is the split between the volunteers and paid staff in terms of leadership.</p>
+            <p class='govuk-hint'>In what ways are volunteers leading, setting direction, and acting as an inspiration to the rest of the group?</p>
+            <p class='govuk-hint'>We look for volunteer-led groups, with volunteers having a key input in decision making at all levels. If relevant, please explain the split between the volunteers and paid staff in terms of leadership.</p>
           )
           required
         end
@@ -313,14 +354,17 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_election_procedures, "Are there procedures for electing and refreshing the governing body?" do
+        textarea :nomination_local_assessment_form_election_procedures, "What are the procedures for electing and refreshing the governing body or leadership of the group?" do
           sub_ref "E 5.7"
+          context %(
+            <p class='govuk-hint'>A good group will take steps to avoid being closed to new members taking a leadership role.</p>
+          )
           required
         end
 
         header :local_assessment_group_organisation_evidence_header, "Evidence of a well-run organisation" do
           context %(
-            <p class='govuk-hint'>Before your visit to the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS local assessment guide, which can be downloaded from your dashboard page, provides ideas about key things to check and how to do this.</p>
+            <p class='govuk-hint'>Before you visit the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS local assessment guide, which can be downloaded from your dashboard page, provides details about key things to check and how to do this.</p>
           )
         end
 
