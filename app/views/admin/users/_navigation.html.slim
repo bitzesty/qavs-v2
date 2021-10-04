@@ -1,6 +1,6 @@
-.govuk-tabs data-module="govuk-tabs"
+.govuk-tabs
   h2.govuk-tabs__title
-    Contents
+    | Contents
   ul.govuk-tabs__list
     - %w[users lieutenants assessors group_leaders admins].each do |role|
       - if policy(role.singularize.to_sym).index?

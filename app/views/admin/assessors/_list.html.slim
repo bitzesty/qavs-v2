@@ -1,5 +1,7 @@
-div role="region" aria-label="list of national assessors" tabindex="0"
-  table.govuk-table
+div role="region" aria-labelledby="table-list-national-assessors-caption" tabindex="0"
+  table.govuk-table#table-list-national-assessors
+    caption.govuk-visually-hidden#table-list-national-assessors-caption
+      | list of national assessors
     thead.govuk-table__head
       tr.govuk-table__row
         th.sortable.govuk-table__header scope='col'
@@ -15,6 +17,7 @@ div role="region" aria-label="list of national assessors" tabindex="0"
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
         th.govuk-table__header
+          span.govuk-visually-hidden Actions
     tbody.govuk-table__body
       - if AssessorDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
@@ -28,8 +31,7 @@ div role="region" aria-label="list of national assessors" tabindex="0"
             th.govuk-table__header scope="row"
               = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: "govuk-link"
             td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis govuk-link"}
-            td.govuk-table__cell
-              = assessor.sub_group.text
+            td.govuk-table__cell = assessor.sub_group&.text
             td.govuk-table__cell
               .text-muted
                 - if assessor.last_sign_in_at.present?
