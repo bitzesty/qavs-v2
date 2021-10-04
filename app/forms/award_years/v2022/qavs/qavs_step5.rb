@@ -135,14 +135,13 @@ class AwardYears::V2022::QAEForms
         header :local_assessment_citation_header, "Citation" do
         end
 
-        textarea :l_citation_summary, "Provide a short citation summarising what the group does" do
+        textarea :l_citation_summary, "Provide a short citation summarising what the group does." do
           sub_ref "E 3.1"
           context %(
             <p class='govuk-hint'>
               Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service. It should not include the group’s name.
             </p>
             <p class='govuk-hint'>Citations typically use the present participle tense, whereby the verbs end in ‘ing’. For example, “maintaining” instead of “maintain”. See the examples below.</p>
-            <p class='govuk-hint'>Character limit: 100 (including spaces)</p>
             <details class="govuk-details" data-module="govuk-details">
               <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
@@ -160,6 +159,7 @@ class AwardYears::V2022::QAEForms
               </div>
             </details>
           )
+          form_hint "Character limit: 100 (including spaces)"
           required
           words_max 100
         end
@@ -167,51 +167,82 @@ class AwardYears::V2022::QAEForms
         header :local_assessment_group_work_header, "Work of the group" do
         end
 
-        textarea :nomination_local_assessment_form_provided_services, "Describe the range of services and activities provided by the group" do
+        textarea :nomination_local_assessment_form_provided_services, "Describe the range of services and activities provided by the group." do
           sub_ref "E 4.1"
           context %(
-            <p class='govuk-hint'>If this is a project or a branch of a larger organisation, make sure this refers to the work of the project or the branch rather than the larger organisation.</p>
+            <p class='govuk-hint'>Please do not rely purely on the description of the services in the nomination form. Find out all the services the group provides and give us a complete picture, emphasising any aspects that are particularly relevant for a QAVS because of the key role of volunteers.</p>
+            <p class='govuk-hint'>If it is a project or a branch of a larger organisation, make sure this refers to the work of the project or the branch rather than the larger organisation.</p>
           )
-          form_hint "Recommended words: 100"
+          form_hint "Recommended 100 words."
           required
           rows 2
         end
 
-        textarea :nomination_local_assessment_form_evidence_of_need, "Describe what is the need for the group's work and provide evidence" do
+        textarea :nomination_local_assessment_form_evidence_of_need, "Describe the need for the group's work and provide evidence." do
           sub_ref "E 4.2"
           context %(
-            <p class='govuk-hint'>For example, gaps in local provision, lack of similar facilities</p>
+            <p class='govuk-hint'>For example:
+              <ul govuk-list>
+                <li>Describe the need, for example, gaps in local provision, lack of similar facilities.</li>
+                <li>How and when was the need for the group’s work established.</li>
+                <li>If the group actively reviews whether the need is still there and whether it is changing?</li>
+                <li>Provide any facts or figures about the local area or target group and the level of need - for example, any local surveys or community audits.</li>
+              </ul>
+            </p>
           )
           required
         end
 
-        textarea :nomination_local_assessment_form_benefits_made, "What difference does the group make in meeting the need described above?" do
+        textarea :nomination_local_assessment_form_benefits_made, "What difference does the group make in meeting the need described above? Please provide evidence." do
           sub_ref "E 4.3"
           context %(
-            <p class='govuk-hint'>Please include direct benefits, but also any indirect benefits. For example, preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.</p>
-            <p class='govuk-hint'>Provide evidence to support this, for example, number of people helped, visitor numbers.</p>
+            <p class='govuk-hint'>Please include direct benefits, but also any indirect benefits, such as preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.</p>
+            <p class='govuk-hint'>Points to consider:
+              <ul govuk-list>
+                <li>How has the group made a difference to individual people and the local community?</li>
+                <li>Has the group done anything particularly different or innovative compared with similar groups?  What stands out about the group’s approach or impact?</li>
+                <li>Any evidence, data, examples to show the impact, such as the number of people helped, visitor numbers, surveys.</li>
+              </ul>
+            </p>
           )
           required
         end
 
-        textarea :nomination_local_assessment_form_makes_their_work_distinctive, "If the group is a branch of a wider organisation, how has the group made its work distinctive from that of other groups in the organisation?" do
+        textarea :nomination_local_assessment_form_makes_their_work_distinctive, "If they are a branch of a wider organisation, how has the group made its work distinctive from that of other groups in the organisation?" do
           sub_ref "E 4.4"
+          context %(
+            <p class='govuk-hint'>Points to consider:
+              <ul govuk-list>
+                <li>How much control does the parent group have over the way the group runs? Does the group have the freedom to make their local approach distinctive? If so, how have they done that?</li>
+                <li>Can they give examples of doing things better or differently from the other branches in their organisation?</li>
+              </ul>
+            </p>
+          )
         end
 
-        textarea :nomination_local_assessment_form_group_operation_timespan, "Describe whether the group operates all year round, or just at certain times of the year, for example, during a festival or during school breaks" do
+        textarea :nomination_local_assessment_form_group_operation_timespan, "Describe whether the group operates all year round or just at certain times of the year, and explain how that affects the work pattern of volunteers." do
           sub_ref "E 4.5"
+          context %(
+            <p class='govuk-hint'>For example, the group may operate only during a festival or during school breaks (this is fine).</p>
+            <p class='govuk-hint'>Explain how that influences the work of the volunteers. For example, some volunteers may work all year round with additional volunteers giving their time nearer to the event. Describe the typical time commitment made by volunteers at the busiest time.</p>
+          )
           required
         end
 
-        textarea :nomination_local_assessment_form_local_challenges, "Describe the local area the group serves and any challenges the area faces, such as deprivation, rural isolation, lack of community, unequal opportunities" do
+        textarea :nomination_local_assessment_form_local_challenges, "Describe the local area the group serves and any challenges the area faces." do
           sub_ref "E 4.6"
           context %(
-            <p class='govuk-hint'>Please give examples</p>
+            <p class='govuk-hint'>
+              <ul govuk-list>
+                <li>Please be specific when describing the area. For example, if describing a rural setting, explain how far away the nearest large town is and its population size. Is it hard to muster volunteers for various reasons?</li>
+                <li>Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, please provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.</li>
+              </ul>
+            </p>
           )
           required
         end
 
-        options :nomination_local_assessment_form_beneficiaries_based_abroad, "Are the group's beneficiaries based abroad or in other parts of the UK?" do
+        options :nomination_local_assessment_form_beneficiaries_based_abroad, "Are the group's beneficiaries based abroad or in more than one part of the UK?" do
           sub_ref "E 4.7"
           yes_no
           required
@@ -223,6 +254,9 @@ class AwardYears::V2022::QAEForms
 
         options :nomination_local_assessment_form_group_based_locally, "If its beneficiaries live elsewhere, is the group itself based entirely locally?" do
           sub_ref "E 4.8"
+          context %(
+            <p class='govuk-hint'>QAVS is aimed at <u>local groups</u> of volunteers, so this question is to confirm that point.</p>
+          )
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
           required
@@ -230,6 +264,9 @@ class AwardYears::V2022::QAEForms
 
         textarea :nomination_local_assessment_form_how_benefits_local_and_abroad, "In what ways does the group's existence benefit the local community as well as people elsewhere?" do
           sub_ref "E 4.9"
+          context %(
+            <p class='govuk-hint'>For example, the group may be significantly improving community cohesiveness through organised events, combating loneliness through volunteering opportunities, or developing people’s skills.</p>
+          )
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
           required
         end
