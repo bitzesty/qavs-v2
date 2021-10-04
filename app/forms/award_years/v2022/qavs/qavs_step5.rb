@@ -9,12 +9,13 @@ class AwardYears::V2022::QAEForms
 
         header :local_assessment_general_header, "General information" do
           context %(
-            <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the QAVS local assessment guide that you can download from your dashboard page. The guide provides helpful tips on approaching the assessment.<p>
+            <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before you start the assessment, please read the guidance document that can be downloaded from your dashboard page. The guidance provides helpful tips on approaching the assessment and completing your report.<p>
           )
         end
 
-        assessor_details :assessor_details, 'Assessor details' do
+        assessor_details :assessor_details, "Assessor's details" do
           sub_ref "E 1.1"
+          form_hint "Please note, if a Deputy Lieutenant nominated the group or wrote a letter of support, they must not be involved in the assessment as this would present a conflict of interest."
           required
           sub_fields([
             { primary_assessor_name: "Full name of the first assessor" },
@@ -22,9 +23,15 @@ class AwardYears::V2022::QAEForms
           ])
         end
 
+        comment :nominee_details_hint, "" do
+          form_hint %(
+            Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It’s important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
+          )
+        end
+
         text :nomination_local_assessment_form_nominee_name, "Group name" do
           sub_ref "E 1.2"
-          form_hint "Please check that the name given by the nominator is correct."
+          form_hint "Please check that the group name given by the nominator is correct."
           required
           default_value :nominee_name
           style "large"
@@ -51,11 +58,12 @@ class AwardYears::V2022::QAEForms
           form_hint "Please check that the details provided by the nominator are correct."
 
           sub_fields([
-            { building: "Building" },
+            { building: "Number or name of building" },
             { street: "Street" },
-            { city: "Town or city" },
+            { city: "Village or town" },
             { county: "County" },
-            { postcode: "Postcode" }
+            { postcode: "Postcode" },
+            { london_borough: "London borough (if applicable)", ignore_validation: true }
           ])
 
           required
