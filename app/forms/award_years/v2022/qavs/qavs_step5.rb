@@ -100,7 +100,7 @@ class AwardYears::V2022::QAEForms
           required
           text -> do
             %(
-              I confirm that I have checked the group’s eligibility for the award as per the criteria below.
+              I confirm that I have checked the group’s eligibility for the award as per the criteria above.
             )
           end
           context %(
@@ -402,7 +402,7 @@ class AwardYears::V2022::QAEForms
                 <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
                 <p class='govuk-body'>Up-to-date income and expenditure data could be in any form - for example, a manual entry book or spreadsheet.</p>
                 <p class='govuk-body'>You could also ask to see the latest bank statements.</p>
-                <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
+                <p class='govuk-body'><strong>Evaluating financial stability</strong></p>
                 <p class='govuk-body'>When evaluating the group’s financial stability, the main consideration is whether the group can manage fluctuations in income. To do so, consider the following:</p>
                 <ul class="govuk-list govuk-list--bullet">
                   <li>Is the group balancing its income with expenditure?</li>
@@ -605,7 +605,7 @@ class AwardYears::V2022::QAEForms
           )
         end
 
-        textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant evaluation summary" do
+        textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant Citation" do
           sub_ref "E 9"
           required
           words_max 600
