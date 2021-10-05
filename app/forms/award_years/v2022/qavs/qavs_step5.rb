@@ -100,7 +100,7 @@ class AwardYears::V2022::QAEForms
           required
           text -> do
             %(
-              I confirm that I have checked the group’s eligibility for the award as per the criteria below.
+              I confirm that I have checked the group’s eligibility for the award as per the criteria above.
             )
           end
           context %(
@@ -402,7 +402,7 @@ class AwardYears::V2022::QAEForms
                 <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
                 <p class='govuk-body'>Up-to-date income and expenditure data could be in any form - for example, a manual entry book or spreadsheet.</p>
                 <p class='govuk-body'>You could also ask to see the latest bank statements.</p>
-                <p class='govuk-body'><strong>Information you need when evaluating a small group</strong></p>
+                <p class='govuk-body'><strong>Evaluating financial stability</strong></p>
                 <p class='govuk-body'>When evaluating the group’s financial stability, the main consideration is whether the group can manage fluctuations in income. To do so, consider the following:</p>
                 <ul class="govuk-list govuk-list--bullet">
                   <li>Is the group balancing its income with expenditure?</li>
@@ -605,13 +605,13 @@ class AwardYears::V2022::QAEForms
           )
         end
 
-        textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant evaluation summary" do
+        textarea :nomination_local_assessment_form_citation_full, "Lord-Lieutenant Citation" do
           sub_ref "E 9"
           required
           words_max 600
           context %(
             <p class='govuk-hint'>
-              The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However,  key things to know are: below when recommending a group to the national assessors:
+              The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However,  key things to know when recommending a group to the national assessors are below:
             </p>
             <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
               <li>The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.</li>
