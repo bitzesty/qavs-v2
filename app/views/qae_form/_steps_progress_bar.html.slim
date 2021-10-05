@@ -38,13 +38,13 @@
       li.divider
       li.govuk-body.step-past.step-download
         - if policy(:form_answer).can_download_attachments?
-          = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
+          = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), download: nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
           -if @form_answer.support_letters.any?
             = render "qae_form/supporter_letter_attachments", adjective: 'first', letter: @form_answer.support_letters.first
             - if @form_answer.support_letters.second.present?
               = render "qae_form/supporter_letter_attachments", adjective: 'second', letter: @form_answer.support_letters.second
         - else
-          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
+          = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), download: nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
     li.divider
     li.sidebar-helpline.govuk-body
       ' Need help? Call us on

@@ -29,6 +29,6 @@ h1.govuk-heading-xl
   = render("admin/form_answers/list_components/table", f: f)
   = render("admin/form_answers/bulk_assignment_button_bottom")
 
-  = paginate @form_answers, params: { search: nil }
+  = paginate @form_answers, method: :post
 
 = render("admin/form_answers/bulk_assignment_modal")

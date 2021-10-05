@@ -1,6 +1,5 @@
 - unless QAE.hide_pdf_links?
   - if policy(:form_answer).can_download_attachments?
-    = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), class: "govuk-link govuk-link--no-visited-state"
+    = link_to "Download nomination and local assessment form (PDF)", nomination_pdf_url(@form_answer), download: nomination_pdf_url(@form_answer), class: "govuk-link govuk-link--no-visited-state"
   - else
-    = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "govuk-link govuk-link--no-visited-state"
-
+    = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), download: nomination_pdf_url(@form_answer), class: "govuk-link govuk-link--no-visited-state"
