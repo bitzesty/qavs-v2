@@ -3,10 +3,6 @@ class FormAnswerStatus::LieutenantFilter
   include NomineeActivityHelper
 
   OPTIONS = {
-    submitted: {
-      label: "Nomination submitted",
-      states: [:submitted]
-    },
     admin_eligible: {
       label: "Eligible by admin",
       states: [:admin_eligible]
@@ -59,12 +55,6 @@ class FormAnswerStatus::LieutenantFilter
       label: "No Royal approval",
       states: [
         :no_royal_approval
-      ]
-    },
-    not_eligible: {
-      label: "Ineligible - questionnaire",
-      states: [
-        :not_eligible
       ]
     },
     awarded: {
