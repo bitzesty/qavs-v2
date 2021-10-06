@@ -34,8 +34,8 @@ class Eligibility::Basic < Eligibility
 
   property :current_holder,
            values: %w[yes no i_dont_know],
-           label: "Are you a current Queen's Award holder in any category?",
-           accept: :not_nil
+           label: "Has the group received a QAVS in the past?",
+           accept: :not_yes
 
   def save_as_eligible!
     self.national_organisation = false

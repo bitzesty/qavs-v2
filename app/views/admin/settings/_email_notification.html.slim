@@ -2,11 +2,11 @@
 - notifications = EmailNotificationDecorator.decorate_collection(notifications)
 
 .panel-section id="email_notification_#{kind}"
-  p.govuk-body
+  p.govuk-body class="govuk-!-font-weight-bold"
     = I18n.t("email_notification_headers.#{kind}")
 
     span.email-notification-help
-      - if (help_message = t("email_notification_help_messages.#{kind}", default: "")).present?
+      - if (help_message = t("email_notification_help_messages.#{kind}_html", default: "")).present?
         span.help-message-text.govuk-hint
           = help_message
 

@@ -165,61 +165,54 @@ en:
   deadline_messages:
     award_year_switch: Award year opens on
     submission_start: Submission period starts on
-    innovation_submission_start: Innovation submission period starts on
-    trade_submission_start: International Trade submission period starts on
-    development_submission_start: Sustainable Development submission period starts on
-    mobility_submission_start: Promoting Opportunity submission period starts on
     submission_end: Submission period closes on
     local_assessment_submission_end: Local assessment period ends on
-    buckingham_palace_attendees_details: HM The Queen's Birthday (end of embargo)
-    buckingham_palace_media_information: QAO provides information to the media of the winners on
-    buckingham_palace_confirm_press_book_notes: Press Book Entry confirmation due by
+    buckingham_palace_attendees_details: Official announcement (end of embargo)
+    buckingham_palace_confirm_press_book_notes: Citation form due by
     buckingham_palace_reception_attendee_information_due_by: Buckingham Palace reception attendee information due by
-    buckingham_palace_attendees_invite: Buckingham Palace Reception on
+    buckingham_palace_attendees_invite: Buckingham Palace reception on
     audit_certificates: Verification of Commercial Figures (External Accountant's Report & list of procedures) due by
 
   deadline_help_messages:
-    award_year_switch: "This date marks the start of the new award year, and will update the website accordingly. Users will not yet be able to start any nominations"
+    award_year_switch: This date marks the start of the new award year, and will update the website accordingly.
     submission_start: "This date is when the nominations for the current award year become available."
-    innovation_submission_start: "This date is when the applications for the Innovation award of the current award year become available."
-    trade_submission_start: "This date is when the applications for the International Trade award of the current award year become available."
-    development_submission_start: "This date is when the applications for the Sustainable Development award of the current award year become available."
-    mobility_submission_start: "This date is when the applications for the Promoting Opportunity award of the current award year become available."
-    submission_end: "Nominators will no longer be able to edit or submit their nominations after this date. This date will be pulled into the Reminder to submit the nominations email."
-    local_assessment_submission_end: This date is displayed for the lieutenants to remind them about the local assessment deadline.
-    buckingham_palace_attendees_details: "This date marks the end of the the embargo preventing winners publicly announcing their success. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
-    buckingham_palace_media_information: "QAO will provide the press book information to the media on this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
-    buckingham_palace_confirm_press_book_notes: "Winners will not be able to make comments or changes to their press release after this date. This date will be pulled into the email notifying all winning nominations of their success, and the email to the heads of organisations."
-    buckingham_palace_reception_attendee_information_due_by: "Winners will not be able to submit attendees details after this date. This date will be pulled into the Buckingham Palace Invite email - to heads of nominations only."
-    buckingham_palace_attendees_invite: "This date will be pulled into the email notifying all winning nominations of their success, the email to the heads of organisations and the Buckingham Palace Invite email."
+    submission_end: "Nominators will no longer be able to submit their nominations after this date. After this date, the lieutenancies will be able to see nominations assigned to them. This date will be pulled into the ‘Reminder to submit the nominations’ email."
+    local_assessment_submission_end: "This date is displayed for the lieutenancy users to remind them about the local assessment deadline. However, it is a soft deadline and lieutenancy users can submit their assessments past this deadline."
+    buckingham_palace_attendees_details: "This date marks the end of the embargo preventing awardees publicly announcing their success. This date will be pulled into the “Notification to group leaders that their group has been successful” email and will be shown in the group leader’s dashboard."
+    buckingham_palace_confirm_press_book_notes: "This date will be pulled into the “Notification to group leaders that their group has been successful” email and will be shown in the group leader’s dashboard."
+    buckingham_palace_reception_attendee_information_due_by: "This date will be pulled into the “Buckingham Palace Invite” email and will be shown in the group leader’s dashboard. Awardees will not be able to submit attendees details after this date. "
+    buckingham_palace_attendees_invite: "This date will be pulled into the “Buckingham Palace Invite” email and will be shown in the group leader’s dashboard."
     audit_certificates: "Shortlisted applicants will have up until this date to submit their Verification of Commercial Figures. This date will be pulled into the email notifying shortlisted applicants of their success, and the reminder to submit Verification of Commercial Figures email."
 
   email_notification_help_messages:
-    award_year_open_notifier: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
-    group_leader_notification: "This email will be sent to group leaders notifying them about the nomination"
-    local_assessment_notification: "This email will be sent out to Lieutenants to notify them about available local assessments in their ceremonial county"
-    local_assessment_reminder: "This email will be sent out to Lieutenants to remind them to submit their local assessment forms"
-    shortlisted_notifier: "Shortlisted stage start (shortlisted/unsuccessful nominations are displayed on the homepage)"
-    winners_notification: "Winners stage start (winning nominations are displayed on the homepage and allows users to update their Press Book entry)"
-    unsuccessful_notification: "Unsuccessful stage start (Unsuccessful nominations are displayed on the homepage)"
-    buckingham_palace_invite: "Palace invites stage start (allows users to add their Palace invite details on the homepage)"
+    award_year_open_notifier_html: "This email will be sent to all users who have ticked that they want to receive opening notification for at least one award type in account's 'Contact Preferences' section."
+    reminder_to_submit_html: "Sent to: nominators who have started but not submitted nominations."
+    group_leader_notification_html: "Send to: All group leaders who have been nominated"
+    local_assessment_notification_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
+    local_assessment_reminder_html: "Sent to: Main lieutenancy users who have nominations in their lieutenancies"
+    winners_head_of_organisation_notification_html: "Sent to: Awarded group leaders"
+    unsuccessful_group_leaders_notification_html: "Sent to: Not recommended group leaders"
+    winners_notification_html: |
+      Important! Please schedule this to be sent on the day after the official announcement.<br>
+      Sent to: Nominators of successful groups
+    unsuccessful_notification_html: |
+      Important! Please schedule this to be sent a few days after the official announcement (to allow time to deal with initial enquiries from the successful ones).<br>
+      Sent to: Nominators of unsuccessful groups
+    buckingham_palace_invite_html: "Sent to: Successful group leaders"
 
   email_notification_headers:
-    award_year_open_notifier: "Notify users that the nominations for the new Award year are open"
+    award_year_open_notifier: "Notify users that the nominations for the new Award year are open."
     submission_started_notification: "Notify users that nominations for the new Award year are open"
-    reminder_to_submit: Reminder to submit the nominations (to all those who have started but not yet submitted nominations).
-    group_leader_notification: "Notification sent to group leaders about the nomination"
-    local_assessment_notification: "Notification to start the local assessment"
+    reminder_to_submit: "Reminder to submit the nominations"
+    group_leader_notification: "Email informing group leaders that the group has been nominated"
+    local_assessment_notification: "Notification to start local assessments"
     local_assessment_reminder: "Reminder to submit the local assessment form"
-    winners_notification: "WINNERS : Email notifying all winning nominations of their success & requesting their confirmation of their Press Book entry."
-    winners_reminder_to_submit:" WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
-    winners_head_of_organisation_notification: "WINNERS : Success email to the 'Head of Organisation' of the Business categories Winner."
-    buckingham_palace_invite: "WINNERS : Buckingham Palace Invite - to heads of winning organisations only."
-    unsuccessful_notification: "UNSUCCESSFUL: Email notification to unsuccessful Business categories Registered Account holder."
-    unsuccessful_ep_notification: "UNSUCCESSFUL: Email notification of unsuccessful QAVS nominations."
-    shortlisted_notifier: "SHORTLISTED : Email notifying shortlisted nominators of their success, including Verification of Commercial Figures (External Accountant's Report & list of procedures) instructions."
-    shortlisted_audit_certificate_reminder: "SHORTLISTED : Reminder to submit Verification of Commercial Figures (External Accountant's Report & list of procedures) for shortlisted applicants who have not yet done so."
-    not_shortlisted_notifier: "NOT SHORTLISTED : Email notifying unsuccessful nominators."
+    winners_notification: "SUCCESSFUL: Email to nominators that their nominations have been successful"
+    winners_reminder_to_submit: "WINNERS : Reminder to submit *palace reception attendee details* (for winning nominators who haven't submitted yet)."
+    winners_head_of_organisation_notification: "SUCCESSFUL: Notification to group leaders that their group has been successful"
+    unsuccessful_group_leaders_notification: "UNSUCCESSFUL: Notification to unsuccessful group leaders"
+    buckingham_palace_invite: "SUCCESSFUL: Garden party invite email"
+    unsuccessful_notification: "UNSUCCESSFUL:  Email to nominators that their nominations have been unsuccessful"
 
   custom_login_messages:
     we_just_sent_you_confirmation_email: We have just sent you an email asking to confirm your account.

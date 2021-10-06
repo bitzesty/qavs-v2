@@ -1,8 +1,8 @@
 .dashboard-table__wrapper.dashboard-report
-  div role="region" aria-label="new account registrations" tabindex="0"
-    table.govuk-table.dashboard-table class="govuk-!-font-size-14"
-      caption.govuk-table__caption.govuk-table__caption--m
-        | New account registrations
+  div role="region" aria-labelledby="table-account-registrations-month-caption" tabindex="0"
+    table.dashboard-table.govuk-table#table-account-registrations-month
+      caption.govuk-table__caption.govuk-table__caption--m#table-account-registrations-month-caption
+        | New account registrations by month
         a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_month")
           | Load data
         button.btn.btn-primary.btn--loading.updating-data.hidden.govuk-button

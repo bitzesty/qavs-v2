@@ -1,8 +1,8 @@
 .dashboard-table__wrapper.dashboard-report
-  div role="region" aria-label="new account registrations" tabindex="0"
-    table.dashboard-table.govuk-table class="govuk-!-font-size-14"
-      caption
-        | New account registrations
+  div role="region" aria-labelledby="table-totals-by-week-caption" tabindex="0"
+    table.dashboard-table.govuk-table#table-totals-by-week
+      caption.govuk-table__caption.govuk-table__caption--m#table-totals-by-week-caption
+        | New account registrations by week by day
         a.btn.btn-primary.btn--load.update-report href=account_registrations_admin_dashboard_reports_path(kind: "by_week")
           | Load data
         button.btn.btn-primary.btn--loading.updating-data.hidden

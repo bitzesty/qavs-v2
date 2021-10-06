@@ -25,8 +25,6 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -44,7 +42,6 @@ CREATE TABLE public.accounts (
 --
 
 CREATE SEQUENCE public.accounts_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -133,7 +130,6 @@ CREATE TABLE public.admins (
 --
 
 CREATE SEQUENCE public.admins_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -170,7 +166,6 @@ CREATE TABLE public.aggregated_award_year_pdfs (
 --
 
 CREATE SEQUENCE public.aggregated_award_year_pdfs_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -222,7 +217,6 @@ CREATE TABLE public.assessor_assignments (
 --
 
 CREATE SEQUENCE public.assessor_assignments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -278,7 +272,6 @@ CREATE TABLE public.assessors (
 --
 
 CREATE SEQUENCE public.assessors_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -314,7 +307,6 @@ CREATE TABLE public.audit_logs (
 --
 
 CREATE SEQUENCE public.audit_logs_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -351,7 +343,6 @@ CREATE TABLE public.award_years (
 --
 
 CREATE SEQUENCE public.award_years_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -455,7 +446,6 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -490,7 +480,6 @@ CREATE TABLE public.deadlines (
 --
 
 CREATE SEQUENCE public.deadlines_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -527,7 +516,6 @@ CREATE TABLE public.draft_notes (
 --
 
 CREATE SEQUENCE public.draft_notes_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -563,7 +551,6 @@ CREATE TABLE public.eligibilities (
 --
 
 CREATE SEQUENCE public.eligibilities_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -598,7 +585,6 @@ CREATE TABLE public.email_notifications (
 --
 
 CREATE SEQUENCE public.email_notifications_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -636,7 +622,6 @@ CREATE TABLE public.feedbacks (
 --
 
 CREATE SEQUENCE public.feedbacks_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -676,7 +661,6 @@ CREATE TABLE public.form_answer_attachments (
 --
 
 CREATE SEQUENCE public.form_answer_attachments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -707,7 +691,6 @@ CREATE TABLE public.form_answer_progresses (
 --
 
 CREATE SEQUENCE public.form_answer_progresses_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -743,7 +726,6 @@ CREATE TABLE public.form_answer_transitions (
 --
 
 CREATE SEQUENCE public.form_answer_transitions_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -811,7 +793,6 @@ CREATE TABLE public.form_answers (
 --
 
 CREATE SEQUENCE public.form_answers_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -853,7 +834,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id integer
+    form_answer_id bigint
 );
 
 
@@ -963,7 +944,6 @@ CREATE TABLE public.palace_attendees (
 --
 
 CREATE SEQUENCE public.palace_attendees_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -998,7 +978,6 @@ CREATE TABLE public.palace_invites (
 --
 
 CREATE SEQUENCE public.palace_invites_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1032,7 +1011,6 @@ CREATE TABLE public.previous_wins (
 --
 
 CREATE SEQUENCE public.previous_wins_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1070,7 +1048,6 @@ CREATE TABLE public.scans (
 --
 
 CREATE SEQUENCE public.scans_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1111,7 +1088,6 @@ CREATE TABLE public.settings (
 --
 
 CREATE SEQUENCE public.settings_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1144,7 +1120,6 @@ CREATE TABLE public.site_feedbacks (
 --
 
 CREATE SEQUENCE public.site_feedbacks_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1181,7 +1156,6 @@ CREATE TABLE public.support_letter_attachments (
 --
 
 CREATE SEQUENCE public.support_letter_attachments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1227,7 +1201,6 @@ CREATE TABLE public.support_letters (
 --
 
 CREATE SEQUENCE public.support_letters_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2530,7 +2503,6 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2562,7 +2534,6 @@ CREATE TABLE public.version_associations (
 --
 
 CREATE SEQUENCE public.version_associations_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2599,7 +2570,6 @@ CREATE TABLE public.versions (
 --
 
 CREATE SEQUENCE public.versions_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3613,6 +3583,14 @@ ALTER TABLE ONLY public.feedbacks
 
 ALTER TABLE ONLY public.feedbacks
     ADD CONSTRAINT fk_rails_85a1d7f049 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
+-- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders
+    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --

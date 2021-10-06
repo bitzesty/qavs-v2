@@ -1,8 +1,10 @@
 .dashboard
   h1.govuk-heading-xl
     | Data Export Log
-  div role="region" aria-label="list of audit logs" tabindex="0"
-    table.govuk-table
+  div role="region" aria-labelledby="table-list-audit-logs-caption" tabindex="0"
+    table.govuk-table#table-list-audit-logs
+      caption.govuk-visually-hidden#table-list-audit-logs-caption
+        | list of audit logs
       colgroup
         col width="100"
         col width="100"

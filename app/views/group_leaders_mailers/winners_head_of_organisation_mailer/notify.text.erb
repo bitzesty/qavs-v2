@@ -1,0 +1,38 @@
+<%= "Dear #{@group_leader_name}," %>
+
+We were delighted to receive a nomination for <%= @group_name %> for The Queen’s Award for Voluntary Service. I am writing to let you know the outcome and to request some immediate details from you.
+
+Her Majesty The Queen has approved the QAVS National Assessment Committee’s recommendation that the volunteers of <%= @group_name %> should receive The Queen’s Award for Voluntary Service (QAVS) <%= @award_year %>. This represents a tremendous achievement and we hope that the group’s volunteers will feel immensely proud of it.
+
+#Confidentiality
+This notification has been sent to you in confidence and it is important that you do not reveal the news before the official announcement on <%= @end_of_embargo_date %> from Buckingham Palace. Members of your group can be informed, but any breach of confidence outside the group could result in the withdrawal of the Award.
+
+#What will happen next?
+As an awardee, your group’s name and citation will be published in a special edition of The Gazette on <%= @end_of_embargo_date %>, available to view online and purchase as a special addition. You will also receive:
+
+* A signed certificate from Her Majesty The Queen, presented locally by the Lord-Lieutenant for your county
+* A crystal award with the QAVS insignia, presented with your certificate
+* An invitation for two people to attend a Royal Garden Party between May and June next year
+* Permission to use the official QAVS logo
+
+#What you must do by <%= @citation_deadline %>:
+
+We need you to provide some basic details to help us get everything ready for the announcement. This includes confirming your acceptance of the award, your group name and a citation, which summarises the group’s activity.
+
+Please follow the link below to login to the The Queen’s Award for Voluntary Service system to confirm the details and to access additional information about your award:
+
+<%= edit_group_leader_password_url(reset_password_token: @token) %>
+
+If you are not the correct person for us to contact, or if your organisation does not want to receive the Award, please get in touch with us directly.
+
+Please accept our warmest congratulations on receiving this Award.
+
+With best wishes
+
+The Queen’s Award for Voluntary Service Team
+
+This email is from an unmanaged mailbox. To contact the QAVS team please email queensaward@dcms.gov.uk or phone 0207 271 6206.
+
+---
+
+View our Privacy policy <%= privacy_url %>

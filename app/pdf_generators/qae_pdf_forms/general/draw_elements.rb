@@ -4,7 +4,7 @@ require 'open-uri'
 module QaePdfForms::General::DrawElements
   DEFAULT_OFFSET = 110.mm
   IMAGES_PATH = "#{Rails.root}/app/assets/images/".freeze
-  LOGO_ICON = "logo-pdf.png".freeze
+  LOGO_ICON = "QAVS-logo_tall_grey_3x.png".freeze
   ATTACHMENT_ICON = "icon-attachment.png".freeze
   ALERT_ICON = "icon-important-print.png".freeze
   ALERT_BIG_ICON = "icon-important-big-print.png".freeze
@@ -118,8 +118,8 @@ module QaePdfForms::General::DrawElements
 
   def render_logo
     image "#{IMAGES_PATH}#{LOGO_ICON}",
-          at: [0, 137.5.mm + DEFAULT_OFFSET],
-          width: 25.mm
+          at: [10.mm, 137.5.mm + DEFAULT_OFFSET],
+          width: 15.mm
   end
 
   def render_urn
@@ -148,7 +148,7 @@ module QaePdfForms::General::DrawElements
             width: 22.5.mm
 
       intro_text = %(
-        This PDF version of the #{form_answer.award_type_full_name} Award nomination is for <b>reference only</b>.
+        This PDF version of the #{form_answer.award_type_full_name} nomination is for <b>reference only</b>.
 
         <b>Please do not send in</b> this form to apply for this award. To apply for this award, you must complete the online form.
       )

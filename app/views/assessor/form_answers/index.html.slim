@@ -20,10 +20,12 @@ h1.govuk-heading-xl
 
   = render("assessor/form_answers/category_tabs")
 
-  div role="region" aria-label="nominations list" tabindex="0"
+  div role="region" aria-labelledby="nomination-list-caption" tabindex="0"
     table.applications-table.govuk-table
-      - if @search.query?
-        caption.govuk-table__caption.govuk-table__caption--m
+      caption.govuk-table__caption.govuk-table__caption--m#nomination-list-caption
+        span.govuk-visually-hidden
+          | Nominations
+        - if @search.query?
           = "Search results for '#{@search.query}'"
           = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
       thead.govuk-table__head

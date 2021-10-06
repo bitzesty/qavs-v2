@@ -1,5 +1,5 @@
 class SubmissionDeadlineStatesTransitionWorker
-  include Cloudtasker::Worker
+  include Sidekiq::Worker
 
   def perform
     FormAnswerStateMachine.trigger_deadlines

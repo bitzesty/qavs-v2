@@ -67,6 +67,14 @@ FactoryBot.define do
     trait :not_awarded do
       submitted_at { Time.current }
       state { "not_awarded" }
+
+      document do
+        FormAnswer::DocumentParser.parse_json_document(
+          JSON.parse(
+            File.read(Rails.root.join("spec/fixtures/form_answer_qavs_with_la.json"))
+          )
+        )
+      end
     end
 
     trait :reserved do

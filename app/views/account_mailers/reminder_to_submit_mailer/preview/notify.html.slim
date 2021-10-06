@@ -1,22 +1,24 @@
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 30px 0;"
-  | Dear Queen’s Award applicant,
+  | Dear #{ @user_name },
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  | If you have already submitted your application please ignore this message.
+  | If you have already submitted your nomination please ignore this message.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  ' This is a reminder that the deadline for submitting your application for a Queen's Award for Enterprise is noon on #{@deadline} and we are unable to accept applications after this time.
+  | This is a reminder that the deadline for submitting your nomination for a Queen's Award for Voluntary Service (QAVS) is #{@deadline} and we are unable to accept nominations after this time.
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  ' Whether you excel in international trade, have a great innovative product or service, or are running an impressive social mobility or sustainable development programme, these Awards are a unique way to recognise your achievements.
-
-p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
-  | Visit the Queen’s Awards for Enterprise website to continue and submit your application via the link below:
+  | You can continue your nomination and submission, via the link below:
   br
-  = link_to edit_form_url(id: @form_answer.id), edit_form_url(id: @form_answer.id)
+  = link_to edit_form_url(id: @form_answer.id), edit_form_url(id: @form_answer.id), class: "govuk-link govuk-link--no-visited-state"
 
 p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 38px 0 38px 0;"
-  ' Thank you,
+  | Thank you,
   br
-  br
-  ' The Queen's Awards Office
+  | The QAVS Team
+
+hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+p.govuk-body style="font-size: 19px; line-height: 1.315789474; margin: 0 0 30px 0;"
+  | View our Privacy policy
+  =< link_to privacy_url, privacy_url , class: "govuk-link govuk-link--no-visited-state"

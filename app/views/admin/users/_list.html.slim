@@ -1,5 +1,7 @@
-div role="region" aria-label="list of nominators" tabindex="0"
-  table.govuk-table
+div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
+  table.govuk-table#table-list-nominators
+    caption.govuk-visually-hidden#table-list-nominators-caption
+      | list of nominators
     thead.govuk-table__head
       tr.govuk-table__row
         th.sortable.govuk-table__header scope="col"
@@ -13,6 +15,7 @@ div role="region" aria-label="list of nominators" tabindex="0"
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked?", @search, :locked_at
         th.govuk-table__header
+          span.govuk-visually-hidden Actions
     tbody.govuk-table__body
       - if UserDecorator.decorate_collection(resources).none?
         tr.govuk-table__row

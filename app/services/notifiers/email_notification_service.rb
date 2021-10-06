@@ -1,4 +1,5 @@
 class Notifiers::EmailNotificationService
+  include ActionView::Helpers::SanitizeHelper
   attr_reader :email_notifications
 
   def self.run
@@ -27,13 +28,12 @@ class Notifiers::EmailNotificationService
   def award_year_open_notifier(award_year)
     user_ids = User.confirmed
                    .not_bounced_emails
-                   .want_to_receive_opening_notification_for_at_least_one_award
                    .pluck(:id)
 
     user_ids.each do |user_id|
       Users::AwardYearOpenNotificationMailer.notify(
         user_id
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 
@@ -42,116 +42,48 @@ class Notifiers::EmailNotificationService
   end
 
   def reminder_to_submit(award_year)
-    collaborator_data = []
     scope = award_year.form_answers.where(submitted_at: nil)
 
     scope.each do |form_answer|
-      form_answer.collaborators.each do |collaborator|
-        if collaborator.notification_when_submission_deadline_is_coming?
-          collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-        end
-      end
+      AccountMailers::ReminderToSubmitMailer.notify(form_answer.id).deliver_now!
     end
-
-    send_emails_to_collaborators!(
-      collaborator_data, AccountMailers::ReminderToSubmitMailer
-    )
-  end
-
-  def reminder_to_submit(award_year)
-    collaborator_data = []
-    scope = award_year.form_answers.where(submitted_at: nil)
-
-    scope.each do |form_answer|
-      form_answer.collaborators.each do |collaborator|
-        if collaborator.notification_when_submission_deadline_is_coming?
-          collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-        end
-      end
-    end
-
-    send_emails_to_collaborators!(
-      collaborator_data, AccountMailers::ReminderToSubmitMailer
-    )
   end
 
   def group_leader_notification(award_year)
-    submitted_nominations = award_year.form_answers.submitted
-    group_leaders = {}
-
-    submitted_nominations.each do |nomination|
-      name = nomination.document["nominee_leader_name"]
-      email = nomination.document["nominee_leader_email"]
-      # making sure we only send 1 email per email
-      group_leaders[email] = name
-    end
-
-    group_leaders.each do |email, name|
-      AccountMailers::GroupLeaderMailer.notify(email, name).deliver_later!
+    award_year.form_answers.submitted.each do |form_answer|
+      AccountMailers::GroupLeaderMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def local_assessment_notification(award_year)
     ceremonial_counties = award_year.form_answers.submitted.pluck(:ceremonial_county_id).uniq
 
-    lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties).pluck(:id)
+    lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties, role: "advanced").pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentNotificationMailer.notify(lieutenant_id).deliver_now!
     end
   end
 
   def local_assessment_reminder(award_year)
-    lieutenant_ids = Lieutenant.all.pluck(:id)
+    ceremonial_counties = award_year.form_answers.submitted.pluck(:ceremonial_county_id).uniq
+
+    lieutenant_ids = Lieutenant.all.where(ceremonial_county_id: ceremonial_counties, role: "advanced").pluck(:id)
 
     lieutenant_ids.each do |lieutenant_id|
-      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_later!
+      LieutenantsMailers::LocalAssessmentReminderMailer.notify(lieutenant_id).deliver_now!
     end
   end
 
-  def shortlisted_notifier(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.shortlisted,
-      AccountMailers::NotifyShortlistedMailer
-    )
-  end
-
-  def not_shortlisted_notifier(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.not_shortlisted,
-      AccountMailers::NotifyNonShortlistedMailer
-    )
-  end
-
-  def shortlisted_audit_certificate_reminder(award_year)
-    collaborator_data = []
-
-    award_year.form_answers.shortlisted.each do |form_answer|
-      next if form_answer.audit_certificate && form_answer.list_of_procedures
-
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    send_emails_to_collaborators!(collaborator_data, Users::AuditCertificateRequestMailer)
-  end
-
-  def unsuccessful_notification(award_year)
-    gather_data_and_send_emails!(
-      award_year.form_answers.unsuccessful_applications,
-      AccountMailers::UnsuccessfulFeedbackMailer
-    )
-  end
-
-  def winners_notification(award_year)
+  # to 'Group Leaders' of winning nominations
+  def winners_head_of_organisation_notification(award_year)
     winners = award_year.form_answers.winners
 
     gl_emails = winners.map do |w|
       # creating citations in one go as well
       w.build_citation(
         group_name: w.document["nomination_local_assessment_form_nominee_name"],
-        body: w.document["l_citation_summary"]
+        body: sanitize(w.document["l_citation_summary"], tags: [])
       ).save!
 
       {
@@ -161,11 +93,10 @@ class Notifiers::EmailNotificationService
         last_name: w.group_leader_last_name
       }
     end
-
     gl_emails.each do |attrs|
       next if GroupLeader.where(email: attrs[:email]).exists?
 
-      gl = GroupLeader.create!(
+      GroupLeader.create!(
         email: attrs[:email],
         first_name: attrs[:first_name],
         last_name: attrs[:last_name],
@@ -175,42 +106,33 @@ class Notifiers::EmailNotificationService
     end
 
     send_emails_to_group_leaders!(
-      award_year.form_answers.winners,
-      AccountMailers::GroupLeaderInviteMailer
+      winners,
+      GroupLeadersMailers::WinnersHeadOfOrganisationMailer
     )
   end
 
-  # to 'Head of Organisation' of the Successful Business categories winners
-  def winners_head_of_organisation_notification(award_year)
-    awarded_application_ids = award_year.form_answers.winners.pluck(:id)
+  def unsuccessful_group_leaders_notification(award_year)
+    award_year.form_answers.unsuccessful_applications.each do |form_answer|
+      GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
+    end
+  end
 
-    awarded_application_ids.each do |form_answer_id|
-      Users::WinnersHeadOfOrganisationMailer.notify(form_answer_id).deliver_later!
+  def winners_notification(award_year)
+    award_year.form_answers.winners.each do |form_answer|
+      AccountMailers::NotifySuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
+    end
+  end
+
+  def unsuccessful_notification(award_year)
+    award_year.form_answers.unsuccessful_applications.each do |form_answer|
+      AccountMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
     end
   end
 
   def buckingham_palace_invite(award_year)
-    form_answer_ids = []
-
-    award_year.form_answers.winners.each do |form_answer|
-
-      invite = PalaceInvite.where(
-        email: form_answer.decorate.head_email,
-        form_answer_id: form_answer.id
-      ).first_or_create
-
-      unless invite.submitted?
-        form_answer_ids << form_answer.id
-      end
-    end
-
-    form_answer_ids.each do |form_answer_id|
-      #
-      # 1: to Head of Organization
-      AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id).deliver_later!
-      #
-      # 2: to Press Contact
-      AccountMailers::BuckinghamPalaceInviteMailer.invite(form_answer_id, true).deliver_later!
+   award_year.form_answers.winners.each do |form_answer|
+    group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
+      GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_now!
     end
   end
 
@@ -222,38 +144,12 @@ class Notifiers::EmailNotificationService
 
   private
 
-  def formatted_collaborator_data(scope)
-    collaborator_data = []
-
-    scope.each do |form_answer|
-      form_answer.collaborators.each do |collaborator|
-        collaborator_data << { form_answer_id: form_answer.id, collaborator_id: collaborator.id }
-      end
-    end
-
-    collaborator_data
-  end
-
-  def gather_data_and_send_emails!(scope, mailer)
-    collaborator_data = formatted_collaborator_data(scope)
-    send_emails_to_collaborators!(collaborator_data, mailer)
-  end
-
-  def send_emails_to_collaborators!(data, mailer)
-    data.each do |entry|
-      mailer.notify(
-        entry[:form_answer_id],
-        entry[:collaborator_id]
-      ).deliver_later!
-    end
-  end
-
- def send_emails_to_group_leaders!(data, mailer)
+  def send_emails_to_group_leaders!(data, mailer)
     data.includes(:group_leader).each do |entry|
       mailer.notify(
         entry.id,
         entry.group_leader.id
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 
@@ -267,7 +163,7 @@ class Notifiers::EmailNotificationService
       Users::SubmissionStartedNotificationMailer.notify(
         user_id,
         award_type
-      ).deliver_later!
+      ).deliver_now!
     end
   end
 end

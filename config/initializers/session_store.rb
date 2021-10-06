@@ -6,7 +6,7 @@
 if Rails.env.development? || Rails.env.test?
   Rails.application.config.session_store :cookie_store, key: "_qavs_session_#{Rails.env}"
 else
-  Rails.application.config.session_store :cookie_store, key: "_qavs_session_#{Rails.env}",
+  Rails.application.config.session_store :cookie_store, key: "_qavs_session",
                                                         domain: ENV["COOKIE_DOMAIN"],
                                                         secure: true,
                                                         httponly: true

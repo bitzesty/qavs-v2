@@ -10,20 +10,6 @@ GIT
       google-cloud-storage (>= 1.30, < 2)
 
 GIT
-  remote: https://github.com/bitzesty/cloudtasker.git
-  revision: fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf
-  ref: fb5cfc1ae2d4e83d6ad0f04b121a56d11301f9cf
-  specs:
-    cloudtasker (0.12.rc11)
-      activesupport
-      connection_pool
-      fugit
-      google-cloud-tasks (~> 1.0)
-      jwt
-      redis
-      retriable
-
-GIT
   remote: https://github.com/devise-security/devise-security.git
   revision: f83d59c5f9063466ce3948ac35ce587aeb659a0a
   ref: f83d59c5f9063466ce3948ac35ce587aeb659a0a
@@ -246,7 +232,7 @@ GEM
       activesupport (>= 3.2)
     equalizer (0.0.11)
     erubi (1.10.0)
-    et-orbi (1.2.4)
+    et-orbi (1.2.5)
       tzinfo
     execjs (2.7.0)
     factory_bot (6.1.0)
@@ -278,7 +264,7 @@ GEM
     faraday_middleware (1.1.0)
       faraday (~> 1.0)
     ffi (1.15.3)
-    fugit (1.5.0)
+    fugit (1.5.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
     globalid (0.5.2)
@@ -315,24 +301,6 @@ GEM
       google-cloud-core (~> 1.6)
       googleauth (>= 0.16.2, < 2.a)
       mini_mime (~> 1.0)
-    google-cloud-tasks (1.5.1)
-      google-gax (~> 1.8)
-      googleapis-common-protos (>= 1.3.9, < 2.0)
-      googleapis-common-protos-types (>= 1.0.4, < 2.0)
-      grpc-google-iam-v1 (~> 0.6.9)
-    google-gax (1.8.1)
-      google-protobuf (~> 3.9)
-      googleapis-common-protos (>= 1.3.9, < 2.0)
-      googleauth (~> 0.9)
-      grpc (~> 1.24)
-      rly (~> 0.2.3)
-    google-protobuf (3.17.3)
-    googleapis-common-protos (1.3.11)
-      google-protobuf (~> 3.14)
-      googleapis-common-protos-types (>= 1.0.6, < 2.0)
-      grpc (~> 1.27)
-    googleapis-common-protos-types (1.1.0)
-      google-protobuf (~> 3.14)
     googleauth (0.17.0)
       faraday (>= 0.17.3, < 2.0)
       jwt (>= 1.4, < 3.0)
@@ -345,13 +313,6 @@ GEM
       sass (>= 3.2.0)
     govuk_template (0.12.0)
       rails (>= 3.1)
-    grpc (1.38.0)
-      google-protobuf (~> 3.15)
-      googleapis-common-protos-types (~> 1.0)
-    grpc-google-iam-v1 (0.6.11)
-      google-protobuf (~> 3.14)
-      googleapis-common-protos (>= 1.3.11, < 2.0)
-      grpc (~> 1.27)
     hashdiff (1.0.1)
     hashery (2.1.2)
     hashie (3.6.0)
@@ -435,7 +396,7 @@ GEM
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
     nio4r (2.5.8)
-    nokogiri (1.12.4)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     notifications-ruby-client (5.3.0)
@@ -501,6 +462,8 @@ GEM
       rack (>= 2.0.0)
     rack-mini-profiler (1.0.0)
       rack (>= 1.2.0)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.7.0)
       rack
     rack-ssl-enforcer (0.2.9)
@@ -577,7 +540,6 @@ GEM
       netrc (~> 0.8)
     retriable (3.1.2)
     rexml (3.2.5)
-    rly (0.2.3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -600,6 +562,9 @@ GEM
       rspec-expectations (~> 3.9)
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
+    rspec-sidekiq (3.1.0)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rspec-support (3.9.3)
     rspec_junit_formatter (0.2.3)
       builder (< 4)
@@ -638,6 +603,14 @@ GEM
       rails (>= 4)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
+    sidekiq (5.2.7)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
+    sidekiq-cron (1.2.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
     signet (0.15.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -739,7 +712,6 @@ DEPENDENCIES
   carrierwave (~> 2.2.2)
   carrierwave-google-storage!
   ckeditor
-  cloudtasker!
   codeclimate_circle_ci_coverage
   coffee-rails (= 5.0)
   connection_pool
@@ -802,12 +774,15 @@ DEPENDENCIES
   rest-client
   rspec-github
   rspec-rails (~> 4.0.1)
+  rspec-sidekiq
   rspec_junit_formatter (= 0.2.3)
   rubocop (~> 0.52)
   sanitize
   selenium-webdriver
   shog
   shoulda-matchers
+  sidekiq (~> 5.2)
+  sidekiq-cron (~> 1.1)
   simple_form (~> 5.0)
   slim-rails (~> 3.2.0)
   sprockets (~> 3.7.2)

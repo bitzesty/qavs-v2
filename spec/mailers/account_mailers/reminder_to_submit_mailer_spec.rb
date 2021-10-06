@@ -6,10 +6,13 @@ describe AccountMailers::ReminderToSubmitMailer do
 
   let(:mail) {
     AccountMailers::ReminderToSubmitMailer.notify(
-      form_answer.id,
-      user.id
+      form_answer.id
     )
   }
+
+  before do
+    Settings.current_submission_deadline.update(trigger_at: 10.days.ago)
+  end
 
   describe "#notify" do
     it "renders the headers" do

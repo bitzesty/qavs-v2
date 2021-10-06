@@ -32,7 +32,6 @@ require "capybara/rspec"
 require "shoulda/matchers"
 require "webmock/rspec"
 require 'selenium-webdriver'
-require 'cloudtasker/testing'
 
 Dotenv.overload('.env.test')
 
@@ -81,8 +80,6 @@ ActiveRecord::Migration.check_pending!
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 Qae::Application.load_tasks
-
-Cloudtasker::Testing.inline!
 
 RSpec.configure do |config|
   config.filter_run_excluding skip: true

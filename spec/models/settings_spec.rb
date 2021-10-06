@@ -10,7 +10,7 @@ describe Settings do
     }
 
     it "creates all kinds of deadlines" do
-      expect(settings.deadlines.count).to eq(9)
+      expect(settings.deadlines.count).to eq(8)
       expect(settings.deadlines.order(:kind).map(&:kind)).to eq(deadlines)
     end
   end
@@ -19,11 +19,6 @@ describe Settings do
     it ".winner_notification_date should filter correctly" do
       target = Settings.current.winners_email_notification.try(:trigger_at).presence
       expect(target).to eq Settings.winner_notification_date
-    end
-
-    it ".not_shortlisted_deadline should filter correctly" do
-      target = Settings.current.email_notifications.not_shortlisted.first.try(:trigger_at)
-      expect(target).to eq Settings.not_shortlisted_deadline
     end
 
     it ".not_awarded_deadline should filter correctly" do

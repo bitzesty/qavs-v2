@@ -1,5 +1,7 @@
-div role="region" aria-label="nominations in progress" tabindex="0"
-  table.govuk-table class="govuk-!-width-two-thirds"
+div role="region" aria-labelledby="table-list-nominations-in-progress-caption" tabindex="0"
+  table.govuk-table#table-list-nominations-in-progress class="govuk-!-width-two-thirds"
+    caption.govuk-visually-hidden#table-list-nominations-in-progress-caption
+      | nominations in progress
     tbody.govuk-table__body
       - applications = FormAnswerDecorator.decorate_collection(award_applications)
       - applications.each do |award|

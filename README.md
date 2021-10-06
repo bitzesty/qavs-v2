@@ -1,8 +1,8 @@
 
-![Logo](https://raw.githubusercontent.com/bitzesty/qae/master/public/logo.jpg) Queen's Awards for Enterprise
+Queen's Award for Voluntary Service
 ---------------------------
 
-"QAE" is the application which powers the application process for The Queen's Awards for Enterprise.
+"QAVS" is the application which powers the application process for The Queen's Award for Voluntary Service.
 
 ## Setup
 
@@ -20,10 +20,10 @@
 ```
 ./bin/setup
 bundle exec rails s
-cloudtasker
+bundle exec sidekiq -C config/sidekiq.yml
 ```
 
-If you're running this on your local dev setup, start redis first before starting cloudtasker
+If you're running this on your local dev setup, start redis first before starting sidekiq
 
 ### Install Poxa
 

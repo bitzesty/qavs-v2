@@ -919,6 +919,9 @@ jQuery ->
 
   if $('.js-ckeditor').length > 0
 
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/notification/plugin.js' );
+    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/wordcount/plugin.js' );
+
     $('.js-ckeditor').each (index) ->
       group = $(this).closest(".govuk-form-group")
 
@@ -927,7 +930,24 @@ jQuery ->
 
       CKEDITOR.replace this,
         title: group.find('label').first().text(),
-        toolbar: 'mini'
+        language: 'en'
+        toolbar_mini: [
+          {name: 'p1', items: ["Cut", "Copy", "PasteText", "-", "Undo", "Redo"]},
+          {name: 'p2', items: ["Bold", "Italic",  "-", "RemoveFormat"]},
+          {name: 'p3', items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']}
+        ]
+        toolbar: "mini";
+        extraPlugins: 'wordcount'
+
+        wordcount: {
+          showParagraphs: false,
+          showWordCount: true
+        }
+
+        removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
+        disableNativeSpellChecker: false
+
+        allowedContent: 'h1 h2 h3 blockquote p ul ol li em i strong b i br'
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')
@@ -962,3 +982,42 @@ jQuery ->
   #
   # Init WYSYWYG editor for QAE Form textareas - end
   #
+
+
+  #cookie settings
+
+  if $('.cookie-settings').length > 0
+    saveButton = document.querySelector('.save-cookie-settings')
+    cookieForm = document.querySelector('.cookie-save-form')
+
+    return if !saveButton
+
+    analyticsConsent = Cookies.get('analytics_cookies_consent_status')
+
+    if analyticsConsent is 'yes'
+      document.getElementById('cookies-analytics-yes').checked = true
+    if analyticsConsent is 'no'
+      document.getElementById('cookies-analytics-no').checked = true
+
+    cookieForm.addEventListener 'submit', (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+
+      analyticsRadio = document.querySelector('input[name="cookies-analytics"]:checked')
+      analyticsValue = if analyticsRadio then analyticsRadio.value else null
+
+      if analyticsValue
+        Cookies.set('analytics_cookies_consent_status', analyticsValue, { expires: 365 })
+
+      Cookies.set('general_cookie_consent_status', 'yes', { expires: 365 })
+
+      existingMessage = document.querySelector('.save-cookie-message')
+
+      if existingMessage
+        existingMessage.parentNode.removeChild(existingMessage)
+
+      message = document.createElement('p')
+      message.classList.add('save-cookie-message')
+      message.setAttribute('role', 'alert')
+      message.innerHTML = 'Your cookie preferences were successfully saved. These preferences will be valid for 1 year.'
+      saveButton.insertAdjacentElement('afterend', message)

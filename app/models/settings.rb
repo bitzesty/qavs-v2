@@ -39,6 +39,12 @@ class Settings < ApplicationRecord
       end
     end
 
+    def current_palace_reception_attendee_information_deadline
+      Rails.cache.fetch("buckingham_palace_reception_attendee_information_due_by", expires_in: 1.minute) do
+        current.deadlines.buckingham_palace_reception_attendee_information_due_by
+      end
+    end
+
     def winner_notification_date
       Rails.cache.fetch("winners_notification", expires_in: 1.minute) do
         current.winners_email_notification.try(:trigger_at).presence
@@ -52,14 +58,6 @@ class Settings < ApplicationRecord
     def after_current_submission_deadline?
       deadline = current_submission_deadline.trigger_at
       DateTime.now >= deadline if deadline.present?
-    end
-
-    def after_shortlisting_stage?
-      deadline = Rails.cache.fetch("shortlisted_notifier_notification", expires_in: 1.minute) do
-        current.email_notifications.where(kind: "shortlisted_notifier").first
-      end
-
-      DateTime.now >= deadline.trigger_at if deadline.present?
     end
 
     def winners_stage?
@@ -95,12 +93,6 @@ class Settings < ApplicationRecord
       award_year_switch_deadline < Time.zone.now && (
         after_current_submission_deadline_start?
       )
-    end
-
-    def not_shortlisted_deadline
-      Rails.cache.fetch("not_shortlisted_notifier_notification", expires_in: 1.minute) do
-        current.email_notifications.not_shortlisted.first.try(:trigger_at)
-      end
     end
 
     def not_awarded_deadline
