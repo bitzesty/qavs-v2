@@ -135,6 +135,7 @@
 
     <%= javascript_include_tag Ckeditor.cdn_url %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag Ckeditor.cdn_url %>
 
     <% if should_enable_js? %>
       <%= yield :body_end %>

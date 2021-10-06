@@ -53,6 +53,5 @@
 
         = f.error :agreed_with_privacy_policy
         = f.input :agreed_with_privacy_policy, as: :boolean, label: "I have read and accepted the #{link_to 'privacy statement', privacy_path, target: '_blank'}".html_safe
-
         .form-actions
           = f.button :submit, "Create account", class: "govuk-button large"
