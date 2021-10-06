@@ -6,6 +6,5 @@
     per_page     : number of items to fetch per page
     remote       : data-remote
 span.next
-  == link_to_unless current_page.last?, t('views.pagination.next').html_safe, url, html: { remote: remote, method: method }
-
+  == link_to t('views.pagination.next').html_safe, url, { remote: remote, method: :post }
 '
