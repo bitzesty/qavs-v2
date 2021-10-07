@@ -5,8 +5,6 @@ class PalaceInviteForm
 
   attr_accessor :invite, :attendees_consent
 
-  validates :attendees_consent, acceptance: { allow_nil: false, accept: "1" }
-
   def initialize(invite)
     @invite = invite
     @attendees_consent = invite.attendees_consent
@@ -17,6 +15,7 @@ class PalaceInviteForm
       public_send("#{k}=", v) if respond_to?("#{k}=")
     end
     invite.attendees_consent = attributes[:attendees_consent]
+    errors.add(:attendees_consent, "Please confirm you have obtained both attendee's consent to provide their details") unless invite.attendees_consent == "1"
     if attributes[:submitted].present?
       if valid? && invite.save
         invite.update_column(:submitted, true)
