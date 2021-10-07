@@ -5,6 +5,8 @@ class PalaceInviteForm
 
   attr_accessor :invite, :attendees_consent
 
+  validates :attendees_consent, acceptance: { allow_nil: false, accept: "1" }
+
   def initialize(invite)
     @invite = invite
     @attendees_consent = invite.attendees_consent
@@ -26,9 +28,9 @@ class PalaceInviteForm
 
   def valid?
     invite.valid? &&
-    palace_attendees.count > 0 &&
-    palace_attendees.count <= 2 &&
-    palace_attendees.all?(&:valid?)
+      palace_attendees.count.positive? &&
+      palace_attendees.count <= 2 &&
+      palace_attendees.all?(&:valid?)
   end
 
   def palace_attendees

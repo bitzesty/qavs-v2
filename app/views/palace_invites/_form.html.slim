@@ -1,5 +1,4 @@
 = simple_form_for @invite_form, as: :palace_invite, url: palace_invite_url(id: @invite.id), html: { class: 'qae-form', method: :patch } do |f|
-
   - @invite_form.build_attendees if @invite_form.palace_attendees.none?
 
   fieldset.question-block.question-group
@@ -15,7 +14,9 @@
               | attendee
           = render "attendee_details", ff: ff, attendee: i
 
-    = f.input :attendees_consent, as: :boolean, label: "I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household."
+    = f.input :attendees_consent,
+              as: :boolean,
+              label: "I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household."
     = f.error :attendees_consent
 
     = f.submit "Submit", class: "govuk-button save-palace-attendees-button", name: "submit"

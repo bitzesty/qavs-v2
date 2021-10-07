@@ -1,6 +1,6 @@
 class PalaceInvite < ApplicationRecord
   attr_accessor :attendees_consent
-  
+
   belongs_to :form_answer
 
   has_many :palace_attendees, dependent: :destroy, autosave: true
@@ -8,7 +8,7 @@ class PalaceInvite < ApplicationRecord
   validates :form_answer_id, presence: true,
                              uniqueness: true
 
-  validates :attendees_consent, acceptance: { allow_nil: false, accept: '1' }, :on => :update
+  validates :attendees_consent, acceptance: { allow_nil: false, accept: "1" }, on: :update
 
   before_create :set_token
 
