@@ -1,7 +1,7 @@
 class QAEFormBuilder
   class TextQuestionValidator < QuestionValidator
     # regex source: https://www.w3resource.com/javascript/form/email-validation.php
-    EMAIL_REGEX = /\A\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+\z/
+    EMAIL_REGEX = /\A\w+([\.\-\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+\z/
 
     def errors
       result = super
