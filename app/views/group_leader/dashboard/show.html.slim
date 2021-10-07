@@ -10,13 +10,17 @@
           | Important
       .govuk-notification-banner__content
         p.govuk-notification-banner__heading
-          | There is a strict embargo preventing public announcement or publication of any Awards information until 2 June 2022. Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
+          | There is a strict embargo preventing public announcement or publication of any Awards information until
+          =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
+          | . Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
 
     h3.govuk-heading-m
       | What you need to do
 
     h4.govuk-heading-s
-      | By 16 May 2022 &mdash; confirm group name and citation &nbsp;
+      | By
+      =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
+      | &mdash; confirm group name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -24,16 +28,24 @@
         strong.govuk-tag.govuk-tag--red
           | Incomplete
     p.govuk-body
-      | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by midday, 16 May 2022. If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
+      | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by
+      =< @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
+      | . If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
     = link_to "Confirm group name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h4.govuk-heading-s
-      | Between 1 April and 2nd June 2022 &mdash; prepare press coverage
+      | Between 1 April and
+      =<> @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | &mdash; prepare press coverage
     p.govuk-body
-      | Please note, there is a strict embargo preventing public announcement or publication of any Awards information until 9 am on June 2022.
+      | Please note, there is a strict embargo preventing public announcement or publication of any Awards information until
+      =< @deadlines.end_of_embargo.decorate.formatted_mailer_deadline
+      | .
     p.govuk-body
-      | However, you can share additional information with - we may be able to include it in our press coverage. You can also approach your press contacts to arrange coverage around your Award. However, make it clear that they cannot publish anything until 2 June 2022.
+      | However, you can share additional information with - we may be able to include it in our press coverage. You can also approach your press contacts to arrange coverage around your Award. However, make it clear that they cannot publish anything until
+      =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | .
     details.govuk-details
       summary.govuk-details__summary
         span.govuk-details__summary-text
@@ -49,7 +61,9 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h4.govuk-heading-s
-      | By 7 January 2023 &mdash; submit details for Royal Garden Party &nbsp;
+      | By
+      =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
+      | &mdash; submit details for Royal Garden Party &nbsp;
       - if @invite.submitted
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -57,7 +71,11 @@
         strong.govuk-tag.govuk-tag--red
           | Incomplete
     p.govuk-body
-      | Two representatives from the awarded groups can attend a Royal Garden Party in 2023. You must provide the attendee details and your preferred day for attending by midday, 7 January 2023.
+      | Two representatives from the awarded groups can attend a Royal Garden Party in
+      =< AwardYear.current.year
+      | . You must provide the attendee details and your preferred day for attending by
+      =< @deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
+      | .
     = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.id), class: "govuk-button govuk-button--start"
 
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible

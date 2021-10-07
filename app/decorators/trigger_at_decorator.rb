@@ -26,6 +26,8 @@ module TriggerAtDecorator
   end
 
   def long_mail_reminder
+    return date_placeholder unless object.trigger_at
+
     trigger_at = object.strftime("%l:%M %P")
     trigger_at = "midnight" if midnight?
     trigger_at = "midday" if midday?
@@ -34,6 +36,8 @@ module TriggerAtDecorator
   end
 
   def formatted_mailer_deadline
+    return date_placeholder unless object.trigger_at
+    
     trigger_at = object.strftime("%l:%M %P")
     trigger_at = "midnight" if midnight?
     trigger_at = "midday" if midday?
