@@ -15,6 +15,17 @@ def enter_attendee_details(attendee)
   choose "#{prefix}alternative_date_any"
 end
 
+def enter_palace_attendees
+  create(:email_notification, trigger_at: 1.day.ago, kind: "buckingham_palace_invite")
+
+  click_link "Provide details for Royal Garden Party"
+
+  expect(page).to have_content("Details for Royal Garden Party")
+
+  enter_attendee_details(1)
+  enter_attendee_details(2)
+end
+
 describe "Palace invite process" do
   let(:form_answer) { create(:form_answer) }
   let(:group_leader) { create(:group_leader, form_answer_id: form_answer.id) }
@@ -25,18 +36,18 @@ describe "Palace invite process" do
   end
 
   it "allows group leader to confirm palace attendees" do
-    create(:email_notification, trigger_at: 1.day.ago, kind: "buckingham_palace_invite")
-
-    click_link "Provide details for Royal Garden Party"
-
-    expect(page).to have_content("Details for Royal Garden Party")
-
-    enter_attendee_details(1)
-    enter_attendee_details(2)
+    enter_palace_attendees
     check 'I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household.'
-    
     click_button "Submit"
 
     expect(page).to have_selector("#flash-message-success-title", text: "Success")
+  end
+
+  it "does not allow submission unless consent given" do
+    enter_palace_attendees
+
+    click_button "Submit"
+
+    expect(page).to_not have_selector("#flash-message-success-title", text: "Success")
   end
 end

@@ -17,6 +17,6 @@
 
     = f.input :attendees_consent, as: :boolean, label: "I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household."
     = f.error :attendees_consent
-    
+
     = f.submit "Submit", class: "govuk-button save-palace-attendees-button", name: "submit"
     = link_to "Cancel", group_leader_root_path, class: "govuk-button govuk-button--secondary if-no-js-hide"

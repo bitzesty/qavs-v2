@@ -1,4 +1,6 @@
 class PalaceInvite < ApplicationRecord
+  attr_accessor :attendees_consent
+  
   belongs_to :form_answer
 
   has_many :palace_attendees, dependent: :destroy, autosave: true
