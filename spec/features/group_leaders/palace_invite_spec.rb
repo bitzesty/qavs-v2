@@ -48,6 +48,6 @@ describe "Palace invite process" do
 
     click_button "Submit"
 
-    expect(page).to_not have_selector("#flash-message-success-title", text: "Success")
+    expect(page).to have_content("Please confirm you have obtained both attendee's consent to provide their details")
   end
 end
