@@ -610,9 +610,8 @@ class AwardYears::V2022::QAEForms
           required
           words_max 600
           context %(
-            <p class='govuk-hint'>
-              The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However,  key things to know when recommending a group to the national assessors are below:
-            </p>
+            <p class='govuk-hint'>The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements.</p>
+            <p class='govuk-hint'>Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However, key things to know when recommending a group to the national assessors are:</p>
             <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
               <li>The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.</li>
               <li>Instead, the citation should try to capture what is exceptional about this particular group.</li>
@@ -627,8 +626,8 @@ class AwardYears::V2022::QAEForms
             </ul>
           )
           pdf_context %(
-            The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements. Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However,  key things to know are: below when recommending a group to the national assessors:            Please read the guidance about the citation below:
-            \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
+            The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements.
+            Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However, key things to know when recommending a group to the national assessors are:            \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
             \u2022 Instead, the citation should try to capture what is exceptional about this particular group.
             For example:
               \u25E6 the impact it has made on local people, particularly if the local context is challenging;
