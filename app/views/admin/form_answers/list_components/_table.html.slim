@@ -7,10 +7,11 @@ div role="region" aria-labelledby="table-nominations-list-caption" tabindex="0"
         = link_to "(Clear search)", admin_form_answers_path, class: "govuk-link govuk-!-margin-left-3"
     thead.govuk-table__head
       tr.govuk-table__row
-        th.govuk-table__header scope="col"
-          span.govuk-visually-hidden Select for bulk action
-          span.if-no-js-hide
-            = check_box_tag :check_all
+        - if show_bulk_lieutenants_assignment?
+          th.govuk-table__header scope="col"
+            span.govuk-visually-hidden Select for bulk action
+            span.if-no-js-hide
+              = check_box_tag :check_all
         th.sortable.govuk-table__header scope="col" width="450"
           = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
         th.govuk-table__header scope="col" width="250"
