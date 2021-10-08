@@ -116,7 +116,7 @@ window.FormValidation =
   validateEmailQuestion: (question) ->
     val = String(question.find("input[type='email']").val()).toLowerCase()
 
-    if not /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val) && val != ""
+    if not /^\w+([\.\-\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(val) && val != ""
       @logThis(question, "validateEmailQuestion", "Not a valid email")
       @addErrorMessage(question, "Not a valid email")
 

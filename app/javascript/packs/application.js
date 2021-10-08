@@ -33,6 +33,7 @@ $('.bulk-assign-lieutenants-link').on('click', function(e) {
   e.stopPropagation();
 
   MicroModal.show('modal-bulk-assign-lieutenants');
+  $("html").addClass('modal-open');
 })
 
 $('.bulk-assign-assessors-link').on('click', function(e) {
@@ -40,11 +41,13 @@ $('.bulk-assign-assessors-link').on('click', function(e) {
   e.stopPropagation();
 
   MicroModal.show('modal-bulk-assign-assessors');
+  $("html").addClass('modal-open');
 })
 
 $(document).on('click', 'button[data-micromodal-close]', function(e) {
   e.preventDefault();
   e.stopPropagation()
+  $("html").removeClass('modal-open');
 })
 
 if ($('.bulk-assignment-container').length > 0) {

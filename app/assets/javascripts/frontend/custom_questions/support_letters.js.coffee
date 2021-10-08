@@ -122,6 +122,7 @@ window.SupportLetters =
                 show_el = $(this).closest(".govuk-form-group").find(".visible-read-only")
                 show_el.text($(this).val())
               SupportLetters.disable_item_fields_and_controls(parent)
+              window.FormValidation.validateStep()
               SupportLetters.autosave()
 
               return

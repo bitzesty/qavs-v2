@@ -48,5 +48,8 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
     - else
       - url = "#"
-    button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.visible-read-only class="#{'read_only' if admin_in_read_only_mode?}"
-      | Remove
+
+    - if submission_deadline.trigger_at >= Time.zone.now
+      button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.visible-read-only class="#{'read_only' if admin_in_read_only_mode?}"
+        | Remove
+

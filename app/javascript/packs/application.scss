@@ -229,3 +229,8 @@ tbody th::before {
     padding: 0.75rem 0.5rem;
   }
 }
+
+html.modal-open {
+  height: 100vh !important;
+  overflow-y: hidden !important;
+}

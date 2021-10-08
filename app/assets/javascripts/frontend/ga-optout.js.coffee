@@ -12,7 +12,7 @@ jQuery ->
       Cookies.set("analytics_cookies_consent_status", $(@).val(), { expires: 3650 })
       $(".govuk-cookie-banner .initial-message").attr("hidden", "true")
 
-      if $(@).val() == "accept"
+      if $(@).val() == "yes"
         $(".govuk-cookie-banner .accept-message").removeAttr("hidden")
       else
         $(".govuk-cookie-banner .reject-message").removeAttr("hidden")
