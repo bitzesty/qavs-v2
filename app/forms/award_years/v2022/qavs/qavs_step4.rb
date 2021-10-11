@@ -37,11 +37,13 @@ class AwardYears::V2022::QAEForms
         text :nominator_telephone, "Telephone (optional)" do
           sub_ref "D 1.4"
           style "small"
+          type "tel"
         end
 
         text :nominator_mobile, "Mobile (optional)" do
           sub_ref "D 1.5"
           style "small"
+          type "tel"
         end
 
         text :nominator_email, "Email address" do

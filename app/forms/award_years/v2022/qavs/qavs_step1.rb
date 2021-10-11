@@ -52,6 +52,7 @@ class AwardYears::V2022::QAEForms
         text :nominee_phone, "Telephone number" do
           sub_ref "A 1.6"
           style "small"
+          type "tel"
         end
 
         text :nominee_website, "Website" do
@@ -108,6 +109,7 @@ class AwardYears::V2022::QAEForms
           sub_ref "A 2.5"
           required
           style "small"
+          type "tel"
         end
       end
     end
