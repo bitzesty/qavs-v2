@@ -42,7 +42,6 @@ class ContentOnlyController < ApplicationController
 
   def dashboard
     @user_award_forms = user_award_forms
-
     @user_award_forms_submitted = @user_award_forms.submitted
 
     set_unsuccessful_business_applications if Settings.unsuccessful_stage?
