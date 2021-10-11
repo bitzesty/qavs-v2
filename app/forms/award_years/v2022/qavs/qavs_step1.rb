@@ -107,7 +107,6 @@ class AwardYears::V2022::QAEForms
 
         text :nominee_leader_telephone, "Telephone" do
           sub_ref "A 2.5"
-          required
           style "small"
           type "tel"
         end
