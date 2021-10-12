@@ -32,17 +32,32 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= FormAnswerSearch.default_search
-    params[:search].permit!
+    search_params = params[:search] || FormAnswerSearch.default_search
+
+    if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
+      search = NominationSearch.create(serialized_query: params[:search].to_json)
+      redirect_to assessor_form_answers_path(search_id: search.id)
+    end
+
+    if params[:search_id]
+      search = NominationSearch.find_by_id(params[:search_id])
+
+      if search.present?
+        payload = JSON.parse(search.serialized_query)
+        search_params[:search_filter] = payload['search_filter']
+        search_params[:query] = payload['query']
+      end
+    end
+
     scope = current_assessor.applications_scope(
       @award_year
     )
 
-    if params[:search][:query].blank? && category_picker.show_award_tabs_for_assessor?
+    if search_params[:query].blank? && category_picker.show_award_tabs_for_assessor?
       scope = scope.where(award_type: category_picker.current_award_type)
     end
 
-    @search = FormAnswerSearch.new(scope, current_assessor).search(params[:search])
+    @search = FormAnswerSearch.new(scope, current_assessor).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
     @form_answers = @search.results
                       .with_comments_counters

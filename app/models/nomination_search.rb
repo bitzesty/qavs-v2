@@ -1,0 +1,2 @@
+class NominationSearch < ApplicationRecord
+end

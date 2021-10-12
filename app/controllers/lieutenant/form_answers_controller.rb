@@ -53,18 +53,28 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= {
-      sort: "company_or_nominee_name",
-      search_filter: {
-       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
-      }
-    }
-    params[:search].permit!
+    search_params = params[:search] || default_filters
+
+    if params[:search] && params[:search][:search_filter] != default_filters[:search_filter]
+      search = NominationSearch.create(serialized_query: params[:search].to_json)
+      redirect_to lieutenant_form_answers_path(search_id: search.id)
+    end
+
+    if params[:search_id]
+      search = NominationSearch.find_by_id(params[:search_id])
+
+      if search.present?
+        payload = JSON.parse(search.serialized_query)
+        search_params[:search_filter] = payload['search_filter']
+        search_params[:query] = payload['query']
+      end
+    end
+
     scope = current_lieutenant.nominations_scope(
       params[:year].to_s == "all_years" ? nil : @award_year
     ).eligible_for_lieutenant
 
-    @search = FormAnswerSearch.new(scope, current_lieutenant).search(params[:search])
+    @search = FormAnswerSearch.new(scope, current_lieutenant).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
 
     @form_answers = @search.results
@@ -145,6 +155,15 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
   end
 
   private
+
+  def default_filters
+    {
+      sort: "company_or_nominee_name",
+      search_filter: {
+       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+      }
+    }
+  end
 
   def find_resource
     @form_answer ||= current_lieutenant.assigned_nominations.find(params[:id]).decorate

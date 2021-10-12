@@ -55,11 +55,25 @@ class Admin::FormAnswersController < Admin::BaseController
   end
 
   def index
-    params[:search] ||= FormAnswerSearch.default_search
-    params[:search].permit!
+    search_params = params[:search] || FormAnswerSearch.default_search
     authorize :form_answer, :index?
 
-    @search = FormAnswerSearch.new(target_scope, current_admin).search(params[:search])
+    if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
+      search = NominationSearch.create(serialized_query: params[:search].to_json)
+      redirect_to admin_form_answers_path(search_id: search.id)
+    end
+
+    if params[:search_id]
+      search = NominationSearch.find_by_id(params[:search_id])
+
+      if search.present?
+        payload = JSON.parse(search.serialized_query)
+        search_params[:search_filter] = payload['search_filter']
+        search_params[:query] = payload['query']
+      end
+    end
+
+    @search = FormAnswerSearch.new(target_scope, current_admin).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
     @form_answers = @search.results
                       .with_comments_counters

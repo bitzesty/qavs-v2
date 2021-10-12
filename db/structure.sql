@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -42,6 +44,7 @@ CREATE TABLE public.accounts (
 --
 
 CREATE SEQUENCE public.accounts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -130,6 +133,7 @@ CREATE TABLE public.admins (
 --
 
 CREATE SEQUENCE public.admins_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -166,6 +170,7 @@ CREATE TABLE public.aggregated_award_year_pdfs (
 --
 
 CREATE SEQUENCE public.aggregated_award_year_pdfs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -217,6 +222,7 @@ CREATE TABLE public.assessor_assignments (
 --
 
 CREATE SEQUENCE public.assessor_assignments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -272,6 +278,7 @@ CREATE TABLE public.assessors (
 --
 
 CREATE SEQUENCE public.assessors_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -307,6 +314,7 @@ CREATE TABLE public.audit_logs (
 --
 
 CREATE SEQUENCE public.audit_logs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -343,6 +351,7 @@ CREATE TABLE public.award_years (
 --
 
 CREATE SEQUENCE public.award_years_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -446,6 +455,7 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -480,6 +490,7 @@ CREATE TABLE public.deadlines (
 --
 
 CREATE SEQUENCE public.deadlines_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -516,6 +527,7 @@ CREATE TABLE public.draft_notes (
 --
 
 CREATE SEQUENCE public.draft_notes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -551,6 +563,7 @@ CREATE TABLE public.eligibilities (
 --
 
 CREATE SEQUENCE public.eligibilities_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -585,6 +598,7 @@ CREATE TABLE public.email_notifications (
 --
 
 CREATE SEQUENCE public.email_notifications_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -622,6 +636,7 @@ CREATE TABLE public.feedbacks (
 --
 
 CREATE SEQUENCE public.feedbacks_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -661,6 +676,7 @@ CREATE TABLE public.form_answer_attachments (
 --
 
 CREATE SEQUENCE public.form_answer_attachments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -691,6 +707,7 @@ CREATE TABLE public.form_answer_progresses (
 --
 
 CREATE SEQUENCE public.form_answer_progresses_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -726,6 +743,7 @@ CREATE TABLE public.form_answer_transitions (
 --
 
 CREATE SEQUENCE public.form_answer_transitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -793,6 +811,7 @@ CREATE TABLE public.form_answers (
 --
 
 CREATE SEQUENCE public.form_answers_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -912,6 +931,35 @@ ALTER SEQUENCE public.lieutenants_id_seq OWNED BY public.lieutenants.id;
 
 
 --
+-- Name: nomination_searches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.nomination_searches (
+    id bigint NOT NULL,
+    serialized_query text
+);
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.nomination_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.nomination_searches_id_seq OWNED BY public.nomination_searches.id;
+
+
+--
 -- Name: palace_attendees; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -944,6 +992,7 @@ CREATE TABLE public.palace_attendees (
 --
 
 CREATE SEQUENCE public.palace_attendees_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -978,6 +1027,7 @@ CREATE TABLE public.palace_invites (
 --
 
 CREATE SEQUENCE public.palace_invites_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1011,6 +1061,7 @@ CREATE TABLE public.previous_wins (
 --
 
 CREATE SEQUENCE public.previous_wins_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1048,6 +1099,7 @@ CREATE TABLE public.scans (
 --
 
 CREATE SEQUENCE public.scans_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1088,6 +1140,7 @@ CREATE TABLE public.settings (
 --
 
 CREATE SEQUENCE public.settings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1120,6 +1173,7 @@ CREATE TABLE public.site_feedbacks (
 --
 
 CREATE SEQUENCE public.site_feedbacks_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1156,6 +1210,7 @@ CREATE TABLE public.support_letter_attachments (
 --
 
 CREATE SEQUENCE public.support_letter_attachments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1201,6 +1256,7 @@ CREATE TABLE public.support_letters (
 --
 
 CREATE SEQUENCE public.support_letters_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2503,6 +2559,7 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2534,6 +2591,7 @@ CREATE TABLE public.version_associations (
 --
 
 CREATE SEQUENCE public.version_associations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2570,6 +2628,7 @@ CREATE TABLE public.versions (
 --
 
 CREATE SEQUENCE public.versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2736,6 +2795,13 @@ ALTER TABLE ONLY public.group_leaders ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.lieutenants ALTER COLUMN id SET DEFAULT nextval('public.lieutenants_id_seq'::regclass);
+
+
+--
+-- Name: nomination_searches id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches ALTER COLUMN id SET DEFAULT nextval('public.nomination_searches_id_seq'::regclass);
 
 
 --
@@ -2997,6 +3063,14 @@ ALTER TABLE ONLY public.group_leaders
 
 ALTER TABLE ONLY public.lieutenants
     ADD CONSTRAINT lieutenants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nomination_searches nomination_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches
+    ADD CONSTRAINT nomination_searches_pkey PRIMARY KEY (id);
 
 
 --
@@ -3861,6 +3935,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210817084427'),
 ('20210819140008'),
 ('20210826124140'),
-('20210831085355');
+('20210831085355'),
+('20211011083451');
 
 
