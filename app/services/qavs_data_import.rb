@@ -122,7 +122,7 @@ class QavsDataImport
         document["understood_privacy_notice"] = "1"
 
         fa.document = document
-
+        fa.sub_group = row["category_name"].presence && row["category_name"].gsub("Category ", "sub_group_")
         fa.state = "application_in_progress"
         fa.created_at = row["created_at"]
         fa.updated_at = row["updated_at"]
