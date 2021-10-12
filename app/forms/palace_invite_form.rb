@@ -3,17 +3,19 @@ class PalaceInviteForm
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_reader :invite
+  attr_accessor :invite, :attendees_consent
 
   def initialize(invite)
     @invite = invite
+    @attendees_consent = invite.attendees_consent
   end
 
   def update(attributes = {})
     attributes.each do |k, v|
       public_send("#{k}=", v) if respond_to?("#{k}=")
     end
-
+    invite.attendees_consent = attributes[:attendees_consent]
+    errors.add(:attendees_consent, "Please confirm you have obtained both attendee's consent to provide their details") unless invite.attendees_consent == "1"
     if attributes[:submitted].present?
       if valid? && invite.save
         invite.update_column(:submitted, true)
@@ -25,9 +27,9 @@ class PalaceInviteForm
 
   def valid?
     invite.valid? &&
-    palace_attendees.count > 0 &&
-    palace_attendees.count <= 2 &&
-    palace_attendees.all?(&:valid?)
+      palace_attendees.count.positive? &&
+      palace_attendees.count <= 2 &&
+      palace_attendees.all?(&:valid?)
   end
 
   def palace_attendees

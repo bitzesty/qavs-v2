@@ -3,6 +3,8 @@ class GroupLeader::DashboardController < GroupLeader::BaseController
     authorize :group_leader_dashboard, :show?
     @citation = current_subject.form_answer.citation
     @invite = palace_invite
+
+    @deadlines = Settings.current.deadlines
   end
 
   private

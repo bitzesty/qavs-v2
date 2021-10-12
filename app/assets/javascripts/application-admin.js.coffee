@@ -18,6 +18,7 @@
 #= require ./frontend/password-strength-indicator
 #= require ./frontend/textarea-autoResize
 #= require ./frontend/text-character-count
+#= require js.cookie
 #= require_tree ./admin
 #= require search
 #= require jquery-ui

@@ -403,6 +403,7 @@ class FormAnswer < ApplicationRecord
       unless validator.valid?
         if Rails.env.test?
           # Better output in Test env
+          # Or during the import from QAVSv1
           # so that devs can easily detect the reasons of issues!
           errors.add(:base, "Answers invalid! Errors: #{validator.errors.inspect}")
         else

@@ -758,7 +758,6 @@ jQuery ->
             name = $(this).find(".js-system-tag").data('new-hidden-input-name')
             p = name.split('form[supporter_letters_list][')
             p2 = p[1].split(']')
-            console.log(p2)
             index = parseInt(p2[0], 10)
             highest_index = Math.max(highest_index, index)
 
@@ -818,6 +817,7 @@ jQuery ->
         $(this).closest("li").remove()
 
       questionAddDefaultReached(parent_ul)
+      window.FormValidation.validateStep()
       triggerAutosave()
 
   questionAddDefaultReached = (ul) ->

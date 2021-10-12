@@ -112,11 +112,12 @@ window.FormValidation =
       @logThis(question, "validateMatchQuestion", "Emails don't match")
       @addErrorMessage(question, "Emails don't match")
 
-  # regex source: https://www.w3resource.com/javascript/form/email-validation.php
+  # regex source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript/13178771#13178771
   validateEmailQuestion: (question) ->
     val = String(question.find("input[type='email']").val()).toLowerCase()
 
-    if not /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val) && val != ""
+
+    if not /^([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)$/.test(val) && val != ""
       @logThis(question, "validateEmailQuestion", "Not a valid email")
       @addErrorMessage(question, "Not a valid email")
 

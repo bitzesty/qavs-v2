@@ -13,7 +13,6 @@ class AwardYears::V2022::QAEForms
 
         text :nominator_title, "Title" do
           sub_ref "D 1.1"
-          required
           style "tiny"
         end
 
