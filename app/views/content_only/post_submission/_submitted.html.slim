@@ -13,8 +13,13 @@
 
 - applications = FormAnswerDecorator.decorate_collection(award_applications)
 - applications.each do |award|
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-      = award.company_or_nominee_name
-    <div class="govuk-grid-column-one-quarter pull-right">
-      = link_to "View nomination", edit_form_url(award.id)
+  .govuk-grid-column-three-quarters
+    .govuk-grid-row
+      .govuk-grid-column-one-half
+        .govuk-body  class="govuk-!-font-weight-bold"
+          = award.company_or_nominee_name
+      .govuk-grid-column-two-quarters.pull-right
+        .govuk-body
+          = link_to "View nomination", edit_form_url(award.id)
+      hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
+  .clear
