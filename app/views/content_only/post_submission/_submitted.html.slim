@@ -1,12 +1,20 @@
-div role="region" aria-labelledby="table-list-nominations-in-progress-caption" tabindex="0"
-  table.govuk-table#table-list-nominations-in-progress class="govuk-!-width-two-thirds"
-    caption.govuk-visually-hidden#table-list-nominations-in-progress-caption
-      | nominations in progress
-    tbody.govuk-table__body
-      - applications = FormAnswerDecorator.decorate_collection(award_applications)
-      - applications.each do |award|
-        tr.govuk-table__row
-          td.govuk-table__cell class="govuk-!-width-one-half"
-            = award.company_or_nominee_name
-          td.govuk-table__cell.pull-right
-            = link_to "View nomination", edit_form_url(award.id)
+/ div role="region" aria-labelledby="table-list-nominations-in-progress-caption" tabindex="0"
+/   table.govuk-table#table-list-nominations-in-progress class="govuk-!-width-two-thirds"
+/     caption.govuk-visually-hidden#table-list-nominations-in-progress-caption
+/       | nominations in progress
+/     tbody.govuk-table__body
+/       - applications = FormAnswerDecorator.decorate_collection(award_applications)
+/       - applications.each do |award|
+/         tr.govuk-table__row
+/           td.govuk-table__cell class="govuk-!-width-one-half"
+/             = award.company_or_nominee_name
+/           td.govuk-table__cell.pull-right
+/             = link_to "View nomination", edit_form_url(award.id)
+
+- applications = FormAnswerDecorator.decorate_collection(award_applications)
+- applications.each do |award|
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      = award.company_or_nominee_name
+    <div class="govuk-grid-column-one-quarter pull-right">
+      = link_to "View nomination", edit_form_url(award.id)
