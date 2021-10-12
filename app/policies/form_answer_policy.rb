@@ -12,8 +12,9 @@ class FormAnswerPolicy < ApplicationPolicy
   end
 
   def edit?
-    deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
-    ((lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?) && (!deadline.present? || DateTime.now <= deadline)
+    # deadline = record.award_year.settings.winners_email_notification.try(:trigger_at)
+    ((lieutenant? && lieutenancy_assigned?) || admin? || assigned_assessor?)
+    # && (!deadline.present? || DateTime.now <= deadline)
   end
 
   def submit?
