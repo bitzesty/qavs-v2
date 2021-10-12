@@ -1,15 +1,16 @@
 - past_applications.each do |award|
   - award = award.decorate
+  - nomination_name = award.decorate.company_or_nominee_name || "Nomination ID: " + award.id.to_s
   .govuk-grid-column-three-quarters
     .govuk-grid-row
       .govuk-grid-column-one-half
         .govuk-body  class="govuk-!-font-weight-bold"
-          = award.company_or_nominee_name
+          = nomination_name
           small
             = award.awarded? ? "Successful" : "Unsuccessful"
       .govuk-grid-column-two-quarters.pull-right
         .govuk-body
-          = render "content_only/past_applications/download_pdf_link", award: award
+          = render "content_only/past_applications/download_pdf_link", award: award, name: nomination_name
           - if award.not_submitted?
             small
               | The nomination was not submitted on time.
