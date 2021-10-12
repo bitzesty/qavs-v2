@@ -802,7 +802,8 @@ CREATE TABLE public.form_answers (
     ineligible_reason_nominator character varying,
     ineligible_reason_group character varying,
     sub_group character varying,
-    secondary_activity character varying
+    secondary_activity character varying,
+    oid character varying
 );
 
 
@@ -3937,5 +3938,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210826124140'),
 ('20210831085355'),
 ('20211011083451');
-
 

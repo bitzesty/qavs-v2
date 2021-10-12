@@ -26,4 +26,8 @@ module NomineeActivityHelper
   def self.lookup_label_for_activity(activity)
     ACTIVITY_MAPPINGS[activity]
   end
+
+  def self.lookup_key_for_label(activity)
+    ACTIVITY_MAPPINGS.detect { |k, v| v == activity }.try(:first)
+  end
 end

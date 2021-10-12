@@ -18,40 +18,6 @@ class FormAnswerSearch < Search
     super(scope)
   end
 
-  # admin comments with flags + global flag per application
-  def sort_by_flag(scoped_results, desc = false)
-    section = (@subject.is_a?(Admin) ? "admin" : "critical")
-    section = Comment.sections[section]
-
-    q = "form_answers.*,
-      (COUNT(flagged_comments.id)) AS flags_count"
-    scoped_results.select(q)
-      .joins("LEFT OUTER JOIN comments  AS flagged_comments on (flagged_comments.commentable_id=form_answers.id) AND ((flagged_comments.section = '#{section}' AND flagged_comments.commentable_type = 'FormAnswer' AND flagged_comments.flagged = true) OR flagged_comments.section IS NULL)")
-      .group("form_answers.id")
-      .order("flags_count #{sort_order(desc)}")
-  end
-
-  def sort_by_sic_code(scoped_results, desc = false)
-    scoped_results.order("(form_answers.document #>> '{sic_code}') #{sort_order(desc)}")
-  end
-
-  def sort_by_primary_assessor_name(scoped_results, desc = false)
-    scoped_results
-  end
-
-  def sort_by_secondary_assessor_name(scoped_results, desc = false)
-    scoped_results
-  end
-
-  def sort_by_audit_updated_at(scoped_results, desc = false)
-    scoped_results
-      .joins("LEFT OUTER JOIN (SELECT audit_logs.auditable_id, audit_logs.auditable_type, MAX(audit_logs.created_at) latest_audit_date FROM audit_logs
-       WHERE audit_logs.action_type != 'download_form_answer'
-       GROUP BY audit_logs.auditable_id, audit_logs.auditable_type) max_audit_dates ON max_audit_dates.auditable_id = form_answers.id AND max_audit_dates.auditable_type = 'FormAnswer'")
-      .order("COALESCE(max_audit_dates.latest_audit_date, TO_DATE('20101031', 'YYYYMMDD')) #{sort_order(desc)}")
-      .group("max_audit_dates.latest_audit_date")
-  end
-
   def filter_by_status(scoped_results, value)
     scoped_results.where(state: filter_klass.internal_states(value))
   end

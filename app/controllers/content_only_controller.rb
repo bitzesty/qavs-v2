@@ -11,7 +11,8 @@ class ContentOnlyController < ApplicationController
                   :apply_for_queens_award_for_enterprise,
                   :sign_up_complete,
                   :submitted_nomination_successful,
-                  :pre_sign_in
+                  :pre_sign_in,
+                  :cookie_policy
                 ]
 
   before_action :get_current_form,
