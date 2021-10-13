@@ -107,7 +107,7 @@ module QaePdfForms::General::DrawElements
   end
 
   def render_submission_deadline_block(indent_value=0)
-    title = Settings.submission_deadline_title
+    title = @steps.last.local_assessment? ? Settings.local_assessment_submission_deadline_title : Settings.submission_deadline_title
 
     if title.present?
       indent indent_value.mm do

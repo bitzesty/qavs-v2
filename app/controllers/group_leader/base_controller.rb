@@ -1,5 +1,4 @@
 class GroupLeader::BaseController < ApplicationController
-  include Pundit
 
   helper_method :namespace_name, :current_subject
 

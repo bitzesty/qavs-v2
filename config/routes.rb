@@ -43,9 +43,7 @@ Rails.application.routes.draw do
   get "/additional_information_and_contact"             => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
   get "/apply-for-queens-award-for-enterprise"          => redirect("https://www.gov.uk/apply-queens-award-enterprise")
   get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
-
-
-  get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
+  get "/accessibility"                                  => redirect("https://qavs.dcms.gov.uk/accessibility-statement/")
   get "/awardees"                                       => redirect("https://qavs.dcms.gov.uk/awardees/")
   get "/honours"                                        => redirect("https://www.gov.uk/honours")
 

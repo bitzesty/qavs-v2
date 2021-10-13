@@ -1,5 +1,4 @@
 class Assessor::BaseController < ApplicationController
-  include Pundit
 
   layout "application-assessor"
 
