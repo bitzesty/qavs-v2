@@ -17,7 +17,7 @@
           - if f.object.public_send(section.desc).present?
             span class="govuk-!-font-weight-bold"
               | Notes (minimum 50 characters required)
-            p.govuk-body
+            p.govuk-body.comment-content
               = f.object.public_send(section.desc)
           - else
             p.govuk-hint.assessor-notes No comment has been added yet.
