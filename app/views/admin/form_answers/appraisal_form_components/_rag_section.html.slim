@@ -19,7 +19,7 @@
           - if f.object.public_send(section.desc).present?
             span class="govuk-!-font-weight-bold"
               | Notes (optional)
-            p.govuk-body
+            p.govuk-body.comment-content
               = f.object.public_send(section.desc)
           - else
             p.govuk-hint No comment has been added yet.

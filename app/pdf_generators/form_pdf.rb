@@ -48,7 +48,6 @@ class FormPdf < Prawn::Document
     end
     @filled_answers = fetch_filled_answers
     @financial_pointer = FormFinancialPointer.new(@form_answer.decorate)
-
     generate!
   end
 
