@@ -105,6 +105,11 @@ class Settings < ApplicationRecord
       formatted_datetime = current_submission_deadline.strftime("%d %b %Y at %H:%M%P")
       "Submission deadline: #{formatted_datetime}"
     end
+
+    def local_assessment_submission_deadline_title
+      formatted_datetime = current_local_assessment_submission_deadline.strftime("%d %b %Y at %H:%M%P")
+      "Submission deadline: #{formatted_datetime}"
+    end
   end
 
   def winners_email_notification
