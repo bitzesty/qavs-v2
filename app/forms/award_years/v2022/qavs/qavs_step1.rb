@@ -7,7 +7,7 @@ class AwardYears::V2022::QAEForms
           <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
-        header :nominee_details_header, "Group Details" do
+        header :nominee_details_header, "Group details" do
           ref "A 1"
         end
 
