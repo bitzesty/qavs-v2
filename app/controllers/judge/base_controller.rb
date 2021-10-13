@@ -1,5 +1,4 @@
 class Judge::BaseController < ApplicationController
-  include Pundit
 
   layout "application-judge"
 
