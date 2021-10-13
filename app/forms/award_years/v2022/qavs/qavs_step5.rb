@@ -233,9 +233,9 @@ class AwardYears::V2022::QAEForms
               \u2022 Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving.
               \u2022 Promoting wellbeing and reducing loneliness and isolation in [town or area].
           )
-          form_hint "Character limit: 100 (including spaces)"
+          form_hint "The short citation must be a maximum of 100 characters, spaces and punctuation are included as characters. If the short citation is longer than 100 characters we may need to edit it without consulting the group so the certificates can be produced on schedule."
           required
-          words_max 100
+          words_max 15
         end
 
         header :local_assessment_group_work_header, "Work of the group" do
