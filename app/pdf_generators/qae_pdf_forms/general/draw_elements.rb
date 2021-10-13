@@ -220,6 +220,6 @@ module QaePdfForms::General::DrawElements
   end
 
   def show_local_assessment?
-    @current_subject.is_a?(Admin) || @current_subject.is_a?(Lieutenant)
+    @steps.last.title == "Local assessment form"
   end
 end
