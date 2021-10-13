@@ -1,5 +1,7 @@
+- title "Nominator dashboard"
+
 - provide(:page_wrapper_class, "page-dashboard")
-- page_title "Nominator dashboard"
+
 - if Settings.after_current_submission_deadline?
   = render "content_only/info_messages/award_season_closed"
 
