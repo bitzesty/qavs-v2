@@ -7,6 +7,7 @@ class ContentOnlyController < ApplicationController
                   :timeline,
                   :additional_information_and_contact,
                   :privacy,
+                  :accessibility,
                   :cookies,
                   :apply_for_queens_award_for_enterprise,
                   :sign_up_complete,
