@@ -201,7 +201,7 @@ class AwardYears::V2022::QAEForms
           )
           form_hint "Character limit: 100 (including spaces)"
           required
-          words_max 100
+          chars_max 100
         end
 
         header :local_assessment_group_work_header, "Work of the group" do

@@ -3,18 +3,28 @@ class QAEFormBuilder
     def errors
       result = super
 
-      length = ActionView::Base.full_sanitizer.sanitize(
+      words_length = ActionView::Base.full_sanitizer.sanitize(
         question.input_value.to_s
       ).split(" ")
        .reject do |a|
         a.blank?
       end.length
 
-      limit = question.delegate_obj.words_max
+      chars_length = ActionView::Base.full_sanitizer.sanitize(
+        question.input_value.to_s
+      ).length
 
-      if limit && limit_with_buffer(limit) && length && length > limit_with_buffer(limit)
+      word_limit = question.delegate_obj.words_max
+      char_limit = question.delegate_obj.chars_max
+
+      if word_limit && limit_with_buffer(word_limit) && words_length && words_length > limit_with_buffer(word_limit)
         result[question.hash_key] ||= ""
-        result[question.hash_key] << " Exceeded #{limit} words limit."
+        result[question.hash_key] << " Exceeded the #{word_limit} words limit."
+      end
+
+      if char_limit && limit_with_buffer(char_limit) && chars_length && chars_length > limit_with_buffer(char_limit)
+        result[question.hash_key] ||= ""
+        result[question.hash_key] << " Exceeded the #{char_limit} characters limit."
       end
 
       result
@@ -29,9 +39,13 @@ class QAEFormBuilder
     def words_max(num)
       @q.words_max = num
     end
+
+    def chars_max(num)
+      @q.chars_max = num
+    end
   end
 
   class TextareaQuestion < Question
-    attr_accessor :rows, :words_max
+    attr_accessor :rows, :words_max, :chars_max
   end
 end

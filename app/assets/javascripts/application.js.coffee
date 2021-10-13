@@ -928,7 +928,7 @@ jQuery ->
       spacer = $("<div class='js-ckeditor-spacer'></div>")
       spacer.insertAfter($(this).parent().find(".hint"))
 
-      CKEDITOR.replace this,
+      config = {
         title: group.find('label').first().text(),
         language: 'en'
         toolbar_mini: [
@@ -939,11 +939,6 @@ jQuery ->
         toolbar: "mini";
         extraPlugins: 'wordcount'
 
-        wordcount: {
-          showParagraphs: false,
-          showWordCount: true
-        }
-
         removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
         disableNativeSpellChecker: false
 
@@ -951,6 +946,18 @@ jQuery ->
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')
+      }
+
+      if $(this).data('char-max')
+        config.wordcount = {
+          maxCharCount: $(this).data('char-max'),
+          showCharCount: true,
+          showWordCount: false,
+          countLineBreaks: true,
+          countSpacesAsChars: true
+        }
+
+      CKEDITOR.replace this, config
 
       CKEDITOR.on 'instanceCreated', (event) ->
         editor = event.editor
