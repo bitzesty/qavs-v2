@@ -107,7 +107,7 @@ module QaePdfForms::General::DrawElements
   end
 
   def render_submission_deadline_block(indent_value=0)
-    title = show_local_assessment? ? Settings.local_assessment_submission_deadline_title : Settings.submission_deadline_title
+    title = @steps.last.local_assessment? ? Settings.local_assessment_submission_deadline_title : Settings.submission_deadline_title
 
     if title.present?
       indent indent_value.mm do
@@ -217,9 +217,5 @@ module QaePdfForms::General::DrawElements
 
   def render_value_or_undefined(val, undefined_text)
     val.present? ? val : undefined_text
-  end
-
-  def show_local_assessment?
-    @steps.last.title == "Local assessment form"
   end
 end
