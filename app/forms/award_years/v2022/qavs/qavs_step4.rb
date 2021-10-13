@@ -36,11 +36,13 @@ class AwardYears::V2022::QAEForms
         text :nominator_telephone, "Telephone (optional)" do
           sub_ref "D 1.4"
           style "small"
+          type "tel"
         end
 
         text :nominator_mobile, "Mobile (optional)" do
           sub_ref "D 1.5"
           style "small"
+          type "tel"
         end
 
         text :nominator_email, "Email address" do
@@ -50,7 +52,7 @@ class AwardYears::V2022::QAEForms
           required
         end
 
-        confirm :not_volunteer, "" do
+        confirm :not_volunteer, "Confirmation of relationship to the group" do
           sub_ref "D 2"
           required
           text -> do
@@ -60,7 +62,7 @@ class AwardYears::V2022::QAEForms
           end
         end
 
-        confirm :understood_privacy_notice, "" do
+        confirm :understood_privacy_notice, "Confirmation of understanding of the privacy policy" do
           sub_ref "D 3"
           required
           text -> do
@@ -70,7 +72,7 @@ class AwardYears::V2022::QAEForms
           end
         end
 
-        confirm :group_leader_aware, "" do
+        confirm :group_leader_aware, "Confirmation of consent from supporters and group leaders" do
           sub_ref "D 4"
           required
           text -> do
