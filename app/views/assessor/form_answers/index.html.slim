@@ -12,11 +12,13 @@ h1.govuk-heading-xl
                                               activity_options: FormAnswerStatus::AssessorFilter.collection('activity type'),
                                               assigned_county_options: FormAnswerStatus::AssessorFilter.collection('assigned county')
 
-  = hidden_field_tag "search[sort]", params[:search][:sort]
-
   .govuk-button-group
-    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
-    = link_to "Clear search and filters", assessor_form_answers_path, class: "govuk-button govuk-button--secondary"
+    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters', aria: { label: "Search and apply filters" }
+    = link_to "Clear search and filters",
+              assessor_form_answers_path,
+              class: "govuk-button govuk-button--secondary",
+              aria: { label: "Clear search filters" },
+              role: "button"
 
   = render("assessor/form_answers/category_tabs")
 
@@ -27,7 +29,7 @@ h1.govuk-heading-xl
           | Nominations
         - if @search.query?
           = "Search results for '#{@search.query}'"
-          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
+          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link", aria: { label: "Clear search" }, role: "button"
       thead.govuk-table__head
         tr.govuk-table__row
           th.sortable.govuk-table__header scope="col" width="250"
