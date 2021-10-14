@@ -1,18 +1,19 @@
-div role="region" aria-labelledby="table-list-nominations-in-progress-caption" tabindex="0"
-  table.govuk-table#table-list-nominations-in-progress class="govuk-!-width-two-thirds"
-    caption.govuk-visually-hidden#table-list-nominations-in-progress-caption
-      | nominations in progress
-    tbody.govuk-table__body
-    - past_applications.each do |award|
-      - award = award.decorate
-
-      tr.govuk-table__row
-        td.govuk-table__cell class="govuk-!-width-one-half"
-          = award.company_or_nominee_name
+- past_applications.each do |award|
+  - award = award.decorate
+  - nomination_name = award.decorate.company_or_nominee_name || "Nomination ID: " + award.id.to_s
+  .govuk-grid-column-three-quarters
+    .govuk-grid-row
+      .govuk-grid-column-one-half
+        .govuk-body  class="govuk-!-font-weight-bold"
+          = nomination_name
           small
             = award.awarded? ? "Successful" : "Unsuccessful"
-        td.govuk-table__cell.pull-right
-          = render "content_only/past_applications/download_pdf_link", award: award
-
+      .govuk-grid-column-two-quarters.pull-right
+        .govuk-body
+          = render "content_only/past_applications/download_pdf_link", award: award, name: nomination_name
           - if award.not_submitted?
-            | The nomination was not submitted on time.
+            small
+              | The nomination was not submitted on time.
+    .govuk-grid-row
+      hr.govuk-section-break.govuk-section-break--visible class="govuk-!-margin-bottom-2"
+  .clear
