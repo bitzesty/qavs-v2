@@ -135,11 +135,11 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def state_text
-    ""# I18n.t(object.state.to_s, scope: "form_answers.state")
+    I18n.t(object.state.to_s, scope: "form_answers.state")
   end
 
   def state_short_text
-    ""#I18n.t(object.state.to_s, scope: "form_answers.state_short").html_safe
+    I18n.t(object.state.to_s, scope: "form_answers.state_short").html_safe
   end
 
   def eligibility_state
