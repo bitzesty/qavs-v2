@@ -1,7 +1,7 @@
 - user_record = f.object
 
 .govuk-inset-text.admin-user-debounce-api-check-block
-  h4.govuk-heading-s
+  p.govuk-heading-s
     | Email deliverability (Valid/Bounces):
 
   - if user_record.debounce_api_latest_check_at.present?
