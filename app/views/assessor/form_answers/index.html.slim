@@ -14,11 +14,9 @@ h1.govuk-heading-xl
 
   .govuk-button-group
     = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters', aria: { label: "Search and apply filters" }
-    = link_to "Clear search and filters",
+    = button_to "Clear search and filters",
               assessor_form_answers_path,
-              class: "govuk-button govuk-button--secondary",
-              aria: { label: "Clear search filters" },
-              role: "button"
+              class: "govuk-button govuk-button--secondary"
 
   = render("assessor/form_answers/category_tabs")
 
@@ -29,7 +27,7 @@ h1.govuk-heading-xl
           | Nominations
         - if @search.query?
           = "Search results for '#{@search.query}'"
-          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link", aria: { label: "Clear search" }, role: "button"
+          = link_to "(Clear search)", assessor_form_answers_path, class: "govuk-link"
       thead.govuk-table__head
         tr.govuk-table__row
           th.sortable.govuk-table__header scope="col" width="250"
