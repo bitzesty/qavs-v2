@@ -835,7 +835,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id bigint
+    form_answer_id integer
 );
 
 
@@ -889,7 +889,8 @@ CREATE TABLE public.lieutenants (
     deleted boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    ceremonial_county_id integer
+    ceremonial_county_id integer,
+    oid character varying
 );
 
 
@@ -910,6 +911,35 @@ CREATE SEQUENCE public.lieutenants_id_seq
 --
 
 ALTER SEQUENCE public.lieutenants_id_seq OWNED BY public.lieutenants.id;
+
+
+--
+-- Name: nomination_searches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.nomination_searches (
+    id bigint NOT NULL,
+    serialized_query text
+);
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.nomination_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.nomination_searches_id_seq OWNED BY public.nomination_searches.id;
 
 
 --
@@ -2740,6 +2770,13 @@ ALTER TABLE ONLY public.lieutenants ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: nomination_searches id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches ALTER COLUMN id SET DEFAULT nextval('public.nomination_searches_id_seq'::regclass);
+
+
+--
 -- Name: palace_attendees id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2998,6 +3035,14 @@ ALTER TABLE ONLY public.group_leaders
 
 ALTER TABLE ONLY public.lieutenants
     ADD CONSTRAINT lieutenants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nomination_searches nomination_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches
+    ADD CONSTRAINT nomination_searches_pkey PRIMARY KEY (id);
 
 
 --
@@ -3587,14 +3632,6 @@ ALTER TABLE ONLY public.feedbacks
 
 
 --
--- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.group_leaders
-    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
 -- Name: aggregated_award_year_pdfs fk_rails_a450856684; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3863,6 +3900,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210819140008'),
 ('20210826124140'),
 ('20210831085355'),
-('20210928120530');
+('20210928120530'),
+('20211011083451'),
+('20211013073349');
 
 
