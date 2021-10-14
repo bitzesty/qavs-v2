@@ -28,4 +28,10 @@ tbody.govuk-table__body
         span.muted
           = obj.last_updated_by
 
-      td.govuk-table__cell = link_to "View", assessor_form_answer_path(obj), class: 'govuk-link'
+      td.govuk-table__cell
+        - if obj.company_or_nominee_name.present?
+          = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" }, class: 'govuk-link' do
+            | View
+        - else
+          = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, nominee name not yet specified" }, class: 'govuk-link' do
+            | View
