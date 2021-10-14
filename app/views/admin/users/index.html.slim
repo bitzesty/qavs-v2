@@ -10,10 +10,11 @@
               = f.input :query, label: "Search", input_html: { class: "form-control", type: "search" }
         .govuk-button-group
           = f.submit "Search", class: 'govuk-button'
-          = button_to "Clear search",
+          = link_to "Clear search",
                     [:admin, controller_name.to_sym],
                     class: "govuk-button govuk-button--secondary",
-                    method: :get
+                    role: "button",
+                    aria: { label: "Clear search" }
         .govuk-grid-row
           = render "shared/users/search_count"
         .govuk-button-group
