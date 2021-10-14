@@ -15,7 +15,7 @@
       = render "shared/users/search_count"
 
     .govuk-button-group
-      = link_to t("admin.users.new_button.#{controller_name}"), new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
+      = button_to t("admin.users.new_button.#{controller_name}"), new_lieutenant_lieutenant_path, class: 'new-user govuk-button', id: 'add-lieutenant'
     .clear
 
     = render 'list', resources: @resources, f: f
