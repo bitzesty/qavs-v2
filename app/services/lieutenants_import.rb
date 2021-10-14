@@ -94,15 +94,4 @@ class LieutenantsImport
 
     Rails.logger.send(kind, str)
   end
-
-  # Splits name into First name and last name
-  # Where it's needed
-  def split_name(str)
-    splat = str.split(" ")
-
-    first_name = splat[0].presence || "-"
-    last_name = splat[1..-1].join(" ").presence || "-"
-
-    [first_name, last_name]
-  end
 end
