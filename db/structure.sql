@@ -835,7 +835,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id bigint
+    form_answer_id integer
 );
 
 
@@ -889,7 +889,8 @@ CREATE TABLE public.lieutenants (
     deleted boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    ceremonial_county_id integer
+    ceremonial_county_id integer,
+    oid character varying
 );
 
 
@@ -3587,14 +3588,6 @@ ALTER TABLE ONLY public.feedbacks
 
 
 --
--- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.group_leaders
-    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
-
-
---
 -- Name: aggregated_award_year_pdfs fk_rails_a450856684; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3863,6 +3856,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210819140008'),
 ('20210826124140'),
 ('20210831085355'),
-('20210928120530');
+('20210928120530'),
+('20211013073349');
 
 
