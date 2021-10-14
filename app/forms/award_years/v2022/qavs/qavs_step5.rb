@@ -23,13 +23,13 @@ class AwardYears::V2022::QAEForms
           ])
         end
 
-        comment :nominee_details_hint, "" do
-          form_hint %(
-            Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It’s important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
-          )
-        end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
+          header_context %(
+            <p class=govuk-body>
+              Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It’s important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
+            </p>
+          )
           sub_ref "E 1.2"
           form_hint "Please check that the group name given by the nominator is correct."
           required
