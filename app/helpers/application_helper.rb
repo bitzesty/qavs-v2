@@ -162,4 +162,8 @@ module ApplicationHelper
 
     govuk_tag(title, style)
   end
+
+  def page_title(text)
+    content_for :title, text
+  end
 end
