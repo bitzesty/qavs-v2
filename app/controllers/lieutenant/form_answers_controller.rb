@@ -53,18 +53,14 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= {
-      sort: "company_or_nominee_name",
-      search_filter: {
-       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
-      }
-    }
-    params[:search].permit!
+
+    search_params = save_or_load_search!
+
     scope = current_lieutenant.nominations_scope(
       params[:year].to_s == "all_years" ? nil : @award_year
     ).eligible_for_lieutenant
 
-    @search = FormAnswerSearch.new(scope, current_lieutenant).search(params[:search])
+    @search = FormAnswerSearch.new(scope, current_lieutenant).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
 
     @form_answers = @search.results
@@ -145,6 +141,15 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
   end
 
   private
+
+  def default_filters
+    {
+      sort: "company_or_nominee_name",
+      search_filter: {
+       activity_type: FormAnswerStatus::LieutenantFilter::checked_options.invert.values
+      }
+    }
+  end
 
   def find_resource
     @form_answer ||= current_lieutenant.assigned_nominations.find(params[:id]).decorate

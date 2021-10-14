@@ -914,6 +914,35 @@ ALTER SEQUENCE public.lieutenants_id_seq OWNED BY public.lieutenants.id;
 
 
 --
+-- Name: nomination_searches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.nomination_searches (
+    id bigint NOT NULL,
+    serialized_query text
+);
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.nomination_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nomination_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.nomination_searches_id_seq OWNED BY public.nomination_searches.id;
+
+
+--
 -- Name: palace_attendees; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2741,6 +2770,13 @@ ALTER TABLE ONLY public.lieutenants ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: nomination_searches id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches ALTER COLUMN id SET DEFAULT nextval('public.nomination_searches_id_seq'::regclass);
+
+
+--
 -- Name: palace_attendees id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2999,6 +3035,14 @@ ALTER TABLE ONLY public.group_leaders
 
 ALTER TABLE ONLY public.lieutenants
     ADD CONSTRAINT lieutenants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nomination_searches nomination_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nomination_searches
+    ADD CONSTRAINT nomination_searches_pkey PRIMARY KEY (id);
 
 
 --
@@ -3857,6 +3901,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210826124140'),
 ('20210831085355'),
 ('20210928120530'),
+('20211011083451'),
 ('20211013073349');
 
 
