@@ -7,8 +7,6 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
         th.sortable.govuk-table__header scope='col'
           = sort_link f, 'Name', @search, :full_name
         th.sortable.govuk-table__header scope='col'
-          = sort_link f, 'Email', @search, :email
-        th.sortable.govuk-table__header scope='col'
           = sort_link f, 'National assessor sub-group', @search, :sub_group
         th.sortable.govuk-table__header scope='col'
           = sort_link f, 'Signed in on', @search, :last_sign_in_at
@@ -17,7 +15,7 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
         th.govuk-table__header
-          span.govuk-visually-hidden Actions
+          | Edit
     tbody.govuk-table__body
       - if AssessorDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
@@ -29,8 +27,10 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
         - AssessorDecorator.decorate_collection(resources).each do |assessor|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to assessor.full_name, edit_admin_assessor_path(assessor), class: "govuk-link"
-            td.govuk-table__cell = mail_to assessor.email, assessor.email, {class: "ellipsis govuk-link"}
+              = link_to assessor.full_name,
+                        edit_admin_assessor_path(assessor),
+                        class: "govuk-link",
+                        aria: { label: "edit #{ assessor.full_name }"}
             td.govuk-table__cell = assessor.sub_group&.text
             td.govuk-table__cell
               .text-muted
@@ -54,4 +54,8 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
                 .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_assessor_path(assessor), class: "govuk-link", id: "edit-#{ assessor.first_name.downcase }-#{ assessor.last_name.downcase }"
+              = link_to "Edit user",
+                        edit_admin_assessor_path(assessor),
+                        class: "govuk-link",
+                        id: "edit-#{ assessor.first_name.downcase }-#{ assessor.last_name.downcase }",
+                        aria: { label: "edit #{ assessor.full_name }"}
