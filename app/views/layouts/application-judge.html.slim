@@ -1,4 +1,4 @@
-title = content_for?(:title) ? yield(:title) + " - Queen's Award for Voluntary Service" : "Judge - Queen's Award for Voluntary Service"
+title = content_for?(:title) ? yield(:title) : "Judge - Queen's Award for Voluntary Service"
 
 - content_for :html_class, 'html-admin'
 - content_for :service_root, '/judge'
