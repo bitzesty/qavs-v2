@@ -8,7 +8,11 @@
           = f.input :query, label: "Search", input_html: { class: "form-control govuk-!-width-one-half", type: "search" }
     .govuk-button-group
       = f.submit "Search", class: 'govuk-button'
-      = link_to "Clear search", lieutenant_lieutenants_path, class: "govuk-button govuk-button--secondary"
+      = link_to "Clear search",
+                lieutenant_lieutenants_path,
+                class: "govuk-button govuk-button--secondary",
+                role: "button",
+                aria: { label: "clear search" }
     .govuk-grid-row
       = render "shared/users/search_count"
 
