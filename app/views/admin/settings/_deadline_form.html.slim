@@ -26,8 +26,8 @@
               = f.input :trigger_at_year, input_html: { class: 'govuk-date-input__input govuk-input--width-4', aria: { label: "Year" } }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
         = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time', input_html: { aria: { label: "Time" } }
         .govuk-button-group
-          input type="submit" value="Save" class="govuk-button btn-submit" aria-label="Save changes to #{title}"
-          = link_to "#", class: "govuk-button govuk-button--secondary btn-cancel if-no-js-hide", role: 'button' do
+          input type="submit" value="Save" class="govuk-button btn-submit" aria-label="Save changes to #{title}" role="button"
+          = button_to "#", class: "govuk-button govuk-button--secondary btn-cancel if-no-js-hide", aria: { label: "Cancel changes to #{title}" } do
             | Cancel
             span.govuk-visually-hidden
               = " changes to #{title}"
