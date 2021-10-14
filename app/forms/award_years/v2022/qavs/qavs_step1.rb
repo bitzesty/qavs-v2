@@ -7,7 +7,7 @@ class AwardYears::V2022::QAEForms
           <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
-        header :nominee_details_header, "Group Details" do
+        header :nominee_details_header, "Group details" do
           ref "A 1"
         end
 
@@ -52,6 +52,7 @@ class AwardYears::V2022::QAEForms
         text :nominee_phone, "Telephone number" do
           sub_ref "A 1.6"
           style "small"
+          type "tel"
         end
 
         text :nominee_website, "Website" do
@@ -106,8 +107,8 @@ class AwardYears::V2022::QAEForms
 
         text :nominee_leader_telephone, "Telephone" do
           sub_ref "A 2.5"
-          required
           style "small"
+          type "tel"
         end
       end
     end

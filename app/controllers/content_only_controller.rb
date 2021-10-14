@@ -7,6 +7,7 @@ class ContentOnlyController < ApplicationController
                   :timeline,
                   :additional_information_and_contact,
                   :privacy,
+                  :accessibility,
                   :cookies,
                   :apply_for_queens_award_for_enterprise,
                   :sign_up_complete,
@@ -43,7 +44,6 @@ class ContentOnlyController < ApplicationController
 
   def dashboard
     @user_award_forms = user_award_forms
-
     @user_award_forms_submitted = @user_award_forms.submitted
 
     set_unsuccessful_business_applications if Settings.unsuccessful_stage?

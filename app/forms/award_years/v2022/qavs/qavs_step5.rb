@@ -23,13 +23,13 @@ class AwardYears::V2022::QAEForms
           ])
         end
 
-        comment :nominee_details_hint, "" do
-          form_hint %(
-            Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It’s important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
-          )
-        end
 
         text :nomination_local_assessment_form_nominee_name, "Group name" do
+          header_context %(
+            <p class=govuk-body>
+              Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It’s important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
+            </p>
+          )
           sub_ref "E 1.2"
           form_hint "Please check that the group name given by the nominator is correct."
           required
@@ -139,6 +139,28 @@ class AwardYears::V2022::QAEForms
               </div>
             </details>
           )
+          pdf_context %(
+            Eligibility criteria
+
+            The group must be:
+              \u2022 be made up of three or more people
+              \u2022 be based in the UK, Channel Islands or Isle of Man
+              \u2022 have been in operation for at least three years before the date of nomination
+              \u2022 have over half its volunteers eligible to reside in the UK
+              \u2022 be led by volunteers, not by paid staff (we would normally expect at least half the group’s members to be volunteers)
+
+            The group must not:
+              \u2022 have been nominated unsuccessfully for a QAVS award in the past 3 years
+              \u2022 have already received a QAVS award
+              \u2022 operate solely for the benefit of animals (unless it can demonstrate that its work provides significant other benefits to the local community)
+
+            Important
+              \u2022 Groups must provide specific and direct benefits to a community through their work. Groups will be considered ineligible where their sole purpose is to support one or more other groups that provide direct benefits (for example, fundraising and providing grants or other resources).
+              \u2022 QAVS awards are not intended for national organisations. A national group that has local branches would not itself be suitable. A group can be nominated if it is a branch of, or affiliated to, a larger regional or national organisation. However, it will be expected to have initiated and developed a distinctive approach locally and be able to show a high degree of autonomy and self-determination.
+              \u2022 Groups based within or in support of a public service (such as a hospital, police force or school) are eligible, but you will need to be able to demonstrate that:
+                \u25E6 the group has a separate identity from the statutory organisation and is clearly under the leadership of volunteers, rather than simply following instructions from paid staff in the organisation
+                \u25E6 the group is an established, long-term volunteer group with its own unique identity and a governance structure, rather than being part of a wider scheme or a school-led volunteering initiative
+          )
         end
 
         textarea :local_assessment_eligibility_comment, "Comments about eligibility (optional)" do
@@ -199,9 +221,21 @@ class AwardYears::V2022::QAEForms
               </div>
             </details>
           )
-          form_hint "Character limit: 100 (including spaces)"
+          pdf_context %(
+            Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group’s certificate if they eventually receive the Queen’s Award for Voluntary Service. It should not include the group’s name.
+
+            Citations typically use the present participle tense, whereby the verbs end in ‘ing’. For example, “maintaining” instead of “maintain”. See the examples below.
+
+            Short citation examples
+              \u2022 Maintaining [name of the park] for the benefit of the whole community.
+              \u2022 Providing financial, social, health and education services to the local community.
+              \u2022 Transforming a derelict stretch of the canal into a wildlife haven and a vibrant community facility.
+              \u2022 Enabling disabled people of all ages to enjoy the therapeutic excitement of pony carriage driving.
+              \u2022 Promoting wellbeing and reducing loneliness and isolation in [town or area].
+          )
+          form_hint "The short citation must be a maximum of 100 characters, spaces and punctuation are included as characters. If the short citation is longer than 100 characters we may need to edit it without consulting the group so the certificates can be produced on schedule."
           required
-          words_max 100
+          words_max 15
         end
 
         header :local_assessment_group_work_header, "Work of the group" do
@@ -230,6 +264,13 @@ class AwardYears::V2022::QAEForms
               </ul>
             </p>
           )
+          pdf_context %(
+            For example
+              \u2022 Describe the need, for example, gaps in local provision, lack of similar facilities.
+              \u2022 How and when was the need for the group’s work established.
+              \u2022 If the group actively reviews whether the need is still there and whether it is changing?
+              \u2022 Provide any facts or figures about the local area or target group and the level of need - for example, any local surveys or community audits.
+          )
           required
         end
 
@@ -245,6 +286,14 @@ class AwardYears::V2022::QAEForms
               </ul>
             </p>
           )
+          pdf_context %(
+            Please include direct benefits, but also any indirect benefits, such as preserving heritage or environment, promoting community cohesion among volunteers, or contributing to crime reduction.
+
+            Points to consider:
+              \u2022 How has the group made a difference to individual people and the local community?
+              \u2022 Has the group done anything particularly different or innovative compared with similar groups?  What stands out about the group’s approach or impact?
+              \u2022 Any evidence, data, examples to show the impact, such as the number of people helped, visitor numbers, surveys.
+          )
           required
         end
 
@@ -257,6 +306,11 @@ class AwardYears::V2022::QAEForms
                 <li>Can they give examples of doing things better or differently from the other branches in their organisation?</li>
               </ul>
             </p>
+          )
+          pdf_context %(
+            Points to consider:
+              \u2022 How much control does the parent group have over the way the group runs? Does the group have the freedom to make their local approach distinctive? If so, how have they done that?
+              \u2022 Can they give examples of doing things better or differently from the other branches in their organisation?
           )
         end
 
@@ -278,6 +332,10 @@ class AwardYears::V2022::QAEForms
                 <li>Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, please provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.</li>
               </ul>
             </p>
+          )
+          pdf_context %(
+            \u2022 Please be specific when describing the area. For example, if describing a rural setting, explain how far away the nearest large town is and its population size. Is it hard to muster volunteers for various reasons?
+            \u2022 Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, please provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.
           )
           required
         end
@@ -379,6 +437,13 @@ class AwardYears::V2022::QAEForms
               <li>Are there any examples of ways in which the group has taken the initiative to develop its own approach?</li>
             </ul>
           )
+          pdf_context %(
+            Points to consider
+              \u2022 What is the relationship between the nominated group and the wider group? For example, a branch, member, or partner?
+              \u2022 Does the larger group control the activity of the nominated group, and if so, what aspects?
+              \u2022 To what degree does the wider group give the nominated group autonomy, only acting as a source of advice or quality assurance for them?
+              \u2022 Are there any examples of ways in which the group has taken the initiative to develop its own approach?
+          )
           required
         end
 
@@ -417,6 +482,36 @@ class AwardYears::V2022::QAEForms
               </div>
             </details>
             )
+            pdf_context %(
+              Please note, you do not need to have a financial background to complete this aspect of the assessment. Just follow the guidance below.
+
+              Guidance on assessing financial stability and group’s ability to manage its finances.
+
+              Information you need when evaluating a larger organisation
+
+              \u2022 Annual accounts
+              \u2022 Management accounts - the latest annual accounts may be almost a year old. Management accounts will provide up-to-date financial figures.
+              \u2022 You may also consider reviewing cash flow forecasts and budgets.
+
+              Information you need when evaluating a small group
+
+              Up-to-date income and expenditure data could be in any form - for example, a manual entry book or spreadsheet.
+              You could also ask to see the latest bank statements.
+
+              Evaluating financial stability
+
+              When evaluating the group’s financial stability, the main consideration is whether the group can manage fluctuations in income. To do so, consider the following:
+                \u2022 Is the group balancing its income with expenditure?
+                \u2022 How reliable are the group's income sources? Are they over-reliant on a small number of income sources, and are any of them at risk?
+                \u2022 Does the group have an appropriate level of cash reserves to meet immediate financial commitments, including recurring expenditures, such as rent and payroll?
+                \u2022 Does the group have any debts or other fixed financial obligations? Can the group meet those obligations?
+
+              Evaluating the group’s ability to manage finances effectively
+
+              Is the group maintaining proper accounting records that are appropriate for their size and circumstances?
+              In the case of a formally registered or incorporated group, are they submitting their accounts on time to their official registering body, for example, Charity Commission or Companies House? Are their finances published and discussed at an Annual General Meeting?
+              Are the funds used for the purposes for which they are intended?
+            )
           required
         end
 
@@ -440,6 +535,15 @@ class AwardYears::V2022::QAEForms
             </ul>
             <p class='govuk-hint'>Please note, even if the group doesn’t work directly with children or adults at risk, they might deal with them as visitors, for example, in museums, and therefore should have a clear policy setting out their approach.</p>
           )
+          pdf_context %(
+            This may include criminal record checks, a child-protection policy, specialised training and insurance indemnity.
+
+            Points to consider:
+              \u2022 Does the group work with children or adults at risk? If not directly, might the volunteers have contact with them without a responsible adult or carer present?
+              \u2022 Does the group have a safeguarding policy, which is a document that outlines how they will keep children or adults at risk safe? If so, how often is the policy reviewed?
+
+            Please note, even if the group doesn’t work directly with children or adults at risk, they might deal with them as visitors, for example, in museums, and therefore should have a clear policy setting out their approach.
+          )
           required
         end
 
@@ -451,6 +555,11 @@ class AwardYears::V2022::QAEForms
               <li>Which, if any, aspects of the group’s work require insurance? This may include public or employee liability insurance.</li>
               <li>Are specific insurances needed? For example, are volunteer drivers covered in case of accidents?</li>
             </ul>
+          )
+          pdf_context %(
+            Points to consider:
+              \u2022 Which, if any, aspects of the group’s work require insurance? This may include public or employee liability insurance.
+              \u2022 Are specific insurances needed? For example, are volunteer drivers covered in case of accidents?
           )
           required
         end
@@ -486,6 +595,13 @@ class AwardYears::V2022::QAEForms
               <li>The group works in partnership with any local bodies? If so, do these organisations consider the partnership to be positive and constructive?</li>
             </ul>
           )
+          pdf_context %(
+            This may include the local authority, police, health, faith, or other community organisations.
+
+            Please check the views of any relevant authorities and state whether:
+              \u2022 The group has a good reputation with local authorities and community organisations;
+              \u2022 The group works in partnership with any local bodies? If so, do these organisations consider the partnership to be positive and constructive?
+          )
           required
         end
 
@@ -497,6 +613,12 @@ class AwardYears::V2022::QAEForms
               <li>Is there any negative publicity about them?</li>
             </ul>
             <p class='govuk-hint'>We recommend that you conduct an internet search, check local press sites and social media. You can then explore any issues with the group. It is important to spot any potential reputational issues at an early stage.</p>
+          )
+          pdf_context %(
+            \u2022 Are the group or volunteers involved in any disputes or other complaint procedures? This could include vexatious complainants.
+            \u2022 Is there any negative publicity about them?
+
+            We recommend that you conduct an internet search, check local press sites and social media. You can then explore any issues with the group. It is important to spot any potential reputational issues at an early stage.
           )
           required
         end
@@ -526,6 +648,11 @@ class AwardYears::V2022::QAEForms
               <li>Is there evidence that they try to reach potential beneficiaries who might face barriers to accessing the group’s services? For example, this may include people with mental health conditions, disabled people, lonely or isolated, older people, or unemployed.</li>
             </ul>
           )
+          pdf_context %(
+            Points to consider:
+              \u2022 How does the group advertise its services, and who would be likely to hear about them?
+              \u2022 Is there evidence that they try to reach potential beneficiaries who might face barriers to accessing the group’s services? For example, this may include people with mental health conditions, disabled people, lonely or isolated, older people, or unemployed.
+          )
           required
         end
 
@@ -539,6 +666,13 @@ class AwardYears::V2022::QAEForms
               <li>Does the group give equal treatment to everyone, for example, to people from different religious or cultural backgrounds, BAME, LGBTQ+, and disabled people?</li>
               <li>Can they describe any practical steps taken? These may include improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format.</li>
             </ul>
+          )
+          pdf_context %(
+            Points to consider:
+              \u2022 Is everyone in the community who might need the service able to access it?
+              \u2022 Is the service free or is there a charge for using the facilities or programmes?
+              \u2022 Does the group give equal treatment to everyone, for example, to people from different religious or cultural backgrounds, BAME, LGBTQ+, and disabled people?
+              \u2022 Can they describe any practical steps taken? These may include improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format.
           )
           required
         end
@@ -627,14 +761,18 @@ class AwardYears::V2022::QAEForms
           )
           pdf_context %(
             The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be very helpful to the Awarding Committee when making their judgements.
-            Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However, key things to know when recommending a group to the national assessors are:            \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
-            \u2022 Instead, the citation should try to capture what is exceptional about this particular group.
-            For example:
-              \u25E6 the impact it has made on local people, particularly if the local context is challenging;
-              \u25E6 the ways in which its work or approach is distinctive or different from other groups doing similar things;
-              \u25E6 anything outstanding about the way the group is run;
-              \u25E6 any exemplary qualities in the volunteers themselves.
-            \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.
+
+            Detailed guidance, which you can download from your dashboard page, provides more advice about drafting the citation. However, key things to know when recommending a group to the national assessors are:
+              \u2022 The citation does not need to repeat the detail provided in the nomination and local assessment report, since the national assessors will have studied this material carefully as well.
+              \u2022 Instead, the citation should try to capture what is exceptional about this particular group.
+
+              For example:
+                \u25E6 the impact it has made on local people, particularly if the local context is challenging;
+                \u25E6 the ways in which its work or approach is distinctive or different from other groups doing similar things;
+                \u25E6 anything outstanding about the way the group is run;
+                \u25E6 any exemplary qualities in the volunteers themselves.
+
+              \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.
           )
           rows 3
         end

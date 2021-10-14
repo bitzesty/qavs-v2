@@ -19,12 +19,12 @@
         .govuk-form-group
           .govuk-date-input
             .govuk-date-input__item
-              = f.input :trigger_at_day, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Day'
+              = f.input :trigger_at_day, input_html: { class: 'govuk-date-input__input govuk-input--width-2', aria: { label: "Day" } }, label_html: { class: 'govuk-date-input__label' }, label: 'Day'
             .govuk-date-input__item
-              = f.input :trigger_at_month, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Month'
+              = f.input :trigger_at_month, input_html: { class: 'govuk-date-input__input govuk-input--width-2', aria: { label: "Month" } }, label_html: { class: 'govuk-date-input__label' }, label: 'Month'
             .govuk-date-input__item
-              = f.input :trigger_at_year, input_html: { class: 'govuk-date-input__input govuk-input--width-4' }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
-        = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time'
+              = f.input :trigger_at_year, input_html: { class: 'govuk-date-input__input govuk-input--width-4', aria: { label: "Year" } }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
+        = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time', input_html: { aria: { label: "Time" } }
         .govuk-button-group
           input type="submit" value="Save" class="govuk-button btn-submit" aria-label="Save changes to #{title}"
           = link_to "#", class: "govuk-button govuk-button--secondary btn-cancel if-no-js-hide", role: 'button' do

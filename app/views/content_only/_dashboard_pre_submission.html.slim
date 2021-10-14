@@ -2,15 +2,14 @@
   - if @user_award_forms.any?
     = render "current_nominations", award_applications: @user_award_forms
 
-    br
   - else
-      .govuk-warning-text class="govuk-!-margin-bottom-9"
-        span.govuk-warning-text__icon aria-hidden="true"
-          | !
-        strong.govuk-warning-text__text
-          span.govuk-warning-text__assistive
-            | Warning
-          ' You haven't submitted any nominations.
+    .govuk-warning-text class="govuk-!-margin-bottom-9"
+      span.govuk-warning-text__icon aria-hidden="true"
+        | !
+      strong.govuk-warning-text__text
+        span.govuk-warning-text__assistive
+          | Warning
+        ' You haven't submitted any nominations.
 
   - if submission_started? && !submission_ended?
     = render "shared/application_awards_status"

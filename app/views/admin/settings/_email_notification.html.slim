@@ -17,7 +17,7 @@
     .govuk-details__text
       = MailRenderer.new.public_send(kind)
 
-  = link_to "#", class: "govuk-button btn-add-schedule if-no-js-hide" do
+  = link_to "#", class: "govuk-button btn-add-schedule if-no-js-hide govuk-!-margin-bottom-1" do
     | Schedule to send the email
     span.govuk-visually-hidden
       = "for the #{title}"
@@ -28,3 +28,4 @@
   ul.notifications
     - notifications.each_with_index do |notification, index|
       = render 'notification', notification: notification.decorate, title: title, index: index
+  br

@@ -11,7 +11,7 @@ div role="region" aria-labelledby="table-nominations-list-caption" tabindex="0"
           th.govuk-table__header scope="col"
             span.govuk-visually-hidden Select for bulk action
             span.if-no-js-hide
-              = check_box_tag :check_all
+              = check_box_tag :check_all, aria: { label: "Select all for bulk action" }
         th.sortable.govuk-table__header scope="col" width="450"
           = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
         th.govuk-table__header scope="col" width="250"

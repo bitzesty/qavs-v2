@@ -1,5 +1,4 @@
 class Admin::BaseController < ApplicationController
-  include Pundit
   helper_method :namespace_name, :current_subject
 
   layout "application-admin"
@@ -49,7 +48,7 @@ class Admin::BaseController < ApplicationController
       send_data pdf_data.render,
                 filename: "application_#{mode.pluralize}_#{form_answer.decorate.pdf_filename}",
                 type: "application/pdf",
-                disposition: 'attachment'              
+                disposition: 'attachment'
     end
   end
 end

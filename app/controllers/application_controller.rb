@@ -2,6 +2,8 @@ require "app_responder"
 include AuditHelper
 
 class ApplicationController < ActionController::Base
+  include Pundit
+
   add_flash_types :success, :success_template
 
   # Prevent CSRF attacks by raising an exception.
