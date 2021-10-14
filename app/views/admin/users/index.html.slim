@@ -12,11 +12,12 @@
           = f.submit "Search", class: 'govuk-button'
           = button_to "Clear search",
                     [:admin, controller_name.to_sym],
-                    class: "govuk-button govuk-button--secondary"
+                    class: "govuk-button govuk-button--secondary",
+                    method: :get
         .govuk-grid-row
           = render "shared/users/search_count"
         .govuk-button-group
-          = button_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right' do
+          = button_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right', method: :get do
             = t("admin.users.new_button.#{controller_name}")
         .clear
 
