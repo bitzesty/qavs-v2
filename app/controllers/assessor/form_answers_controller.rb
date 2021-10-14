@@ -32,22 +32,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def index
     authorize :form_answer, :index?
-    search_params = params[:search] || FormAnswerSearch.default_search
-
-    if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
-      search = NominationSearch.create(serialized_query: params[:search].to_json)
-      redirect_to assessor_form_answers_path(search_id: search.id)
-    end
-
-    if params[:search_id]
-      search = NominationSearch.find_by_id(params[:search_id])
-
-      if search.present?
-        payload = JSON.parse(search.serialized_query)
-        search_params[:search_filter] = payload['search_filter']
-        search_params[:query] = payload['query']
-      end
-    end
+    search_params = save_or_load_search!
 
     scope = current_assessor.applications_scope(
       @award_year
@@ -101,6 +86,9 @@ class Assessor::FormAnswersController < Assessor::BaseController
     CurrentAwardTypePicker.new(current_subject, params)
   end
 
+  def default_filters
+    FormAnswerSearch.default_search
+  end
 
   def resolve_layout
     case action_name

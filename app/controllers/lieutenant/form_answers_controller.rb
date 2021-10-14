@@ -53,22 +53,8 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   def index
     authorize :form_answer, :index?
-    search_params = params[:search] || default_filters
 
-    if params[:search] && params[:search][:search_filter] != default_filters[:search_filter]
-      search = NominationSearch.create(serialized_query: params[:search].to_json)
-      redirect_to lieutenant_form_answers_path(search_id: search.id)
-    end
-
-    if params[:search_id]
-      search = NominationSearch.find_by_id(params[:search_id])
-
-      if search.present?
-        payload = JSON.parse(search.serialized_query)
-        search_params[:search_filter] = payload['search_filter']
-        search_params[:query] = payload['query']
-      end
-    end
+    search_params = save_or_load_search!
 
     scope = current_lieutenant.nominations_scope(
       params[:year].to_s == "all_years" ? nil : @award_year
