@@ -12,8 +12,16 @@ h1.govuk-heading-xl
                         activity_options: FormAnswerStatus::LieutenantFilter.collection('activity type')
 
   .govuk-button-group
-    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
-    = button_to "Clear search and filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
+    = f.submit 'Search and apply filters',
+                class: 'govuk-button',
+                id: 'apply-nomination-filters',
+                aria: { label: "Search and apply filters" }
+
+    = link_to "Clear search and filters",
+              lieutenant_form_answers_path,
+              class: "govuk-button govuk-button--secondary",
+              role: "button",
+              aria: { label: "Clear search filters" }
 
   .applications-table-wrapper
     div role="region" aria-labelledby="table-list-nominations-caption" tabindex="0"

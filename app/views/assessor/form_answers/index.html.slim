@@ -13,10 +13,16 @@ h1.govuk-heading-xl
                                               assigned_county_options: FormAnswerStatus::AssessorFilter.collection('assigned county')
 
   .govuk-button-group
-    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters', aria: { label: "Search and apply filters" }
-    = button_to "Clear search and filters",
+    = f.submit 'Search and apply filters',
+                class: 'govuk-button',
+                id: 'apply-nomination-filters',
+                aria: { label: "Search and apply filters" }
+                
+    = link_to "Clear search and filters",
               assessor_form_answers_path,
-              class: "govuk-button govuk-button--secondary"
+              class: "govuk-button govuk-button--secondary",
+              role: "button",
+              aria: { label: "Remove filters" }
 
   = render("assessor/form_answers/category_tabs")
 
