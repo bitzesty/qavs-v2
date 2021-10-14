@@ -52,8 +52,12 @@ class LieutenantsImport
         county = CeremonialCounty.where("LOWER(name) = LOWER(?)", row["ceremonial_county"]).first
 
         unless county
-          log("Skipping #{oid}, no county found: `#{row["ceremonial_county"]}`", :error)
-          next
+          if row["ceremonial_county"] == "The City of Londonderry"
+            county = CeremonialCounty.where(name: "The County Borough of Londonderry").first
+          else
+            log("Skipping #{oid}, no county found: `#{row["ceremonial_county"]}`", :error)
+            next
+          end
         end
 
         u.ceremonial_county = county
