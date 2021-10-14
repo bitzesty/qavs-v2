@@ -68,8 +68,9 @@ class Admin::FormAnswersController < Admin::BaseController
 
       if search.present?
         payload = JSON.parse(search.serialized_query)
-        search_params[:search_filter] = payload['search_filter']
-        search_params[:query] = payload['query']
+        search_params[:search_filter] = payload["search_filter"]
+        search_params[:query] = payload["query"]
+        search_params[:sort] = payload["sort"]
       end
     end
 
