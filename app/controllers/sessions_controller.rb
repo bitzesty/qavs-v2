@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  after_action :remove_notice, only: [:create, :destroy]
+  after_action :remove_notice, only: %i[create destroy]
   before_action :disable_browser_caching!
 
   private
