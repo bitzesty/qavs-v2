@@ -7,9 +7,8 @@ class AwardYears::V2022::QAEForms
           <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
-        header :recommendation, "" do
-          header "About this section"
-          header_context %(
+        header :recommendation, "About this section" do
+          help "About this section", %(
             <p class='govuk-body'>
               In this section, please explain how your nominated group has made a significant contribution in its area of activity. We are looking for groups that have given excellent service to their beneficiaries and communities; have delivered their service in innovative ways, and have shown other examples of selfless voluntary service that distinguish their work.
               <strong>Please answer each question, noting the word limits, explaining what achievements make the nominated group stand out from others.</strong>

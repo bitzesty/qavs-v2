@@ -55,11 +55,10 @@ class Admin::FormAnswersController < Admin::BaseController
   end
 
   def index
-    params[:search] ||= FormAnswerSearch.default_search
-    params[:search].permit!
     authorize :form_answer, :index?
+    search_params = save_or_load_search!
 
-    @search = FormAnswerSearch.new(target_scope, current_admin).search(params[:search])
+    @search = FormAnswerSearch.new(target_scope, current_admin).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
     @form_answers = @search.results
                       .with_comments_counters
@@ -235,6 +234,10 @@ class Admin::FormAnswersController < Admin::BaseController
 
   def load_versions
     @versions = FormAnswerVersionsDispatcher.new(@form_answer).versions
+  end
+
+  def default_filters
+    FormAnswerSearch.default_search
   end
 
   def eligibility_params

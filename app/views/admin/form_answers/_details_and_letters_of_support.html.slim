@@ -1,4 +1,4 @@
-h3.govuk-heading-m
+h2.govuk-heading-m
   | Nomination and local assessment form
 
 .govuk-button-group
@@ -9,7 +9,7 @@ h3.govuk-heading-m
 
 - if @form_answer.support_letters.any?
   #section-letters-of-support class="govuk-!-margin-top-7"
-    h3.govuk-heading-m
+    h2.govuk-heading-m
       | Letters of support
     = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.support_letters.first, adjective: 'first'
     - if @form_answer.support_letters.second.present?

@@ -91,4 +91,26 @@ module FormAnswerMixin
       updated_by_type: pundit_user.class
     }.merge(params[:financial_data].permit!)
   end
+
+  def save_or_load_search!
+    search_params = params[:search] || default_filters
+
+    if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
+      search = NominationSearch.create(serialized_query: params[:search].to_json)
+      redirect_to [namespace_name, :form_answers, search_id: search.id]
+    end
+
+    if params[:search_id]
+      search = NominationSearch.find_by_id(params[:search_id])
+
+      if search.present?
+        payload = JSON.parse(search.serialized_query)
+        search_params[:search_filter] = payload["search_filter"]
+        search_params[:query] = payload["query"]
+        search_params[:sort] = payload["sort"]
+      end
+    end
+
+    search_params
+  end
 end

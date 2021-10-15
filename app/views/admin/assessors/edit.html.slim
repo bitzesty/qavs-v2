@@ -1,3 +1,6 @@
+- content_for :before_main_content do
+  = link_to "Back to users list", admin_users_path, class: "govuk-back-link"
+
 h1.govuk-heading-xl
   = t("admin.users.edit_button.#{controller_name}")
 

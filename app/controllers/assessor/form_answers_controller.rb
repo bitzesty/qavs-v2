@@ -32,17 +32,17 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def index
     authorize :form_answer, :index?
-    params[:search] ||= FormAnswerSearch.default_search
-    params[:search].permit!
+    search_params = save_or_load_search!
+
     scope = current_assessor.applications_scope(
       @award_year
     )
 
-    if params[:search][:query].blank? && category_picker.show_award_tabs_for_assessor?
+    if search_params[:query].blank? && category_picker.show_award_tabs_for_assessor?
       scope = scope.where(award_type: category_picker.current_award_type)
     end
 
-    @search = FormAnswerSearch.new(scope, current_assessor).search(params[:search])
+    @search = FormAnswerSearch.new(scope, current_assessor).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
     @form_answers = @search.results
                       .with_comments_counters
@@ -86,6 +86,9 @@ class Assessor::FormAnswersController < Assessor::BaseController
     CurrentAwardTypePicker.new(current_subject, params)
   end
 
+  def default_filters
+    FormAnswerSearch.default_search
+  end
 
   def resolve_layout
     case action_name
