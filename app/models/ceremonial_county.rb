@@ -4,6 +4,8 @@ class CeremonialCounty < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :ordered, -> { order(:country, :name) }
+
   COUNTY_MAPPINGS = {
     "England": [
       "Bedfordshire",

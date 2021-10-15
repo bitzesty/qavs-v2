@@ -59,7 +59,7 @@ module FormAnswerStatus::FilteringHelper
     elsif type == 'nomination'
       options = Hash[not_stated: { label: "Not stated" }]
     end
-    CeremonialCounty.all.collect { |county|
+    CeremonialCounty.ordered.collect { |county|
       options[county.id] = { label: county.name }
     }
     options

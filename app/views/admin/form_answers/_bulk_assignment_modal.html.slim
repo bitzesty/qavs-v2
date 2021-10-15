@@ -15,7 +15,7 @@
             .govuk-form-group.primary-lieutenant-group
               = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "govuk-label"
               = f.select :ceremonial_county_id,
-                        CeremonialCounty.all.pluck(:name, :id),
+                        CeremonialCounty.ordered.pluck(:name, :id),
                         { include_blank: true },
                         class: "govuk-select custom-select"
 
