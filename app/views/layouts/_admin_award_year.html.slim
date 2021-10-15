@@ -3,5 +3,5 @@
     .govuk-form-group
       label.govuk-label for="award-year-select" aria-label="Award year"
         ' Award year
-      = f.select :year, award_years_collection, { selected: params[:year] || AwardYear.current.year }, { id: 'award-year-select', class: 'govuk-select custom-select' }
+      = f.select :year, award_years_collection, { selected: params[:year] || AwardYear.current.year }, { id: 'award-year-select', class: 'govuk-select custom-select', aria: {label: 'award year select'} }
     = f.submit 'Change award year', class: 'govuk-button if-js-hide'
