@@ -38,4 +38,34 @@ namespace :qavsv1 do
       fa.update_column(:state, state)
     end
   end
+
+  task how_did_you_hear_about_award_update: :environment do
+    FormAnswer.all.each do |fa|
+      fa.document["how_did_you_hear_about_award"] = case fa.document["how_did_you_hear_about_award"]
+      when "National newspaper"
+        [{ "type": "national_newspaper" }]
+      when "Local newspaper"
+        [{ "type": "local_newspaper" }]
+      when "TV/radio"
+        [{ "type": "tv_radio" }]
+      when "Internet"
+        [{ "type": "internet" }]
+      when "Word of mouth"
+        [{ "type": "word_of_mouth" }]
+      when "Previous winner/entrant"
+        [{ "type": "previous_winner" }]
+      when "Voluntary organisation/charity"
+        [{ "type": "charity" }]
+      when "Local event"
+        [{ "type": "event" }]
+      when "Local library"
+        [{ "type": "library" }]
+      when "Local council"
+        [{ "type": "council" }]
+      when "Other"
+        [{ "type": "other" }]
+      end
+      fa.save!
+    end
+  end
 end
