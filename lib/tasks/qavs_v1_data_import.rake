@@ -36,12 +36,21 @@ namespace :qavsv1 do
       Rails.logger.info("#{oid}, #{state}")
 
       fa.update_column(:state, state)
+
+      if state == "admin_not_eligible_group"
+        fa.update_column(:ineligible_reason_group, "no_specific_benefit")
+      end
     end
   end
 
   task how_did_you_hear_about_award_update: :environment do
-    FormAnswer.all.each do |fa|
-      fa.document["how_did_you_hear_about_award"] = case fa.document["how_did_you_hear_about_award"]
+    Rails.logger = Logger.new(STDOUT)
+
+    FormAnswer.find_each do |fa|
+      Rails.logger.info("#{fa.id} #{fa.document["how_did_you_hear_about_award"]}")
+
+      old_hdyh = fa.document["how_did_you_hear_about_award"]
+      fa.document["how_did_you_hear_about_award"] = case old_hdyh
       when "National newspaper"
         [{ "type": "national_newspaper" }]
       when "Local newspaper"
@@ -64,7 +73,15 @@ namespace :qavsv1 do
         [{ "type": "council" }]
       when "Other"
         [{ "type": "other" }]
+      else
+        if old_hdyh.is_a?(Array) && old_hdyh.any?
+          next
+        elsif old_hdyh.blank?
+          [{ "type": "other" }]
+        end
       end
+      Rails.logger.info(fa.document["how_did_you_hear_about_award"])
+
       fa.save!
     end
   end
