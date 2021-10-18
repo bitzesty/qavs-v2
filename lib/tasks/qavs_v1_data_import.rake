@@ -85,4 +85,23 @@ namespace :qavsv1 do
       fa.save!
     end
   end
+
+  task volunteers_upgrade: :environment do
+    Rails.logger = Logger.new(STDOUT)
+
+    path = "tmp/nominations_production.csv"
+
+    CSV.foreach(Rails.root.join(path), headers: true) do |row|
+      oid = row["oid"]
+
+      fa = FormAnswer.find_by_oid(oid)
+
+      fa.document["volunteers"] = row["recommendation_details_how_has_the_group_achieved_excellence"]
+      Rails.logger.info oid
+
+      fa.save!
+    end
+
+    Rails.logger.info "Done"
+  end
 end
