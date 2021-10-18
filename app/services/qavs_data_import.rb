@@ -111,8 +111,34 @@ class QavsDataImport
               log("Beneficiaries too long for `#{oid}`, truncating", :warn)
               value = value.split(" ")[0..29].join(" ")
             end
-
             document[v2_name] = prepare_value(value)
+          when "how_did_you_hear_about_award"
+            document[v2_name] = case value
+              when "National newspaper"
+                [{ "type": "national_newspaper" }]
+              when "Local newspaper"
+                [{ "type": "local_newspaper" }]
+              when "TV/radio"
+                [{ "type": "tv_radio" }]
+              when "Internet"
+                [{ "type": "internet" }]
+              when "Word of mouth"
+                [{ "type": "word_of_mouth" }]
+              when "Previous winner/entrant"
+                [{ "type": "previous_winner" }]
+              when "Voluntary organisation/charity"
+                [{ "type": "charity" }]
+              when "Local event"
+                [{ "type": "event" }]
+              when "Local library"
+                [{ "type": "library" }]
+              when "Local council"
+                [{ "type": "council" }]
+              when "Other"
+                [{ "type": "other" }]
+              else
+                [{ "type": "other" }]
+              end
           else
             document[v2_name] = prepare_value(value)
           end
@@ -308,7 +334,7 @@ class QavsDataImport
       "recommendation_details_group_activities" => "doc.group_activities",
       "recommendation_details_who_benefits" => "doc.beneficiaries",
       "recommendation_details_what_are_the_benefits" => "doc.benefits",
-      "recommendation_details_about_the_groups_volunteers" => "doc.volunteers",
+      "recommendation_details_how_has_the_group_achieved_excellence" => "doc.volunteers",
 
       "recommendation_details_how_has_the_group_achieved_excellence" => "doc.",
       "demographic_info_how_did_you_hear" => "doc.how_did_you_hear_about_award",
