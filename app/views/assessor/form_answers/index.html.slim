@@ -15,14 +15,12 @@ h1.govuk-heading-xl
   .govuk-button-group
     = f.submit 'Search and apply filters',
                 class: 'govuk-button',
-                id: 'apply-nomination-filters',
-                aria: { label: "Search and apply filters" }
-                
+                id: 'apply-nomination-filters'
+
     = link_to "Clear search and filters",
               assessor_form_answers_path,
               class: "govuk-button govuk-button--secondary",
-              role: "button",
-              aria: { label: "Remove filters" }
+              role: "button"
 
   = render("assessor/form_answers/category_tabs")
 

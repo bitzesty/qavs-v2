@@ -28,7 +28,7 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
               = link_to group_leader.full_name,
                         edit_admin_group_leader_path(group_leader),
                         class: "govuk-link",
-                        aria: { label: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }" }
+                        aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }
             td.govuk-table__cell
               .text-muted
                 - if group_leader.last_sign_in_at.present?
@@ -55,4 +55,4 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
                 edit_admin_group_leader_path(group_leader),
                 class: "govuk-link",
                 id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }",
-                aria: { label: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }" }
+                aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }
