@@ -6,7 +6,6 @@
 
     .govuk-button-group
       - if ::ServerEnvironment.local_or_dev_or_staging_server?
-        / = link_to "Run Notifications", run_notifications_admin_settings_email_notifications_url, aria:{ label: "Run notifications" }, role: "button", method: :post,
         = button_to "Run Notifications", run_notifications_admin_settings_email_notifications_url, aria:{ label: "Run notifications" }, method: :post,
         class: "govuk-button"
   .clear
