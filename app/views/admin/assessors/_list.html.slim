@@ -57,5 +57,5 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
               = link_to "Edit user",
                         edit_admin_assessor_path(assessor),
                         class: "govuk-link",
-                        id: "edit-#{ assessor.first_name.downcase }-#{ assessor.last_name.downcase }",
+                        id: "edit #{ assessor.first_name.downcase } #{ assessor.last_name.downcase }",
                         aria: { label: "edit #{ assessor.full_name }"}
