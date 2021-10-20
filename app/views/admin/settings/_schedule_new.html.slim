@@ -8,12 +8,12 @@
     .govuk-form-group
       .govuk-date-input
         .govuk-date-input__item
-          = f.input :trigger_at_day, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Day'
+          = f.input :trigger_at_day, input_html: { id: title.parameterize.underscore+'_day', class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Day'
         .govuk-date-input__item
-          = f.input :trigger_at_month, input_html: { class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Month'
+          = f.input :trigger_at_month, input_html: { id: title.parameterize.underscore+'_month', class: 'govuk-date-input__input govuk-input--width-2' }, label_html: { class: 'govuk-date-input__label' }, label: 'Month'
         .govuk-date-input__item
-          = f.input :trigger_at_year, input_html: { class: 'govuk-date-input__input govuk-input--width-4' }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
-    = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time'
+          = f.input :trigger_at_year, input_html: { id: title.parameterize.underscore+'_year', class: 'govuk-date-input__input govuk-input--width-4' }, label_html: { class: 'govuk-date-input__label' }, label: 'Year'
+    = f.input :trigger_at_time, as: :select, collection: time_collection_options, label: 'Time', input_html: { id: title.parameterize.underscore+'_time'}
     .govuk-button-group
       = f.submit "Save", class: "govuk-button btn-save"
       = link_to "Cancel", "#", class: "govuk-button govuk-button--secondary if-no-js-hide btn-cancel", role: 'button'
