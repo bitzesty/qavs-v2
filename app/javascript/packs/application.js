@@ -316,7 +316,7 @@ if (!Cookies.get("general_cookie_consent_status")) {
   })
 }
 
-$('.qae-form').find('input,select,textarea').each(function() {
+$('.question-required').find('input,select,textarea').each(function() {
   $(this).prop('required', true);
   $(this).attr('aria-required', 'true');
 });
