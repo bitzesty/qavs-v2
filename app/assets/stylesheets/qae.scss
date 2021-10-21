@@ -20,7 +20,8 @@
   @content;
 }
 
-.qavs-service-name .qavs-service-name:hover {
+.qavs-service-name:hover,
+.qavs-service-name:focus {
   text-decoration: none !important;
 }
 

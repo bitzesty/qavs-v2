@@ -315,3 +315,13 @@ if (!Cookies.get("general_cookie_consent_status")) {
     $(".govuk-cookie-banner").attr("hidden", "true")
   })
 }
+
+$('.qae-form').find('input,select,textarea').each(function() {
+  $(this).prop('required', true);
+  $(this).attr('aria-required', 'true');
+});
+
+$('.qae-form').find('input[type="number"]').each(function() {
+  $(this).attr('pattern', '[0-9]*');
+  $(this).attr('inputmode', 'decimal');
+});
