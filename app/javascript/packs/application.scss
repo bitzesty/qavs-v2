@@ -234,3 +234,15 @@ html.modal-open {
   height: 100vh !important;
   overflow-y: hidden !important;
 }
+
+.govuk-button {
+  white-space: normal;
+}
+
+.footer-helpline .govuk-link {
+  word-break: break-all;
+}
+
+* {
+  word-break: break-word;
+}

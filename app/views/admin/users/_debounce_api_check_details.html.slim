@@ -10,7 +10,7 @@
       p.govuk-body
         = image_tag "icon-important-sm-red.png", alt: ""
         | Bounces
-      
+
       p.govuk-body
         = "Error code: #{user_record.debounce_api_response_code} (#{user_record.bounces_email_reason})"
         = user_record.decorate.debounce_api_check_cycle_details
@@ -25,7 +25,7 @@
 
   - else
     p.govuk-body
-      = image_tag "icon-info.png", alt: ""
+      / = image_tag "icon-info.png", alt: ""
       | Not scanned yet!
 
     p.govuk-body
