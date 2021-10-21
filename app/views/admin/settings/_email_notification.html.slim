@@ -17,7 +17,7 @@
     .govuk-details__text
       = MailRenderer.new.public_send(kind)
 
-  = link_to "#", class: "govuk-button btn-add-schedule if-no-js-hide govuk-!-margin-bottom-1" do
+  = link_to "#", class: "govuk-button btn-add-schedule if-no-js-hide govuk-!-margin-bottom-1", role: "button" do
     | Schedule to send the email
     span.govuk-visually-hidden
       = "for the #{title}"

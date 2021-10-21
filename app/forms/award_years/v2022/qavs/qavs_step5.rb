@@ -173,24 +173,28 @@ class AwardYears::V2022::QAEForms
         number :local_assessment_form_volunteers_number, "Number of volunteers" do
           sub_ref "E 2.1"
           style "tiny"
+          type "number"
           required
         end
 
         number :local_assessment_form_paid_staff_number, "Number of full time paid staff" do
           sub_ref "E 2.2"
           style "tiny"
+          type "number"
           required
         end
 
         number :local_assessment_form_part_time_staff_number, "Number of part time paid staff" do
           sub_ref "E 2.3"
           style "tiny"
+          type "number"
           required
         end
 
         number :local_assessment_form_beneficiaires_number, "Number of beneficiaries (can be approximate)" do
           sub_ref "E 2.4"
           style "tiny"
+          type "number"
           required
         end
 
