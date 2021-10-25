@@ -13,7 +13,6 @@ Queen's Award for Voluntary Service
 * Rails 6.0
 * Postgresql 9.5+
 * Redis 2.8+
-* Cloudfountry Client
 
 ### Running application
 
