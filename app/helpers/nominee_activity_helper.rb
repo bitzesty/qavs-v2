@@ -25,7 +25,7 @@ module NomineeActivityHelper
   }
 
   def self.nominee_activities
-    ACTIVITY_MAPPINGS.keys.sort
+    ACTIVITY_MAPPINGS.keys
   end
 
   def self.nominee_activity_labels
