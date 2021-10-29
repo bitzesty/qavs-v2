@@ -27,7 +27,7 @@ describe "As Assessor I want to filter applications", js: true do
     assert_results_number(4)
     assign_activity(@forms.first, "ART")
     # Untick sport activity filter
-    click_status_option "Sports"
+    click_status_option "Sport"
     assert_results_number(1)
   end
 
