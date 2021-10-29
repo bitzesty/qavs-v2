@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -835,7 +837,7 @@ CREATE TABLE public.group_leaders (
     first_name character varying,
     last_name character varying,
     deleted boolean DEFAULT false NOT NULL,
-    form_answer_id integer
+    form_answer_id bigint
 );
 
 
@@ -3629,6 +3631,14 @@ ALTER TABLE ONLY public.feedbacks
 
 ALTER TABLE ONLY public.feedbacks
     ADD CONSTRAINT fk_rails_85a1d7f049 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
+
+
+--
+-- Name: group_leaders fk_rails_8781709c53; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.group_leaders
+    ADD CONSTRAINT fk_rails_8781709c53 FOREIGN KEY (form_answer_id) REFERENCES public.form_answers(id);
 
 
 --
