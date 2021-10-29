@@ -25,7 +25,7 @@ module NomineeActivityHelper
   }
 
   def self.nominee_activities
-    ACTIVITY_MAPPINGS.keys.sort
+    ACTIVITY_MAPPINGS.keys
   end
 
   def self.nominee_activity_labels
@@ -38,5 +38,9 @@ module NomineeActivityHelper
 
   def self.lookup_key_for_label(activity)
     ACTIVITY_MAPPINGS.detect { |k, v| v == activity }.try(:first)
+  end
+
+  def sort_by_label(activities)
+    activities.values.sort
   end
 end
