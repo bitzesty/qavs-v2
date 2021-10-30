@@ -4,6 +4,7 @@ class Judge::BaseController < ApplicationController
 
   before_action :authenticate_judge!, :load_award_year_and_settings
   after_action :verify_authorized
+  after_action :update_last_seen_at
 
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :restrict_access_if_admin_in_read_only_mode!, raise: false
@@ -29,5 +30,9 @@ class Judge::BaseController < ApplicationController
   def user_not_authorized
     flash.alert = "You are not authorized to perform this action."
     redirect_to(judge_root_path)
+  end
+
+  def update_last_seen_at
+    session[:judge_last_seen_at] = Time.zone.now
   end
 end

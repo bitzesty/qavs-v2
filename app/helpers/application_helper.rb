@@ -166,4 +166,21 @@ module ApplicationHelper
   def title(page_title)
     content_for(:title) { page_title }
   end
+
+  def timeout_in_minutes
+    20
+  end
+  
+  def corresponding_login_path(scope)
+    case scope
+    when 'admin' then new_admin_session_path
+    when 'assessor' then new_assessor_session_path
+    when 'lieutenant' then new_lieutenant_session_path
+    when 'judge' then new_judge_session_path
+    end
+  end
+  
+  def will_session_timeout?
+    current_admin.present? || current_assessor.present? || current_lieutenant.present? || current_judge.present?
+  end
 end
