@@ -4,6 +4,7 @@ class Assessor::BaseController < ApplicationController
 
   before_action :authenticate_assessor!, :load_award_year_and_settings
   after_action :verify_authorized
+  after_action :update_last_seen_at
 
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :restrict_access_if_admin_in_read_only_mode!, raise: false
@@ -33,5 +34,9 @@ class Assessor::BaseController < ApplicationController
 
   def user_for_paper_trail
     "ASSESSOR:#{current_assessor.id}" if current_assessor.present?
+  end
+
+  def update_last_seen_at
+    session[:assessor_last_seen_at] = Time.zone.now
   end
 end

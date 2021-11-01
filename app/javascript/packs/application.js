@@ -22,11 +22,14 @@ import './application.scss';
 import 'jquery/src/jquery';
 import MicroModal from 'micromodal';
 
-import Accordion from '../components/accordion';
 import AccessibleAutocomplete from '../vendor/accessible-autocomplete.min';
 import CheckboxMultiselect from '../vendor/checkbox-multiselect';
 
 import Cookies from 'js-cookie'
+
+import SessionTimeout from '../components/session_timeout';
+
+SessionTimeout();
 
 frontend.initAll()
 

@@ -52,6 +52,10 @@ class Lieutenant < ApplicationRecord
     super
   end
 
+  def timeout_in
+    20.minutes
+  end
+
   private
   # Do not raise an error if already confirmed.
   def pending_any_confirmation

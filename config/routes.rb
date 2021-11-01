@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     sessions: "sessions"
   }
 
+  get "/session/refresh" => "session#refresh", as: 'refresh_session'
+
   get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
   get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
   get "/how_to_apply"                                   => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
