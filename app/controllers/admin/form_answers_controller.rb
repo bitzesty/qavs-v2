@@ -64,6 +64,28 @@ class Admin::FormAnswersController < Admin::BaseController
                       .with_comments_counters
                       .group("form_answers.id")
                       .page(params[:page])
+
+    respond_to do |format|
+      format.html
+
+      format.csv do
+        case params[:report_kind]
+        when "nomination_data"
+          csv = Reports::NominationsReport.new(@search.results).build
+          filename = "nominations.csv"
+        when "local_assessment_data"
+          csv = Reports::LocalAssessmentReport.new(@search.results).build
+          filename = "local_assessments.csv"
+        end
+
+        send_data(
+          csv.force_encoding(::Encoding::UTF_8),
+          filename: filename,
+          type: 'text/csv; charset=Unicode(UTF-8); header=present',
+          disposition: 'attachment'
+        )
+      end
+    end
   end
 
   def show
