@@ -138,7 +138,7 @@ class Reports::LocalAssessmentReport < Reports::QavsBase
       method: :la_full_citation_full,
     },
     {
-      label: "Local assessment: Individual honours. worthy of a national Honour?",
+      label: "Local assessment: Individual honours. Worthy of a national Honour?",
       method: :la_form_member_worthy_of_honour,
     },
     {
@@ -150,7 +150,7 @@ class Reports::LocalAssessmentReport < Reports::QavsBase
       method: :la_worthy_of_honur_reasons,
     },
     {
-      label: "Local assessment: Individual honours. Assessor's Full Nmae",
+      label: "Local assessment: Individual honours. Assessor's Full Name",
       method: :la_nominating_member_worthy_of_honour_full_name,
     },
     {
