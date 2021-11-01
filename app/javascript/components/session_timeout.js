@@ -1,4 +1,5 @@
 import MicroModal from 'micromodal';
+import 'jquery/src/jquery';
 
 export default function() {
   var dialogElement = document.getElementById("timeout_dialog");
@@ -6,26 +7,20 @@ export default function() {
   if (!dialogElement) return;
 
   var continueButtonElement = document.getElementById("timeout-continue");
-  var warningTimeInMinutes = dialogElement.getAttribute("data-warning-in-minutes");
+  var warningTimeInMinutes = 5;
   var timeoutInMinutes = dialogElement.getAttribute("data-timeout-in-minutes");
   var refreshSessionPath = dialogElement.getAttribute("data-refresh-session-path");
   var timeoutInMilliseconds = (timeoutInMinutes - warningTimeInMinutes) * 60 * 1000;
   var timeoutPath = dialogElement.getAttribute("data-timeout-path");
-  var dialog = new window.A11yDialog(dialogElement);
 
   continueButtonElement.onclick = function () {
-    MicroModal.hide('timeout_dialog');
+    MicroModal.close('timeout_dialog');
     document.querySelector("html").classList.remove('modal-open');
     refreshSession();
   };
 
-  dialog.on("hide", function () {
-    dialogElement.setAttribute("aria-hidden", "true");
-    
-  });
-
   function refreshSession() {
-    Rails.ajax({
+    $.ajax({
       url: refreshSessionPath,
       type: "get",
       success: function () {
@@ -43,6 +38,11 @@ export default function() {
 
   function showTimeoutDialog() {
     document.querySelector("html").classList.add('modal-open');
+    if (document.querySelector('.qae-form')) {
+      document.querySelector('.message-outside-form').style.display = 'none';
+    } else {
+      document.querySelector('.message-inside-form').style.display = 'none';
+    }
     MicroModal.show('timeout_dialog');
     window.sessionTimeout = setTimeout(sessionTimedOut, warningTimeInMinutes * 60 * 1000);
   }

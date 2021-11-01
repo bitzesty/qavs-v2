@@ -1,10 +1,9 @@
-.mm-modal#timeout_dialog aria-hidden="true" data-timeout-in-minutes=timeout_in_minutes data-warning-in-minutes=timeout_warning_in_minutes data-timeout-path=path_on_timeout data-refresh-session-path=refresh_session_path
-}
+.mm-modal#timeout_dialog aria-hidden="true" data-timeout-in-minutes=timeout_in_minutes data-timeout-path=path_on_timeout data-refresh-session-path=refresh_session_path
   .mm-modal__overlay tabindex="-1" data-micromodal-close=''
     .mm-modal__container role="dialog" aria-modal="true" aria-labelledby="timeout_dialog-title"
       header.mm-modal__header
         h3.govuk-heading-m.mm-modal__title id="timeout_dialog-title"
-          = "Your session will expire in #{timeout_warning_in_minutes} minutes"
+          | Your session will expire in 5 minutes
       .govuk-body.mm-modal__content id="timeout_dialog-content"
         .message-outside-form
           | We won't be able to save what you have done and you will lose your progress.
