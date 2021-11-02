@@ -54,7 +54,7 @@ class Assessor < ApplicationRecord
   end
 
   def timeout_in
-    30.minutes
+    20.minutes
   end
 
   private

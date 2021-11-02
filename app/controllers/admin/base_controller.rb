@@ -5,6 +5,7 @@ class Admin::BaseController < ApplicationController
 
   before_action :authenticate_admin!, :load_award_year_and_settings
   after_action :verify_authorized
+  after_action :update_last_seen_at
 
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :restrict_access_if_admin_in_read_only_mode!, raise: false
@@ -50,5 +51,9 @@ class Admin::BaseController < ApplicationController
                 type: "application/pdf",
                 disposition: 'attachment'
     end
+  end
+
+  def update_last_seen_at
+    session[:admin_last_seen_at] = Time.zone.now
   end
 end

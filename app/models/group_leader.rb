@@ -38,7 +38,7 @@ class GroupLeader < ApplicationRecord
   end
 
   def timeout_in
-    60.minutes
+    22.hours
   end
 
   private

@@ -6,6 +6,7 @@ class Lieutenant::BaseController < ApplicationController
 
   before_action :authenticate_lieutenant!, :load_award_year_and_settings
   after_action :verify_authorized
+  after_action :update_last_seen_at
 
   skip_before_action :authenticate_user!, raise: false
   skip_before_action :restrict_access_if_admin_in_read_only_mode!, raise: false
@@ -31,8 +32,11 @@ class Lieutenant::BaseController < ApplicationController
     :lieutenant
   end
 
-
   def user_for_paper_trail
     "LIEUTENANT:#{current_subject.id}" if current_subject.present?
+  end
+
+  def update_last_seen_at
+    session[:lieutenant_last_seen_at] = Time.zone.now
   end
 end

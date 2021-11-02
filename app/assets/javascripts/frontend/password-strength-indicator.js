@@ -98,7 +98,7 @@ $(function() {
     } else if ($("[data-email-field]").length > 0) {
       $emailField = $("[data-email-field]").attr("data-email-field").split(/\W+/).join(" ");
     }
-    $passwordField.parent().parent().prepend('<input type="hidden" id="password-strength-score" name="password-strength-score" value=""/>');
+    $passwordField.parent().parent().prepend('<input type="hidden" class="password-strength-score" name="password-strength-score" value=""/>');
 
     new GOVUK.passwordStrengthIndicator({
       password_field: $passwordField,
@@ -111,7 +111,7 @@ $(function() {
       min_password_length: $passwordField.data('min-password-length'),
 
       update_indicator: function(guidance, strengthScore) {
-        $('#password-strength-score').val(strengthScore);
+        $('.password-strength-score').val(strengthScore);
 
         var someProblem = false;
 

@@ -1,5 +1,5 @@
 - current_step_id = params[:step].present? ? params[:step] : @form.steps.first.title_to_param
-- page_title "#{ I18n.t("form.step_titles.user.#{current_step_id}") }"
+
 .steps-progress-bar
   ol
     - if current_user

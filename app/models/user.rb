@@ -148,7 +148,7 @@ class User < ApplicationRecord
   end
 
   def timeout_in
-    60.minutes
+    22.hours
   end
 
   def check_email_on_bounces!
