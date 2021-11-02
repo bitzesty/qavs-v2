@@ -61,11 +61,11 @@ class Reports::Nomination
   end
 
   def nominee_activity
-    NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+    obj.nominee_activity.presence && NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
   end
 
   def secondary_activity
-    NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
+    obj.secondary_activity.presence && NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
   end
 
   def ceremonial_county
