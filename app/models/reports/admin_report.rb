@@ -34,27 +34,15 @@ class Reports::AdminReport
 
     attachment = year.send("#{id.singularize}_#{category}_hard_copy_pdf")
 
-    if year.send("aggregated_#{id.singularize}_hard_copy_state").to_s == "completed" &&
-       attachment.present? &&
-       attachment.file.present?
-      # Render Hard Copy if it's generated for this year
+    # Render dynamically
+    ops = {category: category, award_year: year}
 
-      OpenStruct.new(
-        hard_copy: true,
-        data: (Rails.env.development? ? attachment.file.read : attachment.file.url),
-        filename: attachment.original_filename
-      )
-    else
-      # Render dynamically
-      ops = {category: category, award_year: year}
+    data = pdf_klass.new("all", nil, ops)
 
-      data = pdf_klass.new("all", nil, ops)
-
-      OpenStruct.new(
-        data: data.render,
-        filename: pdf_filename
-      )
-    end
+    OpenStruct.new(
+      data: data.render,
+      filename: pdf_filename
+    )
   end
 
   private
