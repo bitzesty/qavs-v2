@@ -1,22 +1,31 @@
 module NomineeActivityHelper
 
   ACTIVITY_MAPPINGS = {
-    "ART": "Arts",
-    "EDU": "Education",
-    "EME": "Emergency response",
-    "ENV": "Environment & regeneration",
-    "HEA": "Health",
+    "ARM": "Armed Forces",
+    "ART": "Arts and Media",
+    "ASY": "Asylum Seekers and Refugees",
+    "PLY": "Children and Young People",
+    "SOC": "Community Hubs and Services",
+    "CUL": "Cultural",
+    "DIS": "Disability",
+    "EDU": "Education and Employment",
+    "EME": "Emergency Response",
+    "ENV": "Environment",
+    "EVE": "Events",
+    "FAM": "Family Support",
+    "FOO": "Food Support",
+    "HEA": "Health and Care",
     "HER": "Heritage",
-    "OTH": "Other",
-    "PLY": "Playscheme/youth",
-    "SUP": "Self help/support group",
-    "SOC": "Social centre/community",
-    "SPS": "Social preventative scheme",
-    "SPO": "Sports"
+    "HOM": "Homelessness",
+    "SUP": "Mental Health and Wellbeing",
+    "OLD": "Older People",
+    "SPS": "Social Justice",
+    "SPO": "Sport",
+    "OTH": "Other"
   }
 
   def self.nominee_activities
-    ACTIVITY_MAPPINGS.keys.sort
+    ACTIVITY_MAPPINGS.keys
   end
 
   def self.nominee_activity_labels

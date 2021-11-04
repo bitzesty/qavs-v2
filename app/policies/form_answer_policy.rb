@@ -100,6 +100,10 @@ class FormAnswerPolicy < ApplicationPolicy
     record.shortlisted?
   end
 
+  def can_download_csv_reports?
+    admin?
+  end
+
   def can_review_corp_responsibility?
     can_see_corp_responsibility? &&
     can_update_by_admin_lead_and_primary_assessors?

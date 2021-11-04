@@ -1,12 +1,12 @@
 = f.simple_fields_for [:filters, @search.filters] do |g|
-  .govuk-grid-column-one-third.applications-filter.status-filter aria-label="Status"
+  .govuk-grid-column-one-third.applications-filter.status-filter
     = g.input :status,
               collection: options,
               include_blank: true,
               label: 'Status',
               input_html: { multiple: true, class: 'js-admin-filter-option' }
 
-  .govuk-grid-column-one-third.applications-filter.sub-status-filter aria-label="Post Submission Status"
+  .govuk-grid-column-one-third.applications-filter.sub-status-filter
     = g.input :sub_status,
               collection: sub_options,
               label: 'Post Submission Status',
