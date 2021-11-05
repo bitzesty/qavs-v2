@@ -12,7 +12,7 @@ describe "Admin: Assessor management" do
   it "can create a assessor" do
     visit admin_assessors_path
 
-    click_link "Add national assessor"
+    click_button "Add national assessor"
 
     fill_in "First name", with: "LL"
     fill_in "Last name", with: "KK"

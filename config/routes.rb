@@ -12,12 +12,12 @@ Rails.application.routes.draw do
 
   devise_for :admins, controllers: {
     confirmations: "admins/confirmations",
-    devise_authy: "admin/devise_authy"
+    devise_authy: "admin/devise_authy",
+    sessions: "sessions"
   }, path_names: {
     verify_authy: "/verify-token",
     enable_authy: "/enable-two-factor",
-    verify_authy_installation: "/verify-installation",
-    sessions: "sessions"
+    verify_authy_installation: "/verify-installation"
   }
 
   devise_for :lieutenants, controllers: {

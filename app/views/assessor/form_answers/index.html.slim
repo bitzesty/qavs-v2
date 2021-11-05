@@ -14,11 +14,15 @@ h1.govuk-heading-xl
                                               activity_options: FormAnswerStatus::AssessorFilter.collection('activity type'),
                                               assigned_county_options: FormAnswerStatus::AssessorFilter.collection('assigned county')
 
-  = hidden_field_tag "search[sort]", params.dig(:search, :sort)
-
   .govuk-button-group
-    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
-    = link_to "Clear search and filters", assessor_form_answers_path, class: "govuk-button govuk-button--secondary"
+    = f.submit 'Search and apply filters',
+                class: 'govuk-button',
+                id: 'apply-nomination-filters'
+
+    = link_to "Clear search and filters",
+              assessor_form_answers_path,
+              class: "govuk-button govuk-button--secondary",
+              role: "button"
 
   = render("assessor/form_answers/category_tabs")
 
