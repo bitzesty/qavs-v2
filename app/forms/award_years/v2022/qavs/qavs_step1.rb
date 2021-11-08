@@ -38,7 +38,7 @@ class AwardYears::V2022::QAEForms
             { building: "Building" },
             { street: "Street" },
             { city: "Town or city" },
-            { county: "County" },
+            { county: "County", ignore_validation: true },
             { postcode: "Postcode" }
           ])
         end
@@ -93,7 +93,7 @@ class AwardYears::V2022::QAEForms
             { building: "Building" },
             { street: "Street" },
             { city: "Town or city" },
-            { county: "County" },
+            { county: "County", ignore_validation: true },
             { postcode: "Postcode" }
           ])
         end
