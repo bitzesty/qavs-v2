@@ -145,42 +145,6 @@ ALTER SEQUENCE public.admins_id_seq OWNED BY public.admins.id;
 
 
 --
--- Name: aggregated_award_year_pdfs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.aggregated_award_year_pdfs (
-    id integer NOT NULL,
-    award_year_id integer,
-    award_category character varying,
-    file character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    type_of_report character varying,
-    original_filename character varying,
-    sub_type character varying
-);
-
-
---
--- Name: aggregated_award_year_pdfs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.aggregated_award_year_pdfs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: aggregated_award_year_pdfs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.aggregated_award_year_pdfs_id_seq OWNED BY public.aggregated_award_year_pdfs.id;
-
-
---
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2637,13 +2601,6 @@ ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admin
 
 
 --
--- Name: aggregated_award_year_pdfs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.aggregated_award_year_pdfs ALTER COLUMN id SET DEFAULT nextval('public.aggregated_award_year_pdfs_id_seq'::regclass);
-
-
---
 -- Name: assessor_assignments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2875,14 +2832,6 @@ ALTER TABLE ONLY public.admin_verdicts
 
 ALTER TABLE ONLY public.admins
     ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
-
-
---
--- Name: aggregated_award_year_pdfs aggregated_award_year_pdfs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.aggregated_award_year_pdfs
-    ADD CONSTRAINT aggregated_award_year_pdfs_pkey PRIMARY KEY (id);
 
 
 --
@@ -3181,13 +3130,6 @@ CREATE UNIQUE INDEX index_admins_on_reset_password_token ON public.admins USING 
 --
 
 CREATE UNIQUE INDEX index_admins_on_unlock_token ON public.admins USING btree (unlock_token);
-
-
---
--- Name: index_aggregated_award_year_pdfs_on_award_year_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_aggregated_award_year_pdfs_on_award_year_id ON public.aggregated_award_year_pdfs USING btree (award_year_id);
 
 
 --
@@ -3632,14 +3574,6 @@ ALTER TABLE ONLY public.feedbacks
 
 
 --
--- Name: aggregated_award_year_pdfs fk_rails_a450856684; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.aggregated_award_year_pdfs
-    ADD CONSTRAINT fk_rails_a450856684 FOREIGN KEY (award_year_id) REFERENCES public.award_years(id);
-
-
---
 -- Name: support_letter_attachments fk_rails_abd43a0510; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3902,6 +3836,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210831085355'),
 ('20210928120530'),
 ('20211011083451'),
-('20211013073349');
+('20211013073349'),
+('20211104074415');
 
 
