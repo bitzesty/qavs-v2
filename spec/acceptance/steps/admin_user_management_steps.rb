@@ -4,11 +4,11 @@ end
 
 step "I create new user" do
   step "I go to user management page"
-  click_link "Add nominator"
+  click_button "Add nominator"
 
   fill_in 'Email', with: 'user@example.com'
-  fill_in 'First name', with: "Mana"
-  fill_in "Last name", with: "O'Lana"
+  fill_in 'First name', with: "Dummy"
+  fill_in "Last name", with: "User"
   click_button "Add user"
 end
 
@@ -16,7 +16,8 @@ step "I edit user" do
   step "I go to user management page"
   click_link 'Edit user'
 
-  fill_in 'Email', with: 'user@example.com'
+  fill_in 'First name', with: 'Dummy'
+  fill_in "Last name", with: "User"
 
   click_button "Update user"
 end
@@ -24,7 +25,7 @@ end
 step "I should see user in the list" do
   step "I go to user management page"
 
-  expect(page).to have_link('user@example.com')
+  expect(page).to have_link("Dummy User")
 end
 
 step "a not confirmed user exists" do

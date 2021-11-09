@@ -4,7 +4,7 @@ class QAEFormBuilder
 
   class CeremonialCountyQuestionBuilder < OptionsQuestionBuilder
     def counties
-      CeremonialCounty.all.each do |county|
+      CeremonialCounty.ordered.each do |county|
         @q.options << QuestionAnswerOption.new(county.id, county.name)
       end
     end

@@ -7,13 +7,11 @@ div role="region" aria-labelledby="table-list-admin-users-caption" tabindex="0"
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Name', @search, :full_name
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Email', @search, :email
-        th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Signed in on', @search, :last_sign_in_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.govuk-table__header
-          span.govuk-visually-hidden Actions
+          | Edit
     tbody.govuk-table__body
       - if AdminDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
@@ -25,8 +23,10 @@ div role="region" aria-labelledby="table-list-admin-users-caption" tabindex="0"
         - AdminDecorator.decorate_collection(resources).each do |admin|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to admin.full_name, edit_admin_admin_path(admin), class: "govuk-link"
-            td.govuk-table__cell = mail_to admin.email, admin.email, {class: "ellipsis govuk-link"}
+              = link_to admin.full_name,
+                        edit_admin_admin_path(admin),
+                        class: "govuk-link",
+                        aria: { label: "edit #{ admin.full_name }" }
             td.govuk-table__cell
               - if admin.last_sign_in_at.present?
                 .text-muted
@@ -42,4 +42,8 @@ div role="region" aria-labelledby="table-list-admin-users-caption" tabindex="0"
                 .text-danger
                   ' Not confirmed
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_admin_path(admin), class: "govuk-link", id: "edit-#{ admin.first_name.downcase }-#{ admin.last_name.downcase }"
+              = link_to "Edit user",
+                        edit_admin_admin_path(admin),
+                        class: "govuk-link",
+                        id: "edit-#{ admin.first_name.downcase }-#{ admin.last_name.downcase }",
+                        aria: { label: "edit #{ admin.full_name }" }
