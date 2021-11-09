@@ -18,7 +18,7 @@
         .govuk-grid-row
           = render "shared/users/search_count"
         .govuk-button-group
-          = button_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right', method: :get do
+          = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right', role: 'button' do
             = t("admin.users.new_button.#{controller_name}")
         .clear
 
