@@ -7,15 +7,13 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Name', @search, :full_name
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Email', @search, :email
-        th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Signed in on', @search, :last_sign_in_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
         th.govuk-table__header
-          span.govuk-visually-hidden Actions
+          | Edit
     tbody.govuk-table__body
       - if resources.none?
         tr.govuk-table__row
@@ -27,8 +25,10 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
         - GroupLeaderDecorator.decorate_collection(resources).each do |group_leader|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to group_leader.full_name, edit_admin_group_leader_path(group_leader), class: "govuk-link"
-            td.govuk-table__cell = mail_to group_leader.email, group_leader.email, {class: "ellipsis govuk-link"}
+              = link_to group_leader.full_name,
+                        edit_admin_group_leader_path(group_leader),
+                        class: "govuk-link",
+                        aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }
             td.govuk-table__cell
               .text-muted
                 - if group_leader.last_sign_in_at.present?
@@ -51,4 +51,8 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
                 .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_group_leader_path(group_leader), class: "govuk-link", id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }"
+              = link_to "Edit user",
+                edit_admin_group_leader_path(group_leader),
+                class: "govuk-link",
+                id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }",
+                aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }

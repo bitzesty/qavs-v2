@@ -13,11 +13,15 @@ h1.govuk-heading-xl
     = render "filters", f: f,
                         activity_options: FormAnswerStatus::LieutenantFilter.collection('activity type')
 
-  = hidden_field_tag "search[sort]", params.dig(:search, :sort)
-
   .govuk-button-group
-    = f.submit 'Search and apply filters', class: 'govuk-button', id: 'apply-nomination-filters'
-    = link_to "Clear search and filters", lieutenant_form_answers_path, class: "govuk-button govuk-button--secondary"
+    = f.submit 'Search and apply filters',
+                class: 'govuk-button',
+                id: 'apply-nomination-filters'
+
+    = link_to "Clear search and filters",
+              lieutenant_form_answers_path,
+              class: "govuk-button govuk-button--secondary",
+              role: "button"
 
   .applications-table-wrapper
     div role="region" aria-labelledby="table-list-nominations-caption" tabindex="0"

@@ -7,8 +7,6 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Name', @search, :full_name
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Email', @search, :email
-        th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Lieutenancy office', @search, :ceremonial_county_name
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Type', @search, :role
@@ -19,7 +17,7 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
         th.govuk-table__header
-          span.govuk-visually-hidden Actions
+          | Edit
     tbody.govuk-table__body
       - if resources.none?
         tr.govuk-table__row
@@ -31,8 +29,10 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
         - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to lieutenant.full_name, edit_admin_lieutenant_path(lieutenant), class: "govuk-link"
-            td.govuk-table__cell = mail_to lieutenant.email, lieutenant.email, {class: "ellipsis govuk-link"}
+              = link_to lieutenant.full_name,
+                edit_admin_lieutenant_path(lieutenant),
+                class: "govuk-link",
+                aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
             td.govuk-table__cell
               = lieutenant.ceremonial_county.name
             td.govuk-table__cell
@@ -59,4 +59,7 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
                 .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant), class: "govuk-link", id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }"
+              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant),
+                        class: "govuk-link",
+                        id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
+                        aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }

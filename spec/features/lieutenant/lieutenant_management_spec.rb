@@ -14,7 +14,7 @@ describe "Lieutenant: Lieutenant management" do
   it "can create a lieutenant" do
     visit lieutenant_lieutenants_path
 
-    click_link "add-lieutenant"
+    click_button "add-lieutenant"
 
     fill_in "First name", with: "LL"
     fill_in "Last name", with: "KK"

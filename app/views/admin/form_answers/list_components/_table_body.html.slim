@@ -5,7 +5,7 @@
       td.govuk-table__cell = check_box_tag "check_#{obj.id}", obj.id, false, class: "form-answer-check", aria: { label: "Select nomination #{obj.id} for bulk action" }
     td.td-title.govuk-table__cell
       - if obj.company_or_nominee_name.present?
-        = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" }, class: 'govuk-link' do
+        = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination for #{obj.company_or_nominee_name}" }, class: 'govuk-link' do
           = obj.company_or_nominee_name
       - else
         = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, nominee name not yet specified" }, class: 'govuk-link' do
@@ -22,21 +22,23 @@
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name
     td.govuk-table__cell
-      - if obj.nominee_activity?
-        = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
-      br
-      - if obj.secondary_activity?
-        = NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
+      div
+        - if obj.nominee_activity?
+          = NomineeActivityHelper.lookup_label_for_activity(obj.nominee_activity.to_sym)
+        br
+        - if obj.secondary_activity?
+          = NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
     td.govuk-table__cell
       = obj.sub_group.try(:text) || "Not assigned"
     td.govuk-table__cell
-      = obj.last_updated_at
-      br
-      span.muted
-        = obj.last_updated_by
+      div
+        = obj.last_updated_at
+        br
+        span.muted
+          = obj.last_updated_by
     td.govuk-table__cell
       - if obj.company_or_nominee_name.present?
-        = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" }, class: 'govuk-link' do
+        = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination for #{obj.company_or_nominee_name}" }, class: 'govuk-link' do
           | View
       - else
         = link_to polymorphic_url([namespace_name, obj]), aria: { label: "View submitted nomination, nominee name not yet specified" }, class: 'govuk-link' do

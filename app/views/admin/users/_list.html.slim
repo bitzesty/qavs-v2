@@ -7,15 +7,13 @@ div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
         th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Name', @search, :full_name
         th.sortable.govuk-table__header scope="col"
-          = sort_link f, 'Email', @search, :email
-        th.sortable.govuk-table__header scope="col"
           = sort_link f, 'Signed in on', @search, :last_sign_in_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked?", @search, :locked_at
         th.govuk-table__header
-          span.govuk-visually-hidden Actions
+          | Edit
     tbody.govuk-table__body
       - if UserDecorator.decorate_collection(resources).none?
         tr.govuk-table__row
@@ -27,10 +25,10 @@ div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
         - UserDecorator.decorate_collection(resources).each do |user|
           tr.govuk-table__row
             th.govuk-table__header scope="row"
-              = link_to edit_admin_user_path(user), class: "govuk-link" do
-                span.ellipsis
-                  = user.full_name
-            td.govuk-table__cell = mail_to user.email, user.email, {class: "ellipsis govuk-link"}
+              = link_to user.full_name,
+                        edit_admin_user_path(user),
+                        class: "govuk-link",
+                        aria: { label: "edit #{ user.full_name }" }
             td.govuk-table__cell
               - if user.last_sign_in_at.present?
                 .text-muted
@@ -55,4 +53,7 @@ div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
                 .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_user_path(user), class: "govuk-link"
+              = link_to "Edit user",
+                        edit_admin_user_path(user),
+                        class: "govuk-link",
+                        aria: { label: "edit #{ user.full_name }" }

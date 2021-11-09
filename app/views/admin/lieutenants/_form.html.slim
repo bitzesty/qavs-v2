@@ -4,7 +4,7 @@
   = f.association :ceremonial_county,
                   input_html: { class: "govuk-select"},
                   include_blank: false,
-                  colleciton: CeremonialCounty.all,
+                  colleciton: CeremonialCounty.ordered,
                   label_method: :name,
                   label: 'Lieutenancy office',
                   label_html: { class: 'govuk-label--s' }
