@@ -18,11 +18,11 @@
       = render "shared/users/search_count"
 
     .govuk-button-group
-      = button_to t("admin.users.new_button.#{controller_name}"),
+      = link_to t("admin.users.new_button.#{controller_name}"),
                   new_lieutenant_lieutenant_path,
                   class: 'new-user govuk-button',
                   id: 'add-lieutenant',
-                  method: :get
+                  role: 'button'
     .clear
 
     = render 'list', resources: @resources, f: f
