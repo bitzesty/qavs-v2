@@ -27,7 +27,7 @@ end
 def column_values(column_number)
   within ".applications-table" do
     all("tbody tr").map do |tr|
-      tr.all("td")[column_number].text
+      tr.all("th, td")[column_number].text
     end
   end
 end

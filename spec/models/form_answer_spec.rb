@@ -76,17 +76,6 @@ RSpec.describe FormAnswer, type: :model do
       expect(HardCopyGenerators::FormDataGenerator).to receive_message_chain(:new, :run)
       form_answer.generate_pdf_version_from_latest_doc!
     end
-
-    it '#generate_case_summary_hard_copy_pdf! triggers correctly' do
-      expect(HardCopyGenerators::CaseSummaryGenerator).to receive_message_chain(:new, :run)
-      form_answer.generate_case_summary_hard_copy_pdf!
-    end
-
-    it '#generate_feedback_hard_copy_pdf! triggers correctly' do
-      expect(HardCopyGenerators::FeedbackGenerator).to receive_message_chain(:new, :run)
-      form_answer.generate_feedback_hard_copy_pdf!
-    end
-
   end
 
   describe "validations" do
