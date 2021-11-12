@@ -1,9 +1,0 @@
-li
-  div
-    p.govuk-body
-      | Are you sure?
-    br
-    = simple_form_for form_answer_attachment,
-                      url: form_form_answer_organisational_chart_url(@form_answer.id, form_answer_attachment.id),
-                      html: { class: 'qae-form', method: :delete } do |f|
-      = f.submit "Delete", class: "govuk-button govuk-button--warning button-alt"
