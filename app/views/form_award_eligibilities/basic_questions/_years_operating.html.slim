@@ -1,5 +1,7 @@
 .question-body
   p.question-context
     = @eligibility.class.hint(question)
-  = f.input :years_operating, as: :numeric, label: @eligibility.class.label(step).html_safe, input_html: { class: 'tiny' }, label_html: { class: 'govuk-label govuk-label--l' }
+  legend.govuk-fieldset__legend
+    = f.label @eligibility.class.label(step).html_safe, class: 'govuk-label govuk-label--l', tag: 'h2'
+  = f.input :years_operating, as: :numeric, input_html: { class: 'tiny' }, label: false
   span.clear
