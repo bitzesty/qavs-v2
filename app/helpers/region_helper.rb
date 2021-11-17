@@ -83,7 +83,7 @@ module RegionHelper
     "South Glamorgan": "Wales",
     "South Lanarkshire": "Scotland",
     "South Yorkshire": "Yorkshire & The Humber",
-    "Stafffordshire": "West Midlands",
+    "Staffordshire": "West Midlands",
     "Stirling": "Scotland",
     "Suffolk": "East of England",
     "Surrey": "South East",
