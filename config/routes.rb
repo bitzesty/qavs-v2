@@ -115,22 +115,6 @@ Rails.application.routes.draw do
       resources :supporters, only: [:new, :create, :index, :destroy]
       resources :support_letters, only: [:new, :create, :destroy]
       resources :form_attachments, only: [:index, :new, :create, :destroy]
-      resource :form_links, only: [:new, :create, :destroy]
-      resources :organisational_charts, only: [:new, :create, :destroy] do
-        get :confirm_deletion
-      end
-      resource :positions, only: [:new, :create, :edit, :update, :destroy] do
-        get :index, on: :collection
-      end
-
-      [
-        :awards,
-        :subsidiaries
-      ].each do |resource_name|
-        resource resource_name, only: [:new, :create, :edit, :update, :destroy] do
-          get :confirm_deletion
-        end
-      end
     end
   end
   # NON JS implementation - end

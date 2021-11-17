@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class QaePdfForms::General::QuestionPointer
   include QaePdfForms::CustomQuestions::ByYear
-  include QaePdfForms::CustomQuestions::Lists
   include QaePdfForms::CustomQuestions::SupporterLists
   include QaePdfForms::CustomQuestions::CheckboxSeria
   include QaePdfForms::CustomQuestions::Textarea
@@ -37,9 +36,6 @@ class QaePdfForms::General::QuestionPointer
   ANSWER_FONT_END = "</color>".freeze
 
   BLOCK_QUESTIONS = [
-    QAEFormBuilder::AwardHolderQuestion,
-    QAEFormBuilder::PositionDetailsQuestion,
-    QAEFormBuilder::SubsidiariesAssociatesPlantsQuestion,
     QAEFormBuilder::UploadQuestion,
     QAEFormBuilder::ByYearsLabelQuestion,
     QAEFormBuilder::ByYearsQuestion,
@@ -377,12 +373,8 @@ class QaePdfForms::General::QuestionPointer
         form_pdf.indent 7.mm do
           render_years_labels_table
         end
-      when QAEFormBuilder::ByYearsQuestion, QAEFormBuilder::TurnoverExportsCalculationQuestion, QAEFormBuilder::OneOptionByYearsQuestion
+      when QAEFormBuilder::ByYearsQuestion, QAEFormBuilder::OneOptionByYearsQuestion
         render_years_table
-      when QAEFormBuilder::SubsidiariesAssociatesPlantsQuestion
-        if humanized_answer.present?
-          render_subsidiaries_plants
-        end
       when QAEFormBuilder::SupportersQuestion
         form_pdf.indent 7.mm do
           render_supporters
@@ -393,41 +385,11 @@ class QaePdfForms::General::QuestionPointer
         form_pdf.default_bottom_margin
         render_word_limit
         render_wysywyg_content
-      when *LIST_TYPES
-        form_pdf.indent 7.mm do
-          render_list
-        end
       when QAEFormBuilder::CheckboxSeriaQuestion
         render_checkbox_selected_values
       else
         title = q_visible? && humanized_answer.present? ? humanized_answer : ""
         form_pdf.render_standart_answer_block(title)
-      end
-    end
-  end
-
-  def render_subsidiaries_plants
-    if q_visible? && list_rows.present?
-      form_pdf.indent 7.mm do
-        list_rows.each do |subsidiary|
-          subsidiary_text = subsidiary[0]
-          subsidiary_text += ANSWER_FONT_START
-          subsidiary_text += " in "
-          subsidiary_text += subsidiary[1]
-          subsidiary_text += " with "
-          subsidiary_text += subsidiary[2]
-          subsidiary_text += " employees"
-          subsidiary_text += ANSWER_FONT_END
-
-          form_pdf.render_text subsidiary_text,
-                               inline_format: true
-
-          desc = subsidiary[3]
-          if desc.present?
-            form_pdf.render_text "#{ANSWER_FONT_START} #{desc} #{ANSWER_FONT_END}",
-                                 inline_format: true
-          end
-        end
       end
     end
   end
