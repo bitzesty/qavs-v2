@@ -342,6 +342,17 @@ class FormAnswer < ApplicationRecord
   def final_state?
     FormAnswerStateMachine::FINAL_VERDICT_STATES.include?(state.to_sym)  end
 
+  def active_support_letters
+    @active_support_letters ||= begin
+      list = document["supporter_letters_list"] || [{}]
+      ids = list.map { |dl| dl["support_letter_id"] }
+
+      support_letters.select do |sl|
+        ids.include?(sl.id)
+      end
+    end
+  end
+
   private
 
   def set_award_year

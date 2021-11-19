@@ -155,4 +155,24 @@ RSpec.describe FormAnswer, type: :model do
       end
     end
   end
+
+  describe "#active_support_letters" do
+    let(:nomination) { create(:form_answer, :submitted) }
+    let!(:sl1) { create(:support_letter, user: nomination.user, form_answer: nomination) }
+    let!(:sl2) { create(:support_letter, user: nomination.user, form_answer: nomination) }
+    let!(:sl3) { create(:support_letter, user: nomination.user, form_answer: nomination) }
+
+    before do
+      list = [
+        { "support_letter_id" => sl1.id },
+        { "support_letter_id" => sl2.id }
+      ]
+
+      nomination.document = nomination.document.merge("supporter_letters_list" => list)
+    end
+
+    it "filters out support letters that are not from the document" do
+      expect(nomination.active_support_letters.map(&:id).sort).to eq([sl1.id, sl2.id].sort)
+    end
+  end
 end
