@@ -345,7 +345,7 @@ class FormAnswer < ApplicationRecord
   def active_support_letters
     @active_support_letters ||= begin
       list = document["supporter_letters_list"] || [{}]
-      ids = list.map { |dl| dl["support_letter_id"] }
+      ids = list.map { |dl| dl["support_letter_id"].to_i }
 
       support_letters.select do |sl|
         ids.include?(sl.id)
