@@ -102,6 +102,19 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :numeric, class: 'govuk-form-group', error_class: "govuk-form-group--error" do |b|
+    b.wrapper tag: :fieldset, class: 'govuk-fieldset' do |bb|
+      bb.use :html5
+      bb.optional :readonly
+
+      bb.use :label, wrap_with: { tag: :legend, class: 'govuk-fieldset__legend' }, tag: :h2, class: 'govuk-label govuk-label--l'
+
+      bb.use :error, wrap_with: { class: 'govuk-error-message' }
+      bb.use :hint, wrap_with: { class: 'govuk-hint' }
+      bb.use :input, class: 'govuk-input'
+    end
+  end
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default
 
@@ -184,6 +197,7 @@ SimpleForm.setup do |config|
     boolean: :checkbox,
     radio_buttons: :radio_buttons,
     select: :select,
+    numeric: :numeric,
     text: :textarea
   }
 

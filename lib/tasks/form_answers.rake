@@ -358,7 +358,7 @@ namespace :form_answers do
     def change_county(key, nomination)
       old_county = nomination.document[key]
       if @cs.exclude?(old_county)
-        mapped = @map[old_county] || "Orkney Islands"
+        mapped = @map[old_county] || "Highland"
         raise "invalid mapping for #{old_county} - #{mapped}" if @cs.exclude?(mapped)
         puts "Updating #{key} for #{nomination.id} #{nomination.company_or_nominee_name}. From #{old_county} to #{mapped}"
         nomination.document = nomination.document.merge(key => mapped)

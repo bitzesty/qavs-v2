@@ -7,10 +7,10 @@ h2.govuk-heading-m
 
 = link_to "Download nomination and local assessment form (PDF)", { namespace: namespace_name, path: @form_answer, format: :pdf }, class: "govuk-link download-link govuk-link--no-visited-state"
 
-- if @form_answer.support_letters.any?
+- if @form_answer.active_support_letters.any?
   #section-letters-of-support class="govuk-!-margin-top-7"
     h2.govuk-heading-m
       | Letters of support
-    = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.support_letters.first, adjective: 'first'
-    - if @form_answer.support_letters.second.present?
-      = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.support_letters.second, adjective: 'second'
+    = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.active_support_letters.first, adjective: 'first'
+    - if @form_answer.active_support_letters.second.present?
+      = render "admin/form_answer_attachments/support_letter", support_letter: @form_answer.active_support_letters.second, adjective: 'second'

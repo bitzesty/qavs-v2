@@ -14,7 +14,7 @@ p.govuk-body
     strong
       | National assessor sub-group
     br
-    | Sub-group 1
+    = @form_answer.sub_group.try(:text) || "Not assigned"
   p.govuk-body
     strong
       | Lord Lieutenancy office
