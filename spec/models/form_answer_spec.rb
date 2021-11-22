@@ -164,8 +164,8 @@ RSpec.describe FormAnswer, type: :model do
 
     before do
       list = [
-        { "support_letter_id" => sl1.id },
-        { "support_letter_id" => sl2.id }
+        { "support_letter_id" => sl1.id.to_s },
+        { "support_letter_id" => sl2.id.to_s }
       ]
 
       nomination.document = nomination.document.merge("supporter_letters_list" => list)
