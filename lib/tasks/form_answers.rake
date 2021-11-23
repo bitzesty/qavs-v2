@@ -216,4 +216,161 @@ namespace :form_answers do
     form_answer = FormAnswer.find(args[:id])
     ManualUpdaters::TradeAwardDowngrader.new(form_answer).run!
   end
+
+  desc "Fixes imported counties"
+  task fix_imported_counties: :environment do
+    @map = {
+      "North Lincolnshire" => "Lincolnshire - Yorkshire & The Humber region (includes North East Lincolnshire, North Lincolnshire)",
+      "Greater Manchester" => "Manchester",
+      "London" => "Greater London",
+      "Wirral" => "Merseyside",
+      "west Midlands" => "West Midlands",
+      "Cleveland" => "North Yorkshire - North East England region (includes Middlesbrough, Redcar and Cleveland, Stockton-on-Tees)",
+      "S Yorks" => "South Yorkshire",
+      "Co Antrim" => "County Antrim",
+      "Lincolnshire" => "Lincolnshire - Yorkshire & The Humber region (includes North East Lincolnshire, North Lincolnshire)",
+      "E Sussex" => "East Sussex",
+      "Yorkshire" => "Lincolnshire - Yorkshire & The Humber region (includes North East Lincolnshire, North Lincolnshire)",
+      "North Yorkshire" => "North Yorkshire - North East England region (includes Middlesbrough, Redcar and Cleveland, Stockton-on-Tees)",
+      "East Susex" => "East Sussex",
+      "Antrim" => "County Antrim",
+      "CAMBRIDGESHIRE" => "Cambridgeshire",
+      "Debyshire" => "Derbyshire",
+      "Lancs" => "Lancashire",
+      "london" => "Greater London",
+      "Western Isles" => "Na h-Eileanan Siar - Western Isles",
+      "SOUTH LANARKSHIRE" => "South Lanarkshire",
+      "Argyll &Bute" => "Argyll and Bute",
+      "Argyll" => "Argyll and Bute",
+      "LONDON" => "Greater London",
+      "SURREY" => "Surrey",
+      "North Somerset" => "Somerset",
+      "Wigan" => "Manchester",
+      "GREATER MANCHESTER" => "Manchester",
+      "Warwickhire" => "Warwickshire",
+      "Tyrone" => "County Tyrone",
+      "lancashire" => "Lancashire",
+      "W Yorkshire" => "West Yorkshire",
+      "Wigtownshire" => "Dumfries and Galloway",
+      "Fermanagh" => "County Fermanagh",
+      "fermanagh" => "County Fermanagh",
+      "Co. Antrim" => "County Antrim",
+      "Middlesex" => "Greater London",
+      "Wakefield" => "West Yorkshire",
+      "Halifax" => "West Yorkshire",
+      "HAMPSHIRE" => "Hampshire",
+      "WEST SUSSEX" => "West Sussex",
+      "Herts" => "Hertfordshire",
+      "Berkshire," => "Berkshire",
+      "Durham" => "County Durham",
+      "DORSET" => "Dorset",
+      "Londonderry" => "County Londonderry",
+      "STAFFORDSHIRE" => "Staffordshire",
+      "Buckingham" => "Buckinghamshire",
+      "Bucks" => "Buckinghamshire",
+      "Cambs" => "Cambridgeshire",
+      "Dumfriesshire" => "Dumfries and Galloway",
+      "Belfast" => "County Antrim",
+      "CHESHIRE" => "Cheshire",
+      "Outer Hebrides" => "Na h-Eileanan Siar - Werstern Isles",
+      "KENT" => "Kent",
+      "Tameside Manchester" => "Manchester",
+      "Greater Manhester" => "Manchester",
+      "South Yorks" => "South Yorkshire",
+      "Stirling." => "Stirling",
+      "Notts" => "Nottinghamshire",
+      "wiltshire" => "Wiltshire",
+      "Wilts" => "Wiltshire",
+      "Tyne and wear" => "Tyne and Wear",
+      "Newcastle upon Tyne" => "Tyne and Wear",
+      "Mersyside" => "Merseyside",
+      "Dundee" => "City of Dundee",
+      "Tarporley" => "Cheshire",
+      "Worcs" => "Worcestershire",
+      "West Yorks" => "West Yorkshire",
+      "Glasgow" => "City of Glasgow",
+      "Chester" => "Cheshire",
+      "Berwick-upon-Tweed" => "Northumberland",
+      "Hackney" => "Greater London",
+      "Hitchin Herts" => "Hertfordshire",
+      "Perthshire" => "Perth and Kinross",
+      "Aberdeen city" => "Aberdeenshire",
+      "Doncaster" => "South Yorkshire",
+      "Kincardineshire" => "Aberdeenshire",
+      "Blaenau Gwent" => "Monmouthshire",
+      "West yorks" => "West Yorkshire",
+      "west Yorkshire" => "West Yorkshire",
+      "Wolverhampton" => "Staffordshire",
+      "Bolton" => "Manchester",
+      "Radcliffe" => "Manchester",
+      "Telford Shropshire" => "Shropshire",
+      "WEST MIDLANDS" => "West Midlands",
+      "Tyne & Wear" => "Tyne and Wear",
+      "Bridgend" => "Mid Glamorgan",
+      "Glos" => "Gloucestershire",
+      "Glos." => "Gloucestershire",
+      "Stirlingshire" => "Stirling",
+      "Leics" => "Leicestershire",
+      "Richmond" => "Greater London",
+      "Telford" => "Shropshire",
+      "West Berkshire" => "Berkshire",
+      "Hants" => "Hampshire",
+      "city of Edinburgh" => "City of Edinburgh",
+      "South gloucestershire" => "Gloucestershire",
+      "Avon" => "Gloucestershire",
+      "WIGTOWNSHIRE" => "Dumfries and Galloway",
+      "Warrington" => "Cheshire",
+      "Derry" => "County Londonderry",
+      "Bedford" => "Warrington",
+      "East Susssex" => "East Sussex",
+      "Shetland" => "Shetland Islands",
+      "Gwent" => "Monmouthshire",
+      "Kent," => "Kent",
+      "West Bromwich" => "West Midlands",
+      "Co Tyrone" => "County Tyrone",
+      "s yorkshire" => "South Yorkshire",
+      "Birmingham" => "West Midlands",
+      "Caerphilly" => "Mid Glamorgan",
+      "Armagh" => "County Armagh",
+      "Rochdale" => "Lancashire",
+      "Northants" => "Northamptonshire",
+      "Dunkingfield" => "Manchester",
+      "warwickshire" => "Warwickshire",
+      "essex" => "Essex",
+      "Liverpool" => "Merseyside"
+    }
+
+    @cs = ApplicationController.helpers.counties.map(&:to_s)
+
+    nominations = FormAnswer.where("document->>'nominee_address_county' NOT IN (?) OR document->>'nominee_leader_address_county' NOT IN (?) OR document->>'nominator_address_county' NOT IN (?)", @cs, @cs, @cs)
+
+    puts "This will update #{nominations.count} nominations."
+
+    confirm_token = rand(36**6).to_s(36)
+    STDOUT.puts "Enter '#{confirm_token}' to confirm:"
+    input = STDIN.gets.chomp
+
+    unless input == confirm_token
+      puts "Aborting. You entered #{input}"
+      exit
+    end
+
+    def change_county(key, nomination)
+      old_county = nomination.document[key]
+      if @cs.exclude?(old_county)
+        mapped = @map[old_county] || "Highland"
+        raise "invalid mapping for #{old_county} - #{mapped}" if @cs.exclude?(mapped)
+        puts "Updating #{key} for #{nomination.id} #{nomination.company_or_nominee_name}. From #{old_county} to #{mapped}"
+        nomination.document = nomination.document.merge(key => mapped)
+      end
+    end
+
+    nominations.each do |nomination|
+      change_county("nominee_address_county", nomination)
+      change_county("nominee_leader_address_county", nomination)
+      change_county("nominator_address_county", nomination)
+
+      nomination.save!
+    end
+  end
 end

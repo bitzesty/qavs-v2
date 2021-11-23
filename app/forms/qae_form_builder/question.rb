@@ -4,15 +4,12 @@ class QAEFormBuilder
     SKIP_PRESENCE_VALIDATION_QUESTIONS = [
       "DateQuestion",
       "AddressQuestion",
-      "InnovationFinancialYearDateQuestion",
       "ByYearsQuestion",
       "ByYearsLabelQuestion",
       "OneOptionByYearsQuestion",
       "OneOptionByYearsLabelQuestion",
       "UserInfoQuestion",
-      "AwardHolderQuestion",
       "SupportersQuestion",
-      "SubsidiariesAssociatesPlantsQuestion"
     ]
 
     attr_reader :question, :answers
