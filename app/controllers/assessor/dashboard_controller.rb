@@ -1,5 +1,5 @@
 class Assessor::DashboardController < Assessor::BaseController
   def index
-    authorize :dashboard, :index?
+    authorize :assessor_dashboard, :index?
   end
 end

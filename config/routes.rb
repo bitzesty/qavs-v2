@@ -120,7 +120,7 @@ Rails.application.routes.draw do
   # NON JS implementation - end
 
   namespace :assessor do
-    root to: "form_answers#index"
+    root to: "dashboard#index"
     resources :palace_attendees, only: [:new, :create, :update, :destroy]
     resources :palace_invites, only: [] do
       member do
