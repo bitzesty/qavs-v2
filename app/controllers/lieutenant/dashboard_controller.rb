@@ -1,5 +1,5 @@
 class Lieutenant::DashboardController < Lieutenant::BaseController
-  def show
-    authorize :lieutenant_dashboard, :show?
+  def index
+    authorize :lieutenant_dashboard, :index?
   end
 end

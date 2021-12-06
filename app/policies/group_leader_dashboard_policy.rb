@@ -1,5 +1,5 @@
 class GroupLeaderDashboardPolicy < ApplicationPolicy
-  def show?
+  def index?
     group_leader?
   end
 end

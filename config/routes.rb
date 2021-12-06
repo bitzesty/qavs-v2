@@ -275,7 +275,7 @@ Rails.application.routes.draw do
   end
 
   namespace :lieutenant do
-    root to: "dashboard#show"
+    root to: "dashboard#index"
 
     resources :lieutenants, except: [:show]
     resources :form_answers, only: [:index, :show, :edit] do
@@ -297,7 +297,7 @@ Rails.application.routes.draw do
   end
 
   namespace :group_leader do
-    root to: "dashboard#show"
+    root to: "dashboard#index"
 
     resources :citations, only: [:edit, :update]
 
