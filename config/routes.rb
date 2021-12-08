@@ -120,7 +120,7 @@ Rails.application.routes.draw do
   # NON JS implementation - end
 
   namespace :assessor do
-    root to: "form_answers#index"
+    root to: "dashboard#index"
     resources :palace_attendees, only: [:new, :create, :update, :destroy]
     resources :palace_invites, only: [] do
       member do
@@ -275,7 +275,7 @@ Rails.application.routes.draw do
   end
 
   namespace :lieutenant do
-    root to: "dashboard#show"
+    root to: "dashboard#index"
 
     resources :lieutenants, except: [:show]
     resources :form_answers, only: [:index, :show, :edit] do
@@ -297,7 +297,7 @@ Rails.application.routes.draw do
   end
 
   namespace :group_leader do
-    root to: "dashboard#show"
+    root to: "dashboard#index"
 
     resources :citations, only: [:edit, :update]
 
