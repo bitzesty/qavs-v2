@@ -1,0 +1,35 @@
+- title "National Assessor dashboard"
+
+.govuk-width-container
+  .govuk-grid-row
+    .govuk-grid-column-two-thirds
+      h1.govuk-heading-xl
+        | Queen’s Award for Voluntary Service National Assessors' dashboard
+
+      p.govuk-body You can download the national assessment guide, which provides helpful tips on approaching the assessment and completing your evaluations.
+      .govuk-body
+        = link_to "Download QAVS national assessment guide (PDF)",
+                  "assessor_resources/blank.pdf",
+                  class: "download-link govuk-link govuk-link--no-visited-state",
+                  target: :_blank
+
+      hr.govuk-section-break.govuk-section-break--m
+
+      details.govuk-details data-module="govuk-details"
+        summary.govuk-details__summary
+          span.govuk-details__summary-text
+            | Get accessible format of the national assessment guide
+        .govuk-details__text
+          p.govuk-body If you use assistive technology, such as a screen reader, you can use an accessible PDF version of the national assessment guide.
+          = link_to "Download QAVS national assessment guide in accessible PDF format",
+                    "assessor_resources/blank.pdf",
+                    class: "download-link govuk-link govuk-link--no-visited-state",
+                    rel: "noreferrer noopener",
+                    target: :_blank
+
+      hr.govuk-section-break.govuk-section-break--m
+
+      .button
+        = link_to "Start reviewing nominations", assessor_form_answers_url, class: "govuk-button govuk-button--start"
+
+      hr.govuk-section-break.govuk-section-break--m

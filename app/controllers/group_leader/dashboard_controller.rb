@@ -1,6 +1,6 @@
 class GroupLeader::DashboardController < GroupLeader::BaseController
-  def show
-    authorize :group_leader_dashboard, :show?
+  def index
+    authorize :group_leader_dashboard, :index?
     @citation = current_subject.form_answer.citation
     @invite = palace_invite
 
