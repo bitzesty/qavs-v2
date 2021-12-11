@@ -1,3 +1,5 @@
+li.govuk-header__navigation-item
+  = link_to "Dashboard", assessor_root_path, class: 'govuk-header__link'
 li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
   = link_to "Nominations", assessor_form_answers_path, class: 'govuk-header__link'
 / li.govuk-header__navigation-item class=('active' if controller_name == 'reports')
