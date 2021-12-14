@@ -48,6 +48,10 @@
         - else
           = link_to "Download your nomination (PDF)", nomination_pdf_url(@form_answer), class: "download-pdf-link govuk-link"
     li.divider
+    - if current_assessor
+      li.step-complete-assessment
+        = link_to "Complete national assessment", assessor_form_answer_path(@form_answer), class: "govuk-button", role: "button"
+    li.divider
     li.sidebar-helpline.govuk-body
       ' Need help? Call us on
       br
