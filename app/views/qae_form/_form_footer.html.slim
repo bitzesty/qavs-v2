@@ -46,6 +46,10 @@ footer
               - else
                 = "View #{next_step.title(:other).humanize.downcase}"
 
+      - if current_assessor
+        li.step-complete-assessment
+          = button_to "Go to the national assessment form", assessor_form_answer_path(@form_answer), class: "govuk-button", method: :get
+
       - else
         - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)) && policy(@form_answer).submit?
           li.submit.qae-form
