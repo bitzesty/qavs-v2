@@ -6,7 +6,7 @@ class LieutenantsMailers::LocalAssessmentReminderMailer < ApplicationMailer
     @deadline = Settings.current_local_assessment_submission_deadline.decorate.long_mail_reminder
     subject = "Reminder to submit assessments"
 
-    send_mail_if_not_bounces ENV["GOV_UK_NOTIFY_API_TEMPLATE_ID"],
+    view_mail ENV["GOV_UK_NOTIFY_API_TEMPLATE_ID"],
                              to: @lieutenant.email,
                              subject: subject_with_env_prefix(subject)
   end

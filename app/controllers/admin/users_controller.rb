@@ -62,16 +62,6 @@ class Admin::UsersController < Admin::BaseController
                  location: edit_admin_user_path(@resource)
   end
 
-  def scan_via_debounce_api
-    authorize @resource, :update?
-
-    ::ApplicantEmailDebounceApiCheckWorker.perform_async(@resource.id)
-
-    flash[:notice] = "Scanning of email for this user successfully scheduled! Please refresh page in a minute!"
-    respond_with :admin, @resource,
-                 location: edit_admin_user_path(@resource)
-  end
-
   def log_in
     authorize @resource
     @resource.update_column(:confirmed_at, Time.zone.now)

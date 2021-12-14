@@ -25,6 +25,8 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
@@ -2485,9 +2487,6 @@ CREATE TABLE public.users (
     unlock_token character varying,
     locked_at timestamp without time zone,
     unique_session_id character varying,
-    debounce_api_response_code character varying,
-    marked_at_bounces_email boolean DEFAULT false,
-    debounce_api_latest_check_at timestamp without time zone,
     notification_when_submission_deadline_is_coming boolean DEFAULT false,
     agree_sharing_of_details_with_lieutenancies boolean
 );
@@ -3837,6 +3836,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210928120530'),
 ('20211011083451'),
 ('20211013073349'),
-('20211104074415');
+('20211104074415'),
+('20211214111643');
 
 
