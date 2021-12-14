@@ -1329,3 +1329,13 @@ fieldset.account-contact-preferences-other-ops {
 .back-link {
   color: #1d70b8 !important
 }
+
+.pagination {
+  .as-button {
+    color: white !important;
+
+    &:focus {
+      color: black !important;
+    }
+  }
+}
