@@ -328,3 +328,32 @@ $('.qae-form').find('input[type="number"]').each(function() {
   $(this).attr('pattern', '[0-9]*');
   $(this).attr('inputmode', 'decimal');
 });
+
+if ($('.submitted-view').length > 0) {
+  var hash = window.location.hash;
+
+  if (hash) {
+    var heading = $(hash);
+
+    if (heading) {
+      var waitForAccordionAndClickIt = function() {
+        var button = heading.find('button.govuk-accordion__section-button');
+
+        if (button.length > 0) {
+          setTimeout(function() {
+            if (button.first().attr('aria-expanded') !== 'true') {
+              button.first().trigger('click');
+            }
+
+            button.first().focus();
+          }, 1000);
+          return;
+        }
+
+        setTimeout(waitForAccordionAndClickIt, 2000);
+      }
+
+      waitForAccordionAndClickIt();
+    }
+  }
+}
