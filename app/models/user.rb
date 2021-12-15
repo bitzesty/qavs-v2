@@ -63,21 +63,8 @@ class User < ApplicationRecord
     scope :not_in_ids, -> (ids) {
       where.not(id: ids)
     }
-    scope :bounced_emails, -> {
-      where(marked_at_bounces_email: true)
-    }
-    scope :not_bounced_emails, -> {
-      where(
-        "marked_at_bounces_email IS FALSE OR marked_at_bounces_email IS NULL"
-      )
-    }
     scope :allowed_to_get_award_open_notification, -> (award_type) {
       where("notification_when_#{award_type}_award_open" => true)
-    }
-    scope :debounce_scan_candidates, -> () {
-      order(id: :asc).where(
-        "debounce_api_latest_check_at IS NULL OR debounce_api_latest_check_at < ?", 6.months.ago
-      )
     }
   end
 
@@ -149,14 +136,6 @@ class User < ApplicationRecord
 
   def timeout_in
     22.hours
-  end
-
-  def check_email_on_bounces!
-    ::CheckAccountOnBouncesEmail.new(self).run!
-  end
-
-  def bounces_email_reason
-    ::CheckAccountOnBouncesEmail.bounce_reason(debounce_api_response_code)
   end
 
   def registration_in_progress?
