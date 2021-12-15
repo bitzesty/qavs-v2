@@ -50,7 +50,7 @@
     li.divider
     - if current_assessor
       li.step-complete-assessment
-        = link_to "Complete national assessment", assessor_form_answer_path(@form_answer, anchor: "assessment-assessor-#{current_assessor.id}"), class: "govuk-button", role: "button", data: { toggle: "collapse", parent: "govuk-accordion" }
+        = link_to "Complete national assessment", assessor_form_answer_path(@form_answer, anchor: "assessment-assessor-#{current_assessor.id}"), class: "govuk-button"
       li.divider
     li.sidebar-helpline.govuk-body
       ' Need help? Call us on
