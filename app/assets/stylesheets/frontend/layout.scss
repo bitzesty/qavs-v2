@@ -642,6 +642,24 @@ header.page-header aside .inner {
     margin-bottom: 10px;
   }
 
+  .step-complete-assessment {
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    .govuk-button {
+      color: white !important;
+      font-size: 1em;
+
+      &:focus {
+        color: black !important;
+      }
+
+      &:hover {
+        color: white !important;
+      }
+    }
+  }
+
   .sidebar-helpline {
     @include core-16;
     padding: 25px 0;
