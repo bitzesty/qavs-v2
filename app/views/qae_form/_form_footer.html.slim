@@ -48,7 +48,7 @@ footer
 
       - if current_assessor && step.local_assessment?
         li.step-complete-assessment
-          = link_to "Go to the national assessment form", assessor_form_answer_path(@form_answer), class: "govuk-button as-button", role: "button"
+          = link_to "Go to the national assessment form", assessor_form_answer_path(@form_answer), class: "govuk-button as-button", role: "button", data: { toggle: "collapse", parent: "govuk-accordion" }
 
       - else
         - if step.submit && (current_form_is_editable? || (current_lieutenant && step.local_assessment?) || (admin? && !admin_in_read_only_mode? && !step.local_assessment?)) && policy(@form_answer).submit?
