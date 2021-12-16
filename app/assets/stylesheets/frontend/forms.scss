@@ -1,7 +1,7 @@
 $black-true: #000;
 
 legend {
- 
+
 
   &.light {
     font-weight: 400;
@@ -1323,5 +1323,19 @@ fieldset.account-contact-preferences-other-ops {
     font-weight: normal;
     @include core-19;
     margin-bottom: 0;
+  }
+}
+
+.back-link {
+  color: #1d70b8 !important
+}
+
+.pagination {
+  .as-button {
+    color: white !important;
+
+    &:focus {
+      color: black !important;
+    }
   }
 }

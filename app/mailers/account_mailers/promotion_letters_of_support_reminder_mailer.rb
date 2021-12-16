@@ -10,6 +10,6 @@ class AccountMailers::PromotionLettersOfSupportReminderMailer < AccountMailers::
 
     subject = "Queen's Award for Voluntary Service: Continue your nomination"
 
-    send_mail_if_not_bounces ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: collaborator.email, subject: subject_with_env_prefix(subject)
+    view_mail ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: collaborator.email, subject: subject_with_env_prefix(subject)
   end
 end

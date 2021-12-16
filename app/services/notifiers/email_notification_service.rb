@@ -27,7 +27,6 @@ class Notifiers::EmailNotificationService
 
   def award_year_open_notifier(award_year)
     user_ids = User.confirmed
-                   .not_bounced_emails
                    .pluck(:id)
 
     user_ids.each do |user_id|
@@ -155,7 +154,6 @@ class Notifiers::EmailNotificationService
 
   def year_open_award_type_specific_notification(award_type)
     user_ids = User.confirmed
-                   .not_bounced_emails
                    .allowed_to_get_award_open_notification(award_type)
                    .pluck(:id)
 
