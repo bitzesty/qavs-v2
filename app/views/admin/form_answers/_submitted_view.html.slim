@@ -3,7 +3,7 @@
 .govuk-accordion data-module="govuk-accordion"
   = render "section_admin_comments"
 
-  - AssessorAssignmentsConstructor.new(resource, current_admin).assessments.each do |assessment|
+  - AssessorAssignmentsConstructor.new(resource, current_subject).assessments.each do |assessment|
     .govuk-accordion__section id="assessment-assessor-#{assessment.assessor_id}"
       = render "admin/form_answers/section_appraisal_form", assessment: assessment
 

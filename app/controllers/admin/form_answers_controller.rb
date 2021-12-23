@@ -76,6 +76,9 @@ class Admin::FormAnswersController < Admin::BaseController
         when "local_assessment_data"
           csv = Reports::LocalAssessmentReport.new(@search.results).build
           filename = "local_assessments.csv"
+        when "national_assessment_data"
+          csv = Reports::NationalAssessmentsReport.new(@search.results.includes(assessor_assignments: :assessor), @award_year).build
+          filename = "national_assessments.csv"
         end
 
         send_data(

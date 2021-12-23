@@ -1,4 +1,6 @@
 .govuk-button-group
   = link_to "Download nomination data CSV", admin_form_answers_path(search_id: params[:search_id], report_kind: "nomination_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
 
-  = link_to "Download post-assessment data CSV", admin_form_answers_path(search_id: params[:search_id], report_kind: "local_assessment_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
+  = link_to "Download local assessment data CSV", admin_form_answers_path(search_id: params[:search_id], report_kind: "local_assessment_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
+
+  = link_to "Download national assessment data CSV", admin_form_answers_path(search_id: params[:search_id], report_kind: "national_assessment_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
