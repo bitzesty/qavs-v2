@@ -2,12 +2,18 @@ class Reports::Nomination
 
   attr_reader :obj,
               :answers,
-              :award_form
+              :award_form,
+              :assessments,
+              :year
 
-  def initialize(form_answer)
+  def initialize(form_answer, year = nil)
     @obj = form_answer
     @answers = ActiveSupport::HashWithIndifferentAccess.new(obj.document)
     @award_form = form_answer.award_form.decorate(answers: answers)
+
+    @assessments = form_answer.assessor_assignments.select(&:submitted?).sort_by(&:id).map do |a|
+      Reports::Assessment.new(a, year)
+    end
   end
 
   def call_method(method_name)
@@ -17,6 +23,13 @@ class Reports::Nomination
       send(method_name)
     elsif obj.respond_to?(method_name)
       obj.send(method_name)
+    # national assessment methods
+    elsif method_name.starts_with?("na_")
+      if @assessments[assessment_index(method_name)]
+        @assessments[assessment_index(method_name)].fetch(method_name.gsub(/(^na_)|(_\d$)/, ''))
+      else
+        ""
+      end
     else
       "missing method"
     end
@@ -288,5 +301,14 @@ class Reports::Nomination
       "South Glamorgan" => "Wales",
       "West Glamorgan" => "Wales"
     }[lieutenancy]
+  end
+
+  def assessment_index(method_name)
+    index = method_name.gsub(/^([a-z]+_)+/, '')
+    index = index.to_i - 1
+
+    raise ArgumentError, "incorrect index" if index < 0
+
+    index
   end
 end

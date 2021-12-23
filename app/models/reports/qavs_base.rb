@@ -9,7 +9,7 @@ class Reports::QavsBase
     CSV.generate(encoding: "UTF-8", force_quotes: true) do |csv|
      csv << headers
       @scope.each do |form_answer|
-        nomination = Reports::Nomination.new(form_answer)
+        nomination = build_nomination(form_answer)
 
         csv << mapping.map do |m|
           sanitize_string(
@@ -21,6 +21,10 @@ class Reports::QavsBase
   end
 
   private
+
+  def build_nomination(form_answer)
+    Reports::Nomination.new(form_answer)
+  end
 
   def headers
     mapping.map { |m| m[:label] }
