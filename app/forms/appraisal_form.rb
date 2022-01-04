@@ -4,7 +4,7 @@ class AppraisalForm
   #
   # THIS NEED TO BE UPDATED EACH YEAR
   #
-  SUPPORTED_YEARS = [2022,2023]
+  SUPPORTED_YEARS = [2022, 2023]
 
   EVALUATION_OPTIONS_2022 = [
     ["Weak evidence", "weak"],
