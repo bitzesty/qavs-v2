@@ -4,7 +4,7 @@ class AppraisalForm
   #
   # THIS NEED TO BE UPDATED EACH YEAR
   #
-  SUPPORTED_YEARS = [2022]
+  SUPPORTED_YEARS = [2022,2023]
 
   EVALUATION_OPTIONS_2022 = [
     ["Weak evidence", "weak"],
@@ -12,7 +12,19 @@ class AppraisalForm
     ["Strong evidence", "strong"]
   ]
 
+  EVALUATION_OPTIONS_2023 = [
+    ["Weak evidence", "weak"],
+    ["Good evidence", "good"],
+    ["Strong evidence", "strong"]
+  ]
+
   VERDICT_OPTIONS_2022 = [
+    ["Not Recommended", "not_recommended"],
+    ["Recommended", "recommended"],
+    ["Undecided", "undecided"]
+  ]
+
+  VERDICT_OPTIONS_2023 = [
     ["Not Recommended", "not_recommended"],
     ["Recommended", "recommended"],
     ["Undecided", "undecided"]
@@ -84,7 +96,36 @@ class AppraisalForm
     }
   }.freeze
 
+  QAVS_2023 = {
+    good_impact: {
+      type: :rag,
+      label: "Good impact",
+      position: 0
+    },
+    volunteer_led: {
+      type: :rag,
+      label: "Volunteer-led",
+      position: 1
+    },
+    good_governance: {
+      type: :rag,
+      label: "Good governance",
+      position: 2
+    },
+    exceptional_qualities: {
+      type: :rag,
+      label: "Exceptional qualities",
+      position: 3
+    },
+    verdict: {
+      type: :verdict,
+      label: "Overall decision",
+      position: 4
+    }
+  }.freeze
+
   ALL_FORMS_2022 = [QAVS_2022]
+  ALL_FORMS_2023 = [QAVS_2023]
 
   def self.rate(key)
     "#{key}_rate"
@@ -127,7 +168,6 @@ class AppraisalForm
   def self.struct(form_answer, f = nil)
     meth = form_answer.respond_to?(:award_type_slug) ? :award_type_slug : :award_type
     year = form_answer.award_year.year
-
 
     list = const_get("#{form_answer.public_send(meth).upcase}_#{year}")
 
