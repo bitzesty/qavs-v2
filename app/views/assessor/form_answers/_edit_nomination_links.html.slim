@@ -1,1 +1,10 @@
-= link_to 'View nomination and local assessment form', [:edit, namespace_name, @form_answer], class: "govuk-button"
+.govuk-button-group
+  = link_to 'View nomination form',
+    [:edit, namespace_name, @form_answer],
+    class: "govuk-button",
+    role: "button"
+
+  = link_to 'View local assessment form',
+    [:edit, namespace_name, @form_answer, anchor: "local-assessment-form"],
+    class: "govuk-button",
+    role: "button"

@@ -1,7 +1,7 @@
 - provide(:page_wrapper_class, "page-award-form")
 
 - content_for :before_main_content do
-  = link_to "Go back to #{@form_answer.nominee_name} nomination summary page", lieutenant_form_answer_path(@form_answer), class: "govuk-back-link"
+  = link_to "Go back to #{@form_answer.nominee_name} nomination summary page", lieutenant_form_answer_path(@form_answer), class: "govuk-back-link back-link"
 
 form.qae-form.award-form data-autosave-url=save_lieutenant_form_answer_url(@form_answer) action=save_lieutenant_form_answer_url(@form_answer, next_step: next_step(@form, params[:step]), current_step: params[:step]) method="POST" data-attachments-url=attachments_url(@form_answer) novalidate=true
 

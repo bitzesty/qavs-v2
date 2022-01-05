@@ -11,10 +11,6 @@ default_schedule = {
     "cron" => "30 0 * * *",
     "class" => "HardCopyPdfGenerators::Collection::FormDataWorker"
   },
-  "debounce_check_service" => {
-    "cron" => "50 5 * * *",
-    "class" => "Scheduled::DebounceApiScanWorker"
-  },
   "rescan_service" => {
     "cron" => "30 1 * * *",
     "class" => "Scheduled::RescanServiceWorker"

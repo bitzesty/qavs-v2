@@ -7,7 +7,7 @@ class LieutenantsMailers::LocalAssessmentNotificationMailer < ApplicationMailer
     @award_year = AwardYear.current.year
     subject = "Nominations are ready for you to assess"
 
-    send_mail_if_not_bounces ENV["GOV_UK_NOTIFY_API_TEMPLATE_ID"],
+    view_mail ENV["GOV_UK_NOTIFY_API_TEMPLATE_ID"],
                              to: @lieutenant.email,
                              subject: subject_with_env_prefix(subject)
   end
