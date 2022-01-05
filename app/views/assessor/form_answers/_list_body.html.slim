@@ -13,6 +13,9 @@ tbody.govuk-table__body
       td.govuk-table__cell = obj.dashboard_status
 
       td.govuk-table__cell
+        = obj.sub_group.try(:text) || "Not assigned"
+
+      td.govuk-table__cell
         - if obj.ceremonial_county.present?
           = obj.ceremonial_county.name
 
