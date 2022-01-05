@@ -92,6 +92,7 @@ if (dropdowns.length > 0) {
     var dropdown = $(this)[0];
     var multiselect = new CheckboxMultiselect(dropdown, {
       singleSelectionShowDirectly: true,
+      includeBlank: true,
       search: {
         enabled: false
       }
