@@ -1,5 +1,6 @@
 .govuk-grid-column-one-quarter.applications-filter.nominated-lieutenancy-filter
   = g.input :nominated_ceremonial_county,
             collection: options,
+            include_blank: true,
             label: 'Lord Lieutenancy as per form',
             input_html: { multiple: true, class: 'js-admin-filter-option' }

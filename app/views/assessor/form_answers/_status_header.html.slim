@@ -3,12 +3,14 @@ th.govuk-table__header.filter scope="row"
     = h.input :status,
               collection: FormAnswerStatus::AssessorFilter.options,
               label: false,
+              include_blank: true,
               input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide' }
 
   = f.simple_fields_for [:filters, @search.filters] do |g|
     = g.input :sub_status,
               collection: FormAnswerStatus::AssessorFilter.sub_options(current_assessor),
               label: false,
+              include_blank: true,
               input_html: { multiple: true, class: "js-admin-filter-option if-js-hide" }
 
   .dropdown.if-no-js-hide
