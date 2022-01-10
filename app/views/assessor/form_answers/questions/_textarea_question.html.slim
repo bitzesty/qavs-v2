@@ -1,0 +1,8 @@
+.if-no-js-hide
+  .js-ckeditor-spinner-block
+    = image_tag "textarea_spinner.gif", alt: ""
+    span.govuk-body
+      | Loading Editor ...
+
+textarea.js-trigger-autosave.js-ckeditor.govuk-textarea rows=question.rows  name=question.input_name id="q_#{question.key}" disabled="disabled"
+  = question.input_value
