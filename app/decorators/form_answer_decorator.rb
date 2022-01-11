@@ -40,7 +40,9 @@ class FormAnswerDecorator < ApplicationDecorator
 
   def pdf_filename
     timestamp = Time.zone.now.strftime("%d-%m-%Y_%-l-%M%P")
-    "#{object.award_type_full_name.gsub(" ", "_")}_Award_#{timestamp}.pdf"
+    group_name = company_or_nominee_name.presence || "qavs"
+
+    "#{group_name}_nomination_#{timestamp}.pdf"
   end
 
   def csv_filename
