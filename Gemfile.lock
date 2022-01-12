@@ -207,9 +207,9 @@ GEM
     devise-authy (1.10.0)
       authy (>= 2.7.2)
       devise (>= 3.0.0)
-    devise_zxcvbn (4.4.1)
+    devise_zxcvbn (6.0.0)
       devise
-      zxcvbn-js (~> 4.4.1)
+      zxcvbn (~> 0.1.7)
     diff-lcs (1.4.4)
     digest-crc (0.6.4)
       rake (>= 12.0.0, < 14.0.0)
@@ -693,8 +693,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.2)
-    zxcvbn-js (4.4.3)
-      execjs
+    zxcvbn (0.1.7)
 
 PLATFORMS
   ruby
@@ -804,4 +803,4 @@ RUBY VERSION
    ruby 2.7.3p183
 
 BUNDLED WITH
-   2.2.21
+   2.2.27

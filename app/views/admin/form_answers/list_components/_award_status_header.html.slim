@@ -3,12 +3,14 @@ th.filter
     = f.input :status,
               collection: FormAnswerStatus::AdminFilter.collection,
               label: false,
+              include_blank: true,
               input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
 
   = f.simple_fields_for [:filters, @search.filters] do |f|
     = f.input :sub_status,
               collection: FormAnswerStatus::AdminFilter.sub_collection,
               label: false,
+              include_blank: true,
               input_html: { multiple: true, class: 'js-admin-filter-option if-js-hide'}
 
   .dropdown.if-no-js-hide
