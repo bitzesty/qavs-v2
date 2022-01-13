@@ -1,4 +1,6 @@
 module FormAnswerStatus::FilteringHelper
+  include RegionHelper
+
   def internal_states(filtering_values)
     filtering_values = Array(filtering_values)
 
@@ -17,10 +19,10 @@ module FormAnswerStatus::FilteringHelper
       collection_mapping(sub_options)
     when 'activity type'
       collection_mapping(activity_options)
-    when 'nomination county'
-      collection_mapping(county_options('nomination'))
+    when 'group address county'
+      collection_mapping(address_county_options)
     when 'assigned county'
-      collection_mapping(county_options('assigned'))
+      collection_mapping(county_options)
     end
   end
 
@@ -35,9 +37,9 @@ module FormAnswerStatus::FilteringHelper
     when 'activity'
       activity_options.keys.map(&:to_s)
     when 'assigned county'
-      county_options('assigned').keys.map(&:to_s)
-    when 'nominated county'
-      county_options('nomination').keys.map(&:to_s)
+      county_options.keys.map(&:to_s)
+    when 'group address county'
+      address_county_options.keys.map(&:to_s)
     end
   end
 
@@ -53,15 +55,23 @@ module FormAnswerStatus::FilteringHelper
     } ]
   end
 
-  def county_options(type)
-    if type == 'assigned'
-      options = Hash[not_assigned: { label: "Not assigned" }]
-    elsif type == 'nomination'
-      options = Hash[not_stated: { label: "Not stated" }]
-    end
-    CeremonialCounty.ordered.collect { |county|
-      options[county.id] = { label: county.name }
+  def address_county_options
+    options = options = Hash[not_stated: { label: "Not stated" }]
+
+    RegionHelper::COUNTY_REGION_MAPPINGS.collect { |county, _|
+      options[county.to_s] = { label: county }
     }
+
+    options
+  end
+
+  def county_options
+    options = Hash[not_assigned: { label: "Not assigned" }]
+
+    CeremonialCounty.ordered.collect do |county|
+      options[county.id] = { label: county.name }
+    end
+
     options
   end
 
