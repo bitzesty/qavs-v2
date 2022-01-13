@@ -14,10 +14,7 @@
     td.govuk-table__cell = obj.dashboard_status
     td.govuk-table__cell = obj.document["nominee_address_postcode"]
     td.govuk-table__cell
-      - if obj.document["nominee_ceremonial_county"].present?
-        = CeremonialCounty.find(obj.document["nominee_ceremonial_county"]).name
-      - else
-        | Not stated
+      = obj.document["nominee_address_county"].presence || "Not stated"
     td.govuk-table__cell
       - if obj.ceremonial_county.present?
         = obj.ceremonial_county.name

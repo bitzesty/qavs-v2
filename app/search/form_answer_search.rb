@@ -8,7 +8,7 @@ class FormAnswerSearch < Search
         status: FormAnswerStatus::AdminFilter.all,
         activity_type: FormAnswerStatus::AdminFilter.values('activity'),
         assigned_ceremonial_county: FormAnswerStatus::AdminFilter.values('assigned county'),
-        nominated_ceremonial_county: FormAnswerStatus::AdminFilter.values('nominated county')
+        group_address_county: FormAnswerStatus::AdminFilter.values('group address county')
       }
     }
   end
@@ -33,10 +33,10 @@ class FormAnswerSearch < Search
     scoped_results.where(ceremonial_county_id: value)
   end
 
-  def filter_by_nominated_ceremonial_county(scoped_results, value)
-    county_filter_query = scoped_results.where("(form_answers.document #>> '{ nominee_ceremonial_county }') IN (?)", value)
+  def filter_by_group_address_county(scoped_results, value)
+    county_filter_query = scoped_results.where("(form_answers.document #>> '{ nominee_address_county }') IN (?)", value)
     if value.include?("not_stated")
-      scoped_results.where("(form_answers.document -> 'nominee_ceremonial_county') IS NULL").or(county_filter_query)
+      scoped_results.where("(form_answers.document -> 'nominee_address_county') IS NULL").or(county_filter_query)
     else
       county_filter_query
     end
