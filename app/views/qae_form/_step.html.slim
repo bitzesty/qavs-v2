@@ -9,10 +9,11 @@
     - if step.context
       == step.context
 
-    - if step.notice
+    - if step.notice && !current_assessor
       .govuk-inset-text
         == format_submit_notice(step.notice)
-    = render partial: "qae_form/question", collection: step.questions, locals: { answers: answers, attachments: attachments }
+    - question_partial = current_assessor ? "assessor/form_answers/question" : "qae_form/question"
+    = render partial: question_partial, collection: step.questions, locals: { answers: answers, attachments: attachments }
     - if step.submit
       = render partial: "qae_form/step_submit", object: step.submit, as: 'submit'
 

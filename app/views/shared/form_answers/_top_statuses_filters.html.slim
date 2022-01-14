@@ -9,6 +9,7 @@
   .govuk-grid-column-one-third.applications-filter.sub-status-filter
     = g.input :sub_status,
               collection: sub_options,
+              include_blank: true,
               label: 'Post Submission Status',
               input_html: { multiple: true, class: 'js-admin-filter-option' }
 

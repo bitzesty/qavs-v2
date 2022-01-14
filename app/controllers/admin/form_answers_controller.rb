@@ -69,16 +69,18 @@ class Admin::FormAnswersController < Admin::BaseController
       format.html
 
       format.csv do
+        timestamp = Time.zone.now.strftime("%d-%m-%Y_%-l-%M%P")
+
         case params[:report_kind]
         when "nomination_data"
           csv = Reports::NominationsReport.new(@search.results).build
-          filename = "nominations.csv"
+          filename = "nominations_report_#{timestamp}.csv"
         when "local_assessment_data"
           csv = Reports::LocalAssessmentReport.new(@search.results).build
-          filename = "local_assessments.csv"
+          filename = "local_assessments_report_#{timestamp}.csv"
         when "national_assessment_data"
           csv = Reports::NationalAssessmentsReport.new(@search.results.includes(assessor_assignments: :assessor), @award_year).build
-          filename = "national_assessments.csv"
+          filename = "national_assessments_report_#{timestamp}.csv"
         end
 
         send_data(

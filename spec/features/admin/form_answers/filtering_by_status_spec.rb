@@ -21,7 +21,7 @@ describe "As Admin I want to filter applications", js: true do
     # so that we are cleaning it up for last 3
     #
     @forms.last(3).map do |form|
-      form.document["nominee_ceremonial_county"] = ceremonial_county_1.id
+      form.document["nominee_address_county"] = "Angus"
     end
 
     @forms.each.map do |form|
@@ -114,11 +114,11 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(1)
   end
 
-  it "filters by nomination ceremonial county" do
+  it "filters by nominee address county" do
     assert_results_number(4)
 
-    click_status_option("Not stated")
-    assert_results_number(3)
+    click_status_option("Angus")
+    assert_results_number(1)
   end
 
   it "filters by activity" do

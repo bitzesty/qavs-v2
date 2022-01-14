@@ -3,7 +3,7 @@
     p
       = render "qae_form/pdf_link"
 
-  - if submit.notice && (!current_lieutenant || current_lieutenant.role.advanced?)
+  - if submit.notice && (!current_lieutenant || current_lieutenant.role.advanced?) && (!current_assessor)
     .govuk-inset-text
       == format_submit_notice(submit.notice)
   - if submit.alternative_notices && current_lieutenant && current_lieutenant.role.regular?
