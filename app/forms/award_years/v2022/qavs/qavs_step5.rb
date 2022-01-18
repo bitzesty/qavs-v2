@@ -61,7 +61,7 @@ class AwardYears::V2022::QAEForms
             { building: "Number or name of building" },
             { street: "Street" },
             { city: "Village or town" },
-            { county: "County" },
+            { county: "County", ignore_validation: true },
             { postcode: "Postcode" },
             { london_borough: "London borough (if applicable)", ignore_validation: true }
           ])

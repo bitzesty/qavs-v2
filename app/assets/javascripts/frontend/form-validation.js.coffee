@@ -66,7 +66,7 @@ window.FormValidation =
     date.diff(expected, "days")
 
   validateSingleQuestion: (question) ->
-    if question.find("input").hasClass("not-required")
+    if question.find("input, select").hasClass("not-required")
       return true
     else
       if @isSelectQuestion(question)
