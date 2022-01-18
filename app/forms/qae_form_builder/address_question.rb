@@ -1,13 +1,12 @@
 class QAEFormBuilder
   class AddressQuestionValidator < QuestionValidator
-    NO_VALIDATION_SUB_FIELDS = [:street, :county]
     def errors
       result = super
 
       if question.required?
         question.required_sub_fields.each do |sub_field|
           suffix = sub_field.keys[0]
-          if !question.input_value(suffix: suffix).present? && NO_VALIDATION_SUB_FIELDS.exclude?(suffix)
+          if !question.input_value(suffix: suffix).present?
             result[question.hash_key(suffix: suffix)] ||= ""
             result[question.hash_key(suffix: suffix)] << " Can't be blank."
           end
