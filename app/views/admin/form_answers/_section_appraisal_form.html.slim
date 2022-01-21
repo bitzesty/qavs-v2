@@ -2,7 +2,7 @@
   h3.govuk-accordion__section-heading.govuk-accordion__section-heading--with-tag
     span.govuk-accordion__section-button
       = "National assessor (#{assessment.assessor.full_name})"
-      = assessment_govuk_tag(policy(assessment).show_verdict? ? assessment.document['verdict_rate'] : 'pending')
+      = assessment_govuk_tag(policy(assessment).show_verdict? && assessment.document['verdict_rate'].present? ? assessment.document['verdict_rate'] : 'pending')
 
 .govuk-accordion__section-content
   - if policy(assessment).show?
