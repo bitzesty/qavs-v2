@@ -37,8 +37,8 @@ shared_context "successful appraisal form edition" do
 end
 
 def assert_regular_section_change(section)
-  wrapper_class = ".form-#{section.gsub('_', '-')}
-"
+  wrapper_class = ".form-#{section.gsub('_', '-')}"
+
   within "#assessment-assessor-#{assessor.id}" do
     find(".govuk-accordion__section-heading").click
     within wrapper_class do
