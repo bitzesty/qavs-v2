@@ -3,6 +3,10 @@ class AssessorAssignmentPolicy < ApplicationPolicy
     admin? || record.editable_for?(subject) || (record.submitted? && own_assignment_submitted?(subject, record))
   end
 
+  def show_verdict?
+    show?
+  end
+
   def own_assignment_submitted?(subject, record)
     own_assignment = record.form_answer.assessor_assignments.where(assessor_id: subject.id).first
 
