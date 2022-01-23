@@ -1,12 +1,8 @@
 web: &web
   build: .
   command: bundle exec puma -C config/puma.rb
-  environment:
-    - RACK_ENV=production
-    - RAILS_ENV=production
-    - ASSET_HOST=temp
-    - MAILER_HOST=temp
-    - SECRET_KEY_BASE=xxxxxxxxx
+  env_file:
+    - .env.example
   ports:
     - 80:3000
     - 443:3000
