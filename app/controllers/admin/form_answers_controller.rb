@@ -69,7 +69,7 @@ class Admin::FormAnswersController < Admin::BaseController
       format.html
 
       format.csv do
-        timestamp = Time.zone.now.strftime("%d-%m-%Y_%-l-%M%P")
+        timestamp = Time.zone.now.strftime("%d-%m-%Y")
 
         case params[:report_kind]
         when "nomination_data"
