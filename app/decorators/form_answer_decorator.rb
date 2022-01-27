@@ -39,7 +39,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def pdf_filename
-    timestamp = Time.zone.now.strftime("%d-%m-%Y_%-l-%M%P")
+    timestamp = Time.zone.now.strftime("%d-%m-%Y")
     group_name = company_or_nominee_name.presence || "qavs"
 
     "#{group_name}_nomination_#{timestamp}.pdf"
