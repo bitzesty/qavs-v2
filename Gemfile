@@ -91,7 +91,7 @@ gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
 gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '59def7b69589d702b6d14a5ec5b1c77c22e21065'
 
 # Background jobs
-gem 'sidekiq', "~> 5.2"
+gem 'sidekiq', "~> 6.4"
 gem 'sidekiq-cron', "~> 1.1"
 
 # CORS configuration
