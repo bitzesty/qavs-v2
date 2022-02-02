@@ -4,14 +4,14 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 2.7.3'
 
-gem 'rails', '~> 6.0.4.1'
+gem 'rails', '>= 6.1.3.2'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
 gem 'rack-ssl-enforcer'
 
 # PostgreSQL & data import
-gem 'pg', '~> 0.20'
+gem 'pg'
 gem 'activerecord-import'
 
 # Track Changes
