@@ -104,8 +104,15 @@ class Notifiers::EmailNotificationService
       )
     end
 
+    winners_dictionary = winners.includes(:group_leader).map do |entry|
+      {
+        id: entry.id,
+        group_leader_id: entry.group_leader.id
+      }
+    end
+
     send_emails_to_group_leaders!(
-      winners,
+      winners_dictionary,
       GroupLeadersMailers::WinnersHeadOfOrganisationMailer
     )
   end
@@ -144,10 +151,10 @@ class Notifiers::EmailNotificationService
   private
 
   def send_emails_to_group_leaders!(data, mailer)
-    data.includes(:group_leader).each do |entry|
+    data.each do |entry|
       mailer.notify(
-        entry.id,
-        entry.group_leader.id
+        entry[:id],
+        entry[:group_leader_id]
       ).deliver_now!
     end
   end
