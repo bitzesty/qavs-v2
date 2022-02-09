@@ -10,6 +10,10 @@ class MailRenderer
         protocol: "https"
       }
     end
+
+    def compiled_method_container
+      self.class
+    end
   end
 
   def submission_started_notification
@@ -159,7 +163,7 @@ class MailRenderer
   private
 
   def render(assigns, template)
-    view = View.new(ActionView::LookupContext.new(ActionController::Base.view_paths), assigns)
+    view = View.new(ActionView::LookupContext.new(ActionController::Base.view_paths), assigns, nil)
     view.render(template: template)
   end
 
