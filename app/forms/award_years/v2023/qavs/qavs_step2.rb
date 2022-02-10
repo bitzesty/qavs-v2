@@ -66,8 +66,9 @@ class AwardYears::V2023::QAEForms
         end
 
         textarea :how_did_you_hear_about_award_other_details, "" do
+          required
           context %(
-            <p class='govuk-body'>Elaborate on the other sources.</p>
+            <p class='govuk-hint'>Please outline any other sources in the text box below:</p>
           )
           conditional :how_did_you_hear_about_award, "other"
         end
