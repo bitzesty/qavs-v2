@@ -340,7 +340,7 @@ namespace :form_answers do
       "Liverpool" => "Merseyside"
     }
 
-    @cs = ApplicationController.helpers.counties.map(&:to_s)
+    @cs = ApplicationController.helpers.counties_2022.map(&:to_s)
 
     nominations = FormAnswer.where("document->>'nominee_address_county' NOT IN (?) OR document->>'nominee_leader_address_county' NOT IN (?) OR document->>'nominator_address_county' NOT IN (?)", @cs, @cs, @cs)
 
