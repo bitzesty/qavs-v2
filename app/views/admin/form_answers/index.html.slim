@@ -17,10 +17,11 @@ h1.govuk-heading-xl
                                                          sub_options: FormAnswerStatus::AdminFilter.collection('sub')
 
   .govuk-grid-row
+    - address_county_options = @award_year.year == 2022 ? FormAnswerStatus::AdminFilter.collection('group address county 2022') : FormAnswerStatus::AdminFilter.collection('group address county')
     = render "admin/form_answers/nomination_answer_filters", f: f,
                                                              activity_options: FormAnswerStatus::AdminFilter.collection('activity type'),
                                                              assigned_county_options: FormAnswerStatus::AdminFilter.collection('assigned county'),
-                                                             nomination_county_options: FormAnswerStatus::AdminFilter.collection('group address county')
+                                                             nomination_county_options: address_county_options
   .govuk-button-group
     = f.submit 'Apply filters',
                 class: 'govuk-button',

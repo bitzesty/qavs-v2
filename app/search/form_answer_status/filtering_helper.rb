@@ -21,6 +21,8 @@ module FormAnswerStatus::FilteringHelper
       collection_mapping(activity_options)
     when 'group address county'
       collection_mapping(address_county_options)
+    when 'group address county 2022'
+      collection_mapping(address_county_options_2022)
     when 'assigned county'
       collection_mapping(county_options)
     end
@@ -40,6 +42,8 @@ module FormAnswerStatus::FilteringHelper
       county_options.keys.map(&:to_s)
     when 'group address county'
       address_county_options.keys.map(&:to_s)
+    when 'group address county 2022'
+      address_county_options_2022.keys.map(&:to_s)
     end
   end
 
@@ -57,8 +61,16 @@ module FormAnswerStatus::FilteringHelper
 
   def address_county_options
     options = options = Hash[not_stated: { label: "Not stated" }]
-
     RegionHelper::COUNTY_REGION_MAPPINGS.collect { |county, _|
+      options[county.to_s] = { label: county }
+    }
+
+    options
+  end
+
+  def address_county_options_2022
+    options = options = Hash[not_stated: { label: "Not stated" }]
+    RegionHelper::COUNTY_REGION_MAPPINGS_2022.collect { |county, _|
       options[county.to_s] = { label: county }
     }
 
