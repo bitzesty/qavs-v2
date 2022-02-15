@@ -1,7 +1,7 @@
 - title "Nominations"
 
 h1.govuk-heading-xl
-  | Nominations
+  | Nominations for your sub-group
 = simple_form_for @search, url: assessor_form_answers_path, method: :post, as: :search do |f|
   = hidden_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
   = hidden_field_tag :award_type, params[:award_type], class: "visuallyhidden"
