@@ -265,7 +265,14 @@ class FormAnswerStateMachine
         all_states
       end
     else
-      []
+      case object.state.to_sym
+      when :submitted
+        ELIGIBILITY_STATES
+      when *ELIGIBILITY_STATES
+        ELIGIBILITY_STATES
+      else
+        []
+      end
     end
   end
 end

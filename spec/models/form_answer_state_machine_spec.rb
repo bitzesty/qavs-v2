@@ -44,12 +44,23 @@ describe FormAnswerStateMachine do
 
   context "#permitted_states_with_deadline_constraint" do
     it "should return correct state " do
-      allow(Settings).to receive(:after_current_submission_deadline?) {true}
+      allow(Settings).to receive(:after_current_submission_deadline?) { true }
       form_answer.state = :not_eligible
       expect(form_answer.state_machine.send(:permitted_states_with_deadline_constraint)).to eq []
       form_answer.state =:not_submitted
       expect(form_answer.state_machine.send(:permitted_states_with_deadline_constraint)).to eq []
     end
+
+    it "allows changing eligibility state before deadline " do
+      allow(Settings).to receive(:after_current_submission_deadline?) { false }
+      form_answer.state = :not_submitted
+      expect(form_answer.state_machine.send(:permitted_states_with_deadline_constraint)).to eq []
+
+      form_answer.state = :submitted
+      expect(form_answer.state_machine.send(:permitted_states_with_deadline_constraint)).to eq FormAnswerStateMachine::ELIGIBILITY_STATES
+    end
+
+
   end
 
   describe "#perform_transition" do
