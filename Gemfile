@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 2.7.3'
 
-gem 'rails', '>= 6.1.3.2'
+gem 'rails', '6.1.4.6'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -124,7 +124,7 @@ gem 'nilify_blanks'
 gem 'curb', '0.9.10'
 
 # Web server
-gem 'puma', '~> 4.3.9'
+gem 'puma', '~> 4.3.11'
 
 # Performance & Error reporting
 gem 'appsignal'
