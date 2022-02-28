@@ -16,13 +16,13 @@ describe "Eligibility forms" do
       click_link("Start a new nomination")
 
       click_button("Start eligibility questionnaire")
-      form_choice(["Yes", "Yes", "Yes", "No", "No"])
-      expect(page).to have_content('How long has the group been operating? (it must have been operating for at least 3 years before nomination)')
+      form_choice(%w[Yes Yes])
+      expect(page).to have_content("How long has the group been operating? (it must have been operating for at least 3 years before nomination)")
       fill_in("How long has the group been operating? (it must have been operating for at least 3 years before nomination)", with: 3)
       click_button "Continue"
-      form_choice("No")
+      form_choice(%w[Yes No Yes Yes No No])
       expect(page).to have_content("You are eligible to begin your nomination")
-      first('.previous-answers').click_link("Continue")
+      first(".previous-answers").click_link("Continue")
       expect(page).to have_content("Useful Nomination Info Before You Begin")
     end
   end

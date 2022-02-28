@@ -24,7 +24,8 @@
       ul.govuk-list.govuk-list--bullet
         li
           ' The deadline for submissions is
-          = submission_deadline.decorate.formatted_trigger_time
+          strong
+            = submission_deadline.decorate.formatted_trigger_time
           ' .
 
   p#get-started.get-started.group
