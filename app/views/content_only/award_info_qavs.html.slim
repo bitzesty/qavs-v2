@@ -23,13 +23,17 @@ h1.govuk-heading-xl
               h3.govuk-heading-m Before you nominate a group
 
               p.govuk-body
-                | Please make sure all people involved in the nomination see the
+                | Before nominating, you may want to double check that the group meets the full
+                =<> link_to "eligibility criteria", "https://qavs.dcms.gov.uk/make-a-nomination/eligibility/", target: "_blank", title: "opens in a new tab/window"
+                | as outlined on our website and fits the profile described.
+              p.govuk-body
+                | If you are sharing anyone's personal details in this form - for example, name and address, please share the
                 =<> link_to "privacy notice", "https://qavs.dcms.gov.uk/privacy-policy/", target: "_blank", title: "opens in a new tab/window"
-                | e.g. person filling in this form and the persons providing a letter of support.
+                | with them and make sure they are content with it. This includes the group leader and the two individuals providing a letter of support.
 
               h3.govuk-heading-m What you will need:
               h4.govuk-heading-s Section A: Group Information
-              p.govuk-body Basic information about the group you are nominating, including the main contact details for the group.
+              p.govuk-body Basic information about the group you are nominating, including the main contact details for the group leader.
 
               h4.govuk-heading-s Section B: Recommendation
               p.govuk-body Detailed information about the contribution the group has made in its area of activity.
@@ -38,7 +42,7 @@ h1.govuk-heading-xl
               p.govuk-body Two letters from external supporters familiar with the group's work endorsing the group's contribution.
 
               h4.govuk-heading-s Section D: Nominator details & submission
-              p.govuk-body Contact details for the person making the nomination and confirmation that the group leader and supporters are aware of the nomination.
+              p.govuk-body Contact details for the person making the nomination and confirmation that the group leader and supporters are aware of the nomination and the use of their personal data.
 
               p#get-started.get-started.group
                 = link_to result_form_award_eligibility_url(form_id: @form_answer.id), class: "govuk-button", rel: "external"

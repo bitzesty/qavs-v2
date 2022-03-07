@@ -40,6 +40,8 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.benefits_animals_only = false
       eligibility.national_organisation = false
       eligibility.has_at_least_three_people = true
+      eligibility.provide_grants = true
+      eligibility.local_area = true
       eligibility.years_operating = 3
       eligibility.current_holder = "no"
 
@@ -72,11 +74,13 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'returns all questions for new eligibility' do
       expect(eligibility.questions).to eq([
         :based_in_uk,
+        :years_operating,
         :has_at_least_three_people,
         :are_majority_volunteers,
         :national_organisation,
+        :local_area,
+        :provide_grants,
         :benefits_animals_only,
-        :years_operating,
         :current_holder
       ])
     end

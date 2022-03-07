@@ -18,21 +18,27 @@ class AwardYears::V2023::QAEForms
           style "large"
         end
 
-        dropdown :nominee_activity, "Please select the group's main area of activity" do
+        text :nominee_established_date, "When was the group established?" do
           sub_ref "A 1.2"
+          required
+          style "small"
+        end
+
+        dropdown :nominee_activity, "Please select the group's main area of activity" do
+          sub_ref "A 1.3"
           required
           option "", ""
           nominee_activities
         end
 
         dropdown :secondary_activity, "Please select the group's secondary area of activity (optional)" do
-          sub_ref "A 1.3"
+          sub_ref "A 1.4"
           option "", ""
           nominee_activities
         end
 
         address :nominee_address, "Address of group" do
-          sub_ref "A 1.4"
+          sub_ref "A 1.5"
           required
           sub_fields([
             { building: "Building" },
@@ -44,18 +50,18 @@ class AwardYears::V2023::QAEForms
         end
 
         text :nominee_phone, "Telephone number" do
-          sub_ref "A 1.5"
+          sub_ref "A 1.6"
           style "small"
           type "tel"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.7"
+          sub_ref "A 1.8"
           form_hint "Social media accounts if known"
           words_max 100
           rows 2
