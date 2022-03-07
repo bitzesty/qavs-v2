@@ -74,8 +74,8 @@ RSpec.describe Eligibility::Basic, type: :model do
     it 'returns all questions for new eligibility' do
       expect(eligibility.questions).to eq([
         :based_in_uk,
-        :has_at_least_three_people,
         :years_operating,
+        :has_at_least_three_people,
         :are_majority_volunteers,
         :national_organisation,
         :local_area,
