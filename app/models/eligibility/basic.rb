@@ -10,7 +10,7 @@ class Eligibility::Basic < Eligibility
   property :years_operating,
            positive_integer: true,
            label: "How long has the group been operating?",
-           hint: "The group must have been operating for at least 3 years before nomination",
+           hint: "The group must have been operating for at least 3 years before nomination.",
            accept: :more_than_two
 
   property :has_at_least_three_people,
@@ -31,7 +31,7 @@ class Eligibility::Basic < Eligibility
   property :local_area,
            boolean: true,
            label: "Does it focus on benefitting a local area?",
-           hint: "Please note, QAVS is for local volunteer groups",
+           hint: "Please note, QAVS is for local volunteer groups.",
            accept: :true
 
   property :provide_grants,
