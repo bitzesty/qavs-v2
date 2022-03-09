@@ -37,7 +37,7 @@ class Eligibility::Basic < Eligibility
   property :provide_grants,
            boolean: true,
            label: "Is its main purpose to raise funds or provide grants for volunteer groups?",
-           accept: :true
+           accept: :false
 
   property :benefits_animals_only,
            boolean: true,
@@ -56,7 +56,7 @@ class Eligibility::Basic < Eligibility
     self.years_operating = 3
     self.are_majority_volunteers = true
     self.local_area = true
-    self.provide_grants = true
+    self.provide_grants = false
     self.benefits_animals_only = false
     self.current_holder = "i_dont_know"
 

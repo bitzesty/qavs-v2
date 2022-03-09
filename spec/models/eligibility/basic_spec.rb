@@ -40,7 +40,7 @@ RSpec.describe Eligibility::Basic, type: :model do
       eligibility.benefits_animals_only = false
       eligibility.national_organisation = false
       eligibility.has_at_least_three_people = true
-      eligibility.provide_grants = true
+      eligibility.provide_grants = false
       eligibility.local_area = true
       eligibility.years_operating = 3
       eligibility.current_holder = "no"
