@@ -77,8 +77,8 @@ title = content_for?(:title) ? yield(:title) : "Lieutenant - Queen's Award for V
     li.govuk-footer__inline-list-item
       = link_to "Cookie Settings", cookies_path, class: 'govuk-footer__link'
     li.govuk-footer__inline-list-item
-      ' Built by
-      = link_to "The Queen's Awards Office", "http://blogs.bis.gov.uk/queensawards/", class: 'govuk-footer__link'
+      ' Built by the 
+      = link_to "Department for Digital, Culture, Media & Sport", "https://www.gov.uk/government/organisations/department-for-digital-culture-media-sport", class: 'govuk-footer__link'
 
 - content_for :body_end do
   - if should_enable_js?
