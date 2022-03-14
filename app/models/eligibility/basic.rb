@@ -9,7 +9,7 @@ class Eligibility::Basic < Eligibility
 
   property :years_operating,
            positive_integer: true,
-           label: "How long has the group been operating?",
+           label: "How many years has the group been in operation?",
            hint: "The group must have been operating for at least 3 years before nomination.",
            accept: :more_than_two
 
