@@ -6,7 +6,7 @@ module EligibilityHelper
   def eligibility_volunteer_majority_question_ops
     [
       ['Yes', 'true'],
-      ['No (permitted in exceptional circumstances)', 'false'],
+      ['No', 'false'],
       ["Don't know", 'na']
     ]
   end
@@ -16,7 +16,7 @@ module EligibilityHelper
     when 'true'
       'Yes'
     when 'false'
-      'No (permitted in exceptional circumstances)'
+      'No'
     when 'na'
       "Don't know"
     end
