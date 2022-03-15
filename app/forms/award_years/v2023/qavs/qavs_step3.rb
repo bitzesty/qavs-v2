@@ -9,6 +9,7 @@ class AwardYears::V2023::QAEForms
         supporters :supporter_letters_list, "" do
           ref "C 1"
           context %(
+            <p class='govuk-hint'><a href="https://qavs.dcms.gov.uk/make-a-nomination/nominate/">Before you start, please refer to our full guidance for letters of support as outlined on our website.</a></p>
             <p class='govuk-hint'>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
             <p class='govuk-hint'>
               Supporters must not be volunteers or paid workers in the group. Each letter should be no more than 500 words. The letters should be about the whole group, rather than just one volunteer and should help to show how its work is outstanding.

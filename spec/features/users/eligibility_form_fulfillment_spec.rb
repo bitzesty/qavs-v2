@@ -17,10 +17,10 @@ describe "Eligibility forms" do
 
       click_button("Start eligibility questionnaire")
       form_choice(%w[Yes])
-      expect(page).to have_content("How long has the group been operating?")
-      fill_in("How long has the group been operating?", with: 3)
+      expect(page).to have_content("How many years has the group been in operation?")
+      fill_in("How many years has the group been in operation?", with: 3)
       click_button "Continue"
-      form_choice(%w[Yes Yes No Yes Yes No No])
+      form_choice(%w[Yes Yes No Yes No No No])
       expect(page).to have_content("Thank you. Based on your answers, the group meets the basic eligibility citeria. You can proceed with nominating.")
       first(".previous-answers").click_link("Continue")
       expect(page).to have_content("Useful Nomination Info Before You Begin")
