@@ -4,14 +4,14 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 2.7.3'
 
-gem 'rails', '~> 6.0.4.1'
+gem 'rails', '6.1.4.7'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
 gem 'rack-ssl-enforcer'
 
 # PostgreSQL & data import
-gem 'pg', '~> 0.20'
+gem 'pg'
 gem 'activerecord-import'
 
 # Track Changes
@@ -91,7 +91,7 @@ gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
 gem 'vigilion-rails', github: 'vigilion/vigilion-rails', ref: '59def7b69589d702b6d14a5ec5b1c77c22e21065'
 
 # Background jobs
-gem 'sidekiq', "~> 5.2"
+gem 'sidekiq', "~> 6.4"
 gem 'sidekiq-cron', "~> 1.1"
 
 # CORS configuration
@@ -124,7 +124,7 @@ gem 'nilify_blanks'
 gem 'curb', '0.9.10'
 
 # Web server
-gem 'puma', '~> 4.3.9'
+gem 'puma', '~> 4.3.11'
 
 # Performance & Error reporting
 gem 'appsignal'
