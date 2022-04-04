@@ -1,9 +1,7 @@
 .govuk-grid-column-one-quarter.applications-filter
   .govuk-form-group
-    label.govuk-label
-      ' Award year
     .dropdown
-      button.dropdown-toggle.govuk-button.govuk-button--secondary aria-expanded="false"
+      button.dropdown-toggle.govuk-button.govuk-button--secondary aria-expanded="false" aria-label='Award Year'
         span class="govuk-visually-hidden"
           | Award year:&nbsp;
         - current_year = params[:year] ? params[:year].to_i : AwardYear.current.year
@@ -12,8 +10,8 @@
         = params[:year].to_s == "all_years" ? "All Years" : current_year_text
       ul.dropdown-menu
         li class="#{'active' if params[:year].to_s == 'all_years'}"
-          = link_to "All Years", url_for(params.permit(:controller, :action).merge(year: :all_years))
+          = link_to "All Years", url_for(params.permit(:controller, :action, :search_id, :year).merge(year: :all_years)), class: "govuk-!-font-size-19 govuk-link--no-underline"
 
         - AwardYear.admin_switch.each do |year, label|
           li class="#{'active' if label == current_year_text}"
-            = link_to label, url_for(params.permit(:controller, :action).merge(year: year))
+            = link_to label, url_for(params.permit(:controller, :action, :search_id, :year).merge(year: year)), class: "govuk-!-font-size-19 govuk-link--no-underline"

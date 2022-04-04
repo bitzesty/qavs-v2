@@ -97,7 +97,7 @@ module FormAnswerMixin
 
     if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
       search = NominationSearch.create(serialized_query: params[:search].to_json)
-      redirect_to [namespace_name, :form_answers, search_id: search.id]
+      redirect_to [namespace_name, :form_answers, search_id: search.id, year: params[:year]]
     end
 
     if params[:search_id]

@@ -3,10 +3,14 @@
 h1.govuk-heading-xl
   | Nominations
 
-= simple_form_for @search, url: admin_form_answers_path, method: :post, as: :search, html: { class: 'search-form'} do |f|
+= simple_form_for @search, url: admin_form_answers_path(year: params[:year]), method: :post, as: :search, html: { class: 'search-form'} do |f|
+  .govuk-grid-row
+    = render "layouts/vertical_admin_award_year"
+
   .govuk-grid-row
     .govuk-grid-column-one-quarter.if-js-hide
       = f.input :year, input_html: { value: params[:year] || @award_year.year }
+
     .govuk-grid-column-one-third
       .form-group.search-input
         = f.input :query, label: 'Search', input_html: { type: "search" }
