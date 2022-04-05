@@ -4,7 +4,15 @@ Queen's Award for Voluntary Service
 
 "QAVS" is the application which powers the application process for The Queen's Award for Voluntary Service.
 
-## Setup
+## Setup with docker
+
+```
+cp docker-compose.yml.local docker-compose.yml
+docker-compose up
+docker-compose run web bundle exec rake db:migrate
+```
+
+## Setup without docker
 
 ### Pre-requisites
 
