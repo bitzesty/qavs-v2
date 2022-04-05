@@ -42,7 +42,11 @@ class Assessor < ApplicationRecord
   end
 
   def applications_scope(award_year)
-    award_year.form_answers.where(state: FormAnswerStateMachine::ASSESSOR_VISIBLE_STATES, sub_group: sub_group)
+    if award_year
+      award_year.form_answers
+    else
+      FormAnswer.all
+    end.where(state: FormAnswerStateMachine::ASSESSOR_VISIBLE_STATES, sub_group: sub_group)
   end
 
   def full_name
