@@ -99,7 +99,7 @@ class AwardYear < ApplicationRecord
 
   def self.admin_switch
     output = {}
-    year0 = 2016
+    year0 = 2022
     (year0..(current.year + 3)).each do |year|
       output[year] = "#{year - 1} - #{year}"
     end
