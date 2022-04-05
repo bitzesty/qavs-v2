@@ -14,15 +14,20 @@
         p.govuk-notification-banner__heading
           | There is a strict embargo preventing public announcement or publication of any Awards information until
           =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
-          | . Before this date, you must not make any announcements about your Award, either to volunteers or outside your group.
+          | . Before this date, you must not let anyone outside the group know about your award.
+
+    p.govuk-body
+      | We need your help to confirm some important details before the
+      =< @deadlines.end_of_embargo.strftime("#{@deadlines.end_of_embargo.trigger_at&.day&.ordinalize} of %B %Y")
+      |. We also hope that you will use the next few weeks to start planning some local publicity for the announcement and have provided some advice and materials to help with this. Please see the sections below for more information.
 
     h2.govuk-heading-m
-      | What you need to do
+      | Information needed straight away:
 
     h3.govuk-heading-s
       | By
       =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
-      | &mdash; confirm group name and citation &nbsp;
+      | &mdash; confirm your group’s name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -30,24 +35,25 @@
         strong.govuk-tag.govuk-tag--red
           | Incomplete
     p.govuk-body
-      | Your group name and 70 character citation describing the group's work will appear on the certificate and in any media publication. You must provide these details by
-      =< @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
-      | . If we do not receive information from you, we will use the group name and description that Lord Lieutenants provided.
-    = link_to "Confirm group name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start"
+      | Your group name and the 70 character citation describing the group's work will appear on the certificate and in any media publication. We are planning to use the text agreed with you during the local assessment process. Please check and confirm these details by
+      =<> @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
+      | by clicking on the link below - you can make corrections if needed.
+    = link_to "Check and confirm group's name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start", id: "citation-button"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h2.govuk-heading-m
+      | What happens next
 
     h3.govuk-heading-s
       | Between 1 April and
       =<> @deadlines.end_of_embargo.strftime("%-d %B %Y")
       | &mdash; prepare press coverage
     p.govuk-body
-      | Please note, there is a strict embargo preventing public announcement or publication of any Awards information until
-      =< @deadlines.end_of_embargo.decorate.formatted_mailer_deadline
-      | .
+      | This is a great opportunity to get plenty of local publicity for your group. We hope you will be able to prepare some eye-catching posts for social media and invite local journalists to write about your news. Nothing should be publicised or published before the morning of
+      =< @deadlines.end_of_embargo.strftime("#{@deadlines.end_of_embargo.trigger_at&.day&.ordinalize} %B")
+      |, but it will be fine to agree embargoed articles with local journalists beforehand.
     p.govuk-body
-      | However, you can share additional information with - we may be able to include it in our press coverage. You can also approach your press contacts to arrange coverage around your Award. However, make it clear that they cannot publish anything until
-      =< @deadlines.end_of_embargo.strftime("%-d %B %Y")
-      | .
+      | You can use the link below to access our publicity guidance. This includes ideas and templates for posts and press releases to help you get great publicity on the day.
     details.govuk-details
       summary.govuk-details__summary
         span.govuk-details__summary-text
@@ -63,36 +69,40 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | By
-      =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
-      | &mdash; submit details for Royal Garden Party &nbsp;
-      - if @invite.submitted
-        strong.govuk-tag.govuk-tag--blue
-          | Complete
-      - else
-        strong.govuk-tag.govuk-tag--red
-          | Incomplete
+      | 2 June 2022 &mdash; Awards officially announced
     p.govuk-body
-      | Two representatives from the awarded groups can attend a Royal Garden Party in
-      =< AwardYear.current.year
-      | . You must provide the attendee details and your preferred day for attending by
-      =< @deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
-      | .
-    = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.id), class: "govuk-button govuk-button--start"
-
+      | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
+      =< link_to("QAVS website", "https://qavs.dcms.gov.uk/")
+      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #QAVS2022 and tag us @QueensAwardVS.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
-    h2.govuk-heading-m
-      | Announcement and event dates
-    h3.govuk-heading-s
-      | 2 June 2022 &mdash; awards officially announced
-    p.govuk-body
-      | Successful groups, including your group, are announced in Gazette, GOV.UK and on the QAVS website.
     h3.govuk-heading-s
       | June to September 2022 &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
-      | The Lord-Lieutenant of your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. They will be in touch to arrange a suitable date and time for you.
+      | The Lord-Lieutenant for your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h3.govuk-heading-s
+      | By
+      =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
+      | &mdash; submit details for Royal Garden Party &nbsp;
+      / - if @invite.submitted
+        strong.govuk-tag.govuk-tag--blue
+          | Complete
+      / - else
+        strong.govuk-tag.govuk-tag--red
+          | Incomplete
+    p.govuk-body
+      | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
+      =< AwardYear.current.year
+      | . We will contact you at the end of the year to request the contact details for these two guests.
+      strong.text-underline<
+        | No action is needed now.
+    / NOTE for devs: When enabling the button, please also uncomment the tests in 'palace_invite_spec.rb'
+    / = link_to "Provide details for Royal Garden Party", edit_palace_invite_url(id: @invite.id), class: "govuk-button govuk-button--start"
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
     h3.govuk-heading-s
       | May to July 2023 &mdash; Royal Garden Party
     p.govuk-body
-      | The two representatives from your group that you have selected attend a Royal Garden Party at Buckingham Palace in London or the Palace of Holyroodhouse in Edinburgh.
+      |  We will let you know the precise dates when we contact you about this in early 2023.
