@@ -28,7 +28,8 @@ class Admin::FormAnswersController < Admin::BaseController
     if params[:year].to_s == "all_years"
       FormAnswer.all
     else
-      @award_year.form_answers
+      year = AwardYear.find_by(year: params[:year]) || @award_year
+      year.form_answers
     end
   end
 
