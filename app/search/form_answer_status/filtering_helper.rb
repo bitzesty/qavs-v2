@@ -50,9 +50,12 @@ module FormAnswerStatus::FilteringHelper
   end
 
   def activity_options
-    Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
+    options = Hash[not_stated: { label: "Not stated" }]
+    NomineeActivityHelper.nominee_activities.collect do |activity, _|
+      options[activity.to_s] = { label: NomineeActivityHelper.lookup_label_for_activity(activity) }
+    end
+
+    options
   end
 
   def address_county_options
