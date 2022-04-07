@@ -35,7 +35,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
     search_params = save_or_load_search!
 
     scope = current_assessor.applications_scope(
-      params[:year].to_s == "all_years" ? nil : ( AwardYear.find_by(year: params[:year]) || @award_year )
+      params[:year].to_s == "all_years" ? nil : @award_year
     ).eligible_for_assessor
 
     if search_params[:query].blank? && category_picker.show_award_tabs_for_assessor?
