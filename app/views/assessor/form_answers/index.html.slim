@@ -3,8 +3,9 @@
 h1.govuk-heading-xl
   | Nominations for your sub-group
 = simple_form_for @search, url: assessor_form_answers_path(year: params[:year]), method: :post, as: :search do |f|
-  .govuk-grid-row
-    = render "layouts/vertical_admin_award_year"
+  / Temporarily commenting out year filter for assessors
+  / .govuk-grid-row
+  /   = render "layouts/vertical_admin_award_year"
 
   .govuk-grid-row
     .govuk-grid-column-one-third
