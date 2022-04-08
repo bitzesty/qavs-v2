@@ -8,7 +8,7 @@ development:
   password: <%= ENV["DB_PASS"] %> # e.g. "my-database-password"
   database: <%= ENV.fetch("DB_NAME") { "qavs-dev" } %>
   host: <%= ENV.fetch("DB_HOST") { "localhost" }%> # '172.17.0.1' if deployed to GAE Flex
-  port: <%= ENV.fetch("DB_PORT") { 5436 }%>
+  port: <%= ENV.fetch("DB_PORT") { 5432 }%>
 
 test:
   <<: *default
@@ -16,7 +16,7 @@ test:
   username: <%= ENV["DB_USER"] %>  # e.g. "my-database-user"
   password: <%= ENV["DB_PASS"] %> # e.g. "my-database-password"
   host: <%= ENV.fetch("DB_HOST") { "localhost" }%> # '172.17.0.1' if deployed to GAE Flex
-  port: <%= ENV.fetch("DB_PORT") { 5436 }%>
+  port: <%= ENV.fetch("DB_PORT") { 5432 }%>
 
 production:
   <<: *default

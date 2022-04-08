@@ -23,7 +23,16 @@ class FormAnswerSearch < Search
   end
 
   def filter_by_activity_type(scoped_results, value)
-    scoped_results.where(nominee_activity: value).or(scoped_results.where(secondary_activity: value))
+    value = value.reject { |v| v == ''}
+
+    value = value.map do |v|
+      v == "not_stated" ? nil : v
+    end
+
+    nominee_activity_scope = scoped_results.where(nominee_activity: value)
+    secondary_activity_scope = scoped_results.where(secondary_activity: value)
+
+    nominee_activity_scope.or(secondary_activity_scope.and(scoped_results.where.not(secondary_activity: nil)))
   end
 
   def filter_by_assigned_ceremonial_county(scoped_results, value)

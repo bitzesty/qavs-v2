@@ -21,8 +21,6 @@ module FormAnswerStatus::FilteringHelper
       collection_mapping(activity_options)
     when 'group address county'
       collection_mapping(address_county_options)
-    when 'group address county 2022'
-      collection_mapping(address_county_options_2022)
     when 'assigned county'
       collection_mapping(county_options)
     end
@@ -42,8 +40,6 @@ module FormAnswerStatus::FilteringHelper
       county_options.keys.map(&:to_s)
     when 'group address county'
       address_county_options.keys.map(&:to_s)
-    when 'group address county 2022'
-      address_county_options_2022.keys.map(&:to_s)
     end
   end
 
@@ -54,23 +50,17 @@ module FormAnswerStatus::FilteringHelper
   end
 
   def activity_options
-    Hash[NomineeActivityHelper.nominee_activities.collect { |activity|
-      [activity, { label: NomineeActivityHelper.lookup_label_for_activity(activity), nominee_activity: [activity] }]
-    } ]
+    options = Hash[not_stated: { label: "Not stated" }]
+    NomineeActivityHelper.nominee_activities.collect do |activity, _|
+      options[activity.to_s] = { label: NomineeActivityHelper.lookup_label_for_activity(activity) }
+    end
+
+    options
   end
 
   def address_county_options
     options = options = Hash[not_stated: { label: "Not stated" }]
     RegionHelper::COUNTY_REGION_MAPPINGS.collect { |county, _|
-      options[county.to_s] = { label: county }
-    }
-
-    options
-  end
-
-  def address_county_options_2022
-    options = options = Hash[not_stated: { label: "Not stated" }]
-    RegionHelper::COUNTY_REGION_MAPPINGS_2022.collect { |county, _|
       options[county.to_s] = { label: county }
     }
 
