@@ -18,15 +18,6 @@ GIT
       devise (>= 4.3.0, < 5.0)
 
 GIT
-  remote: https://github.com/vigilion/vigilion-rails.git
-  revision: 59def7b69589d702b6d14a5ec5b1c77c22e21065
-  ref: 59def7b69589d702b6d14a5ec5b1c77c22e21065
-  specs:
-    vigilion-rails (2.0.0)
-      rails (>= 6.0.3.7)
-      vigilion (~> 1.0.4)
-
-GIT
   remote: https://github.com/vigilion/vigilion-ruby.git
   revision: 7d6a7e5b93d8491c30b10cf95773be003c6ab579
   ref: 7d6a7e5
@@ -36,6 +27,13 @@ GIT
       faraday
       faraday-detailed_logger
       faraday_middleware
+
+PATH
+  remote: /vigilion-rails
+  specs:
+    vigilion-rails (2.1.0)
+      rails (>= 6.0.3.7)
+      vigilion (~> 1.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -800,7 +798,7 @@ DEPENDENCIES
   turnip (~> 4.2.0)
   uglifier (>= 2.7.2)
   vigilion (~> 1.0.4)!
-  vigilion-rails!
+  vigilion-rails (= 2.1.0)!
   virtus
   web-console
   webmock (= 3.13.0)
