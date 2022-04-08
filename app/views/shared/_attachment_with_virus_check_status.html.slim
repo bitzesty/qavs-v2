@@ -5,7 +5,7 @@
               item.send(mount_name).url,
               target: "_blank",
               class: 'govuk-link'
-  - elsif scan_results == "scanning"
+  - elsif scan_results == "scanning" || scan_results == "pending"
     = item.try(:original_filename)
     |  (scanning on viruses)
   - elsif scan_results == "infected"
