@@ -11,10 +11,8 @@
 
         = params[:year].to_s == "all_years" ? "All Years" : current_year_text
       ul.dropdown-menu
-        / Commented out option for All Years as this will cause issues with the different county options. Can be uncommented when there is a single county list to use.
-
-        / li class="#{'active' if params[:year].to_s == 'all_years'}"
-        /   = link_to "All Years", url_for(params.permit(:controller, :action, :search_id, :year).merge(year: :all_years)), class: "govuk-!-font-size-19 govuk-link--no-underline"
+        li class="#{'active' if params[:year].to_s == 'all_years'}"
+          = link_to "All Years", url_for(params.permit(:controller, :action, :search_id, :year).merge(year: :all_years)), class: "govuk-!-font-size-19 govuk-link--no-underline"
 
         - AwardYear.admin_switch.each do |year, label|
           li class="#{'active' if label == current_year_text}"
