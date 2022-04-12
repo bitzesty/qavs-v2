@@ -27,6 +27,8 @@ class Admin::FormAnswersController < Admin::BaseController
   expose(:target_scope) do
     if params[:year].to_s == "all_years"
       FormAnswer.all
+    elsif params[:year]
+      (year = AwardYear.find_by(year: params[:year])) ? year.form_answers : FormAnswer.none
     else
       @award_year.form_answers
     end

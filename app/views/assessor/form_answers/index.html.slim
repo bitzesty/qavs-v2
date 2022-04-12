@@ -2,12 +2,15 @@
 
 h1.govuk-heading-xl
   | Nominations for your sub-group
-= simple_form_for @search, url: assessor_form_answers_path, method: :post, as: :search do |f|
-  = hidden_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
-  = hidden_field_tag :award_type, params[:award_type], class: "visuallyhidden"
+= simple_form_for @search, url: assessor_form_answers_path(year: params[:year]), method: :post, as: :search do |f|
+  / Temporarily commenting out year filter for assessors
+  / .govuk-grid-row
+  /   = render "layouts/vertical_admin_award_year"
 
   .govuk-grid-row
     .govuk-grid-column-one-third
+      = hidden_field_tag :year, params[:year] || @award_year.year, class: "visuallyhidden"
+      = hidden_field_tag :award_type, params[:award_type], class: "visuallyhidden"
       = f.input :query, label: 'Search', input_html: { class: "medium", type: "search" }
   .govuk-grid-row
     = render "assessor/form_answers/filters", f: f,

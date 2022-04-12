@@ -35,19 +35,20 @@ describe "Palace invite process" do
     login_group_leader(group_leader)
   end
 
-  it "allows group leader to confirm palace attendees" do
-    enter_palace_attendees
-    check 'I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household.'
-    click_button "Submit"
+  # NOTE: tests below commented out because button has been hidden
+  # it "allows group leader to confirm palace attendees" do
+  #   enter_palace_attendees
+  #   check 'I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household.'
+  #   click_button "Submit"
 
-    expect(page).to have_selector("#flash-message-success-title", text: "Success")
-  end
+  #   expect(page).to have_selector("#flash-message-success-title", text: "Success")
+  # end
 
-  it "does not allow submission unless consent given" do
-    enter_palace_attendees
+  # it "does not allow submission unless consent given" do
+  #   enter_palace_attendees
 
-    click_button "Submit"
+  #   click_button "Submit"
 
-    expect(page).to have_content("Please confirm you have obtained both attendee's consent to provide their details")
-  end
+  #   expect(page).to have_content("Please confirm you have obtained both attendee's consent to provide their details")
+  # end
 end

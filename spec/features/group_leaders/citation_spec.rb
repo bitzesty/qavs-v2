@@ -13,14 +13,14 @@ describe "Citation process" do
   end
 
   it 'hides the citation until the group leader confiorms acceptance' do
-    click_link "Confirm group name and citation"
+    find("#citation-button").click
 
     expect(page).to have_content("Do you accept the Queen's Award for Voluntary Service")
     expect(page).to_not have_content("Submit")
   end
 
   it "allows group_leader to confirm citation" do
-    click_link "Confirm group name and citation"
+    find("#citation-button").click
     choose 'accepted-award'
 
     expect(page).to have_content("Group name and citation confirmation")

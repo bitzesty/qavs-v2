@@ -2,16 +2,12 @@ tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
     tr.govuk-table__row
       th.govuk-table__header scope="row"
-        = link_to polymorphic_url([namespace_name, obj]),
-                  aria: { label: "View nomination for #{obj.company_or_nominee_name}" },
+        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year]),
+                  aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" },
                   class: 'govuk-link' do
-          - unless obj.nominee_name.nil?
-            span
-              = obj.nominee_name
-          - else
-            em
-              ' Not found
-
+          span
+            = obj.nominee_name
+          
       td.govuk-table__cell = obj.dashboard_status
 
       td.govuk-table__cell = obj.document["nominee_address_postcode"]
@@ -30,6 +26,6 @@ tbody.govuk-table__body
 
       td.govuk-table__cell
         = link_to "View",
-                  lieutenant_form_answer_path(obj),
-                  aria: { label: "View nomination for #{obj.company_or_nominee_name}" },
+                  lieutenant_form_answer_path(obj, search_id: params[:search_id], year: params[:year]),
+                  aria: { label: "View submitted nomination, for #{obj.company_or_nominee_name}" },
                   class: 'govuk-link'
