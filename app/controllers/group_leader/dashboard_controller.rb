@@ -3,8 +3,8 @@ class GroupLeader::DashboardController < GroupLeader::BaseController
     authorize :group_leader_dashboard, :index?
     @citation = current_subject.form_answer.citation
     @invite = palace_invite
-
-    @deadlines = Settings.current.deadlines
+    @award_year = current_subject.form_answer.award_year
+    @deadlines = @award_year.settings.deadlines
   end
 
   private
