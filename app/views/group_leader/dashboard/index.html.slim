@@ -3,7 +3,7 @@
 .dashboard.article-container.article-container-wider
   .dashboard__header
     h1.govuk-heading-l
-      | Congratulations on being awarded The Queen’s Award for Voluntary Service
+      | Congratulations on being awarded The Queen's Award for Voluntary Service
 
   .dashboard__section
     .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner"
@@ -27,7 +27,7 @@
     h3.govuk-heading-s
       | By
       =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
-      | &mdash; confirm your group’s name and citation &nbsp;
+      | &mdash; confirm your group's name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -78,7 +78,9 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | June to September 2022 &mdash; Lord-Lieutenant presents the Award
+      | June to September
+      =<> @award_year.year-1
+      | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
       | The Lord-Lieutenant for your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
@@ -95,7 +97,7 @@
           | Incomplete
     p.govuk-body
       | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
-      =< AwardYear.current.year
+      =< @award_year.year
       | . We will contact you at the end of the year to request the contact details for these two guests.
       strong.text-underline<
         | No action is needed now.
@@ -104,6 +106,10 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | May to July 2023 &mdash; Royal Garden Party
+      | May to July
+      =<> @award_year.year
+      | &mdash; Royal Garden Party
     p.govuk-body
-      |  We will let you know the precise dates when we contact you about this in early 2023.
+      |  We will let you know the precise dates when we contact you about this in early
+      =< @award_year.year
+      | .
