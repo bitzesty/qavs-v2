@@ -43,6 +43,7 @@
 
     h2.govuk-heading-m
       | What happens next
+    hr.govuk-section-break.govuk-section-break--l
 
     h3.govuk-heading-s
       | Between 1 April and
@@ -61,11 +62,21 @@
       .govuk-details__text
         ul.govuk-list
           li
-            = link_to "The Queen's Award for Voluntary Service awardees' media pack 2022"
+            = link_to "The Queen's Award for Voluntary Service awardees' media pack 2022",
+              "https://storage.googleapis.com/emblem-files-and-guidance/Media%20pack%20for%20QAVS%20Awardees%202022.pdf",
+              rel: "noreferrer noopener",
+              target: :_blank
           li
-            = link_to "The Queen's Award for Voluntary Service logo guidelines"
+            = link_to "The Queen's Award for Voluntary Service media pack materials",
+              "https://storage.googleapis.com/emblem-files-and-guidance/QAVS%202022%20Media%20Pack%20Materials.pptx",
+              rel: "noreferrer noopener",
+              target: :_blank
           li
-            = link_to "The Queen's Award for Voluntary Service logo in various formats"
+            = link_to "The Queen's Award for Voluntary Service logo in various formats",
+              "https://qavs.dcms.gov.uk/the-queens-award-for-voluntary-service-emblem-guidelines/",
+              rel: "noreferrer noopener",
+              target: :_blank
+
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
@@ -82,7 +93,7 @@
       =<> @award_year.year-1
       | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
-      | The Lord-Lieutenant for your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
+      | As The Queen's representative for your county, The Lord-Lieutenant will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
