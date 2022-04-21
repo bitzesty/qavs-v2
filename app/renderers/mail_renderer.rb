@@ -16,6 +16,12 @@ class MailRenderer
     end
   end
 
+  attr_reader :award_year
+
+  def initialize(year)
+    @award_year = year
+  end
+
   def submission_started_notification
     #
     # NOTE: This one is old.
@@ -54,8 +60,8 @@ class MailRenderer
 
     assigns[:user_name] = "Jon Doe"
     assigns[:form_answer] = form_answer
-    deadline = Settings.current_submission_deadline
-    if deadline.trigger_at
+    deadline = settings.deadlines.submission_end.first
+    if deadline && deadline.trigger_at
       assigns[:deadline] = deadline.decorate.long_mail_reminder
     else
       assigns[:deadline] = "[submission period closes deadline]"
@@ -78,7 +84,7 @@ class MailRenderer
     assigns = {}
 
     assigns[:lieutenant] = dummy_lieutenant
-    assigns[:award_year] = AwardYear.current.year
+    assigns[:award_year] = award_year.year
     assigns[:total] = 5
     render(assigns, "lieutenants_mailers/local_assessment_notification_mailer/preview/notify")
   end
@@ -87,8 +93,8 @@ class MailRenderer
     assigns = {}
 
     assigns[:lieutenant] = dummy_lieutenant
-    deadline = Settings.current_local_assessment_submission_deadline
-    if deadline.trigger_at
+    deadline = settings.deadlines.local_assessment_submission_end.first
+    if deadline && deadline.trigger_at
       assigns[:deadline] = deadline.decorate.long_mail_reminder
     else
       assigns[:deadline] = ["local assessment period ends deadline"]
@@ -151,7 +157,7 @@ class MailRenderer
     assigns[:group_leader_name] = "#{ group_leader.first_name } #{ group_leader.last_name }"
     assigns[:form_answer] = form
     assigns[:award_year] = form.award_year.year
-    deadline = Settings.current_palace_reception_attendee_information_deadline
+    deadline = settings.deadlines.buckingham_palace_reception_attendee_information_due_by
     if deadline.trigger_at
       assigns[:palace_invite_deadline] = deadline.decorate.formatted_mailer_deadline
     else
@@ -183,7 +189,7 @@ class MailRenderer
     @form_answer ||= FormAnswer.new(
       id: 0,
       urn: "QA0128/16I",
-      award_year: AwardYear.current,
+      award_year: award_year,
     ).decorate
   end
 
@@ -198,8 +204,12 @@ class MailRenderer
   end
 
   def deadline(kind)
-    Settings.current.deadlines.find_by(
+    settings.deadlines.find_by(
       kind: kind
     ).try :trigger_at
+  end
+
+  def settings
+    award_year.settings
   end
 end

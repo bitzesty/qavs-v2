@@ -15,7 +15,7 @@
       span.govuk-details__summary-text
         | View email content
     .govuk-details__text
-      = MailRenderer.new.public_send(kind)
+      = MailRenderer.new(@award_year).public_send(kind)
 
   = link_to "#", class: "govuk-button btn-add-schedule if-no-js-hide govuk-!-margin-bottom-1", role: "button" do
     | Schedule to send the email
