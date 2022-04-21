@@ -16,6 +16,6 @@ describe "GroupLeader sign in" do
 
     click_button "Sign in"
 
-    expect(page).to have_content("Congratulations on being awarded The Queen’s Award for Voluntary Service")
+    expect(page).to have_content("Congratulations on being awarded The Queen's Award for Voluntary Service")
   end
 end

@@ -3,7 +3,7 @@
 .dashboard.article-container.article-container-wider
   .dashboard__header
     h1.govuk-heading-l
-      | Congratulations on being awarded The Queen’s Award for Voluntary Service
+      | Congratulations on being awarded The Queen's Award for Voluntary Service
 
   .dashboard__section
     .govuk-notification-banner role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner"
@@ -27,7 +27,7 @@
     h3.govuk-heading-s
       | By
       =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
-      | &mdash; confirm your group’s name and citation &nbsp;
+      | &mdash; confirm your group's name and citation &nbsp;
       - if @citation.completed_at?
         strong.govuk-tag.govuk-tag--blue
           | Complete
@@ -36,13 +36,14 @@
           | Incomplete
     p.govuk-body
       | Your group name and the 70 character citation describing the group's work will appear on the certificate and in any media publication. We are planning to use the text agreed with you during the local assessment process. Please check and confirm these details by
-      =< @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
+      =<> @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
       | by clicking on the link below - you can make corrections if needed.
     = link_to "Check and confirm group's name and citation", edit_group_leader_citation_path(@citation), class: "govuk-button govuk-button--start", id: "citation-button"
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h2.govuk-heading-m
       | What happens next
+    hr.govuk-section-break.govuk-section-break--l
 
     h3.govuk-heading-s
       | Between 1 April and
@@ -61,11 +62,38 @@
       .govuk-details__text
         ul.govuk-list
           li
-            = link_to "The Queen's Award for Voluntary Service awardees' media pack 2022"
+            = link_to "The Queen's Award for Voluntary Service awardees' media pack 2022",
+              "https://storage.googleapis.com/emblem-files-and-guidance/Media%20pack%20for%20QAVS%20Awardees%202022.pdf",
+              rel: "noreferrer noopener",
+              target: :_blank
           li
-            = link_to "The Queen's Award for Voluntary Service logo guidelines"
+            = link_to "The Queen's Award for Voluntary Service media pack materials",
+              "https://storage.googleapis.com/emblem-files-and-guidance/QAVS%202022%20Media%20Pack%20Materials.pptx",
+              rel: "noreferrer noopener",
+              target: :_blank
           li
-            = link_to "The Queen's Award for Voluntary Service logo in various formats"
+            = link_to "The Queen's Award for Voluntary Service logo in various formats",
+              "https://qavs.dcms.gov.uk/the-queens-award-for-voluntary-service-emblem-guidelines/",
+              rel: "noreferrer noopener",
+              target: :_blank
+
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h3.govuk-heading-s
+      => @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | &mdash; Awards officially announced
+    p.govuk-body
+      | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
+      =< link_to("QAVS website", "https://qavs.dcms.gov.uk/")
+      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #QAVS2022 and tag us @QueensAwardVS.
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h3.govuk-heading-s
+      | June to September
+      =<> @award_year.year-1
+      | &mdash; Lord-Lieutenant presents the Award
+    p.govuk-body
+      | As The Queen's representative for your county, The Lord-Lieutenant will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
@@ -95,7 +123,7 @@
           | Incomplete
     p.govuk-body
       | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
-      =< AwardYear.current.year
+      =< @award_year.year
       | . We will contact you at the end of the year to request the contact details for these two guests.
       strong.text-underline<
         | No action is needed now.
@@ -104,6 +132,10 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | May to July 2023 &mdash; Royal Garden Party
+      | May to July
+      =<> @award_year.year
+      | &mdash; Royal Garden Party
     p.govuk-body
-      |  We will let you know the precise dates when we contact you about this in early 2023.
+      |  We will let you know the precise dates when we contact you about this in early
+      =< @award_year.year
+      | .

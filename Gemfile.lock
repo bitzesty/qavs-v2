@@ -18,15 +18,6 @@ GIT
       devise (>= 4.3.0, < 5.0)
 
 GIT
-  remote: https://github.com/vigilion/vigilion-rails.git
-  revision: 59def7b69589d702b6d14a5ec5b1c77c22e21065
-  ref: 59def7b69589d702b6d14a5ec5b1c77c22e21065
-  specs:
-    vigilion-rails (2.0.0)
-      rails (>= 6.0.3.7)
-      vigilion (~> 1.0.4)
-
-GIT
   remote: https://github.com/vigilion/vigilion-ruby.git
   revision: 7d6a7e5b93d8491c30b10cf95773be003c6ab579
   ref: 7d6a7e5
@@ -673,6 +664,9 @@ GEM
     unf_ext (0.0.8)
     unicode-display_width (1.8.0)
     unicode_utils (1.4.0)
+    vigilion-rails (2.1.0)
+      rails (>= 6.0.3.7)
+      vigilion (~> 1.0.4)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -800,7 +794,7 @@ DEPENDENCIES
   turnip (~> 4.2.0)
   uglifier (>= 2.7.2)
   vigilion (~> 1.0.4)!
-  vigilion-rails!
+  vigilion-rails (~> 2.1.0)
   virtus
   web-console
   webmock (= 3.13.0)
