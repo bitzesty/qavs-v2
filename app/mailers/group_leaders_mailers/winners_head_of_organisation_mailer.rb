@@ -1,3 +1,4 @@
+# coding: utf-8
 class GroupLeadersMailers::WinnersHeadOfOrganisationMailer < ApplicationMailer
   def notify(form_answer_id, gl_id)
     @form_answer = FormAnswer.find(form_answer_id).decorate
@@ -8,7 +9,7 @@ class GroupLeadersMailers::WinnersHeadOfOrganisationMailer < ApplicationMailer
     @award_year = @form_answer.award_year.year
     @token = @group_leader.send(:set_reset_password_token)
 
-    deadlines = Settings.current.deadlines
+    deadlines = @form_answer.award_year.settings.deadlines
 
     @end_of_embargo_date = deadlines.end_of_embargo.strftime("%-d %B")
     @citation_deadline = deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B")
