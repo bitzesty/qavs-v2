@@ -219,7 +219,9 @@ class FormAnswerStateMachine
   end
 
   def permitted_states_with_deadline_constraint
-    if Settings.after_current_submission_deadline?
+    relevant_submission_deadline = object.award_year.settings.deadlines.submission_end.first
+
+    if relevant_submission_deadline.try(:passed?)
       all_states = [
         :admin_eligible,
         :admin_pending_eligibility,

@@ -7,7 +7,8 @@ describe FormAnswerStateTransition do
     before do
       subject.form_answer = form_answer
 
-      allow(Settings).to receive(:after_current_submission_deadline?).and_return(true)
+      deadline = form_answer.award_year.settings.deadlines.submission_end.first
+      deadline.update_column(:trigger_at, Time.zone.now - 2.days)
     end
 
     it "returns final verdict states for admin" do
