@@ -6,7 +6,7 @@ class GroupLeadersMailers::BuckinghamPalaceInviteMailer < AccountMailers::BaseMa
     @group_leader_email = @form_answer.document["local_assessment_group_leader_email"]
     @award_year = @form_answer.award_year.year
 
-    deadlines = Settings.current.deadlines
+    deadlines = @form_answer.award_year.settings.deadlines
 
     @palace_invite_deadline = deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
 
