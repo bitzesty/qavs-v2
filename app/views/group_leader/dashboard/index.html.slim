@@ -97,6 +97,21 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
+      => @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | &mdash; Awards officially announced
+    p.govuk-body
+      | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
+      =< link_to("QAVS website", "https://qavs.dcms.gov.uk/")
+      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #QAVS2022 and tag us @QueensAwardVS.
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h3.govuk-heading-s
+      | June to September 2022 &mdash; Lord-Lieutenant presents the Award
+    p.govuk-body
+      | The Lord-Lieutenant for your local county, as The Queen's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
+    hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+
+    h3.govuk-heading-s
       | By
       =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
       | &mdash; submit details for Royal Garden Party &nbsp;
