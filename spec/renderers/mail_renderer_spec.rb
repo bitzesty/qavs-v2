@@ -11,7 +11,7 @@ describe MailRenderer do
     end
 
     let(:rendered_email) do
-      described_class.new.submission_started_notification
+      described_class.new(AwardYear.current).submission_started_notification
     end
 
     it "renders e-mail" do
@@ -24,14 +24,14 @@ describe MailRenderer do
     it "renders e-mail" do
       Settings.current_submission_deadline.update(trigger_at: 10.days.ago)
       link = "https://apply.qavs.dcms.gov.uk/form/0"
-      rendered = described_class.new.reminder_to_submit
+      rendered = described_class.new(AwardYear.current).reminder_to_submit
       expect(rendered).to match(link)
     end
   end
 
   describe "#group_leader_notification" do
     it "renders e-mail" do
-      rendered = described_class.new.group_leader_notification
+      rendered = described_class.new(AwardYear.current).group_leader_notification
       expect(rendered).to match("Jane Campton")
     end
   end
@@ -39,7 +39,7 @@ describe MailRenderer do
   describe "#local_assessment_notification" do
     it "renders e-mail" do
       link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
-      rendered = described_class.new.local_assessment_notification
+      rendered = described_class.new(AwardYear.current).local_assessment_notification
       expect(rendered).to match(link)
     end
   end
@@ -48,7 +48,7 @@ describe MailRenderer do
     it "renders e-mail" do
       Settings.current_local_assessment_submission_deadline.update(trigger_at: 10.days.ago)
       link = "https://apply.qavs.dcms.gov.uk/lieutenant/form_answers"
-      rendered = described_class.new.local_assessment_reminder
+      rendered = described_class.new(AwardYear.current).local_assessment_reminder
       expect(rendered).to match(link)
     end
   end
@@ -56,7 +56,7 @@ describe MailRenderer do
   describe "#winners_head_of_organisation_notification" do
     it "renders e-mail" do
       link = "https://apply.qavs.dcms.gov.uk/group_leaders/password/edit?reset_password_token=securetoken"
-      rendered = described_class.new.winners_head_of_organisation_notification
+      rendered = described_class.new(AwardYear.current).winners_head_of_organisation_notification
       expect(rendered).to match("Jane Doe")
       expect(rendered).to match("Synergy")
       expect(rendered).to include(link)
@@ -65,7 +65,7 @@ describe MailRenderer do
 
   describe "#unsuccessful_group_leaders_notification" do
     it "renders e-mail" do
-      rendered = described_class.new.unsuccessful_group_leaders_notification
+      rendered = described_class.new(AwardYear.current).unsuccessful_group_leaders_notification
       expect(rendered).to match("Massive Dynamic")
       expect(rendered).to match("John Smith")
     end
@@ -74,7 +74,7 @@ describe MailRenderer do
   describe "#successful_nominations_notification" do
     it "renders e-mail" do
       link = "https://apply.qavs.dcms.gov.uk/awardees"
-      rendered = described_class.new.winners_notification
+      rendered = described_class.new(AwardYear.current).winners_notification
       expect(rendered).to match(link)
       expect(rendered).to match("Synergy")
     end
@@ -83,7 +83,7 @@ describe MailRenderer do
   describe "#unsuccessful_notification" do
     it "renders e-mail" do
       link = "https://www.gov.uk/honours"
-      rendered = described_class.new.unsuccessful_notification
+      rendered = described_class.new(AwardYear.current).unsuccessful_notification
       expect(rendered).to match "Massive Dynamic"
       expect(rendered).to match link
     end
@@ -93,7 +93,7 @@ describe MailRenderer do
     it "renders e-mail" do
       Settings.current_palace_reception_attendee_information_deadline.update(trigger_at: 10.days.from_now)
       link = "https://apply.qavs.dcms.gov.uk/group_leader"
-      rendered = described_class.new.buckingham_palace_invite
+      rendered = described_class.new(AwardYear.current).buckingham_palace_invite
       expect(rendered).to match(link)
       expect(rendered).to match("Jane Doe")
     end

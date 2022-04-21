@@ -87,7 +87,7 @@ class Notifiers::EmailNotificationService
 
       {
         id: w.id,
-        email: w.document["local_assessment_group_leader_email"],
+        email: w.document["local_assessment_group_leader_email"].downcase,
         first_name: w.group_leader_first_name,
         last_name: w.group_leader_last_name
       }
