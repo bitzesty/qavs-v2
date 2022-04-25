@@ -25,15 +25,20 @@
       | Information needed straight away:
 
     h3.govuk-heading-s
-      | By
-      =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
-      | &mdash; confirm the award acceptance, your group name and citation &nbsp;
-      - if @citation.completed_at?
-        strong.govuk-tag.govuk-tag--blue
-          | Complete
-      - else
-        strong.govuk-tag.govuk-tag--red
-          | Incomplete
+      .govuk-grid-row.gl-dashboard-row
+        .grid-column-deadline
+          | By
+          =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
+          | &mdash;
+        .grid-column-message
+          |confirm the award acceptance, your group name and citation &nbsp;
+        .govuk-grid-column-status
+          - if @citation.completed_at?
+            strong.govuk-tag.govuk-tag--blue
+              | Complete
+          - else
+            strong.govuk-tag.govuk-tag--red
+              | Incomplete
     p.govuk-body
       | You have to confirm that you accept the award first. You will then be asked to check and confirm your group’s name and citation.
     p.govuk-body
