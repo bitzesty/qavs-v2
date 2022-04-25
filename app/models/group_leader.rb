@@ -41,6 +41,10 @@ class GroupLeader < ApplicationRecord
     22.hours
   end
 
+  def reset_password_within
+    4.weeks
+  end
+
   private
 
   # Do not raise an error if already confirmed.
