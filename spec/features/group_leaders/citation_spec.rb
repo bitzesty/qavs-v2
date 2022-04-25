@@ -1,3 +1,4 @@
+# coding: utf-8
 require "rails_helper"
 include Warden::Test::Helpers
 
@@ -19,14 +20,26 @@ describe "Citation process" do
     expect(page).to_not have_content("Submit")
   end
 
-  it "allows group_leader to confirm citation" do
+  it "allows group_leader to confirm citation", js: true do
     find("#citation-button").click
-    choose 'accepted-award'
+    # non-js test:
+    # choose 'accepted-award'
+    find("label[for='accepted-award']").click
 
     expect(page).to have_content("Group name and citation confirmation")
 
     click_button "Submit"
 
     expect(page).to have_selector("#flash-message-success-title", text: "Success")
+  end
+
+  it "allows group leader to reject citation", js: true do
+    find("#citation-button").click
+    # non-js test:
+    # choose 'rejected-award'
+    find("label[for='rejected-award']").click
+    click_button "Submit"
+
+    expect(page).to have_text("If you do not wish to be awarded The Queen’s Award for Voluntary Service, please contact queensaward@dcms.gov.uk.")
   end
 end

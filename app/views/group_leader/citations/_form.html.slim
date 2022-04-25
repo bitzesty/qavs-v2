@@ -8,6 +8,8 @@
     | This information will appear on the certificate, QAVS website and in any media publication. Therefore, please ensure that it is accurate.
 
 = simple_form_for [:group_leader, @citation] do |f|
+  = hidden_field_tag :accept_award, @citation.completed_at?
+
   .citation class='govuk-!-display-none'
     .govuk-form-group
       = f.label :group_name, class: "govuk-label govuk-label--s"
