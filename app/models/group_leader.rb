@@ -41,7 +41,7 @@ class GroupLeader < ApplicationRecord
     22.hours
   end
 
-  def reset_password_within
+  def self.reset_password_within
     4.weeks
   end
 
