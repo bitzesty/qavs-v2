@@ -1017,3 +1017,26 @@ ul.no-bullets {
 form.audit-certificate-upload-form span.button-add {
   margin-bottom: 20px;
 }
+
+.gl-dashboard-row {
+  .grid-column-deadline {
+    width: 25%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0 0 0 15px;
+  }
+
+  .grid-column-message {
+    width: 55%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0 15px 0 0;
+  }
+
+  .grid-column-status {
+    width: 20%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0 0 0 15px;
+  }
+}

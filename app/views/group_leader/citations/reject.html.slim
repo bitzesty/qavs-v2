@@ -1,0 +1,22 @@
+- title "Award acceptance, group name & citation confirmation"
+
+.dashboard.article-container.article-container-wider
+  .dashboard__header
+    .govuk-notification-banner class="govuk-notification-banner--notice" role="region" aria-labelledby="flash-message-notice-title" data-module="govuk-notification-banner"
+      .govuk-notification-banner__header
+        h2.govuk-notification-banner__title id="flash-message-notice-title"
+          | Important
+      .govuk-notification-banner__content
+        p.govuk-notification-banner__heading
+          | If you do not wish to be awarded The Queen’s Award for Voluntary Service, please contact
+          =< mail_to("queensaward@dcms.gov.uk")
+          | .
+
+.dashboard.article-container
+  .dashboard__section
+    p.govuk-body
+      | Return to
+      =<> link_to("dashboard", group_leader_root_path)
+      | or
+      =< link_to("sign out", destroy_group_leader_session_path, method: :delete)
+      | .
