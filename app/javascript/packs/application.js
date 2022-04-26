@@ -203,9 +203,12 @@ for (let i = 0; i < 2; i++) {
 
 $(document).on('click', 'input[name=accept-award]', function() {
   if ($(this).val() == 'yes') {
+    $('#accept_award').val("true")
     $('.citation').removeClass('govuk-!-display-none')
   } else {
-    $('.citation').addClass('govuk-!-display-none')
+    $('#accept_award').val("false")
+    $('input.citation').removeClass('govuk-!-display-none')
+    $('div.citation').addClass('govuk-!-display-none')
   }
 })
 

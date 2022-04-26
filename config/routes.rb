@@ -298,7 +298,9 @@ Rails.application.routes.draw do
   namespace :group_leader do
     root to: "dashboard#index"
 
-    resources :citations, only: [:edit, :update]
+    resources :citations, only: [:edit, :update] do
+      get :reject, on: :collection
+    end
 
     resource :account, only: [:edit] do
       collection do

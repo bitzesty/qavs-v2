@@ -8,6 +8,11 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
   def update
     authorize @citation, :update?
 
+    if params["accept_award"] == "false"
+      redirect_to reject_group_leader_citations_path
+      return
+    end
+
     @citation.completed_at = Time.now
     if @citation.update citation_params
       flash[:success] = "Citation successfully updated!"
@@ -15,6 +20,10 @@ class GroupLeader::CitationsController < GroupLeader::BaseController
     else
       render :edit
     end
+  end
+
+  def reject
+    authorize @citation, :reject?
   end
 
   private
