@@ -198,6 +198,7 @@ Rails.application.routes.draw do
     resources :assessors
     resources :lieutenants
     resources :group_leaders, except: [:new, :create, :show]
+    resources :citations, only: [:index]
 
     resources :admins do
       collection do
