@@ -84,29 +84,6 @@ module Reports::DataPickers::FormDocumentPicker
     doc("ultimate_control_company")
   end
 
-  def employees
-    collect_final_value_from_doc(subcategory_suffix("employees"))
-  end
-
-  def final_year_overseas_sales
-    collect_final_value_from_doc(subcategory_suffix("overseas_sales"))
-  end
-
-  def final_year_total_sales
-    collect_final_value_from_doc(subcategory_suffix("total_turnover"))
-  end
-
-  def subcategory_suffix(attr_name)
-    "#{attr_name}_3of3"
-  end
-
-  def subcategory_field_name
-    "development_performance_years"
-  end
-
-  def sub_category
-    "Outstanding achievement over 3 years"
-  end
 
   def product_service
     service = doc("application_category") == "initiative" ? doc("initiative_desc_short") : doc("organisation_desc_short")
@@ -121,17 +98,6 @@ module Reports::DataPickers::FormDocumentPicker
 
     if year && month && day
       Date.new(year.to_i, month.to_i, day.to_i).strftime("%m/%d/%Y") rescue nil
-    end
-  end
-
-  def collect_final_value_from_doc(meth)
-    if meth
-      target_key = nil
-
-      target_key = meth
-
-      amended_value = financial_data[target_key]
-      amended_value.present? ? amended_value : doc(target_key)
     end
   end
 
