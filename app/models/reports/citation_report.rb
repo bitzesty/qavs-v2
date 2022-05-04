@@ -21,8 +21,12 @@ class Reports::CitationReport
       method: :citation_group_name
     },
     {
-	    label: "Citation",
+	    label: "Updated Citation",
 	    method: :citation_body
+    },
+    {
+      label: "Original Citation",
+      method: :ll_citation
     },
     {
       label: "Lieutenancy",

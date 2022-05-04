@@ -2,6 +2,7 @@ class Reports::FormAnswer
   include Reports::DataPickers::UserPicker
   include Reports::DataPickers::FormDocumentPicker
   include FormAnswersBasePointer
+  include ActionView::Helpers::SanitizeHelper
 
   attr_reader :obj,
               :answers,
@@ -87,6 +88,10 @@ class Reports::FormAnswer
 
   def gl_email
     obj.group_leader.try(:email)
+  end
+
+  def ll_citation
+    sanitize(obj.document["l_citation_summary"], tags: [])
   end
 
   def citation_group_name
