@@ -6,4 +6,4 @@
   = link_to "Download national assessment data CSV", admin_form_answers_path(search_id: params[:search_id], year: params[:year], report_kind: "national_assessment_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
 
 .govuk-button-group
-  = link_to "Download this year’s citation data CSV", admin_citations_path(year: params[:year], format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state"
+  = link_to "Download group leader data CSV", admin_citations_path(year: params[:year], format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state"
