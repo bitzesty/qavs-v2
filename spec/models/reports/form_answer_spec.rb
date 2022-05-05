@@ -1,14 +1,6 @@
 require "rails_helper"
 
 describe Reports::FormAnswer do
-  describe "#employees" do
-    it "returns number of employees" do
-      obj = build(:form_answer)
-      obj.document["employees_3of3"] = 10
-      expect(described_class.new(obj).employees).to eq(10)
-    end
-  end
-
   describe '#call_method' do
     it 'should return missing method' do
       expect(Reports::FormAnswer.new(build(:form_answer)).call_method(:missing)).to eq 'missing method'
@@ -50,20 +42,6 @@ describe Reports::FormAnswer do
 
     it '#telephone2 should return telephone2' do
       expect(report.telephone2).to eq "company_phone_number"
-    end
-  end
-
-
-  describe '#case_summary_status' do
-    it 'should return correct status' do
-      assessor_assignment = build(:assessor_assignment)
-      allow_any_instance_of(Reports::FormAnswer).to receive(:pick_assignment) {assessor_assignment}
-      allow_any_instance_of(AssessorAssignment).to receive(:submitted?) {true}
-      allow_any_instance_of(AssessorAssignment).to receive(:locked?) {true}
-      expect(Reports::FormAnswer.new(build(:form_answer)).send(:case_summary_status)).to eq 'Submitted'
-
-      allow_any_instance_of(AssessorAssignment).to receive(:locked?) {false}
-      expect(Reports::FormAnswer.new(build(:form_answer)).send(:case_summary_status)).to eq 'Not Submitted'
     end
   end
 end

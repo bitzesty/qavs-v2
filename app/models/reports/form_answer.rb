@@ -2,26 +2,17 @@ class Reports::FormAnswer
   include Reports::DataPickers::UserPicker
   include Reports::DataPickers::FormDocumentPicker
   include FormAnswersBasePointer
+  include ActionView::Helpers::SanitizeHelper
 
   attr_reader :obj,
               :answers,
-              :award_form,
-              :financial_data
+              :award_form
 
   def initialize(form_answer, limited_access=false)
     @obj = form_answer
     @answers = ActiveSupport::HashWithIndifferentAccess.new(obj.document)
     @award_form = form_answer.award_form.decorate(answers: answers)
-    @financial_data = form_answer.financial_data || {}
 
-    unless limited_access
-      @moderated = pick_assignment("moderated")
-      @primary = pick_assignment("primary")
-      @secondary = pick_assignment("secondary")
-      @case_summary = pick_assignment("case_summary")
-
-      @secondary_assessor = @obj.secondary_assessor
-    end
   end
 
   def question_visible?(question_key)
@@ -43,65 +34,12 @@ class Reports::FormAnswer
 
   private
 
-  def pick_assignment(name)
-    @obj.assessor_assignments.detect { |a| a.position == name }
-  end
-
-  def feedback_complete
-    obj.feedback && obj.feedback.submitted? && obj.feedback.locked? ? "Submitted" : "Not Submitted"
-  end
-
-  def case_assigned
-    bool(obj.primary_assessor_id.present? && obj.secondary_assessor_id.present?)
-  end
-
   def case_withdrawn
     bool obj.withdrawn?
   end
 
   def percentage_complete
     obj.fill_progress_in_percents
-  end
-
-  def mso_outcome_agreed
-    rag @moderated.try(:verdict_rate)
-  end
-
-  def mso_grade_agreed
-    return unless @moderated
-    rates = @moderated.document.select { |k, _| k =~ /\w_rate/ }
-    rates.map do |_, rate|
-      rag rate
-    end.join(",")
-  end
-
-  def sic_code
-    @obj.document["sic_code"]
-  end
-
-  def sic_code_description
-    res = @obj.decorate.sic_code_name
-    res.present? ? res.split("-").last.strip : ""
-  end
-
-  def first_assessor
-    @obj.primary_assessor.try(:full_name)
-  end
-
-  def second_assessor
-    @secondary_assessor.try(:full_name)
-  end
-
-  def first_assessment_complete
-    bool(@primary.try(:submitted?))
-  end
-
-  def second_assessment_complete
-    bool(@secondary.try(:submitted?))
-  end
-
-  def case_summary_overall_grade
-    rag(@case_summary.try(:verdict_rate))
   end
 
   def section1
@@ -136,23 +74,39 @@ class Reports::FormAnswer
     var ? "Yes" : "No"
   end
 
-  def rag(var)
-    {
-      "negative" => "R",
-      "positive" => "G",
-      "average" => "A"
-    }[var]
-  end
-
-  def case_summary_status
-    if @case_summary.try(:submitted?) && @case_summary.locked?
-      "Submitted"
-    else
-      "Not Submitted"
-    end
-  end
-
   def overall_status
     obj.state.humanize
+  end
+
+  def citation
+    @citation = obj.citation
+  end
+
+  def group_leader_name
+    obj.document["local_assessment_group_leader"]
+  end
+
+  def gl_email
+    obj.group_leader.try(:email)
+  end
+
+  def ll_citation
+    sanitize(obj.document["l_citation_summary"], tags: [])
+  end
+
+  def citation_group_name
+    citation.group_name
+  end
+
+  def citation_body
+    citation.body
+  end
+
+  def year
+    obj.award_year.year
+  end
+
+  def lieutenancy
+    obj.ceremonial_county.try(:name)
   end
 end

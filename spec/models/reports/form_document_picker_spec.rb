@@ -70,14 +70,5 @@ describe Reports::DataPickers::FormDocumentPicker do
         expect(subject.principal_county).to eq 1
       end
     end
-
-    context "sub_category" do
-      it 'should return sub category' do
-        object = double(document: {})
-        allow(object).to receive(:award_type).and_return(nil)
-        allow(subject).to receive(:obj).and_return(object)
-        expect(subject.sub_category).to eq("Outstanding achievement over 3 years")
-      end
-    end
   end
 end
