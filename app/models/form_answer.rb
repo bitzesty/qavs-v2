@@ -77,6 +77,7 @@ class FormAnswer < ApplicationRecord
     scope :not_shortlisted, -> { where(state: "not_recommended") }
     scope :winners, -> { where(state: "awarded") }
     scope :unsuccessful_applications, -> { submitted.where("state not in ('awarded', 'withdrawn')") }
+    scope :unsuccessful_applications_for_group_leader_mailer, -> { submitted.where(state: %w[local_assessment_recommended local_assessment_not_recommended not_awarded]) }
     scope :submitted, -> { where.not(submitted_at: nil) }
     scope :positive, -> { where(state: FormAnswerStateMachine::POSITIVE_STATES) }
     scope :at_post_submission_stage, -> { where(state: FormAnswerStateMachine::POST_SUBMISSION_STATES) }
