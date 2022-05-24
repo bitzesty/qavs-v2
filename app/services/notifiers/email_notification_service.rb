@@ -118,7 +118,7 @@ class Notifiers::EmailNotificationService
   end
 
   def unsuccessful_group_leaders_notification(award_year)
-    award_year.form_answers.unsuccessful_applications.each do |form_answer|
+    award_year.form_answers.unsuccessful_applications_for_group_leader_mailer.each do |form_answer|
       GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer.notify(form_answer.id).deliver_now!
     end
   end

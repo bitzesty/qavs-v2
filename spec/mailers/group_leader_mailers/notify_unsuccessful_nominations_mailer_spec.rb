@@ -1,3 +1,4 @@
+# coding: utf-8
 require "rails_helper"
 
 describe GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer do
@@ -25,7 +26,7 @@ describe GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer do
     it "renders the body" do
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
       expect(mail.body.raw_source).to match(group_name)
-      expect(mail.body.raw_source).to match("I am sorry to say that in the end it was not among those selected to receive the Award this year.")
+      expect(mail.body.raw_source).to match("I am sorry to say that in the end it was not among those selected to receive the award this year")
     end
   end
 end
