@@ -16,9 +16,8 @@ docker-compose run web bundle exec rake db:migrate
 
 ### Pre-requisites
 
-* Ruby 2.5.6
-* `gem install bundler -v 2.0.1`
-* Rails 6.0
+* Ruby 2.7
+* Rails 6.1
 * Postgresql 9.5+
 * Redis 2.8+
 
@@ -31,10 +30,6 @@ bundle exec sidekiq -C config/sidekiq.yml
 ```
 
 If you're running this on your local dev setup, start redis first before starting sidekiq
-
-### Running the console in google cloud
-
-https://www.notion.so/bitzesty/V2-7612041ac679476eb17ce5578317de90#f380a413b2da4b1d88598af2a63cb36e
 
 ## Deploying
 
@@ -55,15 +50,21 @@ This means, that `hstore postgresql` extension needs to be installed:
 sudo apt-get install postgresql-contrib
 ```
 
-## Check Cron schedule on live
+# License
 
-https://www.queens-awards-enterprise.service.gov.uk/sidekiq/cron
+qavs-v2 is Copyright © 2014 Crown Copyright & Bit Zesty. It is free
+software, and may be redistributed under the terms specified in the
+[LICENSE] file.
+
+[LICENSE]: https://github.com/bitzesty/qavs-v2/blob/master/LICENSE
 
 
-## Profile mode in Development
+# About Bit Zesty
 
-To enable [rack mini profiler](https://github.com/MiniProfiler/rack-mini-profiler)
-in development mode set in .env:
-```
-PROFILE_MODE=true
-```
+![Bit Zesty](https://bitzesty.com/wp-content/uploads/2017/01/logo_dark.png)
+
+qavs-v2 is maintained by Bit Zesty Limited.
+The names and logos for Bit Zesty are trademarks of Bit Zesty Limited.
+
+See [our other projects](https://bitzesty.com/client-stories/) or
+[hire us](https://bitzesty.com/contact/) to design, develop, and support your application.
