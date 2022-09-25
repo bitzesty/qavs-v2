@@ -56,6 +56,9 @@ fieldset class=question.fieldset_classes data=question.fieldset_data_hash
         - if question.context
           span.question-context.question-debug.govuk-hint
             == question.context
+        - if question.online_context
+          span.question-context.question-debug.govuk-hint
+            == question.online_context
         - for help in question.help
           span.question-context.question-debug.govuk-hint
             == help.text
