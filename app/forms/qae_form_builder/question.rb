@@ -326,6 +326,10 @@ class QAEFormBuilder
       @q.context = text
     end
 
+    def online_context text
+      @q.online_context = text
+    end
+
     def pdf_context text
       @q.pdf_context = text
     end
@@ -424,6 +428,7 @@ class QAEFormBuilder
                   :title,
                   :pdf_title,
                   :context,
+                  :online_context,
                   :pdf_context,
                   :pdf_context_with_header_blocks,
                   :additional_pdf_context,
