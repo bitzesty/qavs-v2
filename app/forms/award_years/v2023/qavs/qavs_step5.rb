@@ -90,7 +90,7 @@ class AwardYears::V2023::QAEForms
           sub_ref "E 1.8"
           required
           option "yes", "Yes"
-          option "no", "No (please email any amendments to queensaward@dcms.go.uk)."
+          option "no", "No (please email any amendments to queensaward@dcms.gov.uk)."
           context -> do
             %(
               <p class=govuk-body>The details below are still correct:</p>
@@ -330,7 +330,7 @@ class AwardYears::V2023::QAEForms
           required
         end
 
-        textarea :nomination_local_assessment_form_volunteer_work_volume, "Please give an idea of the volume of work put in by volunteers" do
+        textarea :nomination_local_assessment_form_volunteer_work_volume, "Please give an idea of the volume of work put in by volunteers." do
           sub_ref "E 5.2"
           online_context %(
             <p class='govuk-hint'>If possible, provide metrics, for example, 'x' number of volunteering hours are provided by 'y' volunteers each week; or the number of volunteers expressed as full time equivalents (FTEs).</p>
@@ -357,11 +357,8 @@ class AwardYears::V2023::QAEForms
         end
 
         header :local_assessment_group_organisation_evidence_header, "Evidence of a well-run organisation" do
-          online_context %(
-            <p class='govuk-hint'>Before your visit to the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS guidance for Lieutenancies, which can be downloaded from your dashboard page, provides ideas about key things to check and how to do this.</p>
-          )
-          pdf_context %(
-            <p class='govuk-hint'>Before you visit the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS guidance for Lieutenancies, , which can be downloaded from your dashboard page, provides details about key things to check and how to do this.</p>
+          context %(
+            <p class='govuk-hint'>Before your visit to the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS guidance for Lieutenancies, which can be downloaded from your dashboard page, provides details about key things to check and how to do this.</p>
           )
         end
 
@@ -621,6 +618,7 @@ class AwardYears::V2023::QAEForms
                 \u25E6 any exemplary qualities in the volunteers themselves.
 
               \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.
+
             You can also find more detailed information in the QAVS guidance for Lieutenancies
           )
           rows 3
