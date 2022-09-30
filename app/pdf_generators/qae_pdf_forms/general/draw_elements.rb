@@ -150,7 +150,7 @@ module QaePdfForms::General::DrawElements
       intro_text = %(
         This PDF version of the #{form_answer.award_type_full_name} nomination is for <b>reference only</b>.
 
-        <b>Please do not send in</b> this form to apply for this award. To apply for this award, you must complete the online form.
+        <b>Please do not send in</b> this form to apply for this award. To apply for this award, you must complete the online form. You can download a Word version of the local assessment questions and help text from the dashboard to use as a working document.
       )
 
       text_box intro_text,
