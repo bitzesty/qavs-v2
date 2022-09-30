@@ -4,13 +4,13 @@ class AwardYears::V2023::QAEForms
     def qavs_step5
       @qavs_step5 ||= proc do
         notice %(
-          <p class=govuk-body><strong>Please note:</strong> The new QAVS administrative website has a downloadable Word version of the form that includes explanations and suggestions to help you complete it.</p>
           <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
         header :local_assessment_general_header, "General information" do
           context %(
             <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the full guidance for Lieutenancies document that can be downloaded from your dashboard page. This provides helpful tips on approaching the assessment and completing your report.<p>
+            <p class=govuk-body><strong>Please note:</strong> The new QAVS administrative website has a downloadable Word version of the form that includes explanations and suggestions to help you complete it.</p>
           )
         end
 
@@ -54,7 +54,7 @@ class AwardYears::V2023::QAEForms
           style "medium"
         end
 
-        address :local_assessment_group_address, "Address of the group leader or main contact" do
+        address :local_assessment_group_address, "Address of the group" do
           sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
 
@@ -93,7 +93,7 @@ class AwardYears::V2023::QAEForms
           option "no", "No (please email any amendments to queensaward@dcms.gov.uk)."
           context -> do
             %(
-              <p class=govuk-body>The details below are still correct:</p>
+              <p class=govuk-body>The details above are still correct:</p>
             )
           end
         end
@@ -103,7 +103,7 @@ class AwardYears::V2023::QAEForms
           required
           text -> do
             %(
-              I confirm that I have checked the group's eligibility for the award as per the criteria above.
+              I confirm that I have checked the group's eligibility for the award as per the criteria above (if you disagree, please email us at queensaward@dcms.go.uk).
             )
           end
           online_context %(
@@ -275,7 +275,7 @@ class AwardYears::V2023::QAEForms
             <p class='govuk-hint'>For example, the group may operate only during a festival or during school breaks (this is fine).</p>
           )
           online_context %(
-            <p class='govuk-hint'>Explain how that influences the work of the volunteers. For example, some volunteers may work all year round with additional volunteers giving their time nearer to the event. Describe the typical time commitment made by volunteers at the busiest time.</p>
+            <p class='govuk-hint'>Explain how that influences the work of the volunteers. For example, some volunteers may work all year round with additional volunteers giving their time nearer to the event.</p>
           )
           required
         end
@@ -286,7 +286,7 @@ class AwardYears::V2023::QAEForms
             <p class='govuk-hint'>
               <ul class="govuk-list govuk-list--bullet govuk-hint">
                 <li>Please be specific when describing the area. For example, if describing a rural setting, explain how far away the nearest large town is and its population size. Is it hard to muster volunteers for various reasons?</li>
-                <li>Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, please provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.</li>
+                <li>Challenges may include deprivation, rural isolation, lack of community, unequal opportunities. Where possible, provide evidence - for example, if describing deprivation, you could use one of the online deprivation measures for a local postcode.</li>
               </ul>
             </p>
           )
@@ -416,7 +416,7 @@ class AwardYears::V2023::QAEForms
 
         textarea :nomination_local_assessment_form_funds_source, "Where does the group get its funds from?" do
           sub_ref "E 6.3"
-          context %(
+          online_context %(
             <p class='govuk-hint'>Describe the main sources of the group's income. Are these income sources at risk? Are there any plans in place to mitigate those risks?</p>
           )
           required
@@ -425,10 +425,8 @@ class AwardYears::V2023::QAEForms
 
         textarea :nomination_local_assessment_form_safeguarding_procedures, "Describe what safeguarding procedures are in place to ensure that children and adults at risk are well protected and whether these procedures are sufficient." do
           sub_ref "E 6.4"
-          context %(
-            <p class='govuk-hint'>This may include criminal record checks, a child-protection policy, specialised training and insurance indemnity.</p>
-          )
           online_context %(
+            <p class='govuk-hint'>This may include criminal record checks, a child-protection policy, specialised training and insurance indemnity.</p>
             <p class='govuk-hint'>Points to consider:</p>
             <ul class="govuk-list govuk-list--bullet govuk-hint">
               <li>Does the group work with children or adults at risk? If not directly, might the volunteers have contact with them without a responsible adult or carer present?</li>
@@ -492,7 +490,7 @@ class AwardYears::V2023::QAEForms
               <li>Are the group or volunteers involved in any disputes or other complaint procedures? This could include vexatious complainants.</li>
               <li>Is there any negative publicity about them?</li>
             </ul>
-            <p class='govuk-hint'>We recommend that you conduct an internet search, check local press sites and social media. You can then explore any issues with the group. It is important to spot any potential reputational issues at an early stage even if they now seem to be resolved, as we need to be aware of any potential criticism of the group, its leadership or its members, that might bring the Award into disrepute and be grounds for potential forfeiture.</p>
+            <p class='govuk-hint'>We recommend that you conduct an internet search, check local press sites and social media. You can then explore any issues with the group. It is important to spot any potential reputational issues at an early stage even if they now seem to be resolved, as we need to be aware of any potential criticism of the group, its leadership or its members, that might bring the Award into disrepute.</p>
           )
           required
         end
@@ -548,9 +546,6 @@ class AwardYears::V2023::QAEForms
 
         text :nomination_local_assessment_worthy_of_honour_name, "Please give the name of the person you are recommending" do
           sub_ref "E 8.4"
-          pdf_context %(
-            Answer this question if you selected 'Yes' in question E8.3.
-          )
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           required
           style "medium"
@@ -559,11 +554,8 @@ class AwardYears::V2023::QAEForms
         textarea :nomination_local_assessment_worthy_of_honur_reasons, "Explain in a short paragraph why they might merit this." do
           sub_ref "E 8.5"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
-          context %(
+          online_context %(
             <p class='govuk-hint'>The QAVS team will pass this information onto the DCMS Honours team. The Honours Team might get in touch with you in due course if they need your help to produce a citation (including personal details such as date of birth, address, email and telephone number).</p>
-          )
-          pdf_context %(
-            Answer this question if you selected 'Yes' in question E8.3.
           )
           required
           words_max 50
