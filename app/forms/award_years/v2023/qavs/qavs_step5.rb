@@ -28,7 +28,7 @@ class AwardYears::V2023::QAEForms
         text :nomination_local_assessment_form_nominee_name, "Group name" do
           header_context %(
             <p class=govuk-body>
-              Questions 1.2 to 1.7 have information pre-filled by the nominator. Please double-check and amend as necessary. It's important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
+              Questions 1.2 to 1.6 have information pre-filled by the nominator. Please double-check and amend as necessary. It's important that these details are correct so that we can contact the successful group leaders in confidence and use the right group name in any announcement.
             </p>
           )
           sub_ref "E 1.2"
@@ -54,24 +54,8 @@ class AwardYears::V2023::QAEForms
           style "medium"
         end
 
-        address :local_assessment_group_address, "Address of the group" do
-          sub_ref "E 1.5"
-          form_hint "Please check that the details provided by the nominator are correct."
-
-          sub_fields([
-            { building: "Number or name of building" },
-            { street: "Street" },
-            { city: "Village or town" },
-            { county: "County", ignore_validation: true },
-            { postcode: "Postcode" },
-            { london_borough: "London borough (if applicable)", ignore_validation: true }
-          ])
-
-          required
-        end
-
         text :local_assessment_group_leader_email, "Email of the group leader or main contact" do
-          sub_ref "E 1.6"
+          sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           type "email"
@@ -80,14 +64,14 @@ class AwardYears::V2023::QAEForms
         end
 
         text :local_assessment_group_leader_phone, "Telephone of the group leader or main contact" do
-          sub_ref "E 1.7"
+          sub_ref "E 1.6"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           default_value :nominee_leader_telephone
         end
 
         options :group_details_confirmed, "Confirm group details" do
-          sub_ref "E 1.8"
+          sub_ref "E 1.7"
           required
           option "yes", "Yes"
           option "no", "No (please email any amendments to queensaward@dcms.gov.uk)."
@@ -99,11 +83,11 @@ class AwardYears::V2023::QAEForms
         end
 
         confirm :group_eligibility_confirmed, "Confirm group's eligibility" do
-          sub_ref "E 1.9"
+          sub_ref "E 1.8"
           required
           text -> do
             %(
-              I confirm that I have checked the group's eligibility for the award as per the criteria above (if you disagree, please email us at queensaward@dcms.go.uk).
+              I confirm that I have checked the group's eligibility for the award as per the criteria above (if you disagree, please email us at queensaward@dcms.gov.uk).
             )
           end
           online_context %(
@@ -145,7 +129,7 @@ class AwardYears::V2023::QAEForms
         end
 
         textarea :local_assessment_eligibility_comment, "Comments about eligibility (optional)" do
-          sub_ref "E 1.10"
+          sub_ref "E 1.9"
         end
 
         header :local_assessment_key_facts_header, "Key facts" do
