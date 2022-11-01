@@ -382,10 +382,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def assign_searching_attributes
-    unless submitted_and_after_the_deadline?
-      self.company_or_nominee_name = company_or_nominee_from_document
-    end
-
+    self.company_or_nominee_name = company_or_nominee_from_document
     self.nominee_full_name = nominee_full_name_from_document
   end
 
