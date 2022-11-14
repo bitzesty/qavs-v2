@@ -12,7 +12,7 @@ class Reports::Nomination
     @award_form = form_answer.award_form.decorate(answers: answers)
 
     @assessments = form_answer.assessor_assignments.select(&:submitted?).sort_by(&:id).map do |a|
-      Reports::Assessment.new(a, year)
+      Reports::Assessment.new(form_answer, a, year)
     end
   end
 

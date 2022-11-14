@@ -1,0 +1,2 @@
+.govuk-button-group
+  = link_to "Download assessor decisions & comments CSV", assessor_form_answers_path(search_id: params[:search_id], year: params[:year], report_kind: "assessor_decisions_data", format: "csv"), class: "govuk-link download-link govuk-link--no-visited-state", method: :post
