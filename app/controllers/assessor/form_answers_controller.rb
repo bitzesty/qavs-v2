@@ -48,6 +48,27 @@ class Assessor::FormAnswersController < Assessor::BaseController
                       .with_comments_counters
                       .group("form_answers.id")
                       .page(params[:page])
+
+    respond_to do |format|
+      format.html
+
+      format.csv do
+        timestamp = Time.zone.now.strftime("%d-%m-%Y")
+
+        case params[:report_kind]
+        when "assessor_decisions_data"
+          csv = Reports::AssessorDecisionsReport.new(@search.results.includes(assessor_assignments: :assessor), @award_year, current_assessor).build
+          filename = "assessor_decisions_report_#{timestamp}.csv"
+        end
+
+        send_data(
+          csv.force_encoding(::Encoding::UTF_8),
+          filename: filename,
+          type: 'text/csv; charset=Unicode(UTF-8); header=present',
+          disposition: 'attachment'
+        )
+      end
+    end
   end
 
   def show

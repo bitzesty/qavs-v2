@@ -29,6 +29,9 @@ h1.govuk-heading-xl
 
   = render("assessor/form_answers/category_tabs")
 
+  hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+  = render("assessor/form_answers/csv_reports_links")
+
   = paginate @form_answers
 
   div role="region" aria-labelledby="nomination-list-caption" tabindex="0"
