@@ -10,7 +10,7 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
 
   def build
     CSV.generate(encoding: "UTF-8", force_quotes: true) do |csv|
-     csv << headers
+      csv << headers
       @scope.each do |form_answer|
         assessment = build_assessment(form_answer, @assessor)
 

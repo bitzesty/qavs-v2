@@ -16,7 +16,7 @@ class Reports::Assessment
       @form_answer.public_send(method_name)
     elsif method_name.starts_with?("na_")
       if @assessment
-        @assessment.document[(method_name.gsub(/(^na_)|(_\d$)/, ''))]
+        @assessment.document[(method_name.gsub(/(^na_)|(_\d$)/, ""))]
       else
         ""
       end
