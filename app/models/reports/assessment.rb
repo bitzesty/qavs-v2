@@ -36,4 +36,8 @@ class Reports::Assessment
   def ceremonial_county
     @form_answer.ceremonial_county.try(:name)
   end
+
+  def submitted?
+    @assessment&.submitted_at ? "Yes" : "No"
+  end
 end

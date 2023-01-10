@@ -34,6 +34,13 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
     }
   ]
 
+  SUBMITTED = [
+    {
+      label: "Submitted",
+      method: :submitted?
+    }
+  ]
+
   private
 
   def assessment_data
@@ -69,11 +76,11 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
   end
 
   def mapping
-    MAPPING + assessment_data
+    MAPPING + assessment_data + SUBMITTED
   end
 
   def build_assessment(form_answer, assessor)
-    assessment = form_answer.assessor_assignments.where(assessor_id: assessor.id).select(&:submitted?).first
+    assessment = form_answer.assessor_assignments.where(assessor_id: assessor.id).first
 
     Reports::Assessment.new(form_answer, assessment, year)
   end
