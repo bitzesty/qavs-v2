@@ -15,8 +15,8 @@ class Reports::Assessment
     elsif @form_answer.respond_to?(method_name)
       @form_answer.public_send(method_name)
     elsif method_name.starts_with?("na_")
-      if @assessment
-        @assessment.document[(method_name.gsub(/(^na_)|(_\d$)/, ""))]
+      if assessment
+        assessment.document[(method_name.gsub(/(^na_)|(_\d$)/, ""))]
       else
         ""
       end
@@ -37,7 +37,7 @@ class Reports::Assessment
     @form_answer.ceremonial_county.try(:name)
   end
 
-  def submitted?
-    @assessment&.submitted_at ? "Yes" : "No"
+  def submitted
+    assessment&.submitted_at ? "Yes" : "No"
   end
 end

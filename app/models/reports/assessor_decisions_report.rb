@@ -37,7 +37,7 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
   SUBMITTED = [
     {
       label: "Submitted",
-      method: :submitted?
+      method: :submitted
     }
   ]
 
