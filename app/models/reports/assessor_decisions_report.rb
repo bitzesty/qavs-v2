@@ -10,7 +10,7 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
 
   def build
     CSV.generate(encoding: "UTF-8", force_quotes: true) do |csv|
-     csv << headers
+      csv << headers
       @scope.each do |form_answer|
         assessment = build_assessment(form_answer, @assessor)
 
@@ -31,6 +31,13 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
     {
       label: "Ceremonial county",
       method: :ceremonial_county
+    }
+  ]
+
+  SUBMITTED = [
+    {
+      label: "Submitted",
+      method: :submitted
     }
   ]
 
@@ -69,11 +76,11 @@ class Reports::AssessorDecisionsReport < Reports::QavsBase
   end
 
   def mapping
-    MAPPING + assessment_data
+    MAPPING + assessment_data + SUBMITTED
   end
 
   def build_assessment(form_answer, assessor)
-    assessment = form_answer.assessor_assignments.where(assessor_id: assessor.id).select(&:submitted?).first
+    assessment = form_answer.assessor_assignments.where(assessor_id: assessor.id).first
 
     Reports::Assessment.new(form_answer, assessment, year)
   end
