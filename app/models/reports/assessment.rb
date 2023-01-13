@@ -38,6 +38,6 @@ class Reports::Assessment
   end
 
   def submitted
-    assessment&.submitted_at ? "Yes" : "No"
+    assessment&.submitted_at ? "Yes" : ""
   end
 end
