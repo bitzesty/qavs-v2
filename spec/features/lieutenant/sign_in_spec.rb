@@ -13,6 +13,6 @@ describe "Lieutenant sign in" do
 
     click_button "Sign in"
 
-    expect(page).to have_content("Queen’s Award for Voluntary Service Lord Lieutenants' dashboard")
+    expect(page).to have_content("King's Award for Voluntary Service Lord Lieutenants' dashboard")
   end
 end

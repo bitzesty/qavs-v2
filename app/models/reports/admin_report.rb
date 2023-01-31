@@ -51,6 +51,6 @@ class Reports::AdminReport
 
   def pdf_filename
     pdf_timestamp = Time.zone.now.strftime("%e_%b_%Y_at_%-l:%M%P")
-    "qavs_award_#{id}_#{pdf_timestamp}.pdf"
+    "kavs_award_#{id}_#{pdf_timestamp}.pdf"
   end
 end

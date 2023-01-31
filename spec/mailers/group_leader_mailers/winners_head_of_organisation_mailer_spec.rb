@@ -12,7 +12,7 @@ describe GroupLeadersMailers::WinnersHeadOfOrganisationMailer do
     )
   }
   let(:subject) {
-    "Queen’s Award for Voluntary Service - in confidence"
+    "King's Award for Voluntary Service - in confidence"
   }
 
   describe "#notify" do
@@ -25,7 +25,7 @@ describe GroupLeadersMailers::WinnersHeadOfOrganisationMailer do
     it "renders the body" do
       group_name = form_answer.document["nomination_local_assessment_form_nominee_name"]
       expect(mail.body.raw_source).to match(group_name)
-      expect(mail.body.raw_source).to match("Her Majesty The Queen has approved the QAVS National Assessment Committee’s recommendation")
+      expect(mail.body.raw_source).to match("His Majesty The King has approved the KAVS National Assessment Committee's recommendation")
     end
   end
 end

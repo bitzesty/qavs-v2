@@ -13,6 +13,6 @@ describe "Assessor sign in" do
 
     click_button "Sign in"
 
-    expect(page).to have_content("Queen’s Award for Voluntary Service National Assessors' dashboard")
+    expect(page).to have_content("King's Award for Voluntary Service National Assessors' dashboard")
   end
 end

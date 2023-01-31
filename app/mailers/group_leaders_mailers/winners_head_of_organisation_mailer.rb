@@ -14,7 +14,7 @@ class GroupLeadersMailers::WinnersHeadOfOrganisationMailer < ApplicationMailer
     @end_of_embargo_date = deadlines.end_of_embargo.strftime("%-d %B")
     @citation_deadline = deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B")
 
-    @subject = "Queen’s Award for Voluntary Service - in confidence"
+    @subject = "King's Award for Voluntary Service - in confidence"
 
     view_mail ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: @group_leader_email, subject: subject_with_env_prefix(@subject)
   end

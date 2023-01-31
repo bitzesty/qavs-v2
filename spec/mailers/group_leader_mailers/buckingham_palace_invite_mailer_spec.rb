@@ -12,7 +12,7 @@ describe GroupLeadersMailers::BuckinghamPalaceInviteMailer do
     )
   }
   let(:subject) {
-    "QAVS Invitations to a Royal Garden Party - action required"
+    "KAVS Invitations to a Royal Garden Party - action required"
   }
 
   before do
