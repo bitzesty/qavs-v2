@@ -9,7 +9,7 @@ describe AccountMailers::NotifyUnsuccessfulNominationsMailer do
     )
   }
   let(:subject) do
-    "Your nomination for Queen’s Award for Voluntary Service"
+    "Your nomination for King's Award for Voluntary Service"
   end
 
   describe "#notify" do

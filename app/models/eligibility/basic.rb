@@ -31,7 +31,7 @@ class Eligibility::Basic < Eligibility
   property :local_area,
            boolean: true,
            label: "Does it focus on benefitting a local area?",
-           hint: "Please note, QAVS is for local volunteer groups.",
+           hint: "Please note, KAVS is for local volunteer groups.",
            accept: :true
 
   property :provide_grants,
@@ -46,7 +46,7 @@ class Eligibility::Basic < Eligibility
 
   property :current_holder,
            values: %w[yes no i_dont_know],
-           label: "Has the group received a QAVS in the past?",
+           label: "Has the group received a KAVS in the past?",
            accept: :not_yes
 
   def save_as_eligible!

@@ -9,8 +9,8 @@ class AwardYears::V2023::QAEForms
 
         header :local_assessment_general_header, "General information" do
           context %(
-            <p class=govuk-body>Thank you for conducting the local assessment for QAVS. Before starting the assessment, please read the full guidance for Lieutenancies document that can be downloaded from your dashboard page. This provides helpful tips on approaching the assessment and completing your report.<p>
-            <p class=govuk-body><strong>Please note:</strong> The new QAVS administrative website has a downloadable Word version of the form that includes explanations and suggestions to help you complete it.</p>
+            <p class=govuk-body>Thank you for conducting the local assessment for KAVS. Before starting the assessment, please read the full guidance for Lieutenancies document that can be downloaded from your dashboard page. This provides helpful tips on approaching the assessment and completing your report.<p>
+            <p class=govuk-body><strong>Please note:</strong> The new KAVS administrative website has a downloadable Word version of the form that includes explanations and suggestions to help you complete it.</p>
           )
         end
 
@@ -74,7 +74,7 @@ class AwardYears::V2023::QAEForms
           sub_ref "E 1.7"
           required
           option "yes", "Yes"
-          option "no", "No (please email any amendments to queensaward@dcms.gov.uk)."
+          option "no", "No (please email any amendments to kingsaward@dcms.gov.uk)."
           context -> do
             %(
               <p class=govuk-body>The details above are still correct:</p>
@@ -87,7 +87,7 @@ class AwardYears::V2023::QAEForms
           required
           text -> do
             %(
-              I confirm that I have checked the group's eligibility for the award as per the criteria above (if you disagree, please email us at queensaward@dcms.gov.uk).
+              I confirm that I have checked the group's eligibility for the award as per the criteria above (if you disagree, please email us at kingsaward@dcms.gov.uk).
             )
           end
           online_context %(
@@ -108,14 +108,14 @@ class AwardYears::V2023::QAEForms
                 </ul>
                 <p class='govuk-hint'>The group must not:</p>
                 <ul class='govuk-list govuk-list--bullet govuk-hint'>
-                  <li>have been nominated unsuccessfully for a QAVS award in the past 3 years</li>
-                  <li>have already received a QAVS award</li>
+                  <li>have been nominated unsuccessfully for a KAVS award in the past 3 years</li>
+                  <li>have already received a KAVS award</li>
                   <li>operate solely for the benefit of animals (unless it can demonstrate that its work provides significant other benefits to the local community)</li>
                 </ul>
                 <p class='govuk-hint'>Important</p>
                 <ul class='govuk-list govuk-list--bullet govuk-list--spaced govuk-hint'>
                   <li>Groups must provide specific and direct benefits to a community through their work. Groups will be considered ineligible where their sole purpose is to support one or more other groups that provide direct benefits (for example, fundraising and providing grants or other resources).</li>
-                  <li>QAVS awards are not intended for national organisations. A national group that has local branches would not itself be suitable. A group can be nominated if it is a branch of, or affiliated to, a larger regional or national organisation. However, it will be expected to have initiated and developed a distinctive approach locally and be able to show a high degree of autonomy and self-determination.</li>
+                  <li>KAVS awards are not intended for national organisations. A national group that has local branches would not itself be suitable. A group can be nominated if it is a branch of, or affiliated to, a larger regional or national organisation. However, it will be expected to have initiated and developed a distinctive approach locally and be able to show a high degree of autonomy and self-determination.</li>
                   <li>Groups based within or in support of a public service (such as a hospital, police force or school) are eligible, but you will need to be able to demonstrate that:
                     <ul class='govuk-list govuk-list--bullet govuk-hint'>
                       <li>the group has a separate identity from the statutory organisation and is clearly under the leadership of volunteers, rather than simply following instructions from paid staff in the organisation</li>
@@ -170,7 +170,7 @@ class AwardYears::V2023::QAEForms
           sub_ref "E 3.1"
           context %(
             <p class='govuk-hint'>
-              Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group's certificate if they eventually receive the Queen's Award for Voluntary Service. It should not include the group's name.
+              Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group's certificate if they eventually receive the King's Award for Voluntary Service. It should not include the group's name.
             </p>
           )
           online_context %(
@@ -203,7 +203,7 @@ class AwardYears::V2023::QAEForms
         textarea :nomination_local_assessment_form_provided_services, "Describe the range of services and activities provided by the group." do
           sub_ref "E 4.1"
           online_context %(
-            <p class='govuk-hint'>Please do not rely purely on the description of the services in the nomination form. Find out all the services the group provides and give us a complete picture, emphasising any aspects that are particularly relevant for a QAVS because of the key role of volunteers.</p>
+            <p class='govuk-hint'>Please do not rely purely on the description of the services in the nomination form. Find out all the services the group provides and give us a complete picture, emphasising any aspects that are particularly relevant for a KAVS because of the key role of volunteers.</p>
             <p class='govuk-hint'>If it is a project or a branch of a larger organisation, make sure this refers to the work of the project or the branch rather than the larger organisation.</p>
           )
           form_hint "Recommended 100 words."
@@ -290,7 +290,7 @@ class AwardYears::V2023::QAEForms
         options :nomination_local_assessment_form_group_based_locally, "If its beneficiaries live elsewhere, is the group itself based entirely locally?" do
           sub_ref "E 4.8"
           context %(
-            <p class='govuk-hint'>QAVS is aimed at <u>local groups</u> of volunteers, so this question is to confirm that point.</p>
+            <p class='govuk-hint'>KAVS is aimed at <u>local groups</u> of volunteers, so this question is to confirm that point.</p>
           )
           yes_no
           conditional :nomination_local_assessment_form_beneficiaries_based_abroad, "yes"
@@ -342,7 +342,7 @@ class AwardYears::V2023::QAEForms
 
         header :local_assessment_group_organisation_evidence_header, "Evidence of a well-run organisation" do
           context %(
-            <p class='govuk-hint'>Before your visit to the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The QAVS guidance for Lieutenancies, which can be downloaded from your dashboard page, provides details about key things to check and how to do this.</p>
+            <p class='govuk-hint'>Before your visit to the group, it is helpful to check how the group is set up, for example, unconstituted group, registered charity, community interest company, as the statutory requirements and published information about the group will be different in each case. The KAVS guidance for Lieutenancies, which can be downloaded from your dashboard page, provides details about key things to check and how to do this.</p>
           )
         end
 
@@ -522,7 +522,7 @@ class AwardYears::V2023::QAEForms
         options :nomination_local_assessment_form_member_worthy_of_honour, "Would you recommend any individual for a national Honour?" do
           sub_ref "E 8.3"
           context %(
-            <p class='govuk-hint'>Please note, recommending an individual for a national Honour doesn’t affect the group’s chances of receiving the QAVS in any way.</p>
+            <p class='govuk-hint'>Please note, recommending an individual for a national Honour doesn't affect the group's chances of receiving the KAVS in any way.</p>
           )
           yes_no
           required
@@ -539,7 +539,7 @@ class AwardYears::V2023::QAEForms
           sub_ref "E 8.5"
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
           online_context %(
-            <p class='govuk-hint'>The QAVS team will pass this information onto the DCMS Honours team. The Honours Team might get in touch with you in due course if they need your help to produce a citation (including personal details such as date of birth, address, email and telephone number).</p>
+            <p class='govuk-hint'>The KAVS team will pass this information onto the DCMS Honours team. The Honours Team might get in touch with you in due course if they need your help to produce a citation (including personal details such as date of birth, address, email and telephone number).</p>
           )
           required
           words_max 50
@@ -578,7 +578,7 @@ class AwardYears::V2023::QAEForms
                 </ul>
               <li>The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.</li>
             </ul>
-            <p class='govuk-hint'>You can also find more detailed information in the QAVS guidance for Lieutenancies.
+            <p class='govuk-hint'>You can also find more detailed information in the KAVS guidance for Lieutenancies.
           )
           pdf_context %(
             The purpose of the Lord-Lieutenant's citation is to summarise the local panel's opinion about the nominated group and to explain the decision to recommend or not recommend it.  If the decision is to recommend, then these opinions will be beneficial to the National Assessment Committee when making their judgements.
@@ -595,7 +595,7 @@ class AwardYears::V2023::QAEForms
 
               \u2022 The citation should be around 400-600 words. It should not be longer than that, but don't make it too short either, as this is an opportunity to bring the group to life for the national assessors.
 
-            You can also find more detailed information in the QAVS guidance for Lieutenancies
+            You can also find more detailed information in the KAVS guidance for Lieutenancies
           )
           rows 3
         end

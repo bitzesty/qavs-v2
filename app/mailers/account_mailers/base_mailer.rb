@@ -1,6 +1,6 @@
 class AccountMailers::BaseMailer < ApplicationMailer
   default from: ENV["MAILER_FROM"] || "no-reply@qavs.dcms.gov.uk",
-          reply_to: "queensaward@dcms.gov.uk"
+          reply_to: "kingsaward@dcms.gov.uk"
 
   layout "mailer"
 
