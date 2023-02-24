@@ -38,15 +38,9 @@ Rails.application.routes.draw do
 
   get "/session/refresh" => "session#refresh", as: 'refresh_session'
 
-  get "/awards_for_organisations"                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/business-awards")
-  get "/enterprise_promotion_awards"                    => redirect("https://www.gov.uk/queens-awards-for-enterprise/enterprise-promotion-award")
-  get "/how_to_apply"                                   => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
-  get "/timeline"                                       => redirect("https://www.gov.uk/queens-awards-for-enterprise/timeline")
-  get "/additional_information_and_contact"             => redirect("https://www.gov.uk/queens-awards-for-enterprise/how-to-apply")
-  get "/apply-for-queens-award-for-enterprise"          => redirect("https://www.gov.uk/apply-queens-award-enterprise")
-  get "/privacy"                                        => redirect("https://qavs.dcms.gov.uk/privacy-policy/")
-  get "/accessibility"                                  => redirect("https://qavs.dcms.gov.uk/accessibility-statement/")
-  get "/awardees"                                       => redirect("https://qavs.dcms.gov.uk/awardees/")
+  get "/privacy"                                        => redirect("https://kavs.dcms.gov.uk/privacy-policy/")
+  get "/accessibility"                                  => redirect("https://kavs.dcms.gov.uk/accessibility-statement/")
+  get "/awardees"                                       => redirect("https://kavs.dcms.gov.uk/awardees/")
   get "/honours"                                        => redirect("https://www.gov.uk/honours")
 
   get "/sign_up_complete"                               => "content_only#sign_up_complete",                               as: "sign_up_complete"
@@ -69,7 +63,7 @@ Rails.application.routes.draw do
 
   get "/pre_sign_in"                                    => "content_only#pre_sign_in",                                    as: "pre_sign_in"
 
-  root to: QAE.production? ? redirect("https://qavs.dcms.gov.uk") : "content_only#dashboard"
+  root to: QAE.production? ? redirect("https://kavs.dcms.gov.uk") : "content_only#dashboard"
 
   resource :account, only: :show do
     collection do

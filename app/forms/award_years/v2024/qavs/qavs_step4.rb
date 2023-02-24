@@ -67,7 +67,7 @@ class AwardYears::V2024::QAEForms
           required
           text -> do
             %(
-              I have read and understood the contents of the <a href="https://qavs.dcms.gov.uk/privacy-policy/">Privacy Notice</a>
+              I have read and understood the contents of the <a href="https://kavs.dcms.gov.uk/privacy-policy/">Privacy Notice</a>
             )
           end
         end
