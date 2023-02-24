@@ -6,7 +6,7 @@ class MailRenderer
 
     def default_url_options
       {
-        host: "apply.qavs.dcms.gov.uk",
+        host: "apply.kavs.dcms.gov.uk",
         protocol: "https"
       }
     end
