@@ -17,7 +17,7 @@ describe AccountMailers::ReminderToSubmitMailer do
   describe "#notify" do
     it "renders the headers" do
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(["no-reply@qavs.dcms.gov.uk"])
+      expect(mail.from).to eq(["no-reply@kavs.dcms.gov.uk"])
     end
 
     it "renders the body" do
