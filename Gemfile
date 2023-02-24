@@ -145,6 +145,9 @@ gem 'shog'
 # This makes it easier for us to display HTML content within PDF documents.
 gem 'sanitize'
 
+# Handle redirect
+gem 'rack-canonical-host'
+
 group :development do
   gem 'letter_opener'
   gem 'rack-mini-profiler', '>= 0.10.1', require: false
