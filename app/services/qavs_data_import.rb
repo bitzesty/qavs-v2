@@ -245,7 +245,7 @@ class QavsDataImport
   end
 
   def download_file(uri)
-    qavs_url = "https://apply.qavs.dcms.gov.uk"
+    qavs_url = "https://apply.kavs.dcms.gov.uk"
 
     full_url = URI(qavs_url + uri)
     req = Net::HTTP::Get.new(full_url)

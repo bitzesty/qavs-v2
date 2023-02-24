@@ -1,6 +1,6 @@
 class ApplicationMailer < Mail::Notify::Mailer
 
-  default from: ENV["MAILER_FROM"] || "no-reply@qavs.dcms.gov.uk",
+  default from: ENV["MAILER_FROM"] || "no-reply@kavs.dcms.gov.uk",
           reply_to: "kingsaward@dcms.gov.uk"
 
   def subject_with_env_prefix(subject_str)

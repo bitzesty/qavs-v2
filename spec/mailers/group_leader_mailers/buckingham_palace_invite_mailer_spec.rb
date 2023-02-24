@@ -23,7 +23,7 @@ describe GroupLeadersMailers::BuckinghamPalaceInviteMailer do
     it "renders the headers" do
       expect(mail.subject).to eq subject
       expect(mail.to).to eq([group_leader.email])
-      expect(mail.from).to eq(["no-reply@qavs.dcms.gov.uk"])
+      expect(mail.from).to eq(["no-reply@kavs.dcms.gov.uk"])
     end
 
     it "renders the body" do
