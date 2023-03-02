@@ -7,15 +7,15 @@ class ServerEnvironment
     end
 
     def live_server?
-      mailer_host_equal_to?("https://www.queens-awards-enterprise.service.gov.uk")
+      mailer_host_equal_to?("apply.kavs.dcms.gov.uk")
     end
 
     def staging_server?
-      mailer_host_equal_to?("staging.queens-awards-enterprise.service.gov.uk")
+      mailer_host_equal_to?("apply-staging.kavs.dcms.gov.uk")
     end
 
     def dev_server?
-      mailer_host_equal_to?("dev.queens-awards-enterprise.service.gov.uk")
+      mailer_host_equal_to?("kavs-dev.dcms.gov.uk")
     end
 
     def env_prefix_in_mailers
