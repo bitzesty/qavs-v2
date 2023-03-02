@@ -1,8 +1,8 @@
 
-Queen's Award for Voluntary Service
+King's Award for Voluntary Service
 ---------------------------
 
-"QAVS" is the application which powers the application process for The Queen's Award for Voluntary Service.
+"KAVS" is the application which powers the application process for The King's Award for Voluntary Service.
 
 The Wordpress site is here: https://github.com/bitzesty/qavs-v2-wordpress
 

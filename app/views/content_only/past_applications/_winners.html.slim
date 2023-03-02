@@ -5,7 +5,7 @@
   .content-right.content-offset-36
     p.govuk-body
       strong
-        ' Congratulations on winning a Queen's Award for Voluntary Service
+        ' Congratulations on winning a King's Award for Voluntary Service
   .clear
 
 - past_awarded_applications.each do |award|
@@ -23,14 +23,4 @@
 
       p.govuk-body Your nomination was successful.
     .clear
-br
-.container-split
-  .content-right
-    p.govuk-body
-      = link_to "Visit Winners' Resources",
-                award_winners_section_path(award_year_id: award_year.id),
-                class: 'govuk-link'
-      '  to download media for websites and advertisements.
-  .clear
-br
 br

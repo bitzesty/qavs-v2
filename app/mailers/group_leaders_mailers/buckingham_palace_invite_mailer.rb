@@ -10,7 +10,7 @@ class GroupLeadersMailers::BuckinghamPalaceInviteMailer < AccountMailers::BaseMa
 
     @palace_invite_deadline = deadlines.buckingham_palace_reception_attendee_information_due_by.decorate.formatted_mailer_deadline
 
-    @subject = "QAVS Invitations to a Royal Garden Party - action required"
+    @subject = "KAVS Invitations to a Royal Garden Party - action required"
 
     view_mail ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: @group_leader_email, subject: subject_with_env_prefix(@subject)
   end

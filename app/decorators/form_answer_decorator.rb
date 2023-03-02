@@ -40,7 +40,7 @@ class FormAnswerDecorator < ApplicationDecorator
 
   def pdf_filename
     timestamp = Time.zone.now.strftime("%d-%m-%Y")
-    group_name = company_or_nominee_name.presence || "qavs"
+    group_name = company_or_nominee_name.presence || "kavs"
 
     "#{group_name}_nomination_#{timestamp}.pdf"
   end
@@ -58,7 +58,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def award_type_short_name
-    "QAVS"
+    "KAVS"
   end
 
   def award_application_title
@@ -66,7 +66,7 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def award_application_title_print
-    "The Queen's Award for Voluntary Service: #{object.award_year.try(:year)}"
+    "The King's Award for Voluntary Service: #{object.award_year.try(:year)}"
   end
 
   def company_or_nominee_name

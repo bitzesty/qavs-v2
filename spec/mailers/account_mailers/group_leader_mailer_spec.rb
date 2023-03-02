@@ -9,7 +9,7 @@ describe AccountMailers::GroupLeaderMailer do
     )
   }
   let(:subject) {
-    "Nomination for Queen’s Award for Voluntary Service"
+    "Nomination for King's Award for Voluntary Service"
   }
   let(:recipient) {
     form_answer.document["nominee_leader_email"]

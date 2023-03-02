@@ -22,7 +22,7 @@ describe LieutenantsMailers::LocalAssessmentNotificationMailer do
     end
 
     it "renders the body" do
-      expect(mail.body.raw_source).to match("The QAVS nominations for #{ AwardYear.current.year } are now available to assess.")
+      expect(mail.body.raw_source).to match("The KAVS nominations for #{ AwardYear.current.year } are now available to assess.")
     end
   end
 end

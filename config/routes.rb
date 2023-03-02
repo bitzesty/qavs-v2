@@ -59,8 +59,6 @@ Rails.application.routes.draw do
   get "/apply_qavs_award"                               => "content_only#apply_qavs_award",                               as: "apply_qavs_award"
   get "/award_info_qavs"                                => "content_only#award_info_qavs",                                as: "award_info_qavs"
 
-  get "/award_winners_section"                          => "content_only#award_winners_section",                          as: "award_winners_section"
-
   get "/pre_sign_in"                                    => "content_only#pre_sign_in",                                    as: "pre_sign_in"
 
   root to: QAE.production? ? redirect("https://kavs.dcms.gov.uk") : "content_only#dashboard"

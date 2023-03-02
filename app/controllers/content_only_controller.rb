@@ -49,12 +49,6 @@ class ContentOnlyController < ApplicationController
     set_unsuccessful_business_applications if Settings.unsuccessful_stage?
   end
 
-  def award_winners_section
-    @user_award_forms_submitted = user_award_forms.submitted
-
-    render "content_only/award_winners_section/#{target_award_year.year}"
-  end
-
   private
 
   def user_award_forms

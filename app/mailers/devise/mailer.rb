@@ -6,7 +6,7 @@ if defined?(ActionMailer)
 
     def confirmation_instructions(record, token, opts={})
       @token = token
-      opts[:subject] = "A QAVS user account has been created for you"
+      opts[:subject] = "A KAVS user account has been created for you"
       devise_mail(record, :confirmation_instructions, opts)
     end
 

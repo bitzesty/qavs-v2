@@ -7,7 +7,7 @@ require "award_years/v2023/qavs/qavs_step5"
 class AwardYears::V2023::QAEForms
   class << self
     def qavs
-      @qavs ||= QAEFormBuilder.build "Queen's Award for Voluntary Service Nomination" do
+      @qavs ||= QAEFormBuilder.build "King's Award for Voluntary Service Nomination" do
         step "nominee",
              &AwardYears::V2023::QAEForms.qavs_step1
 
