@@ -148,6 +148,8 @@ gem 'sanitize'
 # Handle redirect
 gem 'rack-canonical-host'
 
+gem 'rails-healthcheck'
+
 group :development do
   gem 'letter_opener'
   gem 'rack-mini-profiler', '>= 0.10.1', require: false
