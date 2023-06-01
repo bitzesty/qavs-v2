@@ -195,7 +195,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def award_type_full_name
-    "QAVS"
+    "KAVS"
   end
 
   def head_of_business

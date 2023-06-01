@@ -37,7 +37,7 @@ describe  "User sees the post submission dashboard" do
       )
 
       visit dashboard_path
-      expect(page).to have_content("Congratulations on winning a Queen's Award for Voluntary Service")
+      expect(page).to have_content("Congratulations on winning a King's Award for Voluntary Service")
 
       form_answer.update_column(:state, "not_awarded")
       visit dashboard_path

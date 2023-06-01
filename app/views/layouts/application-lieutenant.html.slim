@@ -1,4 +1,4 @@
-title = content_for?(:title) ? yield(:title) : "Lieutenant - Queen's Award for Voluntary Service"
+title = content_for?(:title) ? yield(:title) : "Lieutenant - King's Award for Voluntary Service"
 
 - content_for :html_class, 'html-admin'
 - content_for :service_root, '/lieutenant'
@@ -59,7 +59,7 @@ title = content_for?(:title) ? yield(:title) : "Lieutenant - Queen's Award for V
               ' Need help? Call us on
               strong 0207 271 6206
               ' . Alternatively, email us at
-              = link_to "queensaward@dcms.gov.uk", "mailto:queensaward@dcms.gov.uk", class: 'govuk-link'
+              = link_to "kingsaward@dcms.gov.uk", "mailto:kingsaward@dcms.gov.uk", class: 'govuk-link'
 
           = render "shared/timeout_dialog", timeout_in_minutes: timeout_in_minutes, path_on_timeout: corresponding_login_path('lieutenant'), refresh_session_path: refresh_session_path(scope: 'lieutenant') if will_session_timeout?
 
@@ -77,7 +77,7 @@ title = content_for?(:title) ? yield(:title) : "Lieutenant - Queen's Award for V
     li.govuk-footer__inline-list-item
       = link_to "Cookie Settings", cookies_path, class: 'govuk-footer__link'
     li.govuk-footer__inline-list-item
-      ' Built by the 
+      ' Built by the
       = link_to "Department for Digital, Culture, Media & Sport", "https://www.gov.uk/government/organisations/department-for-digital-culture-media-sport", class: 'govuk-footer__link'
 
 - content_for :body_end do

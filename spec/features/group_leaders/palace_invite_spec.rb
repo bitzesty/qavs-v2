@@ -38,7 +38,7 @@ describe "Palace invite process" do
   # NOTE: tests below commented out because button has been hidden
   # it "allows group leader to confirm palace attendees" do
   #   enter_palace_attendees
-  #   check 'I confirm that I have received consent from each attendee to submit the data to the Queen’s Awards for Voluntary Service and The Royal Household.'
+  #   check 'I confirm that I have received consent from each attendee to submit the data to the King’s Award for Voluntary Service and The Royal Household.'
   #   click_button "Submit"
 
   #   expect(page).to have_selector("#flash-message-success-title", text: "Success")

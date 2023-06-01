@@ -10,7 +10,7 @@ describe GroupLeadersMailers::NotifyUnsuccessfulNominationsMailer do
     )
   }
   let(:subject) {
-    "Queen’s Award for Voluntary Service #{ form_answer.award_year.year }"
+    "King's Award for Voluntary Service #{ form_answer.award_year.year }"
   }
   let(:recipient) {
     form_answer.document["local_assessment_group_leader_email"]
