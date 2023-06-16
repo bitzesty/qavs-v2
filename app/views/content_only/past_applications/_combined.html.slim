@@ -1,24 +1,21 @@
 - past_applications.each do |application|
   - application = application.decorate
-  - nomination_name = application.decorate.company_or_nominee_name || "Nomination ID: " + application.id.to_s
-  - award_year = application.award_year
-  - winners_notify_date = award_year.settings.email_notifications.find_by(kind: "winners_notification").trigger_at
-  - unsuccessful_notify_date = award_year.settings.email_notifications.find_by(kind: "unsuccessful_notification").trigger_at
+  - award_year = application.award_year.decorate
   .govuk-grid-column-three-quarters
     .govuk-grid-row
       .govuk-grid-column-one-half
         .govuk-body  class="govuk-!-font-weight-bold"
-          = nomination_name
+          = application.nomination_name
           small
-            - if winners_notify_date < Time.zone.now && application.awarded?
+            - if award_year.winners_notify_date < Time.zone.now && application.awarded?
               | Successful
-            - if unsuccessful_notify_date < Time.zone.now && !application.awarded?
+            - if award_year.unsuccessful_notify_date < Time.zone.now && !application.awarded?
               | Unsuccessful
             - else
               | Pending verdict
       .govuk-grid-column-two-quarters.pull-right
         .govuk-body
-          = render "content_only/past_applications/download_pdf_link", award: application, name: nomination_name
+          = render "content_only/past_applications/download_pdf_link", award: application, name: application.nomination_name
           - if application.not_submitted?
             small
               | The nomination was not submitted on time.
