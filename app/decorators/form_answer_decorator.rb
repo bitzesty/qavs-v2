@@ -38,6 +38,10 @@ class FormAnswerDecorator < ApplicationDecorator
     end
   end
 
+  def nomination_name
+    object.company_or_nominee_name || "Nomination ID: " + object.id.to_s
+  end
+
   def pdf_filename
     timestamp = Time.zone.now.strftime("%d-%m-%Y")
     group_name = company_or_nominee_name.presence || "kavs"
