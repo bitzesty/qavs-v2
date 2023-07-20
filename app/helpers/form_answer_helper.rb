@@ -84,6 +84,6 @@ module FormAnswerHelper
   end
 
   def show_bulk_lieutenants_assignment?
-    policy(:lieutenant_assignment_collection).create? && Settings.after_current_submission_deadline?
+    policy(:lieutenant_assignment_collection).create?
   end
 end

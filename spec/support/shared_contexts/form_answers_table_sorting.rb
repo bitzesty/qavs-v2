@@ -2,7 +2,7 @@ require "rails_helper"
 
 shared_context "form answers table sorting" do
   context "Company/Nominee" do
-    let(:header_position) { 0 }
+    let(:header_position) { 1 }
 
     let(:asc_company_names) do
       FormAnswer.pluck(:company_or_nominee_name).sort
