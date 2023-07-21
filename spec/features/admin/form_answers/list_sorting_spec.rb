@@ -15,5 +15,5 @@ describe "Form answer list sorting", js: true do
     visit admin_form_answers_path
   end
 
-  it_behaves_like "form answers table sorting"
+  it_behaves_like "form answers table sorting", 1
 end
