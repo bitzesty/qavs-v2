@@ -124,7 +124,7 @@ gem 'nilify_blanks'
 gem 'curb', '0.9.10'
 
 # Web server
-gem 'puma', '~> 4.3.12'
+gem 'puma', '~> 5.6.7'
 
 # Performance & Error reporting
 gem 'appsignal'
