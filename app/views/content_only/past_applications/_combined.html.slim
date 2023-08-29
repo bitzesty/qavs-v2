@@ -7,9 +7,9 @@
         .govuk-body  class="govuk-!-font-weight-bold"
           = application.nomination_name
           small
-            - if award_year.winners_notify_date < Time.zone.now && application.awarded?
+            - if award_year.winners_notify_date&.past? && application.awarded?
               | Successful
-            - if award_year.unsuccessful_notify_date < Time.zone.now && !application.awarded?
+            - elsif award_year.unsuccessful_notify_date&.past? && !application.awarded?
               | Unsuccessful
             - else
               | Pending verdict
