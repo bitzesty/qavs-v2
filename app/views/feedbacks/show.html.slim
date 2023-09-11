@@ -7,7 +7,7 @@ h1.govuk-heading-xl Send Feedback
   article.group role="article"
     div
       p.govuk-body
-        ' This is for feedback, not support. If you need help, please call us on 0207 271 6206. Alternatively, email us at
+        ' This is for feedback, not support. If you need help, please email us at
         = mail_to "kingsaward@dcms.gov.uk"
 
       = simple_form_for @feedback, url: feedback_path do |f|
