@@ -19,11 +19,7 @@
             = step_link_to step.short_title.html_safe, result_form_award_eligibility_url(form_id: @form_answer.id, anchor: step.title_to_param), index: index + 3, active: 2, index_name: "#{step_letters[index]}.", cant_access_future: false, class: 'govuk-link'
     li.divider
     li.sidebar-helpline.govuk-body
-      ' Need help? Call us on
-      br
-      ' 0207 271 6206
-      span.helpline-space
-      ' Alternatively, email us at
+      ' Need help? Email us at
       = link_to "kingsaward@dcms.gov.uk", "mailto:kingsaward@dcms.gov.uk"
 
     - if submission_deadline && submission_deadline.trigger_at
