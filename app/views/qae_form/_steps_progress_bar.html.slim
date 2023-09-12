@@ -53,11 +53,7 @@
         = link_to "Complete national assessment", assessor_form_answer_path(@form_answer, anchor: "assessment-assessor-#{current_assessor.id}"), class: "govuk-button"
       li.divider
     li.sidebar-helpline.govuk-body
-      ' Need help? Call us on
-      br
-      ' 0207 271 6206
-      span.helpline-space
-      ' Alternatively, email us at
+      ' Need help? Email us at
       = link_to "kingsaward@dcms.gov.uk", "mailto:kingsaward@dcms.gov.uk"
 
     - if submission_deadline && submission_deadline.trigger_at && !lieutenant_nomination? && !current_assessor
