@@ -67,9 +67,7 @@ title = content_for?(:title) ? yield(:title) : "Assessor - King's Award for Volu
 
           - unless landing_page?
             p.footer-helpline.govuk-body
-              ' Need help? Call us on
-              strong 0207 271 6206
-              ' . Alternatively, email us at
+              ' Need help? Email us at
               = link_to "kingsaward@dcms.gov.uk", "mailto:kingsaward@dcms.gov.uk", class: 'govuk-link'
 
           = render "shared/timeout_dialog", timeout_in_minutes: timeout_in_minutes, path_on_timeout: corresponding_login_path('assessor'), refresh_session_path: refresh_session_path(scope: 'assessor') if will_session_timeout?
