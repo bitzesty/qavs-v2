@@ -50,6 +50,4 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       - url = "#"
 
     - if submission_deadline.trigger_at >= Time.zone.now
-      button.govuk-button.govuk-button--warning.remove-supporter.remove-link.js-remove-link.visible-read-only class="#{'read_only' if admin_in_read_only_mode?}"
-        | Remove
-
+      = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
