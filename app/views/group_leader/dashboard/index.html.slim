@@ -31,7 +31,7 @@
           =<> @deadlines.buckingham_palace_confirm_press_book_notes.strftime("%-d %B %Y")
           | &mdash;
         .grid-column-message
-          |confirm the award acceptance, your group name and citation &nbsp;
+          | confirm the award acceptance, your group name and citation &nbsp;
         .govuk-grid-column-status
           - if @citation.completed_at?
             strong.govuk-tag.govuk-tag--blue
@@ -40,7 +40,7 @@
             strong.govuk-tag.govuk-tag--red
               | Incomplete
     p.govuk-body
-      | You have to confirm that you accept the award first. You will then be asked to check and confirm your group’s name and citation.
+      | You have to confirm that you accept the award first. You will then be asked to check and confirm your group's name and citation.
     p.govuk-body
       | Your group name and the 70 character citation describing the group's work will appear on the certificate and in any media publication. We are planning to use the text agreed with you during the local assessment process. Please check and confirm these details by
       =<> @deadlines.buckingham_palace_confirm_press_book_notes.decorate.formatted_mailer_deadline
@@ -53,13 +53,10 @@
     hr.govuk-section-break.govuk-section-break--l
 
     h3.govuk-heading-s
-      | Between 1 April and
-      =<> @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | Between 1 October and 14 November 2024
       | &mdash; prepare press coverage
     p.govuk-body
-      | This is a great opportunity to get plenty of local publicity for your group. We hope you will be able to prepare some eye-catching posts for social media and invite local journalists to write about your news. Nothing should be publicised or published before the morning of
-      =< @deadlines.end_of_embargo.strftime("#{@deadlines.end_of_embargo.trigger_at&.day&.ordinalize} %B")
-      |, but it will be fine to agree embargoed articles with local journalists beforehand.
+      | This is a great opportunity to get plenty of local publicity for your group. We hope you will be able to prepare some eye-catching posts for social media and invite local journalists to write about your news. Nothing should be publicised or published before the morning of 14 November, but it will be fine to agree embargoed articles with local journalists beforehand.
     p.govuk-body
       | You can use the link below to access our publicity guidance. This includes ideas and templates for posts and press releases to help you get great publicity on the day.
     details.govuk-details
@@ -87,16 +84,16 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      => @deadlines.end_of_embargo.strftime("%-d %B %Y")
+      | 14 November 2024
       | &mdash; Awards officially announced
     p.govuk-body
       | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
       =< link_to("KAVS website", "https://kavs.dcms.gov.uk/")
-      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #KAVS2022 and tag us @KingsAwardVS.
+      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #KAVS2023 and tag us @KingsAwardVS.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | June to September
+      | November - March
       =<> @award_year.year
       | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
@@ -116,7 +113,7 @@
     p.govuk-body
       | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
       =< @award_year.year
-      | . We will contact you at the end of the year to request the contact details for these two guests.
+      | . We will contact you in January/February 2024 to request the contact details for these two guests.
       strong.text-underline<
         | No action is needed now.
     / NOTE for devs: When enabling the button, please also uncomment the tests in 'palace_invite_spec.rb'
@@ -124,7 +121,7 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | May to July
+      | May to July 2024
       =<> @award_year.year
       | &mdash; Royal Garden Party
     p.govuk-body
