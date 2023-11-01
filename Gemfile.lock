@@ -185,8 +185,8 @@ GEM
     database_cleaner-core (2.0.1)
     date (3.3.3)
     debug_inspector (1.1.0)
-    decent_decoration (0.1.0)
-      decent_exposure (~> 3.0)
+    decent_decoration (0.0.6)
+      decent_exposure (>= 2.0)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
     declarative (0.0.20)
@@ -838,7 +838,7 @@ DEPENDENCIES
   wicked (~> 1.1)
 
 RUBY VERSION
-   ruby 2.7.7p221
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.8
