@@ -26,6 +26,10 @@ class Reports::LocalAssessmentReport < Reports::QavsBase
       method: :group_leader_email,
     },
     {
+      label: "Group leader website",
+      method: :nominee_website,
+    },
+    {
       label: "Group address building",
       method: :group_address_building,
     },
