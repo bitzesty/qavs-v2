@@ -1,4 +1,4 @@
-require 'award_years/v2024/qavs'
+require_relative 'qavs'
 
-class AwardYears::V2024::QAEForms
+class AwardYears::V2024::QaeForms
 end

@@ -1,29 +1,29 @@
-require "award_years/v2022/qavs/qavs_step1"
-require "award_years/v2022/qavs/qavs_step2"
-require "award_years/v2022/qavs/qavs_step3"
-require "award_years/v2022/qavs/qavs_step4"
-require "award_years/v2022/qavs/qavs_step5"
+require_relative "qavs/qavs_step1"
+require_relative "qavs/qavs_step2"
+require_relative "qavs/qavs_step3"
+require_relative "qavs/qavs_step4"
+require_relative "qavs/qavs_step5"
 
-class AwardYears::V2022::QAEForms
+class AwardYears::V2022::QaeForms
   class << self
     def qavs
-      @qavs ||= QAEFormBuilder.build "Queen's Award for Voluntary Service Nomination" do
+      @qavs ||= QaeFormBuilder.build "Queen's Award for Voluntary Service Nomination" do
         step "nominee",
-             &AwardYears::V2022::QAEForms.qavs_step1
+             &AwardYears::V2022::QaeForms.qavs_step1
 
         step "recommendation",
-             &AwardYears::V2022::QAEForms.qavs_step2
+             &AwardYears::V2022::QaeForms.qavs_step2
 
         step "letters_of_support",
              { id: :letters_of_support_step },
-             &AwardYears::V2022::QAEForms.qavs_step3
+             &AwardYears::V2022::QaeForms.qavs_step3
 
         step "submit_step",
-             &AwardYears::V2022::QAEForms.qavs_step4
+             &AwardYears::V2022::QaeForms.qavs_step4
 
         step "local_assessment_form",
              { id: :local_assessment },
-             &AwardYears::V2022::QAEForms.qavs_step5
+             &AwardYears::V2022::QaeForms.qavs_step5
       end
     end
   end

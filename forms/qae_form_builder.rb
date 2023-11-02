@@ -37,11 +37,11 @@ require "qae_form_builder/supporters_question"
 require "qae_form_builder/assessor_details_question"
 
 
-class QAEFormBuilder
+class QaeFormBuilder
   class << self
 
     def build title, &block
-      form = QAEForm.new title
+      form = QaeForm.new title
       form.instance_eval &block if block_given?
       form
     end

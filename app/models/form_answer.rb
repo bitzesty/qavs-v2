@@ -1,6 +1,6 @@
-require 'award_years/v2022/qae_forms'
-require 'award_years/v2023/qae_forms'
-require 'award_years/v2024/qae_forms'
+require_relative '../../forms/award_years/v2022/qae_forms'
+require_relative '../../forms/award_years/v2023/qae_forms'
+require_relative '../../forms/award_years/v2024/qae_forms'
 
 class FormAnswer < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
@@ -37,9 +37,9 @@ class FormAnswer < ApplicationRecord
 
   begin :associations
     belongs_to :user
-    belongs_to :account
+    belongs_to :account, optional: true
     belongs_to :award_year
-    belongs_to :company_details_editable, polymorphic: true
+    belongs_to :company_details_editable, polymorphic: true, optional: true
     belongs_to :ceremonial_county, optional: true
 
     has_one :form_basic_eligibility, class_name: 'Eligibility::Basic', dependent: :destroy
@@ -51,8 +51,8 @@ class FormAnswer < ApplicationRecord
     has_one :admin_verdict, dependent: :destroy
     has_one :group_leader
 
-    belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id
-    belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id
+    belongs_to :primary_assessor, class_name: "Assessor", foreign_key: :primary_assessor_id, optional: true
+    belongs_to :secondary_assessor, class_name: "Assessor", foreign_key: :secondary_assessor_id, optional: true
     has_many :form_answer_attachments, dependent: :destroy
     has_many :support_letter_attachments, dependent: :destroy
 
@@ -66,7 +66,7 @@ class FormAnswer < ApplicationRecord
 
   begin :validations
     validates :user, presence: true
-    validates :sic_code, format: { with: SICCode::REGEX }, allow_nil: true, allow_blank: true
+    validates :sic_code, format: { with: SicCode::REGEX }, allow_nil: true, allow_blank: true
     validate :validate_answers
     validates :ineligible_reason_nominator, presence: true, if: proc { state == "admin_not_eligible_nominator" }
     validates :ineligible_reason_group, presence: true, if: proc { state == "admin_not_eligible_group" }
@@ -152,7 +152,7 @@ class FormAnswer < ApplicationRecord
         elsif self.class.const_defined?(award_form_class_name(year))
           self.class.const_get(award_form_class_name(year))
         else
-          AwardYears::V2024::QAEForms # default value
+          AwardYears::V2024::QaeForms # default value
         end
       else
         raise ArgumentError, "Can not find award form for the nomination in year: #{award_year.year}"
@@ -429,7 +429,7 @@ class FormAnswer < ApplicationRecord
   end
 
   def award_form_class_name(year)
-    "::AwardYears::V#{year}::QAEForms"
+    "::AwardYears::V#{year}::QaeForms"
   end
 
   def self.transition_class

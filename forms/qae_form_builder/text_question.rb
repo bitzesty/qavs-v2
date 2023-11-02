@@ -1,4 +1,4 @@
-class QAEFormBuilder
+class QaeFormBuilder
   class TextQuestionValidator < QuestionValidator
     # regex source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript/13178771#13178771
     EMAIL_REGEX = /\A([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)\z/

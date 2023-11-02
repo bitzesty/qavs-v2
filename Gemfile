@@ -180,11 +180,11 @@ end
 
 group :test do
   gem 'factory_bot_rails'
-  gem 'capybara', '3.33'
+  gem 'capybara', '~> 3.39'
   gem 'poltergeist'
   gem 'database_cleaner-active_record'
   gem 'launchy'
-  gem 'turnip', '~> 4.2.0'
+  gem 'turnip', '~> 4.4.0'
   gem 'shoulda-matchers', require: false
   gem 'pdf-inspector', require: 'pdf/inspector'
   gem 'codeclimate_circle_ci_coverage'

@@ -1,4 +1,4 @@
-class QAEFormBuilder
+class QaeFormBuilder
   class QuestionValidator
     # multifield questions that can not be simply validated
     SKIP_PRESENCE_VALIDATION_QUESTIONS = [
@@ -50,7 +50,7 @@ class QAEFormBuilder
     end
   end
 
-  class QuestionDecorator < QAEDecorator
+  class QuestionDecorator < QaeDecorator
     def input_name options = {}
       if options[:index]
         suffix = options.fetch(:suffix)
@@ -152,7 +152,7 @@ class QAEFormBuilder
         error = {}
 
         question_class = delegate_obj.class.name.demodulize
-        validator_class = "QAEFormBuilder::#{question_class}Validator".constantize
+        validator_class = "QaeFormBuilder::#{question_class}Validator".constantize
 
         validator = validator_class.new(self, answers)
         errors.merge!(validator.errors)
@@ -260,11 +260,11 @@ class QAEFormBuilder
     end
 
     def can_have_conditional_hints?
-      delegate_obj.is_a?(QAEFormBuilder::OptionsQuestion)
+      delegate_obj.is_a?(QaeFormBuilder::OptionsQuestion)
     end
 
     def can_have_parent_conditional_hints?
-      !delegate_obj.is_a?(QAEFormBuilder::HeaderQuestion)
+      !delegate_obj.is_a?(QaeFormBuilder::HeaderQuestion)
     end
 
     def pdf_conditional_hints(questions_with_references)
@@ -483,7 +483,7 @@ class QAEFormBuilder
 
     def decorate options = {}
       kls_name = self.class.name.split('::').last
-      kls = QAEFormBuilder.const_get "#{kls_name}Decorator" rescue nil
+      kls = QaeFormBuilder.const_get "#{kls_name}Decorator" rescue nil
       (kls || QuestionDecorator).new self, options
     end
 
