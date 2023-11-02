@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 3.2.2'
 
-gem 'rails', '6.1.7.1'
+gem 'rails', '7.1.1'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -30,7 +30,7 @@ gem 'govuk_template', '0.12.0'
 gem 'uglifier', '>= 2.7.2'
 gem 'js_cookie_rails', '2.1.4'
 gem 'ckeditor'
-gem 'webpacker', '6.0.0.beta.7'
+gem 'webpacker'
 
 # Autolinking in admin mass user mailer
 gem 'rails_autolink'
@@ -149,6 +149,8 @@ gem 'sanitize'
 gem 'rack-canonical-host'
 
 gem 'rails-healthcheck'
+
+gem 'matrix', '~> 0.4.1'
 
 group :development do
   gem 'letter_opener'
