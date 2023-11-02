@@ -53,6 +53,10 @@ class Reports::Nomination
     doc["nominee_leader_email"]
   end
 
+  def nominee_website
+    doc["nominee_website"]
+  end
+
   def group_address_building
     doc["nominee_address_building"]
   end
