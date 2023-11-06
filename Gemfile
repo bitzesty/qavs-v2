@@ -171,7 +171,7 @@ gem 'dotenv-rails'
 
 group :development, :test do
   # Enviroment variables
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'rspec-rails', '~> 6.0'
   gem 'rspec-github', require: false
   gem "pry-byebug"
   gem 'rails-controller-testing'
