@@ -5,7 +5,7 @@ describe QaeFormBuilder do
   it 'should build QaeFormBuilder::Form instances' do
     empty = QaeFormBuilder.build 'test'
     expect(empty.title).to eq('test')
-    expect(empty).to be_instance_of(QaeFormBuilder::QAEForm)
+    expect(empty).to be_instance_of(QaeFormBuilder::QaeForm)
   end
 
   it 'should build 0 steps for empty block' do

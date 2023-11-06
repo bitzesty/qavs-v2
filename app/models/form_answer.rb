@@ -41,7 +41,7 @@ include Statesman::Adapters::ActiveRecordQueries[
   begin :associations
     belongs_to :user
     belongs_to :account, optional: true
-    belongs_to :award_year
+    belongs_to :award_year, optional: true
     belongs_to :company_details_editable, polymorphic: true, optional: true
     belongs_to :ceremonial_county, optional: true
 
