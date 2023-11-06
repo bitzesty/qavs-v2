@@ -3,7 +3,10 @@ require_relative '../../forms/award_years/v2023/qae_forms'
 require_relative '../../forms/award_years/v2024/qae_forms'
 
 class FormAnswer < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+include Statesman::Adapters::ActiveRecordQueries[
+    initial_state: :eligibility_in_progress,
+    transition_class: FormAnswerTransition
+  ]
   include PgSearch::Model
   extend Enumerize
   include FormAnswerStatesHelper
