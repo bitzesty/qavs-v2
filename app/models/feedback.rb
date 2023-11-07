@@ -7,7 +7,7 @@ class Feedback < ApplicationRecord
   store_accessor :document, FeedbackForm.fields
 
   scope :submitted, -> { where submitted: true }
-  belongs_to :authorable, polymorphic: true
+  belongs_to :authorable, polymorphic: true, optional: true
   belongs_to :award_year, optional: true
 
   validates :form_answer_id, uniqueness: true
