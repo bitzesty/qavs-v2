@@ -13,6 +13,7 @@ describe "Admin assigns lieutenants", %(
   let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
   let!(:form_answer_1) { create(:form_answer, :submitted) }
   let!(:form_answer_2) { create(:form_answer, :submitted) }
+  let!(:award_year) { AwardYear.current }
   let!(:settings) { create(:settings, :expired_submission_deadlines) }
 
 

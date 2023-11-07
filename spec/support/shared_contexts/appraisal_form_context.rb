@@ -1,4 +1,5 @@
 shared_context "successful appraisal form edition" do
+  let!(:award_year) { AwardYear.current }
   let!(:form_answer) { create(:form_answer, :local_assessment_recommended, sub_group: assessor.sub_group) }
 
   before do
