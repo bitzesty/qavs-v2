@@ -22,7 +22,7 @@ gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-rails', '>= 2.0.0'
 gem 'slim-rails', '~> 3.2.0'
 gem 'coffee-rails', '5.0'
-gem 'jquery-rails', '4.4.0'
+gem 'jquery-rails', '~> 4.4'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
@@ -159,8 +159,6 @@ group :development do
   gem 'rubocop', '~> 0.52', require: false
   # When need to copy model with nested associations
   gem 'amoeba', '3.0.0'
-  # for RailsPanel Chrome extension
-  gem 'meta_request'
   gem 'listen'
 
   # Fixes https://github.com/rails/rails/issues/26658#issuecomment-255590071

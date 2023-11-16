@@ -1,5 +1,5 @@
 import MicroModal from 'micromodal';
-import 'jquery/src/jquery';
+// import 'jquery/src/jquery';
 
 export default function() {
   var dialogElement = document.getElementById("timeout_dialog");

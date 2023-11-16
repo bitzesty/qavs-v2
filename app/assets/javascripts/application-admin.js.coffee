@@ -1,5 +1,5 @@
-#= require jquery
-#= require jquery_ujs
+#= require jquery3
+#= require jquery-ujs
 #= require bootstrap-sprockets
 #= require vendor/file_upload/jquery.ui.widget
 #= require vendor/file_upload/jquery.iframe-transport
@@ -26,9 +26,9 @@
 #= require vendor/jquery-debounce
 #= require clean-paste
 
-$(document).ready(() ->
+$( ->
   $("html").removeClass("no-js").addClass("js")
-  ($ ".timepicker").timePicker()
   ($ ".datepicker").datepicker({dateFormat: "dd/mm/yy"})
+  ($ ".timepicker").timePicker()
   ($ "select.select2").select2({width: "style"})
 )
