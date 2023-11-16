@@ -58,6 +58,8 @@ module Qae
       g.test_framework :rspec
     end
 
+    config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
+
     config.cache_store = :memory_store
     config.active_record.schema_format = :sql
     config.active_job.queue_adapter = :sidekiq
