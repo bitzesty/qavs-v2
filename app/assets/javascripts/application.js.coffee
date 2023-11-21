@@ -1,5 +1,5 @@
 #= require jquery3
-#= require jquery_ujs
+#= require jquery-ujs
 #= require vendor/file_upload/jquery.ui.widget
 #= require vendor/file_upload/jquery.iframe-transport
 #= require vendor/file_upload/jquery.fileupload

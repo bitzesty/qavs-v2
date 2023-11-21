@@ -13,7 +13,7 @@ describe AssessorAssignment do
         end
         it "is invalid" do
           expect(subject).to_not be_valid
-          expect(subject.errors.keys).to include(:verdict_rate)
+          expect(subject.errors.attribute_names).to include(:verdict_rate)
         end
       end
     end

@@ -4,6 +4,7 @@ describe "Adding final verdict", js: true do
   let(:admin) { create(:admin) }
 
   before do
+    AwardYear.current
     create(:settings, :expired_submission_deadlines)
     login_admin(admin)
   end

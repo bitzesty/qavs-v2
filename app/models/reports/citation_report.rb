@@ -1,7 +1,7 @@
 class Reports::CitationReport
   attr_reader :award_year, :scope
 
-  include Reports::CSVHelper
+  include Reports::CsvHelper
 
   MAPPING = [
     {

@@ -6,6 +6,7 @@ describe "Eligibility forms" do
   let!(:user) { create(:user, :completed_profile) }
 
   before do
+    AwardYear.current
     create(:settings, :submission_deadlines)
     login_as(user, scope: :user)
   end

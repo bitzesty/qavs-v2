@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AdminVerdict, type: :model do
+  let!(:award_year) { AwardYear.current }
+
   before do
     create(:settings, :expired_submission_deadlines)
   end

@@ -3,6 +3,7 @@ require "rails_helper"
 describe LocalAssessmentSubmissionService do
   let(:ll) { create(:lieutenant) }
   let(:nomination) { create(:form_answer, :submitted) }
+  let!(:award_year) { AwardYear.current }
   let!(:settings) { create(:settings, :expired_submission_deadlines) }
 
   before do

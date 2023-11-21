@@ -7,6 +7,7 @@ feature "Admin edits eligibility status", js: true do
   let!(:form_answer) { create(:form_answer, :submitted) }
 
   before do
+    AwardYear.current
     Settings.current_submission_deadline.update(trigger_at: 1.day.ago)
 
     login_admin(admin)
