@@ -177,7 +177,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '6.2' # https://github.com/thoughtbot/factory_bot_rails/issues/433
   gem 'capybara', '~> 3.39'
   gem 'poltergeist'
   gem 'database_cleaner-active_record'
