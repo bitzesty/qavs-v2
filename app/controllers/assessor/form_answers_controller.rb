@@ -73,6 +73,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
   def show
     authorize resource, :show?
+    @admin_verdict = resource.admin_verdict
 
     respond_to do |format|
       format.html
