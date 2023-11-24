@@ -307,6 +307,7 @@ en:
       undecided: National assessment - undecided
       awarded: Royal approval - awarded
       not_awarded: Not awarded
+      no_royal_approval: No royal approval
       shortlisted: National assessment - shortlisted
     state_short:
       eligibility_in_progress: Eligibility in progress
@@ -333,6 +334,7 @@ en:
       awarded: Royal approval - awarded
       not_awarded: Not awarded
       shortlisted: National assessment - shortlisted
+      no_royal_approval: No royal approval
   form:
     step_titles:
       user:
