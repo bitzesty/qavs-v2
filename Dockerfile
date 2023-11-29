@@ -1,6 +1,6 @@
 ARG RUBY_VERSION=3.2.2
 
-FROM ruby:${RUBY_VERSION}
+FROM cimg/ruby:${RUBY_VERSION}-node # circle ci image
 
 ENV HOME=/app
 WORKDIR /app
