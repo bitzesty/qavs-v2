@@ -45,7 +45,7 @@ jobs:
           ruby-version: 3.2.2
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '16'
       - run: npm install -g yarn
       - uses: nanasess/setup-chromedriver@master
       - name: Build and run tests
