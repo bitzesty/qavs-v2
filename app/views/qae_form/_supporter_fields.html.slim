@@ -49,5 +49,4 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
     - else
       - url = "#"
 
-    - if submission_deadline.trigger_at >= Time.zone.now
-      = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
+    = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
