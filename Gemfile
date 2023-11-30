@@ -27,7 +27,7 @@ gem 'jquery-ui-rails', '6.0.1'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
-gem 'uglifier', '>= 2.7.2'
+gem "terser", "~> 1.1"
 gem 'js_cookie_rails', '2.1.4'
 gem 'ckeditor'
 gem 'webpacker'
