@@ -1,10 +1,14 @@
 ARG RUBY_VERSION=3.2.2
 
-FROM cimg/ruby:${RUBY_VERSION}-node
+FROM ruby:${RUBY_VERSION}
 
 ENV HOME=/app
 WORKDIR /app
 
+RUN apt-get update
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs npm
+RUN npm install yarn -g
 
 # ENV SSL_CERT_DIR=/etc/ssl/certs
 # ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -15,18 +19,12 @@ ENV CURL_CONNECT_TIMEOUT=0 CURL_TIMEOUT=0 GEM_PATH="$HOME/vendor/bundle/ruby/${R
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-# circleci-image specific
-RUN sudo chown circleci:circleci /app/Gemfile.lock
-
 RUN bundle config set --local path 'vendor/bundle'
 RUN bundle config set --local without 'development test'
 RUN bundle install --jobs 4 --retry 3
 
 COPY . /app
 
-# circleci-image specific
-RUN sudo chown -R circleci:circleci /app
-RUN sudo chown -R circleci:circleci /tmp
 
 RUN yarn install
 RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
