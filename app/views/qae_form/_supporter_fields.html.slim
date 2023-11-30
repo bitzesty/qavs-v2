@@ -48,5 +48,5 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
       - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
     - else
       - url = "#"
-
-    = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
+    = if current_user || policy(:support_letter).can_remove?
+      = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
