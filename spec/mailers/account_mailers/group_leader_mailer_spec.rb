@@ -25,7 +25,7 @@ describe AccountMailers::GroupLeaderMailer do
     it "renders the body" do
       group_name = form_answer.document["nominee_name"]
       expect(mail.body.raw_source).to match(group_name)
-      expect(mail.body.raw_source).to match("We are currently making checks to ensure the group is eligible.")
+      expect(mail.body.raw_source).to match("If your group is eligible for consideration, your local Lieutenancy Office will be in contact")
     end
   end
 end
