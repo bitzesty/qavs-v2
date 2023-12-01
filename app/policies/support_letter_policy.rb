@@ -4,4 +4,8 @@ class SupportLetterPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def can_remove?
+    admin?
+  end
 end
