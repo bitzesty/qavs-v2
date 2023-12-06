@@ -13,7 +13,7 @@ fieldset class=question.fieldset_classes data=question.fieldset_data_hash
                 span.todo
                   = ref.to_s
             - unless question.title.blank?
-              - font_size = question.delegate_obj.is_a?(QAEFormBuilder::HeaderQuestion) ? "govuk-!-font-size-36" : "govuk-!-font-size-24"
+              - font_size = question.delegate_obj.is_a?(QaeFormBuilder::HeaderQuestion) ? "govuk-!-font-size-36" : "govuk-!-font-size-24"
               span class="govuk-body #{ font_size } govuk-!-font-weight-bold govuk-!-display-block"
                 == question.title
 

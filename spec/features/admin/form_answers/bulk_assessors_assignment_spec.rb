@@ -11,6 +11,7 @@ describe "Admin assigns assessors", %(
   let(:subject) { create(:admin) }
   let!(:form_answer_1) { create(:form_answer, :submitted) }
   let!(:form_answer_2) { create(:form_answer, :submitted) }
+  let!(:award_year) { AwardYear.current }
   let!(:settings) { create(:settings, :expired_submission_deadlines) }
 
 

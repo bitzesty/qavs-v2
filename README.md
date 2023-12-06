@@ -18,8 +18,8 @@ docker-compose run web bundle exec rake db:migrate
 
 ### Pre-requisites
 
-* Ruby 2.7
-* Rails 6.1
+* Ruby 3.2
+* Rails 7.1
 * Postgresql 9.5+
 * Redis 2.8+
 
