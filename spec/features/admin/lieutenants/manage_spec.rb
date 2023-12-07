@@ -52,5 +52,20 @@ describe "Admin: Lieutenant management" do
 
       expect(page).to have_no_content "Rob Bobbers"
     end
+
+    it "can restore deleted lieutenant" do
+      Lieutenant.last.soft_delete!
+
+      visit admin_lieutenants_path
+      expect(page).not_to have_content "Bob Bobbers"
+
+      click_link "Show deleted users"
+      click_link "Restore user"
+
+      expect(page).to have_content "User has been successfully restored"
+
+      visit admin_lieutenants_path
+      expect(page).to have_content "Bob Bobbers"
+    end
   end
 end
