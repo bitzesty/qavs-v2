@@ -4,9 +4,18 @@ class Admin::LieutenantsController < Admin::UsersController
     params[:search].permit!
     authorize :lieutenant, :index?
 
-    @search = LieutenantSearch.new(Lieutenant.all).
-                             search(params[:search])
+    @search = LieutenantSearch.new(Lieutenant.all)
+                .search(params[:search])
     @resources = @search.results.page(params[:page])
+  end
+
+  def deleted
+    authorize :lieutenant, :restore?
+
+    @search = LieutenantSearch.new(Lieutenant.deleted)
+                .search(params[:search])
+    @resources = @search.results.page(params[:page])
+    render :index
   end
 
   def new
@@ -41,6 +50,18 @@ class Admin::LieutenantsController < Admin::UsersController
                  @resource,
                  location: admin_lieutenants_path,
                  notice: "User has been successfully updated."
+  end
+
+  def restore
+    @resource = Lieutenant.deleted.find(params[:id])
+
+    authorize @resource, :restore?
+    @resource.restore!
+
+    respond_with :admin,
+                 @resource,
+                 location: admin_lieutenants_path,
+                 notice: "User has been successfully restored."
   end
 
   def destroy
