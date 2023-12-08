@@ -187,7 +187,12 @@ Rails.application.routes.draw do
       end
     end
     resources :assessors
-    resources :lieutenants
+
+    resources :lieutenants do
+      get :deleted, on: :collection
+      post :restore, on: :member
+    end
+
     resources :group_leaders, except: [:new, :create, :show]
     resources :citations, only: [:index]
 

@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   respond_to :html
-  before_action :find_resource, except: [:index, :new, :create]
+  before_action :find_resource, except: [:index, :new, :create, :deleted, :restore]
 
   def index
     params[:search] ||= UserSearch::DEFAULT_SEARCH

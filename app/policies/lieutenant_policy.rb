@@ -11,6 +11,10 @@ class LieutenantPolicy < AdminPolicy
     admin? || (advanced_lieutenant? && same_county?)
   end
 
+  def restore?
+    admin?
+  end
+
   def destroy?
     admin? || (advanced_lieutenant? && subject != record && record.role.regular? && same_county?)
   end

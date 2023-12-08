@@ -16,23 +16,34 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
           = sort_link f, "Confirmed on", @search, :confirmed_at
         th.sortable.govuk-table__header scope="col"
           = sort_link f, "Locked on", @search, :locked_at
-        th.govuk-table__header
-          | Edit
+        - if action_name == "deleted"
+          th.govuk-table__header
+            | Restore
+        - else
+          th.govuk-table__header
+            | Edit
     tbody.govuk-table__body
       - if resources.none?
         tr.govuk-table__row
           td.text-center colspan=100
             br
-            p.govuk-body.p-empty No Lord Lieutenancy office users found.
+            - if action_name == "deleted"
+              p.govuk-body.p-empty No deleted Lord Lieutenancy office users found.
+            - else
+              p.govuk-body.p-empty No Lord Lieutenancy office users found.
             br
       - else
         - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
           tr.govuk-table__row
-            th.govuk-table__header scope="row"
-              = link_to lieutenant.full_name,
-                edit_admin_lieutenant_path(lieutenant),
-                class: "govuk-link",
-                aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
+            - if action_name == "deleted"
+              td.govuk-table__cell scope="row"
+                = lieutenant.full_name
+            - else
+              th.govuk-table__header scope="row"
+                = link_to lieutenant.full_name,
+                  edit_admin_lieutenant_path(lieutenant),
+                  class: "govuk-link",
+                  aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
             td.govuk-table__cell
               = lieutenant.ceremonial_county.name
             td.govuk-table__cell
@@ -59,7 +70,14 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
                 .text-muted
                   ' Not locked
             td.govuk-table__cell
-              = link_to "Edit user", edit_admin_lieutenant_path(lieutenant),
-                        class: "govuk-link",
-                        id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
-                        aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
+              - if action_name == "deleted"
+                = link_to "Restore user", restore_admin_lieutenant_path(lieutenant),
+                          class: "govuk-link",
+                          id: "restore-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
+                          method: :post,
+                          aria: { label: "restore-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
+              - else
+                = link_to "Edit user", edit_admin_lieutenant_path(lieutenant),
+                          class: "govuk-link",
+                          id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
+                          aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
