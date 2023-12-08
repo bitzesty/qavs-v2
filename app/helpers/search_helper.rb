@@ -34,18 +34,23 @@ module SearchHelper
     end
   end
 
-  def user_search_count(resource)
-     "Showing " + user_count(resource) unless resource.none?
+  def user_search_count(resource, deleted = false)
+     "Showing " + user_count(resource, deleted) unless resource.none?
   end
 
-  def user_default_count(resource)
-    "Showing all " + user_count(resource) unless resource.none?
+  def user_default_count(resource, deleted = false)
+    if deleted
+      "Showing "
+    else
+      "Showing all "
+    end + user_count(resource, deleted) unless resource.none?
   end
 
-  def user_count(resource)
+  def user_count(resource, deleted = false)
     user_type = t("admin.users.role_headers.#{controller_name}")
     user_type = user_type.downcase unless controller_name == "lieutenants"
     user_type = resource.count == 1 ? user_type.singularize : user_type
-    "#{resource.count.to_s} #{user_type}"
+    deleted_msg = " deleted" if deleted
+    "#{resource.count.to_s}#{deleted_msg.to_s} #{user_type}"
   end
 end
