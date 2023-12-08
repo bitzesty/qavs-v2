@@ -35,11 +35,15 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
       - else
         - LieutenantDecorator.decorate_collection(resources).each do |lieutenant|
           tr.govuk-table__row
-            th.govuk-table__header scope="row"
-              = link_to lieutenant.full_name,
-                edit_admin_lieutenant_path(lieutenant),
-                class: "govuk-link",
-                aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
+            - if action_name == "deleted"
+              td.govuk-table__cell scope="row"
+                = lieutenant.full_name
+            - else
+              th.govuk-table__header scope="row"
+                = link_to lieutenant.full_name,
+                  edit_admin_lieutenant_path(lieutenant),
+                  class: "govuk-link",
+                  aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
             td.govuk-table__cell
               = lieutenant.ceremonial_county.name
             td.govuk-table__cell
