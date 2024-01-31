@@ -60,7 +60,6 @@ window.SupportLetters =
   enable_item_fields_and_controls: (parent) ->
     parent.find(".js-save-collection").removeClass("govuk-!-display-none")
     parent.find(".visible-read-only").hide()
-    parent.find(".remove-link").removeClass("govuk-!-display-none")
     fields = parent.find("input")
     fields.removeClass("read-only")
     parent.find(".govuk-error-message").html("")
@@ -124,6 +123,7 @@ window.SupportLetters =
               SupportLetters.disable_item_fields_and_controls(parent)
               window.FormValidation.validateStep()
               SupportLetters.autosave()
+              SupportLetters.showRemoveLink(parent, data, response)
 
               return
             error: (response) ->
@@ -154,3 +154,9 @@ window.SupportLetters =
         type: 'POST'
         dataType: 'json'
       })
+
+  showRemoveLink: (parent, data, response) ->
+    removeLink = $(".remove-supporter", parent)
+    removeLink.data("url", "/users/form_answers/#{response['form_answer_id']}/support_letters/#{response['id']}")
+    removeLink.attr("aria-label", "Delete support letter from #{data['support_letter']['first_name']} #{data['support_letter']['last_name']}")
+    removeLink.removeClass("govuk-!-display-none")

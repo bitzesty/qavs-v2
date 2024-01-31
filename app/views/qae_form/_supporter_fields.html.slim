@@ -43,10 +43,13 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
     button.govuk-button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=users_form_answer_support_letters_url(@form_answer)
       | Submit letter of support
 
-  - if !admin_in_read_only_mode? && persisted
-    - if supporter["support_letter_id"].present? && @form_answer.support_letters.find_by_id(supporter["support_letter_id"])
-      - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
+  - if !admin_in_read_only_mode?
+    - if persisted
+      - if supporter["support_letter_id"].present? && @form_answer.support_letters.find_by_id(supporter["support_letter_id"])
+        - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
+      - else
+        - url = "#"
+      - if current_user || policy(:support_letter).can_remove?
+        = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
     - else
-      - url = "#"
-    - if current_user || policy(:support_letter).can_remove?
-      = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
+      = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"
