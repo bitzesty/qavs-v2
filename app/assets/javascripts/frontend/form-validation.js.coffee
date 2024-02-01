@@ -355,8 +355,8 @@ window.FormValidation =
   validateSupportLetters: (question) ->
     lettersReceived = $(".js-support-letter-received").length
     if lettersReceived < 2
-      @logThis(question, "validateSupportLetters", "Upload at least two letters of support")
-      @appendMessage(question, "Upload at least two letters of support")
+      @logThis(question, "validateSupportLetters", "Upload two letters of support")
+      @appendMessage(question, "Upload two letters of support")
       @addErrorClass(question)
 
   validateSelectionLimit: (question) ->
