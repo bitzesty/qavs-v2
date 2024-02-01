@@ -1,6 +1,7 @@
 require_relative '../../forms/award_years/v2022/qae_forms'
 require_relative '../../forms/award_years/v2023/qae_forms'
 require_relative '../../forms/award_years/v2024/qae_forms'
+require_relative '../../forms/award_years/v2025/qae_forms'
 
 class FormAnswer < ApplicationRecord
 include Statesman::Adapters::ActiveRecordQueries[
@@ -155,7 +156,7 @@ include Statesman::Adapters::ActiveRecordQueries[
         elsif self.class.const_defined?(award_form_class_name(year))
           self.class.const_get(award_form_class_name(year))
         else
-          AwardYears::V2024::QaeForms # default value
+          AwardYears::V2025::QaeForms # default value
         end
       else
         raise ArgumentError, "Can not find award form for the nomination in year: #{award_year.year}"

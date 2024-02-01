@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class AwardYears::V2023::QaeForms
+class AwardYears::V2025::QaeForms
   class << self
     def qavs_step4
       @qavs_step4 ||= proc do
@@ -67,7 +67,7 @@ class AwardYears::V2023::QaeForms
           required
           text -> do
             %(
-              I have read and understood the contents of the <a href="https://qavs.dcms.gov.uk/privacy-policy/" target="_blank">Privacy Notice</a>
+              I have read and understood the contents of the <a href="https://kavs.dcms.gov.uk/privacy-policy/" target="_blank">Privacy Notice</a>
             )
           end
         end
