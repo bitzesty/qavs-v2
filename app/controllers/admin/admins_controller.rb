@@ -1,5 +1,7 @@
 class Admin::AdminsController < Admin::UsersController
   before_action :find_resource, except: [:index, :new, :create, :login_as_assessor, :login_as_user, :console]
+  before_action :permit_search_params, except: [:index]
+
   def index
     params[:search] ||= AdminSearch::DEFAULT_SEARCH
     params[:search].permit!
@@ -21,7 +23,7 @@ class Admin::AdminsController < Admin::UsersController
     authorize @resource, :create?
 
     @resource.save
-    location = @resource.persisted? ? admin_admins_path : nil
+    location = @resource.persisted? ? admin_admins_path(search: params[:search], page: params[:page]) : nil
     respond_with :admin, @resource, location: location
   end
 
@@ -34,14 +36,18 @@ class Admin::AdminsController < Admin::UsersController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_admins_path
+    respond_with :admin,
+                 @resource,
+                 location: admin_admins_path(search: params[:search], page: params[:page])
   end
 
   def destroy
     authorize @resource, :destroy?
     @resource.soft_delete!
 
-    respond_with :admin, @resource, location: admin_admins_path
+    respond_with :admin,
+                @resource,
+                location: admin_admins_path(search: params[:search], page: params[:page])
   end
 
   # NOTE: debug abilities for Admin - BEGIN
@@ -79,5 +85,9 @@ class Admin::AdminsController < Admin::UsersController
              :password_confirmation,
              :first_name,
              :last_name)
+  end
+
+  def permit_search_params
+    params[:search].permit! if params[:search].present?
   end
 end

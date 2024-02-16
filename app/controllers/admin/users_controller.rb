@@ -1,11 +1,11 @@
 class Admin::UsersController < Admin::BaseController
   respond_to :html
   before_action :find_resource, except: [:index, :new, :create, :deleted, :restore]
+  before_action :permit_search_params, except: [:index]
 
   def index
     params[:search] ||= UserSearch::DEFAULT_SEARCH
     params[:search].permit!
-
     authorize User, :index?
 
     @search = UserSearch.new(User.all).search(params[:search])
@@ -28,7 +28,7 @@ class Admin::UsersController < Admin::BaseController
     authorize @resource, :create?
 
     @resource.save
-    location = @resource.persisted? ? admin_users_path : nil
+    location = @resource.persisted? ? admin_users_path(search: params[:search], page: params[:page]) : nil
     respond_with :admin, @resource, location: location
   end
 
@@ -41,7 +41,7 @@ class Admin::UsersController < Admin::BaseController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_users_path
+    respond_with :admin, @resource, location: admin_users_path(search: params[:search], page: params[:page])
   end
 
   def resend_confirmation_email
@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::BaseController
     @resource.send_confirmation_instructions
     flash[:success] = "Confirmation instructions were successfully sent to #{@resource.decorate.full_name} (#{@resource.email})"
     respond_with :admin, @resource,
-                 location: admin_users_path
+                 location: admin_users_path(search: params[:search], page: params[:page])
   end
 
   def unlock
@@ -59,7 +59,7 @@ class Admin::UsersController < Admin::BaseController
     @resource.unlock_access!
     flash[:success] = "User #{@resource.decorate.full_name} (#{@resource.email}) successfully unlocked!"
     respond_with :admin, @resource,
-                 location: edit_admin_user_path(@resource)
+                 location: edit_admin_user_path(@resource, search: params[:search], page: params[:page])
   end
 
   def log_in
@@ -87,5 +87,9 @@ class Admin::UsersController < Admin::BaseController
       :password,
       :password_confirmation
     )
+  end
+
+  def permit_search_params
+    params[:search].permit! if params[:search].present?
   end
 end

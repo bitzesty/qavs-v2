@@ -2,7 +2,7 @@ tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
     tr.govuk-table__row
       th.govuk-table__header scope="row"
-        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year]), class: 'govuk-link', target: :_blank do
+        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year], page: params[:page]), class: 'govuk-link', target: :_blank do
           - unless obj.nominee_name.nil?
             span
               = obj.nominee_name
@@ -33,5 +33,5 @@ tbody.govuk-table__body
 
       td.govuk-table__cell
         - aria_label = obj.company_or_nominee_name.present? ? "View submitted nomination, for #{obj.company_or_nominee_name}" : "View submitted nomination, nominee name not yet specified"
-        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year]), aria: { label: aria_label }, class: 'govuk-link', target: :_blank do
+        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year], page: params[:page]), aria: { label: aria_label }, class: 'govuk-link', target: :_blank do
           | View

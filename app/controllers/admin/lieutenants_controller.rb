@@ -1,4 +1,6 @@
 class Admin::LieutenantsController < Admin::UsersController
+  before_action :permit_search_params, except: [:index]
+
   def index
     params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
     params[:search].permit!
@@ -30,7 +32,7 @@ class Admin::LieutenantsController < Admin::UsersController
     authorize @resource, :create?
 
     @resource.save
-    location = @resource.persisted? ? admin_lieutenants_path : nil
+    location = @resource.persisted? ? admin_lieutenants_path(search: params[:search], page: params[:page]) : nil
     respond_with :admin,
                  @resource,
                  location: location,
@@ -48,7 +50,7 @@ class Admin::LieutenantsController < Admin::UsersController
 
     respond_with :admin,
                  @resource,
-                 location: admin_lieutenants_path,
+                 location: admin_lieutenants_path(search: params[:search], page: params[:page]),
                  notice: "User has been successfully updated."
   end
 
@@ -60,7 +62,7 @@ class Admin::LieutenantsController < Admin::UsersController
 
     respond_with :admin,
                  @resource,
-                 location: admin_lieutenants_path,
+                 location: admin_lieutenants_path(search: params[:search], page: params[:page]),
                  notice: "User has been successfully restored."
   end
 
@@ -68,7 +70,9 @@ class Admin::LieutenantsController < Admin::UsersController
     authorize @resource, :destroy?
     @resource.soft_delete!
 
-    respond_with :admin, @resource, location: admin_lieutenants_path
+    respond_with :admin,
+                 @resource,
+                 location: admin_lieutenants_path(search: params[:search], page: params[:page])
   end
 
   private
@@ -86,5 +90,9 @@ class Admin::LieutenantsController < Admin::UsersController
              :last_name,
              :role,
              :ceremonial_county_id)
+  end
+
+  def permit_search_params
+    params[:search].permit! if params[:search].present?
   end
 end

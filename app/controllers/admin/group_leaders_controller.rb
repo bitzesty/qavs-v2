@@ -1,4 +1,6 @@
 class Admin::GroupLeadersController < Admin::UsersController
+  before_action :permit_search_params, except: [:index]
+
   def index
     params[:search] ||= GroupLeaderSearch::DEFAULT_SEARCH
     params[:search].permit!
@@ -20,7 +22,7 @@ class Admin::GroupLeadersController < Admin::UsersController
 
     respond_with :admin,
                  @resource,
-                 location: admin_group_leaders_path,
+                 location: admin_group_leaders_path(search: params[:search], page: params[:page]),
                  notice: "User has been successfully updated."
   end
 
@@ -28,7 +30,9 @@ class Admin::GroupLeadersController < Admin::UsersController
     authorize @resource, :destroy?
     @resource.soft_delete!
 
-    respond_with :admin, @resource, location: admin_group_leaders_path
+    respond_with :admin,
+                 @resource,
+                 location: admin_group_leaders_path(search: params[:search], page: params[:page])
   end
 
   private
@@ -44,5 +48,9 @@ class Admin::GroupLeadersController < Admin::UsersController
              :password_confirmation,
              :first_name,
              :last_name)
+  end
+
+  def permit_search_params
+    params[:search].permit! if params[:search].present?
   end
 end

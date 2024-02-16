@@ -24,7 +24,7 @@ div role="region" aria-labelledby="table-list-admin-users-caption" tabindex="0"
           tr.govuk-table__row
             th.govuk-table__header scope="row"
               = link_to admin.full_name,
-                        edit_admin_admin_path(admin),
+                        edit_admin_admin_path(admin, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         aria: { label: "edit #{ admin.full_name }" }
             td.govuk-table__cell
@@ -43,7 +43,7 @@ div role="region" aria-labelledby="table-list-admin-users-caption" tabindex="0"
                   ' Not confirmed
             td.govuk-table__cell
               = link_to "Edit user",
-                        edit_admin_admin_path(admin),
+                        edit_admin_admin_path(admin, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         id: "edit-#{ admin.first_name.downcase }-#{ admin.last_name.downcase }",
                         aria: { label: "edit #{ admin.full_name }" }
