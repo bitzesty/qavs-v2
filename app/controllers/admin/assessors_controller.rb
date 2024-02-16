@@ -1,4 +1,6 @@
 class Admin::AssessorsController < Admin::UsersController
+  before_action :permit_search_params, except: [:index]
+
   def index
     params[:search] ||= AssessorSearch::DEFAULT_SEARCH
     params[:search].permit!
@@ -21,7 +23,7 @@ class Admin::AssessorsController < Admin::UsersController
     authorize @resource, :create?
 
     @resource.save
-    location = @resource.persisted? ? admin_assessors_path : nil
+    location = @resource.persisted? ? admin_assessors_path(search: params[:search], page: params[:page]) : nil
     respond_with :admin, @resource, location: location, notice: "User has been successfully added."
   end
 
@@ -34,14 +36,19 @@ class Admin::AssessorsController < Admin::UsersController
       @resource.update_without_password(resource_params)
     end
 
-    respond_with :admin, @resource, location: admin_assessors_path, notice: "User has been updated."
+    respond_with :admin,
+                 @resource,
+                 location: admin_assessors_path(search: params[:search], page: params[:page]),
+                 notice: "User has been updated."
   end
 
   def destroy
     authorize @resource, :destroy?
     @resource.soft_delete!
 
-    respond_with :admin, @resource, location: admin_assessors_path
+    respond_with :admin,
+                 @resource,
+                 location: admin_assessors_path(search: params[:search], page: params[:page])
   end
 
   private
@@ -58,5 +65,9 @@ class Admin::AssessorsController < Admin::UsersController
              :sub_group,
              :first_name,
              :last_name)
+  end
+
+  def permit_search_params
+    params[:search].permit!
   end
 end

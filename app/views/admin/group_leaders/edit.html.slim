@@ -1,7 +1,7 @@
 - title t("admin.users.edit_button.#{controller_name}")
 
 - content_for :before_main_content do
-  = link_to "Back to group leaders list",
+  = link_to "Back to users list",
             admin_group_leaders_path(search: params[:search], page: params[:page]),
             class: "govuk-back-link"
 
