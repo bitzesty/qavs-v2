@@ -88,6 +88,6 @@ class Admin::AdminsController < Admin::UsersController
   end
 
   def permit_search_params
-    params[:search].permit!
+    params[:search].permit! if params[:search].present?
   end
 end
