@@ -26,7 +26,7 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
           tr.govuk-table__row
             th.govuk-table__header scope="row"
               = link_to group_leader.full_name,
-                        edit_admin_group_leader_path(group_leader),
+                        edit_admin_group_leader_path(group_leader, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }
             td.govuk-table__cell
@@ -52,7 +52,7 @@ div role="region" aria-labelledby="table-list-group-leaders-caption" tabindex="0
                   ' Not locked
             td.govuk-table__cell
               = link_to "Edit user",
-                edit_admin_group_leader_path(group_leader),
+                edit_admin_group_leader_path(group_leader, search: params[:search], page: params[:page]),
                 class: "govuk-link",
                 id: "edit-#{ group_leader.first_name.downcase }-#{ group_leader.last_name.downcase }",
                 aria: { label: "Edit #{ group_leader.first_name.downcase } #{ group_leader.last_name.downcase }" }
