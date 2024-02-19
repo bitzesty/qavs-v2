@@ -10,11 +10,6 @@ tbody.govuk-table__body
             em
               ' Not found
 
-      td.govuk-table__cell = obj.dashboard_status
-
-      td.govuk-table__cell
-        = obj.sub_group.try(:text) || "Not assigned"
-
       td.govuk-table__cell
         - if obj.ceremonial_county.present?
           = obj.ceremonial_county.name
@@ -30,6 +25,18 @@ tbody.govuk-table__body
         br
         span.muted
           = obj.last_updated_by
+
+      td.govuk-table__cell
+        - assignment = obj.assessor_assignments.detect{|aa| aa.assessor_id == current_assessor.id}
+        - if assignment&.submitted_at
+          strong.govuk-tag.govuk-tag--green
+            | Submitted
+        - elsif assignment&.status == "in_progress"
+          strong.govuk-tag.govuk-tag--yellow
+            | In progress
+        - elsif assignment&.status == "viewed"
+          strong.govuk-tag.govuk-tag--blue
+            | Viewed
 
       td.govuk-table__cell
         - aria_label = obj.company_or_nominee_name.present? ? "View submitted nomination, for #{obj.company_or_nominee_name}" : "View submitted nomination, nominee name not yet specified"

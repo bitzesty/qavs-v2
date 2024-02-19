@@ -46,16 +46,14 @@ h1.govuk-heading-xl
         tr.govuk-table__row
           th.sortable.govuk-table__header scope="col" width="250"
             = sort_link f, "Group name", @search, :company_or_nominee_name, disabled: @search.query?
-          th.govuk-table__header scope="col" width="250"
-            | Status
-          th.govuk-table__header scope="col" width="200"
-            | National assessor Sub-group
           th.govuk-table__header scope="col" width="200"
             | Lord Lieutenancy assigned
           th.govuk-table__header scope="col" width="200"
             | Type of group
           th.sortable.govuk-table__header scope="col" width="130"
             = sort_link f, "Last updated", @search, :audit_updated_at, disabled: @search.query?
+          th.govuk-table__header scope="col" width="150"
+            | Status
           th.govuk-table__header scope="col" View
         = render(partial: "list_body")
 

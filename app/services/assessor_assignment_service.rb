@@ -14,6 +14,7 @@ class AssessorAssignmentService
     resource.assign_attributes(update_params)
     resource.editable = current_subject
     resource.assessed_at = DateTime.now unless assignment_request?
+    resource.status = "in_progress"
     resource.save
   end
 
