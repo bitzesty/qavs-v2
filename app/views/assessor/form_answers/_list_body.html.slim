@@ -27,7 +27,7 @@ tbody.govuk-table__body
           = obj.last_updated_by
 
       td.govuk-table__cell
-        - assignment = obj.assessor_assignments.detect{|aa| aa.assessor_id == current_assessor.id}
+        - assignment = obj.assessor_assignments.detect { |aa| aa.assessor_id == current_assessor.id }
         - if assignment&.submitted_at
           strong.govuk-tag.govuk-tag--green
             | Submitted
