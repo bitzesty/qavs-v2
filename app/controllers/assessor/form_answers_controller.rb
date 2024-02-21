@@ -36,7 +36,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
 
     scope = current_assessor.applications_scope(
       params[:year].to_s == "all_years" ? nil : @award_year
-    ).eligible_for_assessor
+    ).includes(:assessor_assignments).eligible_for_assessor
 
     if search_params[:query].blank? && category_picker.show_award_tabs_for_assessor?
       scope = scope.where(award_type: category_picker.current_award_type)
@@ -95,13 +95,17 @@ class Assessor::FormAnswersController < Assessor::BaseController
   def edit
     authorize resource, :edit?
 
+    unless assessor_assignment.status
+      assessor_assignment.update(status: "viewed")
+    end
+
     @form = resource.award_form.decorate(answers: HashWithIndifferentAccess.new(resource.document))
   end
 
   private
 
   def resource
-    @form_answer ||= current_assessor.applications_scope(@award_year).find(params[:id]).decorate
+    @form_answer ||= current_assessor.applications_scope(@award_year).includes(:assessor_assignments).find(params[:id]).decorate
   end
 
   def category_picker
@@ -119,5 +123,10 @@ class Assessor::FormAnswersController < Assessor::BaseController
     else
       "application-assessor"
     end
+  end
+
+  def assessor_assignment
+    AssessorAssignment.find_by(assessor_id: current_assessor.id, form_answer_id: resource.id) ||
+    resource.assessor_assignments.build(assessor: current_assessor, award_year: @award_year)
   end
 end
