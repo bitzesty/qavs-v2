@@ -41,6 +41,10 @@ class Form::SupportLettersController < Form::BaseController
     redirect_to form_form_answer_supporters_path(@form_answer)
   end
 
+  def confirm_deletion
+    
+  end
+
   private
 
   def support_letter_params

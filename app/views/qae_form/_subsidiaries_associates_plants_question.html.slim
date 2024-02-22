@@ -73,7 +73,7 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
 
         - unless admin_in_read_only_mode?
           - aria_title = ordinal(index + 1) + " subsidiary"
-          
+
           - if !subsidiary["name"].blank?
             - aria_title = subsidiary["name"] + " subsidiary"
 
@@ -109,6 +109,6 @@ div role="group" id="q_#{question.key}" aria-labelledby="q_#{question.key}_label
               ' Specify the reason why you are including it.
             textarea.govuk-textarea.award-textarea.js-char-count.js-trigger-autosave rows="2" name="#{question.input_name}[0][description]" autocomplete="off" data-word-max=question.details_words_max *possible_read_only_ops(question.step.opts[:id])
 
-        
+
 
 = link_to "+ Add subsidiary, associate or plant", new_form_form_answer_subsidiaries_url(@form_answer.id), class: "govuk-button govuk-button--secondary button-add js-button-add", "aria-label" => "Add subsidiary, associate or plant", "data-entity" => "subsidiary"

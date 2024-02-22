@@ -46,10 +46,11 @@ li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
   - if current_form_is_editable? && !current_lieutenant && !current_assessor
     - if persisted
       - if supporter["support_letter_id"].present? && @form_answer.support_letters.find_by_id(supporter["support_letter_id"])
-        - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
+        / - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
+        - url = confirm_deletion_form_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
       - else
-        - url = "#"
+        - url = confirm_deletion_form_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
       - if current_user || policy(:support_letter).can_remove?
-        = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
+        = link_to "Remove", url, class: "govuk-button govuk-button--warning", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
     - else
-      = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"
+      = link_to "Remove", "#", class: "govuk-button govuk-button--warning govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"

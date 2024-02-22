@@ -1,0 +1,43 @@
+- content_for :breadcrumbs do
+  li = link_to "Applications", dashboard_path
+  li = @form.title
+
+header.page-header.group.page-header-over-sidebar
+  div
+    h1.govuk-heading-xl
+      = @form.title
+
+.steps-progress-container
+  .steps-progress-content
+    = render 'qae_form/form_header', form: @form, current_step: "letters_of_support"
+
+    .article-container.article-container-wider.step-article.step-current
+      article.group role="article"
+        .inner
+          fieldset.govuk-fieldset.question-block
+            h2.govuk-heading-l = "C1. Letters of Support"
+
+            ul.list-add
+              li
+                div
+                  p
+                    | Are you sure?
+                  br
+                    = params.inspect
+                  / = simple_form_for :support_letter,
+                  /                   url: form_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"]),
+                  /                   html: { class: 'qae-form', method: :delete } do |f|
+                  /   f.input
+                  /   .row
+                  /     .span-12
+                  /       = f.submit "Delete", class: "button button-alt"
+                  /   .clear
+
+          footer
+            nav.pagination.no-border aria-label="Pagination" role="navigation"
+              ul.group
+                li.previous.previous-alternate
+                  = link_to edit_form_url(id: params[:form_answer_id], step: "letters_of_support"), rel: "prev", title: "Back to letters of support", role: "button" do
+                    span.pagination-label Back
+
+    = render "qae_form/steps_progress_bar", current_step: "letters_of_support"

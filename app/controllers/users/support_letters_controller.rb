@@ -54,6 +54,9 @@ class Users::SupportLettersController < Users::BaseController
     end
   end
 
+  def confirm_deletion
+  end
+
   private
 
   def support_letter_params
