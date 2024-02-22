@@ -1,4 +1,7 @@
-= simple_form_for [:admin, resource], as: :lieutenant, url: resource.persisted? ? admin_lieutenant_path(resource) : admin_lieutenants_path, html: { class: 'qae-form' } do |f|
+= simple_form_for [:admin, resource],
+                  as: :lieutenant,
+                  url: resource.persisted? ? admin_lieutenant_path(resource, search: params[:search], page: params[:page]) : admin_lieutenants_path(search: params[:search], page: params[:page]),
+                  html: { class: 'qae-form' } do |f|
   = render "shared/users/user_details", f: f
 
   = f.association :ceremonial_county,
@@ -19,7 +22,10 @@
       = f.submit "#{f.object.persisted? ? 'Update' : 'Add'} user",
                 class: 'govuk-button'
       = link_to "Cancel",
-                admin_lieutenants_path,
+                admin_lieutenants_path(search: params[:search], page: params[:page]),
                 class: 'govuk-button govuk-button--secondary'
       - if action_name == "edit" && policy(resource).destroy?
-        = link_to 'Delete user', admin_lieutenant_path(resource), data: { method: :delete, confirm: 'Are you sure you want to delete this user?' }, class: 'govuk-button govuk-button--warning'
+        = link_to 'Delete user',
+                  admin_lieutenant_path(resource, search: params[:search], page: params[:page]),
+                  data: { method: :delete, confirm: 'Are you sure you want to delete this user?' },
+                  class: 'govuk-button govuk-button--warning'

@@ -28,7 +28,7 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
           tr.govuk-table__row
             th.govuk-table__header scope="row"
               = link_to assessor.full_name,
-                        edit_admin_assessor_path(assessor),
+                        edit_admin_assessor_path(assessor, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         aria: { label: "edit #{ assessor.full_name }"}
             td.govuk-table__cell = assessor.sub_group&.text
@@ -55,7 +55,7 @@ div role="region" aria-labelledby="table-list-national-assessors-caption" tabind
                   ' Not locked
             td.govuk-table__cell
               = link_to "Edit user",
-                        edit_admin_assessor_path(assessor),
+                        edit_admin_assessor_path(assessor, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         id: "edit #{ assessor.first_name.downcase } #{ assessor.last_name.downcase }",
                         aria: { label: "edit #{ assessor.full_name }"}

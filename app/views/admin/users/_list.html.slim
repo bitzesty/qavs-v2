@@ -26,7 +26,7 @@ div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
           tr.govuk-table__row
             th.govuk-table__header scope="row"
               = link_to user.full_name,
-                        edit_admin_user_path(user),
+                        edit_admin_user_path(user, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         aria: { label: "edit #{ user.full_name }" }
             td.govuk-table__cell
@@ -54,6 +54,6 @@ div role="region" aria-labelledby="table-list-nominators-caption" tabindex="0"
                   ' Not locked
             td.govuk-table__cell
               = link_to "Edit user",
-                        edit_admin_user_path(user),
+                        edit_admin_user_path(user, search: params[:search], page: params[:page]),
                         class: "govuk-link",
                         aria: { label: "edit #{ user.full_name }" }

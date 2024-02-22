@@ -2,18 +2,13 @@ tbody.govuk-table__body
   - FormAnswerDecorator.decorate_collection(@form_answers).each do |obj|
     tr.govuk-table__row
       th.govuk-table__header scope="row"
-        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year]), class: 'govuk-link' do
+        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year], page: params[:page]), class: 'govuk-link', target: :_blank do
           - unless obj.nominee_name.nil?
             span
               = obj.nominee_name
           - else
             em
               ' Not found
-
-      td.govuk-table__cell = obj.dashboard_status
-
-      td.govuk-table__cell
-        = obj.sub_group.try(:text) || "Not assigned"
 
       td.govuk-table__cell
         - if obj.ceremonial_county.present?
@@ -32,6 +27,18 @@ tbody.govuk-table__body
           = obj.last_updated_by
 
       td.govuk-table__cell
+        - assignment = obj.assessor_assignments.detect { |aa| aa.assessor_id == current_assessor.id }
+        - if assignment&.submitted_at
+          strong.govuk-tag.govuk-tag--green
+            | Submitted
+        - elsif assignment&.status == "in_progress"
+          strong.govuk-tag.govuk-tag--yellow
+            | In progress
+        - elsif assignment&.status == "viewed"
+          strong.govuk-tag.govuk-tag--blue
+            | Viewed
+
+      td.govuk-table__cell
         - aria_label = obj.company_or_nominee_name.present? ? "View submitted nomination, for #{obj.company_or_nominee_name}" : "View submitted nomination, nominee name not yet specified"
-        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year]), aria: { label: aria_label }, class: 'govuk-link' do
+        = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year], page: params[:page]), aria: { label: aria_label }, class: 'govuk-link', target: :_blank do
           | View

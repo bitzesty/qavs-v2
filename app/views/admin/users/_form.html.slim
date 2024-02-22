@@ -1,4 +1,7 @@
-= simple_form_for [:admin, resource], html: { class: "qae-form" } do |f|
+= simple_form_for [:admin, resource],
+  as: :user,
+  url: resource.persisted? ? admin_user_path(resource, search: params[:search], page: params[:page]) : admin_users_path(search: params[:search], page: params[:page]),
+  html: { class: "qae-form" } do |f|
   = render "fields_user_details", f: f
 
   .govuk-button-group
@@ -25,5 +28,5 @@
                 method: :patch
 
     = link_to "Cancel",
-              admin_users_path,
+              admin_users_path(search: params[:search], page: params[:page]),
               class: "govuk-button govuk-button--secondary btn-default btn-md"

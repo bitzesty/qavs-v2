@@ -1,7 +1,7 @@
 - title t("admin.users.edit_button.#{controller_name}")
 
 - content_for :before_main_content do
-  = link_to "Back to users list", admin_lieutenants_path(search: params[:search], page: params[:page]), class: "govuk-back-link"
+  = link_to "Back to users list", admin_admins_path(search: params[:search], page: params[:page]), class: "govuk-back-link"
 
 h1.govuk-heading-xl
   = t("admin.users.new_button.#{controller_name}")
