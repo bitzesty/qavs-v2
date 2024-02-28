@@ -33,7 +33,7 @@
                         role: "button",
                         aria: { label: "Show deleted users" }
 
-          = link_to public_send("new_admin_#{controller_name.singularize}_path"), class: 'new-user govuk-button pull-right', role: 'button' do
+          = link_to public_send("new_admin_#{controller_name.singularize}_path", search: params[:search], page: params[:page]), class: 'new-user govuk-button pull-right', role: 'button' do
             = t("admin.users.new_button.#{controller_name}")
         .clear
 

@@ -8,7 +8,7 @@ class SupportLetterAttachment < ApplicationRecord
   begin :associations
     belongs_to :user
     belongs_to :form_answer
-    belongs_to :support_letter
+    belongs_to :support_letter, optional: true
   end
 
   begin :validations

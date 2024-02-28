@@ -4,7 +4,7 @@ RSpec.describe GroupLeader, type: :model do
   subject {build(:group_leader)}
 
   describe "associations" do
-    it { should belong_to(:form_answer) }
+    it { should belong_to(:form_answer).optional }
   end
 
   it 'has valid a factory' do

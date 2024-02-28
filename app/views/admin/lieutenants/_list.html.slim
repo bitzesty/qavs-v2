@@ -41,7 +41,7 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
             - else
               th.govuk-table__header scope="row"
                 = link_to lieutenant.full_name,
-                  edit_admin_lieutenant_path(lieutenant),
+                  edit_admin_lieutenant_path(lieutenant, search: params[:search], page: params[:page]),
                   class: "govuk-link",
                   aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
             td.govuk-table__cell
@@ -71,13 +71,13 @@ div role="region" aria-labelledby="table-list-lieutenancy-office-caption" tabind
                   ' Not locked
             td.govuk-table__cell
               - if action_name == "deleted"
-                = link_to "Restore user", restore_admin_lieutenant_path(lieutenant),
+                = link_to "Restore user", restore_admin_lieutenant_path(lieutenant, search: params[:search], page: params[:page]),
                           class: "govuk-link",
                           id: "restore-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
                           method: :post,
                           aria: { label: "restore-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }
               - else
-                = link_to "Edit user", edit_admin_lieutenant_path(lieutenant),
+                = link_to "Edit user", edit_admin_lieutenant_path(lieutenant, search: params[:search], page: params[:page]),
                           class: "govuk-link",
                           id: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }",
                           aria: { label: "edit-#{ lieutenant.first_name.downcase }-#{ lieutenant.last_name.downcase }" }

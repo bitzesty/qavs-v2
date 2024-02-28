@@ -19,7 +19,6 @@ const frontend = require("govuk-frontend/govuk/all")
 require.context('govuk-frontend/govuk/assets/images', true)
 import './application.scss';
 
-import 'jquery/src/jquery';
 import MicroModal from 'micromodal';
 
 import AccessibleAutocomplete from '../vendor/accessible-autocomplete.min';

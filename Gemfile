@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-ruby '~> 2.7.7'
+ruby '~> 3.2.2'
 
-gem 'rails', '6.1.7.1'
+gem 'rails', '7.1.1'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -15,22 +15,22 @@ gem 'pg'
 gem 'activerecord-import'
 
 # Track Changes
-gem 'paper_trail', '~> 10.3'
+gem 'paper_trail', '~> 15.0'
 
 # Assets & Templates
 gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-rails', '>= 2.0.0'
 gem 'slim-rails', '~> 3.2.0'
 gem 'coffee-rails', '5.0'
-gem 'jquery-rails', '4.4.0'
+gem 'jquery-rails', '~> 4.4'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
-gem 'uglifier', '>= 2.7.2'
+gem "terser", "~> 1.1"
 gem 'js_cookie_rails', '2.1.4'
 gem 'ckeditor'
-gem 'webpacker', '6.0.0.beta.7'
+gem 'webpacker'
 
 # Autolinking in admin mass user mailer
 gem 'rails_autolink'
@@ -70,7 +70,7 @@ gem 'kaminari'
 gem 'wicked', '~> 1.1'
 
 # Statemachine
-gem 'statesman', '3.5.0'
+gem 'statesman', '~> 11.0'
 
 # Form & Data helpers
 gem 'simple_form', '~> 5.0'
@@ -84,7 +84,7 @@ gem 'prawn-table'
 gem 'nokogiri'
 
 # Uploads
-gem 'carrierwave', '~> 2.2.2'
+gem 'carrierwave', '~> 2.2.5'
 gem 'google-cloud-storage', '~> 1.34.1'
 gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'c706a21c6c25045cae2e39bcab5bf594af0bcf46'
 gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
@@ -124,7 +124,7 @@ gem 'nilify_blanks'
 gem 'curb', '0.9.10'
 
 # Web server
-gem 'puma', '~> 5.6.7'
+gem 'puma', '~> 5.6.8'
 
 # Performance & Error reporting
 gem 'appsignal'
@@ -150,6 +150,8 @@ gem 'rack-canonical-host'
 
 gem 'rails-healthcheck'
 
+gem 'matrix', '~> 0.4.1'
+
 group :development do
   gem 'letter_opener'
   gem 'rack-mini-profiler', '>= 0.10.1', require: false
@@ -157,8 +159,6 @@ group :development do
   gem 'rubocop', '~> 0.52', require: false
   # When need to copy model with nested associations
   gem 'amoeba', '3.0.0'
-  # for RailsPanel Chrome extension
-  gem 'meta_request'
   gem 'listen'
 
   # Fixes https://github.com/rails/rails/issues/26658#issuecomment-255590071
@@ -169,7 +169,7 @@ gem 'dotenv-rails'
 
 group :development, :test do
   # Enviroment variables
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'rspec-rails', '~> 6.0'
   gem 'rspec-github', require: false
   gem "pry-byebug"
   gem 'rails-controller-testing'
@@ -177,12 +177,12 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_bot_rails'
-  gem 'capybara', '3.33'
+  gem 'factory_bot_rails', '6.2' # https://github.com/thoughtbot/factory_bot_rails/issues/433
+  gem 'capybara', '~> 3.39'
   gem 'poltergeist'
   gem 'database_cleaner-active_record'
   gem 'launchy'
-  gem 'turnip', '~> 4.2.0'
+  gem 'turnip', '~> 4.4.0'
   gem 'shoulda-matchers', require: false
   gem 'pdf-inspector', require: 'pdf/inspector'
   gem 'codeclimate_circle_ci_coverage'

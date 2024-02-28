@@ -28,5 +28,8 @@ li.js-add-example class="govuk-!-display-none"
     span.govuk-error-message
     input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][{index}][letter_of_support]" id="form[#{question.key}][{index}][letter_of_support]" type='file' disabled=true
 
-  button.govuk-button.button-alt.js-save-collection data-save-collection-url=users_form_answer_support_letters_url(@form_answer) disabled='disabled'
-    | Submit letter of support
+  p
+    button.govuk-button.button-alt.js-save-collection data-save-collection-url=users_form_answer_support_letters_url(@form_answer) disabled='disabled'
+      | Submit letter of support
+
+    = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"

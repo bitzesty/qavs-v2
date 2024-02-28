@@ -15,7 +15,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
 
   expose(:questions_with_references) do
     all_form_questions.select do |q|
-      !q.is_a?(QAEFormBuilder::HeaderQuestion) &&
+      !q.is_a?(QaeFormBuilder::HeaderQuestion) &&
       (q.ref.present? || q.sub_ref.present?)
     end
   end

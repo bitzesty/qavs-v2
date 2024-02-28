@@ -1,4 +1,3 @@
-require 'uglifier'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -29,7 +28,8 @@ Rails.application.configure do
   }
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = Uglifier.new(compress: { unused: false })
+  config.assets.js_compressor = :terser
+
 
   # config.assets.css_compressor = :sass
 
