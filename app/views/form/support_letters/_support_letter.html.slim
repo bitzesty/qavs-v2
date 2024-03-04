@@ -31,4 +31,7 @@ li.view-only
                                                                 mount_name: :attachment
   span.clear
 
-  = button_to "Remove", form_form_answer_support_letter_path(@form_answer, support_letter), method: :delete, class: "govuk-button govuk-button--warning #{'read_only' if admin_in_read_only_mode?}", 'aria-label' => "Delete support letter from #{support_letter.first_name} #{support_letter.last_name}"
+  = button_to "Remove", form_form_answer_support_letter_path(@form_answer, support_letter),
+              data: { method: :delete, confirm: 'Are you sure you want to delete this letter of support?' },
+              class: "govuk-button govuk-button--warning #{'read_only' if admin_in_read_only_mode?}",
+              'aria-label' => "Delete support letter from #{support_letter.first_name} #{support_letter.last_name}"
