@@ -31,7 +31,7 @@ class Form::SupportLettersController < Form::BaseController
 
   def destroy
     # safeguard for the case when not a user tries to delete a letter
-    return if current_assessor || current_leutenant
+    return if current_assessor || current_lieutenant
 
     if @support_letter.destroy
       remove_support_letter_from_document!
