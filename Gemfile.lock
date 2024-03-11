@@ -205,7 +205,7 @@ GEM
     cucumber-messages (22.0.0)
     cuke_modeler (3.20.1)
       cucumber-gherkin (< 28.0)
-    curb (0.9.10)
+    curb (1.0.5)
     database_cleaner-active_record (2.1.0)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -784,7 +784,7 @@ DEPENDENCIES
   coffee-rails (= 5.0)
   connection_pool
   country_select (~> 3.1)
-  curb (= 0.9.10)
+  curb (~> 1.0.5)
   database_cleaner-active_record
   decent_decoration
   decent_exposure
