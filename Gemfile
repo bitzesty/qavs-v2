@@ -84,7 +84,7 @@ gem 'prawn-table'
 gem 'nokogiri'
 
 # Uploads
-gem 'carrierwave', '~> 2.2.5'
+gem 'carrierwave', '~> 2.2.6'
 gem 'google-cloud-storage', '~> 1.34.1'
 gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'c706a21c6c25045cae2e39bcab5bf594af0bcf46'
 gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
