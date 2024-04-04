@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-ruby '~> 3.2.2'
+ruby '~> 3.2.3'
 
-gem 'rails', '7.1.1'
+gem 'rails', '7.1.3.2'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -23,7 +23,7 @@ gem 'sprockets-rails', '>= 2.0.0'
 gem 'slim-rails', '~> 3.2.0'
 gem 'coffee-rails', '5.0'
 gem 'jquery-rails', '~> 4.4'
-gem 'jquery-ui-rails', '6.0.1'
+gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v7.0.0'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
@@ -84,7 +84,7 @@ gem 'prawn-table'
 gem 'nokogiri'
 
 # Uploads
-gem 'carrierwave', '~> 2.2.5'
+gem 'carrierwave', '~> 2.2.6'
 gem 'google-cloud-storage', '~> 1.34.1'
 gem 'carrierwave-google-storage', github: "bitzesty/carrierwave-google-storage", ref: 'c706a21c6c25045cae2e39bcab5bf594af0bcf46'
 gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
@@ -121,7 +121,7 @@ gem 'nilify_blanks'
 
 # We use it for sending API requests to Sendgrid in
 # AdvancedEmailValidator
-gem 'curb', '0.9.10'
+gem 'curb', '~> 1.0.5'
 
 # Web server
 gem 'puma', '~> 5.6.8'
