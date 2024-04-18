@@ -3,7 +3,7 @@ require 'securerandom'
 unless Admin.exists?
   admin_args = {
     email: "admin@example.com",
-    password: SecureRandom.alphanumeric(12),
+    password: SecureRandom.alphanumeric(14),
     first_name: "First name",
     last_name: "Last name",
     confirmed_at: DateTime.now
@@ -17,7 +17,7 @@ unless Assessor.exists?
   assessor_args = {
     email: "assessor@example.com",
     sub_group: "sub_group_1",
-    password: SecureRandom.alphanumeric(12),
+    password: SecureRandom.alphanumeric(14),
     first_name: "First name",
     last_name: "Last name",
     confirmed_at: DateTime.now
