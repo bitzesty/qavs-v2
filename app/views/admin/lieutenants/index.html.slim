@@ -25,20 +25,19 @@
         .govuk-grid-row
           = render "shared/users/search_count"
         .govuk-button-group
-          - if controller_name == "lieutenants"
-            - if action_name == "deleted"
-              = link_to "Show active users",
-                        admin_lieutenants_path,
-                        class: "new-user govuk-button pull-right",
-                        role: "button",
-                        aria: { label: "Show active users" }
+          - if action_name == "deleted"
+            = link_to "Show active users",
+                      admin_lieutenants_path,
+                      class: "new-user govuk-button pull-right",
+                      role: "button",
+                      aria: { label: "Show active users" }
 
-            - else
-              = link_to "Show deleted users",
-                        deleted_admin_lieutenants_path,
-                        class: "new-user govuk-button pull-right",
-                        role: "button",
-                        aria: { label: "Show deleted users" }
+          - else
+            = link_to "Show deleted users",
+                      deleted_admin_lieutenants_path,
+                      class: "new-user govuk-button pull-right",
+                      role: "button",
+                      aria: { label: "Show deleted users" }
 
           = link_to public_send("new_admin_#{controller_name.singularize}_path", search: params[:search], page: params[:page]), class: 'new-user govuk-button pull-right', role: 'button' do
             = t("admin.users.new_button.#{controller_name}")
