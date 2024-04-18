@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN apt-get update
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs npm
+RUN apt-get install -y nodejs
 RUN npm install yarn -g
 
 # ENV SSL_CERT_DIR=/etc/ssl/certs
