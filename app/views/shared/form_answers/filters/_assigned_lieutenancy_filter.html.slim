@@ -3,4 +3,5 @@
             include_blank: true,
             collection: options,
             label: 'Lord Lieutenancy assigned',
-            input_html: { multiple: true, class: 'js-admin-filter-option' }
+            input_html: { multiple: true, class: 'js-admin-filter-option' },
+            selected: defined?(selected_ids) ? selected_ids : nil

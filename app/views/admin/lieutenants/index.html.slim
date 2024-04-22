@@ -14,7 +14,7 @@
           .govuk-grid-column-two-third
             .form-group.search-input
               = f.simple_fields_for [:filters, @search.filters] do |g|
-                = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: LieutenantSearch.ceremonial_county_options
+                = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: LieutenantSearch.ceremonial_county_options, selected_ids: LieutenantSearch.ceremonial_county_options.map(&:second)
         .govuk-button-group
           = f.submit "Search", class: 'govuk-button'
           = link_to "Clear search",
