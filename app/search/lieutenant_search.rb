@@ -1,10 +1,15 @@
 class LieutenantSearch < Search
-  DEFAULT_SEARCH = {
-    sort: "full_name",
-    search_filter: {}
-  }
-
   include FullNameSort
+
+  def self.default_search
+    {
+      sort: "full_name",
+      search_filter: {
+        assigned_ceremonial_county: LieutenantSearch.ceremonial_county_options.map(&:second)
+      }
+    }
+  end
+
 
   def filter_by_assigned_ceremonial_county(scoped_results, value)
     value = value.map do |v|

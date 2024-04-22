@@ -2,7 +2,7 @@ class Admin::LieutenantsController < Admin::UsersController
   before_action :permit_search_params, except: [:index]
 
   def index
-    params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
+    params[:search] ||= LieutenantSearch.default_search
     params[:search].permit!
     authorize :lieutenant, :index?
 
