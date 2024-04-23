@@ -5,9 +5,16 @@
     = render 'admin/users/navigation' do
       .govuk-tabs__panel
         .govuk-grid-row
+          p.govuk-body-l.govuk-grid-column-two-thirds class="govuk-!-font-weight-bold"
+            | Search Lieutenancy office users
+        .govuk-grid-row
           .govuk-grid-column-one-third
             .form-group.search-input
-              = f.input :query, label: "Search", input_html: { class: "form-control", type: "search" }
+              = f.input :query, label: "Name", input_html: { type: "search" }
+          .govuk-grid-column-two-third
+            .form-group.search-input
+              = f.simple_fields_for [:filters, @search.filters] do |g|
+                = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: LieutenantSearch.ceremonial_county_options
         .govuk-button-group
           = f.submit "Search", class: 'govuk-button'
           = link_to "Clear search",
@@ -18,6 +25,20 @@
         .govuk-grid-row
           = render "shared/users/search_count"
         .govuk-button-group
+          - if action_name == "deleted"
+            = link_to "Show active users",
+                      admin_lieutenants_path,
+                      class: "new-user govuk-button pull-right",
+                      role: "button",
+                      aria: { label: "Show active users" }
+
+          - else
+            = link_to "Show deleted users",
+                      deleted_admin_lieutenants_path,
+                      class: "new-user govuk-button pull-right",
+                      role: "button",
+                      aria: { label: "Show deleted users" }
+
           = link_to public_send("new_admin_#{controller_name.singularize}_path", search: params[:search], page: params[:page]), class: 'new-user govuk-button pull-right', role: 'button' do
             = t("admin.users.new_button.#{controller_name}")
         .clear

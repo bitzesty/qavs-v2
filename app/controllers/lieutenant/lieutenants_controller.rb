@@ -5,7 +5,7 @@ class Lieutenant::LieutenantsController < Lieutenant::BaseController
   def index
     authorize :lieutenant, :index?
 
-    params[:search] ||= LieutenantSearch::DEFAULT_SEARCH
+    params[:search] ||= LieutenantSearch.default_search
     params[:search].permit!
 
     @search = LieutenantSearch.new(Lieutenant.from_county(current_lieutenant.ceremonial_county))
