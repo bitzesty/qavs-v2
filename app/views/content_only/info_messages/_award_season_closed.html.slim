@@ -1,12 +1,12 @@
 article.group role="article"
   - if !@user_award_forms.any?
     h2.govuk-heading-l
-      ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May.
+      ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in September.
     .govuk-inset-text
       p.govuk-body
         ' Please note, the #{ AwardYear.current.year } award nominations have closed on #{ submission_deadline.decorate.formatted_trigger_time }.
         br
-        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in May. We will email you when it opens.
+        ' The new nomination period for the #{ AwardYear.current.year + 1 } awards opens in September. We will email you when it opens.
   - else
     .govuk-inset-text
       p.govuk-body
