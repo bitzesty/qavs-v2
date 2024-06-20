@@ -32,4 +32,4 @@ li.js-add-example class="govuk-!-display-none"
     button.govuk-button.button-alt.js-save-collection data-save-collection-url=users_form_answer_support_letters_url(@form_answer) disabled='disabled'
       | Submit letter of support
 
-    = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"
+    = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { confirm: 'Are you sure you want to delete this letter of support?', url: "#" }, 'aria-label' => "#"
