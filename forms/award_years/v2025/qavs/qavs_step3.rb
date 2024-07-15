@@ -29,7 +29,7 @@ class AwardYears::V2025::QaeForms
           )
           classes "question-support-uploads"
           limit 2
-          default 1
+          default 2
         end
       end
     end
