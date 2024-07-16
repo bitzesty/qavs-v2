@@ -104,7 +104,7 @@ Rails.application.routes.draw do
   namespace :form do
     resources :form_answers do
       resources :supporters, only: [:new, :create, :index, :destroy]
-      resources :support_letters, only: [:new, :update, :create, :destroy]
+      resources :support_letters, only: [:create]
       resources :form_attachments, only: [:index, :new, :create, :destroy]
     end
   end

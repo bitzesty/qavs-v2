@@ -35,13 +35,9 @@ h1.govuk-heading-xl
                   = help.title.html_safe
               .govuk-details__text
                 == help.text
-
-          ul.list-add.supporters-list
-            - @form_answer.support_letters.each do |support_letter|
-              = render "form/support_letters/support_letter", support_letter: support_letter
-
-          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "govuk-button govuk-button--secondary button-add"
+          
+          = render partial: "form/support_letters/form"
 
     = render "qae_form/steps_progress_bar", current_step: "letters-of-support"
 
-    = render "footer", step: @step
+    = render "form/supporters/footer", step: @step

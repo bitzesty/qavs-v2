@@ -22,6 +22,8 @@ class SupportLetter < ApplicationRecord
     scope :not_manual, -> { where(manual: false) }
   end
 
+  accepts_nested_attributes_for :support_letter_attachment
+
   attr_accessor :attachment
 
   def full_name
