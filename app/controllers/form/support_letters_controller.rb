@@ -10,7 +10,11 @@ class Form::SupportLettersController < Form::BaseController
       if @form_answer.save
         add_support_letters_to_document!
 
-        redirect_to form_form_answer_supporters_path(@form_answer)
+        if params[:next_step]
+          redirect_to edit_form_url(@form_answer, step: params[:next_step])
+        else
+          redirect_to form_form_answer_supporters_path(@form_answer)
+        end
       else
         @step = @form.steps.detect { |s| s.opts[:id] == :letters_of_support_step }
 
