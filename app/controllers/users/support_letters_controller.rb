@@ -12,7 +12,7 @@ class Users::SupportLettersController < Users::BaseController
   expose(:support_letter) do
     form_answer.support_letters.new(
       support_letter_params.merge({
-        user_id: current_user.try(:id) || form_answer.user_id,
+        user_id: current_user&.id || form_answer.user_id,
         manual: true,
         support_letter_attachment: attachment
       })
@@ -30,11 +30,35 @@ class Users::SupportLettersController < Users::BaseController
       attachment.support_letter = support_letter
       attachment.save!
 
-      render json: { id: support_letter.id, form_answer_id: form_answer.id },
-             status: :created
+      render json: { 
+        id: support_letter.id, 
+        form_answer_id: form_answer.id, 
+        update_url: users_form_answer_support_letter_path(form_answer, support_letter) 
+      }, status: :created
     else
-      render json: support_letter.errors.messages.to_json,
-             status: :unprocessable_entity
+      render json: support_letter.errors.messages.to_json, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @support_letter = form_answer.support_letters.find(params[:id])
+
+    if @support_letter.update(support_letter_params)
+      attachment.support_letter = @support_letter
+      attachment.save!
+
+      SupportLetterAttachment
+        .where(support_letter: @support_letter)
+        .where.not(id: attachment.id)
+        .destroy_all
+
+      render json: { 
+        id: @support_letter.id, 
+        form_answer_id: form_answer.id, 
+        update_url: users_form_answer_support_letter_path(form_answer, @support_letter) 
+      }, status: :ok
+    else
+      render json: @support_letter.errors.messages.to_json, status: :unprocessable_entity
     end
   end
 

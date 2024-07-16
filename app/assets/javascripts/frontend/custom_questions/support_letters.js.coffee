@@ -103,19 +103,27 @@ window.SupportLetters =
     if email
       data['support_letter']['email'] = email
 
-    saveUrl = parent.data('save-collection-url')
+    createUrl = parent.data('create-url')
+    updateUrl = parent.data('update-url')
+    persistUrl = updateUrl || createUrl
 
-    if saveUrl
+    type = if !!updateUrl 
+      'put'
+    else
+      'post'
+
+    if persistUrl
       $.ajax
-        url: saveUrl
-        type: 'post'
+        url: persistUrl
+        type: type
         data: data
         dataType: 'json'
         success: (response) ->
-          parent.find('.js-support-entry-id').prop('value', response)
+          parent.find('.js-support-entry-id').prop('value', response['id'])
           parent.find('.govuk-error-message').html('')
           parent.removeClass('govuk-form-group--error')
           parent.addClass('js-support-letter-received')
+          parent.attr('data-update-url', response['update_url'])
           window.FormValidation.validateStep()
           SupportLetters.autosave()
 

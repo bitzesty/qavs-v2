@@ -1,5 +1,7 @@
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
-li[class=class_names("js-add-example", "js-support-letter-received" => persisted) data-save-collection-url=users_form_answer_support_letters_url(@form_answer)]
+- create_url = users_form_answer_support_letters_url(@form_answer)
+- update_url = users_form_answer_support_letter_path(@form_answer, supporter["support_letter_id"]) if persisted
+li[class=class_names("js-add-example", "js-support-letter-received" => persisted) data-create-url=create_url  data-update-url=update_url]
   input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"] *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
 
