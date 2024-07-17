@@ -113,6 +113,9 @@
     }
   ],
 
+  "independent_individual": "yes",
+  "not_nominator": "yes",
+
   "nominator_title": "Mr",
   "nominator_name": "Nominator",
   "nominator_address_building": "94",
