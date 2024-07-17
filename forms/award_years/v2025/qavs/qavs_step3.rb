@@ -26,6 +26,24 @@ class AwardYears::V2025::QaeForms
           limit 2
           default 2
         end
+
+        confirm :independent_individual, "" do
+          required
+          text -> do
+            %(
+              I can confirm that these letters were written by individuals independent of the group.
+            )
+          end
+        end
+
+        confirm :not_nominator, "" do
+          required
+          text -> do
+            %(
+              I can confirm that these letters were not written by the nominator.
+            )
+          end
+        end
       end
     end
   end

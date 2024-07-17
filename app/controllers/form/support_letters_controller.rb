@@ -1,25 +1,22 @@
 class Form::SupportLettersController < Form::BaseController
+  include FormAnswerSubmissionMixin
+
   def create
     @form_answer.support_letters_attributes = permitted_params["support_letters_attributes"]
+    @form_answer.document = prepare_doc if params[:form].present?
+    
+    if @form_answer.valid? && @form_answer.save
+      add_support_letters_to_document!
 
-    unless @form_answer.valid?
+      if params[:next_step_id]
+        redirect_to edit_form_url(@form_answer, step: params[:next_step_id])
+      else
+        redirect_to form_form_answer_supporters_path(@form_answer)
+      end
+    else
       @step = @form.steps.detect { |s| s.opts[:id] == :letters_of_support_step }
 
       render "form/supporters/index"
-    else
-      if @form_answer.save
-        add_support_letters_to_document!
-
-        if params[:next_step]
-          redirect_to edit_form_url(@form_answer, step: params[:next_step])
-        else
-          redirect_to form_form_answer_supporters_path(@form_answer)
-        end
-      else
-        @step = @form.steps.detect { |s| s.opts[:id] == :letters_of_support_step }
-
-        render "form/supporters/index"
-      end
     end
   end
 
