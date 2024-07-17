@@ -3,18 +3,22 @@
   
   ul.list-add.supporters-list
     = f.simple_fields_for :support_letters do |ff|
+      - idx = ff.options[:child_index] + 1
       li
         .govuk-grid-row
           .govuk-grid-column-one-half
-            = ff.input :first_name, input_html: { class: "form-control" }
-            = ff.input :last_name, input_html: { class: "form-control" }
-            = ff.input :relationship_to_nominee, input_html: { class: "form-control" }
+            label[class="govuk-label"]
+              span[class="govuk-body govuk-!-font-size-20 govuk-!-font-weight-bold govuk-!-display-block"]
+                = "Letter of Support #{idx}"
+            = ff.input :first_name, label: "First Name:", input_html: { class: "form-control" }
+            = ff.input :last_name, label: "Surname:", input_html: { class: "form-control" }
+            = ff.input :relationship_to_nominee, label: "Relationship to Group:", input_html: { class: "form-control" }
 
             = ff.input :manual, as: :hidden, input_html: { value: true }
             = ff.input :user_id, as: :hidden, input_html: { value: current_user.id }
 
             = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
-              = fff.input :attachment, as: :file, label: "Support letter", input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
+              = fff.input :attachment, as: :file, label: "Upload Letter of Support #{idx}", input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
               p.govuk-body.support-letter-attachment-filename
                 = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
 

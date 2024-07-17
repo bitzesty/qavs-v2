@@ -9,23 +9,18 @@ class AwardYears::V2025::QaeForms
         supporters :supporter_letters_list, "" do
           ref "C 1"
           context %(
-            <p class='govuk-hint'><a href="https://kavs.dcms.gov.uk/make-a-nomination/nominate/">Before you start, please refer to our full guidance for letters of support as outlined on our website.</a></p>
-            <p class='govuk-hint'>Please obtain two different letters that endorse the nominated group's contribution from people who are familiar with its work.</p>
-            <p class='govuk-hint'>
-              Supporters must not be volunteers or paid workers in the group. Each letter should be no more than 500 words. The letters should be about the whole group, rather than just one volunteer and should help to show how its work is outstanding.
-            </p>
-            <p class='govuk-hint'>Please list below the names of the supporters and their relationship (if any) to the group.</p>
-          )
-          hint "What are the allowed file formats?", %(
-            <p class='govuk-hint'>
-              Letter of support must be no larger than 5 MB.
-            </p>
-            <p class='govuk-hint'>
-              They can be:
-              <br>
-              Images in jpg, jpeg and png formats;
-              <br>
-              Files in doc, docx, odt, pdf and txt formats.
+            <p class='govuk-body'>Letters of support are an essential part of your nomination, as they help to clarify and explain the impact of the nominated group’s work in the local community. You will need to provide 2 letters of support alongside your nomination.</p>
+            <p class='govuk-body'>For more information on what letters can cover, please see the <a href="https://kavs.dcms.gov.uk/make-a-nomination/letters-of-support/" target="_blank">Letters of Support page</a> on our website.</p>
+            <p class='govuk-body'>Key criteria:</p>
+            <ol class='govuk-list govuk-list--number'>
+              <li>letters must be written by individuals who are familiar with the group’s work, for example: a beneficiary, local resident or member of a partner charity</li>
+              <li>letters must not be written by a volunteer, employee, trustee, or anyone involved in the running of the group</li>
+              <li>letters written by the nominator will be ineligible</li>
+              <li>each letter should be no more than 500 words</li>
+              <li>only 2 letters of support can be submitted</li>
+            </ol>
+            <p class='govuk-body'>For each letter uploaded below, please note the letter writer’s relationship to the group, for example: a beneficiary of the group, local resident or member of a partner charity.</p>
+            <p class='govuk-body'><strong>Once uploaded, all files are saved automatically. If you make a mistake and upload the wrong letter, please use the same button to upload the correct file as it will automatically replace the previous version.</strong></p>
           )
           classes "question-support-uploads"
           limit 2
