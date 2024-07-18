@@ -1,30 +1,34 @@
 li.js-add-example class="govuk-!-display-none"
+  label[class="govuk-label"]
+    span[class="govuk-body govuk-!-font-size-20 govuk-!-font-weight-bold govuk-!-display-block"]
+      = "Letter of Support #{index + 1}"
+
   input.js-support-entry-id type="hidden" name="form[#{question.key}][{index}][support_letter_id]" disabled=true
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][{index}][support_letter_id]"
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][first_name]"
-      ' First Name
+      ' First Name:
     span.govuk-error-message
     input.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][first_name]" id="form[#{question.key}][{index}][first_name]" type="text" disabled=true
     p.govuk-body.visible-read-only
 
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][last_name]"
-      ' Surname
+      ' Surname:
     span.govuk-error-message
     input.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][last_name]" id="form[#{question.key}][{index}][last_name]" type="text" disabled=true
     p.govuk-body.visible-read-only
 
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][relationship_to_nominee]"
-      ' Relationship to Nominee
+      ' Relationship to Group:
     span.govuk-error-message
     input.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][{index}][relationship_to_nominee]" id="form[#{question.key}][{index}][relationship_to_nominee]" type="text" disabled=true
     p.govuk-body.visible-read-only
 
   .govuk-form-group
     label.govuk-label for="form[#{question.key}][{index}][letter_of_support]"
-      ' Letter of Support
+      = "Upload Letter of Support #{index + 1}"
     span.govuk-error-message
     input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][{index}][letter_of_support]" id="form[#{question.key}][{index}][letter_of_support]" type='file' disabled=true
 

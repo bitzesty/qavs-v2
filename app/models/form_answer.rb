@@ -124,6 +124,8 @@ include Statesman::Adapters::ActiveRecordQueries[
     before_create :set_user_info
   end
 
+  accepts_nested_attributes_for :support_letters, reject_if: :dismiss_support_letters
+
   store_accessor :document
   store_accessor :financial_data
 
@@ -136,7 +138,6 @@ include Statesman::Adapters::ActiveRecordQueries[
       @state_machine ||= FormAnswerStateMachine.new(self, transition_class: FormAnswerTransition)
     end
   end
-
 
   # FormAnswer#award_form
   # fetches relevant award form for the application's award year if available
@@ -434,6 +435,10 @@ include Statesman::Adapters::ActiveRecordQueries[
 
   def award_form_class_name(year)
     "::AwardYears::V#{year}::QaeForms"
+  end
+
+  def dismiss_support_letters(attributes)
+    %w(first_name last_name relationship_to_nominee).all? { |attr| attributes[attr].blank? } 
   end
 
   def self.transition_class
