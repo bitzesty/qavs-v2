@@ -2,7 +2,8 @@ window.SupportLetters =
   init: ->
     $('.js-support-letter-attachment').each (idx, el) ->
       SupportLetters.fileupload_init(el)
-    SupportLetters.save_collection_init()
+
+    $(document).on 'change', '.js-trigger-autosave', debounce(SupportLetters.submit, 1000)
 
   new_item_init: (el) ->
     SupportLetters.clean_up_system_tags(el)
@@ -65,9 +66,6 @@ window.SupportLetters =
     prefixed = parent.find('.js-system-tag').data('new-hidden-input-name')
     hiddenInput = $('<input class="js-support-entry-id">').prop('type', 'hidden').prop('name', prefixed)
     parent.append(hiddenInput)
-
-  save_collection_init: () ->
-    $(document).on 'change', '.js-trigger-autosave', debounce(SupportLetters.submit, 1000)
 
   autosave: () ->
     url = $('form.qae-form').data('autosave-url')
