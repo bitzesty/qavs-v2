@@ -15,8 +15,9 @@
 
         = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
           = fff.input :attachment, as: :file, label: "Upload Letter of Support #{idx}", input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
-          p.govuk-body.support-letter-attachment-filename
-            = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
+          - if fff.object.attachment.present?
+            p.govuk-body.support-letter-attachment-filename
+              = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
 
           = fff.input :attachment_cache, as: :hidden
 
