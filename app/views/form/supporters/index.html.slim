@@ -40,6 +40,9 @@ h1.govuk-heading-xl
           = simple_form_for [:form, @form_answer], url: [:form, @form_answer, :support_letters], method: :post, data: { turbo: false }, html: { class: 'qae-form' } do |f|
             = hidden_field_tag :current_step_id, @step.title_to_param
             = hidden_field_tag :next_step_id, @step.next.title_to_param
+
+            - 2.times do |n|
+              - f.object.support_letters.build unless f.object.support_letters[n].present?
             
             ul.list-add.supporters-list
               = render partial: "form/support_letters/form", locals: { f: f }
