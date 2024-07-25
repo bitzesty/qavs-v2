@@ -951,6 +951,7 @@ jQuery ->
         height: 200
         wordcount:
           maxWordCount: $(this).data('word-max')
+        versionCheck: false
 
       CKEDITOR.on 'instanceCreated', (event) ->
         editor = event.editor

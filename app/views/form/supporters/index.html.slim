@@ -15,6 +15,7 @@ h1.govuk-heading-xl
       article.group role="article"
         div
           - letters_intro_question =  @step.questions.detect { |q| q.key == :supporter_letters_list }
+          - checkbox_questions =  @step.questions.select { |q| q.key.in?(%i(independent_individual not_nominator)) }
 
           .question-block
             label.govuk-label
@@ -35,13 +36,21 @@ h1.govuk-heading-xl
                   = help.title.html_safe
               .govuk-details__text
                 == help.text
+          
+          = simple_form_for [:form, @form_answer], url: [:form, @form_answer, :support_letters], method: :post, data: { turbo: false }, html: { class: 'qae-form' } do |f|
+            = hidden_field_tag :current_step_id, @step.title_to_param
+            = hidden_field_tag :next_step_id, @step.next.title_to_param
 
-          ul.list-add.supporters-list
-            - @form_answer.support_letters.each do |support_letter|
-              = render "form/support_letters/support_letter", support_letter: support_letter
+            - 2.times do |n|
+              - f.object.support_letters.build unless f.object.support_letters[n].present?
+            
+            ul.list-add.supporters-list
+              = render partial: "form/support_letters/form", locals: { f: f }
 
-          = link_to "+ Add another support letter", new_form_form_answer_support_letter_path(@form_answer), class: "govuk-button govuk-button--secondary button-add"
+            - checkbox_questions.each do |question|
+              .govuk-form-group
+                = render partial: "qae_form/confirm_question", locals: { question: question }
+
+            = render partial: "form/support_letters/footer", locals: { f: f, step: @step }
 
     = render "qae_form/steps_progress_bar", current_step: "letters-of-support"
-
-    = render "footer", step: @step
