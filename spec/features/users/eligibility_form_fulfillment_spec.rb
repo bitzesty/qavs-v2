@@ -17,7 +17,7 @@ describe "Eligibility forms" do
       click_link("Start a new nomination")
 
       click_button("Start eligibility questionnaire")
-      form_choice(%w[Yes])
+      form_choice(%w[No Yes])
       expect(page).to have_content("How many years has the group been in operation?")
       fill_in("How many years has the group been in operation?", with: 3)
       click_button "Continue"
