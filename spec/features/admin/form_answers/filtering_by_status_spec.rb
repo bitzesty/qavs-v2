@@ -125,8 +125,9 @@ describe "As Admin I want to filter applications", js: true do
     assert_results_number(4)
     assign_activity(@forms.first, "ART")
 
-    # Untick sport activity filter
-    click_status_option("Sport")
+    # Untick sport(primary) and disability(secondary) activity filter
+    click_status_option "Sport"
+    click_status_option "Disability"
     assert_results_number(1)
   end
 end
