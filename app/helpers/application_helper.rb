@@ -65,7 +65,6 @@ module ApplicationHelper
                                            apply_for_queens_award_for_enterprise
                                            privacy
                                            cookies
-                                           useful_information
                                          ].include?(action_name)
   end
 
