@@ -2,6 +2,11 @@ class Eligibility::Basic < Eligibility
   AWARD_NAME = 'General'
   after_save :set_passed
 
+  property :involved_with_group,
+           boolean: true,
+           label: "Are you a volunteer, employee or trustee of the group, or in any way involved with the running of the organisation?",
+           accept: :false
+
   property :based_in_uk,
            boolean: true,
            label: "Is the group based in the UK, the Channel Islands or the Isle of Man?",
@@ -30,7 +35,7 @@ class Eligibility::Basic < Eligibility
 
   property :local_area,
            boolean: true,
-           label: "Does it focus on benefitting a local area?",
+           label: "Does the group provide a specific and direct benefit to the local community?",
            hint: "Please note, KAVS is for local volunteer groups.",
            accept: :true
 
@@ -41,12 +46,12 @@ class Eligibility::Basic < Eligibility
 
   property :benefits_animals_only,
            boolean: true,
-           label: "Does it only benefit animals rather than people?",
+           label: "Is its main focus benefiting animals rather than people?",
            accept: :false
 
   property :current_holder,
            values: %w[yes no i_dont_know],
-           label: "Has the group received a KAVS in the past?",
+           label: "Has the group received a KAVS/QAVS in the past?",
            accept: :not_yes
 
   def save_as_eligible!
@@ -59,6 +64,7 @@ class Eligibility::Basic < Eligibility
     self.provide_grants = false
     self.benefits_animals_only = false
     self.current_holder = "i_dont_know"
+    self.involved_with_group = false
 
     save
   end
