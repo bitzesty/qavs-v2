@@ -11,12 +11,16 @@ class AwardYears::V2025::QaeForms
           help "About this section", %(
             <p class='govuk-body'>
               In this section, please explain how the nominated group has made a significant contribution in its area of activity. We are looking for groups that:
-              <li>Give excellent service to their beneficiaries and communities</li>
-              <li>Deliver their service in innovative ways,</li>
-              <li>Show other examples of selfless voluntary service that distinguish their work.</li>
-
+              <ul class='govuk-list govuk-list--bullet'>
+                <li>Give excellent service to their beneficiaries and communities</li>
+                <li>Deliver their service in innovative ways,</li>
+                <li>Show other examples of selfless voluntary service that distinguish their work.</li>
+              </ul>
+            </p>
+            <p class='govuk-body'>
               Please avoid using 'we' or 'our' in this section as this gives an indication that the person making the nomination is involved in the running of the group's work. It is recommended that you use 'their' or 'the group's work'.
-
+            </p>
+            <p class='govuk-body'>
               <strong>Please answer each question, noting the word limits, explaining what achievements make the nominated group stand out from others.</strong>
             </p>
           )
