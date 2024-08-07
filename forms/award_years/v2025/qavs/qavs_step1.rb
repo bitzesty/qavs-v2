@@ -14,7 +14,7 @@ class AwardYears::V2025::QaeForms
         text :nominee_name, "Name of group" do
           sub_ref "A 1.1"
           required
-          form_hint "<strong>It is important that the name is accurate and spelt correctly</strong>, as this will appear on the Award certificate if your nomination succeeds. <strong>Please do not</strong> capitalise the group's name, include charity numbers, or include special characters.".html_safe
+          form_hint "<strong>It is important that the name is accurate, concise and spelt correctly</strong>, as this will appear on the Award certificate if your nomination succeeds. <strong>Please do not</strong> capitalise the group's name, include charity numbers, or include special characters.".html_safe
           style "large"
         end
 
