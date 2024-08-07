@@ -14,7 +14,7 @@ class AwardYears::V2025::QaeForms
         text :nominee_name, "Name of group" do
           sub_ref "A 1.1"
           required
-          form_hint "It is important that the name is accurate and spelt correctly, as this will appear on the Award certificate if your nomination succeeds. You do not need to add a charity number."
+          form_hint "<strong>It is important that the name is accurate, concise and spelt correctly</strong>, as this will appear on the Award certificate if your nomination succeeds. <strong>Please do not</strong> capitalise the group's name, include charity numbers, or include special characters.".html_safe
           style "large"
         end
 
@@ -31,8 +31,9 @@ class AwardYears::V2025::QaeForms
           nominee_activities
         end
 
-        dropdown :secondary_activity, "Please select the group's secondary area of activity (optional)" do
+        dropdown :secondary_activity, "Please select the group's secondary area of activity" do
           sub_ref "A 1.4"
+          required
           option "", ""
           nominee_activities
         end
@@ -62,7 +63,7 @@ class AwardYears::V2025::QaeForms
 
         textarea :social_media, "Social media" do
           sub_ref "A 1.8"
-          form_hint "Social media accounts if known"
+          form_hint "If known, please insert a link to the group's social media below (Facebook, Instagram, Twitter, Linkedin)"
           words_max 100
           rows 2
         end

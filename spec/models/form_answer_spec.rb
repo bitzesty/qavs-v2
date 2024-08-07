@@ -122,7 +122,7 @@ RSpec.describe FormAnswer, type: :model do
           form_answer.document = form_answer.document.merge(nominee_name: nil)
           form_answer.save!
 
-          expect(form_answer.fill_progress.round(2)).to eq(0.95)
+          expect(form_answer.fill_progress.round(2)).to eq(0.96)
         end
       end
     end
