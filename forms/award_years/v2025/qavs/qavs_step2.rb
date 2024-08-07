@@ -11,6 +11,7 @@ class AwardYears::V2025::QaeForms
           help "About this section", %(
             <p class='govuk-body'>
               In this section, please explain how the nominated group has made a significant contribution in its area of activity. We are looking for groups that:
+
               <span class='indented'>- Give excellent service to their beneficiaries and communities</span>
               <span class='indented'>- Deliver their service in innovative ways,</span>
               <span class='indented'>- Show other examples of selfless voluntary service that distinguish their work.</span>
