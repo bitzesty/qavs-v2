@@ -1339,3 +1339,12 @@ fieldset.account-contact-preferences-other-ops {
     }
   }
 }
+
+.indented {
+  padding-left: 20px;
+  display: block;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+}
