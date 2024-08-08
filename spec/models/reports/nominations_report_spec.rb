@@ -27,5 +27,12 @@ RSpec.describe Reports::NominationsReport, type: :model do
         expect(csv_content[0][column[:label]]).to eq(nomination.call_method(column[:method]).to_s)
       end
     end
+
+    it 'renders new lines' do
+      test_answer = "Line one\nLine two\nLine three"
+      form_answer.document[:group_activities] = test_answer
+      form_answer.save
+      expect(csv_content[0]["Please summarise the activities of the group"]).to eq(test_answer)
+    end
   end
 end

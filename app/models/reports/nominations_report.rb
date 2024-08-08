@@ -92,4 +92,12 @@ class Reports::NominationsReport < Reports::QavsBase
   def mapping
     MAPPING
   end
+
+  def sanitize_string(string)
+    if string.present?
+      ActionView::Base.full_sanitizer.sanitize(string.to_s.strip)
+    else
+      ""
+    end
+  end
 end
