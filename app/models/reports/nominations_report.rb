@@ -95,7 +95,7 @@ class Reports::NominationsReport < Reports::QavsBase
 
   def sanitize_string(string)
     if string.present?
-      ActionView::Base.full_sanitizer.sanitize(string.to_s.strip)
+      ActionView::Base.full_sanitizer.sanitize(string.to_s.strip).gsub("\u00A0", "\u0020")
     else
       ""
     end
