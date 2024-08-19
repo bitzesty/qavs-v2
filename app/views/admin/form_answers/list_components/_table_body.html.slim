@@ -2,7 +2,7 @@
   - obj = form_answer.decorate
   tr.govuk-table__row
     - if show_bulk_lieutenants_assignment?
-      td.govuk-table__cell = check_box_tag "check_#{obj.id}", obj.id, false, class: "form-answer-check", aria: { label: "Select nomination #{obj.id} for bulk action" }
+      td.govuk-table__cell = check_box_tag "bulk_action[ids][]", obj.id, false, class: "form-answer-check", aria: { label: "Select nomination #{obj.id} for bulk action" }
     td.td-title.govuk-table__cell
       - if obj.company_or_nominee_name.present?
         = link_to polymorphic_url([namespace_name, obj], search_id: params[:search_id], year: params[:year], page: params[:page]), aria: { label: "View submitted nomination for #{obj.company_or_nominee_name}" }, class: 'govuk-link', target: :_blank do

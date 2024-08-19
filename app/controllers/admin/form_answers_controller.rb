@@ -68,7 +68,18 @@ class Admin::FormAnswersController < Admin::BaseController
                       .page(params[:page])
 
     respond_to do |format|
-      format.html
+      format.html do
+        raise params[:bulk_action].to_yaml if params[:bulk_action].present?
+
+        @processor = NominationsBulkActionForm.new(params)
+
+        redirect_url = @processor.redirect_url
+
+        if redirect_url
+          redirect_to redirect_url
+          return
+        end
+      end
 
       format.csv do
         timestamp = Time.zone.now.strftime("%d-%m-%Y")
@@ -252,6 +263,44 @@ class Admin::FormAnswersController < Admin::BaseController
       disposition: 'attachment'
     )
   end
+
+  # batch actions
+
+  def bulk_assign_lieutenants
+    authorize :lieutenant_assignment_collection, :create?
+
+    @form = LieutenantAssignmentCollection.new
+    @form.form_answer_ids = []
+  end
+
+  def bulk_assign_lieutenants_confirm
+    authorize :lieutenant_assignment_collection, :create?
+
+    # ConfirmationForm.new(kind: "bulk_assign_lieutenants")
+  end
+
+  def bulk_assign_assessors
+    authorize :assessor_assignment_collection, :create?
+
+    @form = AssessorAssignmentCollection.new
+    @form.form_answer_ids = []
+  end
+
+  def bulk_assign_assessors_confirm
+    authorize :assessor_assignment_collection, :create?
+
+    # ConfirmationForm.new(kind: "bulk_assign_assessors")
+  end
+
+  def bulk_assign_eligibility
+    authorize :eligibility_assignment_collection, :create?
+  end
+
+  def bulk_assign_eligibility_confirm
+    authorize :eligibility_assignment_collection, :create?
+  end
+
+  # / batch actions
 
   private
 

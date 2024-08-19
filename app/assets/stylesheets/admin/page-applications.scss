@@ -474,8 +474,6 @@
 }
 
 .bulk-assignment-container {
-  display: none;
-
   &.show-container {
     display: flex;
     align-items: center;
@@ -487,7 +485,7 @@
     }
   }
 
-  .bulk-assign-lieutenants-link, .bulk-assign-assessors-link {
+  .bulk-assign-lieutenants-link, .bulk-assign-assessors-link, .bulk-assign-eligibility-link {
     margin-bottom: 20px;
     margin-right: 20px;
   }

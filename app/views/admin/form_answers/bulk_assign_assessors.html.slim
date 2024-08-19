@@ -1,0 +1,17 @@
+h3.govuk-heading-m
+  | Bulk assign groups to national assessor sub-group
+
+= form_for [namespace_name, @form] do |f|
+  = flash[:error]
+  .govuk-form-group.primary-subgroup-group
+    = f.label :sub_group, "Select national assessor sub-group", class: "govuk-label"
+    = f.select :sub_group,
+              Assessor.sub_group.options,
+              { include_blank: true },
+              class: "govuk-select custom-select"
+
+  = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
+
+  .govuk-button-group
+    = f.submit "Bulk assign groups to national assessor sub-group", class: "govuk-button"
+    = link_to "Cancel", [namespace_name, :form_answers], class: "govuk-link"

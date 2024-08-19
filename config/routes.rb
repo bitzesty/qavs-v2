@@ -217,6 +217,13 @@ Rails.application.routes.draw do
       collection do
         post :index
         get :awarded_trade_applications
+
+        %w[bulk_assign_lieutenants bulk_assign_assessors bulk_assign_eligibility].each do |action|
+          get action
+          post action
+          get "#{action}_confirm"
+          post "#{action}_confirm"
+        end
       end
 
       member do
