@@ -85,6 +85,26 @@ class Reports::Nomination
     obj.secondary_activity.presence && NomineeActivityHelper.lookup_label_for_activity(obj.secondary_activity.to_sym)
   end
 
+  def nominee_established_date
+    doc["nominee_established_date"]
+  end
+
+  def group_activities
+    doc["group_activities"]
+  end
+
+  def beneficiaries
+    doc["beneficiaries"]
+  end
+
+  def benefits
+    doc["benefits"]
+  end
+
+  def volunteers
+    doc["volunteers"]
+  end
+
   def ceremonial_county
     obj.ceremonial_county.try(:name)
   end

@@ -64,12 +64,40 @@ class Reports::NominationsReport < Reports::QavsBase
     {
       label: "Assigned Sub-Group",
       method: :sub_group,
-    }
+    },
+    {
+      label: "Year founded",
+      method: :nominee_established_date,
+    },
+    {
+      label: "Please summarise the activities of the group",
+      method: :group_activities,
+    },
+    {
+      label: "Who are the beneficiaries (the people it helps) and where do they live?",
+      method: :beneficiaries,
+    },
+    {
+      label: "What are the benefits of the group's work?",
+      method: :benefits,
+    },
+    {
+      label: "This Award is specifically for groups that rely on significant and committed work by volunteers. Please explain what the volunteers do and what makes this particular group of volunteers so impressive?",
+      method: :volunteers,
+    },
   ]
 
   private
 
   def mapping
     MAPPING
+  end
+
+  def sanitize_string(string)
+    if string.present?
+      ActionView::Base.full_sanitizer.sanitize(string.to_s.strip).gsub("\u00A0", "\u0020")
+    else
+      ""
+    end
   end
 end
