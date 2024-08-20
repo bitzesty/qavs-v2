@@ -61,3 +61,14 @@
 .dropdown.open .dropdown-menu {
   display: block;
 }
+
+#select-award-year {
+  padding-top: 9px !important;
+}
+
+#select-award-year__options {
+  font-family: "GDS Transport", sans-serif;
+  color: #444;
+  padding: 0.3em 1em 0.25em 0.5em;
+  margin-top: -1px;
+}

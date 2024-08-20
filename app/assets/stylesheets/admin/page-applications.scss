@@ -474,15 +474,12 @@
 }
 
 .bulk-assignment-container {
-  &.show-container {
+  background-color: $grey-lightest;
+  padding: 20px 25px;
+
+  .bulk-assignment-buttons-container {
     display: flex;
     align-items: center;
-  }
-
-  .show-bulk-assign & {
-    .js & {
-      display: none;
-    }
   }
 
   .bulk-assign-lieutenants-link, .bulk-assign-assessors-link, .bulk-assign-eligibility-link {
@@ -492,8 +489,7 @@
 }
 
 .nominations-checked-total {
-  display: inline;
-  margin-right: 20px;
+  margin-bottom: 15px;
 }
 
 .bulk-assign-assessors-form, .bulk-assign-lieutenants-form {
