@@ -1,5 +1,6 @@
 class NominationsBulkActionForm
   attr_reader :params
+  include Rails.application.routes.url_helpers
 
   def initialize(params)
     @params = params
@@ -37,9 +38,9 @@ class NominationsBulkActionForm
     when "lieutenants"
       bulk_assign_lieutenants_admin_form_answers_path(params: params)
     when "assessors"
-      bulk_assign_lieutenants_admin_form_answers_path(params: params)
+      bulk_assign_assessors_admin_form_answers_path(params: params)
     when "eligibility"
-      bulk_assign_lieutenants_admin_form_answers_path(params: params)
+      bulk_assign_eligibility_admin_form_answers_path(params: params)
     end
   end
 end

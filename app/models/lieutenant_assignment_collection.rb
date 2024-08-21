@@ -3,6 +3,8 @@ class LieutenantAssignmentCollection < AssignmentCollection
 
   attribute :ceremonial_county_id, String
 
+  binding.pry
+
   def save
     return unless valid?
 

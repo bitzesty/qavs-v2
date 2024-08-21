@@ -74,6 +74,8 @@ class Admin::FormAnswersController < Admin::BaseController
         @processor = NominationsBulkActionForm.new(params)
 
         redirect_url = @processor.redirect_url
+        # works as a string but not working with helper method
+        # redirect_url = "/admin/form_answers/bulk_assign_lieutenants"
 
         if redirect_url
           redirect_to redirect_url
@@ -269,7 +271,7 @@ class Admin::FormAnswersController < Admin::BaseController
   def bulk_assign_lieutenants
     authorize :lieutenant_assignment_collection, :create?
 
-    @form = LieutenantAssignmentCollection.new
+    @form = LieutenantAssignmentCollection.new(params)
     @form.form_answer_ids = []
   end
 
