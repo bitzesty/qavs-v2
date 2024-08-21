@@ -9,6 +9,11 @@ class Admin::Statistics::NominationsController < Admin::BaseController
     authorize :statistics, :send?
 
     @search = NominationStatsSearch.new(FormAnswer.all).search(permitted_params)
+    
+    data = generate_csv(@search.results)
+    file = current_admin.protected_files.create_from_raw_data(data, "nomination-statistics-export.csv")
+
+    Admin::Statistics::NominationMailer.notify(current_admin.id, file.id).deliver_now
 
     redirect_to admin_statistics_nominations_path(search: permitted_params), success: "CSV with nomination statistics has been sent to #{current_admin.email}."
   end
