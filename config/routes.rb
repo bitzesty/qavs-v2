@@ -269,6 +269,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :statistics do
+      resources :nominations, only: [:index, :create], path_names: { create: :send }
+    end
+
     resources :protected_files, path: "/files", only: :show
   end
 
