@@ -268,6 +268,8 @@ Rails.application.routes.draw do
         patch 'update_password'
       end
     end
+
+    resources :protected_files, path: "/files", only: :show
   end
 
   namespace :lieutenant do

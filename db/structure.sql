@@ -1057,6 +1057,20 @@ ALTER SEQUENCE public.previous_wins_id_seq OWNED BY public.previous_wins.id;
 
 
 --
+-- Name: protected_files; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.protected_files (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    entity_type character varying,
+    entity_id bigint,
+    file character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    last_downloaded_at timestamp(6) without time zone
+);
+
+
+--
 -- Name: scans; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3060,6 +3074,14 @@ ALTER TABLE ONLY public.previous_wins
 
 
 --
+-- Name: protected_files protected_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.protected_files
+    ADD CONSTRAINT protected_files_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: scans scans_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3440,6 +3462,13 @@ CREATE INDEX index_palace_invites_on_form_answer_id ON public.palace_invites USI
 
 
 --
+-- Name: index_protected_files_on_entity; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_protected_files_on_entity ON public.protected_files USING btree (entity_type, entity_id);
+
+
+--
 -- Name: index_scans_on_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3661,6 +3690,7 @@ ALTER TABLE ONLY public.support_letters
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20240819143818'),
 ('20240819123818'),
 ('20240216144428'),
 ('20211214111643'),
