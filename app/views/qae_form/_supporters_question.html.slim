@@ -2,4 +2,3 @@ input name="form[#{question.key}][array]" value="true" type="hidden" *possible_r
 ul.list-add.supporters-list data-need-to-clear-example=true data-add-limit=question.limit data-attachments-url=(users_form_answer_support_letter_attachments_path(@form_answer)) data-example-has-file-field=true
   - question.entities.each_with_index do |supporter, index|
     = render 'qae_form/supporter_fields', question: question, supporter: supporter, index: index
-

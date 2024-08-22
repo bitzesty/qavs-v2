@@ -162,6 +162,12 @@ label > .visible-read-only,
   display: block;
 }
 
+.support-letter-attachment-container {
+  padding: 15px;
+  display: flex;
+  background: $govuk-light-grey;
+}
+
 .view-only,
 .read-only {
   label {

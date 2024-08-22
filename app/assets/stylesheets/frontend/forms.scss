@@ -660,6 +660,11 @@ input[type="file"] {
     padding: 20px !important;
     border: 2px solid #000 !important;
 
+    &.borderless {
+      border: 0 !important;
+      padding: 0 !important;
+    }
+
     .lte-ie7 & {
       display: inline;
       width: 100%;
