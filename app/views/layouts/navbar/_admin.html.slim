@@ -5,6 +5,10 @@
   li.govuk-header__navigation-item class=('active' if controller_name == 'form_answers')
     = link_to "Nominations", admin_form_answers_path, class: 'govuk-header__link'
 
+- if policy(:statistics).index?
+  li.govuk-header__navigation-item class=('active' if controller_name == 'nominations')
+    = link_to "Statistics", admin_statistics_nominations_path, class: 'govuk-header__link'
+
 - if policy(:user).index?
   li.govuk-header__navigation-item class=('active' if %w[users admins assessors].include?(controller_name))
     = link_to "Users", admin_users_path, class: 'govuk-header__link'

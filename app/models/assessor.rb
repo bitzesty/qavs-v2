@@ -22,6 +22,8 @@ class Assessor < ApplicationRecord
            foreign_key: :sub_group,
            primary_key: :sub_group
 
+  has_many :protected_files, as: :entity, dependent: :destroy
+
   pg_search_scope :basic_search,
                   against: [
                     :first_name,
