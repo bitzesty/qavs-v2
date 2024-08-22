@@ -6,8 +6,8 @@ class AwardYears::V2025::QaeForms
           <p class=govuk-body>Please note your answers are being saved automatically in the background.</p>
         )
 
-        header :supporter_letters_list_key_criteria, "" do
-          help "About this section", %(
+        header :supporter_letters_list_context, "" do
+          context %(
             <p class='govuk-body'>Letters of support are an essential part of your nomination, as they help to clarify and explain the impact of the nominated group's work in the local community. You will need to provide 2 letters of support alongside your nomination.</p>
             <p class='govuk-body'>For more information on what letters can cover, please see the <a href="https://kavs.dcms.gov.uk/make-a-nomination/letters-of-support/" target="_blank">Letters of Support page</a> on our website.</p>
             <p class='govuk-body'><strong>Key criteria:</strong></p>
