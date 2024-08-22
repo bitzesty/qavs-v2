@@ -1,11 +1,12 @@
 - first_or_second = index == 0 ? "first" : "second"
+- idx = index + 1
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
 - create_url = users_form_answer_support_letters_url(@form_answer)
 - update_url = users_form_answer_support_letter_path(@form_answer, supporter["support_letter_id"]) if persisted
 
 li.borderless[class=class_names("js-add-example", "js-support-letter-received" => persisted) data-create-url=create_url  data-update-url=update_url]
   legend.govuk-label
-    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}"
   label[class="govuk-label"]
     span[class="govuk-body govuk-!-font-size-36 govuk-!-font-weight-bold govuk-!-display-block"]
       = "The #{first_or_second} letter of support"
@@ -14,7 +15,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
 
   legend.govuk-label aria-label="C #{index + 1}.1: Name"
-    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.1"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
     span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
       ' Name of the person who wrote the #{first_or_second} letter of support
   .govuk-form-group
@@ -28,8 +29,8 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     span.govuk-error-message
     input.js-support-letter-field.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops(question.step.opts[:id])
 
-  legend.govuk-label aria-label="C #{index + 1}.2: Relationship to Group"
-    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.2"
+  legend.govuk-label aria-label="C #{idx}.2: Relationship to Group"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.2"
   .govuk-form-group
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][relationship_to_nominee]"
       ' Relationship to group
@@ -38,8 +39,8 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     span.govuk-error-message
     input.js-support-letter-field.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops(question.step.opts[:id])
 
-  legend.govuk-label aria-label="C #{index + 1}.3: Relationship to Group"
-    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.2"
+  legend.govuk-label aria-label="C #{idx}.3: Relationship to Group"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.3"
   .govuk-form-group
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][letter_of_support]"
       ' Upload the #{first_or_second} letter of support
