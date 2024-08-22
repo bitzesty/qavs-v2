@@ -2,10 +2,10 @@
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
 - create_url = users_form_answer_support_letters_url(@form_answer)
 - update_url = users_form_answer_support_letter_path(@form_answer, supporter["support_letter_id"]) if persisted
+
 li.borderless[class=class_names("js-add-example", "js-support-letter-received" => persisted) data-create-url=create_url  data-update-url=update_url]
   legend.govuk-label
-    span class="steps"
-      span.todo C #{index + 1}
+    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}"
   label[class="govuk-label"]
     span[class="govuk-body govuk-!-font-size-36 govuk-!-font-weight-bold govuk-!-display-block"]
       = "The #{first_or_second} letter of support"
@@ -14,8 +14,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
 
   legend.govuk-label aria-label="C #{index + 1}.1: Name"
-    span class="steps"
-      span.todo C #{index + 1}.1
+    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.1"
     span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
       ' Name of the person who wrote the #{first_or_second} letter of support
   .govuk-form-group
@@ -30,24 +29,22 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     input.js-support-letter-field.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops(question.step.opts[:id])
 
   legend.govuk-label aria-label="C #{index + 1}.2: Relationship to Group"
-    span class="steps"
-      span.todo C #{index + 1}.2
+    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.2"
   .govuk-form-group
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][relationship_to_nominee]"
-      ' The person's who wrote the #{first_or_second} letter of support relationship to the group
+      ' Relationship to group
     span.question-context.question-debug.govuk-hint
       ' For example, a beneficiary of the group, local resident or member of a partner charity.
     span.govuk-error-message
     input.js-support-letter-field.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops(question.step.opts[:id])
 
   legend.govuk-label aria-label="C #{index + 1}.3: Relationship to Group"
-    span class="steps"
-      span.todo C #{index + 1}.3
+    = render "qae_form/question_ref", question: question, ref: "C #{index + 1}.2"
   .govuk-form-group
-    label.govuk-label for="form[#{question.key}][#{index}][letter_of_support]"
+    label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][letter_of_support]"
       ' Upload the #{first_or_second} letter of support
     span.question-context.question-debug.govuk-hint
-      ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will appear, allowing you to select the correct file.
+      ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
     span.govuk-error-message
     input class="js-support-letter-field js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops(question.step.opts[:id])
     - if supporter['letter_of_support'].present?

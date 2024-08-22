@@ -11,9 +11,7 @@ fieldset class=question.fieldset_classes data=question.fieldset_data_hash
         - if question.label_as_legend?
           legend.govuk-label aria-label="#{ref.to_s.gsub(' ', '-')} #{question.title.blank? ? '' : ':' + question.title}"
             - if question.ref || question.sub_ref
-              span class="steps step-#{ref.to_s.parameterize} #{'if-js-hide' if question.sub_ref && !question.display_sub_ref_on_js_form}"
-                span.todo
-                  = ref.to_s
+              = render "qae_form/question_ref", question: question, ref: ref
             - unless question.title.blank?
               - font_size = question.delegate_obj.is_a?(QaeFormBuilder::HeaderQuestion) ? "govuk-!-font-size-36" : "govuk-!-font-size-24"
               span class="govuk-body #{ font_size } govuk-!-font-weight-bold govuk-!-display-block"
@@ -25,9 +23,7 @@ fieldset class=question.fieldset_classes data=question.fieldset_data_hash
           legend.govuk-label aria-label="#{ref.to_s.gsub(' ', '-')} #{question.title.blank? ? '' : ':' + question.title}"
           label.govuk-label for="q_#{question.key}" id="q_#{question.key}_label" aria-label="#{ref.to_s.gsub(' ', '-')}: #{question.title}"
             - if question.ref || question.sub_ref
-              span class="steps step-#{ref.to_s.parameterize} #{'if-js-hide' if question.sub_ref && !question.display_sub_ref_on_js_form}"
-                span.todo
-                  = ref.to_s
+              = render "qae_form/question_ref", question: question, ref: ref
             - unless question.title.blank?
               span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
                 == question.title
@@ -38,11 +34,7 @@ fieldset class=question.fieldset_classes data=question.fieldset_data_hash
         - if question.ref || question.sub_ref
           .if-js-hide
             label.govuk-label for="q_#{question.key}" aria-label="#{ref.to_s.gsub(' ', '-')}: #{question.title}"
-              span class="steps step-#{ref.to_s.parameterize} #{'if-js-hide' if question.sub_ref && !question.display_sub_ref_on_js_form}"
-                span.visuallyhidden
-                  = ref.to_s
-                span.todo
-                  = ref.to_s
+              = render "qae_form/question_ref", question: question, ref: ref
 
       - if question.delegate_obj.is_a?(QaeFormBuilder::HeaderQuestion)
         - if question.ref || question.sub_ref

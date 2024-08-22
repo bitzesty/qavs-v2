@@ -158,14 +158,24 @@ label > .visible-read-only,
   font-weight: normal;
 }
 
-.support-letter-attachment-filename {
-  display: block;
-}
-
 .support-letter-attachment-container {
-  padding: 15px;
+  padding: 15px 15px 0;
   display: flex;
+  justify-content: space-between;
+  align-items: start;
   background: $govuk-light-grey;
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .js-remove-attachment{
+    color: $govuk-red;
+    word-break: keep-all;
+    margin-top: 0 !important;
+  }
 }
 
 .view-only,
