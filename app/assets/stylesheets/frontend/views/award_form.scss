@@ -159,7 +159,7 @@ label > .visible-read-only,
 }
 
 .support-letter-attachment-container {
-  padding: 15px 15px 0;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -175,6 +175,10 @@ label > .visible-read-only,
     color: $govuk-red;
     word-break: keep-all;
     margin-top: 0 !important;
+  }
+
+  .non-js-remove-attachment {
+    color: $govuk-red;
   }
 }
 
