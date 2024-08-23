@@ -13,7 +13,7 @@ class NominationStatsSearch < Search
   ]
   
   FETCH_QUERY = %Q{
-    ceremonial_counties.name AS ceremonial_county_name,
+    CASE WHEN ceremonial_counties.name IS NULL THEN '-' ELSE ceremonial_counties.name END AS ceremonial_county_name,
     #{TRACKED_STATES.map { |s| "COUNT(CASE WHEN form_answers.state = '#{s}' THEN 1 END) AS #{s}_count" }.join(',')},
     COUNT(CASE WHEN form_answers.state IN (#{TRACKED_STATES.map { |s| "'#{s}'" }.join(',')}) THEN 1 END) AS total_count
   }.squish.freeze
@@ -33,7 +33,7 @@ class NominationStatsSearch < Search
 
     @search_results = @search_results
       .select(FETCH_QUERY)
-      .joins(:ceremonial_county)
+      .left_joins(:ceremonial_county)
       .group("ceremonial_counties.name")
 
     @search_results

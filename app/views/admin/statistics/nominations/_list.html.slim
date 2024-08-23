@@ -16,7 +16,7 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
       col style="width: auto;"
       col style="width: 110px;"
       col style="width: auto;"
-      col style="width: 75px;"
+      col style="width: 95px;"
       col style="width: auto;"
     thead.govuk-table__head
       tr.govuk-table__row
@@ -24,14 +24,14 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
           = sort_link f, 'Lieutenancy', object, :ceremonial_county_name
         th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
           | Submitted nominations
-        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" colspan="4"
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="4"
           | Eligibility
-        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" colspan="2"
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="2"
           | Local Assessment
-        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" colspan="2"
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="2"
           | National Assessment
         th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
-          | Royal Approval - Awarded
+          | Royal Approval&nbsp;- Awarded
         th.govuk-table__header.kavs-table__header--dense scope="col" rowspan="2"
           | Total
       tr.govuk-table__row
@@ -54,7 +54,7 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
     tbody.govuk-table__body
       - results.each do |row|
         tr.govuk-table__row
-          th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="row"
+          th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right
             = row[:ceremonial_county_name]
           td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
             = row[:submitted_count]
@@ -80,7 +80,7 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
             = row[:total_count]
     tfoot.govuk-table__footer
       tr.govuk-table__row
-        th.kavs-table__footer--dense.kavs-table__footer--border-right scope="row"
+        th.kavs-table__footer--dense.kavs-table__footer--border-right
           | Total
         td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
           = results.sum(&:submitted_count)
