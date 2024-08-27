@@ -2,8 +2,8 @@
 
 .support-letter-attachment-container
   .flex
-    .govuk-body.support-letter-attachment-filename
+    .support-letter-attachment-filename class="govuk-!-font-size-19"
       = render "shared/attachment_with_virus_check_status", item: file, mount_name: :attachment
-  button.govuk-link.js-remove-attachment data-module="govuk-button" type="button"
+  button.govuk-link.js-remove-support-letter-attachment class="govuk-!-font-size-19" data-module="govuk-button" type="button"
     | Remove
 input.js-support-letter-attachment-id type="hidden" name="form[#{question.key}][#{index}][letter_of_support]" value=attachment_id *possible_read_only_ops

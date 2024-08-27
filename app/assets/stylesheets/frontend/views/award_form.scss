@@ -151,7 +151,6 @@
   margin: 0.75em 0;
 }
 
-.support-letter-attachment-filename,
 label > .visible-read-only,
 .view-value {
   margin-bottom: 10px;
@@ -171,13 +170,13 @@ label > .visible-read-only,
     align-items: start;
   }
 
-  .js-remove-attachment{
+  .js-remove-support-letter-attachment{
     color: $govuk-red;
     word-break: keep-all;
     margin-top: 0 !important;
   }
 
-  .non-js-remove-attachment {
+  .non-js-remove-support-letter-attachment {
     color: $govuk-red;
   }
 }

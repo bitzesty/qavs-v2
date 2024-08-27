@@ -36,15 +36,15 @@
 
       = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
         - if fff.object.attachment.present?
-          p.govuk-body.support-letter-attachment-container
+          p.govuk-body.support-letter-attachment-container class="govuk-!-font-size-19"
             = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
             - if ff.object.support_letter_attachment.id.present?
-              = link_to 'Remove', form_form_answer_support_letter_support_letter_attachment_path(@form_answer, ff.object, ff.object.support_letter_attachment), method: :delete, class: 'govuk-link non-js-remove-attachment'
+              = link_to 'Remove', form_form_answer_support_letter_support_letter_attachment_path(@form_answer, ff.object, ff.object.support_letter_attachment), method: :delete, class: 'govuk-link non-js-remove-support-letter-attachment govuk-!-font-size-19'
 
           = fff.input :attachment_cache, as: :hidden
 
           = fff.input :form_answer_id, as: :hidden, input_html: { value: @form_answer.id }
           = fff.input :user_id, as: :hidden, input_html: { value: current_user.id }
-        - puts "fff.object.attachment.id.present? #{fff.object.attachment.inspect}"
+
         - unless fff.object.id.present?
           = fff.input :attachment, as: :file, label: false, input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }

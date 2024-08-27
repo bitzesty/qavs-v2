@@ -5,6 +5,10 @@ window.SupportLetters =
 
     $(document).on 'change', '.js-trigger-autosave', debounce(SupportLetters.submit, 1000)
 
+    $(document).on 'click', '.js-remove-support-letter-attachment', (e) ->
+      e.preventDefault()
+      SupportLetters.removeFile($(this).closest('.govuk-form-group').find('input:first'), e)
+
   new_item_init: (el) ->
     SupportLetters.clean_up_system_tags(el)
     SupportLetters.enable_item_fields_and_controls(el)
@@ -25,11 +29,11 @@ window.SupportLetters =
 
       parent.find('.govuk-error-message').html('')
       parent.find('.govuk-error-message').closest('.govuk-form-group').removeClass('govuk-form-group--error')
-
-      label = $('<p class="govuk-body support-letter-attachment-filename">' + filename + '</p>')
+      
+      textContainer = parent.find('.support-letter-attachment-container')
+      textContainer.removeClass('govuk-!-display-none')
+      textContainer.find('.flex').prepend('<p class="govuk-body">' + filename + '</p>')
       hiddenInput = $("<input class='js-support-letter-attachment-id' type='hidden' name='#{$el.attr("name")}' value='#{data.result['id']}' />")
-
-      parent.append(label)
       parent.append(hiddenInput)
       SupportLetters.autosave()
       SupportLetters.submit(e)
@@ -60,6 +64,15 @@ window.SupportLetters =
   clean_up_system_tags: (parent) ->
     parent.find('input[type="hidden"]').remove()
     parent.find('.support-letter-attachment-filename').remove()
+
+  removeFile: (el, e) ->
+    $el = $(el)
+    $el.val('')
+    $el.siblings('.js-support-letter-attachment-id').first().val('')
+    $el.siblings('.support-letter-attachment-container').addClass('govuk-!-display-none')
+    $el.removeClass('govuk-!-display-none')
+    SupportLetters.autosave()
+    SupportLetters.submit(e)
 
   enable_item_fields_and_controls: (parent) ->
     parent.find('.govuk-error-message').html('')
