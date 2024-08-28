@@ -1,26 +1,50 @@
 = f.simple_fields_for :support_letters do |ff|
   - idx = ff.options[:child_index] + 1
-  li
-    .govuk-grid-row
-      .govuk-grid-column-one-half
-        label[class="govuk-label"]
-          span[class="govuk-body govuk-!-font-size-20 govuk-!-font-weight-bold govuk-!-display-block"]
-            = "Letter of Support #{idx}"
-        = ff.input :first_name, label: "First Name:", input_html: { class: "form-control" }
-        = ff.input :last_name, label: "Surname:", input_html: { class: "form-control" }
-        = ff.input :relationship_to_nominee, label: "Relationship to Group:", input_html: { class: "form-control" }
+  - first_or_second = idx == 1 ? "first" : "second"
+  li.borderless
+    .question-block
+      label[class="govuk-label"]
+        legend.govuk-label
+          = render "qae_form/question_ref", question: question, ref: "C #{idx}"
+      span[class="govuk-body govuk-!-font-size-36 govuk-!-font-weight-bold govuk-!-display-block"]
+        = "The #{first_or_second} letter of support"
 
-        = ff.input :manual, as: :hidden, input_html: { value: true }
-        = ff.input :user_id, as: :hidden, input_html: { value: current_user.id }
+      legend.govuk-label aria-label="C #{idx}.1: Name"
+        = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
+      span[class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"]
+        = "Name of the person who wrote the #{first_or_second} letter of support"
+      = ff.input :first_name, label: "First Name:", input_html: { class: "form-control medium" }
+      = ff.input :last_name, label: "Surname:", input_html: { class: "form-control medium" }
 
-        = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
-          = fff.input :attachment, as: :file, label: "Upload Letter of Support #{idx}", input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
-          - if fff.object.attachment.present?
-            p.govuk-body.support-letter-attachment-filename
-              = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
+      legend.govuk-label aria-label="C #{idx}.2: Relationship to Group"
+        = render "qae_form/question_ref", question: question, ref: "C #{idx}.2"
+      label for="form_answer_support_letters_attributes_#{ff.options[:child_index]}_relationship_to_nominee" class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
+        = "Relationship to group"
+      span.question-context.question-debug.govuk-hint
+        ' For example, a beneficiary of the group, local resident or member of a partner charity.
+      = ff.input :relationship_to_nominee, label: false, input_html: { class: "form-control medium" }
+
+      = ff.input :manual, as: :hidden, input_html: { value: true }
+      = ff.input :user_id, as: :hidden, input_html: { value: current_user.id }
+
+      legend.govuk-label aria-label="C #{idx}.3: Upload Letter of Support"
+        = render "qae_form/question_ref", question: question, ref: "C #{idx}.3"
+      label for="form_answer_support_letters_attributes_#{ff.options[:child_index]}_support_letter_attachment" class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
+        = "Upload the #{first_or_second} letter of support"
+      span.question-context.question-debug.govuk-hint
+        ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
+
+      = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
+        - if fff.object.attachment.present?
+          p.govuk-body.support-letter-attachment-container class="govuk-!-font-size-19"
+            = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
+            - if ff.object.support_letter_attachment.id.present?
+              = link_to 'Remove', form_form_answer_support_letter_support_letter_attachment_path(@form_answer, ff.object, ff.object.support_letter_attachment), method: :delete, class: 'govuk-link non-js-remove-support-letter-attachment govuk-!-font-size-19'
 
           = fff.input :attachment_cache, as: :hidden
 
           = fff.input :form_answer_id, as: :hidden, input_html: { value: @form_answer.id }
           = fff.input :user_id, as: :hidden, input_html: { value: current_user.id }
 
+        - unless fff.object.id.present?
+          = fff.input :attachment, as: :file, label: false, input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
