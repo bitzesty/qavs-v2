@@ -11,9 +11,9 @@ class NominationStatsSearch < Search
     shortlisted
     awarded
   ]
-  
+
   FETCH_QUERY = %Q{
-    CASE WHEN ceremonial_counties.name IS NULL THEN '-' ELSE ceremonial_counties.name END AS ceremonial_county_name,
+    CASE WHEN ceremonial_counties.name IS NULL THEN 'Not assigned' ELSE ceremonial_counties.name END AS ceremonial_county_name,
     #{TRACKED_STATES.map { |s| "COUNT(CASE WHEN form_answers.state = '#{s}' THEN 1 END) AS #{s}_count" }.join(',')},
     COUNT(CASE WHEN form_answers.state IN (#{TRACKED_STATES.map { |s| "'#{s}'" }.join(',')}) THEN 1 END) AS total_count
   }.squish.freeze
@@ -23,7 +23,7 @@ class NominationStatsSearch < Search
       sort: "ceremonial_county_name",
       search_filter: {
         year: "all_years",
-        assigned_ceremonial_county: ceremonial_county_options.map(&:second)
+        assigned_ceremonial_county: FormAnswerStatus::AdminFilter.values('assigned county')
       }
     }
   end
@@ -58,27 +58,4 @@ class NominationStatsSearch < Search
     scoped_results.order("ceremonial_counties.name #{sort_order(desc)}")
   end
 
-  class << self
-    def ceremonial_county_options
-      collection_mapping(county_options)
-    end
-
-    private
-
-    def collection_mapping(options)
-      options.map do |k, v|
-        [v[:label], k]
-      end
-    end
-
-    def county_options
-      options = Hash[not_assigned: { label: "Not assigned" }]
-
-      CeremonialCounty.ordered.collect do |county|
-        options[county.id] = { label: county.name }
-      end
-
-      options
-    end
-  end
 end
