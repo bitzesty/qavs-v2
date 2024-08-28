@@ -12,7 +12,7 @@ window.FormValidation =
   clearErrors: (container) ->
     if container.closest(".question-financial").length > 0
       container.closest("label").find(".govuk-error-message").empty()
-    else if container.closest('.question-block').data('answer').indexOf('address') > -1
+    else if container.closest('.question-block').data('answer') && container.closest('.question-block').data('answer').indexOf('address') > -1
       container.closest(".govuk-form-group").find(".govuk-error-message").empty()
     else
       container.closest(".question-block").find(".govuk-error-message").empty()
@@ -489,7 +489,6 @@ window.FormValidation =
     stepContainer.find(".govuk-form-group--error").removeClass("govuk-form-group--error")
     stepContainer.find(".govuk-error-message").empty()
     $(".steps-progress-bar .js-step-link[data-step='" + currentStep + "']").removeClass("step-errors")
-
     for question in stepContainer.find(".question-block")
       question = $(question)
       @validateIndividualQuestion(question)
