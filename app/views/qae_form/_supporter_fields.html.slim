@@ -48,5 +48,4 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
       ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
     span.govuk-error-message
     input class="js-support-letter-field js-trigger-autosave js-support-letter-attachment govuk-input medium #{'govuk-!-display-none' if supporter['letter_of_support'].present?}" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops(question.step.opts[:id])
-    - if supporter['letter_of_support'].present?
-      = render "support_letters/attachment", question: question, index: index, supporter: supporter, attachment_id: supporter['letter_of_support']
+    = render "support_letters/attachment", question: question, index: index, supporter: supporter, attachment_id: supporter['letter_of_support']

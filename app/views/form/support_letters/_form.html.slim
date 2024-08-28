@@ -35,16 +35,17 @@
         ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
 
       = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
-        - if ff.object.support_letter_attachment.present?
+
+        - if ff.object.support_letter_attachment.id.present?
           p.govuk-body.support-letter-attachment-container class="govuk-!-font-size-19"
             = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
             - if ff.object.support_letter_attachment.id.present?
               = link_to 'Remove', form_form_answer_support_letter_support_letter_attachment_path(@form_answer, ff.object, ff.object.support_letter_attachment), method: :delete, class: 'govuk-link non-js-remove-support-letter-attachment govuk-!-font-size-19'
 
-          = fff.input :attachment_cache, as: :hidden
+        = fff.input :attachment_cache, as: :hidden
 
-          = fff.input :form_answer_id, as: :hidden, input_html: { value: @form_answer.id }
-          = fff.input :user_id, as: :hidden, input_html: { value: current_user.id }
+        = fff.input :form_answer_id, as: :hidden, input_html: { value: @form_answer.id }
+        = fff.input :user_id, as: :hidden, input_html: { value: current_user.id }
 
         - unless fff.object.id.present?
           = fff.input :attachment, as: :file, label: false, input_html: { class: "form-control" }, wrapper_html: { style: "margin-bottom: -1rem;" }
