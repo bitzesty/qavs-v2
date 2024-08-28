@@ -12,7 +12,7 @@ h1.govuk-heading-xl
             ' Award year
           = g.select :year, award_years_collection, {}, { id: "award-year-select", class: "govuk-select custom-select", style: "height: 40px;", aria: { label: "award year select" } }
 
-      = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: NominationStatsSearch.ceremonial_county_options
+      = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: FormAnswerStatus::AdminFilter.collection('assigned county')
 
   div[class="govuk-button-group"]
     = f.submit "Apply filters",
