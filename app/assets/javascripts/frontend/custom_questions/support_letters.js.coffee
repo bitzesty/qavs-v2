@@ -32,7 +32,7 @@ window.SupportLetters =
       
       textContainer = parent.find('.support-letter-attachment-container')
       textContainer.removeClass('govuk-!-display-none')
-      textContainer.find('.flex').prepend('<p class="govuk-body">' + filename + '</p>')
+      textContainer.find('.flex').html('<p class="govuk-body">' + filename + '</p>')
       hiddenInput = $("<input class='js-support-letter-attachment-id' type='hidden' name='#{$el.attr("name")}' value='#{data.result['id']}' />")
       parent.append(hiddenInput)
       SupportLetters.autosave()

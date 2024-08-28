@@ -18,12 +18,12 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
     span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
       ' Name of the person who wrote the #{first_or_second} letter of support
-  .govuk-form-group
+  .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][first_name]"
       ' First Name:
     span.govuk-error-message
     input.js-support-letter-field.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops(question.step.opts[:id])
-  .govuk-form-group
+  .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][last_name]"
       ' Surname:
     span.govuk-error-message
@@ -31,7 +31,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
 
   legend.govuk-label aria-label="C #{idx}.2: Relationship to Group"
     = render "qae_form/question_ref", question: question, ref: "C #{idx}.2"
-  .govuk-form-group
+  .govuk-form-group.question-block.question-required
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][relationship_to_nominee]"
       ' Relationship to group
     span.question-context.question-debug.govuk-hint
@@ -41,7 +41,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
 
   legend.govuk-label aria-label="C #{idx}.3: Relationship to Group"
     = render "qae_form/question_ref", question: question, ref: "C #{idx}.3"
-  .govuk-form-group
+  .govuk-form-group.question-block.question-required
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][letter_of_support]"
       ' Upload the #{first_or_second} letter of support
     span.question-context.question-debug.govuk-hint

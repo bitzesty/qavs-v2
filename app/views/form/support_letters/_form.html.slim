@@ -35,7 +35,7 @@
         ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
 
       = ff.simple_fields_for :support_letter_attachment, (ff.object.support_letter_attachment || ff.object.build_support_letter_attachment)  do |fff|
-        - if fff.object.attachment.present?
+        - if ff.object.support_letter_attachment.present?
           p.govuk-body.support-letter-attachment-container class="govuk-!-font-size-19"
             = render "shared/attachment_with_virus_check_status", item: fff.object, mount_name: :attachment
             - if ff.object.support_letter_attachment.id.present?
