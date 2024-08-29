@@ -22,8 +22,8 @@ class AwardYears::V2025::QaeForms
           pdf_context_with_header_blocks [
             [:normal, %(Letters of support are an essential part of your nomination, as they help to clarify and explain the impact of the nominated group's work in the local community. You will need to provide 2 letters of support alongside your nomination.)],
             [:normal, %(For more information on what letters can cover, please see the <link href="https://kavs.dcms.gov.uk/make-a-nomination/letters-of-support/" target="_blank">Letters of Support page</link> on our website.)],
-            [:bold, %(Key criteria:
-
+            [:bold, %(Key criteria:)],
+            [:normal, %(
               1. Letters must be written by individuals who are familiar with the group's work, for example: a beneficiary, local resident or member of a partner charity.
               2. Letters must not be written by a volunteer, employee, trustee, or anyone involved in the running of the group.
               3. Letters written by the nominator will be ineligible.

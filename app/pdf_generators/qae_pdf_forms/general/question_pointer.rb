@@ -382,9 +382,7 @@ class QaePdfForms::General::QuestionPointer
       when QaeFormBuilder::ByYearsQuestion, QaeFormBuilder::OneOptionByYearsQuestion
         render_years_table
       when QaeFormBuilder::SupportersQuestion
-        form_pdf.indent 7.mm do
           render_supporters
-        end
       when QaeFormBuilder::TextareaQuestion
         title = q_visible? && humanized_answer.present? ? humanized_answer : ""
 
