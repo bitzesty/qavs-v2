@@ -19,4 +19,14 @@ class SupportLetterAttachment < ApplicationRecord
                              maximum: 5.megabytes.to_i
                            }
   end
+
+  begin :callbacks
+    before_save :assign_original_filename, if: :will_save_change_to_attachment?
+  end
+
+  private
+
+  def assign_original_filename
+    self.original_filename = self&.attachment&.identifier
+  end
 end

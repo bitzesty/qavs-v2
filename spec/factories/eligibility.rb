@@ -12,6 +12,7 @@ FactoryBot.define do
       current_step { :current_holder }
       answers { {
         kind: "application",
+        involved_with_group: false,
         based_in_uk: true,
         are_majority_volunteers: true,
         has_at_least_three_people: true,

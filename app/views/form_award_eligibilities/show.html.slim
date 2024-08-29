@@ -20,7 +20,7 @@ h1.govuk-heading-xl King's Award for Voluntary Service Nomination
               - if @form_answer.eligible?
                 .eligibility-passed role="alert"
                   p.govuk-body-l Thank you. Based on your answers, the group meets the basic eligibility citeria. You can proceed with nominating.
-                  p.govuk-body-l Please note, we will also evaluate the nomination after submission referring to the more detailed criteria outlined on our website.
+                  p.govuk-body-l = "Please note, we will also evaluate the nomination after submission referring to the more detailed criteria outlined on our #{link_to('website', 'https://kavs.dcms.gov.uk/make-a-nomination/eligibility/', target: '_blank', title: 'opens in a new tab/window')}.".html_safe
 
                 - if (!step || step.to_s == "wicked_finish")
                   br

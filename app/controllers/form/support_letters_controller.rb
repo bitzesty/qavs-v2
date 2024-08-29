@@ -1,100 +1,59 @@
 class Form::SupportLettersController < Form::BaseController
-  before_action :load_letter, only: :destroy
+  include FormAnswerSubmissionMixin
 
   def create
-    @support_letter = @form_answer.support_letters.new(
-      support_letter_params.merge(
-        user_id: current_user.id,
-        manual: true
-      )
-    )
+    @form_answer.support_letters_attributes = permitted_params["support_letters_attributes"]
+    @form_answer.document = prepare_doc if params[:form].present?
+    
+    if @form_answer.valid? && @form_answer.save
+      add_support_letters_to_document!
 
-    attachment = SupportLetterAttachment.new(attachment_params)
-    attachment.user = current_user
-    attachment.form_answer = @form_answer
-    attachment.original_filename = attachment_params[:attachment].try(:original_filename)
-    @support_letter.support_letter_attachment = attachment
-
-    if @support_letter.save
-      add_support_letter_to_document!
-      @form_answer.save
-
-      redirect_to form_form_answer_supporters_path(@form_answer)
+      if params[:next_step_id]
+        redirect_to edit_form_url(@form_answer, step: params[:next_step_id])
+      else
+        redirect_to form_form_answer_supporters_path(@form_answer)
+      end
     else
-      render :new
+      @step = @form.steps.detect { |s| s.opts[:id] == :letters_of_support_step }
+
+      render "form/supporters/index"
     end
-  end
-
-  def new
-    @support_letter = @form_answer.support_letters.new
-  end
-
-  def destroy
-    # safeguard for the case when not a user tries to delete a letter
-    return if current_assessor || current_lieutenant
-
-    if @support_letter.destroy
-      remove_support_letter_from_document!
-      @form_answer.save
-    end
-
-    redirect_to form_form_answer_supporters_path(@form_answer)
   end
 
   private
 
-  def support_letter_params
-    params[:support_letter].permit(
-      :first_name,
-      :last_name,
-      :relationship_to_nominee
+  def permitted_params
+    params.require(:form_answer).permit(
+      support_letters_attributes: [
+        :id, 
+        :first_name, 
+        :last_name, 
+        :relationship_to_nominee,
+        :user_id,
+        :manual, 
+        support_letter_attachment_attributes: [
+          :id,
+          :attachment, 
+          :attachment_cache, 
+          :form_answer_id, 
+          :user_id
+        ]
+      ]
     )
   end
 
-  def attachment_params
-    if params[:support_letter] && params[:support_letter][:support_letter_attachment]
-      params[:support_letter][:support_letter_attachment].permit(:attachment)
-    else
-      {}
-    end
-  end
-
-  def load_letter
-    @support_letter = @form_answer.support_letters.find(params[:id])
-  end
-
-  def add_support_letter_to_document!
-    letters = support_letters_doc
-
-    new_letter = {
-      support_letter_id: @support_letter.id,
-      first_name: @support_letter.first_name,
-      last_name: @support_letter.last_name,
-      relationship_to_nominee: @support_letter.relationship_to_nominee,
-      letter_of_support: @support_letter.support_letter_attachment.id
-    }
-
-    letters << new_letter
-
-    @form_answer.document = @form_answer.document.merge(supporter_letters_list: letters,
-                                                        manually_upload: "yes")
-  end
-
-  def remove_support_letter_from_document!
-    letters = support_letters_doc
-
-    letters.delete_if do |sup|
-      sup["support_letter_id"] == @support_letter.id
+  def add_support_letters_to_document!
+    list = @form_answer.support_letters.each_with_object([]) do |support_letter, memo|
+      memo << Hash[].tap do |h|
+        h[:support_letter_id] = support_letter.id
+        h[:first_name] = support_letter.first_name
+        h[:last_name] = support_letter.last_name
+        h[:relationship_to_nominee] = support_letter.relationship_to_nominee
+        h[:letter_of_support] = support_letter.support_letter_attachment&.id
+      end
     end
 
-    @form_answer.document = @form_answer.document.merge(supporter_letters_list: letters)
-  end
-
-  def support_letters_doc
-    if @form_answer.document["supporter_letters_list"].present?
-      @form_answer.document["supporter_letters_list"]
-    else
-      []
-    end
+    @form_answer.document = @form_answer.document.merge(supporter_letters_list: list, manually_upload: "yes")
+    @form_answer.save!
   end
 end

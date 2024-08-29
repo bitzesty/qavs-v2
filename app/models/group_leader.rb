@@ -23,6 +23,8 @@ class GroupLeader < ApplicationRecord
 
   belongs_to :form_answer, optional: true
 
+  has_many :protected_files, as: :entity, dependent: :destroy
+
   scope :by_email, -> { order(:email) }
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 

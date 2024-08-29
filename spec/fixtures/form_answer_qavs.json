@@ -74,6 +74,7 @@
   "nominee_name": "Bit Zesty",
   "nominee_established_date": "2010",
   "nominee_activity": "SPO",
+  "secondary_activity": "DIS",
   "nominee_address_building": "94",
   "nominee_address_street": "White Lion Street",
   "nominee_address_city": "London",
@@ -112,6 +113,9 @@
       "letter_of_support":"2"
     }
   ],
+
+  "independent_individual": "yes",
+  "not_nominator": "yes",
 
   "nominator_title": "Mr",
   "nominator_name": "Nominator",

@@ -73,7 +73,7 @@
 
           = yield
 
-          - unless landing_page?
+          - unless landing_page? || exclude_footer?
             p.footer-helpline.govuk-body
               ' Need help? Email us at
               = link_to "kingsaward@dcms.gov.uk", "mailto:kingsaward@dcms.gov.uk", class: 'govuk-link'

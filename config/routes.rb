@@ -93,7 +93,7 @@ Rails.application.routes.draw do
       resource :list_of_procedures, only: [:create, :destroy]
       resource :support_letter_attachments, only: :create
       resources :supporters, only: [:create, :destroy]
-      resources :support_letters, only: [:create, :show, :destroy]
+      resources :support_letters, only: [:create, :update, :show, :destroy]
     end
     resources :form_answer_feedbacks, only: [:show]
   end
@@ -104,7 +104,9 @@ Rails.application.routes.draw do
   namespace :form do
     resources :form_answers do
       resources :supporters, only: [:new, :create, :index, :destroy]
-      resources :support_letters, only: [:new, :create, :destroy]
+      resources :support_letters, only: [:create] do
+        resources :support_letter_attachments, only: [:show, :destroy]
+      end
       resources :form_attachments, only: [:index, :new, :create, :destroy]
     end
   end
@@ -268,6 +270,12 @@ Rails.application.routes.draw do
         patch 'update_password'
       end
     end
+
+    namespace :statistics do
+      resources :nominations, only: [:index, :create], path_names: { create: :send }
+    end
+
+    resources :protected_files, path: "/files", only: :show
   end
 
   namespace :lieutenant do

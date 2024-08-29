@@ -151,15 +151,28 @@
   margin: 0.75em 0;
 }
 
-.support-letter-attachment-filename,
 label > .visible-read-only,
 .view-value {
   margin-bottom: 10px;
   font-weight: normal;
 }
 
-.support-letter-attachment-filename {
-  display: block;
+.support-letter-attachment-container {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background: $govuk-light-grey;
+
+  .js-remove-support-letter-attachment{
+    color: $govuk-red;
+    word-break: keep-all;
+    margin-top: 0 !important;
+  }
+
+  .non-js-remove-support-letter-attachment {
+    color: $govuk-red;
+  }
 }
 
 .view-only,

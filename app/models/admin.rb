@@ -12,6 +12,7 @@ class Admin < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   has_many :form_answer_attachments, as: :attachable
+  has_many :protected_files, as: :entity, dependent: :destroy
 
   pg_search_scope :basic_search,
                   against: [

@@ -7,19 +7,20 @@
   .article-container
     article.group role="article"
       h2.govuk-heading-l Nomination guidance:
-      ul.govuk-list.govuk-list--bullet
-        li = "The deadline for submissions is #{Settings.current_submission_deadline.decorate.formatted_trigger_time}".html_safe
-        li = "Start #{link_to('a nomination', dashboard_path)} to see if you meet the eligibility criteria.".html_safe
-        li If you meet the eligibility criteria, you will be able to download a PDF version of the form. Please note, the PDF version of the form is for your reference only, you will have to fill in and submit the online version of the form.
-        li You do not need to complete the online nomination in one go, it is saved as you go and you can come back to it later.
+      p.govuk-body = "The deadline for submissions is #{Settings.current_submission_deadline.decorate.formatted_trigger_time}".html_safe
+      p.govuk-body = "Start #{link_to('a nomination', dashboard_path)} to see if you meet the eligibility criteria.".html_safe
+      p.govuk-body If you meet the eligibility criteria, you will be able to download a PDF version of the form. Please note, the PDF version of the form is for your reference only, you will have to fill in and submit the online version of the form.
+      p.govuk-body You do not need to complete the online nomination in one go, it is saved as you go and you can come back to it later.
+      p.govuk-body = "Once you have submitted your nomination, you will find out the outcome of your nomination when the award is announced on 14th November 2025. <strong>The Award will provide no update until then</strong>.".html_safe
 
-      h2.govuk-heading-l Need help?
+      h2.govuk-heading-l Lord-Lieutenants
 
-      h3.govuk-heading-m The King's Award for Voluntary Service Team
-      p.govuk-body If you need digital assistance with filling in the form or have any questions, please feel free to get in touch with The King's Award for Voluntary Service Team:
-      p.govuk-body = "By emailing #{mail_to('kingsaward@dcms.gov.uk')}".html_safe
-
-      h3.govuk-heading-m Lord-Lieutenants
       p.govuk-body The King's Award for Voluntary Service Team works closely with Lord-Lieutenants. They are His Majesty's representatives in each lieutenancy area of the United Kingdom.
       p.govuk-body You can get in touch with your local Lieutenancy to see how they can help you with your nomination.
       p.govuk-body To get up to date contact details, we recommend that you google your local county lieutenancy.
+
+      h2.govuk-heading-l Need help?
+
+      p.govuk-body = "Visit the #{link_to("FAQs page", "https://kavs.dcms.gov.uk/make-a-nomination/faqs/", target: "_blank")} on our website".html_safe
+      p.govuk-body If you need digital assistance with filling in the form or have any questions, please feel free to get in touch with The King's Award for Voluntary Service Team:
+      p.govuk-body = "By emailing #{mail_to('kingsaward@dcms.gov.uk')}".html_safe

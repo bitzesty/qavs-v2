@@ -68,6 +68,10 @@ module ApplicationHelper
                                          ].include?(action_name)
   end
 
+  def exclude_footer?
+    %w[useful_information].include?(action_name)
+  end
+
   def show_navigation_links?
     current_user
   end

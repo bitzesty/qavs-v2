@@ -14,9 +14,10 @@ h1.govuk-heading-xl
                 h2.govuk-heading-l Useful Nomination Info Before You Begin
 
                 p.govuk-body
-                  ' The deadline for nominations is
-                  = submission_deadline.decorate.formatted_trigger_time
-                  ' .
+                  strong
+                    | The deadline for nominations is
+                    =<> submission_deadline.decorate.formatted_trigger_time
+                    | .
 
               = render "content_only/pdf_link"
 

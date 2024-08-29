@@ -1,55 +1,51 @@
+- first_or_second = index == 0 ? "first" : "second"
+- idx = index + 1
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
-li.js-add-example class="#{'read-only js-support-letter-received' if persisted}"
+- create_url = users_form_answer_support_letters_url(@form_answer)
+- update_url = users_form_answer_support_letter_path(@form_answer, supporter["support_letter_id"]) if persisted
+
+li.borderless[class=class_names("js-add-example", "js-support-letter-received" => persisted) data-create-url=create_url  data-update-url=update_url]
+  legend.govuk-label
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}"
+  label[class="govuk-label"]
+    span[class="govuk-body govuk-!-font-size-36 govuk-!-font-weight-bold govuk-!-display-block"]
+      = "The #{first_or_second} letter of support"
+
   input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"] *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
 
-  .govuk-form-group
+  legend.govuk-label aria-label="C #{index + 1}.1: Name"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
+    span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
+      ' Name of the person who wrote the #{first_or_second} letter of support
+  .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][first_name]"
-      ' First Name
+      ' First name:
     span.govuk-error-message
-
-    input.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops(question.step.opts[:id])
-    p.govuk-body.visible-read-only = supporter["first_name"]
-
-
-  .govuk-form-group
+    input.js-support-letter-field.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops(question.step.opts[:id])
+  .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][last_name]"
-      ' Surname
+      ' Surname:
     span.govuk-error-message
+    input.js-support-letter-field.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops(question.step.opts[:id])
 
-    input.js-support-letter-last-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][last_name]" id="form[#{question.key}][#{index}][last_name]" type="text" value=supporter["last_name"] *possible_read_only_ops(question.step.opts[:id])
-    p.govuk-body.visible-read-only = supporter["last_name"]
-
-
-  .govuk-form-group
-    label.govuk-label for="form[#{question.key}][#{index}][relationship_to_nominee]"
-      ' Relationship to Nominee
+  legend.govuk-label aria-label="C #{idx}.2: Relationship to Group"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.2"
+  .govuk-form-group.question-block.question-required
+    label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][relationship_to_nominee]"
+      ' Relationship to group
+    span.question-context.question-debug.govuk-hint
+      ' For example, a beneficiary of the group, local resident or member of a partner charity.
     span.govuk-error-message
+    input.js-support-letter-field.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops(question.step.opts[:id])
 
-    input.js-support-letter-relationship-to-nominee.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][relationship_to_nominee]" id="form[#{question.key}][#{index}][relationship_to_nominee]" type="text" value=supporter["relationship_to_nominee"] *possible_read_only_ops(question.step.opts[:id])
-    p.govuk-body.visible-read-only = supporter["relationship_to_nominee"]
-  .govuk-form-group
-    label.govuk-label for="form[#{question.key}][#{index}][letter_of_support]"
-      ' Letter of Support
+  legend.govuk-label aria-label="C #{idx}.3: Relationship to Group"
+    = render "qae_form/question_ref", question: question, ref: "C #{idx}.3"
+  .govuk-form-group.question-block.question-required
+    label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][letter_of_support]"
+      ' Upload the #{first_or_second} letter of support
+    span.question-context.question-debug.govuk-hint
+      ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
     span.govuk-error-message
-
-    input class="js-trigger-autosave js-support-letter-attachment govuk-input medium" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops(question.step.opts[:id])
-    - if supporter['letter_of_support'].present?
-      = render "support_letters/attachment", question: question,
-                                              index: index,
-                                              attachment_id: supporter['letter_of_support']
-
-  p
-    button.govuk-button.js-save-collection class=(persisted ? "visuallyhidden" : "") data-save-collection-url=users_form_answer_support_letters_url(@form_answer)
-      | Submit letter of support
-
-  - if current_form_is_editable? && !current_lieutenant && !current_assessor
-    - if persisted
-      - if supporter["support_letter_id"].present? && @form_answer.support_letters.find_by_id(supporter["support_letter_id"])
-        - url = users_form_answer_support_letter_path(form_answer_id: @form_answer.id, id: supporter["support_letter_id"])
-      - else
-        - url = "#"
-      - if current_user || policy(:support_letter).can_remove?
-        = link_to "Remove", url, class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link", data: { url: url }, 'aria-label' => "Delete support letter from #{supporter["first_name"]} #{supporter["last_name"]}"
-    - else
-      = link_to "Remove", "#", class: "govuk-button govuk-button--warning remove-supporter remove-link js-remove-link govuk-!-display-none", data: { url: "#" }, 'aria-label' => "#"
+    input class="js-support-letter-field js-trigger-autosave js-support-letter-attachment govuk-input medium #{'govuk-!-display-none' if supporter['letter_of_support'].present?}" name="form[#{question.key}][#{index}][letter_of_support]" id="form[#{question.key}][#{index}][letter_of_support]" type='file' *possible_read_only_ops(question.step.opts[:id])
+    = render "support_letters/attachment", question: question, index: index, supporter: supporter, attachment_id: supporter['letter_of_support']

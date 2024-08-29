@@ -1,0 +1,106 @@
+ruby:
+  results = object.results
+
+div role="region" aria-labelledby="table-list-nomination-statistics-caption" tabindex="0"
+  table.govuk-table.kavs-table#table-list-nomination-statistics
+    caption.govuk-visually-hidden#table-list-nomination-statistics-caption
+      | nomination statistics report
+    colgroup
+      col style="width: 135px;"
+      col style="width: 110px;"
+      col style="width: 55px;"
+      col style="width: 90px;"
+      col style="width: 90px;"
+      col style="width: auto;"
+      col style="width: 110px;"
+      col style="width: auto;"
+      col style="width: 110px;"
+      col style="width: auto;"
+      col style="width: 95px;"
+      col style="width: auto;"
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th.sortable.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
+          = sort_link f, 'Lieutenancy', object, :ceremonial_county_name
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
+          | Submitted nominations
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="4"
+          | Eligibility
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="2"
+          | Local Assessment
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="2"
+          | National Assessment
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
+          | Royal Approval&nbsp;- Awarded
+        th.govuk-table__header.kavs-table__header--dense scope="col" rowspan="2"
+          | Total
+      tr.govuk-table__row
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Admin eligible
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Not eligible nominator
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Not eligible group
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Withdrawn
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Not recommended
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Recommended
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Not recommended
+        th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col"
+          | Recommended
+    tbody.govuk-table__body
+      - results.each do |row|
+        tr.govuk-table__row
+          th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right
+            = row[:ceremonial_county_name]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:submitted_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:admin_eligible_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:admin_not_eligible_nominator_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:admin_not_eligible_group_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:withdrawn_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:local_assessment_not_recommended_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:local_assessment_recommended_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:not_recommended_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:shortlisted_count]
+          td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+            = row[:awarded_count]
+          td.govuk-table__cell.kavs-table__cell--dense
+            = row[:total_count]
+    tfoot.govuk-table__footer
+      tr.govuk-table__row
+        th.kavs-table__footer--dense.kavs-table__footer--border-right
+          | Total
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:submitted_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:admin_eligible_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:admin_not_eligible_nominator_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:admin_not_eligible_group_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:withdrawn_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:local_assessment_not_recommended_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:local_assessment_recommended_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:not_recommended_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:shortlisted_count)
+        td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
+          = results.sum(&:awarded_count)
+        td.govuk-table__cell.kavs-table__cell--dense
+          = results.sum(&:total_count)

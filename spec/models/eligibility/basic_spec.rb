@@ -26,7 +26,8 @@ RSpec.describe Eligibility::Basic, type: :model do
       expect(eligibility).not_to be_eligible
     end
 
-    it 'is eligible in the middle of the survey' do
+    it 'is not eligible in the middle of the survey' do
+      eligibility.involved_with_group = false
       eligibility.current_step = :based_in_uk
       eligibility.national_organisation = false
       eligibility.based_in_uk = true
@@ -35,6 +36,7 @@ RSpec.describe Eligibility::Basic, type: :model do
     end
 
     it 'is eligible when all questions are answered correctly' do
+      eligibility.involved_with_group = false
       eligibility.based_in_uk = true
       eligibility.are_majority_volunteers = true
       eligibility.benefits_animals_only = false
@@ -73,6 +75,7 @@ RSpec.describe Eligibility::Basic, type: :model do
 
     it 'returns all questions for new eligibility' do
       expect(eligibility.questions).to eq([
+        :involved_with_group,
         :based_in_uk,
         :years_operating,
         :has_at_least_three_people,

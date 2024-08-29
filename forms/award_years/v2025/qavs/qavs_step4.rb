@@ -57,7 +57,7 @@ class AwardYears::V2025::QaeForms
           required
           text -> do
             %(
-              I am neither a volunteer nor a paid member of the group.
+              I am neither a volunteer, employee or trustee of the group, or in any way involved with the running of the organisation
             )
           end
         end
@@ -87,7 +87,7 @@ class AwardYears::V2025::QaeForms
           required
           text -> do
             %(
-              I confirm that, to the best of my knowledge and belief, the information in this form is true and correct. I have discussed the nomination with the group. It is happy to be nominated and is aware that it will be contacted by representatives of the Award and asked for further information, as part of the assessment process.
+              I confirm that, to the best of my knowledge and belief, the information in this form is true and correct. I have discussed the nomination with the group. It is happy to be nominated and is aware that it will be contacted by representatives of the Award and asked for further information, as part of the assessment process. I acknowledge that any false information provided may result in the withdrawal of this nomination from the Award.
             )
           end
         end

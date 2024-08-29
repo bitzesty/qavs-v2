@@ -39,5 +39,15 @@ class QaeFormBuilder
   end
 
   class SupportersQuestionDecorator < MultiQuestionDecorator
+    def entities
+      super
+      
+      collection = [].fill({}, 0, limit)
+      @entities.each_with_index do |record, idx|
+        collection[idx] = record
+      end
+      
+      @entities = collection
+    end
   end
 end

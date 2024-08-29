@@ -134,6 +134,12 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def render_pdf_hint
+    if question.form_hint.present?
+      form_pdf.indent 25.mm do
+        form_pdf.render_text question.form_hint,
+                             style: :italic
+      end
+    end
     if question.additional_pdf_context.present?
       form_pdf.indent 25.mm do
         form_pdf.render_text question.additional_pdf_context,
