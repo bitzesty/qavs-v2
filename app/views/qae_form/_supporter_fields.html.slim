@@ -20,7 +20,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
       ' Name of the person who wrote the #{first_or_second} letter of support
   .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][first_name]"
-      ' First Name:
+      ' First name:
     span.govuk-error-message
     input.js-support-letter-field.js-support-letter-first-name.js-trigger-autosave.govuk-input autocomplete="off" class="js-trigger-autosave medium" name="form[#{question.key}][#{index}][first_name]" id="form[#{question.key}][#{index}][first_name]" type="text" value=supporter["first_name"] *possible_read_only_ops(question.step.opts[:id])
   .govuk-form-group.question-block.question-required
