@@ -7,12 +7,14 @@
               class: 'govuk-link'
   - elsif scan_results == "scanning" || scan_results == "pending"
     = item.try(:original_filename)
-    |  (scanning on viruses)
+    br
+    .govuk-hint
+      |  (File uploaded and is being scanned for viruses. Preview available once the scan is complete.)
   - elsif scan_results == "infected"
     = item.try(:original_filename)
-    |  has been blocked (virus detected), please remove.
+    |  has been blocked (virus detected), please upload another file.
   - else
-    = item.try(:original_filename)
-    |  didn't pass virus scanner check, please remove
+    = item.try(:original_filename) || "File"
+    |  didn't pass virus scanner check, please upload another file.
 - else
   = item.try(:original_filename)

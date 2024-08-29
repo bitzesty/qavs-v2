@@ -1,0 +1,44 @@
+- title "Nomination statistics"
+
+h1.govuk-heading-xl
+  | Nomination statistics
+
+= simple_form_for @search, url: "#", method: :get, as: :search, html: { id: "nomination-statistics-form", class: "search-form" } do |f|
+  = f.simple_fields_for [:filters, @search.filters] do |g|
+    div[class="govuk-grid-row"]
+      div[class="govuk-grid-column-one-quarter"]
+        div[class="govuk-form-group" aria-label="Award year"]
+          label[class="govuk-label" for="award-year-select"]
+            ' Award year
+          = g.select :year, award_years_collection, {}, { id: "award-year-select", class: "govuk-select custom-select", style: "height: 40px;", aria: { label: "award year select" } }
+
+      = render "shared/form_answers/filters/assigned_lieutenancy_filter", g: g, options: FormAnswerStatus::AdminFilter.collection('assigned county')
+
+  div[class="govuk-button-group"]
+    = f.submit "Apply filters",
+                class: "govuk-button",
+                id: "apply-nomination-filters"
+
+    = link_to "Remove filters",
+              admin_statistics_nominations_path,
+              class: "govuk-button govuk-button--secondary",
+              role: "button"
+
+  div[class="govuk-button-group"]
+    = link_to "Receive CSV with nomination statistics via email",
+              admin_statistics_nominations_path(params.to_unsafe_h),
+              class: "govuk-link",
+              method: :post
+
+  = render partial: "list", locals: { f: f, object: @search }
+
+scss:
+  .autocomplete__input {
+    min-height: 2.5rem;
+  }
+  
+  @media (max-width: 991px) {
+    .autocomplete__input {
+      min-height: 2rem;
+    }
+  }

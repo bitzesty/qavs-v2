@@ -49,7 +49,7 @@ class Form::SupportLettersController < Form::BaseController
         h[:first_name] = support_letter.first_name
         h[:last_name] = support_letter.last_name
         h[:relationship_to_nominee] = support_letter.relationship_to_nominee
-        h[:letter_of_support] = support_letter.support_letter_attachment.id
+        h[:letter_of_support] = support_letter.support_letter_attachment&.id
       end
     end
 

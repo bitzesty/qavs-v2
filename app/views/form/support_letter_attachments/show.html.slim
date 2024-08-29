@@ -1,0 +1,20 @@
+- content_for :page_title, "Support Letter Attachment"
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h1.govuk-heading-xl Support Letter Attachment
+
+    - if @support_letter.support_letter_attachment.present?
+      .govuk-summary-list
+        .govuk-summary-list__row
+          dt.govuk-summary-list__key
+            | File Name
+          dd.govuk-summary-list__value
+            = @support_letter.support_letter_attachment.original_filename
+
+      = button_to "Delete Attachment", 
+                  form_form_answer_support_letter_support_letter_attachment_path(@form_answer, @support_letter, @support_letter.support_letter_attachment), 
+                  method: :delete, 
+                  class: "govuk-button govuk-button--warning"
+    - else
+      p.govuk-body No attachment found for this support letter.

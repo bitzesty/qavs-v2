@@ -12,7 +12,7 @@ window.FormValidation =
   clearErrors: (container) ->
     if container.closest(".question-financial").length > 0
       container.closest("label").find(".govuk-error-message").empty()
-    else if container.closest('.question-block').data('answer').indexOf('address') > -1
+    else if container.closest('.question-block').data('answer') && container.closest('.question-block').data('answer').indexOf('address') > -1
       container.closest(".govuk-form-group").find(".govuk-error-message").empty()
     else
       container.closest(".question-block").find(".govuk-error-message").empty()
@@ -56,6 +56,9 @@ window.FormValidation =
   isCheckboxQuestion: (question) ->
     question.find("input[type='checkbox']").length
 
+  isSupportLetterAttachment: (question) ->
+    question.find(".js-support-letter-attachment").length
+
   toDate: (str) ->
     moment(str, "DD/MM/YYYY")
 
@@ -80,6 +83,9 @@ window.FormValidation =
 
       if @isCheckboxQuestion(question)
         return question.find("input[type='checkbox']").filter(":checked").length
+
+      if @isSupportLetterAttachment(question)
+        return (question.find(".js-support-letter-attachment-id").val() || '').toString().trim().length
 
   validateRequiredQuestion: (question) ->
     # if it's a conditional question, but condition was not satisfied
@@ -352,13 +358,6 @@ window.FormValidation =
       @addErrorMessage(question, errorMessage)
       return
 
-  validateSupportLetters: (question) ->
-    lettersReceived = $(".js-support-letter-received").length
-    if lettersReceived < 2
-      @logThis(question, "validateSupportLetters", "Upload two letters of support")
-      @appendMessage(question, "Upload two letters of support")
-      @addErrorClass(question)
-
   validateSelectionLimit: (question) ->
     selection_limit = question.data("selection-limit")
     current_selection_count = question.find("input[type=checkbox]:checked").length
@@ -455,11 +454,6 @@ window.FormValidation =
       # console.log "validateDropBlockCondition"
       @validateDropBlockCondition(question)
 
-    if question.hasClass("question-support-requests") ||
-       question.hasClass("question-support-uploads")
-      # console.log "validateSupportLetters"
-      @validateSupportLetters(question)
-
     if question.hasClass("question-limited-selections")
       @validateSelectionLimit(question)
 
@@ -489,7 +483,6 @@ window.FormValidation =
     stepContainer.find(".govuk-form-group--error").removeClass("govuk-form-group--error")
     stepContainer.find(".govuk-error-message").empty()
     $(".steps-progress-bar .js-step-link[data-step='" + currentStep + "']").removeClass("step-errors")
-
     for question in stepContainer.find(".question-block")
       question = $(question)
       @validateIndividualQuestion(question)

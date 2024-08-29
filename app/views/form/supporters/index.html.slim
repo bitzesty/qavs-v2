@@ -15,19 +15,10 @@ h1.govuk-heading-xl
       article.group role="article"
         div
           - letters_intro_question =  @step.questions.detect { |q| q.key == :supporter_letters_list }
+          - letters_context = @step.questions.detect { |q| q.key == :supporter_letters_list_context}
           - checkbox_questions =  @step.questions.select { |q| q.key.in?(%i(independent_individual not_nominator)) }
 
-          .question-block
-            label.govuk-label
-              span class="steps step-d-1"
-                span.visuallyhidden
-                  ' C 1
-                span.todo
-                  ' C 1
-              span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
-                ' Upload your letters of support
-
-          == letters_intro_question&.context
+          == letters_context&.context
 
           - for help in (letters_intro_question&.hint || [])
             details.govuk-details data-module="govuk-details"
@@ -45,7 +36,7 @@ h1.govuk-heading-xl
               - f.object.support_letters.build unless f.object.support_letters[n].present?
             
             ul.list-add.supporters-list
-              = render partial: "form/support_letters/form", locals: { f: f }
+              = render partial: "form/support_letters/form", locals: { f: f, question: letters_intro_question }
 
             - checkbox_questions.each do |question|
               .govuk-form-group
