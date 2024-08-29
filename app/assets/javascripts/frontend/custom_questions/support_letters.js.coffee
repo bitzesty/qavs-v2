@@ -32,7 +32,7 @@ window.SupportLetters =
       
       textContainer = parent.find('.support-letter-attachment-container')
       textContainer.removeClass('govuk-!-display-none')
-      scanningText = '<p class="govuk-hint">(File uploaded and is being scanned for viruses. Preview available once the scan is complete.)</p>'
+      scanningText = '<p class="govuk-hint">(File uploaded and is being scanned for viruses. Preview available once the scan is complete. You may need to refresh this page.)</p>'
       textContainer.prepend('<div class="support-letter-attachment-filename"><p class="govuk-body">' + filename + '</p>' + scanningText + '</div>')
       hiddenInput = $("<input class='js-support-letter-attachment-id' type='hidden' name='#{$el.attr("name")}' value='#{data.result['id']}' />")
       parent.append(hiddenInput)
