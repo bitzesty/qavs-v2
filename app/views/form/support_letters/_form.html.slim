@@ -13,7 +13,7 @@
         = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
       span[class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"]
         = "Name of the person who wrote the #{first_or_second} letter of support"
-      = ff.input :first_name, label: "First Name:", input_html: { class: "form-control medium" }
+      = ff.input :first_name, label: "First name:", input_html: { class: "form-control medium" }
       = ff.input :last_name, label: "Surname:", input_html: { class: "form-control medium" }
 
       legend.govuk-label aria-label="C #{idx}.2: Relationship to Group"

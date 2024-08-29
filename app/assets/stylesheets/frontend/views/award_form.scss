@@ -164,12 +164,6 @@ label > .visible-read-only,
   align-items: start;
   background: $govuk-light-grey;
 
-  .flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-  }
-
   .js-remove-support-letter-attachment{
     color: $govuk-red;
     word-break: keep-all;
