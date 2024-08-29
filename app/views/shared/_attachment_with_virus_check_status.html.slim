@@ -9,7 +9,7 @@
     = item.try(:original_filename)
     br
     .govuk-hint
-      |  (File uploaded and is being scanned for viruses. Preview available once the scan is complete.)
+      |  (File uploaded and is being scanned for viruses. Preview available once the scan is complete. You may need to refresh this page.)
   - elsif scan_results == "infected"
     = item.try(:original_filename)
     |  has been blocked (virus detected), please upload another file.
