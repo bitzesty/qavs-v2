@@ -1,4 +1,3 @@
-- first_or_second = index == 0 ? "first" : "second"
 - idx = index + 1
 - persisted = supporter["support_letter_id"].present? || supporter["supporter_id"].present?
 - create_url = users_form_answer_support_letters_url(@form_answer)
@@ -9,7 +8,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     = render "qae_form/question_ref", question: question, ref: "C #{idx}"
   label[class="govuk-label"]
     span[class="govuk-body govuk-!-font-size-36 govuk-!-font-weight-bold govuk-!-display-block"]
-      = "The #{first_or_second} letter of support"
+      = "The #{ordinal_label(index)} letter of support"
 
   input.js-support-entry-id type="hidden" name="form[#{question.key}][#{index}][support_letter_id]" value=supporter["support_letter_id"] *possible_read_only_ops(question.step.opts[:id])
   .js-system-tag data-new-hidden-input-name="form[#{question.key}][#{index}][support_letter_id]"
@@ -17,7 +16,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
   legend.govuk-label aria-label="C #{index + 1}.1: Name"
     = render "qae_form/question_ref", question: question, ref: "C #{idx}.1"
     span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block"
-      ' Name of the person who wrote the #{first_or_second} letter of support
+      ' Name of the person who wrote the #{ordinal_label(index)} letter of support
   .govuk-form-group.question-block.question-required
     label.govuk-label for="form[#{question.key}][#{index}][first_name]"
       ' First name:
@@ -43,7 +42,7 @@ li.borderless[class=class_names("js-add-example", "js-support-letter-received" =
     = render "qae_form/question_ref", question: question, ref: "C #{idx}.3"
   .govuk-form-group.question-block.question-required
     label class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block" for="form[#{question.key}][#{index}][letter_of_support]"
-      ' Upload the #{first_or_second} letter of support
+      ' Upload the #{ordinal_label(index)} letter of support
     span.question-context.question-debug.govuk-hint
       ' If you upload the wrong file, click the 'Remove' link next to the file name to delete it. The file upload button will reappear, allowing you to select the correct file.
     span.govuk-error-message
