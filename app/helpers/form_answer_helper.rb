@@ -86,4 +86,13 @@ module FormAnswerHelper
   def show_bulk_lieutenants_assignment?
     policy(:lieutenant_assignment_collection).create?
   end
+
+  def ordinal_label(index)
+    case index
+    when 0
+      "first"
+    when 1
+      "second"
+    end
+  end
 end
