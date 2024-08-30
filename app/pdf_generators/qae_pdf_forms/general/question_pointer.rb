@@ -161,7 +161,8 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def render_question_title_with_ref_or_not
-    if question.delegate_obj.ref.present? || question.delegate_obj.sub_ref.present?
+    if (question.delegate_obj.ref.present? || question.delegate_obj.sub_ref.present?) &&
+       !question.delegate_obj.is_a?(QaeFormBuilder::SupportersQuestion)
       render_question_with_ref
     else
       render_question_without_ref
@@ -169,6 +170,15 @@ class QaePdfForms::General::QuestionPointer
   end
 
   def render_context_and_answer_blocks
+    if question.key.to_s == "supporter_letters_list"
+      form_pdf.indent 11.mm do
+        render_question_context
+        render_question_help_note
+        render_question_hints
+
+        question_answer(question)
+      end
+    end
     # for inline questions answer is rendered with the title
     if RENDER_INLINE_KEYS.exclude?(question.key.to_s)
       form_pdf.indent 25.mm do
@@ -382,7 +392,7 @@ class QaePdfForms::General::QuestionPointer
       when QaeFormBuilder::ByYearsQuestion, QaeFormBuilder::OneOptionByYearsQuestion
         render_years_table
       when QaeFormBuilder::SupportersQuestion
-          render_supporters
+        render_supporters
       when QaeFormBuilder::TextareaQuestion
         title = q_visible? && humanized_answer.present? ? humanized_answer : ""
 
