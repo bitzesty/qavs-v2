@@ -21,7 +21,7 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
     thead.govuk-table__head
       tr.govuk-table__row
         th.sortable.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
-          = sort_link f, 'Lieutenancy', object, :ceremonial_county_name
+          = sort_link f, 'Lieutenancy', object, :name
         th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right scope="col" rowspan="2"
           | Submitted nominations
         th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right.text-center scope="col" colspan="4"
@@ -55,7 +55,7 @@ div role="region" aria-labelledby="table-list-nomination-statistics-caption" tab
       - results.each do |row|
         tr.govuk-table__row
           th.govuk-table__header.kavs-table__header--dense.kavs-table__header--border-right
-            = row[:ceremonial_county_name]
+            = row[:name]
           td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
             = row[:submitted_count]
           td.govuk-table__cell.kavs-table__cell--dense.kavs-table__cell--border-right
