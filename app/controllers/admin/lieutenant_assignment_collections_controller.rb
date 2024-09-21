@@ -1,27 +1,25 @@
 class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
   def create
-    @lieutenant_assignment_collection = LieutenantAssignmentCollection.new(create_params)
-    authorize @lieutenant_assignment_collection, :create?
+    @form = LieutenantAssignmentCollection.new(create_params)
+    authorize @form, :create?
 
-    @lieutenant_assignment_collection.subject = current_subject
+    @form.subject = current_subject
 
-    @lieutenant_assignment_collection.save
-
-    respond_to do |format|
-      format.html do
-        flash[:notice] = @lieutenant_assignment_collection.notice_message
-        flash[:error] = @lieutenant_assignment_collection.errors.full_messages.to_sentence
-        redirect_back(fallback_location: root_path)
-      end
+    if @form.save
+      # Change this - don't permit all params
+      params.permit!
+      redirect_to admin_form_answers_path(params: params), notice: @form.notice_message
+    else
+      # Ensure form_answer_ids is an array
+      @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
+      render 'admin/form_answers/bulk_assign_lieutenants'
     end
   end
 
   private
 
   def create_params
-    params
-      .require(:lieutenant_assignment_collection)
-      .permit(:form_answer_ids,
-              :ceremonial_county_id)
+    params.require(:lieutenant_assignment_collection)
+          .permit(:form_answer_ids, :ceremonial_county_id, :year)
   end
 end

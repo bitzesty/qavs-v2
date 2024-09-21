@@ -66,22 +66,8 @@ class Admin::FormAnswersController < Admin::BaseController
                       .with_comments_counters
                       .group("form_answers.id")
                       .page(params[:page])
-
     respond_to do |format|
-      format.html do
-        raise params[:bulk_action].to_yaml if params[:bulk_action].present?
-
-        @processor = NominationsBulkActionForm.new(params)
-
-        redirect_url = @processor.redirect_url
-        # works as a string but not working with helper method
-        # redirect_url = "/admin/form_answers/bulk_assign_lieutenants"
-
-        if redirect_url
-          redirect_to redirect_url
-          return
-        end
-      end
+      format.html
 
       format.csv do
         timestamp = Time.zone.now.strftime("%d-%m-%Y")
@@ -270,35 +256,25 @@ class Admin::FormAnswersController < Admin::BaseController
 
   def bulk_assign_lieutenants
     authorize :lieutenant_assignment_collection, :create?
-
-    @form = LieutenantAssignmentCollection.new(params)
-    @form.form_answer_ids = []
-  end
-
-  def bulk_assign_lieutenants_confirm
-    authorize :lieutenant_assignment_collection, :create?
-
-    # ConfirmationForm.new(kind: "bulk_assign_lieutenants")
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:lieutenant_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:lieutenant_assignment_collection][:form_answer_ids]
+    end
+    @form = LieutenantAssignmentCollection.new(form_answer_ids: form_answer_ids, params: bulk_assign_params)
+    @form.form_answer_ids = form_answer_ids
   end
 
   def bulk_assign_assessors
     authorize :assessor_assignment_collection, :create?
 
-    @form = AssessorAssignmentCollection.new
-    @form.form_answer_ids = []
-  end
-
-  def bulk_assign_assessors_confirm
-    authorize :assessor_assignment_collection, :create?
-
-    # ConfirmationForm.new(kind: "bulk_assign_assessors")
+    form_answer_ids = params[:bulk_action][:ids]
+    @form = AssessorAssignmentCollection.new(form_answer_ids: form_answer_ids)
+    @form.form_answer_ids = form_answer_ids
   end
 
   def bulk_assign_eligibility
-    authorize :eligibility_assignment_collection, :create?
-  end
-
-  def bulk_assign_eligibility_confirm
     authorize :eligibility_assignment_collection, :create?
   end
 
@@ -328,6 +304,11 @@ class Admin::FormAnswersController < Admin::BaseController
         :ineligible_reason_nominator,
         :ineligible_reason_group
       )
+  end
+
+  def bulk_assign_params
+    # params.require(:bulk_action).permit(ids: []).merge(params.permit(:bulk_assign_lieutenants))
+    params.permit!
   end
 
   def resolve_layout

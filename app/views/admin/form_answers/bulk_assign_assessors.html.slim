@@ -10,7 +10,7 @@ h3.govuk-heading-m
               { include_blank: true },
               class: "govuk-select custom-select"
 
-  = f.text_field :form_answer_ids, class: "if-js-hide visuallyhidden"
+  = f.hidden_field :form_answer_ids, value: @form.form_answer_ids.join(",")
 
   .govuk-button-group
     = f.submit "Bulk assign groups to national assessor sub-group", class: "govuk-button"
