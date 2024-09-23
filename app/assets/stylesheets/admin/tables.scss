@@ -5,3 +5,44 @@
 [role="region"][aria-labelledby][tabindex]:focus {
   outline: .1em solid rgba(0,0,0,.1);
 }
+
+.kavs-table {
+  border-top: 1px solid #b1b4b6;
+  border-bottom: 1px solid #b1b4b6;
+  width: max-content;
+
+  .text-center {
+    text-align: center;
+  }
+
+  thead {
+    background-color: #f2f2f2;
+
+    .govuk-table__header:last-child, 
+    .govuk-table__cell:last-child,
+    .govuk-table__footer:last-child {
+      padding-right: 10px;
+    }
+  }
+
+  tfoot {
+    &.govuk-table__footer {
+      background-color: #f2f2f2;
+      font-weight: 700;
+      text-align: left;
+    }
+  }
+}
+
+.kavs-table__header--dense,
+.kavs-table__cell--dense,
+.kavs-table__footer--dense {
+  font-size: 1rem;
+  padding: 10px
+}
+
+.kavs-table__header--border-right,
+.kavs-table__cell--border-right,
+.kavs-table__footer--border-right {
+  border-right: 1px solid #b1b4b6;
+}

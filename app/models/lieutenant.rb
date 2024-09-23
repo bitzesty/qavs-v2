@@ -12,6 +12,8 @@ class Lieutenant < ApplicationRecord
 
   belongs_to :ceremonial_county
 
+  has_many :protected_files, as: :entity, dependent: :destroy
+
   validates :first_name, :last_name, :role, :ceremonial_county, presence: true
 
   enumerize :role, in: %w(regular advanced)
@@ -29,7 +31,6 @@ class Lieutenant < ApplicationRecord
                       prefix: true
                     }
                   }
-
 
   def assigned_nominations
     nominations_scope

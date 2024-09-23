@@ -104,7 +104,9 @@ Rails.application.routes.draw do
   namespace :form do
     resources :form_answers do
       resources :supporters, only: [:new, :create, :index, :destroy]
-      resources :support_letters, only: [:create]
+      resources :support_letters, only: [:create] do
+        resources :support_letter_attachments, only: [:show, :destroy]
+      end
       resources :form_attachments, only: [:index, :new, :create, :destroy]
     end
   end
@@ -275,6 +277,12 @@ Rails.application.routes.draw do
         patch 'update_password'
       end
     end
+
+    namespace :statistics do
+      resources :nominations, only: [:index, :create], path_names: { create: :send }
+    end
+
+    resources :protected_files, path: "/files", only: :show
   end
 
   namespace :lieutenant do
