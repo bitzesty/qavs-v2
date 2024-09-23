@@ -1,9 +1,9 @@
 class NominationsBulkActionForm
-  attr_reader :params, :errors
+  attr_reader :params, :errors, :search_id
   include Rails.application.routes.url_helpers
 
   def initialize(params)
-    @params = params
+    @params = save_search_and_clean_params(params)
     @errors = ActiveModel::Errors.new(self)
     @kind = determine_kind
   end
@@ -45,5 +45,17 @@ class NominationsBulkActionForm
     elsif params[:bulk_assign_eligibility]
       "eligibility"
     end
+  end
+
+  def save_search_and_clean_params(params)
+    if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
+      search = NominationSearch.create(serialized_query: params[:search].to_json)
+      @search_id = search.id
+      params[:search_id] = search.id
+      params[:search] = nil
+      params[:authenticity_token] = nil
+    end
+
+    params
   end
 end

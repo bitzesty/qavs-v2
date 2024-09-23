@@ -10,6 +10,9 @@ h3.govuk-heading-m
               CeremonialCounty.ordered.pluck(:name, :id),
               { include_blank: true },
               class: "govuk-select custom-select"
+    = f.hidden_field :search_id, value: params[:search_id], name: :search_id
+    = f.hidden_field :year, value: params[:year], name: :year
+
     - if @form.errors[:ceremonial_county_id].any?
       .govuk-error-message
         | Please select a Lord Lieutenancy office
@@ -19,4 +22,4 @@ h3.govuk-heading-m
 
   .govuk-button-group
     = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "govuk-button"
-    = link_to "Cancel", [namespace_name, :form_answers], class: "govuk-link"
+    = link_to "Cancel", [namespace_name, :form_answers, year: params[:year], search_id: params[:search_id]], class: "govuk-link"

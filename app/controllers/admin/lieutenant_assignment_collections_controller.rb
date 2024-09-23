@@ -6,9 +6,7 @@ class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
     @form.subject = current_subject
 
     if @form.save
-      # Change this - don't permit all params
-      params.permit!
-      redirect_to admin_form_answers_path(params: params), notice: @form.notice_message
+      redirect_to admin_form_answers_path(year: params[:year], search_id: params[:search_id]), notice: @form.notice_message
     else
       # Ensure form_answer_ids is an array
       @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
