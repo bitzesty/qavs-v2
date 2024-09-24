@@ -1,18 +1,16 @@
 class Admin::AssessorAssignmentCollectionsController < Admin::BaseController
   def create
-    @assessor_assignment_collection = AssessorAssignmentCollection.new(create_params)
-    authorize @assessor_assignment_collection, :create?
+    @form = AssessorAssignmentCollection.new(create_params)
+    authorize @form, :create?
 
-    @assessor_assignment_collection.subject = current_subject
+    @form.subject = current_subject
 
-    @assessor_assignment_collection.save
-
-    respond_to do |format|
-      format.html do
-        flash[:notice] = @assessor_assignment_collection.notice_message
-        flash[:error] = @assessor_assignment_collection.errors.full_messages.to_sentence
-        redirect_back(fallback_location: root_path)
-      end
+    if @form.save
+      redirect_to admin_form_answers_path(year: params[:year], search_id: params[:search_id]), notice: @form.notice_message
+    else
+      # Ensure form_answer_ids is an array
+      @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
+      render "admin/form_answers/bulk_assign_assessors"
     end
   end
 

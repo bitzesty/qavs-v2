@@ -10,7 +10,7 @@ class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
     else
       # Ensure form_answer_ids is an array
       @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
-      render 'admin/form_answers/bulk_assign_lieutenants'
+      render "admin/form_answers/bulk_assign_lieutenants"
     end
   end
 

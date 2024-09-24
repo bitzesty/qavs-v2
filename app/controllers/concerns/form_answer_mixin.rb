@@ -94,12 +94,12 @@ module FormAnswerMixin
 
   def save_or_load_search!
     search_params = params[:search] || default_filters
-    if params[:bulk_assign_lieutenants].present?
+    if params[:bulk_assign_lieutenants] || params[:bulk_assign_assessors] || params[:bulk_assign_eligibility]
 
       bulk_params = params.permit(
         :year,
         :bulk_assign_lieutenants,
-      #   :bulk_assign_assessors,
+        :bulk_assign_assessors,
       #   :bulk_assign_eligibility,
         search: {},
         bulk_action: { ids: [] }
