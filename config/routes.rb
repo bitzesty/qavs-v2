@@ -223,8 +223,6 @@ Rails.application.routes.draw do
         %w[bulk_assign_lieutenants bulk_assign_assessors bulk_assign_eligibility].each do |action|
           get action
           post action
-          get "#{action}_confirm"
-          post "#{action}_confirm"
         end
       end
 
@@ -271,6 +269,7 @@ Rails.application.routes.draw do
 
     resources :lieutenant_assignment_collections, only: [:create]
     resources :assessor_assignment_collections, only: [:create]
+    resources :eligibility_assignment_collections, only: [:create]
 
     resource :account, only: [:edit] do
       collection do

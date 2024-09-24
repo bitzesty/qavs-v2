@@ -1,6 +1,6 @@
-class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
+class Admin::EligibilityAssignmentCollectionsController < Admin::BaseController
   def create
-    @form = LieutenantAssignmentCollection.new(create_params)
+    @form = EligibilityAssignmentCollection.new(create_params)
     authorize @form, :create?
 
     @form.subject = current_subject
@@ -10,14 +10,14 @@ class Admin::LieutenantAssignmentCollectionsController < Admin::BaseController
     else
       # Ensure form_answer_ids is an array
       @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
-      render "admin/form_answers/bulk_assign_lieutenants"
+      render "admin/form_answers/bulk_assign_eligibility"
     end
   end
 
   private
 
   def create_params
-    params.require(:lieutenant_assignment_collection)
-          .permit(:form_answer_ids, :ceremonial_county_id)
+    params.require(:eligibility_assignment_collection)
+          .permit(:form_answer_ids, :state)
   end
 end

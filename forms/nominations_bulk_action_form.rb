@@ -15,12 +15,18 @@ class NominationsBulkActionForm
     end
 
     case @kind
-    when "lieutenants", "assessors", "eligibility"
+    when "lieutenants", "assessors"
       params[:bulk_action].present?
+    when "eligibility"
+      params[:bulk_action].present? && form_answers_eligible_for_state_change?
     else
       @errors.add(:bulk_base, "Invalid bulk action type.")
       false
     end
+  end
+
+  def base_error_messages
+    @errors[:bulk_base].join(" ")
   end
 
   def redirect_url
@@ -47,6 +53,8 @@ class NominationsBulkActionForm
     end
   end
 
+  private
+
   def save_search_and_clean_params(params)
     if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
       search = NominationSearch.create(serialized_query: params[:search].to_json)
@@ -57,5 +65,16 @@ class NominationsBulkActionForm
     end
 
     params
+  end
+
+  def form_answers_eligible_for_state_change?
+    if FormAnswer.where(id: params[:bulk_action][:ids]).all? do |form_answer|
+         EligibilityAssignmentCollection::VALID_STATES.include?(form_answer.state)
+       end
+      true
+    else
+      @errors.add(:bulk_base, "To assign the eligibility status, you must only select groups that currently have ‘Nomination submitted’ or ‘Eligibility pending’ status.")
+      false
+    end
   end
 end

@@ -1,0 +1,24 @@
+
+h3.govuk-heading-m
+  | Assign eligibility status to selected groups
+
+= simple_form_for [namespace_name, @form] do |f|
+  .govuk-form-group.primary-subgroup-group
+    = f.input :state,
+              as: :radio_buttons,
+              collection: FormAnswerStateMachine::ELIGIBILITY_STATES.map { |s| [t(s, scope: "form_answers.state"), s] },
+              input_html: { class: "admin-eligibility-option" },
+              label: "Select the eligibility status",
+              label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
+    - if @form.errors[:sub_group].any?
+      .govuk-error-message
+        | Please select a national assessor sub-group
+
+    = f.hidden_field :search_id, value: params[:search_id], name: :search_id
+    = f.hidden_field :year, value: params[:year], name: :year
+
+  = f.hidden_field :form_answer_ids, value: @form.form_answer_ids.join(",")
+
+  .govuk-button-group
+    = f.submit "Bulk assign eligibility status", class: "govuk-button"
+    = link_to "Cancel", [namespace_name, :form_answers, year: params[:year], search_id: params[:search_id]], class: "govuk-link"

@@ -262,8 +262,8 @@ class Admin::FormAnswersController < Admin::BaseController
       # get form_answer_ids after validation error
       params[:lieutenant_assignment_collection][:form_answer_ids]
     end
+
     @form = LieutenantAssignmentCollection.new(form_answer_ids: form_answer_ids, params: bulk_assign_params)
-    @form.form_answer_ids = form_answer_ids
   end
 
   def bulk_assign_assessors
@@ -271,11 +271,19 @@ class Admin::FormAnswersController < Admin::BaseController
 
     form_answer_ids = params[:bulk_action][:ids]
     @form = AssessorAssignmentCollection.new(form_answer_ids: form_answer_ids)
-    @form.form_answer_ids = form_answer_ids
   end
 
   def bulk_assign_eligibility
     authorize :eligibility_assignment_collection, :create?
+
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:lieutenant_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:lieutenant_assignment_collection][:form_answer_ids]
+    end
+
+    @form = EligibilityAssignmentCollection.new(form_answer_ids: form_answer_ids)
   end
 
   # / batch actions

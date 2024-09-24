@@ -100,7 +100,7 @@ module FormAnswerMixin
         :year,
         :bulk_assign_lieutenants,
         :bulk_assign_assessors,
-      #   :bulk_assign_eligibility,
+        :bulk_assign_eligibility,
         search: {},
         bulk_action: { ids: [] }
       )
@@ -110,7 +110,8 @@ module FormAnswerMixin
 
       unless @processor.valid?
         # raise "Invalid bulk action parameters: #{params.to_yaml}\nErrors: #{@processor.errors.full_messages.to_yaml}"
-        redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id), notice: "You must select at least one group from the list below before clicking a bulk action button." and return
+        flash[:bulk_error] = @processor.base_error_messages
+        redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id) and return
       end
 
       redirect_url = @processor.redirect_url
