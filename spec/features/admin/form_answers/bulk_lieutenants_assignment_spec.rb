@@ -26,13 +26,12 @@ describe "Admin assigns lieutenants", %(
     it "assigns the lieutenant" do
       first("#check_all").set(true)
       click_button("Bulk assign to Lord Lieutenancy office", match: :first)
-      find(:css, "#modal-bulk-assign-lieutenants").should be_visible
 
       custom_select ceremonial_county_2.name, from: "Select Lord Lieutenancy office"
 
-      within "#modal-bulk-assign-lieutenants" do
-        click_button "Bulk assign groups to Lord Lieutenancy office"
-      end
+      click_button "Bulk assign groups to Lord Lieutenancy office"
+
+      expect(page).to have_content("Groups have been assigned to the Lord Lieutenancy office")
 
       expect(form_answer_1.reload.ceremonial_county.name).to eq("B")
       expect(form_answer_2.reload.ceremonial_county.name).to eq("B")

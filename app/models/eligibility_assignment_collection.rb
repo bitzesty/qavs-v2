@@ -18,7 +18,7 @@ class EligibilityAssignmentCollection < AssignmentCollection
       "Groups have"
     else
       "Group has"
-    end.concat " been assigned the #{state} status."
+    end.concat " been assigned the #{I18n.t(state, scope: "form_answers.state")} status."
   end
 
   private

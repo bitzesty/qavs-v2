@@ -20,5 +20,5 @@ h3.govuk-heading-m
   = f.hidden_field :form_answer_ids, value: @form.form_answer_ids.join(",")
 
   .govuk-button-group
-    = f.submit "Bulk assign eligibility status", class: "govuk-button"
+    = f.submit "Save", class: "govuk-button"
     = link_to "Cancel", [namespace_name, :form_answers, year: params[:year], search_id: params[:search_id]], class: "govuk-link"

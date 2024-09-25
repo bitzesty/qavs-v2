@@ -6,7 +6,7 @@
       .govuk-select.dropdown-checkboxes__selection.dropdown-toggle#select-award-year aria-expanded="false" aria-label='Select award year'
         span class="govuk-visually-hidden"
           | Award year:&nbsp;
-        - current_year = params[:year] ? params[:year].to_i : AwardYear.current.year
+        - current_year = params[:year].present? ? params[:year].to_i : AwardYear.current.year
         - current_year_text = "#{current_year - 1} - #{current_year}"
 
         = params[:year].to_s == "all_years" ? "All Years" : current_year_text

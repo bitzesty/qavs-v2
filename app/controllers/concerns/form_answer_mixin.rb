@@ -94,6 +94,7 @@ module FormAnswerMixin
 
   def save_or_load_search!
     search_params = params[:search] || default_filters
+
     if params[:bulk_assign_lieutenants] || params[:bulk_assign_assessors] || params[:bulk_assign_eligibility]
 
       bulk_params = params.permit(

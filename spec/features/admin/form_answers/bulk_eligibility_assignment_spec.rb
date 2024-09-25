@@ -6,7 +6,7 @@ Warden.test_mode!
 describe "Admin assigns assessors", %(
   As Admin
   I want to be able to assign national assessor sub-gruops
-), js: true do
+) do
 
   let(:subject) { create(:admin) }
   let!(:form_answer_1) { create(:form_answer, :submitted) }
@@ -21,19 +21,20 @@ describe "Admin assigns assessors", %(
       visit admin_form_answers_path
     end
 
-    it "assigns assessors" do
-      first("#check_all").set(true)
+    it "assigns eligibility" do
+      all("#bulk_action_ids_").each { |i| i.set(true) }
 
-      click_button("Bulk assign to national assessor sub-group", match: :first)
-      custom_select "Sub-group 9", from: "Select national assessor sub-group"
+      click_button("Bulk assign eligibility status", match: :first)
 
-      click_button "Bulk assign groups to national assessor sub-group"
+      save_and_open_page
+      choose("eligibility_assignment_collection_state_admin_eligible")
 
-      expect(page).to have_content("Groups have been assigned to the national assessor sub-group")
-      expect(page).to have_content("Sub-group 9")
+      click_button "Save"
 
-      expect(form_answer_1.reload.sub_group.text).to eq("Sub-group 9")
-      expect(form_answer_2.reload.sub_group.text).to eq("Sub-group 9")
+      expect(page).to have_content("Groups have been assigned the Eligible by admin status")
+
+      expect(form_answer_1.reload.state).to eq("admin_eligible")
+      expect(form_answer_2.reload.state).to eq("admin_eligible")
     end
   end
 end
