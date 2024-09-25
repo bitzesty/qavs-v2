@@ -26,7 +26,6 @@ describe "Admin assigns assessors", %(
 
       click_button("Bulk assign eligibility status", match: :first)
 
-      save_and_open_page
       choose("eligibility_assignment_collection_state_admin_eligible")
 
       click_button "Save"
