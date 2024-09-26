@@ -1,6 +1,6 @@
 div role="region" aria-labelledby="table-nominations-list-caption" tabindex="0"
   table.govuk-table.applications-table#table-nominations-list class="govuk-!-margin-top-7 govuk-!-margin-bottom-9"
-    caption.govuk-table__caption.govuk-table__caption--m#table-nominations-list-caption
+    caption.govuk-table__caption.govuk-table__caption--m#table-nominations-list-caption.govuk-visually-hidden
       | Nominations list
       - if @search.query?
         =<> "Search results for '#{@search.query}'"

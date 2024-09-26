@@ -1,0 +1,23 @@
+h3.govuk-heading-m
+  | Bulk assign groups to national assessor sub-group
+
+= form_for [namespace_name, @form] do |f|
+  .govuk-grid-row
+    .govuk-form-group.primary-subgroup-group.govuk-grid-column-one-third
+      = f.label :sub_group, "Select national assessor sub-group", class: "govuk-label"
+      = f.select :sub_group,
+                Assessor.sub_group.options,
+                { include_blank: true },
+                class: "govuk-select custom-select"
+      - if @form.errors[:sub_group].any?
+        .govuk-error-message
+          | Please select a national assessor sub-group
+
+    = f.hidden_field :search_id, value: params[:search_id], name: :search_id
+    = f.hidden_field :year, value: params[:year], name: :year
+
+  = f.hidden_field :form_answer_ids, value: @form.form_answer_ids.join(",")
+
+  .govuk-button-group
+    = f.submit "Bulk assign groups to national assessor sub-group", class: "govuk-button"
+    = link_to "Cancel", [namespace_name, :form_answers, year: params[:year], search_id: params[:search_id]], class: "govuk-link"

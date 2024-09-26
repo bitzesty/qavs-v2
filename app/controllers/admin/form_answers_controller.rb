@@ -27,7 +27,7 @@ class Admin::FormAnswersController < Admin::BaseController
   expose(:target_scope) do
     if params[:year].to_s == "all_years"
       FormAnswer.all
-    elsif params[:year]
+    elsif params[:year].present?
       (year = AwardYear.find_by(year: params[:year])) ? year.form_answers : FormAnswer.none
     else
       @award_year.form_answers
@@ -59,6 +59,7 @@ class Admin::FormAnswersController < Admin::BaseController
   def index
     authorize :form_answer, :index?
     search_params = save_or_load_search!
+    return if search_params.nil? # Redirected from save_or_load_search!
 
     @search = FormAnswerSearch.new(target_scope, current_admin).search(search_params)
     @search.ordered_by = "company_or_nominee_name" unless @search.ordered_by
@@ -66,7 +67,6 @@ class Admin::FormAnswersController < Admin::BaseController
                       .with_comments_counters
                       .group("form_answers.id")
                       .page(params[:page])
-
     respond_to do |format|
       format.html
 
@@ -253,6 +253,47 @@ class Admin::FormAnswersController < Admin::BaseController
     )
   end
 
+  # batch actions
+
+  def bulk_assign_lieutenants
+    authorize :lieutenant_assignment_collection, :create?
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:lieutenant_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:lieutenant_assignment_collection][:form_answer_ids]
+    end
+
+    @form = LieutenantAssignmentCollection.new(form_answer_ids: form_answer_ids, params: bulk_assign_params)
+  end
+
+  def bulk_assign_assessors
+    authorize :assessor_assignment_collection, :create?
+
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:eligibility_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:eligibility_assignment_collection][:form_answer_ids]
+    end
+    @form = AssessorAssignmentCollection.new(form_answer_ids: form_answer_ids)
+  end
+
+  def bulk_assign_eligibility
+    authorize :eligibility_assignment_collection, :create?
+
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:lieutenant_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:lieutenant_assignment_collection][:form_answer_ids]
+    end
+
+    @form = EligibilityAssignmentCollection.new(form_answer_ids: form_answer_ids)
+  end
+
+  # / batch actions
+
   private
 
   helper_method :resource
@@ -277,6 +318,10 @@ class Admin::FormAnswersController < Admin::BaseController
         :ineligible_reason_nominator,
         :ineligible_reason_group
       )
+  end
+
+  def bulk_assign_params
+    params.require(:bulk_action).permit(ids: []).merge(params.permit(:bulk_assign_lieutenants, :bulk_assign_assessors, :bulk_assign_eligibility))
   end
 
   def resolve_layout

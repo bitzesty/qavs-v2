@@ -32,17 +32,18 @@ h1.govuk-heading-xl
 
     = link_to "Remove filters",
               admin_form_answers_path,
-              class: "govuk-button govuk-button--secondary",
+              class: "govuk-link",
               role: "button"
 
 
   hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
+  h2.govuk-body-l class="govuk-!-font-weight-bold"
+    | Nominations list
   - if policy(:form_answer).can_download_csv_reports?
     = render("admin/form_answers/csv_reports_links")
-  = render("admin/form_answers/bulk_assignment_button_top")
+  = render("admin/form_answers/bulk_assignment_button_top", f: f)
 
   = render("admin/form_answers/list_components/table", f: f)
-  = render("admin/form_answers/bulk_assignment_button_bottom")
 
   = paginate @form_answers
 

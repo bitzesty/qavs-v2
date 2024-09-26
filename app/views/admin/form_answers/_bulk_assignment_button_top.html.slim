@@ -1,10 +1,13 @@
 - if show_bulk_lieutenants_assignment?
-
-  .if-no-js-hide
-    p.govuk-body.bulk-assignment-help
-      | Select groups from the list below to bulk assign to Lord Lieutenancy office or national assessor sub-groups.
-    .bulk-assignment-container
-      p.govuk-body.nominations-checked-total
-      button.govuk-button.bulk-assign-lieutenants-link type="button" Bulk assign to Lord Lieutenancy office
-
-      button.govuk-button.bulk-assign-assessors-link type="button" Bulk assign to national assessor sub-group
+  .bulk-assignment-container
+    p.govuk-body.nominations-checked-total aria-live='polite'
+      strong
+        ' Bulk actions:
+      ' select groups from the list below and click an appropriate bulk action button.
+    - if flash[:bulk_error].present?
+      p.govuk-body.govuk-bulk-error-message
+        = flash[:bulk_error]
+    .bulk-assignment-buttons-container
+      = f.submit "Bulk assign to Lord Lieutenancy office", class: "govuk-button bulk-assign-lieutenants-link", name: "bulk_assign_lieutenants"
+      = f.submit "Bulk assign to national assessor sub-group", class: "govuk-button bulk-assign-assessors-link", name: "bulk_assign_assessors"
+      = f.submit "Bulk assign eligibility status", class: "govuk-button bulk-assign-eligibility-link", name: "bulk_assign_eligibility"

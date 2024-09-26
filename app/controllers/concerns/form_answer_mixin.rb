@@ -95,9 +95,34 @@ module FormAnswerMixin
   def save_or_load_search!
     search_params = params[:search] || default_filters
 
+    if params[:bulk_assign_lieutenants] || params[:bulk_assign_assessors] || params[:bulk_assign_eligibility]
+
+      bulk_params = params.permit(
+        :year,
+        :bulk_assign_lieutenants,
+        :bulk_assign_assessors,
+        :bulk_assign_eligibility,
+        search: {},
+        bulk_action: { ids: [] }
+      )
+
+      @processor = NominationsBulkActionForm.new(bulk_params)
+
+      unless @processor.valid?
+        flash[:bulk_error] = @processor.base_error_messages
+        redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id) and return
+      end
+
+      redirect_url = @processor.redirect_url
+
+      if redirect_url
+        redirect_to redirect_url and return
+      end
+    end
+
     if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
       search = NominationSearch.create(serialized_query: params[:search].to_json)
-      redirect_to [namespace_name, :form_answers, search_id: search.id, year: params[:year]]
+      redirect_to [namespace_name, :form_answers, search_id: search.id, year: params[:year]] and return
     end
 
     if params[:search_id]

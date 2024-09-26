@@ -1,0 +1,28 @@
+h3.govuk-heading-m
+  | Bulk assign groups to Lord Lieutenancy office
+.govuk-body
+  | Please select the Lord Lieutenancy office that you would like to assign selected groups to.
+
+= form_for [namespace_name, @form] do |f|
+  .govuk-grid-row
+
+    .govuk-form-group.primary-lieutenant-group.govuk-grid-column-one-third
+      = f.label :ceremonial_county_id, "Select Lord Lieutenancy office", class: "govuk-label"
+      = f.select :ceremonial_county_id,
+                CeremonialCounty.ordered.pluck(:name, :id),
+                { include_blank: true },
+                class: "govuk-select custom-select"
+      - if @form.errors[:ceremonial_county_id].any?
+        .govuk-error-message
+          | Please select a Lord Lieutenancy office
+
+    = f.hidden_field :search_id, value: params[:search_id], name: :search_id
+    = f.hidden_field :year, value: params[:year], name: :year
+
+
+    - if @form.form_answer_ids.present?
+      = f.hidden_field :form_answer_ids, value: @form.form_answer_ids.join(",")
+
+  .govuk-button-group
+    = f.submit "Bulk assign groups to Lord Lieutenancy office", class: "govuk-button"
+    = link_to "Cancel", [namespace_name, :form_answers, year: params[:year], search_id: params[:search_id]], class: "govuk-link"

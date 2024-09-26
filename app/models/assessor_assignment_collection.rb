@@ -1,6 +1,8 @@
 class AssessorAssignmentCollection < AssignmentCollection
   NOT_ASSIGNED = "not assigned"
 
+  validates :sub_group, presence: true
+
   attribute :sub_group, String
 
 
