@@ -1,10 +1,9 @@
 class EligibilityAssignmentCollection < AssignmentCollection
   VALID_STATES = %w[submitted admin_pending_eligibility].freeze
 
-
   attribute :state, String
 
-  validates :state, presence: true, inclusion: { in: FormAnswerStateMachine::ELIGIBILITY_STATES.map(&:to_s) }
+  validates :state, presence: { message: "Please select a status" }, inclusion: { in: FormAnswerStateMachine::ELIGIBILITY_STATES.map(&:to_s) }
 
   validate :form_answers_state_validation
 

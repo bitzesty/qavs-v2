@@ -107,10 +107,8 @@ module FormAnswerMixin
       )
 
       @processor = NominationsBulkActionForm.new(bulk_params)
-      # Debugging: Inspect the parameters and validation errors
 
       unless @processor.valid?
-        # raise "Invalid bulk action parameters: #{params.to_yaml}\nErrors: #{@processor.errors.full_messages.to_yaml}"
         flash[:bulk_error] = @processor.base_error_messages
         redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id) and return
       end

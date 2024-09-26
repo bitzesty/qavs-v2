@@ -270,7 +270,12 @@ class Admin::FormAnswersController < Admin::BaseController
   def bulk_assign_assessors
     authorize :assessor_assignment_collection, :create?
 
-    form_answer_ids = params[:bulk_action][:ids]
+    form_answer_ids = if params[:bulk_action]
+      params[:bulk_action][:ids]
+    elsif params[:eligibility_assignment_collection]
+      # get form_answer_ids after validation error
+      params[:eligibility_assignment_collection][:form_answer_ids]
+    end
     @form = AssessorAssignmentCollection.new(form_answer_ids: form_answer_ids)
   end
 
@@ -316,8 +321,7 @@ class Admin::FormAnswersController < Admin::BaseController
   end
 
   def bulk_assign_params
-    # params.require(:bulk_action).permit(ids: []).merge(params.permit(:bulk_assign_lieutenants))
-    params.permit!
+    params.require(:bulk_action).permit(ids: []).merge(params.permit(:bulk_assign_lieutenants, :bulk_assign_assessors, :bulk_assign_eligibility))
   end
 
   def resolve_layout

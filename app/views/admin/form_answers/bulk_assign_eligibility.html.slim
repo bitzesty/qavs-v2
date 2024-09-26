@@ -10,9 +10,6 @@ h3.govuk-heading-m
               input_html: { class: "admin-eligibility-option" },
               label: "Select the eligibility status",
               label_html: { class: "govuk-!-font-size-19 govuk-!-margin-bottom-0" }
-    - if @form.errors[:sub_group].any?
-      .govuk-error-message
-        | Please select a national assessor sub-group
 
     = f.hidden_field :search_id, value: params[:search_id], name: :search_id
     = f.hidden_field :year, value: params[:year], name: :year
