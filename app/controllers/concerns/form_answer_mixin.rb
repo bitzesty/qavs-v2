@@ -110,7 +110,7 @@ module FormAnswerMixin
 
       unless @processor.valid?
         flash[:bulk_error] = @processor.base_error_messages
-        redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id) and return
+        redirect_to admin_form_answers_path(year: params[:year], search_id: @processor.search_id) + "#bulk_error" and return
       end
 
       redirect_url = @processor.redirect_url

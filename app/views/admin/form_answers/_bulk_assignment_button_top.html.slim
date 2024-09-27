@@ -5,7 +5,7 @@
         ' Bulk actions:
       ' select groups from the list below and click an appropriate bulk action button.
     - if flash[:bulk_error].present?
-      p.govuk-body.govuk-bulk-error-message
+      p.govuk-body.govuk-bulk-error-message#bulk_error
         = flash[:bulk_error]
     .bulk-assignment-buttons-container
       = f.submit "Bulk assign to Lord Lieutenancy office", class: "govuk-button bulk-assign-lieutenants-link", name: "bulk_assign_lieutenants"
