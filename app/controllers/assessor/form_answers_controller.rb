@@ -33,6 +33,7 @@ class Assessor::FormAnswersController < Assessor::BaseController
   def index
     authorize :form_answer, :index?
     search_params = save_or_load_search!
+    return if search_params.nil? # Redirected from save_or_load_search!
 
     scope = current_assessor.applications_scope(
       params[:year].to_s == "all_years" ? nil : @award_year

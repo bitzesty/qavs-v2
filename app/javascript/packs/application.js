@@ -32,22 +32,6 @@ SessionTimeout();
 
 frontend.initAll()
 
-$('.bulk-assign-lieutenants-link').on('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-
-  MicroModal.show('modal-bulk-assign-lieutenants');
-  $("html").addClass('modal-open');
-})
-
-$('.bulk-assign-assessors-link').on('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-
-  MicroModal.show('modal-bulk-assign-assessors');
-  $("html").addClass('modal-open');
-})
-
 $(document).on('click', 'button[data-micromodal-close]', function(e) {
   e.preventDefault();
   e.stopPropagation()
@@ -55,34 +39,10 @@ $(document).on('click', 'button[data-micromodal-close]', function(e) {
 })
 
 if ($('.bulk-assignment-container').length > 0) {
-  $("#check_all").on("change", function() {
+  $("#check_all").on("click", function() {
     var select_all_value = $(this).prop("checked");
     $(this).closest("table").find(".form-answer-check").prop("checked", select_all_value)
   });
-
-  $(".form-answer-check, #check_all").on("change", function() {
-    var show_button = false;
-
-    $(".form-answer-check").each(function() {
-      if ($(this).prop("checked")) {
-        show_button = true
-      }
-    })
-
-    if (show_button) {
-      $(".bulk-assignment-container").addClass("show-container")
-      $(".bulk-assignment-help").addClass("govuk-!-display-none")
-      var selected_count = $('input[type=checkbox].form-answer-check:checked').length
-      if (selected_count > 1) {
-        $('.nominations-checked-total').text(selected_count +' groups selected')
-      } else {
-        $('.nominations-checked-total').text(selected_count +' group selected')
-      }
-    } else {
-      $(".bulk-assignment-container").removeClass("show-container")
-      $(".bulk-assignment-help").removeClass("govuk-!-display-none")
-    }
-  })
 }
 
 var dropdowns = $('select[multiple]');

@@ -3,14 +3,14 @@
     .dropdown
       label.govuk-label for='select-award-year'
         | Select Award Year
-      button.dropdown-toggle.govuk-button.govuk-button--secondary#select-award-year aria-expanded="false" aria-label='Select award year'
+      .govuk-select.dropdown-checkboxes__selection.dropdown-toggle#select-award-year aria-expanded="false" aria-label='Select award year'
         span class="govuk-visually-hidden"
           | Award year:&nbsp;
-        - current_year = params[:year] ? params[:year].to_i : AwardYear.current.year
+        - current_year = params[:year].present? ? params[:year].to_i : AwardYear.current.year
         - current_year_text = "#{current_year - 1} - #{current_year}"
 
         = params[:year].to_s == "all_years" ? "All Years" : current_year_text
-      ul.dropdown-menu
+      ul.dropdown-menu#select-award-year__options
         li class="#{'active' if params[:year].to_s == 'all_years'}"
           = link_to "All Years", url_for(params.permit(:controller, :action, :search_id, :year).merge(year: :all_years)), class: "govuk-!-font-size-19 govuk-link--no-underline"
 

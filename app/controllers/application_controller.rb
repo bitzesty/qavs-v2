@@ -210,7 +210,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_award_year_and_settings
-    if params[:year] && AwardYear::AVAILABLE_YEARS.include?(params[:year].to_i)
+    if params[:year].present? && AwardYear::AVAILABLE_YEARS.include?(params[:year].to_i)
       @award_year = AwardYear.for_year(params[:year].to_i).first_or_create
     else
       @award_year = AwardYear.current

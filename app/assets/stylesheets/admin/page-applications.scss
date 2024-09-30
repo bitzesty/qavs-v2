@@ -474,28 +474,22 @@
 }
 
 .bulk-assignment-container {
-  display: none;
+  background-color: $grey-lightest;
+  padding: 20px 25px;
 
-  &.show-container {
+  .bulk-assignment-buttons-container {
     display: flex;
     align-items: center;
   }
 
-  .show-bulk-assign & {
-    .js & {
-      display: none;
-    }
-  }
-
-  .bulk-assign-lieutenants-link, .bulk-assign-assessors-link {
+  .bulk-assign-lieutenants-link, .bulk-assign-assessors-link, .bulk-assign-eligibility-link {
     margin-bottom: 20px;
     margin-right: 20px;
   }
 }
 
 .nominations-checked-total {
-  display: inline;
-  margin-right: 20px;
+  margin-bottom: 15px;
 }
 
 .bulk-assign-assessors-form, .bulk-assign-lieutenants-form {
@@ -598,4 +592,9 @@
 
 .js-remove-audit-certificate-link span {
   margin-top: 0;
+}
+
+.govuk-bulk-error-message {
+  margin-top: 20px;
+  color: rgb(212, 53, 28);
 }

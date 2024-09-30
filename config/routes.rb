@@ -219,6 +219,11 @@ Rails.application.routes.draw do
       collection do
         post :index
         get :awarded_trade_applications
+
+        %w[bulk_assign_lieutenants bulk_assign_assessors bulk_assign_eligibility].each do |action|
+          get action
+          post action
+        end
       end
 
       member do
@@ -264,6 +269,7 @@ Rails.application.routes.draw do
 
     resources :lieutenant_assignment_collections, only: [:create]
     resources :assessor_assignment_collections, only: [:create]
+    resources :eligibility_assignment_collections, only: [:create]
 
     resource :account, only: [:edit] do
       collection do
