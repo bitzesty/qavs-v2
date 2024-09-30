@@ -27,7 +27,7 @@ RSpec.describe Admin::FormAnswersController do
       it "deserializes search params" do
         search = NominationSearch.create(serialized_query: { sort: "company_or_nominee_name.asc" }.to_json)
         expect {
-          get :index, params: { search_id: search.id }
+          get :index, params: { search_id: search.id, year: "all_years" }
         }.not_to change {
           NominationSearch.count
         }
@@ -40,7 +40,7 @@ RSpec.describe Admin::FormAnswersController do
         search = NominationSearch.create(serialized_query: { sort: "company_or_nominee_name.desc" }.to_json)
 
         expect {
-          get :index, params: { search_id: search.id }
+          get :index, params: { search_id: search.id, year: "all_years" }
         }.not_to change {
           NominationSearch.count
         }
