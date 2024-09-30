@@ -120,19 +120,31 @@ module FormAnswerMixin
       end
     end
 
+    # If search is present, save it and clean up the params.
+    # Do not pass params[:year] to the redirect as this does not work with the non-js search
     if params[:search] && params[:search][:search_filter] != FormAnswerSearch.default_search[:search_filter]
       search = NominationSearch.create(serialized_query: params[:search].to_json)
-      redirect_to [namespace_name, :form_answers, search_id: search.id, year: params[:year]] and return
-    end
+      year = JSON.parse(search.serialized_query)[:year]
+      redirect_to [namespace_name, :form_answers, search_id: search.id, year: year] and return
 
-    if params[:search_id]
+    elsif params[:search_id]
       search = NominationSearch.find_by_id(params[:search_id])
-
       if search.present?
         payload = JSON.parse(search.serialized_query)
         search_params[:search_filter] = payload["search_filter"]
         search_params[:query] = payload["query"]
         search_params[:sort] = payload["sort"]
+        search_params[:year] = payload["year"]
+
+        # Update the year parameter if it is different
+        if params[:year] && search_params[:year] != params[:year]
+          search_params[:year] = params[:year]
+          search.update_attribute(:serialized_query, search_params.to_json)
+
+        # Redirect to include the year parameter if it is not present
+        elsif !params[:year] && namespace_name == :admin
+          redirect_to [namespace_name, :form_answers, search_id: search.id, year: search_params[:year]] and return
+        end
       end
     end
 

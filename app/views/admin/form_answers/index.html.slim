@@ -4,7 +4,7 @@ h1.govuk-heading-xl
   | Nominations
 
 = simple_form_for @search, url: admin_form_answers_path(year: params[:year]), method: :post, as: :search, html: { class: 'search-form'} do |f|
-  .govuk-grid-row
+  .govuk-grid-row.if-no-js-hide
     = render "layouts/vertical_admin_award_year"
 
   .govuk-grid-row
