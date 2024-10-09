@@ -1,6 +1,6 @@
-class Admin::AssessorAssignmentCollectionsController < Admin::BaseController
+class Admin::EligibilityAssignmentCollectionsController < Admin::BaseController
   def create
-    @form = AssessorAssignmentCollection.new(create_params)
+    @form = EligibilityAssignmentCollection.new(create_params)
     authorize @form, :create?
 
     @form.subject = current_subject
@@ -10,16 +10,14 @@ class Admin::AssessorAssignmentCollectionsController < Admin::BaseController
     else
       # Ensure form_answer_ids is an array
       @form.form_answer_ids = @form.form_answer_ids.split(",") if @form.form_answer_ids.is_a?(String)
-      render "admin/form_answers/bulk_assign_assessors"
+      render "admin/form_answers/bulk_assign_eligibility"
     end
   end
 
   private
 
   def create_params
-    params
-      .require(:assessor_assignment_collection)
-      .permit(:form_answer_ids,
-              :sub_group)
+    params.require(:eligibility_assignment_collection)
+          .permit(:form_answer_ids, :state)
   end
 end

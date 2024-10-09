@@ -130,20 +130,6 @@ ready = ->
     else
       area.addClass("if-js-hide")
 
-  $(document).on "submit", "#new_assessor_assignment_collection", (e) ->
-    form = $(this)
-    ids = ""
-    $(".form-answer-check:checked").each ->
-      ids += ($(@).val() + ",")
-    $("#assessor_assignment_collection_form_answer_ids").val(ids)
-
-  $(document).on "submit", "#new_lieutenant_assignment_collection", (e) ->
-    form = $(this)
-    ids = ""
-    $(".form-answer-check:checked").each ->
-      ids += ($(@).val() + ",")
-    $("#lieutenant_assignment_collection_form_answer_ids").val(ids)
-
 changeRagStatus = ->
   $(document).on "click", ".btn-rag .dropdown-menu a", (e) ->
     e.preventDefault()

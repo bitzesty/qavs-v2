@@ -55,6 +55,7 @@ class Lieutenant::FormAnswersController < Lieutenant::BaseController
     authorize :form_answer, :index?
 
     search_params = save_or_load_search!
+    return if search_params.nil? # Redirected from save_or_load_search!
 
     scope = current_lieutenant.nominations_scope(
       params[:year].to_s == "all_years" ? nil : @award_year
