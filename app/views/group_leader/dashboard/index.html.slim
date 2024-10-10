@@ -54,7 +54,7 @@
 
     h3.govuk-heading-s
       | Between 1 October and 14 November
-      =<> @award_year.year - 1
+      =<> @award_year.year
       | &mdash; prepare press coverage
     p.govuk-body
       | This is a great opportunity to get plenty of local publicity for your group. We hope you will be able to prepare some eye-catching posts for social media and invite local journalists to write about your news. Nothing should be publicised or published before the morning of 14 November, but it will be fine to agree embargoed articles with local journalists beforehand.
@@ -86,21 +86,21 @@
 
     h3.govuk-heading-s
       | 14 November
-      =<> @award_year.year - 1
+      =<> @award_year.year
       | &mdash; Awards officially announced
     p.govuk-body
       | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
       =< link_to("KAVS website", "https://kavs.dcms.gov.uk/")
       | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #KAVS
-      => @award_year.year - 1
+      => @award_year.year
       | and tag us @KingsAwardVS.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
       | Mid December
-      =<> @award_year.year - 1
-      | - April
       =<> @award_year.year
+      | - April
+      =<> @award_year.year + 1
       | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
       | The Lord-Lieutenant for your local county, as The King's representative, will present your group with a certificate and a commemorative crystal at a local ceremony. The Lieutenancy office will be in touch to arrange a suitable date and time for this.
@@ -118,9 +118,9 @@
           | Incomplete
     p.govuk-body
       | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
-      =< @award_year.year
+      =< @award_year.year + 1
       | . We will contact you in February
-      =<> @award_year.year
+      =<> @award_year.year + 1
       | to request the contact details for these two guests.
       strong.text-underline<
         | No action is needed now.
@@ -130,9 +130,9 @@
 
     h3.govuk-heading-s
       | May to July
-      =<> @award_year.year
+      =<> @award_year.year + 1
       | &mdash; Royal Garden Party
     p.govuk-body
       |  We will let you know the precise dates when we contact you about this in early
-      =< @award_year.year
+      =< @award_year.year + 1
       | .
