@@ -67,13 +67,13 @@
       .govuk-details__text
         ul.govuk-list
           li
-            = link_to "The King's Award for Voluntary Service awardees' media pack 2023",
-              "https://storage.googleapis.com/emblem-files-and-guidance/Media%20pack%20for%20KAVS%20Awardees%202023.pdf",
+            = link_to "The King's Award for Voluntary Service awardees' media pack #{@award_year.year}",
+              "https://storage.googleapis.com/emblem-files-and-guidance/Media%20pack%20for%20#{@award_year.year >= 2023 ? "KAVS" : "QAVS"}%20Awardees%20#{@award_year.year}.pdf",
               rel: "noreferrer noopener",
               target: :_blank
           li
             = link_to "The King's Award for Voluntary Service media pack materials",
-              "https://storage.googleapis.com/emblem-files-and-guidance/KAVS%202023%20Media%20Pack%20Materials.pptx",
+              "https://storage.googleapis.com/emblem-files-and-guidance/#{@award_year.year >= 2023 ? "KAVS" : "QAVS"}%20#{@award_year.year}%20Media%20Pack%20Materials.pptx",
               rel: "noreferrer noopener",
               target: :_blank
           li
