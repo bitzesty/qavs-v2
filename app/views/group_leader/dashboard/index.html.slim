@@ -53,7 +53,8 @@
     hr.govuk-section-break.govuk-section-break--l
 
     h3.govuk-heading-s
-      | Between 1 October and 14 November 2023
+      | Between 1 October and 14 November
+      =<> @award_year.year - 1
       | &mdash; prepare press coverage
     p.govuk-body
       | This is a great opportunity to get plenty of local publicity for your group. We hope you will be able to prepare some eye-catching posts for social media and invite local journalists to write about your news. Nothing should be publicised or published before the morning of 14 November, but it will be fine to agree embargoed articles with local journalists beforehand.
@@ -84,16 +85,21 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | 14 November 2023
+      | 14 November
+      =<> @award_year.year - 1
       | &mdash; Awards officially announced
     p.govuk-body
       | Successful groups, including your group, will be announced in The Gazette, GOV.UK and on the
       =< link_to("KAVS website", "https://kavs.dcms.gov.uk/")
-      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #KAVS2023 and tag us @KingsAwardVS.
+      | . We will also be promoting it widely on our social media pages and sharing your posts too. Please join in and make sure you use the hashtag #KAVS
+      => @award_year.year - 1
+      | and tag us @KingsAwardVS.
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | November - March
+      | Mid December
+      =<> @award_year.year - 1
+      | - April
       =<> @award_year.year
       | &mdash; Lord-Lieutenant presents the Award
     p.govuk-body
@@ -113,7 +119,9 @@
     p.govuk-body
       | Two representatives from the awarded groups will be invited to attend a Royal Garden Party at Buckingham Palace or The Palace of Holyroodhouse in Edinburgh in
       =< @award_year.year
-      | . We will contact you in January/February 2024 to request the contact details for these two guests.
+      | . We will contact you in February
+      =<> @award_year.year
+      | to request the contact details for these two guests.
       strong.text-underline<
         | No action is needed now.
     / NOTE for devs: When enabling the button, please also uncomment the tests in 'palace_invite_spec.rb'
