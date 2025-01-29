@@ -4,7 +4,7 @@ class AppraisalForm
   #
   # THIS NEED TO BE UPDATED EACH YEAR
   #
-  SUPPORTED_YEARS = [2022, 2023, 2024, 2025]
+  SUPPORTED_YEARS = [2022, 2023, 2024, 2025, 2026]
 
   EVALUATION_OPTIONS_2022 = [
     ["Weak evidence", "weak"],
@@ -30,6 +30,12 @@ class AppraisalForm
     ["Strong evidence", "strong"]
   ]
 
+  EVALUATION_OPTIONS_2026 = [
+    ["Weak evidence", "weak"],
+    ["Good evidence", "good"],
+    ["Strong evidence", "strong"]
+  ]
+
   VERDICT_OPTIONS_2022 = [
     ["Not Recommended", "not_recommended"],
     ["Recommended", "recommended"],
@@ -49,6 +55,12 @@ class AppraisalForm
   ]
 
   VERDICT_OPTIONS_2025 = [
+    ["Not Recommended", "not_recommended"],
+    ["Recommended", "recommended"],
+    ["Undecided", "undecided"]
+  ]
+
+  VERDICT_OPTIONS_2026 = [
     ["Not Recommended", "not_recommended"],
     ["Recommended", "recommended"],
     ["Undecided", "undecided"]
@@ -204,10 +216,39 @@ class AppraisalForm
     }
   }.freeze
 
+  QAVS_2026 = {
+    good_impact: {
+      type: :rag,
+      label: "Good impact",
+      position: 0
+    },
+    volunteer_led: {
+      type: :rag,
+      label: "Volunteer-led",
+      position: 1
+    },
+    good_governance: {
+      type: :rag,
+      label: "Good governance",
+      position: 2
+    },
+    exceptional_qualities: {
+      type: :rag,
+      label: "Exceptional qualities",
+      position: 3
+    },
+    verdict: {
+      type: :verdict,
+      label: "Overall decision",
+      position: 4
+    }
+  }.freeze
+
   ALL_FORMS_2022 = [QAVS_2022]
   ALL_FORMS_2023 = [QAVS_2023]
   ALL_FORMS_2024 = [QAVS_2024]
   ALL_FORMS_2025 = [QAVS_2025]
+  ALL_FORMS_2026 = [QAVS_2026]
 
   def self.rate(key)
     "#{key}_rate"
