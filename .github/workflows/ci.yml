@@ -2,7 +2,7 @@ name: CI
 on: [push]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       db:
         image: postgres:12-alpine
@@ -22,45 +22,49 @@ jobs:
         options: --entrypoint redis-server
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v3
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -yqq install postgresql postgresql-client libpq-dev xvfb unzip libcurl4 libcurl3-gnutls libcurl4-openssl-dev
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.231.0
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+          ruby-version: .ruby-version
+          bundler: '2.4.8'
+          bundler-cache: true
+          cache-version: 1
+      - name: Configure bundler
+        run: |
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without 'development'
+      - name: Install dependencies
+        run: |
+          bundle install --jobs 4 --retry 3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '16'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2.3
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '16'
       - run: npm install -g yarn
-      - uses: nanasess/setup-chromedriver@master
-      - name: Build and run tests
+      - uses: nanasess/setup-chromedriver@v2
+      - name: Install JavaScript dependencies
+        run: yarn install
+      - name: Setup database and run tests
         env:
           DISPLAY_SOCIAL_MOBILITY_AWARD: true
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/qavs_test"
-          BUNDLER_VERSION: 2.1.4
           DOCKER_TLS_CERTDIR: ""
+          RAILS_ENV: test
         run: |
-          sudo apt-get update
-          sudo apt-get -yqq install postgresql postgresql-client libpq-dev xvfb unzip libcurl4 libcurl3-gnutls libcurl4-openssl-dev
-          gem install bundler
-          gem update --system && gem update bundler
-          bundle config path vendor/bundle
-          yarn install
-          bundle install --jobs 4 --retry 3
-          RAILS_ENV=test bundle exec rake db:create db:migrate
-          RAILS_ENV=test RAILS_DISABLE_TEST_LOG=true bundle exec rspec --format RSpec::Github::Formatter --format progress
+          bundle exec rake db:create db:migrate
+          RAILS_DISABLE_TEST_LOG=true bundle exec rspec --format RSpec::Github::Formatter --format progress
