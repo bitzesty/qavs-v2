@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 3.2.3'
 
-gem 'rails', '7.1.3.2'
+gem 'rails', '7.1.5.1'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -46,10 +46,10 @@ gem 'hashie', '~> 3.5'
 gem 'responders', '~> 3.0'
 
 # Rails 4 sanitizer
-gem 'rails-html-sanitizer', '>= 1.4.3'
+gem 'rails-html-sanitizer', '~> 1.6.1'
 
 # JSON
-gem 'json', '2.3.0'
+gem 'json', '~> 2.7.1'
 gem 'jbuilder', '~> 2.10.1'
 gem 'gon', '>= 6.4.0'
 
@@ -81,7 +81,7 @@ gem 'enumerize'
 # PDF generation
 gem 'prawn'
 gem 'prawn-table'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.18.4'
 
 # Uploads
 gem 'carrierwave', '~> 2.2.6'
@@ -91,10 +91,12 @@ gem 'vigilion', '~> 1.0.4', github: 'vigilion/vigilion-ruby', ref: '7d6a7e5'
 gem 'vigilion-rails', '~> 2.1.0'
 
 # Background jobs
-gem 'sidekiq', "~> 7.0"
+gem 'sidekiq', '~> 7.2.4'
 gem 'sidekiq-cron', "~> 1.1"
+gem 'fugit', '~> 1.11.1'
 
 # CORS configuration
+gem 'rack', '~> 2.2.13'
 gem 'rack-cors', '~> 1.0'
 
 # Redis
@@ -124,7 +126,7 @@ gem 'nilify_blanks'
 gem 'curb', '~> 1.0.5'
 
 # Web server
-gem 'puma', '~> 5.6.8'
+gem 'puma', '~> 5.6.9'
 
 # Performance & Error reporting
 gem 'appsignal'
@@ -151,6 +153,10 @@ gem 'rack-canonical-host'
 gem 'rails-healthcheck'
 
 gem 'matrix', '~> 0.4.1'
+
+gem 'rexml', '~> 3.3.9'
+gem 'webrick', '~> 1.8.2'
+gem 'net-imap', '~> 0.4.19'
 
 group :development do
   gem 'letter_opener'
