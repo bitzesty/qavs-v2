@@ -319,4 +319,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'test', to: 'test#index'
 end
