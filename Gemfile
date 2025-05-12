@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 3.2.3'
 
-gem 'rails', '7.1.5.1'
+gem 'rails', '8.0.0'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -15,11 +15,11 @@ gem 'pg'
 gem 'activerecord-import'
 
 # Track Changes
-gem 'paper_trail', '~> 15.0'
+gem 'paper_trail', github: 'paper-trail-gem/paper_trail', branch: 'master'
 
 # Assets & Templates
-gem 'sprockets', '~> 3.7.2'
-gem 'sprockets-rails', '>= 2.0.0'
+gem 'sprockets', '~> 4.2.0'
+gem 'sprockets-rails', '~> 3.4.2'
 gem 'slim-rails', '~> 3.2.0'
 gem 'coffee-rails', '5.0'
 gem 'jquery-rails', '~> 4.4'
@@ -31,6 +31,7 @@ gem "terser", "~> 1.1"
 gem 'js_cookie_rails', '2.1.4'
 gem 'ckeditor'
 gem 'webpacker'
+gem 'importmap-rails'
 
 # Autolinking in admin mass user mailer
 gem 'rails_autolink'
@@ -43,20 +44,20 @@ gem 'decent_decoration'
 gem 'hashie', '~> 3.5'
 
 # Rails 4 Responders
-gem 'responders', '~> 3.0'
+gem 'responders', '~> 3.1.1'
 
 # Rails 4 sanitizer
 gem 'rails-html-sanitizer', '~> 1.6.1'
 
 # JSON
 gem 'json', '~> 2.7.1'
-gem 'jbuilder', '~> 2.10.1'
+gem 'jbuilder', '~> 2.12.0'
 gem 'gon', '>= 6.4.0'
 
 # User authentication & authorization
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.9.2'
 gem 'devise-authy', '>= 1.10.0'
-gem 'pundit', '~> 1.1'
+gem 'pundit', '~> 2.3.0'
 gem 'devise_zxcvbn', '>= 4.4.1'
 gem 'devise-security', github: "devise-security/devise-security", ref: "f83d59c5f9063466ce3948ac35ce587aeb659a0a"
 
@@ -64,7 +65,7 @@ gem 'devise-security', github: "devise-security/devise-security", ref: "f83d59c5
 gem 'mail-notify', '~> 1.0'
 
 # Pagenation
-gem 'kaminari'
+gem 'kaminari', '~> 1.2.2'
 
 # step-by-step wizard
 gem 'wicked', '~> 1.1'
@@ -73,7 +74,7 @@ gem 'wicked', '~> 1.1'
 gem 'statesman', '~> 11.0'
 
 # Form & Data helpers
-gem 'simple_form', '~> 5.0'
+gem 'simple_form', '~> 5.3.0'
 gem 'country_select', '~> 3.1'
 gem 'email_validator'
 gem 'enumerize'
@@ -92,17 +93,16 @@ gem 'vigilion-rails', '~> 2.1.0'
 
 # Background jobs
 gem 'sidekiq', '~> 7.2.4'
-gem 'sidekiq-cron', "~> 1.1"
+gem 'sidekiq-cron', "~> 1.12.0"
 gem 'fugit', '~> 1.11.1'
 
 # CORS configuration
-gem 'rack', '~> 2.2.13'
+gem 'rack', '~> 3.0.0'
 gem 'rack-cors', '~> 1.0'
 
 # Redis
 gem 'hiredis'
-gem 'redis-rails'
-gem 'redis-store', "~> 1.4"
+gem 'redis', '~> 5.0'
 gem 'connection_pool'
 
 # We use it for communicating with api.debounce.io
@@ -111,7 +111,7 @@ gem 'rest-client'
 # We are using Pusher with Poxa server
 # for collaborators application edit stuff
 #
-gem 'pusher', '0.15.2'
+gem 'pusher', '~> 2.0'
 
 # Text Search
 gem 'pg_search', "~> 2.3.3"
@@ -126,7 +126,7 @@ gem 'nilify_blanks'
 gem 'curb', '~> 1.0.5'
 
 # Web server
-gem 'puma', '~> 5.6.9'
+gem 'puma', '~> 6.4.0'
 
 # Performance & Error reporting
 gem 'appsignal'
@@ -138,7 +138,7 @@ gem 'lograge'
 # speedup server boot time
 gem 'bootscale', require: false
 
-gem 'browser', '2.4.0'
+gem 'browser', '~> 5.3.1'
 
 # Simple colored logging
 gem 'shog'
@@ -166,6 +166,7 @@ group :development do
   # When need to copy model with nested associations
   gem 'amoeba', '3.0.0'
   gem 'listen'
+  gem 'ruby-lsp', '~> 0.13.0', require: false
 
   # Fixes https://github.com/rails/rails/issues/26658#issuecomment-255590071
   gem 'rb-readline'

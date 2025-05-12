@@ -1,0 +1,50 @@
+Gems that need upgrading for Rails 8.0:
+
+Current Version -> Required Version
+
+1. Core Infrastructure:
+- sprockets (~> 3.7.2) -> (~> 4.2.0)
+- sprockets-rails (>= 2.0.0) -> (~> 3.4.2)
+- rack (~> 2.2.13) -> (~> 3.0.0)
+- responders (~> 3.0) -> (~> 4.0)
+- puma (~> 5.6.9) -> (~> 6.4.0)
+
+2. Authentication & Authorization:
+- devise (~> 4.7) -> (~> 4.9.3)
+- pundit (~> 1.1) -> (~> 2.3.1)
+- devise-authy (>= 1.10.0) -> (needs evaluation - Authy is deprecated)
+
+3. Frontend/Asset Related:
+- webpacker -> (replace with importmap-rails or jsbundling-rails)
+- coffee-rails (5.0) -> (consider removing - deprecated)
+- jquery-rails (~> 4.4) -> (consider using import maps)
+- bootstrap-sass (~> 3.4) -> (consider Bootstrap 5 with cssbundling-rails)
+- govuk_frontend_toolkit (~> 3.1.0) -> (check latest GOV.UK frontend)
+- govuk_template (0.12.0) -> (check latest GOV.UK template)
+- js_cookie_rails (2.1.4) -> (consider using JS modules)
+
+4. API & Data Handling:
+- pusher (0.15.2) -> (~> 2.0)
+- jbuilder (~> 2.10.1) -> (~> 2.11.5)
+- browser (2.4.0) -> (~> 5.3.1)
+
+5. Form & UI Components:
+- simple_form (~> 5.0) -> (~> 5.3.0)
+- kaminari -> (~> 1.2.2)
+
+6. Background Processing:
+- sidekiq (~> 7.2.4) -> (current version is compatible)
+- sidekiq-cron (~> 1.1) -> (~> 1.12.0)
+
+7. Storage & File Handling:
+- carrierwave (~> 2.2.6) -> (~> 3.0.5)
+
+8. Deprecated/Consider Removing:
+- hashie (~> 3.5)
+- virtus (use ActiveModel attributes instead)
+
+Notes:
+1. Some gems might need additional configuration changes beyond version updates
+2. Test thoroughly after each gem update
+3. Some gems might require application code changes to work with newer versions
+4. Consider replacing deprecated gems with modern alternatives
