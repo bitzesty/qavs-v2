@@ -216,7 +216,7 @@ GEM
     cuke_modeler (3.20.1)
       cucumber-gherkin (< 28.0)
     curb (1.0.5)
-    database_cleaner-active_record (2.1.0)
+    database_cleaner-active_record (2.2.1)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
@@ -797,7 +797,7 @@ DEPENDENCIES
   connection_pool
   country_select (~> 3.1)
   curb (~> 1.0.5)
-  database_cleaner-active_record
+  database_cleaner-active_record (~> 2.2.0)
   decent_decoration
   decent_exposure
   devise (~> 4.7)

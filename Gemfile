@@ -186,7 +186,7 @@ group :test do
   gem 'factory_bot_rails', '6.2' # https://github.com/thoughtbot/factory_bot_rails/issues/433
   gem 'capybara', '~> 3.39'
   gem 'poltergeist'
-  gem 'database_cleaner-active_record'
+  gem 'database_cleaner-active_record', '~> 2.2.0'
   gem 'launchy'
   gem 'turnip', '~> 4.4.0'
   gem 'shoulda-matchers', require: false

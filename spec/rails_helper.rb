@@ -94,12 +94,11 @@ RSpec.configure do |config|
 
   config.raise_error_for_unimplemented_steps = true
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
+  # Let database_cleaner handle transactions
   config.use_transactional_fixtures = false
+
   config.infer_base_class_for_anonymous_controllers = false
 
   # #build is no longer building an association if this is set to true
@@ -129,6 +128,31 @@ RSpec.configure do |config|
   RSpec.configure do |config|
     config.include(Shoulda::Matchers::ActiveModel, type: :model)
     config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+  end
+
+  # Optimize test performance
+  config.before(:suite) do
+    # Speed up Devise in tests
+    Devise.stretches = 1
+
+    # Factory Bot performance optimization
+    FactoryBot.use_parent_strategy = false
+
+    # Faster faker for large test suites (if Faker is used)
+    if defined?(Faker)
+      Faker::Config.random = Random.new(config.seed)
+    end
+  end
+
+  # Use memory store for caching in tests
+  config.before(:each) do
+    Rails.cache.clear
+  end
+
+  # Speed up tests by lowering BCrypt's cost function
+  require 'bcrypt'
+  silence_warnings do
+    BCrypt::Engine::DEFAULT_COST = BCrypt::Engine::MIN_COST
   end
 end
 
