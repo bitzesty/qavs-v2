@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 3.2.3'
 
-gem 'rails', '7.1.5.1'
+gem 'rails', '7.2.0'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -175,7 +175,7 @@ gem 'dotenv-rails'
 
 group :development, :test do
   # Enviroment variables
-  gem 'rspec-rails', '~> 6.0'
+  gem 'rspec-rails', github: "rspec/rspec-rails", branch: "main"
   gem 'rspec-github', require: false
   gem "pry-byebug"
   gem 'rails-controller-testing'
