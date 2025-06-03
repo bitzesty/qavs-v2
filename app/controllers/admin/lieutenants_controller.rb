@@ -1,4 +1,5 @@
 class Admin::LieutenantsController < Admin::UsersController
+  before_action :find_resource, except: [:index, :new, :create, :deleted, :restore]
   before_action :permit_search_params, except: [:index]
 
   def index

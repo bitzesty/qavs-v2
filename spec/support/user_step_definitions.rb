@@ -20,12 +20,11 @@ module UserStepDefinitions
     # Make sure we're starting fresh
     page.driver.browser.manage.delete_all_cookies rescue nil
 
-    # Make sure the lieutenant has the right password for testing
-    lieutenant.update_column(:encrypted_password, Lieutenant.new(password: "my98ssdkjv9823kds=2").encrypted_password)
+    # Ensure lieutenant is confirmed
     lieutenant.update_column(:confirmed_at, Time.now) if lieutenant.confirmed_at.nil?
 
-    # Use direct browser login
-    visit destroy_lieutenant_session_path rescue nil
+    # Use Warden logout instead of visiting sign out path
+    logout(:lieutenant) rescue nil
     visit '/lieutenants/sign_in'
 
     # Fill in the login form

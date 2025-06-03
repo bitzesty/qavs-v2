@@ -4,7 +4,8 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
 
-Capybara.server = :puma #, { Silent: true }
+# Use webrick instead of puma to avoid compatibility issues
+Capybara.server = :webrick
 
 Capybara.register_driver(:chrome_headless) do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new
