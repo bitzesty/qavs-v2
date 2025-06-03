@@ -4,21 +4,17 @@ class FormController < ApplicationController
   before_action :authenticate_user!
   before_action :check_deadlines
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
-    :new, :create, :update, :destroy,
-    :submit_confirm, :save, :add_attachment
+    :new_qavs_form, :submit_confirm, :save, :add_attachment
   ]
 
   before_action :set_form_answer, except: [
     :new_qavs_form
   ]
 
-  before_action :check_if_deadline_ended!, only: [:update, :save, :add_attachment]
+  before_action :check_if_deadline_ended!, only: [:save, :add_attachment]
 
   before_action :check_eligibility!, only: [
-    :create,
-    :destroy,
     :save,
-    :update,
     :add_attachment,
     :submit_confirm
   ]
@@ -116,7 +112,7 @@ class FormController < ApplicationController
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               params[:step] ||= @form.steps.first.title_to_param
-                
+
               render template: "qae_form/show"
             end
           end

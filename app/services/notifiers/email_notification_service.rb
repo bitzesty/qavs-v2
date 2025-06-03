@@ -104,12 +104,20 @@ class Notifiers::EmailNotificationService
       )
     end
 
-    winners_dictionary = winners.includes(:group_leader).map do |entry|
-      {
-        id: entry.id,
-        group_leader_id: entry.group_leader.id
-      }
-    end
+    # Reload the winners to get the updated group_leader associations
+    winners = award_year.form_answers.winners.includes(:group_leader)
+
+    winners_dictionary = winners.map do |entry|
+      # Find the group leader by form_answer_id if the association is nil
+      group_leader = entry.group_leader || GroupLeader.find_by(form_answer_id: entry.id)
+
+      if group_leader
+        {
+          id: entry.id,
+          group_leader_id: group_leader.id
+        }
+      end
+    end.compact
 
     send_emails_to_group_leaders!(
       winners_dictionary,
@@ -138,7 +146,9 @@ class Notifiers::EmailNotificationService
   def buckingham_palace_invite(award_year)
    award_year.form_answers.winners.each do |form_answer|
     group_leader = GroupLeader.find_by_form_answer_id(form_answer.id)
-      GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_now!
+    next unless group_leader
+
+    GroupLeadersMailers::BuckinghamPalaceInviteMailer.invite(form_answer.id, group_leader.id).deliver_now!
     end
   end
 

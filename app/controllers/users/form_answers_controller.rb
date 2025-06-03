@@ -1,6 +1,9 @@
 class Users::FormAnswersController < Users::BaseController
   include FormAnswersPdf
 
+  # Override parent callback since this controller only has :show action
+  skip_before_action :restrict_access_if_admin_in_read_only_mode!
+
   expose(:form_answer) do
     current_user.account
                 .form_answers

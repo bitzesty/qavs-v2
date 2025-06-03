@@ -1,19 +1,11 @@
 class ContentOnlyController < ApplicationController
   before_action :authenticate_user!, unless: -> { admin_signed_in? || assessor_signed_in? },
                 except: [
-                  :home,
-                  :awards_for_organisations,
-                  :how_to_apply,
-                  :timeline,
-                  :additional_information_and_contact,
-                  :privacy,
-                  :accessibility,
+                  :dashboard,
                   :cookies,
-                  :apply_for_queens_award_for_enterprise,
+                  :cookie_policy,
                   :sign_up_complete,
-                  :submitted_nomination_successful,
-                  :pre_sign_in,
-                  :cookie_policy
+                  :pre_sign_in
                 ]
 
   before_action :get_current_form,
