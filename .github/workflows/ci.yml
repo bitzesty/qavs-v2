@@ -62,9 +62,11 @@ jobs:
       - name: Setup database and run tests
         env:
           DISPLAY_SOCIAL_MOBILITY_AWARD: true
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/qavs_test"
-          DOCKER_TLS_CERTDIR: ""
+          DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/qavs_test'
+          DOCKER_TLS_CERTDIR: ''
           RAILS_ENV: test
         run: |
-          bundle exec rake db:create db:migrate
+          # Setup test database using standard Rails commands
+          bundle exec rails db:create
+          bundle exec rails db:migrate
           RAILS_DISABLE_TEST_LOG=true bundle exec rspec --format RSpec::Github::Formatter --format progress

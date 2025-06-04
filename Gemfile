@@ -63,7 +63,7 @@ gem 'devise', '~> 4.9.3'
 gem 'devise-authy', '>= 1.10.0'
 gem 'pundit', '~> 2.3.1'
 gem 'devise_zxcvbn', '>= 4.4.1'
-gem 'devise-security', github: "devise-security/devise-security", ref: "f83d59c5f9063466ce3948ac35ce587aeb659a0a"
+gem 'devise-security', github: "devise-security/devise-security", ref: "699b9fafa69abe2d28bf97ea6254e74d3c2473f7"
 
 # GOV.UK Notify support (for mailers)
 gem 'mail-notify', '~> 1.0'

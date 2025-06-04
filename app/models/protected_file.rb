@@ -6,10 +6,11 @@ class ProtectedFile < ApplicationRecord
   validates :entity_type, inclusion: { in: %w(Admin Assessor GroupLeader Lieutenant User) }, presence: true
   validates :entity_id, presence: true
 
+  before_create :generate_uuid
   after_create :cleanup_tempfile
 
   def mark_as_downloaded!
-    touch(:last_downloaded_at) 
+    touch(:last_downloaded_at)
   end
 
   def self.build_from_raw_data(data, filename, **attrs)
@@ -30,6 +31,10 @@ class ProtectedFile < ApplicationRecord
   end
 
   private
+
+  def generate_uuid
+    self.id = SecureRandom.uuid if id.blank?
+  end
 
   def cleanup_tempfile
     @file.unlink if @file
