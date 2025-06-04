@@ -66,5 +66,15 @@ module Qae
 
     # Default to strong cookies
     config.action_dispatch.cookies_same_site_protection = :lax
+
+    # Rails 8 specific configurations for stability
+    config.force_ssl = false if Rails.env.development?
+
+    # Prevent memory issues in development
+    if Rails.env.development?
+      config.cache_classes = false
+      config.eager_load = false
+      config.consider_all_requests_local = true
+    end
   end
 end

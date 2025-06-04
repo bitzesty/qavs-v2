@@ -35,15 +35,22 @@ class ContentOnlyController < ApplicationController
   end
 
   def dashboard
-    @user_award_forms = user_award_forms
-    @user_award_forms_submitted = @user_award_forms.submitted
+    if current_account
+      @user_award_forms = user_award_forms
+      @user_award_forms_submitted = @user_award_forms.submitted
 
-    set_unsuccessful_business_applications if Settings.unsuccessful_stage?
+      set_unsuccessful_business_applications if Settings.unsuccessful_stage?
+    else
+      # Redirect to sign in if no current account
+      redirect_to new_user_session_path
+    end
   end
 
   private
 
   def user_award_forms
+    return FormAnswer.none unless current_account
+
     current_account.form_answers
                    .where(award_year: target_award_year)
   end
