@@ -112,6 +112,15 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Enable DNS rebinding protection and other Origin header checks
+  config.action_controller.forgery_protection_origin_check = true
+
+  # Enable parameter wrapping for JSON
+  config.action_controller.wrap_parameters_by_default = true
+
+  # Raise error when a before_action's only/except options reference missing actions
+  config.action_controller.raise_on_missing_callback_actions = true
+
   # AWS SES mail settings are in config/initializers/aws_ses.rb
 
   # configure the devise email layout

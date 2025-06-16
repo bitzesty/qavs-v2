@@ -6,11 +6,21 @@ feature "Admin view application", js: true do
     Settings.current.deadlines.award_year_switch.update(trigger_at: 1.day.ago)
 
     application = create_application
-    login_admin(create(:admin, superadmin: true))
+    admin = create(:admin, superadmin: true)
 
+    # Ensure admin is properly logged in
+    login_admin(admin)
+
+    # Verify login was successful by checking for dashboard page content
+    # that's actually present in the header
+    expect(page).to have_content("Nominations", wait: 10)
+
+    # Then navigate to form answer
     visit admin_form_answer_path(application)
 
-    expect(page).to have_content("Edit nomination and local assessment form")
+    # Wait for page to load - check for the group name, not URN
+    expect(page).to have_content("Bitzesty", wait: 10)
+    expect(page).to have_content("Edit nomination and local assessment form", wait: 10)
 
     click_link("Edit nomination and local assessment form")
     expect(page).to have_current_path edit_admin_form_answer_path(application)
@@ -22,11 +32,21 @@ feature "Admin view application", js: true do
     Settings.current_submission_deadline.update(trigger_at: 1.day.ago)
 
     application = create_application
-    login_admin(create(:admin, superadmin: true))
+    admin = create(:admin, superadmin: true)
 
+    # Ensure admin is properly logged in
+    login_admin(admin)
+
+    # Verify login was successful by checking for dashboard page content
+    # that's actually present in the header
+    expect(page).to have_content("Nominations", wait: 10)
+
+    # Then navigate to form answer
     visit admin_form_answer_path(application)
 
-    expect(page).to have_content("Edit nomination and local assessment form")
+    # Wait for page to load - check for the group name, not URN
+    expect(page).to have_content("Bitzesty", wait: 10)
+    expect(page).to have_content("Edit nomination and local assessment form", wait: 10)
 
     click_link("Edit nomination and local assessment form")
 

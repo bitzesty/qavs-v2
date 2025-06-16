@@ -1,19 +1,11 @@
 class ContentOnlyController < ApplicationController
   before_action :authenticate_user!, unless: -> { admin_signed_in? || assessor_signed_in? },
                 except: [
-                  :home,
-                  :awards_for_organisations,
-                  :how_to_apply,
-                  :timeline,
-                  :additional_information_and_contact,
-                  :privacy,
-                  :accessibility,
+                  :dashboard,
                   :cookies,
-                  :apply_for_queens_award_for_enterprise,
+                  :cookie_policy,
                   :sign_up_complete,
-                  :submitted_nomination_successful,
-                  :pre_sign_in,
-                  :cookie_policy
+                  :pre_sign_in
                 ]
 
   before_action :get_current_form,
@@ -43,15 +35,22 @@ class ContentOnlyController < ApplicationController
   end
 
   def dashboard
-    @user_award_forms = user_award_forms
-    @user_award_forms_submitted = @user_award_forms.submitted
+    if current_account
+      @user_award_forms = user_award_forms
+      @user_award_forms_submitted = @user_award_forms.submitted
 
-    set_unsuccessful_business_applications if Settings.unsuccessful_stage?
+      set_unsuccessful_business_applications if Settings.unsuccessful_stage?
+    else
+      # Redirect to sign in if no current account
+      redirect_to new_user_session_path
+    end
   end
 
   private
 
   def user_award_forms
+    return FormAnswer.none unless current_account
+
     current_account.form_answers
                    .where(award_year: target_award_year)
   end

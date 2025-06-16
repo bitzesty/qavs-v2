@@ -4,21 +4,17 @@ class FormController < ApplicationController
   before_action :authenticate_user!
   before_action :check_deadlines
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
-    :new, :create, :update, :destroy,
-    :submit_confirm, :save, :add_attachment
+    :new_qavs_form, :submit_confirm, :save, :add_attachment
   ]
 
   before_action :set_form_answer, except: [
     :new_qavs_form
   ]
 
-  before_action :check_if_deadline_ended!, only: [:update, :save, :add_attachment]
+  before_action :check_if_deadline_ended!, only: [:save, :add_attachment]
 
   before_action :check_eligibility!, only: [
-    :create,
-    :destroy,
     :save,
-    :update,
     :add_attachment,
     :submit_confirm
   ]
@@ -75,6 +71,7 @@ class FormController < ApplicationController
 
   def save
     @form_answer.document = prepare_doc if params[:form].present?
+    process_supporters_question_data if params[:form].present?
     @form = @form_answer.award_form.decorate(answers: HashWithIndifferentAccess.new(@form_answer.document))
 
     redirected = params[:next_action] == "redirect"
@@ -116,7 +113,7 @@ class FormController < ApplicationController
             else
               params[:step] = @form_answer.steps_with_errors.try(:first)
               params[:step] ||= @form.steps.first.title_to_param
-                
+
               render template: "qae_form/show"
             end
           end
@@ -266,5 +263,48 @@ class FormController < ApplicationController
     e.force_validate_now = true
 
     e.valid?
+  end
+
+  def process_supporters_question_data
+    return unless @form_answer.document["supporter_letters_list"].present?
+
+    supporter_letters_data = @form_answer.document["supporter_letters_list"]
+    return unless supporter_letters_data.is_a?(Array)
+
+    # Process each supporter letter entry
+    supporter_letters_data.each_with_index do |supporter_data, index|
+      next unless supporter_data.is_a?(Hash)
+      next if supporter_data["support_letter_id"].present? # Already processed
+
+      # Check if we have the required data to create a support letter
+      if supporter_data["first_name"].present? &&
+         supporter_data["last_name"].present? &&
+         supporter_data["relationship_to_nominee"].present? &&
+         supporter_data["letter_of_support"].present?
+
+        # Find the attachment
+        attachment = @form_answer.support_letter_attachments.find_by(id: supporter_data["letter_of_support"])
+        next unless attachment
+
+        # Create or find existing support letter
+        support_letter = @form_answer.support_letters.find_or_initialize_by(
+          first_name: supporter_data["first_name"],
+          last_name: supporter_data["last_name"],
+          relationship_to_nominee: supporter_data["relationship_to_nominee"],
+          support_letter_attachment: attachment
+        )
+
+        support_letter.user = current_user
+        support_letter.manual = true
+
+        if support_letter.save
+          # Update the document with the support_letter_id
+          supporter_data["support_letter_id"] = support_letter.id
+        end
+      end
+    end
+
+    # Update the document with manually_upload flag
+    @form_answer.document["manually_upload"] = "yes"
   end
 end

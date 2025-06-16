@@ -2,7 +2,7 @@ require "app_responder"
 include AuditHelper
 
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
 
   add_flash_types :success, :success_template
 

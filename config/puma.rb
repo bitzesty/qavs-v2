@@ -5,24 +5,30 @@
 # and maximum; this matches the default thread size of Active Record.
 #
 
-workers Integer(ENV.fetch("WEB_CONCURRENCY") { 2 })
+# Reduce workers to prevent memory issues in development
+workers Integer(ENV.fetch("WEB_CONCURRENCY") { Rails.env.development? ? 0 : 2 })
 threads_count = ENV.fetch("MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
-preload_app!
+# Only preload app in production to avoid memory issues in development
+preload_app! unless Rails.env.development?
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
 port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
-#
-environment ENV.fetch("RACK_ENV") { "development" }
+# Use RAILS_ENV instead of RACK_ENV for Rails 8 compatibility
+environment ENV.fetch("RAILS_ENV") { ENV.fetch("RACK_ENV") { "development" } }
 
-on_worker_boot do
-  # Worker specific setup for Rails 4.1+
-  # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
-  ActiveRecord::Base.establish_connection
+# Only define worker boot block if running in cluster mode
+worker_count = Integer(ENV.fetch("WEB_CONCURRENCY") { Rails.env.development? ? 0 : 2 })
+if worker_count > 0
+  on_worker_boot do
+    # Worker specific setup for Rails 4.1+
+    # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
+    ActiveRecord::Base.establish_connection
+  end
 end
 
 # Specifies the number of `workers` to boot in clustered mode.

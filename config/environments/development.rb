@@ -55,15 +55,15 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.action_mailer.default_url_options = { host: ENV['MAILER_HOST'], port: 3000 }
-  config.action_mailer.asset_host = "https://#{ENV['ASSET_HOST']}"
+  config.action_mailer.default_url_options = { host: ENV['MAILER_HOST'] || 'localhost', port: 3000 }
+  config.action_mailer.asset_host = "https://#{ENV['ASSET_HOST'] || 'localhost:3000'}"
   config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.delivery_method = :notify
   # config.action_mailer.notify_settings = {
   #   api_key: ENV['GOV_UK_NOTIFY_API_KEY']
   # }
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  # config.i18n.raise_on_missing_translations = true
 
   # configure the devise email layout
   # config.to_prepare { Devise::Mailer.layout "mailer" }
@@ -73,5 +73,12 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Rails 8 specific settings
+  # Raise error when a before_action's only/except options reference missing actions
+  config.action_controller.raise_on_missing_callback_actions = true
+
+  # Uncomment if you wish to allow Action Cable access from any origin.
+  # config.action_cable.disable_request_forgery_protection = true
 end

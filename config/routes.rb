@@ -143,7 +143,6 @@ Rails.application.routes.draw do
       end
 
       member do
-        patch :update_financials
         get :review
       end
       resources :draft_notes, only: [:create, :update]

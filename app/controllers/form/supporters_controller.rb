@@ -1,4 +1,6 @@
 class Form::SupportersController < Form::BaseController
+  # Override parent callback to only apply to actions that exist in this controller
+  before_action :restrict_access_if_admin_in_read_only_mode!, only: [:new, :create, :destroy]
 
   def create
     @supporter = @form_answer.supporters.build(supporter_params)
