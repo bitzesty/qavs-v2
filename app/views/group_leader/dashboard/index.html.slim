@@ -107,8 +107,8 @@
     hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
     h3.govuk-heading-s
-      | By
-      =<> @deadlines.buckingham_palace_reception_attendee_information_due_by.strftime("%-d %B %Y")
+      | By Mid February
+      =<> @award_year.year + 1
       | &mdash; Submit details for Royal Garden Party &nbsp;
       / - if @invite.submitted
         strong.govuk-tag.govuk-tag--blue
