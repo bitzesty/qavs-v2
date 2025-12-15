@@ -1,8 +1,10 @@
 #!/bin/sh
 set -e
 
+# Get Ruby version dynamically
+RUBY_VERSION=$(ruby -e "puts RUBY_VERSION" | cut -d. -f1,2)
 # Ensure PATH includes vendor/bundle binaries
-export PATH="$HOME/bin:$HOME/vendor/bundle/bin:$HOME/vendor/bundle/ruby/3.2.3/bin:$PATH"
+export PATH="$HOME/bin:$HOME/vendor/bundle/bin:$HOME/vendor/bundle/ruby/$RUBY_VERSION/bin:$PATH"
 
 rm -rf tmp/pids
 
