@@ -27,7 +27,8 @@ COPY . /app
 
 
 RUN yarn install
-RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
+# Compile assets without ASSET_HOST to use relative URLs
+RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url ASSET_HOST= bundle exec rake assets:precompile
 
 # Make startup script executable
 RUN chmod +x bin/docker-run.sh

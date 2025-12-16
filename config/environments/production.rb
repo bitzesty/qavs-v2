@@ -42,7 +42,8 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = ENV['ASSET_HOST']
+  # Only set asset_host if ASSET_HOST is explicitly provided (not empty)
+  config.action_controller.asset_host = ENV['ASSET_HOST'] if ENV['ASSET_HOST'].present?
   config.static_cache_control = 'public, max-age=3600'
 
 
