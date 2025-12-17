@@ -42,7 +42,8 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = ENV['ASSET_HOST']
+  # Only set asset_host if ASSET_HOST is explicitly provided (not empty)
+  config.action_controller.asset_host = ENV['ASSET_HOST'] if ENV['ASSET_HOST'].present?
   config.static_cache_control = 'public, max-age=3600'
 
 
@@ -79,7 +80,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: ENV['MAILER_HOST'] }
-  config.action_mailer.asset_host = "https://#{ENV['ASSET_HOST']}"
+  config.action_mailer.asset_host = "https://#{ENV['ASSET_HOST']}" if ENV['ASSET_HOST'].present?
   config.action_mailer.delivery_method = :notify
   config.action_mailer.notify_settings = {
     api_key: ENV['GOV_UK_NOTIFY_API_KEY']
