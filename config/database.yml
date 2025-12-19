@@ -23,11 +23,6 @@ production:
   username: <%= ENV["DB_USER"] %>  # e.g. "my-database-user"
   password: <%= ENV["DB_PASS"] %> # e.g. "my-database-password"
   database: <%= ENV.fetch("DB_NAME") { "qavs-dev" } %>
-  <% if ENV["INSTANCE_CONNECTION_NAME"] %>
-  # Use Unix socket for Cloud SQL connection
-  socket: /cloudsql/<%= ENV["INSTANCE_CONNECTION_NAME"] %>
-  <% else %>
   host: <%= ENV.fetch("DB_HOST") { "localhost" }%> # '172.17.0.1' if deployed to GAE Flex
   port: <%= ENV.fetch("DB_PORT") { 5432 }%>
-  <% end %>
   pool: <%= ENV['DB_POOL'] || ENV['MAX_THREADS'] || 5 %>

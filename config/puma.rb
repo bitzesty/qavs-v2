@@ -6,14 +6,12 @@
 #
 
 # Reduce workers to prevent memory issues in development
-# Use ENV vars instead of Rails.env since Rails isn't loaded when Puma config is evaluated
-rails_env = ENV.fetch("RAILS_ENV") { ENV.fetch("RACK_ENV") { "development" } }
-workers Integer(ENV.fetch("WEB_CONCURRENCY") { rails_env == "development" ? 0 : 2 })
+workers Integer(ENV.fetch("WEB_CONCURRENCY") { Rails.env.development? ? 0 : 2 })
 threads_count = ENV.fetch("MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
 # Only preload app in production to avoid memory issues in development
-preload_app! unless rails_env == "development"
+preload_app! unless Rails.env.development?
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
@@ -24,7 +22,7 @@ port        ENV.fetch("PORT") { 3000 }
 environment ENV.fetch("RAILS_ENV") { ENV.fetch("RACK_ENV") { "development" } }
 
 # Only define worker boot block if running in cluster mode
-worker_count = Integer(ENV.fetch("WEB_CONCURRENCY") { rails_env == "development" ? 0 : 2 })
+worker_count = Integer(ENV.fetch("WEB_CONCURRENCY") { Rails.env.development? ? 0 : 2 })
 if worker_count > 0
   on_worker_boot do
     # Worker specific setup for Rails 4.1+

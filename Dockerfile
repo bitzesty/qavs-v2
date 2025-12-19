@@ -27,11 +27,4 @@ COPY . /app
 
 
 RUN yarn install
-# Compile assets (packs are served from /packs on the same host in Cloud Run)
 RUN RAILS_ENV=production NODE_ENV=production DATABASE_URL=postgresql://localhost/dummy_url bundle exec rake assets:precompile
-
-# Make startup script executable
-RUN chmod +x bin/docker-run.sh
-
-# Use the startup script as the entrypoint
-CMD ["sh", "bin/docker-run.sh"]
