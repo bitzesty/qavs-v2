@@ -35,3 +35,4 @@ qae-production-worker_manifest.yml
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+cloud-sql-proxy
