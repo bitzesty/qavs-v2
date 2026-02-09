@@ -86,7 +86,7 @@ gem 'enumerize'
 # PDF generation
 gem 'prawn'
 gem 'prawn-table'
-gem 'nokogiri', '~> 1.18.4'
+gem 'nokogiri', '~> 1.18.9'
 
 # Uploads
 gem 'carrierwave', '~> 2.2.6'
@@ -158,7 +158,7 @@ gem 'rails-healthcheck'
 
 gem 'matrix', '~> 0.4.1'
 
-gem 'rexml', '~> 3.3.9'
+gem 'rexml', '~> 3.4.2'
 gem 'webrick', '~> 1.8.2'
 gem 'net-imap', '~> 0.4.19'
 

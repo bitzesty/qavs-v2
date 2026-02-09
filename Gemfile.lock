@@ -467,11 +467,11 @@ GEM
       activerecord (>= 4.0.0)
       activesupport (>= 4.0.0)
     nio4r (2.7.4)
-    nokogiri (1.18.8-arm64-darwin)
+    nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-darwin)
+    nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-linux-gnu)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
       jwt (>= 1.5, < 3)
@@ -621,7 +621,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     retriable (3.1.2)
-    rexml (3.3.9)
+    rexml (3.4.2)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -845,7 +845,7 @@ DEPENDENCIES
   matrix (~> 0.4.1)
   net-imap (~> 0.4.19)
   nilify_blanks
-  nokogiri (~> 1.18.4)
+  nokogiri (~> 1.18.9)
   oj
   paper_trail!
   pdf-inspector
@@ -872,7 +872,7 @@ DEPENDENCIES
   redis (~> 5.1.0)
   responders (~> 3.1.0)
   rest-client
-  rexml (~> 3.3.9)
+  rexml (~> 3.4.2)
   rspec-github
   rspec-rails!
   rspec-sidekiq
