@@ -29,7 +29,7 @@ gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
 gem "terser", "~> 1.1"
 gem 'js_cookie_rails', '2.1.4'
-gem 'ckeditor'
+gem 'ckeditor5'
 gem 'webpacker'
 
 # Autolinking in admin mass user mailer
