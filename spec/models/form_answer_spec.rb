@@ -175,4 +175,25 @@ RSpec.describe FormAnswer, type: :model do
       expect(nomination.active_support_letters.map(&:id).sort).to eq([sl1.id, sl2.id].sort)
     end
   end
+
+  context "URN" do
+    before do
+      FormAnswer.connection.execute("ALTER SEQUENCE urn_seq_#{AwardYear.current.year} RESTART")
+    end
+
+    let!(:form_answer) do
+      create(:form_answer, :submitted)
+    end
+
+    let(:award_year) { AwardYear.current.year.to_s[2..] }
+
+    it "creates form with URN" do
+      expect(form_answer.urn).to eq("KAVS0001/#{award_year}")
+    end
+
+    it "increments URN" do
+      other_form_answer = create(:form_answer, :submitted)
+      expect(other_form_answer.urn).to eq("KAVS0002/#{award_year}")
+    end
+  end
 end

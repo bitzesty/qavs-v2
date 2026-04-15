@@ -21,6 +21,10 @@ class Reports::NationalAssessmentsReport < Reports::QavsBase
       method: :company_or_nominee_name,
     },
     {
+      label: "URN",
+      method: :urn,
+    },
+    {
       label: "Ceremonial county",
       method: :ceremonial_county,
     },
