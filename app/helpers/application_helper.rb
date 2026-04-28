@@ -186,4 +186,11 @@ module ApplicationHelper
   def will_session_timeout?
     current_admin.present? || current_assessor.present? || current_lieutenant.present?
   end
+
+  def include_ckeditor5_assets
+    return if content_for?(:ckeditor5_assets_loaded)
+
+    provide(:ckeditor5_assets_loaded, true)
+    ckeditor5_assets
+  end
 end

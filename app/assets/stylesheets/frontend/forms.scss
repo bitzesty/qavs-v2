@@ -1353,3 +1353,41 @@ fieldset.account-contact-preferences-other-ops {
     margin-top: 10px;
   }
 }
+
+div.ck.ck-editor__editable_inline {
+  padding: 15px 25px;
+}
+
+.cke_wordcount {
+  display: block;
+  text-align: right;
+  width: 100%;
+  color: black;
+ }
+
+ .cke_wordcount span {
+   font-size: 1.1875rem !important;
+   color: $grey-1 !important;
+  font: normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
+  padding: 6px 8px 2px;
+  border: solid var(--ck-color-base-border);
+  border-width: 0 1px 1px;
+  background: #f8f8f8;
+  display: block;
+}
+
+ckeditor-component.govuk-textarea {
+  border: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.ck.ck-powered-by {
+  display: none !important;
+}
+
+@media (min-width: 40.0625em) {
+  .cke_wordcount span {
+    margin-bottom: 30px;
+  }
+}
