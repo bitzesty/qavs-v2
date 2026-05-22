@@ -14,6 +14,10 @@ class Reports::LocalAssessmentReport < Reports::QavsBase
       method: :company_or_nominee_name,
     },
     {
+      label: "URN",
+      method: :urn,
+    },
+    {
       label: "Group leader name",
       method: :group_leader_name,
     },
