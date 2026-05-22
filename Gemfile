@@ -101,7 +101,7 @@ gem 'sidekiq-cron', "~> 1.12.0"
 gem 'fugit', '~> 1.11.1'
 
 # CORS configuration
-gem 'rack', '~> 2.2.8'
+gem 'rack', '~> 2.2.20'
 gem 'rack-cors', '~> 2.0.1'
 
 # Redis
