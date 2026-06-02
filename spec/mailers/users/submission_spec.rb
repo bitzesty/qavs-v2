@@ -9,7 +9,7 @@ describe Users::SubmissionMailer do
                       user: user
   end
 
-  let(:subject) { "KAVS Nomination Received" }
+  let(:subject) { "KAVS Nomination Received - Application ref #{form_answer.urn}" }
 
   before do
     form_answer
