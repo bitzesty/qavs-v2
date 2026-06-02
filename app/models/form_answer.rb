@@ -27,7 +27,8 @@ include Statesman::Adapters::ActiveRecordQueries[
                     :company_or_nominee_name,
                     :nominee_full_name,
                     :user_full_name,
-                    :user_email
+                    :user_email,
+                    :urn
                   ],
                   using: {
                     tsearch: {
@@ -117,6 +118,7 @@ include Statesman::Adapters::ActiveRecordQueries[
 
   begin :callbacks
     before_save :set_award_year, unless: :award_year
+    before_save :set_urn
     before_save :set_progress
     before_save :set_region
     before_save :assign_searching_attributes
@@ -369,6 +371,11 @@ include Statesman::Adapters::ActiveRecordQueries[
 
   def set_award_year
     self.award_year = AwardYear.current
+  end
+
+  def set_urn
+    builder = ::UrnBuilder.new(self)
+    builder.assign
   end
 
   def set_progress
