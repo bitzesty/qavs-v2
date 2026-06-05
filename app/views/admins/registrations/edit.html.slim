@@ -39,7 +39,7 @@ header.page-header.group
             .question
               h2.govuk.heading-l Current password
               .question-body
-                = f.input :current_password, required: true, label: false, hint: "We need your current password to confirm your changes", input_html: { class: "js-disable-copy medium" }
+                = f.input :current_password, required: true, label: false, hint: "We need your current password to confirm your changes", input_html: { class: "js-disable-copy medium", autocomplete: "current-password" }
 
         .form-actions
           = f.button :submit, "Update", class: "govuk-button button large"

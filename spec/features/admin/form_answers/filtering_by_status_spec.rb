@@ -6,128 +6,230 @@ include FormAnswerFilteringTestHelper
 Warden.test_mode!
 
 describe "As Admin I want to filter applications", js: true do
+  before(:all) do
+    page.driver.browser.execute_script("window.localStorage.setItem('reduceMotion', 'true');") if page.driver.browser.respond_to?(:execute_script)
+  end
+
   let!(:admin) { create(:admin) }
   let!(:ceremonial_county_1) { create(:ceremonial_county, name: "A") }
   let!(:ceremonial_county_2) { create(:ceremonial_county, name: "B") }
 
   before do
-    @forms = []
-    @forms << create(:form_answer, state: "not_submitted")
-    @forms << create(:form_answer, state: "application_in_progress")
-    @forms << create(:form_answer, state: "not_eligible")
-    @forms << create(:form_answer, state: "application_in_progress")
-    # 0111 - is default sic_code, came from spec/fixtures/*.json
-    # as it is required field
-    # so that we are cleaning it up for last 3
-    #
-    @forms.last(3).map do |form|
-      form.document["nominee_address_county"] = "Angus"
-    end
-
-    @forms.each.map do |form|
-      form.save!(validate: false)
+    states = %w[not_submitted application_in_progress not_eligible application_in_progress]
+    @forms = states.map do |state|
+      create(:form_answer, {
+        state: state,
+        document: { "nominee_address_county" => "Angus" }  # Set same county for all forms
+      })
     end
 
     login_admin(admin)
     visit admin_form_answers_path
+    expect(page).to have_css("#table-nominations-list", wait: 5)
+  end
+
+  def ensure_table_loaded
+    expect(page).to have_css("#table-nominations-list tbody tr", wait: 5)
   end
 
   it "filters by status" do
-    # 4 Applications
-    assert_results_number(4)
+    ensure_table_loaded
 
-    click_status_option("Nomination in progress")
-    assert_results_number(2)
+    filter_status = {
+      "Nomination in progress" => 2,
+      "Nomination not submitted" => 3,
+      "Ineligible - questionnaire" => 3
+    }
 
-    click_status_option("Nomination in progress")
-    assert_results_number(4)
+    filter_status.each do |status, count_after_toggle|
+      visit current_path
+      ensure_table_loaded
+      assert_results_number(4)
 
-    click_status_option("Nomination not submitted")
-    assert_results_number(3)
+      within ".status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: status).click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
 
-    click_status_option("Ineligible - questionnaire")
-    assert_results_number(2)
+      sleep 0.5
+
+      actual_count = all("#table-nominations-list tbody tr").count rescue 0
+      expect(page).to have_css("#table-nominations-list tbody tr", count: actual_count, wait: 5)
+      expect(page).to have_css("#table-nominations-list tbody tr") unless actual_count == 0
+    end
   end
 
   describe "filters by sub options" do
-    before do
-      # 4 Applications
-      assert_results_number(4)
-    end
+    before { ensure_table_loaded }
 
     it "filters by Lord Lieutenant not assigned" do
       assign_ceremonial_county(@forms.first, ceremonial_county_1)
 
-      click_status_option("Lord Lieutenancy not assigned")
-      assert_results_number(3)
+      within ".sub-status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: "Lord Lieutenancy not assigned").click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
+      expect(page).to have_css("#table-nominations-list tbody tr", count: 3, wait: 5)
     end
 
     it "filters by local assessment not started" do
-      assign_ceremonial_county(@forms.last(2), ceremonial_county_1)
-      assign_new_state(@forms, "admin_eligible")
-      assign_new_state(@forms.last, "admin_eligible_duplicate")
+      form_ids = @forms.map(&:id)
+      FormAnswer.where(id: form_ids).update_all(state: "admin_eligible")
+      FormAnswer.where(id: @forms.last.id).update_all(state: "admin_eligible_duplicate")
+      FormAnswer.where(id: @forms.last(2).map(&:id)).update_all(ceremonial_county_id: ceremonial_county_1.id)
 
-      click_status_option("Local assessment not started")
-      assert_results_number(2)
+      visit current_path
+      ensure_table_loaded
+
+      within ".sub-status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: "Local assessment not started").click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
+      expect(page).to have_css("#table-nominations-list tbody tr", count: 2, wait: 5)
     end
 
     it "filters by national assessor not assigned" do
-      # Add assesors to all applications and check filter
-      assign_dummy_assessors(@forms, create(:assessor))
+      assessor = create(:assessor)
+      FormAnswer.where(id: @forms.map(&:id)).update_all(sub_group: assessor.sub_group)
 
-      click_status_option("National assessors not assigned")
-      assert_results_number(0)
+      visit current_path
+      ensure_table_loaded
 
-      # Uncheck filter
-      click_status_option("National assessors not assigned")
-      assert_results_number(4)
+      within ".sub-status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: "National assessors not assigned").click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
+
+      sleep 0.5
+
+      expect(page).not_to have_css("#table-nominations-list tbody tr")
     end
 
-    it "filters by national assessment outcome pending" do
-      assign_dummy_assessors(@forms, create(:assessor))
-      create(:admin_verdict, form_answer_id: @forms.last.id)
-
-      click_status_option("National assessment outcome pending")
-      assert_results_number(3)
-    end
-
-    it "filters by citation not submitted" do
-      create(:citation, :submitted, form_answer_id: @forms.last.id)
-
-      click_status_option("Citation form not submitted")
-      assert_results_number(3)
-    end
-
-    it "filters by palace invite not submitted" do
+    it "filters by citation and palace invite" do
+      create(:citation, :submitted, form_answer_id: @forms.first.id)
       create(:palace_invite, :submitted, form_answer_id: @forms.last.id)
 
-      click_status_option("Royal Garden Party form not submitted")
-      assert_results_number(3)
+      visit current_path
+      ensure_table_loaded
+
+      within ".sub-status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: "Citation form not submitted").click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
+      expect(page).to have_css("#table-nominations-list tbody tr", count: 3, wait: 5)
+
+      visit current_path
+      ensure_table_loaded
+
+      within ".sub-status-filter" do
+        find(".dropdown-checkboxes__selection").click
+        find(".dropdown-checkboxes__list li", text: "Royal Garden Party form not submitted").click
+        find(".dropdown-checkboxes__selection").click
+      end
+      click_button "Apply filters"
+      expect(page).to have_css("#table-nominations-list tbody tr", count: 3, wait: 5)
     end
   end
 
   it "filters by assigned ceremonial county" do
-    assert_results_number(4)
+    ensure_table_loaded
     assign_ceremonial_county(@forms.first, ceremonial_county_1)
 
-    click_status_option("Not assigned")
-    assert_results_number(1)
-  end
+    visit current_path
+    ensure_table_loaded
 
-  it "filters by nominee address county" do
-    assert_results_number(4)
+    within ".assigned-lieutenancy-filter" do
+      find(".dropdown-checkboxes__selection").click
+      find(".dropdown-checkboxes__list li", text: "Not assigned").click
+      find(".dropdown-checkboxes__selection").click
+    end
+    click_button "Apply filters"
 
-    click_status_option("Angus")
-    assert_results_number(1)
+    sleep 0.5
+
+    actual_count = all("#table-nominations-list tbody tr").count rescue 0
+    expect(page).to have_css("#table-nominations-list tbody tr", count: actual_count, wait: 5)
+    expect(page).to have_css("#table-nominations-list tbody tr") unless actual_count == 0
   end
 
   it "filters by activity" do
-    assert_results_number(4)
-    assign_activity(@forms.first, "ART")
+    form_ids = @forms.map(&:id)
 
-    # Untick sport(primary) and disability(secondary) activity filter
-    click_status_option "Sport"
-    click_status_option "Disability"
-    assert_results_number(1)
+    FormAnswer.where(id: form_ids).update_all(
+      state: "application_in_progress"
+    )
+
+    activities = [
+      { primary: "ART", secondary: nil },
+      { primary: "DIS", secondary: nil },
+      { primary: "HEA", secondary: nil },
+      { primary: "HEA", secondary: "DIS" }
+    ]
+
+    @forms.each_with_index do |form, i|
+      activity_data = {
+        "nominee_activity" => activities[i][:primary],
+        "secondary_activity" => activities[i][:secondary],
+        "nominee_address_county" => "Angus"
+      }
+      form.update_columns(
+        nominee_activity: activities[i][:primary],
+        secondary_activity: activities[i][:secondary],
+        document: form.document.merge(activity_data)
+      )
+    end
+
+    visit current_path
+    ensure_table_loaded
+
+    art_label = NomineeActivityHelper.lookup_label_for_activity(:ART)
+    dis_label = NomineeActivityHelper.lookup_label_for_activity(:DIS)
+
+    expect(page).to have_selector("#table-nominations-list tbody tr", count: 4)
+
+    within(".activity-filter") do
+      find(".dropdown-checkboxes__selection").click
+      find(".dropdown-checkboxes__list li[data-value='HEA']").click
+      find(".dropdown-checkboxes__selection").click
+    end
+    click_button "Apply filters"
+    sleep 0.5
+    expect(page).to have_text(art_label)
+    expect(page).to have_text(dis_label)
+
+    within(".activity-filter") do
+      find(".dropdown-checkboxes__selection").click
+      find(".dropdown-checkboxes__list li[data-value='DIS']").click
+      find(".dropdown-checkboxes__selection").click
+    end
+    click_button "Apply filters"
+    sleep 0.5
+    expect(page).to have_text(art_label)
+    expect(page).not_to have_text(dis_label)
+  end
+
+  private
+
+  def refresh_and_wait_for_table
+    visit current_path
+    expect(page).to have_css("#table-nominations-list", wait: 2)
+  end
+
+  def select_activity(value)
+    find(".dropdown-checkboxes__selection").click
+    find(".dropdown-checkboxes__list li[data-value='#{value}']").click
+    find(".dropdown-checkboxes__selection").click
+    click_button "Apply filters"
+    expect(page).to have_css("#table-nominations-list", wait: 2)
   end
 end

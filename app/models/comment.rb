@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
 
   delegate :email, to: :authorable, prefix: :author
 
-  enum section: {
+  enum :section, {
     admin: 0, # only Admin can edit/see
     critical: 1 # Admin & Assessors can edit/see
   }

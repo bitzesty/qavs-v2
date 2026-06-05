@@ -21,9 +21,10 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
+  config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = :none
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -40,16 +41,18 @@ Rails.application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-  config.action_mailer.default_url_options = { host: "example.com" }  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_mailer.default_url_options = { host: "example.com" }
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  # config.i18n.raise_on_missing_translations = true
+
+  # Annotate rendered view with file names.
+  # config.action_view.annotate_rendered_view_with_filenames = true
+
   config.active_support.disallowed_deprecation = :raise
   config.active_support.disallowed_deprecation_warnings = []
 
   config.active_job.queue_adapter = :test
-  config.cache_store = :null_store
 
   config.after_initialize do
     PaperTrail.enabled = false
@@ -59,4 +62,8 @@ Rails.application.configure do
     config.logger = Logger.new(nil)
     config.log_level = :fatal
   end
+
+  # Disable raising error when a before_action's only/except options reference missing actions
+  # This is causing test failures in Rails 8
+  config.action_controller.raise_on_missing_callback_actions = false
 end

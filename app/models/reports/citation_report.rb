@@ -21,6 +21,10 @@ class Reports::CitationReport
       method: :citation_group_name
     },
     {
+      label: "URN",
+      method: :urn,
+    },
+    {
 	    label: "Updated Citation",
 	    method: :citation_body
     },

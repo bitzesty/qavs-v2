@@ -1,3 +1,5 @@
+require 'database_cleaner/active_record'
+
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner[:active_record].clean_with(:truncation)
@@ -8,7 +10,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true) do
-    DatabaseCleaner[:active_record].strategy = :truncation
+    DatabaseCleaner[:active_record].strategy = :truncation, { cache_tables: false }
   end
 
   config.before(:each) do

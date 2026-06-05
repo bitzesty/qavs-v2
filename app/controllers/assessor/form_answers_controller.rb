@@ -2,7 +2,6 @@ class Assessor::FormAnswersController < Assessor::BaseController
   include FormAnswerMixin
   include FormAnswersPdf
 
-  before_action :load_resource, only: [:update_financials]
   layout :resolve_layout
 
   expose(:all_form_questions) do

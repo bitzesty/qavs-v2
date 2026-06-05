@@ -1,5 +1,3 @@
-require "concerns/formatted_time/date_time_for"
-
 class Deadline < ApplicationRecord
   extend Enumerize
   include FormattedTime::DateTimeFor

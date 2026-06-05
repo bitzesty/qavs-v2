@@ -1042,7 +1042,7 @@ ALTER SEQUENCE public.previous_wins_id_seq OWNED BY public.previous_wins.id;
 --
 
 CREATE TABLE public.protected_files (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    id uuid NOT NULL,
     entity_type character varying,
     entity_id bigint,
     file character varying,
@@ -3655,6 +3655,7 @@ ALTER TABLE ONLY public.support_letters
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250604124109'),
 ('20240819143818'),
 ('20240819123818'),
 ('20240216144428'),
@@ -3885,4 +3886,3 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20141124161532'),
 ('20141124112326'),
 ('20141124095215');
-

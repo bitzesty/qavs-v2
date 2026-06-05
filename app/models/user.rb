@@ -3,7 +3,7 @@ class User < ApplicationRecord
   extend Enumerize
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :trackable, :validatable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :zxcvbnable, :lockable, :timeoutable, :session_limitable
 
   include PasswordSkippable

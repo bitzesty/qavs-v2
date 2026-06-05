@@ -5,7 +5,7 @@ class FormAwardEligibilitiesController < ApplicationController
   before_action :set_form_answer
   before_action :set_steps_and_eligibilities, :setup_wizard
   before_action :restrict_access_if_admin_in_read_only_mode!, only: [
-    :new, :create, :update, :destroy
+    :update
   ]
 
   def show

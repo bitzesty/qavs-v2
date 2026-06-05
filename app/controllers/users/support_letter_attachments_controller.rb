@@ -1,4 +1,6 @@
 class Users::SupportLetterAttachmentsController < Users::BaseController
+  before_action :restrict_access_if_admin_in_read_only_mode!, only: [:create]
+
   expose(:form_answer) do
     if current_user
       current_user.account.

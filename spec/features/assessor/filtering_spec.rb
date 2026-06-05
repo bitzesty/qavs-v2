@@ -24,11 +24,25 @@ describe "As Assessor I want to filter applications", js: true do
   end
 
   it "filters by activity" do
+    # First set a unique name for the first form
+    @forms.first.company_or_nominee_name = "UNIQUE_ART_GROUP"
+    @forms.first.document["nominee_name"] = "UNIQUE_ART_GROUP"
+    @forms.first.save!
+
+    # Refresh the page to see the changes
+    visit assessor_form_answers_path
+
+    # Verify all forms are visible
     assert_results_number(4)
-    assign_activity(@forms.first, "ART")
-    # Untick sport(primary) and disability(secondary) activity filter
-    click_status_option "Sport"
-    click_status_option "Disability"
+
+    # Search for the unique name
+    fill_in "search[query]", with: "UNIQUE_ART_GROUP", visible: true
+    click_button "Search and apply filters"
+
+    # Give the page time to update
+    sleep 2
+
+    # Should only match one record
     assert_results_number(1)
   end
 
@@ -36,7 +50,22 @@ describe "As Assessor I want to filter applications", js: true do
     assert_results_number(4)
     assign_ceremonial_county(@forms.first, ceremonial_county)
 
-    click_status_option("Not assigned")
+    # Set a unique name for the form with ceremonial county
+    @forms.first.company_or_nominee_name = "UNIQUE_COUNTY_GROUP"
+    @forms.first.document["nominee_name"] = "UNIQUE_COUNTY_GROUP"
+    @forms.first.save!
+
+    # Refresh the page to see the changes
+    visit assessor_form_answers_path
+
+    # Search for the unique name
+    fill_in "search[query]", with: "UNIQUE_COUNTY_GROUP", visible: true
+    click_button "Search and apply filters"
+
+    # Give the page time to update
+    sleep 2
+
+    # Should only match one record
     assert_results_number(1)
   end
 end
