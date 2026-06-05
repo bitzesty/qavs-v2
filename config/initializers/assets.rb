@@ -22,7 +22,6 @@ Rails.application.config.assets.precompile += [
   "application-ie9.css"
 ]
 
-Rails.application.config.assets.precompile += %w( ckeditor/* )
 Rails.application.config.assets.precompile += %w( favicon.ico )
 Rails.application.config.assets.precompile += %w( *.png )
 # application.js, application.css, and all non-JS/CSS in the app/assets

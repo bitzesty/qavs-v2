@@ -23,13 +23,13 @@ gem 'sprockets-rails', '>= 3.4.2'
 gem 'slim-rails', '~> 3.6.2'
 gem 'coffee-rails', '~> 5.0'
 gem 'jquery-rails', '~> 4.6.0'
-gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v7.0.0'
+gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v8.0.0'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'govuk_frontend_toolkit', '~> 3.1.0'
 gem 'govuk_template', '0.12.0'
 gem "terser", "~> 1.1"
 gem 'js_cookie_rails', '2.1.4'
-gem 'ckeditor'
+gem 'ckeditor5'
 gem 'webpacker'
 
 # Autolinking in admin mass user mailer
@@ -86,7 +86,7 @@ gem 'enumerize'
 # PDF generation
 gem 'prawn'
 gem 'prawn-table'
-gem 'nokogiri', '~> 1.18.9'
+gem 'nokogiri', '~> 1.19'
 
 # Uploads
 gem 'carrierwave', '~> 2.2.6'
