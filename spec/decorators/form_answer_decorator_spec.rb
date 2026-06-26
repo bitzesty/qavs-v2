@@ -76,6 +76,39 @@ describe FormAnswerDecorator do
     end
   end
 
+  describe "#last_updated_by" do
+    let(:form_answer) { create(:form_answer) }
+    subject { described_class.new(form_answer) }
+
+    def create_update(subject_record)
+      AuditLog.create!(
+        subject: subject_record,
+        auditable: form_answer,
+        action_type: "update"
+      )
+    end
+
+    it "returns the full name of the subject who made the last update" do
+      admin = create(:admin, first_name: "Jane", last_name: "Smith")
+      create_update(admin)
+
+      expect(subject.last_updated_by).to eq("Jane Smith")
+    end
+
+    it "returns the full name even when the subject is soft-deleted" do
+      admin = create(:admin, first_name: "Jane", last_name: "Smith")
+      create_update(admin)
+      admin.soft_delete!
+
+      expect(Admin.find_by(id: admin.id)).to be_nil
+      expect(subject.last_updated_by).to eq("Jane Smith")
+    end
+
+    it "returns nil when there are no updates" do
+      expect(subject.last_updated_by).to be_nil
+    end
+  end
+
   describe "#dashboard_status" do
     it "returns fill progress when application is not submitted" do
      form_answer = create(:form_answer, state: "application_in_progress", document: { sic_code:  SicCode.first.code })
