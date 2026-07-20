@@ -5,7 +5,6 @@
 #= require vendor/file_upload/jquery.fileupload
 #= require vendor/file_upload/jquery.fileupload-process
 #= require vendor/file_upload/jquery.fileupload-validate
-#= require ./ckeditor/config.js
 #= require Countable
 #= require moment.min
 #= require core
@@ -919,64 +918,27 @@ jQuery ->
 
   if $('.js-ckeditor').length > 0
 
-    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/notification/plugin.js' );
-    CKEDITOR.plugins.addExternal( 'wordcount', '/ckeditor/plugins/wordcount/plugin.js' );
-
     $('.js-ckeditor').each (index) ->
       group = $(this).closest(".govuk-form-group")
 
       spacer = $("<div class='js-ckeditor-spacer'></div>")
       spacer.insertAfter($(this).parent().find(".hint"))
 
-      CKEDITOR.replace this,
-        title: group.find('label').first().text(),
-        language: 'en'
-        toolbar_mini: [
-          {name: 'p1', items: ["Cut", "Copy", "PasteText", "-", "Undo", "Redo"]},
-          {name: 'p2', items: ["Bold", "Italic",  "-", "RemoveFormat"]},
-          {name: 'p3', items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']}
-        ]
-        toolbar: "mini";
-        extraPlugins: 'wordcount'
-
-        wordcount: {
-          showParagraphs: false,
-          showWordCount: true
-        }
-
-        removePlugins: 'link,elementspath,contextmenu,liststyle,tabletools,tableselection'
-        disableNativeSpellChecker: false
-
-        allowedContent: 'h1 h2 h3 blockquote p ul ol li em i strong b i br'
-        height: 200
-        wordcount:
-          maxWordCount: $(this).data('word-max')
-        versionCheck: false
-
-      CKEDITOR.on 'instanceCreated', (event) ->
-        editor = event.editor
-        element = editor.element
-
-
-      CKEDITOR.on 'instanceReady', (event) ->
-        target_id = event.editor.name
-
+      $(this).on "editor-ready", () ->
+        wordLimit = $(this).attr("data-word-max")
         spinner = group.find(".js-ckeditor-spinner-block")
         spinner.addClass('govuk-!-display-none')
+        wordCountSpan = $(this).parent().find(".cke_path_item")
 
-    for i of CKEDITOR.instances
-      instance = CKEDITOR.instances[i]
+        if wordLimit && wordCountSpan
+          wordCount = this.instance.plugins.get("WordCount").words
+          wordCountSpan.text("Words: #{wordCount}/#{wordLimit}")
 
-      instance.on 'change', (event) ->
-        target_id = event.editor.name
-        element = CKEDITOR.instances[target_id]
+          this.instance.plugins.get("WordCount").on "update", (evt, stats) ->
+            wordCountSpan.text("Words: #{stats.words}/#{wordLimit}")
 
-        element.updateElement()
-        raiseChangesFlag()
-
-        $("#" + target_id).trigger("change")
-
-        return
+      $(this).on "change", (event) ->
+         raiseChangesFlag()
 
     TextareaCkeditorIeCallback.init()
 

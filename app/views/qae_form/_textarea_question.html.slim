@@ -1,8 +1,4 @@
-/ Add .js-char-count class to textarea if you want to return standart
-/ application counter blocks
-/
-/ textarea.js-trigger-autosave.js-char-count.js-ckeditor
-/
+= include_ckeditor5_assets
 
 .if-no-js-hide
   .js-ckeditor-spinner-block
@@ -10,6 +6,15 @@
     span.govuk-body
       | Loading Editor ...
 
-textarea.js-trigger-autosave.js-ckeditor.govuk-textarea rows=question.rows data-word-max=question.words_max name=question.input_name id="q_#{question.key}" *possible_read_only_ops(question.step.opts[:id])
-  = question.input_value
 
+.textarea-question
+  = ckeditor5_editor name: question.input_name,
+                    class: "js-trigger-autosave govuk-textarea js-ckeditor text-words-max",
+                    id: "q_#{question.key}",
+                    data: { "word-max": question.words_max },
+                    aria_describedby: (@form_answer.validator_errors && @form_answer.validator_errors[question.hash_key] ? "error_for_#{question.key}" : nil ),
+                    **possible_read_only_ops(question.step.opts[:id])
+    = question.input_value
+  - if question.words_max
+    .cke_wordcount
+      span id="cke_wordcount_#{question.input_name}" class="cke_path_item"

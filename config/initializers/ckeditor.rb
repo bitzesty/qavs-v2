@@ -1,3 +1,14 @@
-Ckeditor.setup do |config|
-  config.cdn_url = "//cdn.ckeditor.com/4.22.1/full/ckeditor.js"
+CKEditor5::Rails.configure do
+  language "en"
+  menubar visible: false
+
+  toolbar :undo, :redo, :|,
+    :bold, :italic, :|,
+    :removeFormat, :|,
+    :numberedList, :bulletedList, :|,
+    :outdent, :indent
+
+  plugins :WordCount, :RemoveFormat
+
+  editable_height 200
 end
