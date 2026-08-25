@@ -23,7 +23,7 @@ class AwardYears::V2027::QaeForms
 
           context %( <p class='govuk-hint'>If the group is registered with the Charity Commission, Scottish Charity Register (OSCR), Charity Commission Northern Ireland or Companies House, please enter its registration number here.</p>
           <p class='govuk-hint'>If you do not know this information please leave the box blank.</p> )
-          style "large"
+          style "small"
         end
 
         text :nominee_established_date, "When was the group established?" do
