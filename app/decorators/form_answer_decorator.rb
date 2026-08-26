@@ -437,7 +437,10 @@ class FormAnswerDecorator < ApplicationDecorator
   end
 
   def last_updated_by
-    latest_update && latest_update.subject.full_name
+    return unless latest_update
+
+    subject = subject_including_deleted(latest_update)
+    subject && subject.full_name
   end
 
   private
@@ -452,5 +455,13 @@ class FormAnswerDecorator < ApplicationDecorator
 
   def latest_update
     object.audit_logs.data_update.order("created_at").last
+  end
+
+  def subject_including_deleted(audit_log)
+    return unless audit_log.subject_type && audit_log.subject_id
+
+    klass = audit_log.subject_type.constantize
+    scope = klass.respond_to?(:unscoped) ? klass.unscoped : klass
+    scope.find_by(id: audit_log.subject_id)
   end
 end

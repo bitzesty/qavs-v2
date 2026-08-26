@@ -4,7 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 ruby '~> 3.2.3'
 
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 8.0.5.1'
 gem 'websocket-extensions', '~> 0.1.5'
 
 # SSL redirect
@@ -84,7 +84,8 @@ gem 'email_validator'
 gem 'enumerize'
 
 # PDF generation
-gem 'prawn'
+gem 'prawn', '2.4.0' # fix to 2.4.0 until https://github.com/prawnpdf/prawn/issues/1346 is resolved
+gem 'ttfunk', '~> 1.7.0' # specify prawn dependency version until https://github.com/prawnpdf/prawn/issues/1346 is resolved
 gem 'prawn-table'
 gem 'nokogiri', '~> 1.18.9'
 
