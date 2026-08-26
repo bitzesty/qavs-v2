@@ -9,7 +9,7 @@
 
 - if ["edit", "update"].include?(action_name)
   = f.input :current_password,
-            input_html: { class: "medium" },
+            input_html: { class: "medium", autocomplete: "current-password" },
             hint: "We need the #{controller_name.singularize}'s current password to confirm your changes",
             label: 'Current password'
 

@@ -5,7 +5,7 @@ class Users::SubmissionMailer < ApplicationMailer
     @form_answer = FormAnswer.find(form_answer_id).decorate
     @form_owner = @form_answer.user.decorate
     @recipient = User.find(user_id).decorate
-    @subject = "KAVS Nomination Received"
+    @subject = "KAVS Nomination Received - Application ref #{@form_answer.urn}"
 
     view_mail ENV['GOV_UK_NOTIFY_API_TEMPLATE_ID'], to: @recipient.email, subject: subject_with_env_prefix(@subject)
   end

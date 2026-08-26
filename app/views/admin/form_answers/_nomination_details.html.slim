@@ -2,6 +2,14 @@ hr.govuk-section-break.govuk-section-break--l.govuk-section-break--visible
 
 p.govuk-body
   strong
+    | URN
+  br
+  - if @form_answer.urn.present?
+    = @form_answer.urn
+  br
+
+p.govuk-body
+  strong
     | Type of group
   br
   - if @form_answer.nominee_activity.present?

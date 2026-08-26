@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Qae
   class Application < Rails::Application
-    config.load_defaults 7.0
+    config.load_defaults 8.0
 
     #initializer :regenerate_require_cache, before: :load_environment_config do
     #  Bootscale.regenerate
@@ -17,6 +17,8 @@ module Qae
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     # config.middleware.use Rack::SslEnforcer, except: "/healthcheck", except_environments: ["development", "test"]
+
+    # In Rails 8, zeitwerk is the only autoloader
     config.autoloader = :zeitwerk
 
     if ENV['CORS_HOST'].present?
@@ -44,15 +46,9 @@ module Qae
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    #NOTE: This works like Rails 4. For Rails 5, we can use
-    # `config.eager_load_paths << Rails.root.join('lib')` but still it is not recommended for Threadsafty.
-    # Need to take look in to it.
-    config.eager_load = false
-
-    config.autoload_once_paths << "#{root}/lib"
+    # For Rails 8, use autoload_lib for code organization
+    config.autoload_lib(ignore: %w(assets tasks))
     config.autoload_once_paths << "#{root}/forms"
-    config.autoload_paths << "#{root}/lib"
-    config.eager_load_paths << "#{root}/lib"
 
     config.generators do |g|
       g.test_framework :rspec
@@ -64,5 +60,21 @@ module Qae
     config.active_record.schema_format = :sql
     config.active_job.queue_adapter = :sidekiq
     config.action_view.automatically_disable_submit_tag = false
+
+    # Rails 8 - explicitly set the log level format
+    config.log_level_format = :prepend
+
+    # Default to strong cookies
+    config.action_dispatch.cookies_same_site_protection = :lax
+
+    # Rails 8 specific configurations for stability
+    config.force_ssl = false if Rails.env.development?
+
+    # Prevent memory issues in development
+    if Rails.env.development?
+      config.cache_classes = false
+      config.eager_load = false
+      config.consider_all_requests_local = true
+    end
   end
 end

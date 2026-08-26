@@ -13,6 +13,7 @@ class AwardYears::V2027::QaeForms
             <p class='govuk-body'><strong>Key criteria:</strong></p>
             <ol class='govuk-list govuk-list--number'>
               <li>Letters must be written by individuals who are familiar with the group's work, for example: a beneficiary, local resident or member of a partner charity.</li>
+              <li>Letters from Members of Parliament or officials less familiar with the group’s work are discouraged.</li>
               <li>Letters must not be written by a volunteer, employee, trustee, or anyone involved in the running of the group.</li>
               <li>Letters written by the nominator will be ineligible.</li>
               <li>Each letter should be no more than 500 words.</li>
@@ -25,10 +26,11 @@ class AwardYears::V2027::QaeForms
             [:bold, %(Key criteria:)],
             [:normal, %(
               1. Letters must be written by individuals who are familiar with the group's work, for example: a beneficiary, local resident or member of a partner charity.
-              2. Letters must not be written by a volunteer, employee, trustee, or anyone involved in the running of the group.
-              3. Letters written by the nominator will be ineligible.
-              4. Each letter should be no more than 500 words.
-              5. Only 2 letters of support can be submitted.
+              2. Letters from Members of Parliament or officials less familiar with the group’s work are discouraged.
+              3. Letters must not be written by a volunteer, employee, trustee, or anyone involved in the running of the group.
+              4. Letters written by the nominator will be ineligible.
+              5. Each letter should be no more than 500 words.
+              6. Only 2 letters of support can be submitted.
             )],
           ]
         end

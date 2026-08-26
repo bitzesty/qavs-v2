@@ -18,28 +18,36 @@ class AwardYears::V2027::QaeForms
           style "large"
         end
 
-        text :nominee_established_date, "When was the group established?" do
+        text :registration_number, "Registration number" do
           sub_ref "A 1.2"
+
+          context %( <p class='govuk-hint'>If the group is registered with the Charity Commission, Scottish Charity Register (OSCR), Charity Commission Northern Ireland or Companies House, please enter its registration number here.</p>
+          <p class='govuk-hint'>If you do not know this information please leave the box blank.</p> )
+          style "small"
+        end
+
+        text :nominee_established_date, "When was the group established?" do
+          sub_ref "A 1.3"
           required
           style "small"
         end
 
         dropdown :nominee_activity, "Please select the group's main area of activity" do
-          sub_ref "A 1.3"
-          required
-          option "", ""
-          nominee_activities
-        end
-
-        dropdown :secondary_activity, "Please select the group's secondary area of activity" do
           sub_ref "A 1.4"
           required
           option "", ""
           nominee_activities
         end
 
-        address :nominee_address, "Address of group" do
+        dropdown :secondary_activity, "Please select the group's secondary area of activity" do
           sub_ref "A 1.5"
+          required
+          option "", ""
+          nominee_activities
+        end
+
+        address :nominee_address, "Address of group" do
+          sub_ref "A 1.6"
           required
           sub_fields([
             { building: "Building" },
@@ -51,18 +59,18 @@ class AwardYears::V2027::QaeForms
         end
 
         text :nominee_phone, "Telephone number" do
-          sub_ref "A 1.6"
+          sub_ref "A 1.7"
           style "small"
           type "tel"
         end
 
         text :nominee_website, "Website" do
-          sub_ref "A 1.7"
+          sub_ref "A 1.8"
           style "large"
         end
 
         textarea :social_media, "Social media" do
-          sub_ref "A 1.8"
+          sub_ref "A 1.9"
           form_hint "If known, please insert a link to the group's social media below (Facebook, Instagram, Twitter, Linkedin)"
           words_max 100
           rows 2

@@ -21,11 +21,16 @@ describe "Users search", "
         within ".search-input" do
           fill_in "search_query", with: user.first_name
         end
+
         click_button "Search"
 
-        within ".govuk-table" do
-          expect(page).to have_selector("tbody tr", count: 1)
-        end
+        # Wait for page to settle after search
+        sleep(1)
+
+        # Use a more stable approach to check results
+        expect(page).to have_css('.govuk-table')
+        rows = page.all('.govuk-table tbody tr', wait: 5)
+        expect(rows.count).to eq(1)
       end
     end
   end
@@ -36,18 +41,26 @@ describe "Users search", "
         within ".search-input" do
           fill_in "search_query", with: "notfound"
         end
-        click_button "Search"
 
-        within ".govuk-table" do
-          expect(page).to have_content("No nominators found")
-        end
+        # Use a more reliable method to find the search button
+        find("input.govuk-button[type='submit']", visible: true).click
+
+        # Wait for page to settle
+        sleep(1)
+
+        # Check for no results text
+        expect(page).to have_content("No nominators found")
       end
       it "clears the search" do
         click_link "Clear search"
 
-        within ".govuk-table" do
-          expect(page).to have_selector("tbody tr", count: 2)
-        end
+        # Wait for page to settle
+        sleep(1)
+
+        # Use a more stable approach to check results
+        expect(page).to have_css('.govuk-table')
+        rows = page.all('.govuk-table tbody tr', wait: 5)
+        expect(rows.count).to eq(2)
       end
     end
   end

@@ -6,6 +6,8 @@ As an Assessor (Lead / Primary)
 I want to download original PDF of application at the deadline
 So that I can see original application data was at the deadline moment
 } do
+  let!(:form_user) { create(:user) }
+  let!(:form_answer) { create(:form_answer, :submitted, user: form_user) }
 
   let(:target_url) do
     assessor_form_answer_path(form_answer)
@@ -13,6 +15,7 @@ So that I can see original application data was at the deadline moment
 
   before do
     Settings.current_submission_deadline.update(trigger_at: Time.zone.now - 1.day)
+    # Generate the PDF version
     form_answer.generate_pdf_version!
   end
 

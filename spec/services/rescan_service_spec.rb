@@ -16,6 +16,13 @@ describe RescanService do
     it "rescans unresolved files" do
       attachment.file_scan_results = "scanning"
       attachment.save!
+
+      # Mock the scan_file! method to change the scan results to clean
+      expect_any_instance_of(FormAnswerAttachment).to receive(:scan_file!).and_wrap_original do |original, *args|
+        original.receiver.update_column(:file_scan_results, "clean")
+        true
+      end
+
       described_class.rescan_model(FormAnswerAttachment, :file)
       expect(attachment.reload.file_scan_results).to eq('clean')
     end

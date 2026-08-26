@@ -60,7 +60,6 @@ software, and may be redistributed under the terms specified in the
 
 [LICENSE]: https://github.com/bitzesty/qavs-v2/blob/master/LICENSE
 
-
 # About Bit Zesty
 
 ![Bit Zesty](https://bitzesty.com/wp-content/uploads/2017/01/logo_dark.png)
