@@ -84,7 +84,8 @@ gem 'email_validator'
 gem 'enumerize'
 
 # PDF generation
-gem 'prawn'
+gem 'prawn', '2.4.0' # fix to 2.4.0 until https://github.com/prawnpdf/prawn/issues/1346 is resolved
+gem 'ttfunk', '~> 1.7.0' # specify prawn dependency version until https://github.com/prawnpdf/prawn/issues/1346 is resolved
 gem 'prawn-table'
 gem 'nokogiri', '~> 1.18.9'
 
