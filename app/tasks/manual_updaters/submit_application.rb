@@ -21,21 +21,37 @@ module ManualUpdaters
       form_answer.update_column(:submitted, true)
       form_answer.update_column(:submitted_at, Time.current)
 
-      # STEP 2: Trigger state machine
+      # STEP 2: Assign URN
       #
-      form_answer.state_machine.submit(form_answer.user)
+      generated_urn = UrnBuilder.new(form_answer).generate_urn
 
-      # STEP 3: Notify user about successful submission
-      #
-      FormAnswerUserSubmissionService.new(form_answer).perform
+      if generated_urn.present?
+        # STEP 3: If URN generate successfuly, THEN:
 
-      # STEP 4: Generate hard copy PDF file
-      #
-      HardCopyPdfGenerators::FormDataWorker.perform_async(form_answer.id, true)
+        # save URN
+        #
+        form_answer.update_column(:urn, generated_urn)
 
-      p ""
-      p "[MANUAL SUBMISSION | SUCCESS] DONE! Check it at https://www.queens-awards-enterprise.service.gov.uk/admin/form_answers/#{form_answer.id}"
-      p ""
+        # trigger state
+        #
+        form_answer.state_machine.submit(form_answer.user)
+
+        # notify user about successful submission
+        #
+        FormAnswerUserSubmissionService.new(form_answer).perform
+
+        # generate hard copy PDF file
+        #
+        HardCopyPdfGenerators::FormDataWorker.perform_async(form_answer.id, true)
+
+        p ""
+        p "[MANUAL SUBMISSION | SUCCESS] DONE! Check it at https://www.queens-awards-enterprise.service.gov.uk/admin/form_answers/#{form_answer.id}"
+        p ""
+      else
+        p ""
+        p "[MANUAL SUBMISSION | ERROR] seems URN is not generated! Please, check why!"
+        p ""
+      end
     end
   end
 end
