@@ -38,8 +38,16 @@ class AwardYears::V2027::QaeForms
           style "large"
         end
 
-        text :local_assessment_group_leader, "Name of the group leader or main contact in the group" do
+        text :local_assessment_registration_number, "Registration Number" do
           sub_ref "E 1.3"
+          form_hint "Please check that the details provided by the nominator are correct."
+          required
+          default_value :registration_number
+          style "small"
+        end
+
+        text :local_assessment_group_leader, "Name of the group leader or main contact in the group" do
+          sub_ref "E 1.4"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           default_value :nominee_leader_name
@@ -47,15 +55,29 @@ class AwardYears::V2027::QaeForms
         end
 
         text :local_assessment_group_leader_position, "Position held in the group by the group leader or main contact" do
-          sub_ref "E 1.4"
+          sub_ref "E 1.5"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           default_value :nominee_leader_position
           style "medium"
         end
 
+        address :local_assessment_group_leader_address, "Address of the group leader or main contact" do
+          sub_ref "E 1.6"
+          form_hint "Please check that the details provided by the nominator are correct."
+          required
+          default_value :nominee_address
+          sub_fields([
+            { building: "Building" },
+            { street: "Street" },
+            { city: "Town or city" },
+            { county: "County" },
+            { postcode: "Postcode" }
+          ])
+        end
+
         text :local_assessment_group_leader_email, "Email of the group leader or main contact" do
-          sub_ref "E 1.5"
+          sub_ref "E 1.7"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           type "email"
@@ -64,26 +86,24 @@ class AwardYears::V2027::QaeForms
         end
 
         text :local_assessment_group_leader_phone, "Telephone of the group leader or main contact" do
-          sub_ref "E 1.6"
+          sub_ref "E 1.8"
           form_hint "Please check that the details provided by the nominator are correct."
           required
           default_value :nominee_leader_telephone
         end
 
-        options :group_details_confirmed, "Confirm group details" do
-          sub_ref "E 1.7"
+        confirm :group_details_confirmed, "Confirm group details" do
+          sub_ref "E 1.9"
           required
-          option "yes", "Yes"
-          option "no", "No (please email any amendments to kingsaward@dcms.gov.uk)."
-          context -> do
+          text -> do
             %(
-              <p class=govuk-body>The details above are still correct:</p>
+              I confirm that I have checked and, where required, amended the group name and group leader’s details.
             )
           end
         end
 
         confirm :group_eligibility_confirmed, "Confirm group's eligibility" do
-          sub_ref "E 1.8"
+          sub_ref "E 1.10"
           required
           text -> do
             %(
@@ -129,35 +149,52 @@ class AwardYears::V2027::QaeForms
         end
 
         textarea :local_assessment_eligibility_comment, "Comments about eligibility (optional)" do
-          sub_ref "E 1.9"
+          sub_ref "E 1.11"
         end
 
         header :local_assessment_key_facts_header, "Key facts" do
+          context %(
+            <p class='govuk-body'><span class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold govuk-!-display-block">Volunteer Breakdown</span></p>
+            <p class='govuk-body'>It is important to differentiate between corporate volunteers and individuals who volunteer all year round. If there are no corporate volunteers, please only complete 2.1 and 2.2 and leave 2.3 blank.</p>
+          )
         end
 
-        number :local_assessment_form_volunteers_number, "Number of volunteers" do
+        number :local_assessment_form_volunteers_number, "Number of volunteers total (this includes all types of volunteers)" do
           sub_ref "E 2.1"
           style "tiny"
           type "number"
           required
         end
 
-        number :local_assessment_form_paid_staff_number, "Number of full time paid staff" do
+        number :local_assessment_form_full_time_volunteers_number, "Number of which are full time volunteers" do
           sub_ref "E 2.2"
           style "tiny"
           type "number"
           required
         end
 
-        number :local_assessment_form_part_time_staff_number, "Number of part time paid staff" do
+        number :local_assessment_form_corporate_volunteers_number, "Number of which are corporate volunteers (if applicable)" do
           sub_ref "E 2.3"
+          style "tiny"
+          type "number"
+        end
+
+        number :local_assessment_form_paid_staff_number, "Number of full time paid staff" do
+          sub_ref "E 2.4"
+          style "tiny"
+          type "number"
+          required
+        end
+
+        number :local_assessment_form_part_time_staff_number, "Number of part time paid staff" do
+          sub_ref "E 2.5"
           style "tiny"
           type "number"
           required
         end
 
         number :local_assessment_form_beneficiaires_number, "Number of beneficiaries annually (can be approximate)" do
-          sub_ref "E 2.4"
+          sub_ref "E 2.6"
           style "tiny"
           type "number"
           required
@@ -171,6 +208,9 @@ class AwardYears::V2027::QaeForms
           context %(
             <p class='govuk-hint'>
               Please discuss with the group and provide a short summary of the group's work in one sentence. This will be used for the group's certificate if they eventually receive the King's Award for Voluntary Service. It should not include the group's name.
+            </p>
+            <p class='govuk-hint'>
+              When writing a short citation, we generally recommend beginning with an adjective or ‘ing’ word (e.g. delivering, fostering, maintaining, promoting etc.)
             </p>
           )
           online_context %(
@@ -306,15 +346,23 @@ class AwardYears::V2027::QaeForms
           required
         end
 
+        options :nomination_local_assessment_work_of_the_group_sufficient, "Do you feel the above information is sufficient to recommend this group for a KAVS?" do
+          context %(
+            <p class='govuk-hint'>If ‘no’ please strengthen the section or consider not recommending this group.</p>
+          )
+          yes_no
+        end
+
+
         header :local_assessments_volunteers_header, "Role and status of volunteers" do
         end
 
-        textarea :nomination_local_assessment_form_volunteer_roles, "What specific roles do the volunteers cover and what does this involve? Do any of these roles rely on the volunteers' input?" do
+        textarea :nomination_local_assessment_form_volunteer_roles, "What specific roles do the volunteers cover and what does this involve?" do
           sub_ref "E 5.1"
           required
         end
 
-        textarea :nomination_local_assessment_form_volunteer_work_volume, "Please give an idea of the volume of work put in by volunteers." do
+        textarea :nomination_local_assessment_form_volunteer_work_volume, "Please give an idea of the volume of work put in by volunteers. Which aspects of the group’s work rely on volunteers’ input?" do
           sub_ref "E 5.2"
           online_context %(
             <p class='govuk-hint'>If possible, provide metrics, for example, 'x' number of volunteering hours are provided by 'y' volunteers each week; or the number of volunteers expressed as full time equivalents (FTEs).</p>
@@ -327,7 +375,7 @@ class AwardYears::V2027::QaeForms
           required
         end
 
-        textarea :nomination_local_assessment_form_volunteer_representation_in_leadership_roles, "In what ways do volunteers play a central role in the group's leadership?" do
+        textarea :nomination_local_assessment_form_volunteer_representation_in_leadership_roles, "In what ways do volunteers play a central role in the group's leadership? What evidence is there that all of the volunteers can contribute their thoughts and ideas to the leadership?" do
           sub_ref "E 5.4"
           online_context %(
             <p class='govuk-hint'>We are looking for volunteer-led groups where volunteers have a key input in decision making at all levels. Please look for evidence that volunteers are leading the work, setting its direction and acting as an inspiration to the rest of the group; also that volunteers at all levels of the organisation have a voice. If there are paid staff, they should be supporting rather than directing the work.</p>
@@ -338,6 +386,13 @@ class AwardYears::V2027::QaeForms
         textarea :nomination_local_assessment_form_election_procedures, "What are the procedures for electing and refreshing the governing body or leadership of the group?" do
           sub_ref "E 5.5"
           required
+        end
+
+        options :nomination_local_assessment_election_procedures_sufficient, "Do you feel the above information is sufficient to recommend this group for a KAVS?" do
+          context %(
+            <p class='govuk-hint'>If ‘no’ please strengthen the section or consider not recommending this group.</p>
+          )
+          yes_no
         end
 
         header :local_assessment_group_organisation_evidence_header, "Evidence of a well-run organisation" do
@@ -407,7 +462,7 @@ class AwardYears::V2027::QaeForms
         end
 
 
-        textarea :nomination_local_assessment_form_safeguarding_procedures, "Describe what safeguarding procedures are in place to ensure that children and adults at risk are well protected and whether these procedures are sufficient." do
+        textarea :nomination_local_assessment_form_safeguarding_procedures, "Describe what safeguarding procedures are in place to ensure that children and adults at risk are well protected and whether these procedures are sufficient. Please also include any procedures in place to support volunteers themselves." do
           sub_ref "E 6.4"
           online_context %(
             <p class='govuk-hint'>This may include criminal record checks, a child-protection policy, specialised training and insurance indemnity.</p>
@@ -479,6 +534,13 @@ class AwardYears::V2027::QaeForms
           required
         end
 
+       options :nomination_local_assessment_adverse_information_sufficient, "Do you feel the above information is sufficient to recommend this group for a KAVS?" do
+          context %(
+            <p class='govuk-hint'>If ‘no’ please strengthen the section or consider not recommending this group.</p>
+          )
+          yes_no
+        end
+
         header :local_assessment_inclusivity_header, "Inclusivity" do
         end
 
@@ -495,12 +557,19 @@ class AwardYears::V2027::QaeForms
           required
         end
 
-        textarea :nomination_local_assessment_form_services_accessibility, "How does the group make its services accessible to the widest range of beneficiaries?" do
+        textarea :nomination_local_assessment_form_services_accessibility, "How does the group reach out to potential beneficiaries who might face barriers to accessing the group’s services? Can you give examples of how the group takes practical steps to make its services accessible." do
           sub_ref "E 7.3"
           online_context %(
-            <p class='govuk-hint'>For example, by improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format. Does it reach out to different communities, people with mental health conditions, disabled people, lonely or isolated people etc?</p>
+            <p class='govuk-hint'>For example, by improving physical access to buildings, adjusting opening hours or means of contact and providing materials in a second language or alternative format.</p>
           )
           required
+        end
+
+        options :nomination_local_assessment_inclusivity_sufficient, "Do you feel the above information is sufficient to recommend this group for a KAVS?" do
+          context %(
+            <p class='govuk-hint'>If ‘no’ please strengthen the section or consider not recommending this group.</p>
+          )
+          yes_no
         end
 
         header :local_assessment_exceptional_qualities_header, "Exceptional qualities" do
@@ -545,7 +614,7 @@ class AwardYears::V2027::QaeForms
           words_max 50
         end
 
-        assessor_details :assessor_nominating_member_worthy_of_honour, "Assessor recommending an individual for a national Honour details" do
+        assessor_details :assessor_nominating_member_worthy_of_honour, "If you are recommending an individual for a national Honour, please provide your contact details so that the DCMS Honours Team can contact you for more information." do
           sub_ref "E 8.6"
           required
           conditional :nomination_local_assessment_form_member_worthy_of_honour, "yes"
