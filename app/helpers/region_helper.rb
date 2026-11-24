@@ -71,6 +71,7 @@ module RegionHelper
     "Glasgow": "Scotland",
     "Highland": "Scotland",
     "Inverclyde": "Scotland",
+    "Kincardineshire": "Scotland",
     "Lanarkshire": "Scotland",
     "Midlothian": "Scotland",
     "Moray": "Scotland",
