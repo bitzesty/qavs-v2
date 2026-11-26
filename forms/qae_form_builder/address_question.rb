@@ -24,6 +24,13 @@ class QaeFormBuilder
   class AddressQuestionDecorator < QuestionDecorator
     include RegionHelper
 
+    def input_value(options = {})
+      result = super
+      return result if result.present? || !delegate_obj.default_value_key || !options[:suffix]
+
+      answers["#{delegate_obj.default_value_key}_#{options[:suffix]}"]
+    end
+
     def required_sub_fields
       if sub_fields.present?
         sub_fields.reject do |f|
@@ -68,9 +75,13 @@ class QaeFormBuilder
     def county_context(county_context)
       @q.county_context = county_context
     end
+
+    def default_value(q_key)
+      @q.default_value_key = q_key
+    end
   end
 
   class AddressQuestion < Question
-    attr_accessor :countries, :sub_fields, :region_context, :county_context
+    attr_accessor :countries, :sub_fields, :region_context, :county_context, :default_value_key
   end
 end
